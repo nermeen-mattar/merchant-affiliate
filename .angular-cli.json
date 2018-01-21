@@ -19,6 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "tc",
       "styles": [
+        "styles/team-center.scss",
         "styles.scss"
       ],
       "scripts": [],

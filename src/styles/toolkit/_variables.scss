@@ -1,0 +1,137 @@
+
+////////////////////////////////////////////////////////////
+// Fonts ( Family & Size )
+////////////////////////////////////////////////////////////
+
+// Type
+$tc-font-face-base:'Roboto','Arial', sans-serif;
+
+// Weight
+$tc-font-weight-1: 100;
+$tc-font-weight-2: 200;
+$tc-font-weight-3: 300;
+$tc-font-weight-4: 400;
+$tc-font-weight-5: 500;
+$tc-font-weight-6: 600;
+$tc-font-weight-7: 700;
+$tc-font-weight-8: 800;
+$tc-font-weight-9: 900;
+
+//  Font Size
+$tc-font-size-base : 10px;
+$tc-font-size-body: 1.3rem;
+
+// Heading Size
+$tc-font-size-h1: 3.2rem;
+$tc-font-size-h2: 2.0rem;
+$tc-font-size-h3: 1.5rem;
+$tc-font-size-h4: 1.2rem;
+$tc-font-size-h5: 1.0rem;
+$tc-font-size-h6: 0.7rem;
+
+
+////////////////////////////////////////////////////////////
+// Color ( Base, Font, Border, Alert )
+////////////////////////////////////////////////////////////
+
+// 20 Shades of Gray
+// Base Gray #f6f6f6
+// shade-0 = tint-0
+
+$tc-color-gray-shade-0: #f6f6f6;
+$tc-color-gray-shade-1: #dddddd;
+$tc-color-gray-shade-2: #c4c4c4;
+$tc-color-gray-shade-3: #acacac;
+$tc-color-gray-shade-4: #939393;
+$tc-color-gray-shade-5: #7b7b7b;
+$tc-color-gray-shade-6: #626262;
+$tc-color-gray-shade-7: #494949;
+$tc-color-gray-shade-8: #313131;
+$tc-color-gray-shade-9: #181818;
+$tc-color-gray-shade-10: #000000;
+
+$tc-color-gray-tint-0: #f6f6f6;
+$tc-color-gray-tint-1: #f6f6f6;
+$tc-color-gray-tint-2: #f7f7f7;
+$tc-color-gray-tint-3: #f8f8f8;
+$tc-color-gray-tint-4: #f9f9f9;
+$tc-color-gray-tint-5: #fafafa;
+$tc-color-gray-tint-6: #fbfbfb;
+$tc-color-gray-tint-7: #fcfcfc;
+$tc-color-gray-tint-8: #fdfdfd;
+$tc-color-gray-tint-9: #fefefe;
+$tc-color-gray-tint-10: #ffffff;
+
+// Base
+$tc-color-base-bright: #2fabdf;
+$tc-color-base-dark: #323232;
+
+$tc-color-base-bright-shade-0: #2fabdf;
+$tc-color-base-bright-shade-1: #1f99cd;
+$tc-color-base-bright-shade-2: #1d8ebe;
+$tc-color-base-bright-shade-3: #166d92;
+$tc-color-base-bright-shade-4: #146283;
+$tc-color-base-bright-shade-5: #125774;
+$tc-color-base-bright-shade-6: #104c66;
+$tc-color-base-bright-shade-7: #0d4157;
+$tc-color-base-bright-shade-8: #0b3648;
+$tc-color-base-bright-shade-9: #092b39;
+$tc-color-base-bright-shade-10: #07202b;
+
+
+$tc-color-base-bright-tint-0: #2fabdf;
+$tc-color-base-bright-tint-1: #4cb7e4;
+$tc-color-base-bright-tint-2: #6ac3e8;
+$tc-color-base-bright-tint-3: #87cfed;
+$tc-color-base-bright-tint-4: #96d5ef;
+$tc-color-base-bright-tint-5: #a5dbf1;
+$tc-color-base-bright-tint-6: #b3e0f3;
+$tc-color-base-bright-tint-7: #d1ecf8;
+$tc-color-base-bright-tint-8: #e0f2fa;
+$tc-color-base-bright-tint-9: #eef8fc;
+$tc-color-base-bright-tint-10: #fdfeff;
+
+// Background
+$tc-color-background-light: #f6f6f6;
+$tc-color-background-light-invert: #fff;
+
+
+// Font
+$tc-color-font-dark: #08090b;
+$tc-color-font-dark-medium: #16191f;
+$tc-color-font-medium: #242933;
+$tc-color-font-medium-light: #a6afc0;
+$tc-color-font-light: #e2e5eb;
+$tc-color-font-disabled: #eceef2;
+
+// Border
+$tc-color-border-dark: #242933;
+$tc-color-border-medium: #e2e5eb;
+$tc-color-border-light: #eceef2;
+
+$tc-color-border-base: $tc-color-border-medium;
+
+// Fill
+$tc-color-fill: #fff;
+$tc-color-focus-border: #eceef2;
+
+// Alerts
+$tc-color-error: #be143f;
+$tc-color-warning: #e2e735;
+$tc-color-valid: #b4fccd;
+$tc-color-invalid: #ef7193;
+$tc-color-success:#52f88c;
+$tc-color-failure: $tc-color-error;
+
+// z-index levels
+
+$tc-z-index-level-1: 100;
+$tc-z-index-level-2: 200;
+$tc-z-index-level-3: 300;
+$tc-z-index-level-4: 400;
+$tc-z-index-level-5: 500;
+$tc-z-index-level-6: 600;
+$tc-z-index-level-7: 700;
+$tc-z-index-level-8: 800;
+$tc-z-index-level-9: 900;
+$tc-z-index-level-10: 1000;

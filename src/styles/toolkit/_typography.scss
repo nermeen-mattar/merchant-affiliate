@@ -1,0 +1,48 @@
+$tc-font-default-set: normal !default;
+$tc-font-default-directory: '/assets/fonts' !default;
+$tc-copyright: '© 2018 team-center inc.' !default;
+
+@mixin font-face( $name,
+                  $path,
+                  $weight: null,
+                  $style: null,
+                  $extensions: ttf ){
+
+    $src: null;
+    $extmods: ( ttf: '?' );
+    $formats:( ttf:'truetype' );
+
+    @each $ext in $extensions {
+
+      $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+      $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+      $src: append( $src, url(quote($path + '.' + $extmod)) format(quote($format)),comma);
+
+    }
+
+    @font-face {
+      font-family: $name;
+      font-style: $style;
+      font-weight: $weight;
+      src: $src
+    }
+}
+
+@mixin ee-font-system(  $font-name,
+                        $font-weight-set,
+                        $font-directory : $tc-font-default-directory,
+                        $font-type-set: $tc-font-default-set,
+                        $font-family-copyright: $tc-copyright){
+
+    @each $font-type in $font-type-set{
+      @each $font-weight in $font-weight-set{
+        @include font-face( $font-name,
+                            $font-directory + '/' + $font-name + '/' + $font-name + '-' +
+                            nth($font-weight,1),
+                            nth($font-weight,2),
+                            $font-type
+        );
+      }
+    }
+
+}

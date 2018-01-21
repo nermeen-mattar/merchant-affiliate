@@ -1,0 +1,20 @@
+.app-header {
+  color: white;
+
+  &__logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &__icon {
+      background: url('../../../../assets/img/core/logo.png') 50% 50% no-repeat;
+      background-size: contain;
+      width: 20px;
+      margin-right: 10px;
+      height: 20px;
+    }
+    &__text {
+      font-family: 'Baloo Thambi', cursive;
+      font-size: 30px;
+    }
+  }
+}
