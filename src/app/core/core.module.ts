@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';
+import { FooterComponent } from './components/footer/footer.component';
+import { throwIfAlreadyLoaded } from './module-import-guard';
 
 export class MyOwnCustomMaterialModule { }
 @NgModule({
@@ -10,10 +12,17 @@ export class MyOwnCustomMaterialModule { }
     SharedModule
   ],
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+  /* Only the root AppModule should import the CoreModule*/
+  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
+  }
+ }
