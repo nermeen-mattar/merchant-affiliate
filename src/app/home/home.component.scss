@@ -1,0 +1,24 @@
+.app-home {
+    &__main{
+        &__top {
+            background: url('../../assets/img/squash-793062.jpg') no-repeat center fixed;
+        }
+        &__bottom {
+            background: url('../../assets/img/basketball3.jpg') no-repeat center fixed;
+        }
+        &__top, &__bottom{
+            background-size: cover;
+            min-height: 500px;
+        }
+    }
+    &__info {
+        justify-content: center;// space-around;
+        display: flex;
+        flex-wrap: wrap;
+        >div {
+            // remove if space-around
+            padding:2%;
+            width: 35%;
+          }
+    }
+}
