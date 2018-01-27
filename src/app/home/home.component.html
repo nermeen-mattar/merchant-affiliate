@@ -1,27 +1,85 @@
 <!-- home.html -->
 <!-- why to include the word app 
-why not making in shorter e.g - in the last __ in the first
+why not making it shorter e.g - in the last __ in the first
 -->
 <div class="app-home">
   <div class="app-home__main">
     <div class="app-home__main__top">
+      <div class="app-home__main__top__register bg-white">
+        <h3 class="font-w-bolder"> Create your team - 100% free </h3>
+        <div class="mt-2">
+          <!-- uncomment if you want the icon to be seperated from the input <mat-icon >supervisor_account</mat-icon> -->
+          <mat-form-field>
+            <input matInput placeholder="Team Name" required [formControl]="teamName" type="text">
+            <mat-icon matPrefix>supervisor_account</mat-icon>
+            <mat-error *ngIf="teamName.invalid"> You must enter a Team Name</mat-error>
+          </mat-form-field>
+          <!-- better design if we removed float-right-->
+          <button mat-mini-fab color="primary" class="text-white float-right" (click)="navigateToRegisterPage()">GO!</button>
+          <!--uncomment if you want a square button <button mat-raised-button color="accent">Accent</button>-->
+        </div>
+      </div>
     </div>
   </div>
-  <div class="app-home__info">
-    <div> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui voluptas, quasi at facere laborum earum sint distinctio
-      quos voluptate, sunt nisi magni fuga neque hic accusantium maiores odit dolorum! Delectus.</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat suscipit ducimus, reprehenderit exercitationem sequi
-      ratione quam doloribus, voluptas iure sapiente in tenetur voluptatem? Impedit, ad atque? Voluptas dolores est repudiandae.</div>
-    <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolores, labore neque est ex vero rem deserunt illum error
-      nulla. Voluptatem atque neque eaque quasi minima? Nesciunt quos amet nulla!</div>
-    <div> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui voluptas, quasi at facere laborum earum sint distinctio
-      quos voluptate, sunt nisi magni fuga neque hic accusantium maiores odit dolorum! Delectus.</div>
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat suscipit ducimus, reprehenderit exercitationem sequi
-      ratione quam doloribus, voluptas iure sapiente in tenetur voluptatem? Impedit, ad atque? Voluptas dolores est repudiandae.</div>
-    <div> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dolores, labore neque est ex vero rem deserunt illum error
-      nulla. Voluptatem atque neque eaque quasi minima? Nesciunt quos amet nulla!</div>
-  </div>
+  <div class="app-home__info bg-white">
+    <h1 class="text-center font-w-bolder font-s-biggest">Simplified Team management</h1>
+    <div class="app-home__info__sections__container">
+      <div class="app-home__info__section">
+        <div class="app-home__info__section__icon text-center">
+          <mat-icon>power_settings_new</mat-icon>
+        </div>
+        <h2 class="app-home__info__section__header text-center font-w-bolder">Participations & Cancellations</h2>
+        <p>Create Participation or Cancellation events and enter a maximum of participant or minimum of remaining team members
+          per event.</p>
+      </div>
+      <div class="app-home__info__section">
+        <div class="app-home__info__section__icon text-center">
+          <mat-icon>group</mat-icon>
+        </div>
 
+        <h2 class="app-home__info__section__header text-center font-w-bolder"> Volunteer work Management</h2>
+
+        <div>Many clubs have difficulties organizing the many Volunteer work. Teamcenter makes it easy to manage them. </div>
+      </div>
+      <div class="app-home__info__section">
+        <div class="app-home__info__section__icon text-center">
+          <mat-icon>vpn_key</mat-icon>
+        </div>
+
+        <h2 class="app-home__info__section__header text-center font-w-bolder">One password for all</h2>
+        <div> Teamcenter makes it possible to set the same password for all team members and still have personal logins. Just ask
+          your teammate or use the direct link if you forget your password. </div>
+      </div>
+      <div class="app-home__info__section">
+        <div class="app-home__info__section__icon text-center">
+          <mat-icon>group_work</mat-icon>
+        </div>
+
+        <h2 class="app-home__info__section__header text-center font-w-bolder"> Be a member of several teams</h2>
+        <div> In the event overview you will see all the events in which you are included as a team member. You have all your team
+          events displayed in one, central location </div>
+      </div>
+      <div class="app-home__info__section">
+        <div class="app-hom1e__info__section__icon text-center">
+          <mat-icon>add_alert</mat-icon>
+        </div>
+
+        <h2 class="app-home__info__section__header text-center font-w-bolder"> Activate mail notifications </h2>
+        <div> When creating an event, the admin can decide if the event should be created with automatic mail reminders, indicating
+          how many days before the event the reminder will be sent </div>
+      </div>
+      <div class="app-home__info__section">
+
+        <div class="app-home__info__section__icon text-center">
+          <mat-icon>insert_chart</mat-icon>
+        </div>
+
+        <h2 class="app-home__info__section__header text-center font-w-bolder"> Team overview and reporting </h2>
+        <div> Each team member has full transparency about the number of registrations and cancellations of his team mates. For
+          example, club members remember each other for entering a helper mission, or to cancel a training session </div>
+      </div>
+    </div>
+  </div>
   <div class="app-home__main">
     <div class="app-home__main__bottom">
     </div>

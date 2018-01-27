@@ -2,6 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './components/auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { ResetComponent } from './components/reset/reset.component';
+import { RegisterComponent } from './components/register/register.component';
 
 /**
  * Paths will look to the end user as follow:
@@ -21,15 +22,18 @@ const authRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
+                redirectTo: 'login'            },
+            {
+                path: 'login',
                 component: LoginComponent
             },
-            // {
-            //     path: 'login',
-            //     component: LoginComponent
-            // },
             {
                 path: 'reset',
                 component: ResetComponent
+            },
+            {
+                path: 'register', // should we include it in another module?
+                component: RegisterComponent
             }
         ]
     }

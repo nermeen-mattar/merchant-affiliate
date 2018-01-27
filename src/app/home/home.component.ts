@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tc-home',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  teamName: FormControl;
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.teamName = new FormControl('', [Validators.required]);
+  }
 
-  ngOnInit() {
+  ngOnInit() {}
+  navigateToRegisterPage() {
+    this.router.navigate(['/auth/register'], {
+      queryParams: {
+        'team-name': this.teamName.value
+      }
+    });
   }
 
 }

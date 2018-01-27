@@ -1,7 +1,12 @@
-.app-header {
-  color: white;
+@import "~assets/styles/variables.scss";
 
+.app-header {
+  z-index:1;
+  padding:0px;
+  padding-left: 16px;
+  position: fixed;
   &__logo {
+    cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -15,6 +20,22 @@
     &__text {
       font-family: 'Baloo Thambi', cursive;
       font-size: 30px;
+    }
+  }
+  &__menu{
+    margin-left:auto;
+    &__item{
+      float:left;
+      transition: background-color .3s;
+      font-size: 1rem;
+      // color: #fff;
+      // display: inline-block;
+      padding: 16px 15px;
+      cursor: pointer;
+      &:hover{
+        background-color: rgba(235,235,235,0.8);
+        color: $dark-color;
+      }
     }
   }
 }
