@@ -28,14 +28,17 @@
       float:left;
       transition: background-color .3s;
       font-size: 1rem;
-      // color: #fff;
-      // display: inline-block;
       padding: 16px 15px;
       cursor: pointer;
       &:hover{
         background-color: rgba(235,235,235,0.8);
         color: $dark-color;
       }
+     &__arrow-icon{
+       position: absolute;
+       right: 5px;
+       top: 20px;
+     }
     }
   }
 }
