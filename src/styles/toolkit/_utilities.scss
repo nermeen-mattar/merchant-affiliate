@@ -1,0 +1,36 @@
+
+@import "~assets/styles/variables.scss";
+
+/* common styles*/
+
+/* colors section*/
+.font-w-bolder{
+    font-weight: 400 !important;
+}
+.font-s-biggest {
+    font-size: $biggest-font-size;
+}
+.bg-white {
+    background-color: white;
+}
+.bg-orange {
+background-color: #ff9800;
+}
+.text-white {
+    color:white !important;
+}
+
+/* spacing */
+.float-right{
+    float: right;
+}
+.text-center{
+    text-align:center;
+}
+
+.pr-2{
+    padding-right: 2rem !important;
+}
+.mt-2 {
+    margin-top: 2rem;
+}

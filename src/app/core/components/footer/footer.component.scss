@@ -1,0 +1,27 @@
+.app-footer {
+  width:100%;
+  background-color: #ff9800; // fix color="primary"
+  &__menu {
+    padding: 2% 15%;
+    &__item {
+      color: #eee;
+      font-size: 0.9rem; // set it in a variable if may used in other places
+    }
+  }
+  &__copyright {
+    padding: 1% 15%;
+    color: #eee;
+    background-color: rgba(51, 51, 51, 0.08) !important;
+  }
+}
+
+ :host {
+   ::ng-deep {
+    .mat-list-item {
+      height: initial !important;
+      &-content {
+        padding: 0px !important;
+      }
+    }
+  }
+}
