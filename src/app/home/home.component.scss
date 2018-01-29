@@ -1,4 +1,4 @@
-@import "~assets/styles/variables.scss";
+@import "../../styles/toolkit/variables.scss";
 .app-home {
   &__main {
     &__top,
@@ -8,22 +8,38 @@
       min-height: 564px;
     }
     &__top {
-      background: url('../../../assets/img/squash-793062.jpg') no-repeat center fixed;
+      background: url('../../assets/img/squash-793062.jpg') no-repeat center fixed;
       display: flex;
       justify-content: center;
       flex-direction: column;
       &__register {
-       width:90%;
-       height:150px;
-       margin: 0 auto;
-       max-width:500px;
-       padding:10px 20px;
-       box-sizing: border-box;
-       opacity: 0.85;
+        width: 90%;
+        height: 150px;
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        opacity: 0.85;
+        &__main-input-field {
+          ::ng-deep .mat-input-prefix {
+            position: relative;
+            top: 6px;
+          }
+          ::ng-deep  &.mat-focused {
+            .mat-input-prefix {
+              color: $primary-color-dark;
+            }
+          }
+          ::ng-deep  &.ng-invalid.ng-touched {
+            .mat-input-prefix {
+              color: $tc-color-error;
+            }
+          }
+        }
       }
     }
     &__bottom {
-      background: url('../../../assets/img/basketball3.jpg') no-repeat center fixed;
+      background: url('../../assets/img/basketball3.jpg') no-repeat center fixed;
     }
   }
   &__info {
@@ -53,3 +69,4 @@
     }
   }
 }
+

@@ -5,8 +5,8 @@ import { MatListModule, MatMenuModule, MatIconModule} from '@angular/material';
 import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
-import { throwIfAlreadyLoaded } from './module-import-guard';
-export class MyOwnCustomMaterialModule { }
+import { throwIfAlreadyLoaded } from './guards/module-import-guard';
+
 @NgModule({
   imports: [
     CommonModule,
