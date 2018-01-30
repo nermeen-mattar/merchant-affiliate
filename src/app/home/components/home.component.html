@@ -6,12 +6,12 @@
         <div class="mt-2">
           <!-- uncomment if you want the icon to be seperated from the input <mat-icon >supervisor_account</mat-icon> -->
           <mat-form-field>
-            <input matInput placeholder="Team Name" required [formControl]="teamName" type="text">
+            <input matInput placeholder="Team Name" ngModel name="teamName" #teamName="ngModel" required type="text">
             <mat-icon matPrefix>supervisor_account</mat-icon>
             <mat-error *ngIf="teamName.invalid"> You must enter a Team Name</mat-error>
           </mat-form-field>
           <!-- better design if we removed float-right-->
-          <button mat-mini-fab color="primary" class="text-white float-right" (click)="navigateToRegisterPage()">GO!</button>
+          <button mat-mini-fab color="primary" class="text-white float-right" (click)="navigateToRegisterPage(teamName.value)">GO!</button>
           <!--uncomment if you want a square button <button mat-raised-button color="accent">Accent</button>-->
         </div>
       </div>
@@ -56,7 +56,7 @@
           events displayed in one, central location </div>
       </div>
       <div class="app-home__info__section">
-        <div class="app-hom1e__info__section__icon text-center">
+        <div class="app-home__info__section__icon text-center">
           <mat-icon>add_alert</mat-icon>
         </div>
 

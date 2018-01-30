@@ -1,0 +1,18 @@
+@import "~assets/styles/variables.scss";
+.app-login-card {
+  color: $dark-color; // move it to a common place 
+  width: 80%;
+  height: 300px;
+  min-width: 200px;
+  max-width: 400px;
+  margin: 0px auto;
+  margin-top: 200px;
+  &__field {
+    width: 100%;
+    line-height: 2.125;
+    &__icon {
+      font-size: 1.8rem;
+      margin-right:5px;
+    }
+  }
+}

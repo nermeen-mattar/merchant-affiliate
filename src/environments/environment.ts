@@ -6,5 +6,7 @@
 export const environment = {
   production: false
 };
-export const baseUrl = 'http://dev.team.center/service/';
-
+export const baseUrl = 'http://team.center/service/';
+export const TokenAuthinitication = {
+  TokenExpirationDaysLong: 0 // 23
+};

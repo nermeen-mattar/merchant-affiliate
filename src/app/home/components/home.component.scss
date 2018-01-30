@@ -40,7 +40,8 @@
       width: 25%;
       min-width: 250px; // supporting small devices
       &__header {
-        width: 50%;
+        width: 70%;
+        max-width: 230px;
         margin: 0 auto;
         font-size: 1.7rem;
         margin-bottom: 0.6em;

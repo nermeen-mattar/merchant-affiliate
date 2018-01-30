@@ -1,3 +1,6 @@
+@import "~assets/styles/variables.scss";
+
 #app-content{
-    min-height:100%;
+    margin-top: $header-bar-height;
+    min-height: 100%;
 }
