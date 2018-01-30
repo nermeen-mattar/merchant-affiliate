@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { ParallaxModule } from 'ngx-parallax';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { TranslateModule } from '@ngx-translate/core';
     HomeRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    ParallaxModule
   ],
   declarations: [HomeComponent]
 })

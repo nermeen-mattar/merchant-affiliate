@@ -13,6 +13,7 @@
       justify-content: center;
       flex-direction: column;
       &__register {
+        position: relative;
         width: 90%;
         height: 150px;
         margin: 0 auto;
@@ -21,6 +22,7 @@
         box-sizing: border-box;
         opacity: 0.85;
         &__main-input-field {
+          margin-top: 2rem;
           ::ng-deep .mat-input-prefix {
             position: relative;
             top: 6px;
@@ -35,6 +37,13 @@
               color: $tc-color-error;
             }
           }
+        }
+        &__action-btn {
+          position: absolute;
+          right: 20px;
+          top: 0;
+          bottom: 0;
+          margin: auto;
         }
       }
     }
@@ -61,10 +70,12 @@
         font-size: 1.7rem;
         margin-bottom: 0.6em;
       }
-      &__icon .mat-icon {
-        font-size: 4rem !important;
-        margin-right: 2rem;
-        color: #795548;
+      &__icon {
+        .mat-icon {
+          font-size: 4rem !important;
+          margin-right: 2rem;
+          color: $dark-brown;
+        }
       }
     }
   }
