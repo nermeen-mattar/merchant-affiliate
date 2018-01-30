@@ -6,6 +6,18 @@
 // Type
 $tc-font-face-base:'Roboto','Arial', sans-serif;
 
+// Colors
+$primary-color-dark:   #F57C00;
+$primary-color:        #FF9800;
+$primary-color-light:  #FFE0B2;
+$primary-color-text:   #212121;
+$accent-color:         #FFEB3B;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+$dark-brown:           #795548;
+
+
 // Weight
 $tc-font-weight-1: 100;
 $tc-font-weight-2: 200;
@@ -116,7 +128,7 @@ $tc-color-fill: #fff;
 $tc-color-focus-border: #eceef2;
 
 // Alerts
-$tc-color-error: #be143f;
+$tc-color-error: #f44336;
 $tc-color-warning: #e2e735;
 $tc-color-valid: #b4fccd;
 $tc-color-invalid: #ef7193;
@@ -135,3 +147,13 @@ $tc-z-index-level-7: 700;
 $tc-z-index-level-8: 800;
 $tc-z-index-level-9: 900;
 $tc-z-index-level-10: 1000;
+
+
+
+
+// Styles added by nermeen (please adjust these in above sections)
+
+$primary-font-size: .95rem;
+$secondary-font-size: 0.8571rem;
+$biggest-font-size: 2.92rem;
+$dark-color : #5d5f61;

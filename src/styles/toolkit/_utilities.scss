@@ -1,36 +1,35 @@
-
-@import "~assets/styles/variables.scss";
-
+@import "./variables.scss";
 /* common styles*/
 
 /* colors section*/
-.font-w-bolder{
-    font-weight: 400 !important;
+
+.font-w-bolder {
+  font-weight: 400 !important;
 }
+
 .font-s-biggest {
-    font-size: $biggest-font-size;
+  font-size: $biggest-font-size;
 }
+
 .bg-white {
-    background-color: white;
+  background-color: white;
 }
+
 .bg-orange {
-background-color: #ff9800;
+  background-color: #ff9800;
 }
+
 .text-white {
-    color:white !important;
+  color: white !important;
 }
 
 /* spacing */
-.float-right{
-    float: right;
-}
-.text-center{
-    text-align:center;
+
+.float-right {
+  float: right;
 }
 
-.pr-2{
-    padding-right: 2rem !important;
+.text-center {
+  text-align: center;
 }
-.mt-2 {
-    margin-top: 2rem;
-}
+

@@ -1,4 +1,4 @@
-@import "~assets/styles/variables.scss";
+@import "../../../../styles/toolkit/variables.scss";
 
 .app-header {
   z-index:1;
@@ -33,6 +33,9 @@
       &:hover{
         background-color: rgba(235,235,235,0.8);
         color: $dark-color;
+      }
+      &:last-child {
+        padding-right: 2rem;
       }
      &__arrow-icon{
        position: absolute;
