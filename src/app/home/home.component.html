@@ -3,20 +3,18 @@
     <div class="app-home__main__top">
       <div class="app-home__main__top__register bg-white">
         <h3 class="font-w-bolder"> {{ 'HOME.CREATE_YOUR_TEAM' | translate }} </h3>
-        <div class="mt-2">
-          <!-- uncomment if you want the icon to be seperated from the input <mat-icon >supervisor_account</mat-icon> -->
-          <mat-form-field class="app-home__main__top__register__main-input-field">
-            <span matPrefix>
-              <mat-icon>supervisor_account</mat-icon> &nbsp;
-            </span>
-            <input matInput placeholder="Team Name" required [formControl]="teamName" type="text">
-            <mat-error *ngIf="teamName.invalid"> {{'HOME.ERRORS.TEAM_NAME_REQUIRED' | translate}}</mat-error>
-          </mat-form-field>
+        <!-- uncomment if you want the icon to be seperated from the input <mat-icon >supervisor_account</mat-icon> -->
+        <mat-form-field class="app-home__main__top__register__main-input-field">
+          <span matPrefix>
+            <mat-icon>supervisor_account</mat-icon> &nbsp;
+          </span>
+          <input matInput placeholder="Team Name" required [formControl]="teamName" type="text">
+          <mat-error *ngIf="teamName.invalid"> {{'HOME.ERRORS.TEAM_NAME_REQUIRED' | translate}}</mat-error>
+        </mat-form-field>
 
-          <!-- better design if we removed float-right-->
-          <button mat-mini-fab color="primary" class="text-white float-right" (click)="navigateToRegisterPage()">GO!</button>
-          <!--uncomment if you want a square button <button mat-raised-button color="accent">Accent</button>-->
-        </div>
+        <!-- better design if we removed float-right-->
+        <button mat-mini-fab color="primary" class="text-white float-right" (click)="navigateToRegisterPage()">GO!</button>
+        <!--uncomment if you want a square button <button mat-raised-button color="accent">Accent</button>-->
       </div>
     </div>
   </div>
