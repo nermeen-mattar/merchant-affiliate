@@ -7,14 +7,12 @@
         <mat-icon class="app-login-card__field__icon" matPrefix>email</mat-icon>
         <mat-error *ngIf="userEmail.invalid"> You must enter a valid Email</mat-error>
       </mat-form-field>
-      <mat-form-field class="app-login-card__field mt-2">
+      <mat-form-field class="app-login-card__field">
         <input matInput placeholder="Password" ngModel #userPassword="ngModel" name="userPassword" required type="password">
         <mat-icon  class="app-login-card__field__icon" matPrefix>lock</mat-icon>
         <mat-error *ngIf="userPassword.invalid"> You must enter a Password</mat-error>
       </mat-form-field>
-      <div class="mt-2">
-          <button  mat-raised-button  color="primary" class="text-white mt-2" (click)="login(userEmail.value, userPassword.value)">Login</button>
-      </div>
+        <button mat-raised-button  color="primary" class="text-white app-login-card__button" (click)="login(userEmail.value, userPassword.value)">Login</button>
     </form>
   </mat-card-content>
 </mat-card>

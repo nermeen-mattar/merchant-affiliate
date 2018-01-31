@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MembersListComponent } from './components/members-list/members-list.component';
-import { MembersComponent } from './components/members.component';
-import { memberRouting } from './members.routing';
+import { MembersListComponent } from './members-list/members-list.component';
+import { MembersComponent } from './members.component';
+import { MembersRoutingModule } from './members-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    memberRouting
+    MembersRoutingModule
   ],
   declarations: [MembersListComponent, MembersComponent]
 })
 export class MembersModule { }
+
+
