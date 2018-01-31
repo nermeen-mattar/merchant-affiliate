@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
-import { TeamsComponent } from './components/teams/teams.component';
-import { TeamCenterComponent } from './components/team-center.component';
+import { TeamsComponent } from './teams/teams.component';
+import { TeamCenterComponent } from './team-center.component';
 
 const teamCenterRoutes: Routes = [
     {

@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
-import { MembersListComponent } from './components/members-list/members-list.component';
-import { MembersComponent } from './components/members.component';
+import { MembersListComponent } from './members-list/members-list.component';
+import { MembersComponent } from './members.component';
 
 const memberRoutes: Routes = [
     {

@@ -1,4 +1,4 @@
-@import "../../../../styles/toolkit/variables.scss";
+@import "../../../styles/toolkit/variables.scss";
 .app-login-card {
   color: $tc-color-gray-shade-6; // move it to a common place 
   width: 80%;
@@ -10,9 +10,13 @@
   &__field {
     width: 100%;
     line-height: 2.125;
+    margin-top: 1rem;
     &__icon {
       font-size: 1.8rem;
       margin-right:5px;
     }
+  }
+  &__button{
+    margin-top: 2.2rem;
   }
 }
