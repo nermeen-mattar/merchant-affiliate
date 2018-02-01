@@ -2,7 +2,6 @@ import { Observer } from 'rxjs/Observer';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 /**
@@ -12,20 +11,15 @@ import { HttpRequestsService } from '../../core/services/http-requests.service';
  */
 @Injectable()
 export class AuthService implements OnDestroy {
-  subject: Subject < {} > ;
   constructor(
     private httprequest: HttpRequestsService,
     private tokenHandler: TokenHandlerService, private router: Router
   ) {
-    this.subject = new Subject < any > ();
     this.httprequest.loginResponse = this.getLoginResponseFromStorage();
     if (this.httprequest.loginResponse) {
       /*  needed in case the app is reloaded and the user is logged in */
       this.addTokenToHttpHeader();
     }
-  }
-  getAuthObservable(): Observable < {} > {
-    return this.subject.asObservable();
   }
 
   login(userCredentials) {
@@ -35,10 +29,8 @@ export class AuthService implements OnDestroy {
         localStorage.setItem('login-response', JSON.stringify(this.httprequest.loginResponse));
         this.addTokenToHttpHeader();
         this.router.navigateByUrl('events');
-        this.subject.next('success');
       },
       err => {
-        this.subject.next('fail');
         console.log('The username or password is incorrect ')// replace this line with an error alert
       }
     );
@@ -72,6 +64,5 @@ export class AuthService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subject.complete();
   }
 }
