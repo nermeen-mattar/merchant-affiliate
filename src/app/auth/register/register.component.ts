@@ -15,8 +15,13 @@ export class RegisterComponent implements OnInit {
   }
 
   register(formValue) {
-    this.httpRequestService.httpPost('register', formValue).subscribe((res) => {
-      this.authService.login({username: formValue.email, password: formValue.adminpassword});
+    this.httpRequestService.httpPost('register', {
+      teamname: formValue.teamName,
+        teampassword: formValue.teamPassword, email: formValue.email,
+         firstname: formValue.firstName, lastname: formValue.lastName,
+         adminpassword: formValue.adminPassword
+    }).subscribe((res) => {
+      this.authService.login({username: formValue.email, password: formValue.adminPassword});
     });
   }
 

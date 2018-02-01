@@ -6,7 +6,6 @@ import { Observer } from 'rxjs/Observer';
 import { Router } from '@angular/router';
 import { Response, RequestOptions, Headers } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
-import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HttpRequestsService {
@@ -44,26 +43,18 @@ export class HttpRequestsService {
 
   public httpGet(requestUrl: string): Observable < any > {
     return this.http.get(this.baseUrl + requestUrl, this.requestOptions)
-      .map(response => response)
-    // .catch(this.handleError.bind(this));
   }
 
   public httpPost(requestUrl: string, requestParams ? : Object): Observable < any > {
     return this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions)
-      .map(response => response)
-    // .catch(this.handleError.bind(this));
   }
 
   public httpPut(requestUrl: string, requestParams ? : Object): Observable < any > {
     return this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions)
-      .map(response => response)
-    // .catch(this.handleError.bind(this));
   }
 
   public httpDelete(requestUrl: string): Observable < any > {
-    return this.http.delete(this.baseUrl + requestUrl, this.requestOptions)
-      .map(response => response)
-    //.catch(this.handleError.bind(this));
+    return this.http.delete(this.baseUrl + requestUrl, this.requestOptions)      
   }
 
   private handleError(error: Response | any) {

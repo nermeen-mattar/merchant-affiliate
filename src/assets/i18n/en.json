@@ -4,6 +4,7 @@
     "YES": "Yes",
     "NO": "No",
     "GO": "Go",
+    "REQUIRED": "is Required",
     "HOME": {
         "CREATE_YOUR_TEAM": "Create your team - 100% free",
         "TEAM_NAME": "Team Name",
@@ -17,6 +18,7 @@
         }
     },
     "REGISTER": {
+        "REGISTER": "Register",
         "TEAM_NAME": "Team name",
         "TEAM_NAME_REQUIRED": "Team name is required",
         "TEAM_PASSWORD": "Team Password",
@@ -33,11 +35,11 @@
         "ADMIN_DETAILS": "Administrator details"
     },
     "LOGIN": {
+        "LOGIN": "Login",
         "EMAIL": "Email",
         "EMAIL_REQUIRED": "email is required",
         "PASSWORD": "Password",
         "PASSWORD_REQUIRED": "Password is required",
-        "LOGIN": "Login",
         "REGISTER": "Register Now!",
         "FORGOT_PASSWORD": "Forgot Password?"
     },
