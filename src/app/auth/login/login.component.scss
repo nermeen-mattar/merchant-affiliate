@@ -1,22 +1,21 @@
 @import "../../../styles/toolkit/variables.scss";
-.app-login-card {
-  color: $tc-color-gray-shade-6; // move it to a common place 
+.app-login {
+  color: $tc-color-gray-shade-6; // move it to a common place
   width: 80%;
-  height: 300px;
   min-width: 200px;
   max-width: 400px;
   margin: 0px auto;
-  margin-top: 200px;
+  margin-top: 120px;
   &__field {
     width: 100%;
-    line-height: 2.125;
+    line-height: 1.5;
     margin-top: 1rem;
     &__icon {
       font-size: 1.8rem;
-      margin-right:5px;
+      margin-right: 5px;
     }
   }
-  &__button{
+  &__button {
     margin-top: 2.2rem;
   }
 }

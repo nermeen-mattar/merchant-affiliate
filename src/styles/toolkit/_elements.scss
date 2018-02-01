@@ -1,4 +1,8 @@
-// elements variables 
+@import "./variables.scss";
+
+/** elements variables **/
+
+// (I beleive better to place it on variables, make a variables file for each type e.g. elements)
 $header-bar-height: 64px; // used in the header itself and in app component
 
-// elements styles
+/** elements styles **/

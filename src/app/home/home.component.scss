@@ -23,20 +23,6 @@
         opacity: 0.85;
         &__main-input-field {
           margin-top: 2rem;
-          ::ng-deep .mat-input-prefix {
-            position: relative;
-            top: 6px;
-          }
-          ::ng-deep  &.mat-focused {
-            .mat-input-prefix {
-              color: $primary-color-dark;
-            }
-          }
-          ::ng-deep  &.ng-invalid.ng-touched {
-            .mat-input-prefix {
-              color: $tc-color-error;
-            }
-          }
         }
         &__action-btn {
           position: absolute;

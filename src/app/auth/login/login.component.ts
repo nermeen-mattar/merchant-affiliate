@@ -13,6 +13,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   login(userEmail, userPassword) {
-    this.authService.signIn({username: userEmail, password: userPassword});
+    this.authService.login({username: userEmail, password: userPassword});
   }
 }
