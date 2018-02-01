@@ -4,7 +4,7 @@
     "YES": "Yes",
     "NO": "No",
     "GO": "Go",
-    "REQUIRED": "is Required",
+    "IS_REQUIRED": "is Required",
     "HOME": {
         "CREATE_YOUR_TEAM": "Create your team - 100% free",
         "TEAM_NAME": "Team Name",
