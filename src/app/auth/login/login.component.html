@@ -1,18 +1,20 @@
-<mat-card class="app-login-card">
-  <mat-card-title>Login </mat-card-title>
-  <mat-card-content>
-    <form novalidate #loginForm="ngForm">
-      <mat-form-field  class="app-login-card__field">
-        <input matInput placeholder="Email" ngModel #userEmail="ngModel" name="userEmail" required email type="text">
-        <mat-icon class="app-login-card__field__icon" matPrefix>email</mat-icon>
-        <mat-error *ngIf="userEmail.invalid"> You must enter a valid Email</mat-error>
-      </mat-form-field>
-      <mat-form-field class="app-login-card__field">
-        <input matInput placeholder="Password" ngModel #userPassword="ngModel" name="userPassword" required type="password">
-        <mat-icon  class="app-login-card__field__icon" matPrefix>lock</mat-icon>
-        <mat-error *ngIf="userPassword.invalid"> You must enter a Password</mat-error>
-      </mat-form-field>
-        <button mat-raised-button  color="primary" class="text-white app-login-card__button" (click)="login(userEmail.value, userPassword.value)">Login</button>
-    </form>
-  </mat-card-content>
-</mat-card>
+<div class="app-login">
+  <mat-card>
+    <mat-card-title class="text-center">Login </mat-card-title>
+    <mat-card-content>
+      <form novalidate #loginForm="ngForm">
+        <mat-form-field class="app-login__field">
+          <input matInput placeholder="Email" ngModel #userEmail="ngModel" name="userEmail" required email type="text">
+          <mat-icon class="app-login__field__icon" matPrefix>email</mat-icon>
+          <mat-error *ngIf="userEmail.invalid"> You must enter a valid Email</mat-error>
+        </mat-form-field>
+        <mat-form-field class="app-login__field">
+          <input matInput placeholder="Password" ngModel #userPassword="ngModel" name="userPassword" required type="password">
+          <mat-icon class="app-login__field__icon" matPrefix>lock</mat-icon>
+          <mat-error *ngIf="userPassword.invalid"> You must enter a Password</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="text-white app-login__button" (click)="login(userEmail.value, userPassword.value)">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

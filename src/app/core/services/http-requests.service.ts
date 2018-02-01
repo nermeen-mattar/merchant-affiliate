@@ -6,6 +6,7 @@ import { Observer } from 'rxjs/Observer';
 import { Router } from '@angular/router';
 import { Response, RequestOptions, Headers } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HttpRequestsService {
@@ -14,8 +15,7 @@ export class HttpRequestsService {
   private baseUrl: string;
   public token: string;
   public loginResponse;
-  constructor(private http: HttpClient) {
-    // tslint:disable-next-line:max-line-length
+  constructor(private http: HttpClient, private router: Router) {
     this.setHttpRequestOptions();
     this.baseUrl = baseUrl;
     this.loginResponse = JSON.parse(localStorage.getItem('login-response'));
@@ -24,12 +24,12 @@ export class HttpRequestsService {
     }
   }
 
-  setHttpRequestOptions(token?: string) {
+  setHttpRequestOptions(token ? : string) {
     if (token) {
       this.token = token;
       this.requestHeader = new Headers({ // HttpHeaders
         'Accept': 'application/json',
-        'Authorization': 'POS ' + token
+        'Authorization': 'Bearer ' + token
       });
     } else {
       this.requestHeader = new Headers({
@@ -43,47 +43,36 @@ export class HttpRequestsService {
   }
 
   public httpGet(requestUrl: string): Observable < any > {
-    // return Observable.ceate(obs => {
-  return this.http.get(this.baseUrl + requestUrl, this.requestOptions);
-    //     .map(response => response)
-    //     .catch(this.handleError.bind(this)).subscribe(getResponse => {
-    //       obs.next(getResponse);
-    //       obs.complete();
-    //     }, (err: HttpErrorResponse) => {
-    //       obs.error(err);
-    //       obs.complete();
-    //     });
-    // });
-
+    return this.http.get(this.baseUrl + requestUrl, this.requestOptions)
+      .map(response => response)
+    // .catch(this.handleError.bind(this));
   }
 
-  public httpPost(requestUrl: string, data): Observable < any > {
-    // return Observable.create((obs: Observer < any > ) => {
-    return this.http.post(this.baseUrl + requestUrl, data, this.requestOptions);
-    //     .map(response => {
-    //       return response;
-    //     })
-    //     .catch((res1: HttpErrorResponse) => {
-    //       return Observable.throw(res1);
-    //     })
-    //     .subscribe(response => {
-    //       obs.next(response);
-    //       obs.complete();
-    //     }, (err: HttpErrorResponse) => {
-    //       obs.error(err);
-    //       obs.complete();
-    //     });
-    // });
+  public httpPost(requestUrl: string, requestParams ? : Object): Observable < any > {
+    return this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions)
+      .map(response => response)
+    // .catch(this.handleError.bind(this));
   }
 
-  private handleError(error: Response | any): Observable < any > {
-    console.log('error', error);
-    if (error && error.optionalParams && error.optionalParams.msg) {
-      // .showConfir mDialog(error.optionalParams.entityName);
-    }
+  public httpPut(requestUrl: string, requestParams ? : Object): Observable < any > {
+    return this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions)
+      .map(response => response)
+    // .catch(this.handleError.bind(this));
+  }
+
+  public httpDelete(requestUrl: string): Observable < any > {
+    return this.http.delete(this.baseUrl + requestUrl, this.requestOptions)
+      .map(response => response)
+    //.catch(this.handleError.bind(this));
+  }
+
+  private handleError(error: Response | any) {
     console.log('Http-Request Error: ', error.status + ' - ' + error.statusText);
     switch (error.status) {
       case 500:
+        break;
+      case 401:
+        this.router.navigate(['']);
         break;
     }
     return Observable.throw(error);

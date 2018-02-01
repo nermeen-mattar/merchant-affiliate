@@ -1,4 +1,28 @@
-// elements variables 
+@import "./variables.scss";
+
+/** elements variables **/
+
+// (I beleive better to place it on variables, make a variables file for each type e.g. elements)
 $header-bar-height: 64px; // used in the header itself and in app component
 
-// elements styles
+/** elements styles **/
+
+/* Inputs Styles */
+
+::ng-deep .mat-input-prefix {
+  position: relative !important;
+  top: 6px !important;
+}
+
+mat-form-field {
+  ::ng-deep &.mat-focused {
+    .mat-input-prefix {
+      color: $primary-color-dark;
+    }
+  }
+  ::ng-deep &.ng-invalid.ng-touched {
+    .mat-input-prefix {
+      color: $tc-color-error;
+    }
+  }
+}
