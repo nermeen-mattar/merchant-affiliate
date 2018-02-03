@@ -1,19 +1,21 @@
 <mat-toolbar color="primary" class="app-header text-white">
-  <div class="app-header__logo" routerLink="home">
-    <span class="app-header__logo__icon"></span>
-    <div class="app-header__logo__text">team.center</div>
-  </div>
-  <ul class="app-header__menu">
-    <li class="app-header__menu__item"  routerLink="auth/register">Register</li>
-    <li class="app-header__menu__item" routerLink="auth/login">Login</li>  <!-- should not appear when signed in -->
-    <li class="app-header__menu__item" (click)="logout()" >Logout</li> <!-- should not appear when not signed in -->
-    <li class="app-header__menu__item">About</li>
-    <li class="app-header__menu__item" mat-button [matMenuTriggerFor]="langMenu">Lang
-      <mat-icon class="app-header__menu__item__arrow-icon">keyboard_arrow_down</mat-icon>
-      <mat-menu #langMenu="matMenu">
-        <button mat-menu-item>German</button>
-        <button mat-menu-item>English</button>
-      </mat-menu>
-    </li>
-  </ul>
+    <div class="app-header__logo" routerLink="/home">
+        <span class="app-header__logo__icon"></span>
+        <div class="app-header__logo__text">team.center</div>
+    </div>
+    <ul class="app-header__menu">
+        <li class="app-header__menu__item" routerLink="/auth/register">Register</li>
+        <li class="app-header__menu__item" routerLink="/auth/login">Login</li>
+        <!-- should not appear when signed in -->
+        <li class="app-header__menu__item" (click)="logout()">Logout</li>
+        <!-- should not appear when not signed in -->
+        <li class="app-header__menu__item">About</li>
+        <li class="app-header__menu__item" mat-button [matMenuTriggerFor]="langMenu">Lang
+            <mat-icon class="app-header__menu__item__arrow-icon">keyboard_arrow_down</mat-icon>
+            <mat-menu #langMenu="matMenu">
+                <button mat-menu-item>German</button>
+                <button mat-menu-item>English</button>
+            </mat-menu>
+        </li>
+    </ul>
 </mat-toolbar>

@@ -6,7 +6,7 @@
                 <mat-form-field class="app-login__field">
                     <input matInput placeholder="{{ 'LOGIN.EMAIL' | translate }}" ngModel #userEmail="ngModel" name="userEmail" required email type="text">
                     <mat-icon class="app-login__field__icon" matPrefix>email</mat-icon>
-                    <mat-error *ngIf="userEmail.invalid"> {{'LOGIN.EMAIL' | translate}} {{ 'REQUIRED' | translate }}</mat-error>
+                    <mat-error *ngIf="userEmail.invalid"> {{'LOGIN.EMAIL' | translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
                 </mat-form-field>
                 <mat-form-field class="app-login__field">
                     <input matInput placeholder="{{ 'LOGIN.PASSWORD' | translate }}" ngModel #userPassword="ngModel" name="userPassword" required type="password">
