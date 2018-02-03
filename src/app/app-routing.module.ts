@@ -2,6 +2,7 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { TeamsComponent } from './teams/teams.component';
 
 /* The default route is the team center module but if the user is not logged in auth gaurd will redirect the user to the home */
 const routes: Routes = [{
@@ -22,13 +23,18 @@ const routes: Routes = [{
   {
     path: 'events',
     canActivate: [AuthGuard],
-    loadChildren: './team-center/events/events.module#EventsModule'
+    loadChildren: './events/events.module#EventsModule'
   },
   {
     path: 'members',
     canActivate: [AuthGuard],
-    loadChildren: './team-center/members/members.module#MembersModule'
+    loadChildren: './members/members.module#MembersModule'
   },
+  // {
+  //   path: 'teams',
+  //   canActivate: [AuthGuard],
+  //   component: TeamsComponent // may change it to module if needee
+  // },
   {
     path: '**',
     redirectTo: 'home'

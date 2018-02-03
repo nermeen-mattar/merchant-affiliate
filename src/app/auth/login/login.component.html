@@ -13,7 +13,7 @@
                     <mat-icon class="app-login__field__icon" matPrefix> lock</mat-icon>
                     <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'REQUIRED' | translate }}</mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="primary" class="text-white app-login__button" (click)="login(userEmail.value, userPassword.value)">{{ 'LOGIN.LOGIN' | translate }}</button>
+                <button mat-raised-button color="primary" class="text-white app-login__button" [disabled]="loginForm.invalid" (click)="login(loginForm.value)">{{ 'LOGIN.LOGIN' | translate }}</button>
             </form>
         </mat-card-content>
     </mat-card>
