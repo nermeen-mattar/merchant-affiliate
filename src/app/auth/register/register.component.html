@@ -39,7 +39,7 @@
                         <mat-error *ngIf="adminPassword.invalid"> {{ 'REGISTER.ADMIN_PASSWORD_REQUIRED' | translate }} </mat-error>
                     </mat-form-field>
                 </div>
-                <button mat-raised-button color="primary" class="text-white app-register__button" (click)="register(registerForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
+                <button mat-raised-button color="primary" class="text-white app-register__button" [disabled]="registerForm.invalid" (click)="register(registerForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
             </form>
         </mat-card-content>
     </mat-card>
