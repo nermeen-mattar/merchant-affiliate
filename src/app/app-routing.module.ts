@@ -30,11 +30,11 @@ const routes: Routes = [{
     canActivate: [AuthGuard],
     loadChildren: './members/members.module#MembersModule'
   },
-  // {
-  //   path: 'teams',
-  //   canActivate: [AuthGuard],
-  //   component: TeamsComponent // may change it to module if needee
-  // },
+  {
+    path: 'teams',
+    canActivate: [AuthGuard],
+    loadChildren: './teams/teams.module#TeamsModule'
+    },
   {
     path: '**',
     redirectTo: 'home'
