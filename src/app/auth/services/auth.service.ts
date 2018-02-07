@@ -1,9 +1,9 @@
-import { Observer } from 'rxjs/Observer';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
+import { Subject } from 'rxjs/Subject';
 /**
  * @author Nermeen Mattar
  * @class AuthService is responsible of user authentication and JWT tokens.
@@ -11,6 +11,7 @@ import { HttpRequestsService } from '../../core/services/http-requests.service';
  */
 @Injectable()
 export class AuthService implements OnDestroy {
+  userState: Subject<Boolean> = new Subject;
   constructor(
     private httpRequest: HttpRequestsService,
     private tokenHandler: TokenHandlerService, private router: Router
@@ -22,6 +23,10 @@ export class AuthService implements OnDestroy {
     }
   }
 
+  userStateChanges(): Observable <Boolean> {
+    return this.userState.asObservable();
+  }
+
   login(userCredentials) {
     this.httpRequest.httpPost('login', userCredentials).subscribe(
       res => {
@@ -29,6 +34,7 @@ export class AuthService implements OnDestroy {
         localStorage.setItem('login-response', JSON.stringify(this.httpRequest.loginResponse));
         this.addTokenToHttpHeader();
         this.router.navigateByUrl('events');
+        this.userState.next(true);
       },
       err => {
         console.log('The username or password is incorrect ')// replace this line with an error alert
@@ -42,6 +48,7 @@ export class AuthService implements OnDestroy {
     this.httpRequest.loginResponse = undefined;
     this.httpRequest.token = undefined;
     this.router.navigateByUrl('home');
+    this.userState.next(false);
   }
 
   /**
