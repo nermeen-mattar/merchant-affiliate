@@ -1,9 +1,9 @@
-import { Observer } from 'rxjs/Observer';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 /**
  * @author Nermeen Mattar
  * @class AuthService is responsible of user authentication and JWT tokens.
@@ -11,6 +11,8 @@ import { HttpRequestsService } from '../../core/services/http-requests.service';
  */
 @Injectable()
 export class AuthService implements OnDestroy {
+  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  $userLoggedIn: Observable<boolean> = this.isLoggedIn.asObservable();
   constructor(
     private httpRequest: HttpRequestsService,
     private tokenHandler: TokenHandlerService, private router: Router
@@ -19,6 +21,9 @@ export class AuthService implements OnDestroy {
     if (this.httpRequest.loginResponse) {
       /*  needed in case the app is reloaded and the user is logged in */
       this.addTokenToHttpHeader();
+      this.isLoggedIn.next(true);
+    } else {
+      this.isLoggedIn.next(false);
     }
   }
 
@@ -29,6 +34,7 @@ export class AuthService implements OnDestroy {
         localStorage.setItem('login-response', JSON.stringify(this.httpRequest.loginResponse));
         this.addTokenToHttpHeader();
         this.router.navigateByUrl('events');
+        this.isLoggedIn.next(true);
       },
       err => {
         console.log('The username or password is incorrect ')// replace this line with an error alert
@@ -42,6 +48,7 @@ export class AuthService implements OnDestroy {
     this.httpRequest.loginResponse = undefined;
     this.httpRequest.token = undefined;
     this.router.navigateByUrl('home');
+    this.isLoggedIn.next(false);
   }
 
   /**
@@ -49,7 +56,7 @@ export class AuthService implements OnDestroy {
    * 1- existance of login response which indicates that the user has signed in
    * 2- the token is not expired yet
    */
-  isAuthenticated(): Boolean {
+  isAuthenticated(): boolean {
     if (this.httpRequest.loginResponse && this.httpRequest.loginResponse.token) {
       return this.tokenHandler.isTokenValid(this.httpRequest.loginResponse.token);
     }
