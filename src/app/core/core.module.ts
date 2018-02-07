@@ -7,16 +7,20 @@ import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { throwIfAlreadyLoaded } from './guards/module-import-guard';
+import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
+    FormsModule,
     CommonModule,
     SharedModule,
     MatListModule,
     MatMenuModule,
     MatIconModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslateModule
   ],
   declarations: [
     HeaderComponent,

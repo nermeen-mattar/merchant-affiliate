@@ -4,39 +4,39 @@
         <mat-card-content>
             <form novalidate #registerForm="ngForm">
                 <div class="app-register__section">
-                    <h4 class="font-w-bolder">{{ 'REGISTER.TEAM_DETAILS' | translate }}</h4>
+                    <h4 class="font-w-bolder">{{ 'TEAM.TEAM_DETAILS' | translate }}</h4>
                     <mat-form-field class="app-register__section__field">
-                        <input matInput placeholder="{{ 'REGISTER.TEAM_NAME' | translate }}" ngModel #teamName="ngModel" name="teamName" required type="text">
+                        <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" ngModel #teamName="ngModel" name="teamName" required type="text">
                         <mat-icon class="app-register__section__field__icon" matPrefix>supervisor_account</mat-icon>
-                        <mat-error *ngIf="teamName.invalid"> {{ 'REGISTER.TEAM_NAME_REQUIRED' | translate }}</mat-error>
+                        <mat-error *ngIf="teamName.invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{ 'REGISTER.IS_REQUIRED' | translate }}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="app-register__section__field">
-                        <input matInput placeholder="{{ 'REGISTER.TEAM_PASSWORD' | translate }}" ngModel #teamPassword="ngModel" name="teamPassword" required type="password">
+                        <input matInput placeholder="{{ 'TEAM.TEAM_PASSWORD' | translate }}" ngModel #teamPassword="ngModel" name="teamPassword" required type="password">
                         <mat-icon class="app-register__section__field__icon" matPrefix>lock</mat-icon>
-                        <mat-error *ngIf="teamPassword.invalid">{{ 'REGISTER.TEAM_PASSWORD_REQUIRED' | translate }}</mat-error>
+                        <mat-error *ngIf="teamPassword.invalid">{{ 'TEAM.TEAM_PASSWORD' | translate }} {{ 'IS_REQUIRED' | translate }}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="app-register__section">
-                    <h4 class="font-w-bolder">{{ 'REGISTER.ADMIN_DETAILS' | translate }}</h4>
+                    <h4 class="font-w-bolder">{{ 'ADMIN.ADMIN_DETAILS' | translate }}</h4>
                     <mat-form-field class="app-register__section__field">
                         <input matInput placeholder="{{ 'REGISTER.EMAIL' | translate }}" ngModel #email="ngModel" name="email" required email type="text">
                         <mat-icon class="app-register__section__field__icon" matPrefix>email</mat-icon>
-                        <mat-error *ngIf="email.invalid"> {{ 'REGISTER.EMAIL_REQUIRED' | translate }}</mat-error>
+                        <mat-error *ngIf="email.invalid"> {{ 'REGISTER.EMAIL' | translate }} {{'IS_REQUIRED' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="app-register__section__field">
                         <input matInput placeholder="{{ 'REGISTER.FIRST_NAME' | translate }}" ngModel #firstName="ngModel" name="firstName" required type="text">
                         <mat-icon class="app-register__section__field__icon" matPrefix>person_circle</mat-icon>
-                        <mat-error *ngIf="firstName.invalid"> {{ 'REGISTER.FIRST_NAME_REQUIRED' | translate }}</mat-error>
+                        <mat-error *ngIf="firstName.invalid"> {{ 'REGISTER.FIRST_NAME' | translate }} {{'IS_REQUIRED' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="app-register__section__field">
                         <input matInput placeholder="{{ 'REGISTER.LAST_NAME' | translate }}" ngModel #lastName="ngModel" name="lastName" required type="text">
                         <mat-icon class="app-register__section__field__icon" matPrefix>person_circle</mat-icon>
-                        <mat-error *ngIf="lastName.invalid"> {{ 'REGISTER.LAST_NAME_REQUIRED' | translate }}</mat-error>
+                        <mat-error *ngIf="lastName.invalid"> {{ 'REGISTER.LAST_NAME_' | translate }} {{IS_REQUIRED | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="app-register__section__field">
-                        <input matInput placeholder="{{ 'REGISTER.ADMIN_PASSWORD' | translate }}" ngModel #adminPassword="ngModel" name="adminPassword" required type="password">
+                        <input matInput placeholder="{{ 'ADMIN.ADMIN_PASSWORD' | translate }}" ngModel #adminPassword="ngModel" name="adminPassword" required type="password">
                         <mat-icon class="app-register__section__field__icon" matPrefix>lock</mat-icon>
-                        <mat-error *ngIf="adminPassword.invalid"> {{ 'REGISTER.ADMIN_PASSWORD_REQUIRED' | translate }} </mat-error>
+                        <mat-error *ngIf="adminPassword.invalid"> {{ 'ADMIN.ADMIN_PASSWORD' | translate }} {{IS_REQUIRED | translate}}</mat-error>
                     </mat-form-field>
                 </div>
                 <button mat-raised-button color="primary" class="text-white app-register__button" [disabled]="registerForm.invalid" (click)="register(registerForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
