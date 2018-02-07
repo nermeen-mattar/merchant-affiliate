@@ -1,64 +1,114 @@
 @import "../../../../styles/toolkit/variables.scss";
 @import "../../../../styles/toolkit/elements.scss";
-
 .app-header {
-  z-index: 1;
-  padding: 0px;
-  padding-left: 16px;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  height: $header-bar-height;
-  box-sizing: border-box;
-  top: 0px;
-  position: fixed;
-  &__logo {
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    &__icon {
-      background: url('../../../../assets/img/core/logo.png') 50% 50% no-repeat;
-      background-size: contain;
-      width: 20px;
-      margin-right: 10px;
-      height: 20px;
+    width: 100%;
+    z-index: 1;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: $header-bar-height;
+    overflow: visible;
+    box-sizing: border-box;
+    top: 0px;
+    position: fixed;
+    &__nav {
+        &__logo {
+            cursor: pointer;
+            flex-direction: row;
+            &__icon {
+                background: url('../../../../assets/img/core/logo.png') 50% 50% no-repeat;
+                background-size: contain;
+                width: 20px;
+                margin-right: 10px;
+                height: 24px;
+            }
+            &__text {
+                font-family: 'Baloo Thambi', cursive;
+                font-size: 30px;
+            }
+        }
+        &__menu {
+            margin-left: auto;
+            &__item {
+                float: left;
+                transition: background-color .3s;
+                font-size: 1rem;
+                padding: 21px 16px;
+                cursor: pointer;
+                &:hover,
+                &.active {
+                    background-color: rgba(235, 235, 235, 0.8);
+                    color: $tc-color-gray-shade-6;
+                }
+                &__language {
+                    position: relative; // added for small devices
+                }
+                &__arrow {
+                    position: absolute;
+                    right: -8px;
+                    top: 22px;
+                }
+                &__icon {
+                    color: $primary-color;
+                    position: relative;
+                    top: 6px;
+                    margin-right: 16px;
+                }
+            }
+        }
     }
-    &__text {
-      font-family: 'Baloo Thambi', cursive;
-      font-size: 30px;
-    }
-  }
-  &__menu {
-    margin-left: auto;
-    &__item {
-      float: left;
-      transition: background-color .3s;
-      font-size: 1rem;
-      padding: 16px 15px;
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(235, 235, 235, 0.8);
-        color: $tc-color-gray-shade-6;
-      }
-      &:last-child {
-        padding-right: 2rem;
-      }
-     &__arrow-icon{
-       position: absolute;
-       right: 5px;
-       top: 20px;
-     }
-    }
-  }
 }
 
-@media only screen and (max-width: 540px) {
-  .app-header {
-    height: 80px;
-    justify-content: space-between;
-    &__menu__item{
-      padding: 8px 15px;
+@media only screen and (max-width: 879px) {
+    mat-sidenav {
+        position: fixed !important;
+        background-color: white;
     }
-  }
+    .app-header {
+        [bigDeviceElements] {
+            display: none !important;
+        }
+        &__nav {
+            &__logo {
+                justify-content: center;
+            }
+            &__menu {
+                width: 210px;
+                margin-top: 2rem;
+                color: $tc-color-gray-shade-6;
+                &__item {
+                    float: none;
+                    padding: 20px;
+                    &__arrow {
+                        right: 50px;
+                        top: 29px;
+                    }
+                }
+            }
+            &__toggle {
+                &__button {
+                    color: $primary-color;
+                    border-radius: 0px 20px 20px 0px;
+                    position: absolute;
+                }
+            }
+        }
+    }
 }
 
+@media only screen and (min-width: 880px) {
+    .app-header {
+        &__nav {
+            padding: 0px 30px;
+            display: flex;
+            width: 100%;
+            visibility: visible !important;
+            transform: translate3d(0px, 0px, 0px);
+            &__logo {
+                margin-left: 30px;
+            }
+        }
+    }
+    [smallDeviceElements] {
+        display: none;
+    }
+}

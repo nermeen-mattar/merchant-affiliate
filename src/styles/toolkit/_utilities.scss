@@ -1,37 +1,52 @@
 @import "./variables.scss";
-/* common styles*/
 
-/* colors section*/
+/* Common Styles*/
+
+
+/* Colors Section*/
 
 .font-w-bolder {
-  font-weight: 400 !important;
+    font-weight: 400 !important;
 }
 
 .font-s-biggest {
-  font-size: $biggest-font-size;
+    font-size: $biggest-font-size;
 }
 
 .bg-white {
-  background-color: white;
+    background-color: white;
 }
 
 .bg-orange {
-  background-color: #ff9800;
+    background-color: #ff9800;
 }
 
 .text-white {
-  color: white !important;
+    color: white !important;
 }
 
-/* spacing */
+
+/* Positioning Section*/
 
 .float-right {
-  float: right;
+    float: right;
 }
 
 .text-center {
-  text-align: center;
+    text-align: center;
 }
+
+.d-flex {
+    display: flex !important; // added important to overwrite .mat-drawer-content in header bar mat-sidenav-content
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+
+/* Sizing Section */
+
 .w-100 {
-  width:100%;
+    width: 100%;
 }
