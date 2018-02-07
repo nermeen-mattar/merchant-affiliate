@@ -7,6 +7,7 @@
     flex-wrap: wrap;
     height: $header-bar-height;
     overflow: visible;
+    background-color: $primary-color;
     box-sizing: border-box;
     top: 0px;
     position: fixed;
@@ -59,10 +60,6 @@
 }
 
 @media only screen and (max-width: 879px) {
-    mat-sidenav {
-        position: fixed !important;
-        background-color: white;
-    }
     .app-header {
         [bigDeviceElements] {
             display: none !important;
@@ -100,7 +97,6 @@
         &__nav {
             padding: 0px 30px;
             display: flex;
-            width: 100%;
             visibility: visible !important;
             transform: translate3d(0px, 0px, 0px);
             &__logo {

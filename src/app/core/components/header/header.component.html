@@ -1,4 +1,4 @@
-<mat-sidenav-container class="app-header bg-orange" (window:mouseup)="changeMenuDisplay($event)">
+<!-- <mat-sidenav-container class="app-header bg-orange" (window:mouseup)="changeMenuDisplay($event)">
     <mat-sidenav #sidenav mode="side" [opened]="menuOpened" class="bg-orange text-white app-header__nav">
         <div class="app-header__nav__logo d-flex align-items-center" bigDeviceElements routerLink="/home">
             <span class="app-header__nav__logo__icon"></span>
@@ -59,4 +59,56 @@
             </div>
         </div>
     </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
+<div class="app-header">
+  <div class="app-header__nav">
+    <button (click)="onMenuClick($event)">OPEN MENU</button>
+    <div class="app-header__nav__logo d-flex align-items-center" bigDeviceElements routerLink="/home">
+      <span class="app-header__nav__logo__icon"></span>
+      <div class="app-header__nav__logo__text">{{'TEAM_CENTER' | translate}}</div>
+    </div>
+    <ul class="app-header__nav__menu font-w-bolder">
+      <li class="app-header__nav__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+          <mat-icon class="app-header__nav__menu__item__icon" smallDeviceElements>event</mat-icon>
+          <span>  {{'EVENT.EVENTS' | translate}} </span>
+      </li>
+      <li class="app-header__nav__menu__item" routerLink="/members" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+          <mat-icon class="app-header__nav__menu__item__icon" smallDeviceElements>people</mat-icon>
+          <span>  {{'MEMBER.MEMBERS' | translate}} </span>
+      </li>
+      <li class="app-header__nav__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+          <mat-icon class="app-header__nav__menu__item__icon" smallDeviceElements>people</mat-icon>
+          <span>  {{'TEAM.TEAMS' | translate}} </span>
+      </li>
+      <li class="app-header__nav__menu__item" routerLink="/admin" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+          <mat-icon class="app-header__nav__menu__item__icon" smallDeviceElements>person_circle</mat-icon>
+          <span>  {{'ADMIN.ADMIN' | translate}} </span>
+      </li>
+      <li class="app-header__nav__menu__item" routerLink="/auth/register" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+          <mat-icon class="app-header__nav__menu__item__icon" smallDeviceElements>lock_open</mat-icon>
+          <span> {{'REGISTER.REGISTER' | translate}}</span>
+      </li>
+      <li class="app-header__nav__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+          <mat-icon class="app-header__nav__menu__item__icon" smallDeviceElements>lock_open</mat-icon>
+          <span> {{'LOGIN.LOGIN' | translate}}</span>
+      </li>
+      <li class="app-header__nav__menu__item" routerLink="/about" routerLinkActive="active">
+          <mat-icon class="app-header__nav__menu__item__icon" smallDeviceElements>info_circle</mat-icon>
+          <span>  {{'ABOUT.ABOUT' | translate}} </span>
+      </li>
+      <li class="app-header__nav__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async)">
+          <mat-icon class="app-header__nav__menu__item__icon" smallDeviceElements>lock_outline</mat-icon>
+          <span>{{'LOG_OUT' | translate}}</span>
+      </li>
+      <li class="app-header__nav__menu__item app-header__nav__menu__item__language" mat-button [matMenuTriggerFor]="langMenu">
+          <mat-icon class="app-header__nav__menu__item__icon" smallDeviceElements>language</mat-icon>
+          {{'LANGUAGE.LANGUAGE' | translate}}
+          <mat-icon class="app-header__nav__menu__item__arrow">keyboard_arrow_down</mat-icon>
+          <mat-menu #langMenu="matMenu">
+              <button mat-menu-item>{{'LANGUAGE.GERMAN' | translate}}</button>
+              <button mat-menu-item>{{'LANGUAGE.ENGLISH' | translate}}</button>
+          </mat-menu>
+      </li>
+    </ul>
+  </div>
+</div>
