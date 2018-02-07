@@ -1,66 +1,95 @@
 {
+    "TEAM_CENTER": "team.center",
     "DELETE": "Delete",
     "CANCEL": "Cancel",
     "YES": "Yes",
     "NO": "No",
-    "GO": "Go",
+    "LOG_OUT": "Log out",
+    "CONTACT": "Contact",
     "IS_REQUIRED": "is Required",
+    "LANGUAGE": {
+        "LANGUAGE": "Language",
+        "ENGLISH": "English",
+        "GERMAN": "German"
+    },
     "HOME": {
-        "CREATE_YOUR_TEAM": "Create your team - 100% free",
-        "TEAM_NAME": "Team Name",
+        "GO": "Go!",
         "SLOGAN": "Simplified Team Management",
         "ADV1": {
             "TITLE": "Participations & Cancellations",
             "TEXT": "Create Participation or Cancellation events and enter a maximum of participant or minimum of remaining team members per event."
         },
-        "ERRORS": {
-            "TEAM_NAME_REQUIRED": "Team name is required"
+        "ADV2": {
+            "TITLE": "Volunteer work Management",
+            "TEXT": "Many clubs have difficulties organizing the many Volunteer work. Teamcenter makes it easy to manage them."
+        },
+        "ADV3": {
+            "TITLE": "One password for all",
+            "TEXT": "Teamcenter makes it possible to set the same password for all team members and still have personal logins. Just ask your teammate or use the direct link if you forget your password."
+        },
+        "ADV4": {
+            "TITLE": "Be a member of several teams",
+            "TEXT": "In the event overview you will see all the events in which you are included as a team member. You have all your team events displayed in one, central location"
+        },
+        "ADV5": {
+            "TITLE": "Activate mail notifications",
+            "TEXT": "When creating an event, the admin can decide if the event should be created with automatic mail reminders, indicating how many days before the event the reminder will be sent"
+        },
+        "ADV6": {
+            "TITLE": "Team overview and reporting",
+            "TEXT": "Each team member has full transparency about the number of registrations and cancellations of his team mates. For example, club members remember each other for entering a helper mission, or to cancel a training session."
         }
+    },
+    "EVENT": {
+        "EVENTS": "Events"
+    },
+    "TEAM": {
+        "TEAMS": "Teams",
+        "CREATE_YOUR_TEAM": "Create your team - 100% free",
+        "TEAM_NAME": "Team Name",
+        "TEAM_PASSWORD": "Team Password",
+        "TEAM_DETAILS": "Team details"
+    },
+    "ADMIN": {
+        "ADMIN": "Admin",
+        "ADMIN_PASSWORD": "Admin Password",
+        "ADMIN_DETAILS": "Administrator details",
+        "ADMIN_PASSWORD_INCORRECT": "Admin password incorrect"
+    },
+    "MEMBER": {
+        "MEMBERS": "Members"
     },
     "REGISTER": {
         "REGISTER": "Register",
-        "TEAM_NAME": "Team name",
-        "TEAM_NAME_REQUIRED": "Team name is required",
-        "TEAM_PASSWORD": "Team Password",
-        "TEAM_PASSWORD_REQUIRED": "Team password is required",
         "EMAIL": "Email",
-        "EMAIL_REQUIRED": "Email is required",
         "FIRST_NAME": "First name",
-        "FIRST_NAME_REQUIRED": "First name is required",
-        "LAST_NAME": "Last Name",
-        "LAST_NAME_REQUIRED": "Last name is required",
-        "ADMIN_PASSWORD": "Admin Password",
-        "ADMIN_PASSWORD_REQUIRED": "Admin password is required",
-        "TEAM_DETAILS": "Team details",
-        "ADMIN_DETAILS": "Administrator details"
+        "LAST_NAME": "Last Name"
     },
     "LOGIN": {
         "LOGIN": "Login",
         "EMAIL": "Email",
-        "EMAIL_REQUIRED": "email is required",
         "PASSWORD": "Password",
-        "PASSWORD_REQUIRED": "Password is required",
-        "REGISTER": "Register Now!",
-        "FORGOT_PASSWORD": "Forgot Password?"
+        "REGISTER": "Register Now!"
     },
-    "home_teamNameRequired": "Team name is required",
-    "home_buttonGo": "Go!",
-    "home_Slogan": "Simplified Team management",
-    "home_adv1_Titel": "Participations & Cancellations",
-    "home_adv1_Text": "Create Participation or Cancellation events and enter a maximum of participant or minimum of remaining team members per event",
-    "home_adv2_Titel": "Volunteer work Management",
-    "home_adv2_Text": "Many clubs have difficulties organizing the many Volunteer work. Teamcenter makes it easy to manage them.",
-    "home_adv3_Titel": "One password for all",
-    "home_adv3_Text": "Teamcenter makes it possible to set the same password for all team members and still have personal logins. Just ask your teammate or use the direct link if you forget your password.",
-    "home_adv4_Titel": "Be a member of several teams",
-    "home_adv4_Text": "In the event overview you will see all the events in which you are included as a team member. You have all your team events displayed in one, central location",
-    "home_adv5_Titel": "Activate mail notifications",
-    "home_adv5_Text": "When creating an event, the admin can decide if the event should be created with automatic mail reminders, indicating how many days before the event the reminder will be sent",
-    "home_adv6_Titel": "Team overview and reporting",
-    "home_adv6_Text": "Each team member has full transparency about the number of registrations and cancellations of his team mates. For example, club members remember each other for entering a helper mission, or to cancel a training session.",
-    "about_title": "teamcenter",
-    "about_p1": "This tool is as an alpha version available at the moment. It will be improved and extended continuously.",
-    "about_p2": "We are grateful for feedback especially after implementing new features: rene@team.center",
+    "FOOTER": {
+        "footer_text1": "You can use rows and columns here to organize your footer content.",
+        "footer_LinksTitle": "Content",
+        "TERMS_CONDITIONS": "Terms & Conditions",
+        "footer_Link3": "Impressum",
+        "COPY_RIGHT": "© 2018 Copyright teamcenter",
+        "footer_buyACoffee": "Support this project with buying a coffee"
+    },
+    "ABOUT": {
+        "ABOUT": "About",
+        "p1": "This tool is as an alpha version available at the moment. It will be improved and extended continuously.",
+        "p2": "We are grateful for feedback especially after implementing new features: rene@team.center"
+    },
+    "footer_title": "Footer Content",
+    "footer_MoreLinks": "More Links",
+    "menu_Download": "Downloads",
+    "menu_MobileLogin": "Login",
+    "menu_MobileLogOut": "Log out",
+    "menu_MobileDownload": "Downloads",
     "settings": "Settings",
     "directLink": " Direct link",
     "directLinkRequired": " Direct link required ",
@@ -71,37 +100,6 @@
     "agb_title": "General terms and conditions",
     "agb_p1": "Make team organisation for your team. The full potential of this tool will be in regulary apointments with a group of peaople where the organisator needs to know how many will take part.",
     "agb_p2": "This tool is in alpha version available at the moment. We are working continuously on improvements and new fewatures. Input is welcome. If you like to suport us you can buy us a coffee:",
-    "footer_title": "Footer Content",
-    "footer_text1": "You can use rows and columns here to organize your footer content.",
-    "footer_LinksTitle": "Content",
-    "footer_Link1": "Terms & Conditions",
-    "footer_Link2": "About",
-    "footer_Link3": "Impressum",
-    "footer_Link4": "Kontakt",
-    "footer_copyright": "© 2018 Copyright teamcenter",
-    "footer_MoreLinks": "More Links",
-    "footer_buyACoffee": "Support this project with buying a coffee",
-    "menu_headingTitle": "team.center",
-    "menu_menuTitle": "Menu",
-    "menu_signUp": "Register",
-    "menu_signIn": "Login",
-    "menu_Events": "Events",
-    "menu_Members": "Members",
-    "menu_Teams": "Teams",
-    "menu_Admin": "Admin",
-    "menu_LogOut": "Log out",
-    "menu_Download": "Downloads",
-    "menu_About": "About",
-    "menu_langLabel": "Lang",
-    "menu_LangDE": "German",
-    "menu_LangEN": "English",
-    "menu_MobileRegister": "Register",
-    "menu_MobileLogin": "Login",
-    "menu_MobileEvents": "Events",
-    "menu_MobileMembers": "Members",
-    "menu_MobileLogOut": "Log out",
-    "menu_MobileDownload": "Downloads",
-    "menu_MobileAbout": "About",
     "userAdmin_msg": "You are logged in as a team member. To authenticate as a team admin, please enter a admin password.",
     "userAdmin_password": "Password",
     "userAdmin_passwordRequired": "Password is required",
@@ -218,6 +216,5 @@
     "register_ts_AlertDisabledRegisterButton": "This function is not available yet.",
     "create_member_ts_AlertUserCreated": "User created",
     "create_member_ts_AlertUserAlreadyExists": "User already exists",
-    "login_ts_AlertWrondUserPw": "Wrong username or password",
-    "admin_ts_AlertAdminPwIncorrect": "Admin password incorrect"
+    "login_ts_AlertWrondUserPw": "Wrong username or password"
 }
