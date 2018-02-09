@@ -1,18 +1,18 @@
 @import './toolkit/toolkit';
-
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-size: $primary-font-size;
-  -webkit-overflow-scrolling: touch;
-  color: $tc-color-gray-shade-6;
-  line-height: 1.5;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-size: $primary-font-size;
+    -webkit-overflow-scrolling: touch;
+    color: $tc-color-gray-shade-6;
+    line-height: 1.5;
 }
 
 body {
-  font-family: 'Roboto';
-  font-weight: 300;
-  background-color: $tc-color-background-light;
+    font-family: 'Roboto';
+    font-weight: $tc-font-weight-3;
+    background-color: $tc-color-background-light;
 }

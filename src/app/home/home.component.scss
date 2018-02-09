@@ -1,69 +1,68 @@
 @import "../../styles/toolkit/variables.scss";
 .app-home {
-  &__main {
-    &__top,
-    &__bottom {
-      background-attachment: fixed;
-      background-size: cover;
-      min-height: 564px;
-    }
-    &__top {
-      background: url('../../assets/img/squash-793062.jpg') no-repeat center fixed;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      &__register {
-        position: relative;
-        width: 90%;
-        height: 150px;
-        margin: 0 auto;
-        max-width: 500px;
-        padding: 10px 20px;
-        box-sizing: border-box;
-        opacity: 0.85;
-        &__main-input-field {
-          margin-top: 2rem;
+    &__main {
+        &__top,
+        &__bottom {
+            background-attachment: fixed;
+            background-size: cover;
+            min-height: 564px;
         }
-        &__action-btn {
-          position: absolute;
-          right: 20px;
-          top: 0;
-          bottom: 0;
-          margin: auto;
+        &__top {
+            background: url('../../assets/img/squash-793062.jpg') no-repeat center fixed;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            &__register {
+                position: relative;
+                width: 90%;
+                height: 150px;
+                margin: 0 auto;
+                max-width: 500px;
+                padding: 10px 20px;
+                box-sizing: border-box;
+                opacity: 0.85;
+                &__main-input-field {
+                    margin-top: 2rem;
+                }
+                &__action-btn {
+                    position: absolute;
+                    right: 20px;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                }
+            }
         }
-      }
-    }
-    &__bottom {
-      background: url('../../assets/img/basketball3.jpg') no-repeat center fixed;
-    }
-  }
-  &__info {
-    padding: 2.2rem 0;
-    &__sections__container {
-      justify-content: center; // space-around;
-      display: flex;
-      flex-wrap: wrap;
-      flex-flow: row wrap;
-    }
-    &__section {
-      // remove if space-around
-      padding: 2%;
-      width: 25%;
-      min-width: 250px; // supporting small devices
-      &__header {
-        width: 50%;
-        margin: 0 auto;
-        font-size: 1.7rem;
-        margin-bottom: 0.6em;
-      }
-      &__icon {
-        .mat-icon {
-          font-size: 4rem !important;
-          margin-right: 2rem;
-          color: $dark-brown;
+        &__bottom {
+            background: url('../../assets/img/basketball3.jpg') no-repeat center fixed;
         }
-      }
     }
-  }
+    &__info {
+        padding: 2.2rem 0;
+        &__sections__container {
+            justify-content: center; // space-around;
+            display: flex;
+            flex-wrap: wrap;
+            flex-flow: row wrap;
+        }
+        &__section {
+            // remove if space-around
+            padding: 2%;
+            width: 25%;
+            min-width: 250px; // supporting small devices
+            &__header {
+                width: 50%;
+                margin: 0 auto;
+                font-size: $tc-font-size-h3;
+                margin-bottom: 0.6em;
+            }
+            &__icon {
+                .mat-icon {
+                    font-size: $tc-font-size-h1;
+                    margin-right: 2rem;
+                    color: $dark-brown;
+                }
+            }
+        }
+    }
 }
-

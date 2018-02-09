@@ -1,21 +1,20 @@
 @import "../../../styles/toolkit/variables.scss";
 .app-login {
-  color: $tc-color-gray-shade-6; // move it to a common place
-  width: 80%;
-  min-width: 200px;
-  max-width: 400px;
-  margin: 0px auto;
-  margin-top: 120px;
-  &__field {
-    width: 100%;
-    line-height: 1.5;
-    margin-top: 1rem;
-    &__icon {
-      font-size: 1.8rem;
-      margin-right: 5px;
+    color: $tc-color-gray-shade-6;
+    width: 80%;
+    min-width: 200px;
+    max-width: 400px;
+    margin: 120px auto;
+    &__field {
+        width: 100%;
+        line-height: 1.5;
+        margin-top: 1rem;
+        &__icon {
+            font-size: $tc-font-size-h3;
+            margin-right: 5px;
+        }
     }
-  }
-  &__button {
-    margin-top: 2.2rem;
-  }
+    &__button {
+        margin-top: 2.2rem;
+    }
 }

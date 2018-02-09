@@ -24,7 +24,4 @@ export class HeaderComponent implements OnInit {
     this.menuClicked.emit();
   }
 
-  changeMenuDisplay($event) {
-    this.menuOpened = $event.target.className.indexOf('app-header__toggle__button') ? !this.menuOpened : false;
-  }
 }
