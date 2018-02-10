@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 /**
  * @author Nermeen Mattar
  * @class AuthService is responsible of user authentication and JWT tokens.
@@ -11,8 +12,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
  */
 @Injectable()
 export class AuthService implements OnDestroy {
-  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  $userLoggedIn: Observable<boolean> = this.isLoggedIn.asObservable();
+  isLoggedIn: BehaviorSubject < boolean > = new BehaviorSubject(false);
+  $userLoggedIn: Observable < boolean > = this.isLoggedIn.asObservable();
   constructor(
     private httpRequest: HttpRequestsService,
     private tokenHandler: TokenHandlerService, private router: Router
@@ -35,9 +36,10 @@ export class AuthService implements OnDestroy {
         this.addTokenToHttpHeader();
         this.router.navigateByUrl('events');
         this.isLoggedIn.next(true);
+        this.storeLoggedInUserInfo(this.tokenHandler.decodeToken(this.httpRequest.loginResponse.token));
       },
       err => {
-        console.log('The username or password is incorrect ')// replace this line with an error alert
+        console.log('The username or password is incorrect ') // replace this line with an error alert
       }
     );
   }
@@ -70,6 +72,19 @@ export class AuthService implements OnDestroy {
     this.httpRequest.setHttpRequestOptions(this.httpRequest.loginResponse.token); // any subsequent request will have a token
   }
 
-  ngOnDestroy() {
+  /**
+   * @function storeLoggedInUserInfo
+   * @description is responsible for storing logged in user data
+   * @param {{sub: string, teamRoles: any[]}} userInfo
+   * @memberof AuthService
+   * @ToDo:
+   *  1-  add real/descriptive type for userInfo
+   *  2- add service for using local storage to handle the JSON.stringify/JSON.parse
+   *  3- store those info in a service
+   */
+  storeLoggedInUserInfo(userInfo) { // : {sub: string, teamRoles: any[]})
+    localStorage.setItem('username', userInfo.sub);
+    localStorage.setItem('teamRoles', JSON.stringify(userInfo.teamRoles));
   }
+  ngOnDestroy() {}
 }
