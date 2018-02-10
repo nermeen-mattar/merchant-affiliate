@@ -1,5 +1,4 @@
 @import "../../styles/toolkit/variables.scss";
-@import "../../styles/toolkit/elements.scss";
 .app-home {
     &__main {
         &__top,
@@ -12,7 +11,6 @@
             background: url('../../assets/img/squash-793062.jpg') no-repeat center fixed;
             display: flex;
             align-items: center;
-            padding-top: $header-bar-height;
             &__register {
                 position: relative;
                 width: 90%;

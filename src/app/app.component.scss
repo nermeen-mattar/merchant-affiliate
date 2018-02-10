@@ -34,6 +34,10 @@
             }
         }
     }
+    &__main-content {
+        margin-top: $header-bar-height;
+        min-height: 82%;
+    }
 }
 
 @media only screen and (min-width: 879px) {
