@@ -34,10 +34,6 @@
             }
         }
     }
-    &__sidenav-content__main {
-        margin-top: $header-bar-height;
-        min-height: 82%;
-    }
 }
 
 @media only screen and (min-width: 879px) {
@@ -45,13 +41,12 @@
         &__sidenav {
             display: none;
         }
-        &__sidenav-content {
-            display: none !important;
+    }
+     :host {
+         ::ng-deep {
+            .mat-drawer-backdrop.mat-drawer-shown {
+                display: none;
+            }
         }
     }
-    .mat-drawer-backdrop {
-        display: none;
-    }
 }
-
-//__sidenav-content__main"
