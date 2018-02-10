@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs/Observable';
+import { AuthService } from './auth/services/auth.service';
 
 @Component({
   selector: 'tc-root',
@@ -9,10 +11,12 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
   appLanguage: string;
-
-  constructor(private translate: TranslateService) {}
+  $isUserLoggedIn: Observable<boolean>;
+  menuOpened = false;
+  constructor(private translate: TranslateService, private authService: AuthService) {}
 
   ngOnInit() {
+    this.$isUserLoggedIn = this.authService.$userLoggedIn;
     const browserLanguage = this.translate.getBrowserLang() || defaultLanguage;
     this.appLanguage = this.getSuitableLanguage(browserLanguage);
     this.translate.use(this.appLanguage);
@@ -28,5 +32,9 @@ export class AppComponent implements OnInit {
     language = language.substring(0, 2).toLowerCase();
 
     return availableLanguages.some(lang => (lang.code === language)) ? language : defaultLanguage;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

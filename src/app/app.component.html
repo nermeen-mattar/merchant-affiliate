@@ -1,6 +1,56 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<tc-header></tc-header>
-<div id="app-content">
-    <router-outlet></router-outlet>
-</div>
-<tc-footer></tc-footer>
+<mat-sidenav-container class="app-container">
+    <mat-sidenav class="app-container__sidenav" #sidenav mode="over" [opened]="menuOpened">
+        <div class="app-container__sidenav__menu font-w-bolder">
+            <div (click)="sidenav.close()">
+                <div class="app-container__sidenav__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+                    <mat-icon class="app-container__sidenav__menu__item__icon">event</mat-icon>
+                    <span>  {{'EVENT.EVENTS' | translate}} </span>
+                </div>
+                <div class="app-container__sidenav__menu__item" routerLink="/members" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+                    <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
+                    <span>  {{'MEMBER.MEMBERS' | translate}} </span>
+                </div>
+                <div class="app-container__sidenav__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+                    <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
+                    <span>  {{'TEAM.TEAMS' | translate}} </span>
+                </div>
+                <div class="app-container__sidenav__menu__item" routerLink="/admin" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+                    <mat-icon class="app-container__sidenav__menu__item__icon">person_circle</mat-icon>
+                    <span>  {{'ADMIN.ADMIN' | translate}} </span>
+                </div>
+                <div class="app-container__sidenav__menu__item" routerLink="/auth/register" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+                    <mat-icon class="app-container__sidenav__menu__item__icon">lock_open</mat-icon>
+                    <span> {{'REGISTER.REGISTER' | translate}}</span>
+                </div>
+                <div class="app-container__sidenav__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+                    <mat-icon class="app-container__sidenav__menu__item__icon">lock_open</mat-icon>
+                    <span> {{'LOGIN.LOGIN' | translate}}</span>
+                </div>
+                <div class="app-container__sidenav__menu__item" routerLink="/about" routerLinkActive="active">
+                    <mat-icon class="app-container__sidenav__menu__item__icon">info_circle</mat-icon>
+                    <span>  {{'ABOUT.ABOUT' | translate}} </span>
+                </div>
+                <div class="app-container__sidenav__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async)">
+                    <mat-icon class="app-container__sidenav__menu__item__icon">lock_outline</mat-icon>
+                    <span>{{'LOG_OUT' | translate}}</span>
+                </div>
+            </div>
+            <div class="app-container__sidenav__menu__item app-container__sidenav__menu__item__language" mat-button [matMenuTriggerFor]="langMenu">
+                <mat-icon class="app-container__sidenav__menu__item__icon">language</mat-icon>
+                {{'LANGUAGE.LANGUAGE' | translate}}
+                <mat-icon class="app-container__sidenav__menu__item__arrow">keyboard_arrow_down</mat-icon>
+                <mat-menu #langMenu="matMenu">
+                    <button mat-menu-item>{{'LANGUAGE.GERMAN' | translate}}</button>
+                    <button mat-menu-item>{{'LANGUAGE.ENGLISH' | translate}}</button>
+                </mat-menu>
+            </div>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <tc-header (menuClicked)="sidenav.toggle()"></tc-header>
+        <div class="app-container__main-content">
+            <router-outlet></router-outlet>
+        </div>
+        <tc-footer></tc-footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

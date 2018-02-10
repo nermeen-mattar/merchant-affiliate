@@ -15,9 +15,6 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     CommonModule,
     SharedModule,
-    MatListModule,
-    MatMenuModule,
-    MatIconModule,
     RouterModule,
     HttpClientModule,
     TranslateModule

@@ -11,6 +11,7 @@ import { HttpRequestsService } from './core/services/http-requests.service';
 import { TokenHandlerService } from './auth/services/token-handler.service';
 import { AuthService } from './auth/services/auth.service';
 import { AuthGuard } from './core/guards/auth.guard';
+import { MaterialModule } from './shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AuthGuard } from './core/guards/auth.guard';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
+    MaterialModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
