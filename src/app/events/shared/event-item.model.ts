@@ -1,4 +1,4 @@
-export class EventData {
+export interface EventItem {
   id: string;
   type: string;
   date: string; // or start date and end date

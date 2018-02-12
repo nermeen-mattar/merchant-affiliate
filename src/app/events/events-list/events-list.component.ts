@@ -1,4 +1,4 @@
-import { EventData } from './../shared/event.model';
+import { EventItem } from './../shared/event-item.model';
 import { Observable } from 'rxjs/Observable';
 import { EventsService } from './../shared/events.service';
 import { HttpRequestsService } from './../../core/services/http-requests.service';
@@ -25,31 +25,25 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
  */
 
 export class EventsListComponent implements OnInit{
-  $eventsList: Observable<object>;
+  events: EventItem[];
   displayedColumns = ['id', 'type', 'date', 'time', 'event', 'status', 'critical-value'];
-  dataSource: MatTableDataSource<EventData>;
+  dataSource: MatTableDataSource<EventItem>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private httpRequestService: HttpRequestsService, private eventsService: EventsService) {
-    const users: EventData[] = [];
-      const currTeamId = 55; // hard coded until I implement the drop down menu for teams.
-      this.httpRequestService.httpPost('events/byteamid/' + currTeamId, localStorage.getItem('username')).subscribe((res) => {
-        console.log(res);
-        this.initDataSource(res.events);
+      this.eventsService.getEvents().subscribe( res => {
+        this.events = res;
+        this.initDataSource(this.events);
       });
   }
-  ngOnInit() {
-  }
-  getEventsList() {
-  //  this.$eventsList = this.eventsService.getEvents();
-  }
+  ngOnInit() {}
   /**
    * Set the paginator and sort after getting events since this component will
    * be able to query its view for the initialized paginator and sort.
    */
-  initDataSource(events) { // add typing
+  initDataSource(events: EventItem[]) {
     // transform events
     this.dataSource = new MatTableDataSource(events); // Assign the data to the data source for the table to render
     this.dataSource.paginator = this.paginator;

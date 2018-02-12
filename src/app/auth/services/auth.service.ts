@@ -1,3 +1,4 @@
+import { UserService } from './../../core/services/user.service';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -16,7 +17,8 @@ export class AuthService implements OnDestroy {
   $userLoggedIn: Observable < boolean > = this.isLoggedIn.asObservable();
   constructor(
     private httpRequest: HttpRequestsService,
-    private tokenHandler: TokenHandlerService, private router: Router
+    private tokenHandler: TokenHandlerService, private router: Router,
+    private userService: UserService
   ) {
     this.httpRequest.loginResponse = this.getLoginResponseFromStorage();
     if (this.httpRequest.loginResponse) {
@@ -80,11 +82,10 @@ export class AuthService implements OnDestroy {
    * @ToDo:
    *  1-  add real/descriptive type for userInfo
    *  2- add service for using local storage to handle the JSON.stringify/JSON.parse
-   *  3- store those info in a service
    */
   storeLoggedInUserInfo(userInfo) { // : {sub: string, teamRoles: any[]})
-    localStorage.setItem('username', userInfo.sub);
-    localStorage.setItem('teamRoles', JSON.stringify(userInfo.teamRoles));
+    this.userService.setUsername(userInfo.sub);
+    this.userService.setTeamRoles(userInfo.teamRoles);
   }
   ngOnDestroy() {}
 }

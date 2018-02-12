@@ -1,3 +1,4 @@
+import { UserService } from './core/services/user.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,7 +33,7 @@ import { MaterialModule } from './shared/material/material.module';
       }
     }),
   ],
-  providers: [HttpRequestsService, TokenHandlerService, AuthService, AuthGuard], // both used by auth service
+  providers: [HttpRequestsService, TokenHandlerService, AuthService, AuthGuard, UserService], // both used by auth service
   bootstrap: [AppComponent],
 })
 export class AppModule {}
