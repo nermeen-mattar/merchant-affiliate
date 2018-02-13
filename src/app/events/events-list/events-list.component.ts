@@ -34,7 +34,7 @@ export class EventsListComponent implements OnInit {
 
   constructor(private httpRequestService: HttpRequestsService, private eventsService: EventsService) {
       this.eventsService.getEvents().subscribe( res => {
-        this.events = res;
+        this.events = res.events;
         this.initDataSource(this.events);
       });
   }

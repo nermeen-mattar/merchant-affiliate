@@ -7,7 +7,7 @@ export class UserService {
 
   // TODO[nermeen]: add method level comment
   getUsername(): string {
-    return localStorage.getItem('username');
+    return JSON.parse(localStorage.getItem('username'));
   }
 
   // TODO[nermeen]: add method level comment
