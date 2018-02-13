@@ -11,7 +11,7 @@ export class EventsService {
   constructor(private httpRequestService: HttpRequestsService, private userService: UserService) { }
 
   // TODO[nermeen]: add method level comment
-  getEvents(): Observable <EventItem[]> {
+  getEvents(): Observable <any> {
     const currTeamId = 55; // dummy data for now
     return this.httpRequestService.httpPost(
       `events/byteamid/${currTeamId}` ,
