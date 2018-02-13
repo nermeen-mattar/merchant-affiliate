@@ -1,0 +1,25 @@
+# @author: Ahsan Ayaz
+# Gitlab CI for backtable-app project
+
+# requiring the environment node-karma-proctract with headless chrome
+image: weboaks/node-karma-protractor-chrome:headless
+
+before_script:
+  - echo 'Hello World. Ahsan was here'
+  - npm -v
+  - node -v
+  - pwd
+  - ls -l
+
+# add cache to 'node_modules' for speeding up builds
+cache:
+  paths:
+    # - node_modules/ # Node modules and dependencies
+    - node_modules/
+
+run_tests:
+  stage: test
+  script:
+    - npm install
+    - npm run test:ci
+    - npm run e2e-ci

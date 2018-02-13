@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://team.center/service/',
+  baseUrl: '/api/',
   authConfig: {
     tokenExpiration: 0 // in days
   }
