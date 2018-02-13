@@ -22,4 +22,9 @@ run_tests:
   script:
     - npm install
     - npm run test:ci
-    - npm run e2e-ci
+    - npm run e2e:ci
+
+build_app:
+  state: build
+  script:
+    - npm run build:prod
