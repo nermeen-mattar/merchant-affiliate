@@ -34,6 +34,7 @@ export class AppComponent implements OnInit {
     return availableLanguages.some(lang => (lang.code === language)) ? language : defaultLanguage;
   }
 
+  // TODO[nermeen]: add method level comment
   logout() {
     this.authService.logout();
   }

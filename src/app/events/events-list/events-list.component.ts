@@ -1,6 +1,6 @@
-import { EventItem } from './../shared/event-item.model';
+import { EventItem } from './../models/event-item.model';
 import { Observable } from 'rxjs/Observable';
-import { EventsService } from './../shared/events.service';
+import { EventsService } from './../services/events.service';
 import { HttpRequestsService } from './../../core/services/http-requests.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
@@ -24,7 +24,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
  * 4- add error/confirm messages (a branch by itself)
  */
 
-export class EventsListComponent implements OnInit{
+export class EventsListComponent implements OnInit {
   events: EventItem[];
   displayedColumns = ['id', 'type', 'date', 'time', 'event', 'status', 'critical-value'];
   dataSource: MatTableDataSource<EventItem>;
@@ -39,6 +39,7 @@ export class EventsListComponent implements OnInit{
       });
   }
   ngOnInit() {}
+
   /**
    * Set the paginator and sort after getting events since this component will
    * be able to query its view for the initialized paginator and sort.
@@ -50,6 +51,7 @@ export class EventsListComponent implements OnInit{
     this.dataSource.sort = this.sort;
   }
 
+  // TODO[nermeen]: add method level comment
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches

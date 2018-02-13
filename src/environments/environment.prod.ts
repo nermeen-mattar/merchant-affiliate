@@ -1,4 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl:  'http://team.center/service/'
 };
-export const baseUrl =  'http://team.center/service/';

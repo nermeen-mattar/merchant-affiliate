@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  // TODO[nermeen]: use a method level comment here. Use the AuthService to make the http request.
+  // TODO[nermeen]: See the wrong indentation below. Please ifx it and make sure we have one property per line in objects
   register(formValue) {
     this.httpRequestService.httpPost('register', {
       teamname: formValue.teamName,

@@ -1,5 +1,5 @@
 .app-footer {
-  width:100%;
+  width: 100%;
   background-color: #ff9800; // fix color="primary"
   &__menu {
     padding: 2% 15%;
@@ -15,8 +15,10 @@
   }
 }
 
- :host {
-   ::ng-deep {
+// TODO[nermeen]: remove !important(s) from this file
+
+:host {
+  ::ng-deep {
     .mat-list-item {
       height: initial !important;
       &-content {
@@ -25,3 +27,4 @@
     }
   }
 }
+

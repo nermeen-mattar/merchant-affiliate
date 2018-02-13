@@ -3,16 +3,20 @@ import { Injectable } from '@angular/core';
 import { HttpRequestsService } from './../../core/services/http-requests.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { EventItem } from './event-item.model';
+import { EventItem } from '../models/event-item.model';
 
 @Injectable()
 export class EventsService {
 
   constructor(private httpRequestService: HttpRequestsService, private userService: UserService) { }
 
-  getEvents(): Observable <EventItem[]>{
+  // TODO[nermeen]: add method level comment
+  getEvents(): Observable <EventItem[]> {
     const currTeamId = 55; // dummy data for now
-    return this.httpRequestService.httpPost('events/byteamid/' + currTeamId , this.userService.getUsername());
+    return this.httpRequestService.httpPost(
+      `events/byteamid/${currTeamId}` ,
+      this.userService.getUsername()
+    );
   }
 
 }

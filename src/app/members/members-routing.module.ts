@@ -5,24 +5,24 @@ import { MembersComponent } from './members.component';
 
 const routes: Routes = [
   {
-      path: '',
-      component: MembersComponent,
-      children: [
-          {
-              path: '',
-              pathMatch: 'full',
-              redirectTo: 'list'
-          },
-          {
-              path: 'list',
-              component: MembersListComponent
-          }
-          /* The event form component will be used for creating and form editing, creation if the path was /new, edit otherwise */
-          // , {
-          //     path: '/:id',
-          //     component: EventFormComponent
-          // }
-      ]
+    path: '',
+    component: MembersComponent,
+    children: [
+      {
+          path: '',
+          pathMatch: 'full',
+          redirectTo: 'list'
+      },
+      {
+          path: 'list',
+          component: MembersListComponent
+      }
+      /* The event form component will be used for creating and form editing, creation if the path was /new, edit otherwise */
+      // , {
+      //     path: '/:id',
+      //     component: EventFormComponent
+      // }
+    ]
   }
 ];
 

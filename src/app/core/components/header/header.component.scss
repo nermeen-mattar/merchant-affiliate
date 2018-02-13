@@ -1,85 +1,96 @@
 @import "../../../../styles/toolkit/variables.scss";
 @import "../../../../styles/toolkit/elements.scss";
+
 .app-header {
-    width: 100%;
-    z-index: 1;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    height: $header-bar-height;
-    overflow: visible;
-    background-color: $primary-color;
-    padding: 0px 40px;
-    box-sizing: border-box;
-    top: 0px;
-    position: fixed;
-    &__logo {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        flex-direction: row;
-        &__icon {
-            background: url('../../../../assets/img/core/logo.png') 50% 50% no-repeat;
-            background-size: contain;
-            width: 20px;
-            margin-right: 10px;
-            height: 22px;
-        }
-        &__text {
-            font-family: 'Baloo Thambi', cursive; // replace with variable or class
-            font-size: $tc-font-size-h2;
-        }
+  width: 100%;
+  z-index: 1;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: $header-bar-height;
+  overflow: visible;
+  background-color: $primary-color;
+  padding: 0px 40px;
+  box-sizing: border-box;
+  top: 0px;
+  position: fixed;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-direction: row;
+
+    &__icon {
+      background: url('../../../../assets/img/core/logo.png') 50% 50% no-repeat;
+      background-size: contain;
+      width: 20px;
+      margin-right: 10px;
+      height: 22px;
     }
-    &__menu {
-        margin-left: auto;
-        &__item {
-            float: left;
-            transition: background-color .3s;
-            font-size: $tc-font-size-h5;
-            padding: 16px 15px;
-            cursor: pointer;
-            &:hover,
-            &.active {
-                background-color: rgba(235, 235, 235, 0.8);
-                color: $tc-color-gray-shade-6;
-            }
-            &__language {
-                padding-right: 2rem;
-            }
-            &__arrow {
-                position: absolute;
-                bottom: 20px;
-                right: 38px;
-            }
-            &__icon {
-                color: $primary-color;
-                position: relative;
-                top: 6px;
-                margin-right: 16px;
-            }
-        }
+
+    &__text {
+      font-family: 'Baloo Thambi', cursive; // replace with variable or class
+      font-size: $tc-font-size-h2;
     }
-    &__nav-toggler {
-        border-radius: 0px 20px 20px 0px;
+  }
+  &__menu {
+    margin-left: auto;
+
+    &__item {
+      float: left;
+      transition: background-color .3s;
+      font-size: $tc-font-size-h5;
+      padding: 16px 15px;
+      cursor: pointer;
+
+      &:hover,
+      &.active {
+        background-color: rgba(235, 235, 235, 0.8);
+        color: $tc-color-gray-shade-6;
+      }
+
+      &__language {
+        padding-right: 2rem;
+      }
+
+      &__arrow {
         position: absolute;
-        left: 0px;
+        bottom: 20px;
+        right: 38px;
+      }
+
+      &__icon {
+        color: $primary-color;
+        position: relative;
+        top: 6px;
+        margin-right: 16px;
+      }
     }
+  }
+
+  &__nav-toggler {
+    border-radius: 0px 20px 20px 0px;
+    position: absolute;
+    left: 0px;
+  }
 }
 
 @media only screen and (max-width: 879px) {
-    .app-header {
-        &__logo {
-            justify-content: center;
-        }
-        &__menu {
-            display: none;
-        }
+  .app-header {
+    &__logo {
+      justify-content: center;
     }
+
+    &__menu {
+      display: none;
+    }
+  }
 }
 
 @media only screen and (min-width: 880px) {
-    .app-header {
-        &__nav-toggler {
-            display: none;
-        }
+  .app-header {
+    &__nav-toggler {
+      display: none;
     }
+  }
 }

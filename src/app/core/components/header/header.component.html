@@ -1,44 +1,44 @@
 <mat-toolbar color="primary" class="app-header text-white">
-    <button mat-icon-button (click)="onMenuClick($event)" class="app-header__nav-toggler bg-white" color="primary">
+  <button mat-icon-button (click)="onMenuClick($event)" class="app-header__nav-toggler bg-white" color="primary">
     <mat-icon>menu</mat-icon>
   </button>
-    <div class="app-header__logo d-flex align-items-center" routerLink="/home">
-        <span class="app-header__logo__icon"></span>
-        <div class="app-header__logo__text">{{'TEAM_CENTER' | translate}}</div>
-    </div>
+  <div class="app-header__logo d-flex align-items-center" routerLink="/home">
+    <span class="app-header__logo__icon"></span>
+    <div class="app-header__logo__text">{{'TEAM_CENTER' | translate}}</div>
+  </div>
 
-    <div class="app-header__menu font-w-bolder">
-        <span class="app-header__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
-            <span>  {{'EVENT.EVENTS' | translate}} </span>
-        </span>
-        <span class="app-header__menu__item" routerLink="/members" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
-            <span>  {{'MEMBER.MEMBERS' | translate}} </span>
-        </span>
-        <span class="app-header__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
-            <span>  {{'TEAM.TEAMS' | translate}} </span>
-        </span>
-        <span class="app-header__menu__item" routerLink="/admin" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
-            <span>  {{'ADMIN.ADMIN' | translate}} </span>
-        </span>
-        <span class="app-header__menu__item" routerLink="/auth/register" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
-            <span> {{'REGISTER.REGISTER' | translate}}</span>
-        </span>
-        <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
-            <span> {{'LOGIN.LOGIN' | translate}}</span>
-        </span>
-        <span class="app-header__menu__item" routerLink="/about" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
-            <span>  {{'ABOUT.ABOUT' | translate}} </span>
-        </span>
-        <span class="app-header__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async)">
-            <span>{{'LOG_OUT' | translate}}</span>
-        </span>
-        <span class="app-header__menu__item app-header__menu__item__language" mat-button [matMenuTriggerFor]="langMenu">
-            {{'LANGUAGE.LANGUAGE' | translate}}
-            <mat-icon class="app-header__menu__item__arrow">keyboard_arrow_down</mat-icon>
-            <mat-menu #langMenu="matMenu">
-                <button mat-menu-item>{{'LANGUAGE.GERMAN' | translate}}</button>
-                <button mat-menu-item>{{'LANGUAGE.ENGLISH' | translate}}</button>
-            </mat-menu>
-        </span>
-    </div>
+  <div class="app-header__menu font-w-bolder">
+    <span class="app-header__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+      <span> {{'EVENT.EVENTS' | translate}} </span>
+    </span>
+    <span class="app-header__menu__item" routerLink="/members" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+      <span> {{'MEMBER.MEMBERS' | translate}} </span>
+    </span>
+    <span class="app-header__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+      <span> {{'TEAM.TEAMS' | translate}} </span>
+    </span>
+    <span class="app-header__menu__item" routerLink="/admin" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+      <span> {{'ADMIN.ADMIN' | translate}} </span>
+    </span>
+    <span class="app-header__menu__item" routerLink="/auth/register" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+      <span> {{'REGISTER.REGISTER' | translate}}</span>
+    </span>
+    <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+      <span> {{'LOGIN.LOGIN' | translate}}</span>
+    </span>
+    <span class="app-header__menu__item" routerLink="/about" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+      <span> {{'ABOUT.ABOUT' | translate}} </span>
+    </span>
+    <span class="app-header__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async)">
+      <span>{{'LOG_OUT' | translate}}</span>
+    </span>
+    <span class="app-header__menu__item app-header__menu__item__language" mat-button [matMenuTriggerFor]="langMenu">
+      {{'LANGUAGE.LANGUAGE' | translate}}
+      <mat-icon class="app-header__menu__item__arrow">keyboard_arrow_down</mat-icon>
+      <mat-menu #langMenu="matMenu">
+        <button mat-menu-item>{{'LANGUAGE.GERMAN' | translate}}</button>
+        <button mat-menu-item>{{'LANGUAGE.ENGLISH' | translate}}</button>
+      </mat-menu>
+    </span>
+  </div>
 </mat-toolbar>
