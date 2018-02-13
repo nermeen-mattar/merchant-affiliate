@@ -12,8 +12,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-  //userEmail.value, userPassword.value
+  // TODO[nermeen]: please put a method level comment here
   login(loginFormValue) {
-    this.authService.login({username: loginFormValue.userEmail, password: loginFormValue.userPassword});
+    this.authService.login({
+      username: loginFormValue.userEmail,
+      password: loginFormValue.userPassword
+    });
   }
 }

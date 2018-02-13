@@ -12,7 +12,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {}
-  
+
+  // TODO[nermeen]: add method level comment
   navigateToRegisterPage(teamName) {
     this.router.navigate(['/auth/register'], {
       queryParams: {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { baseUrl } from './../../../environments/environment.prod';
+import { environment } from './../../../environments/environment.prod';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../auth/services/auth.service';
 
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable < boolean > | Promise < boolean > | boolean {
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated()) { // if the user is logged in
       if (state.url.indexOf('home') > -1  || state.url.indexOf('auth') > -1 ) {
         if (this.router.routerState.snapshot.url === '') {
           this.router.navigateByUrl('events'); // when manually changing the route to a wrong route or to a non account based page.
@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
       } else {
         return true;
       }
-    } else {
+    } else {  // if the user is not logged in
       if (state.url.indexOf('home') > -1  || state.url.indexOf('auth') > -1 ) {
         return true;
       } else {

@@ -41,7 +41,15 @@
         }
     },
     "EVENT": {
-        "EVENTS": "Events"
+        "EVENTS": "Events",
+        "EVENT": "Event",
+        "TYPE": "Type",
+        "DATE": "Date",
+        "TIME": "Time",
+        "STATUS": "Status",
+        "CRITICAL_VALUE": "Critical value",
+        "OUT": "Out",
+        "IN": "In"
     },
     "TEAM": {
         "TEAMS": "Teams",
@@ -131,7 +139,6 @@
     "userEvents_EventTime": "Time",
     "userEvents_EventName": "Event",
     "userEvents_EventStatus": "Status",
-    "userEvents_EventValue": "Critical value",
     "userEvents_EventAction": "Action",
     "userEvents_MouseOver_Parti": "Participation Event (default you are out)",
     "userEvents_MouseOver_Cancel": "Cancellation Event (default you are in)",
@@ -151,7 +158,6 @@
     "userEventsPast_EventTime": "Time",
     "userEventsPast_EventName": "Event",
     "userEventsPast_EventStatus": "Status",
-    "userEventsPast_EventValue": "Critical value",
     "userEventsPast_EventAction": "Action",
     "userEventsPast_MouseOver_Parti": "Participation Event (default you are out)",
     "userEventsPast_MouseOver_Cancel": "Cancellation Event (default you are in)",

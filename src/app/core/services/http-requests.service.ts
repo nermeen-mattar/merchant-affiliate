@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { baseUrl } from './../../../environments/environment';
+import { environment } from './../../../environments/environment';
 import { Observer } from 'rxjs/Observer';
 import { Router } from '@angular/router';
 import { Response, RequestOptions, Headers } from '@angular/http';
@@ -16,14 +16,14 @@ export class HttpRequestsService {
   public loginResponse;
   constructor(private http: HttpClient, private router: Router) {
     this.setHttpRequestOptions();
-    this.baseUrl = baseUrl;
+    this.baseUrl = environment.baseUrl;
     this.loginResponse = JSON.parse(localStorage.getItem('login-response'));
     if (this.loginResponse) {
       this.token = this.loginResponse.token;
     }
   }
 
-  setHttpRequestOptions(token ? : string) {
+  setHttpRequestOptions(token ?: string) {
     if (token) {
       this.token = token;
       this.requestHeader = new Headers({ // HttpHeaders
@@ -42,19 +42,19 @@ export class HttpRequestsService {
   }
 
   public httpGet(requestUrl: string): Observable < any > {
-    return this.http.get(this.baseUrl + requestUrl, this.requestOptions)
+    return this.http.get(this.baseUrl + requestUrl, this.requestOptions);
   }
 
-  public httpPost(requestUrl: string, requestParams ? : Object): Observable < any > {
-    return this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions)
+  public httpPost(requestUrl: string, requestParams ?: Object): Observable < any > {
+    return this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions);
   }
 
-  public httpPut(requestUrl: string, requestParams ? : Object): Observable < any > {
-    return this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions)
+  public httpPut(requestUrl: string, requestParams ?: Object): Observable < any > {
+    return this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions);
   }
 
   public httpDelete(requestUrl: string): Observable < any > {
-    return this.http.delete(this.baseUrl + requestUrl, this.requestOptions)      
+    return this.http.delete(this.baseUrl + requestUrl, this.requestOptions);
   }
 
   private handleError(error: Response | any) {

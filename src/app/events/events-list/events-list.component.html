@@ -1,3 +1,47 @@
-<p>
-  events-list works!
-</p>
+<div class="app-events__header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div class="app-events__container mat-elevation-z8" *ngIf="dataSource">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'EVENT.OUT' | translate}}
+        <mat-slide-toggle color="primary"> </mat-slide-toggle> {{'EVENT.IN' | translate}}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}}
+        <mat-slide-toggle color="primary"> </mat-slide-toggle>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'EVENT.TYPE' | translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.type}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'EVENT.DATE' | translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.date}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'EVENT.TIME' | translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.startTime}} - {{row.endTime}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="event">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'EVENT.EVENT' | translate}}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.eventName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'EVENT.STATUS' | translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> --</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="critical-value">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{'EVENT.CRITICAL_VALUE' | translate}} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.criticalValue}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+  <mat-paginator [length]="10" [pageSize]="1" [pageSizeOptions]="[2, 5, 10, 25, 100]"></mat-paginator>
+</div>

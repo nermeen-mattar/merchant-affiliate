@@ -5,15 +5,14 @@
     top: 6px !important;
 }
 
-mat-form-field {
-     ::ng-deep &.mat-focused {
-        .mat-input-prefix {
-            color: $primary-color-dark;
-        }
+mat-form-field.mat-focused {
+    .mat-input-prefix {
+        color: $primary-color-dark;
     }
-     ::ng-deep &.ng-invalid.ng-touched {
-        .mat-input-prefix {
-            color: $tc-color-error;
-        }
+}
+
+mat-form-field.ng-invalid.ng-touched {
+    .mat-input-prefix mat-icon {
+        color: red;
     }
 }

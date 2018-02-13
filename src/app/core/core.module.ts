@@ -9,6 +9,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { throwIfAlreadyLoaded } from './guards/module-import-guard';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { HttpRequestsService } from './services/http-requests.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   imports: [
@@ -26,6 +28,10 @@ import { TranslateModule } from '@ngx-translate/core';
   exports: [
     HeaderComponent,
     FooterComponent
+  ],
+  providers: [
+    UserService,
+    HttpRequestsService
   ]
 })
 export class CoreModule {
