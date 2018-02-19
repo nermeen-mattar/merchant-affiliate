@@ -1,30 +1,37 @@
+@import "../../../../styles/toolkit/variables.scss";
 .app-footer {
-  width: 100%;
-  background-color: #ff9800; // fix color="primary"
-  &__menu {
-    padding: 2% 15%;
-    &__item {
-      color: #eee;
-      font-size: 0.9rem; // set it in a variable if may used in other places
+    width: 100%;
+    background-color: #ff9800; // fix color="primary"
+    &__menu {
+        padding: 2% 15%;
+        &__item {
+            color: #eee;
+            font-size: 0.9rem; // set it in a variable if may used in other places
+            cursor: pointer;
+            max-width: 250px;
+            &:hover {
+                background-color: rgba(235, 235, 235, 0.8);
+                color: $tc-color-gray-shade-6;
+            }
+        }
     }
-  }
-  &__copyright {
-    padding: 1% 15%;
-    color: #eee;
-    background-color: rgba(51, 51, 51, 0.08) !important;
-  }
+    &__copyright {
+        padding: 1% 15%;
+        color: #eee;
+        background-color: rgba(51, 51, 51, 0.08);
+        &__text {
+            padding: 0 16px;
+        }
+    }
 }
-
-// TODO[nermeen]: remove !important(s) from this file
 
 :host {
-  ::ng-deep {
-    .mat-list-item {
-      height: initial !important;
-      &-content {
-        padding: 0px !important;
-      }
+     ::ng-deep {
+        .mat-list-item {
+            max-height: 30px;
+            &-content {
+                max-height: 30px;
+            }
+        }
     }
-  }
 }
-
