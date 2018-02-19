@@ -1,6 +1,5 @@
 @import "../../../../styles/toolkit/variables.scss";
 @import "../../../../styles/toolkit/elements.scss";
-
 .app-header {
   width: 100%;
   z-index: 1;
@@ -13,13 +12,11 @@
   box-sizing: border-box;
   top: 0px;
   position: fixed;
-
   &__logo {
     display: flex;
     align-items: center;
     cursor: pointer;
     flex-direction: row;
-
     &__icon {
       background: url('../../../../assets/img/core/logo.png') 50% 50% no-repeat;
       background-size: contain;
@@ -27,7 +24,6 @@
       margin-right: 10px;
       height: 22px;
     }
-
     &__text {
       font-family: 'Baloo Thambi', cursive; // replace with variable or class
       font-size: $tc-font-size-h2;
@@ -35,30 +31,25 @@
   }
   &__menu {
     margin-left: auto;
-
     &__item {
       float: left;
       transition: background-color .3s;
       font-size: $tc-font-size-h5;
-      padding: 16px 15px;
+      padding: 17px 15px;
       cursor: pointer;
-
       &:hover,
       &.active {
         background-color: rgba(235, 235, 235, 0.8);
         color: $tc-color-gray-shade-6;
       }
-
       &__language {
         padding-right: 2rem;
       }
-
       &__arrow {
         position: absolute;
         bottom: 20px;
         right: 38px;
       }
-
       &__icon {
         color: $primary-color;
         position: relative;
@@ -67,7 +58,6 @@
       }
     }
   }
-
   &__nav-toggler {
     border-radius: 0px 20px 20px 0px;
     position: absolute;
@@ -80,7 +70,6 @@
     &__logo {
       justify-content: center;
     }
-
     &__menu {
       display: none;
     }
