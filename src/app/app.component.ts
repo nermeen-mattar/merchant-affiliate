@@ -34,7 +34,10 @@ export class AppComponent implements OnInit {
     return availableLanguages.some(lang => (lang.code === language)) ? language : defaultLanguage;
   }
 
-  // TODO[nermeen]: add method level comment
+  /**
+   * @author Nermeen Mattar
+   * @description Logs the user out of the system
+   */
   logout() {
     this.authService.logout();
   }

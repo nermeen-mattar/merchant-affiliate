@@ -12,8 +12,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-  // TODO[nermeen]: please put a method level comment here
-  login(loginFormValue) {
+
+ /**
+  * @author Nermeen Mattar
+  * @description logging in for an existing user
+  * @param {ClientSideLoginInfo} loginFormValue
+  */
+ login(loginFormValue: ClientSideLoginInfo) {
     this.authService.login({
       username: loginFormValue.userEmail,
       password: loginFormValue.userPassword

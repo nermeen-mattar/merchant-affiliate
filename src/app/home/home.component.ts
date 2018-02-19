@@ -12,9 +12,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  // TODO[nermeen]: add method level comment
-  navigateToRegisterPage(teamName) {
+/**
+ * @author Nermeen Mattar
+ * @description navigates the user to the register page while passing the enetered team name in the URL as a query parameter
+ * @param {string} teamName
+ */
+navigateToRegisterPage(teamName: string) {
     this.router.navigate(['/auth/register'], {
       queryParams: {
         'team-name': teamName

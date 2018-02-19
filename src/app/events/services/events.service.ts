@@ -10,8 +10,12 @@ export class EventsService {
 
   constructor(private httpRequestService: HttpRequestsService, private userService: UserService) { }
 
-  // TODO[nermeen]: add method level comment
-  getEvents(): Observable <any> {
+  /**
+   * @author Nermeen Mattar
+   * @description sends a get request to the server to get the list of events for a specific user and team
+   * @returns {Observable <any>}
+   */
+  getEvents(): Observable <any> { // EventItem[] there are other info!
     const currTeamId = 55; // dummy data for now
     return this.httpRequestService.httpPost(
       `events/byteamid/${currTeamId}` ,
