@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { AuthService } from '../services/auth.service';
-
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
@@ -9,22 +8,29 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private httpRequestService: HttpRequestsService, private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  // TODO[nermeen]: use a method level comment here. Use the AuthService to make the http request.
-  // TODO[nermeen]: See the wrong indentation below. Please ifx it and make sure we have one property per line in objects
-  register(formValue) {
-    this.httpRequestService.httpPost('register', {
-      teamname: formValue.teamName,
-        teampassword: formValue.teamPassword, email: formValue.email,
-         firstname: formValue.firstName, lastname: formValue.lastName,
-         adminpassword: formValue.adminPassword
+/**
+ * @author Nermeen Mattar
+ * @description registering a new user. Once registration is successful the new user will get logged in using credentials received from the
+ * server
+ * @param {ClientSideRegisterInfo} registerFormValue
+ */
+register(registerFormValue: ClientSideRegisterInfo) {
+    this.authService.register({
+      teamname: registerFormValue.teamName,
+      teampassword: registerFormValue.teamPassword,
+      email: registerFormValue.email,
+      firstname: registerFormValue.firstName,
+      lastname: registerFormValue.lastName,
+      adminpassword: registerFormValue.adminPassword
     }).subscribe((res) => {
-      this.authService.login({username: formValue.email, password: formValue.adminPassword});
+      this.authService.login({
+        username: registerFormValue.email,
+        password: registerFormValue.adminPassword
+      });
     });
   }
-
 }
