@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EventsListComponent } from './events-list.component';
+import { MaterialModule } from '../../shared/material/material.module';
+import { EventsService } from '../services/events.service';
+import { EventsServiceMock } from '../../shared/mocks/services/events.service.mock';
 
 describe('EventsListComponent', () => {
   let component: EventsListComponent;
@@ -8,7 +14,19 @@ describe('EventsListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventsListComponent ]
+      declarations: [ EventsListComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
+      imports: [
+        TranslateModule.forRoot(),
+        MaterialModule,
+        NoopAnimationsModule
+      ],
+      providers: [
+        {
+          provide: EventsService,
+          useClass: EventsServiceMock
+        }
+      ]
     })
     .compileComponents();
   }));

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { environment } from './../../../environments/environment.prod';
+import { environment } from './../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../auth/services/auth.service';
 
