@@ -1,7 +1,6 @@
 import { EventItem } from './../models/event-item.model';
 import { Observable } from 'rxjs/Observable';
 import { EventsService } from './../services/events.service';
-import { HttpRequestsService } from './../../core/services/http-requests.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 @Component({
@@ -32,7 +31,7 @@ export class EventsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private httpRequestService: HttpRequestsService, private eventsService: EventsService) {
+  constructor(private eventsService: EventsService) {
       this.eventsService.getEvents().subscribe( res => {
         this.events = res.events;
         this.initDataSource(this.events);
