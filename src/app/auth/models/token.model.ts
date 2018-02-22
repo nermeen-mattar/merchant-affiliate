@@ -1,7 +1,7 @@
-interface Token {
+export interface Token {
   greantedRole: string;
   roles: string[];
-  sub: string; // username/email
+  sub: string; /* username/email */
   teamRoles: {
     teamAdmins: {
       teamId: number,

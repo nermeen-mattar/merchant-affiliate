@@ -1,4 +1,4 @@
-interface ServerSideRegisterInfo{
+export interface ServerSideRegisterInfo{
   teamname: string;
   teampassword: string;
   email: string;

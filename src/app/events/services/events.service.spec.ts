@@ -1,9 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { EventsService } from './events.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
-import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from '../../core/services/user.service';
 
 describe('EventsService', () => {

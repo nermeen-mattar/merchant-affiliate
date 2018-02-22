@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { AuthService } from '../services/auth.service';
+import { ClientSideRegisterInfo } from './../models/client-side-register-info.model';
+
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
@@ -14,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
 /**
  * @author Nermeen Mattar
- * @description registering a new user. Once registration is successful the new user will get logged in using credentials received from the
+ * @description registering a new user, once registration is successful the new user will get logged in using credentials received from the
  * server
  * @param {ClientSideRegisterInfo} registerFormValue
  */

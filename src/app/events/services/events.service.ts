@@ -1,9 +1,10 @@
-import { UserService } from './../../core/services/user.service';
 import { Injectable } from '@angular/core';
-import { HttpRequestsService } from './../../core/services/http-requests.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+
 import { EventItem } from '../models/event-item.model';
+import { UserService } from './../../core/services/user.service';
+import { HttpRequestsService } from './../../core/services/http-requests.service';
 
 @Injectable()
 export class EventsService {

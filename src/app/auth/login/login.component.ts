@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from '../services/auth.service';
+import { ClientSideLoginInfo } from '../models/client-side-login-info.model';
 
 @Component({
   selector: 'tc-login',

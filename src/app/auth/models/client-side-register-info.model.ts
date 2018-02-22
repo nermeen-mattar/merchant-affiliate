@@ -1,4 +1,4 @@
-interface ClientSideRegisterInfo{
+export interface ClientSideRegisterInfo {
   teamName: string;
   teamPassword: string;
   email: string;

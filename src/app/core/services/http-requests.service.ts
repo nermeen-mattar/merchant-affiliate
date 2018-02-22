@@ -1,11 +1,12 @@
-import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from './../../../environments/environment';
-import { Observer } from 'rxjs/Observer';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response, RequestOptions, Headers } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
+
+import { environment } from './../../../environments/environment';
 
 @Injectable()
 export class HttpRequestsService {
@@ -26,7 +27,7 @@ export class HttpRequestsService {
   setHttpRequestOptions(token ?: string) {
     if (token) {
       this.token = token;
-      this.requestHeader = new Headers({ // HttpHeaders
+      this.requestHeader = new Headers({
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + token
       });

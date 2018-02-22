@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
-import { AuthService } from '../../../auth/services/auth.service';
 import { Observable } from 'rxjs/Observable';
+
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'tc-header',
