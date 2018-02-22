@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
+
+import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
 import { AuthService } from './auth/services/auth.service';
 
 @Component({
@@ -34,7 +35,10 @@ export class AppComponent implements OnInit {
     return availableLanguages.some(lang => (lang.code === language)) ? language : defaultLanguage;
   }
 
-  // TODO[nermeen]: add method level comment
+  /**
+   * @author Nermeen Mattar
+   * @description Logs the user out of the system
+   */
   logout() {
     this.authService.logout();
   }

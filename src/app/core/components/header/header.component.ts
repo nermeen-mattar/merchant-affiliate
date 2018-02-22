@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
-import { AuthService } from '../../../auth/services/auth.service';
 import { Observable } from 'rxjs/Observable';
+
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'tc-header',
@@ -18,15 +19,20 @@ export class HeaderComponent implements OnInit {
     this.$isUserLoggedIn = this.authService.$userLoggedIn;
   }
 
-  // TODO[nermeen]: add method level comment
+  /**
+   * @author Nermeen Mattar
+   * @description logging out the logged in user
+   */
   logout() {
     this.authService.logout();
   }
 
-  // TODO[nermeen]: add method level comment
-  onMenuClick($event) {
-    $event.stopPropagation();
+  /**
+   * @author Nermeen Mattar
+   * @description informs the parent component (app component) that the sidebar menu (small devices menu) is clicked and should be opened.
+   * @param {Event} $event
+   */
+  onMenuClick($event: Event) {
     this.menuClicked.emit();
   }
-
 }

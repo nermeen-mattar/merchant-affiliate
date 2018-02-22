@@ -1,28 +1,15 @@
-import { UserService } from './../../core/services/user.service';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { first } from 'rxjs/operators';
+
+import { UserService } from './../../core/services/user.service';
 import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ServerSideLoginInfo } from '../models/server-side-login-info.mdel';
+import { ServerSideRegisterInfo } from '../models/server-side-register-info.model';
 
-// TODO[nermeen]: Have third party imports, then a line gap, then others. see below
-
-// import { Injectable, OnDestroy } from '@angular/core';
-// import { Router } from '@angular/router';
-// import { Observable } from 'rxjs/Observable';
-// import { BehaviorSubject } from 'rxjs/BehaviorSubject;'
-
-// import { UserService } from './../../core/services/user.service';
-// import { TokenHandlerService } from './token-handler.service';
-// import { HttpRequestsService } from '../../core/services/http-requests.service';
-
-/**
- * @author Nermeen Mattar
- * @class AuthService is responsible of user authentication and JWT tokens.
- * AuthService is the only class that uses TokenHandlerService.
- */
 @Injectable()
 export class AuthService implements OnDestroy {
   isLoggedIn: BehaviorSubject < boolean > = new BehaviorSubject(false);
@@ -34,7 +21,7 @@ export class AuthService implements OnDestroy {
   ) {
     this.httpRequest.loginResponse = this.getLoginResponseFromStorage();
     if (this.httpRequest.loginResponse) {
-      /*  needed in case the app is reloaded and the user is logged in */
+      /*  needed in case the page is reloaded and the user is logged in */
       this.addTokenToHttpHeader();
       this.isLoggedIn.next(true);
     } else {
@@ -42,29 +29,37 @@ export class AuthService implements OnDestroy {
     }
   }
 
-  // TODO[nermeen]: add method level comment
-  login(userCredentials) {
-    // TODO[nermeen]: Use the `first` operator to make sure the subscription ends. I'm doing it for this call, replicate for other calls
+  /**
+   * @author Nermeen Mattar
+   * @description sends a post request to the server holding user credentials to login an existing user.
+   * @param {ServerSideLoginInfo} userCredentials
+   */
+  login(userCredentials: ServerSideLoginInfo) {
     this.httpRequest.httpPost('login', userCredentials)
       .pipe(
         first()
       )
       .subscribe(
-      res => {
-        this.httpRequest.loginResponse = res; // may use map to only store needed info
-        localStorage.setItem('login-response', JSON.stringify(this.httpRequest.loginResponse));
-        this.addTokenToHttpHeader();
-        this.router.navigateByUrl('events');
-        this.isLoggedIn.next(true);
-        this.storeLoggedInUserInfo(this.tokenHandler.decodeToken(this.httpRequest.loginResponse.token));
-      },
-      err => {
-        console.log('The username or password is incorrect '); // replace this line with an error alert
-      }
-    );
+        res => {
+          this.httpRequest.loginResponse = res; // may use map to only store needed info
+          localStorage.setItem('login-response', JSON.stringify(this.httpRequest.loginResponse));
+          this.addTokenToHttpHeader();
+          this.router.navigateByUrl('events');
+          this.isLoggedIn.next(true);
+          this.storeLoggedInUserInfo(this.tokenHandler.decodeToken(this.httpRequest.loginResponse.token));
+        },
+        err => {
+          console.log('The username or password is incorrect '); // replace this line with an error alert
+        }
+      );
   }
 
-  // TODO[nermeen]: Add a method level comment
+  /**
+   * @author Nermeen Mattar
+   * @description logs out the user by firstly changing request header to not include authentication token, secondly removing the login
+   * response object (received upon logging in) from local storage, third resting the local variables (login response and token),
+   * and finally navigating to home.
+   */
   logout() {
     this.httpRequest.setHttpRequestOptions(); // any subsequent request will have a token
     localStorage.removeItem('login-response');
@@ -73,11 +68,20 @@ export class AuthService implements OnDestroy {
     this.router.navigateByUrl('home');
     this.isLoggedIn.next(false);
   }
+  /**
+   * @description sends a post request holding user entered info to the server to register a new user
+   * @param {ServerSideRegisterInfo} registrationInfo
+   * @returns {Observable<any>}
+   */
+  register(registrationInfo: ServerSideRegisterInfo): Observable < any > {
+    return this.httpRequest.httpPost('register', registrationInfo);
+  }
 
   /**
-   * @function isAuthenticated checks if the user is authenticated based on two conditions:
-   * 1- existance of login response which indicates that the user has signed in
-   * 2- the token is not expired yet
+   * @author Nermeen Mattar
+   * checks if the user is authenticated based on first, the existance of login response which indicates that the user is signed in
+   * second, the token in the login response is not expired yet
+   * @returns {boolean}
    */
   isAuthenticated(): boolean {
     if (this.httpRequest.loginResponse && this.httpRequest.loginResponse.token) {
@@ -86,27 +90,31 @@ export class AuthService implements OnDestroy {
     return false;
   }
 
-  // TODO[nermeen]: add method level comment
+  /**
+   * @author Nermeen Mattar
+   * @description retrieves the login response object from the local storage
+   */
   getLoginResponseFromStorage() {
     return JSON.parse(localStorage.getItem('login-response'));
   }
-
-  // TODO[nermeen]: add method level comment
+  /**
+   * @author Nermeen Mattar
+   * @description uses the http request service to change the request options so that any subsequent request will include a token
+   */
   private addTokenToHttpHeader() {
-    this.httpRequest.setHttpRequestOptions(this.httpRequest.loginResponse.token); // any subsequent request will have a token
+    this.httpRequest.setHttpRequestOptions(this.httpRequest.loginResponse.token);
   }
 
   /**
-   * @function storeLoggedInUserInfo
+   *
+   * @author Nermeen Mattar
    * @description is responsible for storing logged in user data
    * @param {{sub: string, teamRoles: any[]}} userInfo
-   * @memberof AuthService
    * @ToDo:
    *  1-  add real/descriptive type for userInfo
    *  2- add service for using local storage to handle the JSON.stringify/JSON.parse
    */
   storeLoggedInUserInfo(userInfo) { // : {sub: string, teamRoles: any[]})
-    // TODO[nermeen]: QUESTION: why aren't we storing the whole userInfo?
     this.userService.setUsername(userInfo.sub);
     this.userService.setTeamRoles(userInfo.teamRoles);
   }

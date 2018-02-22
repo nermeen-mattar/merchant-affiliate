@@ -80,18 +80,18 @@
         "REGISTER": "Register Now!"
     },
     "FOOTER": {
-        "footer_text1": "You can use rows and columns here to organize your footer content.",
-        "footer_LinksTitle": "Content",
         "TERMS_CONDITIONS": "Terms & Conditions",
-        "footer_Link3": "Impressum",
-        "COPY_RIGHT": "© 2018 Copyright teamcenter",
-        "footer_buyACoffee": "Support this project with buying a coffee"
+        "IMPRESSUM": "Impressum",
+        "COPY_RIGHT": "© 2018 Copyright teamcenter"
     },
     "ABOUT": {
         "ABOUT": "About",
         "p1": "This tool is as an alpha version available at the moment. It will be improved and extended continuously.",
         "p2": "We are grateful for feedback especially after implementing new features: rene@team.center"
     },
+    "footer_buyACoffee": "Support this project with buying a coffee",
+    "footer_LinksTitle": "Content",
+    "footer_text1": "You can use rows and columns here to organize your footer content.",
     "footer_title": "Footer Content",
     "footer_MoreLinks": "More Links",
     "menu_Download": "Downloads",
