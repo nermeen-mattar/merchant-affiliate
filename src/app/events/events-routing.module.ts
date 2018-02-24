@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { EventDetailsComponent } from './event-details/event-details.component';
 import { EventsListComponent } from './events-list/events-list.component';
 import { EventsComponent } from './events.component';
 
@@ -17,12 +18,11 @@ const routes: Routes = [
       {
         path: 'list',
         component: EventsListComponent
+      },
+      {
+        path: 'list/:teamId',
+        component: EventDetailsComponent
       }
-      /* The event form component will be used for creating and form editing, creation if the path was /new, edit otherwise */
-      // , {
-      //     path: '/:id',
-      //     component: EventFormComponent
-      // }
     ]
   }
 ];

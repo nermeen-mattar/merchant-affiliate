@@ -96,7 +96,7 @@ export class EventsListComponent implements OnInit {
   }
   /**
    * @author Nermeen Mattar
-   * @description deletes the target event from the events list
+   * @description deletes the target event from the events list (only allowed for admin)
    * @param {number} eventId
    */
   deleteEvent(eventId: number) {
@@ -107,7 +107,7 @@ export class EventsListComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description created a new object of type material table data source and passes to it the events data to be displayed on the table
+   * @description creates a new object of type material table data source and passes to it the events data to be displayed on the table
    * @param {EventItem[]} events
    */
   initDataSource(events: EventItem[]) {
@@ -120,7 +120,7 @@ export class EventsListComponent implements OnInit {
    * @param {string} filterValue
    */
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.trim(); // Removes whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }

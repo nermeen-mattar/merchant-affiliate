@@ -1,0 +1,35 @@
+@import "../../../styles/toolkit/variables.scss";
+
+.app-event-details {
+  color: $tc-color-gray-shade-6;
+  padding:3% 10%;
+  &__back {
+    color: $primary-color;
+    font-weight: $tc-font-weight-4;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    &__table {
+      flex-grow:1;
+      margin: 0 2%;
+      &__filter {
+        width:50%;
+      }
+      &__header {
+        font-weight: $tc-font-weight-6;
+        font-size: $tc-font-size-h5;
+      }
+      &__cell-header {
+        font-weight: $tc-font-weight-6;
+        font-size: $tc-font-size-h5;
+      }
+    }
+  }
+  &__header {
+    margin: 3% 2%;
+  }
+}
