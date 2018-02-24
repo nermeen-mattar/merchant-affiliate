@@ -4,7 +4,7 @@
   &__action {
     cursor: pointer;
   }
-  &__back{
+  &__back {
     color: $primary-color;
     font-weight: $tc-font-weight-4;
     display: flex;
@@ -20,15 +20,23 @@
       font-weight: $tc-font-weight-4;
       display: flex;
       align-items: center;
+      &__text {
+        margin-right: 15px;
+      }
     }
   }
   &__filter {
     width: 50%;
   }
-  &__table {
-    &__cell-header {
-      font-weight: $tc-font-weight-6;
-      font-size: $tc-font-size-h5;
+  &__container {
+    overflow-x: auto;
+    &__table {
+      min-width: 640px;
+      overflow-x: auto;
+      &__cell-header {
+        font-weight: $tc-font-weight-6;
+        font-size: $tc-font-size-h5;
+      }
     }
   }
 }

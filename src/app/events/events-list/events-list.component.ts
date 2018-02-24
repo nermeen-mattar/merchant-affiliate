@@ -26,7 +26,7 @@ export class EventsListComponent implements OnInit {
   displayAdminActions: boolean;
 
   constructor(private eventsService: EventsService, private userService: UserService, private router: Router) {
-    this.displayAdminActions = this.userService.userType.toLowerCase() === 'admin';
+    this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
     }
@@ -71,11 +71,11 @@ export class EventsListComponent implements OnInit {
   updateUserTeams() {
     this.userTeams = [];
     const teamIds = [];
-    this.userService.teamRoles.teamAdmins.forEach(team => {
+    this.userService.getTeamRoles().teamAdmins.forEach(team => {
       this.userTeams.push(team);
       teamIds.push(team.teamId);
     });
-    this.userService.teamRoles.teamMembers.forEach(team => {
+    this.userService.getTeamRoles().teamMembers.forEach(team => {
       if (teamIds.indexOf(team.teamId) === -1) {
         this.userTeams.push(team);
       }

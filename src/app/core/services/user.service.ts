@@ -4,14 +4,14 @@ import { TeamRoles } from './../../teams/models/team-roles.model';
 
 @Injectable()
 export class UserService {
-  private _username: string;
-  private _teamRoles: TeamRoles;
-  private _userType: string;
+  private username: string;
+  private teamRoles: TeamRoles;
+  private userType: string;
 
   constructor() {
-    this._username = JSON.parse(localStorage.getItem('username'));
-    this._teamRoles = JSON.parse(localStorage.getItem('teamRoles'));
-    this._userType = JSON.parse(localStorage.getItem('userType'));
+    this.username = JSON.parse(localStorage.getItem('username'));
+    this.teamRoles = JSON.parse(localStorage.getItem('teamRoles'));
+    this.userType = JSON.parse(localStorage.getItem('userType'));
   }
 
   /**
@@ -20,16 +20,16 @@ export class UserService {
    * @readonly
    * @type {string}
    */
-  get username(): string {
-    return this._username;
+  getUsername(): string {
+    return this.username;
   }
   /**
    * @author Nermeen Mattar
    * @description sets the username/email in a private variable
    * @param {username} string
    */
-  set username(username: string) {
-    this._username = username;
+  setUsername(username: string) {
+    this.username = username;
   }
 
   /**
@@ -38,16 +38,16 @@ export class UserService {
    * @readonly
    * @type {TeamRoles}
    */
-  get teamRoles(): TeamRoles {
-    return this._teamRoles;
+  getTeamRoles(): TeamRoles {
+    return this.teamRoles;
   }
   /**
    * @author Nermeen Mattar
    * @description sets the team roles in a private variable
    * @param {teamRoles} TeamRoles
    */
-  set teamRoles(teamRoles: TeamRoles) {
-    this._teamRoles = teamRoles;
+  setTeamRoles(teamRoles: TeamRoles) {
+    this.teamRoles = teamRoles;
   }
 
   /**
@@ -56,8 +56,8 @@ export class UserService {
    * @readonly
    * @type {string}
    */
-  get userType(): string {
-    return this._userType;
+  getUserType(): string {
+    return this.userType;
   }
 
   /**
@@ -65,8 +65,8 @@ export class UserService {
    * @description sets the user type (ordinary user or admin) in a private variable
    * @param {userType} string
    */
-  set userType(userType: string) {
-    this._userType = userType;
+  setUserType(userType: string) {
+    this.userType = userType;
   }
 
   /**
@@ -76,11 +76,11 @@ export class UserService {
    * @param {TeamRoles} teamRoles
    */
   storeLoggedInUserInfo(username: string, teamRoles: TeamRoles, userType: string) {
-    this._username = username;
+    this.setUsername(username);
     localStorage.setItem('username', JSON.stringify(username));
-    this._teamRoles = teamRoles;
+    this.setTeamRoles(teamRoles);
     localStorage.setItem('teamRoles', JSON.stringify(teamRoles));
-    this._userType = userType;
+    this.setUserType(userType);
     localStorage.setItem('userType', JSON.stringify(userType));
   }
 }
