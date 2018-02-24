@@ -1,10 +1,11 @@
 <div class="app-events" *ngIf="dataSource">
-  <div *ngIf="isPastEvents" class="app-events__back">
-    <mat-icon (click)="updateEvents(false)" color="primary">chevron_left</mat-icon>
+  <div *ngIf="isPastEvents" class="app-events__back" (click)="updateEvents(false)">
+    <mat-icon color="primary">chevron_left</mat-icon>
     {{'BACK'| translate}}
   </div>
   <div class="app-events__header">
-    <h3 class="app-events__header__title">{{'EVENT.EVENTS' | translate}}
+    <h3 class="app-events__header__title">
+      <span class="app-events__header__title__text">{{'EVENT.EVENTS' | translate}}</span>
       <mat-icon *ngIf="!isPastEvents" class="app-events__action" (click)="updateEvents(true)" color="primary">history</mat-icon>
     </h3>
     <div>
@@ -20,9 +21,10 @@
   <mat-form-field class="app-events__filter">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
-  <mat-table class="app-events__table" [dataSource]="dataSource" matSort>
+  <div class="app-events__container">
+  <mat-table class="app-events__container__table" [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="id">
-      <mat-header-cell class="app-events__table__cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.OUT' | translate}}
+      <mat-header-cell class="app-events__container__table__cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.OUT' | translate}}
         <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
@@ -31,36 +33,36 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="date">
-      <mat-header-cell class="app-events__table__cell-header" *matHeaderCellDef mat-sort-header>
+      <mat-header-cell class="app-events__container__table__cell-header" *matHeaderCellDef mat-sort-header>
         {{'EVENT.DATE' | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.date}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="time">
-      <mat-header-cell class="app-events__table__cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.TIME' | translate}} </mat-header-cell>
+      <mat-header-cell class="app-events__container__table__cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.TIME' | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.startTime}} - {{row.endTime }} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="event">
-      <mat-header-cell class="app-events__table__cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.EVENT' | translate}}
+      <mat-header-cell class="app-events__container__table__cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.EVENT' | translate}}
       </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.eventName}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="status">
-      <mat-header-cell class="app-events__table__cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.STATUS' | translate}} </mat-header-cell>
+      <mat-header-cell class="app-events__container__table__cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.STATUS' | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.numOfParticipations}} / {{row.detailedParticipations.length}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="critical-value">
-      <mat-header-cell class="app-events__table___cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.CRITICAL_VALUE' | translate}} </mat-header-cell>
+      <mat-header-cell class="app-events__container__table___cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.CRITICAL_VALUE' | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.criticalValue}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="action" *ngIf="displayAdminActions">
-      <mat-header-cell class="app-events__table__cell-header" *matHeaderCellDef mat-sort-header> {{'ACTION' | translate}} </mat-header-cell>
+      <mat-header-cell class="app-events__container__table__cell-header" *matHeaderCellDef mat-sort-header> {{'ACTION' | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let row">
         <mat-icon class="app-events__action" (click)="updateEvents(false)" color="primary">edit</mat-icon>
         <mat-icon class="app-events__action" (click)="deleteEvent(row.id)" color="primary">delete</mat-icon>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="event-info">
-      <mat-header-cell class="app-events__table__cell-header" *matHeaderCellDef mat-sort-header> {{'DETAILS' | translate}} </mat-header-cell>
+      <mat-header-cell class="app-events__container__table__cell-header" *matHeaderCellDef mat-sort-header> {{'DETAILS' | translate}} </mat-header-cell>
       <mat-cell *matCellDef="let row">
         <mat-icon class="app-events__action" routerLink="{{row.id}}" color="primary">info</mat-icon>
       </mat-cell>
@@ -69,4 +71,5 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;">
     </mat-row>
   </mat-table>
+</div>
 </div>
