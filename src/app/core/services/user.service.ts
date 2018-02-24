@@ -9,9 +9,9 @@ export class UserService {
   private userType: string;
 
   constructor() {
-    this.setUsername(JSON.parse(localStorage.getItem('username')));
-    this.setTeamRoles(JSON.parse(localStorage.getItem('teamRoles')));
-    this.setUserType(JSON.parse(localStorage.getItem('userType')));
+    this.username = JSON.parse(localStorage.getItem('username'));
+    this.teamRoles = JSON.parse(localStorage.getItem('teamRoles'));
+    this.userType = JSON.parse(localStorage.getItem('userType'));
   }
 
   /**
