@@ -19,8 +19,8 @@ export class AuthService implements OnDestroy {
     private tokenHandler: TokenHandlerService, private router: Router,
     private userService: UserService
   ) {
-    this.httpRequest.loginResponse = this.getLoginResponseFromStorage();
-    if (this.httpRequest.loginResponse) {
+    this.httpRequest.token = JSON.parse(localStorage.getItem('token'));
+    if (this.httpRequest.token) {
       /*  needed in case the page is reloaded and the user is logged in */
       this.addTokenToHttpHeader();
       this.isLoggedIn.next(true);
@@ -31,25 +31,24 @@ export class AuthService implements OnDestroy {
 
   /**
    * @author Nermeen Mattar
-   * @description sends a post request to the server holding user credentials to login an existing user.
+   * @description sends a post request to the server holding user credentials to login an existing user, upon login success the received
+   * data will be stored in the local storage and the http header will include the token in each subsequent request to the backend.
    * @param {ServerSideLoginInfo} userCredentials
    */
   login(userCredentials: ServerSideLoginInfo) {
-    this.httpRequest.httpPost('login', userCredentials)
+    this.httpRequest.httpPost('login', userCredentials, {fail: 'LOGIN.UNSUCCESSFUL_LOGIN'})
       .pipe(
         first()
       )
       .subscribe(
         res => {
-          this.httpRequest.loginResponse = res; // may use map to only store needed info
-          localStorage.setItem('login-response', JSON.stringify(this.httpRequest.loginResponse));
+          this.isLoggedIn.next(true);
+          this.httpRequest.token = res.token; // may use map to only store needed info
+          localStorage.setItem('token', JSON.stringify(this.httpRequest.token));
+          const userReceivedInfo = this.tokenHandler.decodeToken(this.httpRequest.token);
+          this.userService.storeLoggedInUserInfo(userReceivedInfo.sub, userReceivedInfo.teamRoles, res.isAuthorized);
           this.addTokenToHttpHeader();
           this.router.navigateByUrl('events');
-          this.isLoggedIn.next(true);
-          this.storeLoggedInUserInfo(this.tokenHandler.decodeToken(this.httpRequest.loginResponse.token));
-        },
-        err => {
-          console.log('The username or password is incorrect '); // replace this line with an error alert
         }
       );
   }
@@ -62,8 +61,7 @@ export class AuthService implements OnDestroy {
    */
   logout() {
     this.httpRequest.setHttpRequestOptions(); // any subsequent request will have a token
-    localStorage.removeItem('login-response');
-    this.httpRequest.loginResponse = undefined;
+    localStorage.removeItem('token');
     this.httpRequest.token = undefined;
     this.router.navigateByUrl('home');
     this.isLoggedIn.next(false);
@@ -84,39 +82,18 @@ export class AuthService implements OnDestroy {
    * @returns {boolean}
    */
   isAuthenticated(): boolean {
-    if (this.httpRequest.loginResponse && this.httpRequest.loginResponse.token) {
-      return this.tokenHandler.isTokenValid(this.httpRequest.loginResponse.token);
+    if (this.httpRequest.token) {
+      return this.tokenHandler.isTokenValid(this.httpRequest.token);
     }
     return false;
   }
 
   /**
    * @author Nermeen Mattar
-   * @description retrieves the login response object from the local storage
-   */
-  getLoginResponseFromStorage() {
-    return JSON.parse(localStorage.getItem('login-response'));
-  }
-  /**
-   * @author Nermeen Mattar
    * @description uses the http request service to change the request options so that any subsequent request will include a token
    */
   private addTokenToHttpHeader() {
-    this.httpRequest.setHttpRequestOptions(this.httpRequest.loginResponse.token);
-  }
-
-  /**
-   *
-   * @author Nermeen Mattar
-   * @description is responsible for storing logged in user data
-   * @param {{sub: string, teamRoles: any[]}} userInfo
-   * @ToDo:
-   *  1-  add real/descriptive type for userInfo
-   *  2- add service for using local storage to handle the JSON.stringify/JSON.parse
-   */
-  storeLoggedInUserInfo(userInfo) { // : {sub: string, teamRoles: any[]})
-    this.userService.setUsername(userInfo.sub);
-    this.userService.setTeamRoles(userInfo.teamRoles);
+    this.httpRequest.setHttpRequestOptions(this.httpRequest.token);
   }
 
   ngOnDestroy() {}
