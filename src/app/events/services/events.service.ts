@@ -77,4 +77,4 @@ export class EventsService {
         fail: 'EVENT.EVENT_DELETION_FAIL'
       });
   }
-
+}
