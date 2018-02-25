@@ -6,4 +6,6 @@ export interface EventItem {
   eventName: string;
   status: string;
   criticalValue: string;
+  numOfParticipations?: number;
+  detailedParticipations?: any; // add type participation
 }

@@ -13,7 +13,6 @@ const routes: Routes = [{
   },
   {
     path: 'home',
-    canActivate: [AuthGuard],
     loadChildren: './home/home.module#HomeModule'
   },
   {
@@ -35,8 +34,7 @@ const routes: Routes = [{
     path: 'teams',
     canActivate: [AuthGuard],
     loadChildren: './teams/teams.module#TeamsModule'
-    },
-  {
+  }, {
     path: '**',
     redirectTo: 'home'
   }

@@ -21,6 +21,14 @@
     background-color: $primary-color;
 }
 
+.bg-success {
+  background-color: $tc-color-success;
+}
+
+.bg-error {
+  background-color: $tc-color-error;
+}
+
 .text-white {
     color: white !important;
 }

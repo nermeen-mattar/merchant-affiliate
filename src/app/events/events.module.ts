@@ -7,6 +7,7 @@ import { EventsComponent } from './events.component';
 import { EventsRoutingModule } from './events-routing.module';
 import { MaterialModule } from './../shared/material/material.module';
 import { EventsService } from './services/events.service';
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { EventsService } from './services/events.service';
   ],
   declarations: [
     EventsListComponent,
-    EventsComponent
+    EventsComponent,
+    EventDetailsComponent
   ],
   providers: [EventsService]
 })

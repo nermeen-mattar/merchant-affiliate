@@ -2,6 +2,9 @@
     "TEAM_CENTER": "team.center",
     "DELETE": "Delete",
     "CANCEL": "Cancel",
+    "BACK": "Back",
+    "ACTION": "Action",
+    "DETAILS": "Details",
     "YES": "Yes",
     "NO": "No",
     "LOG_OUT": "Log out",
@@ -49,7 +52,14 @@
         "STATUS": "Status",
         "CRITICAL_VALUE": "Critical value",
         "OUT": "Out",
-        "IN": "In"
+        "IN": "In",
+        "PARTICIPATION_CONFIRMED": "Participation confirmed",
+        "CANCELATION_CONFIRMED": "Cancelation confirmed",
+        "ERROR_CHANGING_PARTICIPATION": "Error Changing Participation",
+        "EVENT_DELETION_SUCCESS": "The event has been deleted successfuly",
+        "EVENT_DELETION_FAIL": "Unable to delete event",
+        "CANCELATIONS": "Cancelations",
+        "PARTICIPATIONS": "Participations"
     },
     "TEAM": {
         "TEAMS": "Teams",
@@ -65,7 +75,8 @@
         "ADMIN_PASSWORD_INCORRECT": "Admin password incorrect"
     },
     "MEMBER": {
-        "MEMBERS": "Members"
+        "MEMBERS": "Members",
+        "MEMBER": "Member"
     },
     "REGISTER": {
         "REGISTER": "Register",
@@ -77,7 +88,8 @@
         "LOGIN": "Login",
         "EMAIL": "Email",
         "PASSWORD": "Password",
-        "REGISTER": "Register Now!"
+        "REGISTER": "Register Now!",
+        "UNSUCCESSFUL_LOGIN": "Wrong username or password"
     },
     "FOOTER": {
         "TERMS_CONDITIONS": "Terms & Conditions",
@@ -166,7 +178,6 @@
     "userEventsPast_EventDelete": "Delete",
     "userEventsPast_EventDeleteCancel": "Cancel",
     "events_ts_cancelCompleted": "Cancellation confirmed",
-    "events_ts_ParticipateCompleted": "Participation confirmed",
     "userEventsDetails_back": "Back",
     "userEventsDetails_EventDetail": "Event Detail:",
     "userEventsDetails_status": "Status:",
@@ -221,6 +232,5 @@
     "teams_TeamMember": "Member",
     "register_ts_AlertDisabledRegisterButton": "This function is not available yet.",
     "create_member_ts_AlertUserCreated": "User created",
-    "create_member_ts_AlertUserAlreadyExists": "User already exists",
-    "login_ts_AlertWrondUserPw": "Wrong username or password"
+    "create_member_ts_AlertUserAlreadyExists": "User already exists"
 }
