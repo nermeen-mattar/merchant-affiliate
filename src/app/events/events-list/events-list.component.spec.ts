@@ -7,6 +7,8 @@ import { EventsListComponent } from './events-list.component';
 import { MaterialModule } from '../../shared/material/material.module';
 import { EventsService } from '../services/events.service';
 import { EventsServiceMock } from '../../shared/mocks/services/events.service.mock';
+import { UserServiceMock } from './../../shared/mocks/services/user.serivce.mock';
+import { UserService } from './../../core/services/user.service';
 
 describe('EventsListComponent', () => {
   let component: EventsListComponent;
@@ -25,6 +27,10 @@ describe('EventsListComponent', () => {
         {
           provide: EventsService,
           useClass: EventsServiceMock
+        },
+        {
+          provide: UserService,
+          useClass: UserServiceMock
         }
       ]
     })
