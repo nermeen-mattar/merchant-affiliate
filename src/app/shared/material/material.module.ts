@@ -38,7 +38,6 @@ import {
     MatSidenavModule,
     MatListModule,
     MatMenuModule,
-    MatIconModule,
     MatSelectModule,
     MatOptionModule,
     MatSnackBarModule

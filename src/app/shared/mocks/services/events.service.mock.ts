@@ -12,4 +12,10 @@ export class EventsServiceMock {
     const currTeamId = 55; // dummy data for now
     return of([]);
   }
+
+  getEventDetails (eventId) {
+    return Observable.create(obs => {
+      obs.next({absent: [], present: []});
+    });
+  }
 }

@@ -16,7 +16,7 @@ import { UserService } from './../../core/services/user.service';
 })
 
 export class EventsListComponent implements OnInit {
-  events: EventItem[];
+  events: EventItem[] = [];
   displayedColumns = ['event-info', 'id', 'date', 'time', 'event', 'status', 'critical-value'];
   dataSource: MatTableDataSource < EventItem > ;
   userTeams: TeamInfo[];
@@ -41,9 +41,9 @@ export class EventsListComponent implements OnInit {
    */
   updateEvents(isPast: boolean) {
     this.isPastEvents = isPast;
-    this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe(res => {
-      this.teamMemberId = res.myTeamMemberId;
-      this.events = res.events; // *** res contains myParts and other info!
+    this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe( ({events= [], myTeamMemberId}) => {
+      this.teamMemberId = myTeamMemberId;
+      this.events = events; // *** res contains myParts and other info!
       this.addNumOfParticipationsToEvents();
       this.initDataSource(this.events);
     });
