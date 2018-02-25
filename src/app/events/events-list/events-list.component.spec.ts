@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -21,7 +22,8 @@ describe('EventsListComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         MaterialModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        RouterTestingModule
       ],
       providers: [
         {
