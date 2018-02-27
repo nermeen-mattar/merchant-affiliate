@@ -20,7 +20,7 @@ export class HttpRequestsService {
   constructor(private http: HttpClient, private router: Router, public snackBar: MatSnackBar, private translateService: TranslateService) {
     this.setHttpRequestOptions();
     this.baseUrl = environment.baseUrl;
-    this.token = JSON.parse(localStorage.getItem('token'));
+    this.token = localStorage.getItem('token');
   }
 
   setHttpRequestOptions(token ? : string) {
@@ -45,14 +45,14 @@ export class HttpRequestsService {
     return this.http.get(this.baseUrl + requestUrl, this.requestOptions);
   }
 
-  public httpPost(requestUrl: string, requestParams ? : Object, userMessages ? : UserMessages): Observable < any > {
+  public httpPost(requestUrl: string, requestParams ? : Object, userMessages ?: UserMessages): Observable < any > {
     return Observable.create(obs => {
       this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe(res => {
           this.showUserMessage(userMessages, 'success');
           obs.next(res);
         },
         err => {
-          userMessages.fail = userMessages && userMessages.fail ? userMessages.fail : 'Something went wrong';
+          userMessages = userMessages && userMessages.fail ? userMessages : {fail: 'Something went wrong'};
           this.showUserMessage(userMessages, 'fail');
         });
     });
@@ -65,7 +65,7 @@ export class HttpRequestsService {
           this.showUserMessage(userMessages, 'success');
         },
         err => {
-          userMessages.fail = userMessages && userMessages.fail ? userMessages.fail : 'Something went wrong';
+          userMessages = userMessages && userMessages.fail ? userMessages : {fail: 'Something went wrong'};
           this.showUserMessage(userMessages, 'fail');
         });
     });
@@ -78,7 +78,7 @@ export class HttpRequestsService {
           this.showUserMessage(userMessages, 'success');
         },
         err => {
-          userMessages.fail = userMessages && userMessages.fail ? userMessages.fail : 'Something went wrong';
+          userMessages = userMessages && userMessages.fail ? userMessages : {fail: 'Something went wrong'};
           this.showUserMessage(userMessages, 'fail');
         });
     });
