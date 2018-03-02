@@ -1,7 +1,6 @@
 export interface EventItem {
   id?: string; // no id when creating a new event
   type: number;
-  // time: string;
   eventName: string;
   status?: string; // needed in events list requests, but not in event form requests
   criticalValue: number;

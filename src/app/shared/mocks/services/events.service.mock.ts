@@ -5,17 +5,27 @@ import { EventItem } from '../../../events/models/event-item.model';
 
 export class EventsServiceMock {
 
-  constructor() { }
+  constructor() {}
 
-  // TODO[nermeen]: add method level comment
-  getEvents(): Observable <EventItem[]> {
-    const currTeamId = 55; // dummy data for now
+  getEvents(): Observable < EventItem[] > {
     return of([]);
   }
 
-  getEventDetails (eventId) {
-    return Observable.create(obs => {
-      obs.next({absent: [], present: []});
-    });
+  getEventDetails(eventId) {
+    return of ({
+        absent: [],
+        present: []
+      });
+  }
+  getEvent(eventId: string): Observable < any > {
+    return of({});
+  }
+
+  createEvent(teamId: number, event: EventItem): Observable < any > { // EventItem[] there are other info!
+    return of({});
+  }
+
+  updateEvent(eventId: string, teamId: number, event: EventItem): Observable < any > {
+    return of({});
   }
 }
