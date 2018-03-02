@@ -36,7 +36,7 @@ export class AuthService implements OnDestroy {
    * @param {ServerSideLoginInfo} userCredentials
    */
   login(userCredentials: ServerSideLoginInfo) {
-    this.httpRequest.httpPost('login', userCredentials, {fail: 'LOGIN.UNSUCCESSFUL_LOGIN'})
+    this.httpRequest.httpPost('login', userCredentials, {fail: 'UNSUCCESSFUL_LOGIN'})
       .pipe(
         first()
       )
