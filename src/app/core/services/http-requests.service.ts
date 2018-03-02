@@ -86,10 +86,10 @@ export class HttpRequestsService {
 
   private showUserMessage(userMessages: UserMessages, messageType) {
     if (userMessages && userMessages[messageType]) {
-      this.translateService.get(userMessages[messageType]).subscribe(
+      this.translateService.get('USER_MESSAGES.'.concat(userMessages[messageType])).subscribe(
         translatedMessage => {
           this.snackBar.open(translatedMessage, '', {
-            duration: 500,
+            duration: 1000,
             panelClass: messageType === 'success' ? 'bg-success' : 'bg-error'
           });
         }

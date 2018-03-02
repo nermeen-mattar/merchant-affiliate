@@ -95,7 +95,7 @@ export class EventsService {
    */
   createEvent(teamId: number, event: EventItem): Observable < any > { // EventItem[] there are other info!
     return this.httpRequestService.httpPost(
-      'events', event, {
+      'events', {teamId: teamId, ...event}, {
         success: 'EVENT_CREATING_SUCCESS',
         fail: 'EVENT_CREATING_FAIL'
       });

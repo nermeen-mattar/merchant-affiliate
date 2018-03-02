@@ -112,7 +112,7 @@ export class EventFormComponent implements OnInit {
       criticalValue: eventValue.criticalValue,
       type: Number(eventValue.type),
       location: eventValue.location,
-      comment: eventValue.comment,
+      comment: eventValue.comment
     };
     return eventGroupValueCopy;
   }

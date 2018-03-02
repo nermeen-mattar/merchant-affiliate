@@ -59,9 +59,8 @@ export class UserService {
 
   /**
    * @author Nermeen Mattar
-   * @description  each time we set new set new user teams we initialize the selected team by the first one
-   * @readonly
-   * @type {TeamRoles}
+   * @description sets the user's teams by combining the teams that the user is admin of with the teams that the user is member of
+   * each time we set new user teams we initialize the selected team by the first one
    */
   setUserTeams() {
     this.userTeams = [];
