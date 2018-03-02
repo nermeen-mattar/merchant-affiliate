@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { EventFormComponent } from './event-form/event-form.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { EventsListComponent } from './events-list/events-list.component';
 import { EventsComponent } from './events.component';
@@ -20,7 +21,11 @@ const routes: Routes = [
         component: EventsListComponent
       },
       {
-        path: 'list/:teamId',
+        path: 'list/:eventId',
+        component: EventFormComponent
+      },
+      {
+        path: 'list/details/:teamId',
         component: EventDetailsComponent
       }
     ]
