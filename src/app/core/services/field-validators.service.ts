@@ -1,8 +1,4 @@
-import {
-  ValidatorFn,
-  AbstractControl,
-  FormGroup
-} from '@angular/forms';
+import { ValidatorFn, AbstractControl, FormGroup } from '@angular/forms';
 /**
  * @author Nermeen Mattar
  * A class that has all the custom validators needed in forms.
@@ -23,12 +19,10 @@ export class FieldValidatorsService {
       return (group: FormGroup): {
         [key: string]: any
       } => {
-        console.log('test ', group.controls.startTime.value < group.controls.endTime.value);
         return group.controls.startTime.value < group.controls.endTime.value ?
           null : {
             checkIfEndAfterStart: {
-              errorMsg: 'END_SHOULD_BE_AFTER_START',
-              value: 'test'
+              errorMsg: 'END_SHOULD_BE_AFTER_START'
             }
           };
       };
