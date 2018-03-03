@@ -57,15 +57,18 @@ export class EventsListComponent implements OnInit {
    */
   addNumOfParticipationsToEvents() {
     let numOfParitications;
-    this.events.forEach(event => {
+    const eventsListLen = this.events.length;
+    for (let eventIndex = 0 ; eventIndex < eventsListLen ; eventIndex++) {
       numOfParitications = 0;
-      event.detailedParticipations.forEach(participation => {
-        if (participation.action === 'participate') {
+      const eventParticipations = this.events[eventIndex].detailedParticipations;
+      const eventParticipationsLen = eventParticipations.length;
+      for ( let participationIndex = 0 ; participationIndex < eventParticipationsLen; participationIndex++) {
+        if (eventParticipations[participationIndex].action === 'participate') {
           numOfParitications++;
         }
-      });
-      event.numOfParticipations = numOfParitications;
-    });
+      }
+      this.events[eventIndex].numOfParticipations = numOfParitications;
+    }
   }
 
   /**

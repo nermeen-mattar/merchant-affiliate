@@ -47,7 +47,7 @@ export class EventsService {
    */
   toggleEventParticipation(isParticipated: boolean, eventId: number, teamMemberId: number): Observable < any > {
     const participationText = isParticipated ? 'participate' : 'cancel';
-    const userMessage = isParticipated ? 'EVENT.PARTICIPATION_CONFIRMED' : 'EVENT.CANCELATION_CONFIRMED';
+    const userMessage = isParticipated ? 'PARTICIPATION_CONFIRMED' : 'CANCELATION_CONFIRMED';
     return this.httpRequestService.httpPut(
       'particips', {
         eventId: eventId,
