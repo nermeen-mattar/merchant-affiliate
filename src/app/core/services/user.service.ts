@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 
+import { TeamInfo } from './../../teams/models/team-info.model';
 import { TeamRoles } from './../../teams/models/team-roles.model';
 
 @Injectable()
 export class UserService {
+  /* User static properties (received from the backend) */
   private username: string;
-  private teamRoles: TeamRoles;
   private userType: string;
-
+  private teamRoles: TeamRoles;
+  private userTeams: TeamInfo[];
+  /* user changable properties (can be changed on the client side)*/
+  private selectedTeam: TeamInfo;
   constructor() {
-    this.username = JSON.parse(localStorage.getItem('username'));
-    this.teamRoles = JSON.parse(localStorage.getItem('teamRoles'));
-    this.userType = JSON.parse(localStorage.getItem('userType'));
+    this.setUsername(JSON.parse(localStorage.getItem('username')));
+    this.setTeamRoles(JSON.parse(localStorage.getItem('teamRoles')));
+    this.setUserType(JSON.parse(localStorage.getItem('userType')));
   }
 
   /**
@@ -48,6 +52,39 @@ export class UserService {
    */
   setTeamRoles(teamRoles: TeamRoles) {
     this.teamRoles = teamRoles;
+    if (this.teamRoles) {
+    this.setUserTeams();
+    }
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description sets the user's teams by combining the teams that the user is admin of with the teams that the user is member of
+   * each time we set new user teams we initialize the selected team by the first one
+   */
+  setUserTeams() {
+    this.userTeams = [];
+    const teamIds = [];
+    this.getTeamRoles().teamAdmins.forEach(team => {
+      this.userTeams.push(team);
+      teamIds.push(team.teamId);
+    });
+    this.getTeamRoles().teamMembers.forEach(team => {
+      if (teamIds.indexOf(team.teamId) === -1) {
+        this.userTeams.push(team);
+      }
+    });
+    this.setSelectedTeam(this.userTeams[0]); // sets an initial value to the select input
+  }
+
+ /**
+  * @author Nermeen Mattar
+  * @description returns the team roles for the logged in user
+  * @returns {TeamInfo[]}
+  */
+
+ getUserTeams(): TeamInfo[] {
+    return this.userTeams;
   }
 
   /**
@@ -69,6 +106,21 @@ export class UserService {
     this.userType = userType;
   }
 
+  /**
+   * @author Nermeen Mattar
+   * @description sets the selected team in a private variable based on the user selection from the list of teams he/she is admin/member of.
+   */
+  setSelectedTeam(selectedTeam: TeamInfo) {
+    this.selectedTeam = selectedTeam;
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description returns team the user has selected from the list of team he/she is admin/member of.
+   */
+  getSelectedTeam(): TeamInfo {
+    return this.selectedTeam;
+  }
   /**
    * @author Nermeen Mattar
    * @description stores the username, the team roles, and the user type ordinary/admin in the local storage and in private variables

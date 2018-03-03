@@ -19,7 +19,7 @@ export class AuthService implements OnDestroy {
     private tokenHandler: TokenHandlerService, private router: Router,
     private userService: UserService
   ) {
-    this.httpRequest.token = JSON.parse(localStorage.getItem('token'));
+    this.httpRequest.token = localStorage.getItem('token');
     if (this.httpRequest.token) {
       /*  needed in case the page is reloaded and the user is logged in */
       this.addTokenToHttpHeader();
@@ -36,7 +36,7 @@ export class AuthService implements OnDestroy {
    * @param {ServerSideLoginInfo} userCredentials
    */
   login(userCredentials: ServerSideLoginInfo) {
-    this.httpRequest.httpPost('login', userCredentials, {fail: 'LOGIN.UNSUCCESSFUL_LOGIN'})
+    this.httpRequest.httpPost('login', userCredentials, {fail: 'UNSUCCESSFUL_LOGIN'})
       .pipe(
         first()
       )

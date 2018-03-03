@@ -30,9 +30,11 @@ export class EventsListComponent implements OnInit {
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
     }
-    this.updateUserTeams();
+    this.userTeams = this.userService.getUserTeams();
+    this.selectedTeam = this.userService.getSelectedTeam();
     this.updateEvents(this.isPastEvents);
   }
+
   ngOnInit() {}
   /**
    * @author Nermeen Mattar
@@ -41,6 +43,7 @@ export class EventsListComponent implements OnInit {
    */
   updateEvents(isPast: boolean) {
     this.isPastEvents = isPast;
+    this.userService.setSelectedTeam(this.selectedTeam); // *** temp (to enhance)
     this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe( ({events= [], myTeamMemberId}) => {
       this.teamMemberId = myTeamMemberId;
       this.events = events; // *** res contains myParts and other info!
@@ -63,24 +66,6 @@ export class EventsListComponent implements OnInit {
       });
       event.numOfParticipations = numOfParitications;
     });
-  }
-  /**
-   * @author Nermeen Mattar
-   * @description initializes the user's teams by combining the teams that the user is admin of with the teams that the user is member of
-   */
-  updateUserTeams() {
-    this.userTeams = [];
-    const teamIds = [];
-    this.userService.getTeamRoles().teamAdmins.forEach(team => {
-      this.userTeams.push(team);
-      teamIds.push(team.teamId);
-    });
-    this.userService.getTeamRoles().teamMembers.forEach(team => {
-      if (teamIds.indexOf(team.teamId) === -1) {
-        this.userTeams.push(team);
-      }
-    });
-    this.selectedTeam = this.userTeams[0]; // sets an initial value to the select input
   }
 
   /**

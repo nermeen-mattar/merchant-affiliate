@@ -12,6 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { throwIfAlreadyLoaded } from './guards/module-import-guard';
 import { HttpRequestsService } from './services/http-requests.service';
 import { UserService } from './services/user.service';
+import { FieldValidatorsService } from './services/field-validators.service';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { UserService } from './services/user.service';
   ],
   providers: [
     UserService,
-    HttpRequestsService
+    HttpRequestsService,
+    FieldValidatorsService
   ]
 })
 export class CoreModule {
