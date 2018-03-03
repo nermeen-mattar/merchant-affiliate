@@ -36,7 +36,8 @@
   }
   &__main-content {
     margin-top: $header-bar-height;
-    min-height: 100%;
+    // min-height: 100%; replaced with the following line to fix no (or small) content
+    min-height: 526px;
   }
 }
 
