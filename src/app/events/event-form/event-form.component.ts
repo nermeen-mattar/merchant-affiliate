@@ -16,7 +16,6 @@ import { EventItem } from '../models/event-item.model';
 export class EventFormComponent implements OnInit {
   selectedTeamId: number;
   eventGroup: FormGroup;
-  eventTimingGroup: FormGroup;
   eventId: string; /* is undefined (in the case of event creation) */
   constructor(private eventsService: EventsService, userService: UserService, private fieldValidatorsService: FieldValidatorsService,
     private route: ActivatedRoute, private router: Router) {
@@ -61,17 +60,15 @@ export class EventFormComponent implements OnInit {
    * @param {EventItem} eventValue
    */
   createEventForm(eventValue ? : EventItem) {
-    this.eventTimingGroup = new FormGroup({
-      startTime: new FormControl(eventValue ? eventValue.startTime : '', [Validators.required]),
-      endTime: new FormControl(eventValue ? eventValue.endTime : '', [Validators.required])
-    }, this.fieldValidatorsService.getValidator('checkIfEndAfterStart'));
-
     this.eventGroup = new FormGroup({
       eventName: new FormControl(eventValue ? eventValue.eventName : '', [Validators.required]),
       date: new FormControl(eventValue ? eventValue.date : '', [Validators.required]),
-      eventTiming: this.eventTimingGroup,
+      eventTiming:  new FormGroup({
+        startTime: new FormControl(eventValue ? eventValue.startTime : '', [Validators.required]),
+        endTime: new FormControl(eventValue ? eventValue.endTime : '', [Validators.required])
+      }, this.fieldValidatorsService.getValidator('checkIfEndAfterStart')),
       location: new FormControl(eventValue ? eventValue.location : '', [Validators.required]),
-      type: new FormControl(eventValue ? JSON.stringify(eventValue.type): '0', [Validators.required]),
+      type: new FormControl(eventValue ? JSON.stringify(eventValue.type) : '0', [Validators.required]),
       criticalValue: new FormControl(eventValue ? eventValue.criticalValue : '', [Validators.required]),
       comment: new FormControl(eventValue ? eventValue.comment : '', [Validators.maxLength(600)]) // need to check the actual max
     });

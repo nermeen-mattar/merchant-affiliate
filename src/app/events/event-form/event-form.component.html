@@ -24,16 +24,16 @@
             <mat-form-field class="app-event-form__field">
               <input matInput placeholder="{{ 'EVENT.START_TIME' | translate }}" formControlName="startTime" required type="time">
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix>query_builder</mat-icon>
-              <mat-error *ngIf="eventTimingGroup.controls['startTime'].invalid"> {{'EVENT.START_TIME' | translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['startTime'].invalid"> {{'EVENT.START_TIME' | translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field class="app-event-form__field">
               <input matInput placeholder="{{ 'EVENT.END_TIME'| translate }}" formControlName="endTime" required type="time">
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> query_builder</mat-icon>
-              <mat-error *ngIf="eventTimingGroup.controls['endTime'].invalid"> {{'EVENT.END_TIME' | translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['endTime'].invalid"> {{'EVENT.END_TIME' | translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
             </mat-form-field>
           </div>
           <!-- <mat-error *ngIf="eventTimingGroup.invalid && eventId || (eventTimingGroup.controls['endTime'].dirty &&  eventTimingGroup.controls['startTime'].dirty)"> -->
-          <mat-error *ngIf="eventTimingGroup.invalid && (!eventTimingGroup.controls['endTime'].invalid &&  !eventTimingGroup.controls['startTime'].invalid)">
+          <mat-error *ngIf="eventGroup.controls['eventTiming'].invalid && (!eventGroup.controls['eventTiming'].controls['endTime'].invalid &&  !eventGroup.controls['eventTiming'].controls['startTime'].invalid)">
             {{'EVENT.END_SHOULD_BE_AFTER_START' | translate}}
           </mat-error>
         </div>
