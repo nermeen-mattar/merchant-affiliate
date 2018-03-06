@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
 import { AuthService } from './auth/services/auth.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'tc-root',
@@ -12,9 +13,9 @@ import { AuthService } from './auth/services/auth.service';
 })
 export class AppComponent implements OnInit {
   appLanguage: string;
-  $isUserLoggedIn: Observable<boolean>;
+  $isUserLoggedIn: Observable < boolean > ;
   menuOpened = false;
-  constructor(private translate: TranslateService, private authService: AuthService) {}
+  constructor(private translate: TranslateService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.$isUserLoggedIn = this.authService.$userLoggedIn;
@@ -22,6 +23,19 @@ export class AppComponent implements OnInit {
     this.appLanguage = this.getSuitableLanguage(browserLanguage);
     this.translate.use(this.appLanguage);
     sysOptions.systemLanguage = this.appLanguage;
+    this.resetScrollOnRouteChange();
+  }
+  /**
+   * @author Nermeen Mattar
+   * @description Scrolls to top on Route Change
+   */
+  resetScrollOnRouteChange() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
 
   /**
