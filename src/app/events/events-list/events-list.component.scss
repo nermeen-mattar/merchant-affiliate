@@ -1,10 +1,14 @@
 @import "../../../styles/toolkit/variables.scss";
 .app-events {
-  padding: 5% 10%;
+  position: relative;
+  padding: 14px 8px; /* to leave space to the back button */
   &__action {
     cursor: pointer;
   }
   &__back {
+    position:absolute;
+    top: 0px;
+    left:0px;
     color: $primary-color;
     font-weight: $tc-font-weight-4;
     display: flex;
@@ -19,9 +23,9 @@
       color: $tc-color-gray-shade-6;
       font-weight: $tc-font-weight-4;
       display: flex;
-      align-items: center;
+      align-items: center; /* to allign the title (events) with the history icon */
       &__text {
-        margin-right: 15px;
+        margin-right: 15px; /* a space to seperate the title from the history icon */
       }
     }
   }
@@ -38,5 +42,9 @@
         font-size: $tc-font-size-h5;
       }
     }
+    &__spinner {
+      margin: 50px auto;
+    }
   }
 }
+
