@@ -62,7 +62,7 @@ export class EventsService {
   /**
    * @author Nermeen Mattar
    * @description sends a request to the server to delete a specific event
-   * @param {number} eventId
+   * @param {string} eventId
    * @returns {Observable <any>}
    */
   deleteEvent(eventId: string): Observable < any > {
