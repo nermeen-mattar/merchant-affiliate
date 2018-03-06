@@ -29,10 +29,10 @@ export class EventsService {
   /**
    * @author Nermeen Mattar
    * @description sends a get request to the server to receive the details for the chosen event
-   * @param {number} eventId
+   * @param {string} eventId
    * @returns {Observable <any>}
    */
-  getEventDetails(eventId: number): Observable < any > {
+  getEventDetails(eventId: string): Observable < any > {
     return this.httpRequestService.httpGet(
       `eventstate/${eventId}`);
   }
@@ -41,11 +41,11 @@ export class EventsService {
    * @author Nermeen Mattar
    * @description sends a request to the server to change the user's participation status for a specific event
    * @param {boolean} isParticipated
-   * @param {number} eventId
+   * @param {string} eventId
    * @param {number} teamMemberId
    * @returns {Observable < any >}
    */
-  toggleEventParticipation(isParticipated: boolean, eventId: number, teamMemberId: number): Observable < any > {
+  toggleEventParticipation(isParticipated: boolean, eventId: string, teamMemberId: number): Observable < any > {
     const participationText = isParticipated ? 'participate' : 'cancel';
     const userMessage = isParticipated ? 'PARTICIPATION_CONFIRMED' : 'CANCELATION_CONFIRMED';
     return this.httpRequestService.httpPut(
@@ -65,7 +65,7 @@ export class EventsService {
    * @param {number} eventId
    * @returns {Observable <any>}
    */
-  deleteEvent(eventId: number): Observable < any > {
+  deleteEvent(eventId: string): Observable < any > {
     return this.httpRequestService.httpDelete(
       `events/${eventId}`, {
         success: 'EVENT_DELETING_SUCCESS',

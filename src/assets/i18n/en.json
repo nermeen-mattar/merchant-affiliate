@@ -13,6 +13,7 @@
   "EDIT": "Edit",
   "Delete": "Delete",
   "SAVE": "Save",
+  "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "USER_MESSAGES": {
     "UNSUCCESSFUL_LOGIN": "Wrong username or password",
     "EVENT_DELETING_SUCCESS": "The event has been deleted successfuly",
@@ -60,6 +61,7 @@
   },
   "EVENT": {
     "EVENTS": "Events",
+    "PAST_EVENTS": "Past events",
     "EVENT": "Event",
     "TYPE": "Type",
     "DATE": "Date",
@@ -175,7 +177,6 @@
   "userEvents_CancelLastParticipText": "This cancellation will cancel the event. Do you really want this?",
   "userEvents_MouseOver_Check": "Event is full",
   "userEvents_MouseOver_Canc": "Critical value exceeded",
-  "userEventsPast_EventTitle": "Past events",
   "userEventsPast_Out": "Out",
   "userEventsPast_In": "In",
   "userEventsPast_EventType": "Type",
