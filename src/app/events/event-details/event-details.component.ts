@@ -10,46 +10,37 @@ import { EventsService } from './../services/events.service';
   styleUrls: ['./event-details.component.scss']
 })
 export class EventDetailsComponent implements OnInit {
-  absentDatasource: MatTableDataSource <any> ;
-  presentDatasource: MatTableDataSource <any> ;
+  eventDetailsDatasource: {absent: MatTableDataSource<any>, present: MatTableDataSource<any>};
   displayedColumns = ['name', 'mail'];
 
   constructor(private eventsService: EventsService, route: ActivatedRoute) {
     this.eventsService.getEventDetails(route.snapshot.params['teamId']).subscribe (res => {
-      this.initAbsentDataSource(res.absent);
-      this.initPresentDataSource(res.present);
+      this.initEventDetailsDataSource(res);
     });
    }
 
   ngOnInit() {
   }
 
-  initAbsentDataSource(eventState) {
-    this.absentDatasource = new MatTableDataSource(eventState); // Assign the data to the data source for the table to render
-  }
-  initPresentDataSource(eventState) {
-    this.presentDatasource = new MatTableDataSource(eventState); // Assign the data to the data source for the table to render
+  initEventDetailsDataSource(eventDetails) {
+    this.eventDetailsDatasource = {
+      absent: new MatTableDataSource(eventDetails.absent),
+      present: new MatTableDataSource(eventDetails.present),
+    };
   }
 
-  /**
-   * @author Nermeen Mattar
-   * @description filters the participations list table based on the user's input
-   * @param {string} filterValue
-   */
-  applyFilterToParticipations(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.presentDatasource.filter = filterValue;
-  }
  /**
    * @author Nermeen Mattar
-   * @description filters the cancelations list table based on the user's input
+   * @description filters the either the cancelation list or the participations list based on the passed parameter
+   * table based on the user's input
    * @param {string} filterValue
+   * @param {string} eventType
    */
-  applyFilterToCancelations(filterValue: string) {
+  applyFilterToEventDetails(filterValue: string, eventType: string) {
+    debugger;
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.absentDatasource.filter = filterValue;
+    this.eventDetailsDatasource[eventType].filter = filterValue;
   }
 
 }

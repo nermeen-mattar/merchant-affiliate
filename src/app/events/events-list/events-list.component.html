@@ -1,11 +1,11 @@
-<div class="app-events" *ngIf="dataSource">
-  <div [ngStyle]="{'visibility': isPastEvents? 'visible': 'hidden'}" class="app-events__back" (click)="updateEvents(false)">
+<div class="app-events">
+  <div *ngIf="isPastEvents" class="app-events__back" (click)="updateEvents(false)">
     <mat-icon color="primary">chevron_left</mat-icon>
     {{'BACK'| translate}}
   </div>
   <div class="app-events__header">
     <h3 class="app-events__header__title">
-      <span class="app-events__header__title__text">{{'EVENT.EVENTS' | translate}}</span>
+      <span class="app-events__header__title__text">{{ (isPastEvents ? 'EVENT.PAST_EVENTS' : 'EVENT.EVENTS') | translate}}</span>
       <mat-icon *ngIf="!isPastEvents" class="app-events__action" (click)="updateEvents(true)" color="primary">history</mat-icon>
     </h3>
     <div>
@@ -19,11 +19,11 @@
     </div>
   </div>
   <mat-form-field class="app-events__filter">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterString" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}">
   </mat-form-field>
   <mat-icon *ngIf="displayAdminActions" class="app-events__action" routerLink="new" color="primary">add</mat-icon>
   <div class="app-events__container">
-    <mat-table class="app-events__container__table" [dataSource]="dataSource" matSort>
+    <mat-table class="app-events__container__table" [dataSource]="eventsDataSource" matSort>
       <ng-container matColumnDef="id">
         <mat-header-cell class="app-events__container__table__cell-header" *matHeaderCellDef mat-sort-header> {{'EVENT.OUT' | translate}}
           <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
@@ -72,5 +72,6 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;">
       </mat-row>
     </mat-table>
+    <mat-spinner class="app-events__container__spinner" *ngIf="!eventsDataSource"></mat-spinner>
   </div>
 </div>

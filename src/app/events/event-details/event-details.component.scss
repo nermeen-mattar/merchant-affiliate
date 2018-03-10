@@ -1,9 +1,13 @@
 @import "../../../styles/toolkit/variables.scss";
-
 .app-event-details {
   color: $tc-color-gray-shade-6;
-  padding:3% 10%;
+  padding: 30px 8px;
+  /* to leave space to the back button */
+  position: relative;
   &__back {
+    position: absolute;
+    top: 0px;
+    left: 0px;
     color: $primary-color;
     font-weight: $tc-font-weight-4;
     display: flex;
@@ -14,10 +18,11 @@
     display: flex;
     flex-wrap: wrap;
     &__table {
-      flex-grow:1;
-      margin: 0 2%;
+      flex-grow: 1;
+      padding: 2rem 0;
+      /* adds space between tables when they stack on top of each other (on small devices) */
       &__filter {
-        width:50%;
+        width: 50%;
       }
       &__header {
         font-weight: $tc-font-weight-6;
@@ -28,8 +33,16 @@
         font-size: $tc-font-size-h5;
       }
     }
+    &__space-seperator {
+      flex-grow: 0;
+      width: 5%;
+    }
+    &__spinner {
+      margin: 50px auto;
+    }
   }
   &__header {
-    margin: 3% 2%;
+    color: $tc-color-gray-shade-6;
+    font-weight: $tc-font-weight-4;
   }
 }

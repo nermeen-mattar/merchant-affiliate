@@ -53,7 +53,7 @@ export class UserService {
   setTeamRoles(teamRoles: TeamRoles) {
     this.teamRoles = teamRoles;
     if (this.teamRoles) {
-    this.setUserTeams();
+      this.setUserTeams();
     }
   }
 
@@ -65,25 +65,28 @@ export class UserService {
   setUserTeams() {
     this.userTeams = [];
     const teamIds = [];
-    this.getTeamRoles().teamAdmins.forEach(team => {
-      this.userTeams.push(team);
-      teamIds.push(team.teamId);
-    });
-    this.getTeamRoles().teamMembers.forEach(team => {
-      if (teamIds.indexOf(team.teamId) === -1) {
-        this.userTeams.push(team);
+    const teamRoles = this.getTeamRoles();
+    Object.keys(teamRoles).forEach( teamRolesProp => {
+      const teams = teamRoles[teamRolesProp];
+      const teamsLen = teams.length;
+      for (let teamIndex = 0; teamIndex < teamsLen; teamIndex++) {
+        const team = teams[teamIndex];
+        if (teamIds.indexOf(team.teamId) === -1) {
+          this.userTeams.push(team);
+          teamIds.push(team.teamId);
+        }
       }
     });
     this.setSelectedTeam(this.userTeams[0]); // sets an initial value to the select input
   }
 
- /**
-  * @author Nermeen Mattar
-  * @description returns the team roles for the logged in user
-  * @returns {TeamInfo[]}
-  */
+  /**
+   * @author Nermeen Mattar
+   * @description returns the team roles for the logged in user
+   * @returns {TeamInfo[]}
+   */
 
- getUserTeams(): TeamInfo[] {
+  getUserTeams(): TeamInfo[] {
     return this.userTeams;
   }
 

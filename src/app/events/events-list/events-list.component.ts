@@ -18,12 +18,13 @@ import { UserService } from './../../core/services/user.service';
 export class EventsListComponent implements OnInit {
   events: EventItem[] = [];
   displayedColumns = ['event-info', 'id', 'date', 'time', 'event', 'status', 'critical-value'];
-  dataSource: MatTableDataSource < EventItem > ;
+  eventsDataSource: MatTableDataSource < EventItem > ;
   userTeams: TeamInfo[];
   selectedTeam: TeamInfo;
   teamMemberId: number;
   isPastEvents: boolean;
   displayAdminActions: boolean;
+  filterString = '';
 
   constructor(private eventsService: EventsService, private userService: UserService, private router: Router) {
     this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
@@ -39,16 +40,17 @@ export class EventsListComponent implements OnInit {
   /**
    * @author Nermeen Mattar
    * @description updates the events variable by using events service to get events for the selected team then sends the received events to
-   * initDatasource function which initializes the datasource for the events table
+   * initEventsDataSource function which initializes the eventsDataSource for the events table
    */
   updateEvents(isPast: boolean) {
     this.isPastEvents = isPast;
+    this.eventsDataSource = undefined; // reset data source to display the loader as new data will be received
     this.userService.setSelectedTeam(this.selectedTeam); // *** temp (to enhance)
     this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe( ({events= [], myTeamMemberId}) => {
       this.teamMemberId = myTeamMemberId;
       this.events = events; // *** res contains myParts and other info!
       this.addNumOfParticipationsToEvents();
-      this.initDataSource(this.events);
+      this.updateEventsDataSource(this.events);
     });
   }
   /**
@@ -57,36 +59,50 @@ export class EventsListComponent implements OnInit {
    */
   addNumOfParticipationsToEvents() {
     let numOfParitications;
-    this.events.forEach(event => {
+    const eventsListLen = this.events.length;
+    for (let eventIndex = 0 ; eventIndex < eventsListLen ; eventIndex++) {
       numOfParitications = 0;
-      event.detailedParticipations.forEach(participation => {
-        if (participation.action === 'participate') {
+      const eventParticipations = this.events[eventIndex].detailedParticipations;
+      const eventParticipationsLen = eventParticipations.length;
+      for ( let participationIndex = 0 ; participationIndex < eventParticipationsLen; participationIndex++) {
+        if (eventParticipations[participationIndex].action === 'participate') {
           numOfParitications++;
         }
-      });
-      event.numOfParticipations = numOfParitications;
-    });
+      }
+      this.events[eventIndex].numOfParticipations = numOfParitications;
+    }
   }
 
   /**
    * @author Nermeen Mattar
    * @description toggles user participaion in the target event
    * @param {boolean} toggleValue
-   * @param {number} eventId
+   * @param {string} eventId
    */
-  toogleParticipationInEvent(toggleValue: boolean, eventId: number) {
+  toogleParticipationInEvent(toggleValue: boolean, eventId: string) {
     this.eventsService.toggleEventParticipation(toggleValue, eventId, this.teamMemberId).subscribe(res => {
-      this.updateEvents(this.isPastEvents);
+      this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)].numOfParticipations += toggleValue ? 1 : -1;
+      this.triggerTableToRefreshData();
     });
+  }
+
+  getIndexOfTargetEvent(eventId: string) {
+    return this.eventsDataSource.data.findIndex(event => event.id === eventId);
+  }
+
+  triggerTableToRefreshData() {
+    this.filterString = ''; // reset any string the user entered in the search input
+    this.eventsDataSource.data = this.eventsDataSource.data; // to trigger the table to change its data.
   }
   /**
    * @author Nermeen Mattar
    * @description deletes the target event from the events list (only allowed for admin)
-   * @param {number} eventId
+   * @param {string} eventId
    */
-  deleteEvent(eventId: number) {
+  deleteEvent(eventId: string) {
     this.eventsService.deleteEvent(eventId).subscribe( res => {
-      this.updateEvents(this.isPastEvents);
+      this.eventsDataSource.data.splice(this.getIndexOfTargetEvent(eventId) , 1);
+      this.triggerTableToRefreshData();
     });
   }
 
@@ -95,8 +111,9 @@ export class EventsListComponent implements OnInit {
    * @description creates a new object of type material table data source and passes to it the events data to be displayed on the table
    * @param {EventItem[]} events
    */
-  initDataSource(events: EventItem[]) {
-    this.dataSource = new MatTableDataSource(events); // Assign the data to the data source for the table to render
+  updateEventsDataSource(events: EventItem[]) {
+    this.filterString = ''; // reset any string the user entered in the search input
+    this.eventsDataSource = new MatTableDataSource(events); // Assign the data to the data source for the table to render
   }
 
   /**
@@ -106,7 +123,7 @@ export class EventsListComponent implements OnInit {
    */
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Removes whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+    filterValue = filterValue.toLowerCase(); // eventsDataSource defaults to lowercase matches
+    this.eventsDataSource.filter = filterValue;
   }
 }

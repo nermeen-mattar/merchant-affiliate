@@ -10,17 +10,17 @@
     <div class="app-event-details__container__table">
       <h4 class="app-event-details__container__table__header">{{'EVENT.PARTICIPATIONS' | translate}} </h4>
       <mat-form-field class="app-event-details__container__table__filter">
-        <input matInput (keyup)="applyFilterToParticipations($event.target.value)" placeholder="Filter">
+        <input matInput (keyup)="applyFilterToEventDetails($event.target.value, 'present')" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}">
       </mat-form-field>
-      <mat-table [dataSource]="presentDatasource" *ngIf="presentDatasource">
-        <ng-container  matColumnDef="name">
-          <mat-header-cell class="app-event-details__container__table__cell-header"  *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
+      <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.present">
+        <ng-container matColumnDef="name">
+          <mat-header-cell class="app-event-details__container__table__cell-header" *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             {{row.firstname}} {{row.name}}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="mail">
-          <mat-header-cell class="app-event-details__container__table__cell-header"  *matHeaderCellDef> {{'LOGIN.EMAIL' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-event-details__container__table__cell-header" *matHeaderCellDef> {{'LOGIN.EMAIL' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.member.mail}} </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -28,15 +28,16 @@
         </mat-row>
       </mat-table>
     </div>
+    <div class="app-event-details__container__space-seperator"></div>
     <!-- Cancelation Table -->
     <div class="app-event-details__container__table">
       <h4 class="app-event-details__container__table__header">{{'EVENT.CANCELATIONS' | translate}} </h4>
       <mat-form-field class="app-event-details__container__table__filter">
-        <input matInput (keyup)="applyFilterToCancelations($event.target.value)" placeholder="Filter">
+        <input matInput (keyup)="applyFilterToEventDetails($event.target.value, 'absent')" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}">
       </mat-form-field>
-      <mat-table [dataSource]="absentDatasource" *ngIf="absentDatasource">
+      <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.absent">
         <ng-container matColumnDef="name">
-          <mat-header-cell class="app-event-details__container__table__cell-header"  *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-event-details__container__table__cell-header" *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             {{row.firstname}} {{row.name}}
           </mat-cell>
@@ -51,4 +52,5 @@
       </mat-table>
     </div>
   </div>
+  <mat-spinner class="app-event-details__container__spinner" *ngIf="!eventDetailsDatasource"></mat-spinner>
 </div>

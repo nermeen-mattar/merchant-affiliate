@@ -13,15 +13,18 @@
   "EDIT": "Edit",
   "Delete": "Delete",
   "SAVE": "Save",
+  "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "USER_MESSAGES": {
     "UNSUCCESSFUL_LOGIN": "Wrong username or password",
-    "ERROR_CHANGING_PARTICIPATION": "Error Changing Participation",
     "EVENT_DELETING_SUCCESS": "The event has been deleted successfuly",
     "EVENT_DELETING_FAIL": "Unable to delete event",
     "EVENT_CREATING_SUCCESS": "The event has been created successfuly",
     "EVENT_CREATING_FAIL": "Unable to creat event",
     "EVENT_UPDATING_SUCCESS": "The event has been updated successfuly",
-    "EVENT_UPDATING_FAIL": "Unable to update event"
+    "EVENT_UPDATING_FAIL": "Unable to update event",
+    "PARTICIPATION_CONFIRMED": "Participation confirmed",
+    "CANCELATION_CONFIRMED": "Cancelation confirmed",
+    "ERROR_CHANGING_PARTICIPATION": "Error Changing Participation"
   },
   "LANGUAGE": {
     "LANGUAGE": "Language",
@@ -58,6 +61,7 @@
   },
   "EVENT": {
     "EVENTS": "Events",
+    "PAST_EVENTS": "Past events",
     "EVENT": "Event",
     "TYPE": "Type",
     "DATE": "Date",
@@ -66,8 +70,6 @@
     "CRITICAL_VALUE": "Critical value",
     "OUT": "Out",
     "IN": "In",
-    "PARTICIPATION_CONFIRMED": "Participation confirmed",
-    "CANCELATION_CONFIRMED": "Cancelation confirmed",
     "CANCELATIONS": "Cancelations",
     "PARTICIPATIONS": "Participations",
     "EVENT_NAME": "Event name",
@@ -175,7 +177,6 @@
   "userEvents_CancelLastParticipText": "This cancellation will cancel the event. Do you really want this?",
   "userEvents_MouseOver_Check": "Event is full",
   "userEvents_MouseOver_Canc": "Critical value exceeded",
-  "userEventsPast_EventTitle": "Past events",
   "userEventsPast_Out": "Out",
   "userEventsPast_In": "In",
   "userEventsPast_EventType": "Type",
