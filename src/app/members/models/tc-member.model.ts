@@ -10,6 +10,6 @@ export interface TcMember {
     mail: string,
     // sessionTeamPassword: string,
     id?: number,
-    new: Boolean
+    new: boolean
   };
 }

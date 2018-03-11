@@ -52,7 +52,6 @@ export class HttpRequestsService {
           obs.next(res);
         },
         err => {
-          console.log(err);
           userMessages = userMessages && userMessages.fail ? userMessages : {fail: 'Something went wrong'};
           this.showUserMessage(userMessages, 'fail');
         });
