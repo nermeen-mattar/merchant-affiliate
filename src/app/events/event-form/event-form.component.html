@@ -4,7 +4,7 @@
       <mat-icon color="primary">chevron_left</mat-icon>
       {{'BACK'| translate}}
     </div>
-    <mat-card-title class="text-center">{{ (eventId ? 'EVENT.EDIT_EVENT' : 'EVENT.CREATE_EVENT') | translate }} </mat-card-title>
+    <mat-card-title class="app-event-form__title">{{ (eventId ? 'EVENT.EDIT_EVENT' : 'EVENT.CREATE_EVENT') | translate }} </mat-card-title>
     <mat-card-content *ngIf="eventGroup">
       <form novalidate [formGroup]="eventGroup" (ngSubmit)="save(eventGroup.value)" novalidate>
         <div class="app-event-form__fields-wrapper ">

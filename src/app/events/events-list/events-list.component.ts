@@ -2,11 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MatTableDataSource} from '@angular/material';
 import { DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
 
-import { EventItem } from './../models/event-item.model';
+import { TcEvent } from '../models/tc-event.model';
 import { EventsService } from './../services/events.service';
-import { TeamInfo } from './../../teams/models/team-info.model';
+import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
 import { UserService } from './../../core/services/user.service';
 
 @Component({
@@ -16,43 +15,46 @@ import { UserService } from './../../core/services/user.service';
 })
 
 export class EventsListComponent implements OnInit {
-  events: EventItem[] = [];
-  displayedColumns = ['event-info', 'id', 'date', 'time', 'event', 'status', 'critical-value'];
-  eventsDataSource: MatTableDataSource < EventItem > ;
-  userTeams: TeamInfo[];
-  selectedTeam: TeamInfo;
+  events: TcEvent[] = [];
+  displayedColumns = ['event-info', 'id', 'date', 'time', 'event', 'status', 'critical-value', 'action'];
+  eventsDataSource: MatTableDataSource < TcEvent > ;
+  userTeams: TcTeamInfo[];
+  selectedTeam: TcTeamInfo;
   teamMemberId: number;
   isPastEvents: boolean;
   displayAdminActions: boolean;
   filterString = '';
-
-  constructor(private eventsService: EventsService, private userService: UserService, private router: Router) {
+  showConfirmDialog: boolean;
+  constructor(private eventsService: EventsService, private userService: UserService) {
     this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
-    if (this.displayAdminActions) {
-      this.displayedColumns.push('action');
-    }
     this.userTeams = this.userService.getUserTeams();
     this.selectedTeam = this.userService.getSelectedTeam();
     this.updateEvents(this.isPastEvents);
   }
 
   ngOnInit() {}
+
   /**
    * @author Nermeen Mattar
-   * @description updates the events variable by using events service to get events for the selected team then sends the received events to
-   * initEventsDataSource function which initializes the eventsDataSource for the events table
+   * @description updates the events variable by using events service to get events for the selected team then sends the
+   * received events to initEventsDataSource function which initializes the eventsDataSource for the events table
+   * @param {boolean} isPast
    */
   updateEvents(isPast: boolean) {
     this.isPastEvents = isPast;
     this.eventsDataSource = undefined; // reset data source to display the loader as new data will be received
     this.userService.setSelectedTeam(this.selectedTeam); // *** temp (to enhance)
-    this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe( ({events= [], myTeamMemberId}) => {
+    this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe(({
+      events = [],
+      myTeamMemberId
+    }) => {
       this.teamMemberId = myTeamMemberId;
       this.events = events; // *** res contains myParts and other info!
       this.addNumOfParticipationsToEvents();
       this.updateEventsDataSource(this.events);
     });
   }
+
   /**
    * @author Nermeen Mattar
    * @description calculates the number of participations for each event and add it to the event object
@@ -60,13 +62,15 @@ export class EventsListComponent implements OnInit {
   addNumOfParticipationsToEvents() {
     let numOfParitications;
     const eventsListLen = this.events.length;
-    for (let eventIndex = 0 ; eventIndex < eventsListLen ; eventIndex++) {
+    for (let eventIndex = 0; eventIndex < eventsListLen; eventIndex++) {
       numOfParitications = 0;
       const eventParticipations = this.events[eventIndex].detailedParticipations;
-      const eventParticipationsLen = eventParticipations.length;
-      for ( let participationIndex = 0 ; participationIndex < eventParticipationsLen; participationIndex++) {
-        if (eventParticipations[participationIndex].action === 'participate') {
-          numOfParitications++;
+      if (eventParticipations) {
+        const eventParticipationsLen = eventParticipations.length;
+        for (let participationIndex = 0; participationIndex < eventParticipationsLen; participationIndex++) {
+          if (eventParticipations[participationIndex].action === 'participate') {
+            numOfParitications++;
+          }
         }
       }
       this.events[eventIndex].numOfParticipations = numOfParitications;
@@ -99,19 +103,26 @@ export class EventsListComponent implements OnInit {
    * @description deletes the target event from the events list (only allowed for admin)
    * @param {string} eventId
    */
-  deleteEvent(eventId: string) {
-    this.eventsService.deleteEvent(eventId).subscribe( res => {
-      this.eventsDataSource.data.splice(this.getIndexOfTargetEvent(eventId) , 1);
+
+  deleteEvent($event, eventId: string) {
+    // $event.stopPropagation();
+    // this.showConfirmDialog = true;
+    this.eventsService.deleteEvent(eventId).subscribe(res => {
+      this.eventsDataSource.data.splice(this.getIndexOfTargetEvent(eventId), 1);
       this.triggerTableToRefreshData();
     });
+  }
+
+  onConfirmationReponse($event) {
+    this.showConfirmDialog = false;
   }
 
   /**
    * @author Nermeen Mattar
    * @description creates a new object of type material table data source and passes to it the events data to be displayed on the table
-   * @param {EventItem[]} events
+   * @param {Event []} events
    */
-  updateEventsDataSource(events: EventItem[]) {
+  updateEventsDataSource(events: TcEvent[]) {
     this.filterString = ''; // reset any string the user entered in the search input
     this.eventsDataSource = new MatTableDataSource(events); // Assign the data to the data source for the table to render
   }
