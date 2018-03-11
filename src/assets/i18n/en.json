@@ -1,9 +1,9 @@
 {
   "TEAM_CENTER": "team.center",
+  "EMAIL": "Email",
   "DELETE": "Delete",
   "CANCEL": "Cancel",
   "BACK": "Back",
-  "ACTION": "Action",
   "DETAILS": "Details",
   "YES": "Yes",
   "NO": "No",
@@ -24,7 +24,16 @@
     "EVENT_UPDATING_FAIL": "Unable to update event",
     "PARTICIPATION_CONFIRMED": "Participation confirmed",
     "CANCELATION_CONFIRMED": "Cancelation confirmed",
-    "ERROR_CHANGING_PARTICIPATION": "Error Changing Participation"
+    "CHANGING_PARTICIPATION_FAIL": "Error Changing Participation",
+    "MEMBER_DELETING_SUCCESS": "The member has been deleted successfuly",
+    "MEMBER_DELETING_FAIL": "Unable to delete member",
+    "MEMBER_CREATING_SUCCESS": "The member has been created successfuly",
+    "MEMBER_CREATING_FAIL": "Unable to creat member",
+    "MEMBER_UPDATING_SUCCESS": "The member has been updated successfuly",
+    "MEMBER_UPDATING_FAIL": "Unable to update member",
+    "MEMBER_ACTIVATE_SUCCESS": "The member has been activated successfuly",
+    "MEMBER_DEACTIVATE_SUCCESS": "The member has been deactivated successfuly",
+    "CHANGING_MEMBER_ACTIVATION_STATUS_FAIL": "Unable to change member activation status"
   },
   "LANGUAGE": {
     "LANGUAGE": "Language",
@@ -101,17 +110,18 @@
   },
   "MEMBER": {
     "MEMBERS": "Members",
-    "MEMBER": "Member"
+    "MEMBER": "Member",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "MAIL": "Mail",
+    "EDIT_MEMBER": "Edit member",
+    "CREATE_MEMBER": "Create member"
   },
   "REGISTER": {
-    "REGISTER": "Register",
-    "EMAIL": "Email",
-    "FIRST_NAME": "First name",
-    "LAST_NAME": "Last Name"
+    "REGISTER": "Register"
   },
   "LOGIN": {
     "LOGIN": "Login",
-    "EMAIL": "Email",
     "PASSWORD": "Password",
     "REGISTER": "Register Now!"
   },

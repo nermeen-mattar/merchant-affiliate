@@ -11,6 +11,10 @@
     align-items: center;
     cursor: pointer;
   }
+  &__title {
+    color: $tc-color-gray-shade-6;
+    text-align: center;
+  }
   &__fields-wrapper {
     // flex-wrap: wrap;
     display: flex;
