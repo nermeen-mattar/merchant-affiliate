@@ -14,7 +14,6 @@ import { TcMember } from '../models/tc-member.model';
   styleUrls: ['./members-list.component.scss']
 })
 export class MembersListComponent implements OnInit {
-  members: TcMember[] = [];
   displayedColumns = ['member', 'mail'];
   membersDataSource: MatTableDataSource < TcMember > ;
   userTeams: TcTeamInfo[];
@@ -45,9 +44,7 @@ export class MembersListComponent implements OnInit {
     this.userService.setSelectedTeam(this.selectedTeam); // *** temp (to enhance)
     this.membersService.getMembers(this.selectedTeam.teamId).subscribe((res) => { // {members= [], myTeamMemberId}
       // this.teamMemberId = myTeamMemberId;
-      // debugger;
-      this.members = res; // *** res contains myParts and other info!
-      this.updateMembersDataSource(this.members);
+      this.updateMembersDataSource(res);
     });
   }
 
@@ -97,6 +94,7 @@ export class MembersListComponent implements OnInit {
   updateMembersDataSource(members: TcMember[]) {
     this.filterString = ''; // reset any string the user entered in the search input
     this.membersDataSource = new MatTableDataSource(members); // Assign the data to the data source for the table to render
+    console.log('this.membersDataSource ', this.membersDataSource);
   }
 
   /**

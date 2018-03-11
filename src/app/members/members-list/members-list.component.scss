@@ -1,21 +1,23 @@
 @import "../../../styles/toolkit/variables.scss";
 .app-members {
-  position: relative;
   padding: 14px 8px; /* to leave space to the back button */
   max-width: 1000px;
   margin: 0 auto;
   &__action {
     cursor: pointer;
   }
+  &__add {
+    color: white;
+    margin-left: 1rem;
+    font-size: $tc-font-size-h3;
+  }
   &__header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:center;
     &__title {
       color: $tc-color-gray-shade-6;
       font-weight: $tc-font-weight-4;
-      display: flex;
-      align-items: center; /* to allign the title (members) with the history icon */
     }
   }
   &__filter {
