@@ -58,7 +58,7 @@
           <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> comment</mat-icon>
           <mat-error *ngIf="eventGroup.controls['comment'] .invalid"> {{'EVENT.COMMENT'| translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" class="text-white app-event-form__button" type="submit" [disabled]="!eventGroup.valid">{{ 'SAVE' | translate }}</button>
+        <button mat-raised-button color="primary" class="app-event-form__button" type="submit" [disabled]="!eventGroup.valid">{{ 'SAVE' | translate }}</button>
       </form>
     </mat-card-content>
   </mat-card>
