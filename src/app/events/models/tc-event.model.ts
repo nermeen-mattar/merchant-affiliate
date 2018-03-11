@@ -1,4 +1,4 @@
-export interface EventItem {
+export interface TcEvent {
   id?: string; // no id when creating a new event
   type: number;
   eventName: string;

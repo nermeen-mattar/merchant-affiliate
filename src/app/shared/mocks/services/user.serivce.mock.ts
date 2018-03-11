@@ -1,5 +1,5 @@
-import { TeamInfo } from './../../../teams/models/team-info.model';
-import { TeamRoles } from './../../../teams/models/team-roles.model';
+import { TcTeamInfo } from './../../../teams/models/tc-team-info.model';
+import { TcTeamRoles } from './../../../teams/models/tc-team-roles.model';
 export class UserServiceMock {
 
   constructor() {}
@@ -12,7 +12,7 @@ export class UserServiceMock {
     return 'ADMIN';
   }
 
-  getTeamRoles(): TeamRoles {
+  getTeamRoles(): TcTeamRoles {
     return {
       teamAdmins: [{
         teamId: 1,
@@ -26,13 +26,13 @@ export class UserServiceMock {
   }
 
   setTeamRoles(teamRoles): void {}
-  getSelectedTeam(): TeamInfo {
+  getSelectedTeam(): TcTeamInfo {
     return {
       teamId: 1,
       teamName: 'test'
     };
   }
-  setSelectedTeam(selectedTeam: TeamInfo) {}
+  setSelectedTeam(selectedTeam: TcTeamInfo) {}
   getUserTeams() {
     return [{
       teamId: 1,
