@@ -1,8 +1,8 @@
 @import "../../../styles/toolkit/variables.scss";
 
-.app-event-form {
-  width: 80%;
+.app-member-form {
   max-width: 700px;
+  min-width: 200px;
   margin: 0px auto;
   &__back {
     color: $primary-color;
@@ -15,15 +15,9 @@
     color: $tc-color-gray-shade-6;
     text-align: center;
   }
-  &__fields-wrapper {
-    // flex-wrap: wrap;
-    display: flex;
-  }
   &__field {
     width: 100%;
-    // flex-grow: 1;
     line-height: 1.5;
-    // margin: 1rem;
     margin-top:1rem;
     &__icon {
       margin-right: 5px;
@@ -31,14 +25,5 @@
   }
   &__button {
     margin-top: 2.2rem;
-  }
-}
-
-@media only screen and (max-width: 720px) {
-  .app-event-form {
-    width: 95%;
-    &__fields-wrapper {
-      display: block;
-    }
   }
 }

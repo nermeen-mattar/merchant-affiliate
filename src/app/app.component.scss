@@ -1,12 +1,12 @@
 @import "../styles/toolkit/elements.scss";
 @import "../styles/toolkit/variables.scss";
 .app-container {
+  color: $tc-color-gray-shade-6;
   // height: 100%;
   &__sidenav {
     &__menu {
       width: 210px;
       margin-top: 2rem;
-      color: $tc-color-gray-shade-6;
       &__item {
         transition: background-color .3s;
         font-size: $tc-font-size-h5;

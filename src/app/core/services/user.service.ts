@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 
-import { TeamInfo } from './../../teams/models/team-info.model';
-import { TeamRoles } from './../../teams/models/team-roles.model';
+import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
+import { TcTeamRoles } from './../../teams/models/tc-team-roles.model';
 
 @Injectable()
 export class UserService {
   /* User static properties (received from the backend) */
   private username: string;
   private userType: string;
-  private teamRoles: TeamRoles;
-  private userTeams: TeamInfo[];
+  private teamRoles: TcTeamRoles;
+  private userTeams: TcTeamInfo[];
   /* user changable properties (can be changed on the client side)*/
-  private selectedTeam: TeamInfo;
+  private selectedTeam: TcTeamInfo;
   constructor() {
     this.setUsername(JSON.parse(localStorage.getItem('username')));
     this.setTeamRoles(JSON.parse(localStorage.getItem('teamRoles')));
@@ -40,17 +40,17 @@ export class UserService {
    * @author Nermeen Mattar
    * @description returns the team roles for the logged in user
    * @readonly
-   * @type {TeamRoles}
+   * @type {TcTeamRoles}
    */
-  getTeamRoles(): TeamRoles {
+  getTeamRoles(): TcTeamRoles {
     return this.teamRoles;
   }
   /**
    * @author Nermeen Mattar
    * @description sets the team roles in a private variable
-   * @param {teamRoles} TeamRoles
+   * @param {teamRoles} TcTeamRoles
    */
-  setTeamRoles(teamRoles: TeamRoles) {
+  setTeamRoles(teamRoles: TcTeamRoles) {
     this.teamRoles = teamRoles;
     if (this.teamRoles) {
       this.setUserTeams();
@@ -83,10 +83,10 @@ export class UserService {
   /**
    * @author Nermeen Mattar
    * @description returns the team roles for the logged in user
-   * @returns {TeamInfo[]}
+   * @returns {TcTeamInfo[]}
    */
 
-  getUserTeams(): TeamInfo[] {
+  getUserTeams(): TcTeamInfo[] {
     return this.userTeams;
   }
 
@@ -113,7 +113,7 @@ export class UserService {
    * @author Nermeen Mattar
    * @description sets the selected team in a private variable based on the user selection from the list of teams he/she is admin/member of.
    */
-  setSelectedTeam(selectedTeam: TeamInfo) {
+  setSelectedTeam(selectedTeam: TcTeamInfo) {
     this.selectedTeam = selectedTeam;
   }
 
@@ -121,16 +121,16 @@ export class UserService {
    * @author Nermeen Mattar
    * @description returns team the user has selected from the list of team he/she is admin/member of.
    */
-  getSelectedTeam(): TeamInfo {
+  getSelectedTeam(): TcTeamInfo {
     return this.selectedTeam;
   }
   /**
    * @author Nermeen Mattar
    * @description stores the username, the team roles, and the user type ordinary/admin in the local storage and in private variables
    * @param {string} username
-   * @param {TeamRoles} teamRoles
+   * @param {TcTeamRoles} teamRoles
    */
-  storeLoggedInUserInfo(username: string, teamRoles: TeamRoles, userType: string) {
+  storeLoggedInUserInfo(username: string, teamRoles: TcTeamRoles, userType: string) {
     this.setUsername(username);
     localStorage.setItem('username', JSON.stringify(username));
     this.setTeamRoles(teamRoles);

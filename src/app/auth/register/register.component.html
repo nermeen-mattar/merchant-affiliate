@@ -20,21 +20,21 @@
         <div class="app-register__section">
           <h4 class="font-w-bolder">{{ 'ADMIN.ADMIN_DETAILS' | translate }}</h4>
           <mat-form-field class="app-register__section__field">
-            <input matInput placeholder="{{ 'REGISTER.EMAIL' | translate }}" ngModel #email="ngModel" name="email" required email type="text">
+            <input matInput placeholder="{{ 'EMAIL' | translate }}" ngModel #email="ngModel" name="email" required email type="text">
             <mat-icon class="app-register__section__field__icon" matPrefix>email</mat-icon>
-            <mat-error *ngIf="email.invalid"> {{ 'REGISTER.EMAIL' | translate }} {{'IS_REQUIRED' | translate}}</mat-error>
+            <mat-error *ngIf="email.invalid"> {{ 'EMAIL' | translate }} {{'IS_REQUIRED' | translate}}</mat-error>
           </mat-form-field>
           <mat-form-field class="app-register__section__field">
-            <input matInput placeholder="{{ 'REGISTER.FIRST_NAME' | translate }}" ngModel #firstName="ngModel" name="firstName" required
+            <input matInput placeholder="{{ 'MEMBER.FIRST_NAME' | translate }}" ngModel #firstName="ngModel" name="firstName" required
               type="text">
             <mat-icon class="app-register__section__field__icon" matPrefix>person_circle</mat-icon>
-            <mat-error *ngIf="firstName.invalid"> {{ 'REGISTER.FIRST_NAME' | translate }} {{'IS_REQUIRED' | translate}}</mat-error>
+            <mat-error *ngIf="firstName.invalid"> {{ 'MEMBER.FIRST_NAME' | translate }} {{'IS_REQUIRED' | translate}}</mat-error>
           </mat-form-field>
           <mat-form-field class="app-register__section__field">
-            <input matInput placeholder="{{ 'REGISTER.LAST_NAME' | translate }}" ngModel #lastName="ngModel" name="lastName" required
+            <input matInput placeholder="{{ 'MEMBER.LAST_NAME' | translate }}" ngModel #lastName="ngModel" name="lastName" required
               type="text">
             <mat-icon class="app-register__section__field__icon" matPrefix>person_circle</mat-icon>
-            <mat-error *ngIf="lastName.invalid"> {{ 'REGISTER.LAST_NAME_' | translate }} {{IS_REQUIRED | translate}}</mat-error>
+            <mat-error *ngIf="lastName.invalid"> {{ 'MEMBER.LAST_NAME_' | translate }} {{IS_REQUIRED | translate}}</mat-error>
           </mat-form-field>
           <mat-form-field class="app-register__section__field">
             <input matInput placeholder="{{ 'ADMIN.ADMIN_PASSWORD' | translate }}" ngModel #adminPassword="ngModel" name="adminPassword"

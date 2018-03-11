@@ -1,4 +1,4 @@
-export interface TeamInfo{
+export interface TcTeamInfo {
   teamId: number;
   teamName: string;
 }

@@ -22,8 +22,7 @@ describe('EventsListComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         MaterialModule,
-        NoopAnimationsModule,
-        RouterTestingModule
+        NoopAnimationsModule
       ],
       providers: [
         {

@@ -10,15 +10,16 @@ import { MaterialModule } from './../shared/material/material.module';
 import { EventsService } from './services/events.service';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { EventFormComponent } from './event-form/event-form.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     EventsRoutingModule,
-    MaterialModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     EventsListComponent,

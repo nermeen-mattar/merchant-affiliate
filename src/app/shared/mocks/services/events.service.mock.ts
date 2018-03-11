@@ -1,16 +1,15 @@
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { EventItem } from '../../../events/models/event-item.model';
+import { TcEvent } from '../../../events/models/tc-event.model';
 
 export class EventsServiceMock {
 
   constructor() {}
 
-  getEvents(): Observable < EventItem[] > {
+  getEvents(): Observable < Event [] > {
     return of([]);
   }
-
   getEventDetails(eventId) {
     return of ({
         absent: [],
@@ -20,12 +19,10 @@ export class EventsServiceMock {
   getEvent(eventId: string): Observable < any > {
     return of({});
   }
-
-  createEvent(teamId: number, event: EventItem): Observable < any > { // EventItem[] there are other info!
+  createEvent(teamId: number, event: Event ): Observable < any > { // Event [] there are other info!
     return of({});
   }
-
-  updateEvent(eventId: string, teamId: number, event: EventItem): Observable < any > {
+  updateEvent(eventId: string, teamId: number, event: Event ): Observable < any > {
     return of({});
   }
 }

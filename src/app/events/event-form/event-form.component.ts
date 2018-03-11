@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { FieldValidatorsService } from './../../core/services/field-validators.service';
 import { UserService } from './../../core/services/user.service';
 import { EventsService } from './../services/events.service';
-import { EventItem } from '../models/event-item.model';
+import { TcEvent } from '../models/tc-event.model';
 
 @Component({
   selector: 'tc-event-form',
@@ -57,9 +57,9 @@ export class EventFormComponent implements OnInit {
    * @author Nermeen Mattar
    * @description creates the event's form groups along with their form controls. With each created form control two things are passed;
    * First the field's value which is in the recevied parameter in the case of editing, and default value in the case of creating.
-   * @param {EventItem} eventValue
+   * @param {TcEvent} eventValue
    */
-  createEventForm(eventValue ? : EventItem) {
+  createEventForm(eventValue ? : TcEvent ) {
     this.eventGroup = new FormGroup({
       eventName: new FormControl(eventValue ? eventValue.eventName : '', [Validators.required]),
       date: new FormControl(eventValue ? eventValue.date : '', [Validators.required]),
@@ -80,16 +80,16 @@ export class EventFormComponent implements OnInit {
    * and navigates back upon successfully saving the event.
    * @param {any} eventValue
    */
-  save(eventValue) { // EventItem
-    const eventGroupValueCopy = this.getEventInBackendStructure(eventValue);
-    eventGroupValueCopy.type = eventGroupValueCopy.type;
+  save(eventValue) {
+    const eventValueForBackend = this.getEventInBackendStructure(eventValue);
+    eventValueForBackend.type = eventValueForBackend.type;
     if (this.eventId) {
       this.eventsService.updateEvent(this.eventId, this.selectedTeamId,
-        eventGroupValueCopy).subscribe(res => {
+        eventValueForBackend).subscribe(res => {
         this.navigateBack();
       });
     } else {
-      this.eventsService.createEvent(this.selectedTeamId, eventGroupValueCopy).subscribe(res => {
+      this.eventsService.createEvent(this.selectedTeamId, eventValueForBackend).subscribe(res => {
         this.navigateBack();
       });
     }
@@ -100,8 +100,8 @@ export class EventFormComponent implements OnInit {
    * @description maps the properties in the received object to the structure required by the backend and formats the date.
    * @param {any} eventValue
    */
-  getEventInBackendStructure(eventValue): EventItem {
-    const eventGroupValueCopy: EventItem = {
+  getEventInBackendStructure(eventValue): TcEvent {
+    const eventValueCopy: TcEvent = {
       eventName: eventValue.eventName,
       date: format(eventValue.date, 'DD.MM.YYYY'),
       startTime: eventValue.eventTiming.startTime,
@@ -111,7 +111,7 @@ export class EventFormComponent implements OnInit {
       location: eventValue.location,
       comment: eventValue.comment
     };
-    return eventGroupValueCopy;
+    return eventValueCopy;
   }
 
   /**
