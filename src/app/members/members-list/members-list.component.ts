@@ -15,7 +15,7 @@ import { TcMember } from '../models/tc-member.model';
 })
 export class MembersListComponent implements OnInit {
   members: TcMember[] = [];
-  displayedColumns = ['member', 'mail', 'action'];
+  displayedColumns = ['member', 'mail'];
   membersDataSource: MatTableDataSource < TcMember > ;
   userTeams: TcTeamInfo[];
   selectedTeam: TcTeamInfo;
@@ -25,6 +25,9 @@ export class MembersListComponent implements OnInit {
 
   constructor(private membersService: MembersService, private userService: UserService) {
     this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
+    if (this.displayAdminActions) {
+      this.displayedColumns.push('action');
+    }
     this.userTeams = this.userService.getUserTeams();
     this.selectedTeam = this.userService.getSelectedTeam();
     this.updateMembers();
