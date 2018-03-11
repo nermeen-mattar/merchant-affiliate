@@ -1,0 +1,36 @@
+@import "../../../styles/toolkit/variables.scss";
+.app-teams {
+  padding: 14px 8px; /* to leave space to the back button */
+  max-width: 1000px;
+  margin: 0 auto;
+  &__action {
+    cursor: pointer;
+  }
+  &__title {
+      color: $tc-color-gray-shade-6;
+      font-weight: $tc-font-weight-4;
+  }
+  &__filter {
+    width: 50%;
+  }
+  &__container {
+    overflow-x: auto;
+    &__table {
+      margin-top: 2rem;
+      min-width: 640px;
+      overflow-x: auto;
+      &__header-cell {
+        font-weight: $tc-font-weight-6;
+        font-size: $tc-font-size-h5;
+      }
+      &__team-admin {
+        color: white;
+        background-color: $primary-color;
+      }
+    }
+    &__spinner {
+      margin: 50px auto;
+    }
+  }
+}
+

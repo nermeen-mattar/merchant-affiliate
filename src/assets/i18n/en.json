@@ -97,10 +97,12 @@
   },
   "TEAM": {
     "TEAMS": "Teams",
+    "YOUR_TEAMS": "Your teams",
     "CREATE_YOUR_TEAM": "Create your team - 100% free",
     "TEAM_NAME": "Team Name",
     "TEAM_PASSWORD": "Team Password",
-    "TEAM_DETAILS": "Team details"
+    "TEAM_DETAILS": "Team details",
+    "ROLES": "Roles"
   },
   "ADMIN": {
     "ADMIN": "Admin",
@@ -115,7 +117,8 @@
     "LAST_NAME": "Last name",
     "MAIL": "Mail",
     "EDIT_MEMBER": "Edit member",
-    "CREATE_MEMBER": "Create member"
+    "CREATE_MEMBER": "Create member",
+    "ADD_MYSELF_AS_MEMBER": "Add myself as a member"
   },
   "REGISTER": {
     "REGISTER": "Register"
