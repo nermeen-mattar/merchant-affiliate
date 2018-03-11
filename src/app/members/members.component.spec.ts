@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { MaterialModule } from './../shared/material/material.module';
 import { MembersComponent } from './members.component';
 
 
@@ -11,7 +12,7 @@ describe('MembersComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MembersComponent ],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule, MaterialModule]
     })
     .compileComponents();
   }));

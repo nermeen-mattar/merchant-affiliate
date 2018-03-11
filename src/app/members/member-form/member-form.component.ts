@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MembersService } from '../services/members.service';
-import { FieldValidatorsService } from './../../core/services/field-validators.service';
 import { UserService } from './../../core/services/user.service';
 import { TcMember } from '../models/tc-member.model';
 @Component({
@@ -15,7 +14,7 @@ export class MemberFormComponent implements OnInit {
   selectedTeamId: number;
   memberGroup: FormGroup;
   memberId: number; /* is undefined (in the case of member creation) */
-  constructor(private membersService: MembersService, userService: UserService, private fieldValidatorsService: FieldValidatorsService,
+  constructor(private membersService: MembersService, userService: UserService,
     private route: ActivatedRoute, private router: Router) {
     this.selectedTeamId = userService.getSelectedTeam().teamId;
     this.initFormEditingOrCreating();
