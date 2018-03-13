@@ -66,14 +66,17 @@ export class UserService {
     this.userTeams = [];
     const teamIds = [];
     const teamRoles = this.getTeamRoles();
-    Object.keys(teamRoles).forEach( teamRolesProp => {
-      const teams = teamRoles[teamRolesProp];
+    Object.keys(teamRoles).forEach( teamRole => {
+      const teams = teamRoles[teamRole];
+      const teamRoleTranslateKey = teamRole === 'teamAdmins' ? 'admin' : 'member';
       const teamsLen = teams.length;
       for (let teamIndex = 0; teamIndex < teamsLen; teamIndex++) {
         const team = teams[teamIndex];
         if (teamIds.indexOf(team.teamId) === -1) {
-          this.userTeams.push(team);
+          this.userTeams.push({roles: [teamRoleTranslateKey], ...team});
           teamIds.push(team.teamId);
+        } else {
+          this.userTeams[teamIndex].roles.push(teamRoleTranslateKey);
         }
       }
     });

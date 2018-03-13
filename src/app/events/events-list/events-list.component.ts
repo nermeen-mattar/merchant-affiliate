@@ -15,7 +15,6 @@ import { UserService } from './../../core/services/user.service';
 })
 
 export class EventsListComponent implements OnInit {
-  events: TcEvent[] = [];
   displayedColumns = ['event-info', 'id', 'date', 'time', 'event', 'status', 'critical-value'];
   eventsDataSource: MatTableDataSource < TcEvent > ;
   userTeams: TcTeamInfo[];
@@ -46,28 +45,28 @@ export class EventsListComponent implements OnInit {
   updateEvents(isPast: boolean) {
     this.isPastEvents = isPast;
     this.eventsDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.userService.setSelectedTeam(this.selectedTeam); // *** temp (to enhance)
+    this.userService.setSelectedTeam(this.selectedTeam); // *** (need enhance) to update if the user changed the selected team from the menu
     this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe(({
       events = [],
       myTeamMemberId
     }) => {
       this.teamMemberId = myTeamMemberId;
-      this.events = events; // *** res contains myParts and other info!
-      this.addNumOfParticipationsToEvents();
-      this.updateEventsDataSource(this.events);
+      this.addNumOfParticipationsToEvents(events);
+      this.updateEventsDataSource(events);
     });
   }
 
   /**
    * @author Nermeen Mattar
    * @description calculates the number of participations for each event and add it to the event object
+   * @param {Event []} events
    */
-  addNumOfParticipationsToEvents() {
+  addNumOfParticipationsToEvents(events: TcEvent[]) {
     let numOfParitications;
-    const eventsListLen = this.events.length;
+    const eventsListLen = events.length;
     for (let eventIndex = 0; eventIndex < eventsListLen; eventIndex++) {
       numOfParitications = 0;
-      const eventParticipations = this.events[eventIndex].detailedParticipations;
+      const eventParticipations = events[eventIndex].detailedParticipations;
       if (eventParticipations) {
         const eventParticipationsLen = eventParticipations.length;
         for (let participationIndex = 0; participationIndex < eventParticipationsLen; participationIndex++) {
@@ -76,7 +75,7 @@ export class EventsListComponent implements OnInit {
           }
         }
       }
-      this.events[eventIndex].numOfParticipations = numOfParitications;
+      events[eventIndex].numOfParticipations = numOfParitications;
     }
   }
 

@@ -36,7 +36,7 @@ const routes: Routes = [{
     loadChildren: './teams/teams.module#TeamsModule'
   }, {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'events'
   }
 ];
 

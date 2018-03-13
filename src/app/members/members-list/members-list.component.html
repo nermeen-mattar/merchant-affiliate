@@ -1,7 +1,9 @@
 <div class="app-members">
   <div class="app-members__header">
     <h3 class="app-members__header__title">
-      {{ 'MEMBER.MEMBERS' | translate}} ({{this.members && this.members.length}})
+      {{ 'MEMBER.MEMBERS' | translate}} <span *ngIf="membersDataSource"> ({{membersDataSource.data.length}})</span>
+      <button mat-mini-fab *ngIf="displayAdminActions" color="primary" class="app-members__action app-members__add" routerLink="new">
+    + </button>
     </h3>
     <div>
       <mat-form-field>
@@ -16,7 +18,6 @@
   <mat-form-field class="app-members__filter">
     <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterString" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}">
   </mat-form-field>
-  <mat-icon *ngIf="displayAdminActions" class="app-members__action" routerLink="new" color="primary">add</mat-icon>
   <div class="app-members__container">
     <mat-table class="app-members__container__table" [dataSource]="membersDataSource" matSort>
       <ng-container matColumnDef="member">
