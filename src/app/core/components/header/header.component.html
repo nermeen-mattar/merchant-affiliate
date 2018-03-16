@@ -6,7 +6,6 @@
     <span class="app-header__logo__icon"></span>
     <div class="app-header__logo__text">{{'TEAM_CENTER' | translate}}</div>
   </div>
-
   <div class="app-header__menu font-w-bolder">
     <span class="app-header__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'EVENT.EVENTS' | translate}} </span>
@@ -17,7 +16,7 @@
     <span class="app-header__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'TEAM.TEAMS' | translate}} </span>
     </span>
-    <span class="app-header__menu__item" routerLink="/admin" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+    <span class="app-header__menu__item" routerLink="/member-user/switch-to-admin" *ngIf="($isUserLoggedIn | async) && !($isUserAdmin | async)" routerLinkActive="active">
       <span> {{'ADMIN.ADMIN' | translate}} </span>
     </span>
     <span class="app-header__menu__item" routerLink="/auth/register" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
@@ -26,7 +25,7 @@
     <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'LOGIN.LOGIN' | translate}}</span>
     </span>
-    <span class="app-header__menu__item" routerLink="/about" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+    <span class="app-header__menu__item" routerLink="/home/about" routerLinkActive="active">
       <span> {{'ABOUT.ABOUT' | translate}} </span>
     </span>
     <span class="app-header__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async)">

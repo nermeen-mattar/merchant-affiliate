@@ -1,11 +1,10 @@
 @import "../../../styles/toolkit/variables.scss";
 .app-register {
-  color: $tc-color-gray-shade-6; // move it to a common place
+  color: $tc-color-gray-shade-6;
   width: 80%;
   min-width: 200px;
-  max-width: 400px;
-  margin: 0px auto;
-  padding: 60px 0px;
+  max-width: 500px;
+  margin: 120px auto;
   &__section {
     margin-top: 2rem;
     &__field {

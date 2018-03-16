@@ -1,22 +1,19 @@
-<div class="app-login">
-  <mat-card>
-    <mat-card-title class="text-center">{{ 'LOGIN.LOGIN' | translate }} </mat-card-title>
-    <mat-card-content>
-      <form novalidate #loginForm="ngForm">
-        <mat-form-field class="app-login__field">
-          <input matInput placeholder="{{ 'EMAIL' | translate }}" ngModel #userEmail="ngModel" name="userEmail" required email
-            type="text">
-          <mat-icon class="app-login__field__icon" matPrefix>email</mat-icon>
-          <mat-error *ngIf="userEmail.invalid"> {{'EMAIL' | translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
-        </mat-form-field>
-        <mat-form-field class="app-login__field">
-          <input matInput placeholder="{{ 'LOGIN.PASSWORD' | translate }}" ngModel #userPassword="ngModel" name="userPassword" required
-            type="password">
-          <mat-icon class="app-login__field__icon" matPrefix> lock</mat-icon>
-          <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'REQUIRED' | translate }}</mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" class="app-login__button" [disabled]="loginForm.invalid" (click)="login(loginForm.value)">{{ 'LOGIN.LOGIN' | translate }}</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
+<mat-card class="app-login">
+  <mat-card-title class="text-center">{{ 'LOGIN.LOGIN' | translate }} </mat-card-title>
+  <mat-card-content>
+    <form novalidate #loginForm="ngForm">
+      <mat-form-field class="app-login__field">
+        <input matInput placeholder="{{ 'EMAIL' | translate }}" ngModel #userEmail="ngModel" name="userEmail" required email type="text">
+        <mat-icon class="app-login__field__icon" matPrefix>email</mat-icon>
+        <mat-error *ngIf="userEmail.invalid"> {{'EMAIL' | translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="app-login__field">
+        <input matInput placeholder="{{ 'LOGIN.PASSWORD' | translate }}" ngModel #userPassword="ngModel" name="userPassword" required
+          type="password">
+        <mat-icon class="app-login__field__icon" matPrefix> lock</mat-icon>
+        <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="app-login__button" [disabled]="loginForm.invalid" (click)="login(loginForm.value)">{{ 'LOGIN.LOGIN' | translate }}</button>
+    </form>
+  </mat-card-content>
+</mat-card>

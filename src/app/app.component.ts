@@ -1,3 +1,4 @@
+import { UserService } from './core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
@@ -14,11 +15,14 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent implements OnInit {
   appLanguage: string;
   $isUserLoggedIn: Observable < boolean > ;
+  $isUserAdmin: Observable < boolean > ;
   menuOpened = false;
-  constructor(private translate: TranslateService, private authService: AuthService, private router: Router) {}
+  constructor(private translate: TranslateService, private authService: AuthService, private router: Router,
+    private userService: UserService) {}
 
   ngOnInit() {
     this.$isUserLoggedIn = this.authService.$userLoggedIn;
+    this.$isUserAdmin =  this.userService.$userAdmin;
     const browserLanguage = this.translate.getBrowserLang() || defaultLanguage;
     this.appLanguage = this.getSuitableLanguage(browserLanguage);
     this.translate.use(this.appLanguage);

@@ -8,7 +8,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/material/material.module';
-import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { createTranslateLoader } from './core/loaders/translate-loader';
@@ -21,7 +20,6 @@ import { createTranslateLoader } from './core/loaders/translate-loader';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AuthModule,
     CoreModule,
     MaterialModule,
     HttpClientModule,

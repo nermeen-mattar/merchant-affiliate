@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable } from '@angular/core';
 
 import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
@@ -12,6 +14,10 @@ export class UserService {
   private userTeams: TcTeamInfo[];
   /* user changable properties (can be changed on the client side)*/
   private selectedTeam: TcTeamInfo;
+  /* user state properties */
+  private isAdmin: BehaviorSubject < boolean > = new BehaviorSubject(false);
+  $userAdmin: Observable < boolean > = this.isAdmin.asObservable();
+
   constructor() {
     this.setUsername(JSON.parse(localStorage.getItem('username')));
     this.setTeamRoles(JSON.parse(localStorage.getItem('teamRoles')));
@@ -109,6 +115,7 @@ export class UserService {
    * @param {userType} string
    */
   setUserType(userType: string) {
+    this.isAdmin.next(userType.toLowerCase() === 'admin');
     this.userType = userType;
   }
 

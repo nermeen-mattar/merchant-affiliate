@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { first } from 'rxjs/operators';
 
+import { UserMessagesService } from './../../core/services/user-messages.service';
 import { UserService } from './../../core/services/user.service';
 import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
@@ -17,7 +18,8 @@ export class AuthService implements OnDestroy {
   constructor(
     private httpRequest: HttpRequestsService,
     private tokenHandler: TokenHandlerService, private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private userMessagesService: UserMessagesService
   ) {
     this.httpRequest.token = localStorage.getItem('token');
     if (this.httpRequest.token) {
@@ -31,26 +33,53 @@ export class AuthService implements OnDestroy {
 
   /**
    * @author Nermeen Mattar
-   * @description sends a post request to the server holding user credentials to login an existing user, upon login success the received
-   * data will be stored in the local storage and the http header will include the token in each subsequent request to the backend.
+   * @description sends a post request to the server holding user credentials to login an existing user.
    * @param {ServerSideLoginInfo} userCredentials
    */
   login(userCredentials: ServerSideLoginInfo) {
-    this.httpRequest.httpPost('login', userCredentials, {fail: 'UNSUCCESSFUL_LOGIN'})
-      .pipe(
-        first()
-      )
+    this.httpRequest.httpPost('login', userCredentials, {fail: 'INCORRECT_USERNAME_OR_PASSWORD'})
       .subscribe(
         res => {
           this.isLoggedIn.next(true);
-          this.httpRequest.token = res.token; // may use map to only store needed info
-          localStorage.setItem('token', JSON.stringify(this.httpRequest.token));
-          const userReceivedInfo = this.tokenHandler.decodeToken(this.httpRequest.token);
-          this.userService.storeLoggedInUserInfo(userReceivedInfo.sub, userReceivedInfo.teamRoles, res.isAuthorized);
-          this.addTokenToHttpHeader();
-          this.router.navigateByUrl('events');
+          this.onLoginRequestSuccess(res);
         }
       );
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description sends a post request to the server holding admin credentials to switch from member view to admin vie
+   * @param {ServerSideLoginInfo} userCredentials
+   */
+  switchToAdmin (userCredentials: ServerSideLoginInfo) {
+    const switchFailMsg = 'INCORRECT_ADMIN_PASSWRD';
+    this.httpRequest.httpPost('login', userCredentials, {
+        fail: switchFailMsg
+      })
+      .subscribe(
+        res => {
+          if (res.isAuthorized.toLowerCase() === 'admin') {
+            this.onLoginRequestSuccess(res);
+          } else {
+            this.userMessagesService.showUserMessage( {fail: switchFailMsg} , 'fail');
+          }
+        }
+      );
+  }
+
+/**
+ * @description upon successful user login/switch the data will be stored in the local storage and the http header will include
+ * the token in each subsequent request to the backend.
+ * @param {any} loginResponse
+ * @memberof AuthService
+ */
+onLoginRequestSuccess(loginResponse) {
+    this.httpRequest.token = loginResponse.token; // may use map to only store needed info
+    localStorage.setItem('token', JSON.stringify(this.httpRequest.token));
+    const userReceivedInfo = this.tokenHandler.decodeToken(this.httpRequest.token);
+    this.userService.storeLoggedInUserInfo(userReceivedInfo.sub, userReceivedInfo.teamRoles, loginResponse.isAuthorized);
+    this.addTokenToHttpHeader();
+    this.router.navigateByUrl('events');
   }
 
   /**
