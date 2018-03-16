@@ -17,7 +17,7 @@ export class SwitchToAdminComponent implements OnInit {
 
  /**
   * @author Nermeen Mattar
-  * @description logging in for an existing user
+  * @description switching a logged in user from member to admin
   * @param {ClientSideLoginInfo} loginFormValue
   */
  switchToAdmin(password: string) {
