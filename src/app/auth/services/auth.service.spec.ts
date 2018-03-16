@@ -9,6 +9,7 @@ import { UserServiceMock } from '../../shared/mocks/services/user.serivce.mock';
 import { UserService } from '../../core/services/user.service';
 
 import { AuthService } from './auth.service';
+import { UserMessagesService } from '../../core/services/user-messages.service';
 
 describe('AuthService', () => {
   beforeEach(() => {
@@ -20,9 +21,14 @@ describe('AuthService', () => {
           useClass: HttpRequestsServiceMock
         },
         {
+          provide: UserMessagesService,
+          useClass: UserServiceMock
+        },
+        {
           provide: TokenHandlerService,
           useClass: TokenHandlerServiceMock
-        }, {
+        },
+        {
           provide: UserService,
           useClass: UserServiceMock
         }

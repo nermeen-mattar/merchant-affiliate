@@ -2,19 +2,25 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from '../../shared/material/material.module';
 
+import { MaterialModule } from '../../shared/material/material.module';
 import { HttpRequestsService } from './http-requests.service';
-import { MatSnackBar } from '@angular/material';
+import { UserMessagesService } from './user-messages.service';
+import { UserServiceMock } from '../../shared/mocks/services/user.serivce.mock';
 
 describe('HttpRequestsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HttpRequestsService],
+      providers: [
+        HttpRequestsService,
+        {
+          provide: UserMessagesService,
+          useClass: UserServiceMock
+        }
+      ],
       imports: [
         HttpClientModule,
         RouterTestingModule,
-        MaterialModule,
         TranslateModule.forRoot()
       ]
     });

@@ -6,6 +6,8 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { AuthServiceMock } from '../../../shared/mocks/services/auth.service.mock';
 
 import { HeaderComponent } from './header.component';
+import { UserService } from './../../services/user.service';
+import { UserServiceMock } from '../../../shared/mocks/services/user.serivce.mock';
 
 
 describe('HeaderComponent', () => {
@@ -19,6 +21,10 @@ describe('HeaderComponent', () => {
         {
           provide: AuthService,
           useClass: AuthServiceMock
+        },
+        {
+          provide: UserService,
+          useClass: UserServiceMock
         }
       ],
       schemas: [

@@ -115,6 +115,7 @@ export class UserService {
    * @param {userType} string
    */
   setUserType(userType: string) {
+    userType = userType ? userType : ''; // a preventive check to prevent toLowerCase for causing errors.
     this.isAdmin.next(userType.toLowerCase() === 'admin');
     this.userType = userType;
   }
