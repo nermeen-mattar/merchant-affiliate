@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TeamsListComponent } from './teams-list/teams-list.component';
+import { TeamsListComponent } from './components/teams-list/teams-list.component';
 import { TeamsComponent } from './teams.component';
 
 const routes: Routes = [{
