@@ -31,7 +31,8 @@
           <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <mat-slide-toggle color="primary" (change)="toogleParticipationInEvent($event.checked, row.id)" [checked]="row.myParticipation && row.myParticipation.action !== 'cancel'">
+          <mat-slide-toggle color="primary" (change)="toogleParticipationInEvent($event.checked, row.id)" [disabled]="isPastEvents"
+            [checked]="row.myParticipation && row.myParticipation.action !== 'cancel'">
           </mat-slide-toggle>
         </mat-cell>
       </ng-container>
@@ -51,22 +52,21 @@
       </ng-container>
       <ng-container matColumnDef="status">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.STATUS' | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let row" > <span *ngIf="row.detailedParticipations">{{row.numOfParticipations}} / {{row.detailedParticipations.length}}</span></mat-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf="row.detailedParticipations">{{row.numOfParticipations}} / {{row.detailedParticipations.length}}</span>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="critical-value">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.CRITICAL_VALUE' | translate}} </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.criticalValue}} </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="action" *ngIf="displayAdminActions">
+      <ng-container matColumnDef="actions">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <mat-icon class="app-events__action" [routerLink]="row.id" color="primary">edit</mat-icon>
-          <mat-icon class="app-events__action" (click)="deleteEvent($event, row.id)" color="primary">delete</mat-icon>
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="event-info">
-        <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'DETAILS' | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let row">
+          <ng-container *ngIf="displayAdminActions">
+            <mat-icon class="app-events__action" [routerLink]="row.id" color="primary">edit</mat-icon>
+            <mat-icon class="app-events__action" (click)="deleteEvent($event, row.id)" color="primary">delete</mat-icon>
+          </ng-container>
           <mat-icon class="app-events__action" routerLink="details/{{row.id}}" color="primary">info</mat-icon>
         </mat-cell>
       </ng-container>
@@ -77,5 +77,5 @@
     <mat-spinner class="app-events__container__spinner" *ngIf="!eventsDataSource"></mat-spinner>
   </div>
   <tc-confirm-dialog *ngIf="showConfirmDialog" (confirmResponse)="onConfirmationReponse($event)" [confirmHeader]="'CONFIRM_DELETE_HEADER_TABLE'"
-  [confirmMessage]="'CONFIRM_DELETE_BODY_TABLE'"> </tc-confirm-dialog>
+    [confirmMessage]="'CONFIRM_DELETE_BODY_TABLE'"> </tc-confirm-dialog>
 </div>

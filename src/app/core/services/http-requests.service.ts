@@ -42,8 +42,16 @@ export class HttpRequestsService {
     });
   }
 
-  public httpGet(requestUrl: string): Observable < any > {
-    return this.http.get(this.baseUrl + requestUrl, this.requestOptions);
+  public httpGet(requestUrl: string, userMessages ?: UserMessages): Observable < any > {
+    return Observable.create(obs => {
+      this.http.get(this.baseUrl + requestUrl, this.requestOptions).subscribe(res => {
+          this.userMessagesService.showUserMessage(userMessages, 'success');
+          obs.next(res);
+        },
+        err => {
+          this.userMessagesService.showUserMessage(userMessages, 'fail');
+        });
+    });
   }
 
   public httpPost(requestUrl: string, requestParams ? : Object, userMessages ?: UserMessages): Observable < any > {
@@ -53,7 +61,6 @@ export class HttpRequestsService {
           obs.next(res);
         },
         err => {
-          userMessages = userMessages && userMessages.fail ? userMessages : {fail: 'Something went wrong'};
           this.userMessagesService.showUserMessage(userMessages, 'fail');
         });
     });
@@ -66,7 +73,6 @@ export class HttpRequestsService {
           this.userMessagesService.showUserMessage(userMessages, 'success');
         },
         err => {
-          userMessages = userMessages && userMessages.fail ? userMessages : {fail: 'Something went wrong'};
           this.userMessagesService.showUserMessage(userMessages, 'fail');
         });
     });
@@ -79,7 +85,7 @@ export class HttpRequestsService {
           this.userMessagesService.showUserMessage(userMessages, 'success');
         },
         err => {
-          userMessages = userMessages && userMessages.fail ? userMessages : {fail: 'Something went wrong'};
+
           this.userMessagesService.showUserMessage(userMessages, 'fail');
         });
     });

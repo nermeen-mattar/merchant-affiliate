@@ -5,6 +5,7 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MembersService } from '../../services/members.service';
 import { UserService } from '../../../core/services/user.service';
 import { TcMember } from '../../models/tc-member.model';
+
 @Component({
   selector: 'tc-member-form',
   templateUrl: './member-form.component.html',
@@ -29,28 +30,39 @@ export class MemberFormComponent implements OnInit {
    */
   initFormEditingOrCreating() {
     const memberIdVariable = this.route.snapshot.params['memberId'];
+    this.createMemberForm();
     if (memberIdVariable !== 'new') {
       this.memberId = memberIdVariable;
       this.leavePageIfWrongId();
       this.membersService.getMember(this.memberId).subscribe(res => {
-        this.createMemberForm(res);
+        this.updateMemberValues(res);
       });
-    } else {
-      this.createMemberForm();
     }
   }
 
   /**
    * @author Nermeen Mattar
-   * @description creates the member's form groups along with their form controls. With each created form control two things are passed;
-   * First the field's value which is in the recevied parameter in the case of editing, and default value in the case of creating.
+   * @description creates the member's form group along with form controls. With each created form control two things are passed;
+   * First the field's value which is initially empty, and second is the validators based on the validation rules.
+   */
+  createMemberForm() {
+    this.memberGroup = new FormGroup({
+      firstName: new FormControl( '', [Validators.required]),
+      lastName: new FormControl( '', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email])
+    });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description updates the member's form group with the received value.
    * @param {TcMember} memberValue
    */
-  createMemberForm(memberValue ? : TcMember) {
-    this.memberGroup = new FormGroup({
-      firstName: new FormControl(memberValue ? memberValue.firstname : '', [Validators.required]),
-      lastName: new FormControl(memberValue ? memberValue.lastname : '', [Validators.required]),
-      email: new FormControl(memberValue ? memberValue.email : '', [Validators.required, Validators.email])
+  updateMemberValues(memberValue ?: TcMember) {
+    this.memberGroup.setValue({
+      firstName: memberValue.firstname,
+      lastName: memberValue.lastname,
+      email: memberValue.email
     });
   }
 

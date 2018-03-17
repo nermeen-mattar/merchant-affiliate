@@ -10,6 +10,9 @@ export class UserMessagesService {
   constructor(public snackBar: MatSnackBar, private translateService: TranslateService) {}
 
   showUserMessage(userMessages: UserMessages, messageType) {
+    if (messageType === 'fail' && !(userMessages && userMessages.fail)) {
+      userMessages =  {fail: 'SOMETHING_WENT_WRONG'};
+    }
     if (userMessages && userMessages[messageType]) {
       this.translateService.get('USER_MESSAGES.'.concat(userMessages[messageType])).subscribe(
         translatedMessage => {

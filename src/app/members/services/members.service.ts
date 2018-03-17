@@ -67,7 +67,10 @@ export class MembersService {
    */
   getMember(memberId: number): Observable < any > {
     return this.httpRequestService.httpGet(
-      `teammembers/${memberId}`);
+      `teammembers/${memberId}`,
+      {
+        fail: 'MEMBER_GETTING_FAIL'
+      });
   }
 
   /**

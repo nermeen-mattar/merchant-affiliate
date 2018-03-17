@@ -15,7 +15,7 @@ import { UserService } from '../../../core/services/user.service';
 })
 
 export class EventsListComponent implements OnInit {
-  displayedColumns = ['event-info', 'id', 'date', 'time', 'event', 'status', 'critical-value'];
+  displayedColumns = ['id', 'date', 'time', 'event', 'status', 'critical-value', 'actions'];
   eventsDataSource: MatTableDataSource < TcEvent > ;
   userTeams: TcTeamInfo[];
   selectedTeam: TcTeamInfo;
@@ -26,9 +26,6 @@ export class EventsListComponent implements OnInit {
   showConfirmDialog: boolean;
   constructor(private eventsService: EventsService, private userService: UserService) {
     this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
-    if (this.displayAdminActions) {
-      this.displayedColumns.push('action');
-    }
     this.userTeams = this.userService.getUserTeams();
     this.selectedTeam = this.userService.getSelectedTeam();
     this.updateEvents(this.isPastEvents);
