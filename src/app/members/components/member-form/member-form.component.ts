@@ -58,7 +58,7 @@ export class MemberFormComponent implements OnInit {
    * @description updates the member's form group with the received value.
    * @param {TcMember} memberValue
    */
-  updateMemberValues(memberValue ?: TcMember) {
+  updateMemberValues(memberValue: TcMember) {
     this.memberGroup.setValue({
       firstName: memberValue.firstname,
       lastName: memberValue.lastname,
