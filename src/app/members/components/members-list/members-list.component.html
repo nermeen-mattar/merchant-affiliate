@@ -1,0 +1,47 @@
+<div class="app-members">
+  <div class="app-members__header">
+    <h3 class="app-members__header__title">
+      {{ 'MEMBER.MEMBERS' | translate}} <span *ngIf="membersDataSource"> ({{membersDataSource.data.length}})</span>
+      <button mat-mini-fab *ngIf="displayAdminActions" color="primary" class="app-members__action app-members__add" routerLink="new">
+    + </button>
+    </h3>
+    <div>
+      <mat-form-field>
+        <mat-select [(value)]="selectedTeam" (change)="updateMembers()">
+          <mat-option *ngFor="let team of userTeams" [value]="team">
+            {{ team.teamName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-form-field class="app-members__filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterString" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}">
+  </mat-form-field>
+  <div class="app-members__container">
+    <mat-table class="app-members__container__table" [dataSource]="membersDataSource" matSort>
+      <ng-container matColumnDef="member">
+        <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header>
+          {{'MEMBER.FIRST_NAME' | translate}} </mat-header-cell>
+        <mat-cell *matCellDef="let row" [ngClass]="!row.flag ? 'app-members__container__table__inactive-cell' : ''"> {{row.firstname}} {{row.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="mail">
+        <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'MEMBER.MEMBER' | translate}}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" [ngClass]="!row.flag ? 'app-members__container__table__inactive-cell' : ''"> {{row.member.mail}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action" *ngIf="displayAdminActions">
+        <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-cell style="text-align: right;" *matCellDef="let row">
+          <mat-icon class="app-members__action" (click)="changeMemberActivationStatus(row)" color="primary">{{row.flag ? "pause_circle_outline" : "play_circle_outline"}}</mat-icon>
+          <mat-icon class="app-members__action" [routerLink]="row.id" color="primary">edit</mat-icon>
+          <mat-icon class="app-members__action" (click)="deleteMember(row.id)" color="primary">delete</mat-icon>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    <mat-spinner class="app-members__container__spinner" *ngIf="!membersDataSource"></mat-spinner>
+  </div>
+</div>

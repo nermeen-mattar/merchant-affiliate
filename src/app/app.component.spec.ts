@@ -8,6 +8,8 @@ import { MaterialModule } from './shared/material/material.module';
 import { AuthService } from './auth/services/auth.service';
 import { AuthServiceMock } from './shared/mocks/services/auth.service.mock';
 import { AppComponent } from './app.component';
+import { UserService } from './core/services/user.service';
+import { UserServiceMock } from './shared/mocks/services/user.serivce.mock';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -28,7 +30,12 @@ describe('AppComponent', () => {
       providers: [{
         provide: AuthService,
         useClass: AuthServiceMock
-      }]
+      },
+      {
+        provide: UserService,
+        useClass: UserServiceMock
+      }
+    ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

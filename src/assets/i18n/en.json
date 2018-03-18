@@ -15,24 +15,28 @@
   "SAVE": "Save",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "USER_MESSAGES": {
-    "UNSUCCESSFUL_LOGIN": "Wrong username or password",
+    "SOMETHING_WENT_WRONG": "Something went wrong",
+    "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
+    "INCORRECT_ADMIN_PASSWRD": "Wrong admin password",
     "EVENT_DELETING_SUCCESS": "The event has been deleted successfuly",
     "EVENT_DELETING_FAIL": "Unable to delete event",
     "EVENT_CREATING_SUCCESS": "The event has been created successfuly",
-    "EVENT_CREATING_FAIL": "Unable to creat event",
+    "EVENT_CREATING_FAIL": "Unable to create event",
     "EVENT_UPDATING_SUCCESS": "The event has been updated successfuly",
     "EVENT_UPDATING_FAIL": "Unable to update event",
+    "EVENT_GETTING_FAIL": "Unable to get the event",
     "PARTICIPATION_CONFIRMED": "Participation confirmed",
     "CANCELATION_CONFIRMED": "Cancelation confirmed",
     "CHANGING_PARTICIPATION_FAIL": "Error Changing Participation",
     "MEMBER_DELETING_SUCCESS": "The member has been deleted successfuly",
     "MEMBER_DELETING_FAIL": "Unable to delete member",
     "MEMBER_CREATING_SUCCESS": "The member has been created successfuly",
-    "MEMBER_CREATING_FAIL": "Unable to creat member",
+    "MEMBER_CREATING_FAIL": "Unable to create member",
     "MEMBER_UPDATING_SUCCESS": "The member has been updated successfuly",
     "MEMBER_UPDATING_FAIL": "Unable to update member",
     "MEMBER_ACTIVATE_SUCCESS": "The member has been activated successfuly",
     "MEMBER_DEACTIVATE_SUCCESS": "The member has been deactivated successfuly",
+    "MEMBER_GETTING_FAIL": "Unable to get the member",
     "CHANGING_MEMBER_ACTIVATION_STATUS_FAIL": "Unable to change member activation status"
   },
   "LANGUAGE": {
@@ -67,6 +71,11 @@
       "TITLE": "Team overview and reporting",
       "TEXT": "Each team member has full transparency about the number of registrations and cancellations of his team mates. For example, club members remember each other for entering a helper mission, or to cancel a training session."
     }
+  },
+  "USER_SWITCHING": {
+    "SWITCH_TO_ADMIN": "Switch to admin",
+    "SWITCHING_MSG": "You are logged in as a team member. To authenticate as a team admin, please enter a admin password.",
+    "SWITCH": "Switch"
   },
   "EVENT": {
     "EVENTS": "Events",
@@ -157,7 +166,6 @@
   "agb_title": "General terms and conditions",
   "agb_p1": "Make team organisation for your team. The full potential of this tool will be in regulary apointments with a group of peaople where the organisator needs to know how many will take part.",
   "agb_p2": "This tool is in alpha version available at the moment. We are working continuously on improvements and new fewatures. Input is welcome. If you like to suport us you can buy us a coffee:",
-  "userAdmin_msg": "You are logged in as a team member. To authenticate as a team admin, please enter a admin password.",
   "userAdmin_password": "Password",
   "userAdmin_passwordRequired": "Password is required",
   "userAdmin_buttonLogin": "Login",

@@ -5,10 +5,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { MaterialModule } from './../shared/material/material.module';
 import { MembersService } from './services/members.service';
-import { MembersListComponent } from './members-list/members-list.component';
+import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersComponent } from './members.component';
 import { MembersRoutingModule } from './members-routing.module';
-import { MemberFormComponent } from './member-form/member-form.component';
+import { MemberFormComponent } from './components/member-form/member-form.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({

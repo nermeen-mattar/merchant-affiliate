@@ -34,7 +34,13 @@ const routes: Routes = [{
     path: 'teams',
     canActivate: [AuthGuard],
     loadChildren: './teams/teams.module#TeamsModule'
-  }, {
+  },
+  {
+    path: 'member-user',
+    canActivate: [AuthGuard],
+    loadChildren: './member-user/member-user.module#MemberUserModule'
+  },
+  {
     path: '**',
     redirectTo: 'events'
   }

@@ -83,7 +83,9 @@ export class EventsService {
    */
   getEvent(eventId: string): Observable < any > {
     return this.httpRequestService.httpGet(
-      `events/${eventId}`);
+      `events/${eventId}`, {
+        fail: 'EVENT_GETTING_FAIL'
+      });
   }
 
   /**
