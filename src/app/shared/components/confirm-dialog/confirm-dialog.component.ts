@@ -11,8 +11,7 @@ export class ConfirmDialogComponent implements OnInit {
   @Input() confirmMessage;
   @Input() confirmHeader;
   @Output() confirmResponse: EventEmitter<boolean> = new EventEmitter();
-  constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {}
 }
