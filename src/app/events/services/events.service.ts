@@ -47,7 +47,7 @@ export class EventsService {
    */
   toggleEventParticipation(isParticipated: boolean, eventId: string, teamMemberId: number): Observable < any > {
     const participationText = isParticipated ? 'participate' : 'cancel';
-    const toggleSuccessMessage = isParticipated ? 'PARTICIPATION_CONFIRMED' : 'CANCELATION_CONFIRMED';
+    const toggleSuccessMessage = isParticipated ? 'EVENT.EVENT_PARTICIPATION_CONFIRMED' : 'EVENT.EVENT_CANCELATION_CONFIRMED';
     return this.httpRequestService.httpPut(
       'particips', {
         eventId: eventId,
@@ -55,7 +55,7 @@ export class EventsService {
         teamMemberId: teamMemberId
       }, {
         success: toggleSuccessMessage,
-        fail: 'CHANGING_PARTICIPATION_FAIL'
+        fail: 'EVENT.EVENT_CHANGING_PARTICIPATION_FAIL'
       });
   }
 
@@ -68,8 +68,8 @@ export class EventsService {
   deleteEvent(eventId: string): Observable < any > {
     return this.httpRequestService.httpDelete(
       `events/${eventId}`, {
-        success: 'EVENT_DELETING_SUCCESS',
-        fail: 'EVENT_DELETING_FAIL'
+        success: 'EVENT.EVENT_DELETING_SUCCESS',
+        fail: 'EVENT.EVENT_DELETING_FAIL'
       });
   }
 
@@ -84,7 +84,7 @@ export class EventsService {
   getEvent(eventId: string): Observable < any > {
     return this.httpRequestService.httpGet(
       `events/${eventId}`, {
-        fail: 'EVENT_GETTING_FAIL'
+        fail: 'EVENT.EVENT_GETTING_FAIL'
       });
   }
 
@@ -98,8 +98,8 @@ export class EventsService {
   createEvent(teamId: number, event: TcEvent ): Observable < any > { // Event [] there are other info!
     return this.httpRequestService.httpPost(
       'events', {teamId: teamId, ...event}, {
-        success: 'EVENT_CREATING_SUCCESS',
-        fail: 'EVENT_CREATING_FAIL'
+        success: 'EVENT.EVENT_CREATING_SUCCESS',
+        fail: 'EVENT.EVENT_CREATING_FAIL'
       });
   }
 
@@ -114,8 +114,8 @@ export class EventsService {
   updateEvent(eventId: string, teamId: number, event: TcEvent ): Observable < any > {
     return this.httpRequestService.httpPut(
       `events/${eventId}`, event, {
-        success: 'EVENT_UPDATING_SUCCESS',
-        fail: 'EVENT_UPDATING_FAIL'
+        success: 'EVENT.EVENT_UPDATING_SUCCESS',
+        fail: 'EVENT.EVENT_UPDATING_FAIL'
       });
   }
 }

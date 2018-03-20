@@ -1,12 +1,14 @@
+import { first } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { MatTableDataSource} from '@angular/material';
+import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
 import { DatePipe } from '@angular/common';
 
 import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { UserService } from '../../../core/services/user.service';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'tc-events-list',
@@ -23,8 +25,8 @@ export class EventsListComponent implements OnInit {
   isPastEvents: boolean;
   displayAdminActions: boolean;
   filterString = '';
-  showConfirmDialog: boolean;
-  constructor(private eventsService: EventsService, private userService: UserService) {
+  confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
+  constructor(private eventsService: EventsService, private userService: UserService, public dialog: MatDialog) {
     this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
     this.userTeams = this.userService.getUserTeams();
     this.selectedTeam = this.userService.getSelectedTeam();
@@ -42,7 +44,6 @@ export class EventsListComponent implements OnInit {
   updateEvents(isPast: boolean) {
     this.isPastEvents = isPast;
     this.eventsDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.userService.setSelectedTeam(this.selectedTeam); // *** (need enhance) to update if the user changed the selected team from the menu
     this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe(({
       events = [],
       myTeamMemberId
@@ -51,6 +52,16 @@ export class EventsListComponent implements OnInit {
       this.addNumOfParticipationsToEvents(events);
       this.updateEventsDataSource(events);
     });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description When the user changes the selected team from the menu, it updates the selected team in user service with the newly
+   * selected team, and updates the displayed events to displays the events that belongs to the selected team.
+   */
+  changeSelectedTeam() {
+    this.userService.setSelectedTeam(this.selectedTeam);
+    this.updateEvents(false);
   }
 
   /**
@@ -104,16 +115,27 @@ export class EventsListComponent implements OnInit {
    */
 
   deleteEvent($event, eventId: string) {
-    // $event.stopPropagation();
-    // this.showConfirmDialog = true;
-    this.eventsService.deleteEvent(eventId).subscribe(res => {
-      this.eventsDataSource.data.splice(this.getIndexOfTargetEvent(eventId), 1);
-      this.triggerTableToRefreshData();
+    this.openConfirmationDialog();
+    this.confirmDialogRef.afterClosed().pipe(
+      first()
+    ).subscribe(confirmed => {
+      if (confirmed) {
+        this.eventsService.deleteEvent(eventId).subscribe(res => {
+          this.eventsDataSource.data.splice(this.getIndexOfTargetEvent(eventId), 1);
+          this.triggerTableToRefreshData();
+        });
+      }
     });
   }
 
-  onConfirmationReponse($event) {
-    this.showConfirmDialog = false;
+  openConfirmationDialog(): void {
+    this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
+      autoFocus: true,
+      data: {
+        dialogTitle: 'USER_MESSAGES.EVENT.EVENT_CONFIRM_DELETING_HEADER',
+        dialogMessage: 'USER_MESSAGES.EVENT.EVENT_CONFIRM_DELETING_BODY'
+      }
+    });
   }
 
   /**

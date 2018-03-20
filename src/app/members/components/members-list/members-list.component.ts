@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { MatTableDataSource} from '@angular/material';
+import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
 import { DatePipe } from '@angular/common';
+import { first } from 'rxjs/operators';
 
 import { MembersService } from '../../services/members.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { UserService } from '../../../core/services/user.service';
 import { TcMember } from '../../models/tc-member.model';
+import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'tc-members-list',
@@ -21,8 +23,8 @@ export class MembersListComponent implements OnInit {
   teamMemberId: number;
   displayAdminActions: boolean;
   filterString = '';
-
-  constructor(private membersService: MembersService, private userService: UserService) {
+  confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
+  constructor(private membersService: MembersService, private userService: UserService, public dialog: MatDialog) {
     this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
@@ -63,9 +65,26 @@ export class MembersListComponent implements OnInit {
    * @param {number} memberId
    */
   deleteMember(memberId: number) {
-    this.membersService.deleteMember(memberId).subscribe(res => {
-      this.membersDataSource.data.splice(this.getIndexOfTargetMember(memberId), 1);
-      this.triggerTableToRefreshData();
+    this.openConfirmationDialog();
+    this.confirmDialogRef.afterClosed().pipe(
+      first()
+    ).subscribe(confirmed => {
+      if (confirmed) {
+        this.membersService.deleteMember(memberId).subscribe(res => {
+          this.membersDataSource.data.splice(this.getIndexOfTargetMember(memberId), 1);
+          this.triggerTableToRefreshData();
+        });
+      }
+    });
+  }
+
+  openConfirmationDialog(): void {
+    this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
+      autoFocus: true,
+      data: {
+        dialogTitle: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_DELETING_HEADER',
+        dialogMessage: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_DELETING_BODY'
+      }
     });
   }
 
@@ -76,13 +95,21 @@ export class MembersListComponent implements OnInit {
    * @param {TcMember} member
    */
   changeMemberActivationStatus(member: TcMember) {
-    const updatedFlag: number = member.flag ? 0 : 1;
-    this.membersService.changeMemberActivationStatus({
-      flag: updatedFlag, /* backend expects number */
-      teamId: this.selectedTeam.teamId,
-      teamMemberId: member.id
-    }).subscribe(res => {
-      this.membersDataSource.data[this.getIndexOfTargetMember(member.id)].flag = updatedFlag;
+    this.openConfirmationDialog();
+    this.confirmDialogRef.afterClosed().pipe(
+      first()
+    ).subscribe(confirmed => {
+      if (confirmed) {
+        const updatedFlag: number = member.flag ? 0 : 1;
+        this.membersService.changeMemberActivationStatus({
+          flag: updatedFlag,
+          /* backend expects number */
+          teamId: this.selectedTeam.teamId,
+          teamMemberId: member.id
+        }).subscribe(res => {
+          this.membersDataSource.data[this.getIndexOfTargetMember(member.id)].flag = updatedFlag;
+        });
+      }
     });
   }
 

@@ -1,9 +1,21 @@
-.dialog {
-    z-index: 4;
-    .dialog-content {
-        max-width: 450px;
-        .btn {
-            width: 73px;
-        }
+@import "../../../../styles/toolkit/variables.scss";
+.app-dialog {
+  width: 40%;
+  min-width: 400px;
+  max-width: 800px;
+  &__header {
+    color: $tc-color-gray-shade-6;
+  }
+  &__content {
+    color: $tc-color-gray-shade-6;
+      padding-bottom: 1rem;
+  }
+  &__actions {
+    &__confirm {
+      color: white;
     }
+    &__cancel, &__confirm {
+      margin-left: auto;
+    }
+  }
 }

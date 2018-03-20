@@ -1,18 +1,11 @@
-
-
-<div class="dialog" *ngIf="!windowClicked" (window:click)="windowClicked = true">
-
-    <div class="dialog-content">
-        <div class="dialog-header p-bg">
-            ***{{windowClicked}} ***
-            {{confirmHeader | translate}}
-        </div>
-        <div class="dialog-body p-3">
-            <p> {{confirmMessage | translate}}</p>
-            <div class="m-auto text-center">
-                <button class="btn button" (click)="confirmResponse.emit(true)"> {{'OK' | translate}}</button>
-                <button class="btn btn-light mx-1" (click)="confirmResponse.emit(false)"> {{'CANCEL' | translate}}</button>
-            </div>
-        </div>
-    </div>
+<div class="app-dialog">
+  <h3 mat-dialog-title class="app-dialog__header">{{data.dialogTitle | translate}} </h3>
+  <div mat-dialog-content class="app-dialog__content">
+    <p> {{data.dialogMessage | translate}} </p>
+  </div>
+  <div mat-dialog-actions class="app-dialog__actions">
+    <button mat-raised-button class="app-dialog__actions__cancel" [mat-dialog-close]="false"> {{'CANCEL' | translate}}</button>
+    <button mat-raised-button color="primary" class="app-dialog__actions__confirm" [mat-dialog-close]="true" color="primary">
+    {{'CONFIRM' | translate}}</button>
+  </div>
 </div>

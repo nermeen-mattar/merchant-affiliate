@@ -34,4 +34,12 @@ export class TeamsListComponent implements OnInit {
     this.filterString = ''; // reset any string the user entered in the search input
     this.teamsDataSource = new MatTableDataSource(teams); // Assign the data to the data source for the table to render
   }
+
+  /**
+   * @author Nermeen Mattar
+   * @description deletes the target team from the teams list (only allowed for admin)
+   * @param {number} memberId
+   */
+  deleteTeam(teamId: number) { // to be implemented once supported from the backend side
+  }
 }
