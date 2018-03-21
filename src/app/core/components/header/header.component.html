@@ -25,7 +25,7 @@
     <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'LOGIN.LOGIN' | translate}}</span>
     </span>
-    <span class="app-header__menu__item" routerLink="/home/about" routerLinkActive="active">
+    <span class="app-header__menu__item" routerLinkActive="active">
       <span> {{'ABOUT.ABOUT' | translate}} </span>
     </span>
     <span class="app-header__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async)">

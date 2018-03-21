@@ -47,6 +47,7 @@ export class HttpRequestsService {
       this.http.get(this.baseUrl + requestUrl, this.requestOptions).subscribe(res => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
           obs.next(res);
+          obs.complete();
         },
         err => {
           this.userMessagesService.showUserMessage(userMessages, 'fail');
@@ -59,6 +60,7 @@ export class HttpRequestsService {
       this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe(res => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
           obs.next(res);
+          obs.complete();
         },
         err => {
           this.userMessagesService.showUserMessage(userMessages, 'fail');
@@ -71,6 +73,7 @@ export class HttpRequestsService {
       this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe(res => {
           obs.next(res);
           this.userMessagesService.showUserMessage(userMessages, 'success');
+          obs.complete();
         },
         err => {
           this.userMessagesService.showUserMessage(userMessages, 'fail');
@@ -83,6 +86,7 @@ export class HttpRequestsService {
       this.http.delete(this.baseUrl + requestUrl, this.requestOptions).subscribe(res => {
           obs.next(res);
           this.userMessagesService.showUserMessage(userMessages, 'success');
+          obs.complete();
         },
         err => {
 
