@@ -12,7 +12,7 @@
     </h3>
     <div>
       <mat-form-field>
-        <mat-select [(value)]="selectedTeam" (change)="updateEvents(false)">
+        <mat-select [(value)]="selectedTeam" (change)="changeSelectedTeam()">
           <mat-option *ngFor="let team of userTeams" [value]="team">
             {{ team.teamName }}
           </mat-option>
@@ -76,6 +76,4 @@
     </mat-table>
     <mat-spinner class="app-events__container__spinner" *ngIf="!eventsDataSource"></mat-spinner>
   </div>
-  <tc-confirm-dialog *ngIf="showConfirmDialog" (confirmResponse)="onConfirmationReponse($event)" [confirmHeader]="'CONFIRM_DELETE_HEADER_TABLE'"
-    [confirmMessage]="'CONFIRM_DELETE_BODY_TABLE'"> </tc-confirm-dialog>
 </div>

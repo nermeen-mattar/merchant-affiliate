@@ -20,7 +20,8 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatProgressSpinnerModule,
-  MatChipsModule
+  MatChipsModule,
+  MatDialogModule
 } from '@angular/material';
 
 
@@ -49,7 +50,8 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule {}

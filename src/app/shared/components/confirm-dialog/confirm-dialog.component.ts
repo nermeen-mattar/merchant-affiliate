@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 
 @Component({
   selector: 'tc-confirm-dialog',
@@ -9,10 +11,7 @@ export class ConfirmDialogComponent implements OnInit {
   @Input() confirmMessage;
   @Input() confirmHeader;
   @Output() confirmResponse: EventEmitter<boolean> = new EventEmitter();
-  windowClicked: boolean;
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

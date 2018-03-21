@@ -1,5 +1,5 @@
-import { MatSnackBar } from '@angular/material';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserMessages } from '../models/user-messages.model';

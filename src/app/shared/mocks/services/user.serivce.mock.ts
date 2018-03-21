@@ -40,4 +40,5 @@ export class UserServiceMock {
     }];
   }
   setUserTeams() {}
+  clearLoggedInUserInfo () {}
 }

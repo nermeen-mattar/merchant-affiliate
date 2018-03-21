@@ -36,8 +36,8 @@ export class MembersService {
   deleteMember(memberId: number): Observable < any > {
     return this.httpRequestService.httpDelete(
       `teammembers/${memberId}`, {
-        success: 'MEMBER_DELETING_SUCCESS',
-        fail: 'MEMBER_DELETING_FAIL'
+        success: 'MEMBER.MEMBER_DELETING_SUCCESS',
+        fail: 'MEMBER.MEMBER_DELETING_FAIL'
       });
   }
 
@@ -49,11 +49,11 @@ export class MembersService {
    * @memberof MembersService
    */
   changeMemberActivationStatus(activationStatusInfo: TcActivationStatusInfo) {
-    const changeStatusSuccessMessage = activationStatusInfo.flag ? 'MEMBER_ACTIVATE_SUCCESS' : 'MEMBER_DEACTIVATE_SUCCESS';
+    const changeStatusSuccessMessage = activationStatusInfo.flag ? 'MEMBER.MEMBER_ACTIVATE_SUCCESS' : 'MEMBER.MEMBER_DEACTIVATE_SUCCESS';
     return this.httpRequestService.httpPut(
       `teammembers`, activationStatusInfo, {
         success: changeStatusSuccessMessage,
-        fail: 'CHANGING_MEMBER_ACTIVATION_STATUS_FAIL'
+        fail: 'MEMBER.MEMBER_CHANGING_ACTIVATION_STATUS_FAIL'
       });
   }
 
@@ -69,7 +69,7 @@ export class MembersService {
     return this.httpRequestService.httpGet(
       `teammembers/${memberId}`,
       {
-        fail: 'MEMBER_GETTING_FAIL'
+        fail: 'MEMBER.MEMBER_GETTING_FAIL'
       });
   }
 
@@ -83,8 +83,8 @@ export class MembersService {
   createMember(teamId: number, member: TcMember): Observable < any > {
     return this.httpRequestService.httpPost(
       'members', {teamId: teamId, ...member}, {
-        success: 'MEMBER_CREATING_SUCCESS',
-        fail: 'MEMBER_CREATING_FAIL'
+        success: 'MEMBER.MEMBER_CREATING_SUCCESS',
+        fail: 'MEMBER.MEMBER_CREATING_FAIL'
       });
   }
 
@@ -99,8 +99,8 @@ export class MembersService {
   updateMember(memberId: number, teamId: number, member: TcMember): Observable < any > {
     return this.httpRequestService.httpPut(
       `members/${memberId}`, member, {
-        success: 'MEMBER_UPDATING_SUCCESS',
-        fail: 'MEMBER_UPDATING_FAIL'
+        success: 'MEMBER.MEMBER_UPDATING_SUCCESS',
+        fail: 'MEMBER.MEMBER_UPDATING_FAIL'
       });
   }
 }

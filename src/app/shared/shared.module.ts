@@ -8,10 +8,11 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 @NgModule({
   imports: [
     CommonModule,
-
+    MaterialModule,
     TranslateModule
   ],
   declarations: [ConfirmDialogComponent],
+  entryComponents: [ConfirmDialogComponent],
   exports: [
     MaterialModule,
     ConfirmDialogComponent
