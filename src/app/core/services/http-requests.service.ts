@@ -1,3 +1,4 @@
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response, RequestOptions, Headers } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
@@ -13,33 +14,32 @@ import { UserMessagesService } from './user-messages.service';
 
 @Injectable()
 export class HttpRequestsService {
-  private requestHeader: Headers;
-  private requestOptions: Object;
+  private requestHeader: HttpHeaders;
+  private requestOptions: {headers: HttpHeaders};
   private baseUrl: string;
-  public token: string;
 
   constructor(private http: HttpClient, private router: Router, private userMessagesService: UserMessagesService) {
-    this.setHttpRequestOptions();
     this.baseUrl = environment.baseUrl;
-    this.token = localStorage.getItem('token');
+    this.requestHeader = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    });
+    // this.setHttpRequestOptions();
   }
 
-  setHttpRequestOptions(token ? : string) {
-    if (token) {
-      this.token = token;
-      this.requestHeader = new Headers({
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token
-      });
-    } else {
-      this.requestHeader = new Headers({
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      });
-    }
-    this.requestOptions = new Object({
+  appendAuthorizationToRequestHeader(token) {
+    this.requestHeader =  this.requestHeader.append('Authorization', `Bearer ${token}`);
+    this.setHttpRequestOptions();
+  }
+  deleteAuthorizationInRequestHeader() {
+    this.requestHeader =  this.requestHeader.delete('Authorization');
+    this.setHttpRequestOptions();
+  }
+
+  setHttpRequestOptions() {
+    this.requestOptions = {
       headers: this.requestHeader
-    });
+    };
   }
 
   public httpGet(requestUrl: string, userMessages ?: UserMessages): Observable < any > {
@@ -91,16 +91,33 @@ export class HttpRequestsService {
     });
   }
 
-  private handleError(error: Response | any) {
-    console.log('Http-Request Error: ', error.status + ' - ' + error.statusText);
-    switch (error.status) {
-      case 500:
-        break;
-      case 401:
-        this.router.navigate(['']);
-        break;
-    }
-    return Observable.throw(error);
+  /*
+  // To be uncommented to check with Ahsan why handle error is never called eventhough I am forcing the request to return error by appending
+  // the word fail to the base url
+  public httpPost(requestUrl: string, requestParams ? : Object, userMessages ?: UserMessages): Observable < any > {
+      return this.http.post(this.baseUrl + 'fail' + requestUrl, requestParams, this.requestOptions).pipe(
+        map(res => {
+          this.userMessagesService.showUserMessage(userMessages, 'success');
+        },
+        catchError (err => this.handleError(err, userMessages))
+      ));
   }
+  */
 
+  private handleError(error: HttpErrorResponse, userMessages: UserMessages) {
+    this.userMessagesService.showUserMessage(userMessages, 'fail');
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('A client-side/network error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // return an ErrorObservable with a user-facing error message
+    return new ErrorObservable(
+      'Something bad happened; please try again later.');
+  }
 }
