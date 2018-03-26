@@ -103,7 +103,7 @@ export class EventFormComponent implements OnInit {
   getEventInBackendStructure(eventValue): TcEvent {
     const eventValueCopy: TcEvent = {
       eventName: eventValue.eventName,
-      date: format(eventValue.date, 'DD.MM.YYYY'),
+      date: format(eventValue.date, 'YYYY-MM-DD'),
       startTime: eventValue.eventTiming.startTime,
       endTime: eventValue.eventTiming.endTime,
       criticalValue: eventValue.criticalValue,
