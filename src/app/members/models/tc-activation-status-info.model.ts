@@ -1,5 +1,5 @@
 export interface TcActivationStatusInfo {
   flag: number;
   teamId: number;
-  teamMemberId;
+  teamMemberId: number;
 }
