@@ -28,6 +28,20 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## Running the app locally: 
+
+1) clone the repo
+2) run `npm install`
+3) run `npm start`
+
+## Adding a new language: 
+
+1) open src/assets/i18n folder
+2) create a new file and name it language code.ts e.g. en.ts
+3) copy the content from en.ts to the new language file then translate all the texts
+4) open src/app/core/constants/i18n.constants.ts file
+5) add the new language code and name to the available languages
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
