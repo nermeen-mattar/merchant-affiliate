@@ -7,6 +7,7 @@
     &__menu {
       width: 210px;
       margin-top: 2rem;
+      font-weight: 400;
       &__item {
         transition: background-color .3s;
         font-size: $tc-font-size-h5;
