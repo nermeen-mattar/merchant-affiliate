@@ -8,6 +8,7 @@
   "DETAILS": "Details",
   "YES": "Yes",
   "NO": "No",
+  "OUR": "Our",
   "LOG_OUT": "Log out",
   "CONTACT": "Contact",
   "IS_REQUIRED": "is Required",
@@ -153,8 +154,26 @@
   },
   "ABOUT": {
     "ABOUT": "About",
-    "p1": "This tool is as an alpha version available at the moment. It will be improved and extended continuously.",
-    "p2": "We are grateful for feedback especially after implementing new features: rene@team.center"
+    "SECTION1": {
+      "TITLE": "Who are we?",
+      "TEXT": "Hi. We are team.center. The first events management software you will actually like. We’d love to tell you a bit about us."
+    },
+    "SECTION2": {
+      "TITLE": "About Team.center",
+      "TEXT": "What we are team.center is a private sponsered web project from Switzerland. We are currently in Beta status and therefore a lot of improvements to improve the user experiance are ongoing."
+    },
+    "SECTION3": {
+      "TITLE": "How to support us?",
+      "TEXT": "You can support our project with buing us a coffee or even more :)",
+      "TEXT2": "And please like us un Facebook and we keep you membersr informed about our progress."
+    },
+    "SECTION4": {
+      "TITLE": "What is next?",
+      "TEXT": "Excel (CSV) Upload function to create multiple events and members per one click",
+      "TEXT2": "Ability for Admins to enable \"Event log\" view for the members",
+      "TEXT3": "Google maps for location entires - Other languages - Mobile Apps (Android & iOS)",
+      "TEXT4":  "We are grateful for feedback especially after implementing new features: rene@team.center"
+    }
   },
   "footer_buyACoffee": "Support this project with buying a coffee",
   "footer_LinksTitle": "Content",
