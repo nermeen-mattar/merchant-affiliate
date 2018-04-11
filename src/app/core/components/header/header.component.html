@@ -1,12 +1,12 @@
 <mat-toolbar color="primary" class="app-header">
-  <button mat-icon-button (click)="onMenuClick($event)" class="app-header__nav-toggler bg-white" color="primary">
+  <button mat-icon-button (click)="onMenuClick($event)" class="app-header__nav-toggler" color="primary">
     <mat-icon>menu</mat-icon>
   </button>
-  <div class="app-header__logo d-flex align-items-center" routerLink="/home">
+  <div class="app-header__logo" routerLink="/home">
     <span class="app-header__logo__icon"></span>
     <div class="app-header__logo__text">{{'TEAM_CENTER' | translate}}</div>
   </div>
-  <div class="app-header__menu font-w-bolder">
+  <div class="app-header__menu">
     <span class="app-header__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'EVENT.EVENTS' | translate}} </span>
     </span>
@@ -25,7 +25,7 @@
     <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'LOGIN.LOGIN' | translate}}</span>
     </span>
-    <span class="app-header__menu__item" routerLinkActive="active">
+    <span class="app-header__menu__item"  routerLink="/about" routerLinkActive="active">
       <span> {{'ABOUT.ABOUT' | translate}} </span>
     </span>
     <span class="app-header__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async)">

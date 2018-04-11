@@ -4,6 +4,7 @@
   background-color: #ff9800; // fix color="primary"
   &__menu {
     padding: 2% 15%;
+    font-weight:400;
     &__item {
       color: #eee;
       font-size: 0.9rem; // set it in a variable if may used in other places

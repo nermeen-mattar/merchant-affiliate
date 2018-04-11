@@ -16,6 +16,10 @@ const routes: Routes = [{
     loadChildren: './home/home.module#HomeModule'
   },
   {
+    path: 'about',
+    loadChildren: './about/about.module#AboutModule'
+  },
+  {
     path: 'auth',
     canActivate: [AuthGuard],
     loadChildren: './auth/auth.module#AuthModule',
