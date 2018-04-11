@@ -17,6 +17,7 @@ import { FieldValidatorsService } from './services/field-validators.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from '../auth/services/auth.service';
 import { TokenHandlerService } from '../auth/services/token-handler.service';
+import { AdminService } from './services/admin.service';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { TokenHandlerService } from '../auth/services/token-handler.service';
   ],
   providers: [
     UserService,
+    AdminService,
     AuthService,
     AuthGuard,
     TokenHandlerService,

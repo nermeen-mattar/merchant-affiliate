@@ -1,3 +1,4 @@
+import { AdminService } from './../../../core/services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
@@ -13,7 +14,7 @@ import { TeamRegisterInfo } from './../../models/team-register-info.model';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private adminService: AdminService) {}
 
   ngOnInit() {}
   selectedStepChanged(changeInfo: StepperSelectionEvent) {
@@ -23,14 +24,20 @@ export class RegisterComponent implements OnInit {
   }
 
   checkIfAdminAlreadyExist(firstStepValue) { // add typing
-   /* this.authService.isAdminExist({
-     email: firstStepValue.email
-    }).subscribe(
-      res => {
+    this.adminService.isAdminExist(firstStepValue.email).subscribe(
+    (res: {message: string}) => {
       console.log(res);
-    }, err => { // not catching the error
-      console.log(err);
-    });*/
+      if (res.message === 'not admin yet') {
+        console.log('user exist but not admin')
+      }
+    }, err => { // received an empty errorFields
+         console.log(err.error);
+      if (err.error.data.message === 'is already admin' || err.status === 'Conflict') {
+          console.log('adminAlreadyExist')
+      } else if(err.error.data.message === "user doesn't exists" || err.status === "Not Found") {
+          console.log('no such user at all  ')
+      }
+    });
   }
 
 /**

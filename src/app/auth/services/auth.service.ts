@@ -18,7 +18,7 @@ export class AuthService implements OnDestroy {
   $userLoggedIn: Observable < boolean > = this.isLoggedIn.asObservable();
   loginResponse: LoginResponse;
   constructor(
-    private httpRequest: HttpRequestsService,
+    private httpRequestsService: HttpRequestsService,
     private tokenHandler: TokenHandlerService, private router: Router,
     private userService: UserService,
     private userMessagesService: UserMessagesService
@@ -33,7 +33,7 @@ export class AuthService implements OnDestroy {
    * @param {ServerSideLoginInfo} userCredentials
    */
   login(userCredentials: ServerSideLoginInfo) {
-    this.httpRequest.httpPost('login', userCredentials, {
+    this.httpRequestsService.httpPost('login', userCredentials, {
         fail: 'INCORRECT_USERNAME_OR_PASSWORD'
       })
       .subscribe(
@@ -50,7 +50,7 @@ export class AuthService implements OnDestroy {
    */
   switchToAdmin(userCredentials: ServerSideLoginInfo) {
     const switchFailMsg = 'INCORRECT_ADMIN_PASSWRD';
-    this.httpRequest.httpPost('login', userCredentials, {
+    this.httpRequestsService.httpPost('login', userCredentials, {
         fail: switchFailMsg
       })
       .subscribe(
@@ -100,11 +100,11 @@ export class AuthService implements OnDestroy {
    */
   updateAuthorizationStates() {
     if (this.loginResponse) {
-      this.httpRequest.appendAuthorizationToRequestHeader(this.loginResponse.token);
+      this.httpRequestsService.appendAuthorizationToRequestHeader(this.loginResponse.token);
       this.userService.setLoggedInUserInfo(this.tokenHandler.decodeToken(this.loginResponse.token)); // this.loginResponse,
       this.isLoggedIn.next(true);
     } else {
-      this.httpRequest.deleteAuthorizationInRequestHeader();
+      this.httpRequestsService.deleteAuthorizationInRequestHeader();
       this.userService.clearLoggedInUserInfo();
       this.isLoggedIn.next(false);
     }
@@ -116,7 +116,7 @@ export class AuthService implements OnDestroy {
    * @returns {Observable<any>}
    */
   register(registrationInfo: ServerSideRegisterInfo): Observable < any > {
-    return this.httpRequest.httpPost('register', registrationInfo);
+    return this.httpRequestsService.httpPost('register', registrationInfo);
   }
 
   /**
