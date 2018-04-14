@@ -18,7 +18,8 @@
     <!-- I am using unlocalized text in the team section becuase the text are dummy for now-->
     <h1 class="app-about__team__heading">
       <mat-icon class="app-about__team__heading__icon">group</mat-icon>
-      <span class="app-about__team__heading__text"> {{'OUR' | translate}} {{'MEMBER.MEMBERS' | translate}}</span>
+      <span class="app-about__team__heading__text"> {{'MEMBER.OUR_MEMBERS' | translate}}
+      </span>
     </h1>
     <div class="app-about__team__members__container">
       <div class="app-about__team__member">
@@ -91,13 +92,13 @@
     </div>
     <div class="app-about__section">
       <h3 class="app-about__section__title"> {{'ABOUT.SECTION4.TITLE' | translate}}</h3>
-      <mat-list class="app-about__section__content">
-        <mat-list-item>{{'ABOUT.SECTION4.TEXT' | translate}}</mat-list-item>
+      <div class="app-about__section__content">
+        <div class="app-about__section__content__text">{{'ABOUT.SECTION4.TEXT' | translate}}</div>
         <mat-divider></mat-divider>
-        <mat-list-item>{{'ABOUT.SECTION4.TEXT2' | translate}}</mat-list-item>
+        <div class="app-about__section__content__text">{{'ABOUT.SECTION4.TEXT2' | translate}}</div>
         <mat-divider></mat-divider>
-        <mat-list-item>{{'ABOUT.SECTION4.TEXT3' | translate}}</mat-list-item>
-      </mat-list>
+        <div class="app-about__section__content__text">{{'ABOUT.SECTION4.TEXT3' | translate}}</div>
+      </div>
     </div>
     <div class="app-about__section">
       {{'ABOUT.SECTION4.TEXT4' | translate}}

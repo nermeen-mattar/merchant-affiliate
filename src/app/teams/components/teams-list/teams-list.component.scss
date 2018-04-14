@@ -11,13 +11,13 @@
       font-weight: $tc-font-weight-4;
   }
   &__filter {
+    min-width: 200px;
     width: 50%;
   }
   &__container {
     overflow-x: auto;
     &__table {
       margin-top: 2rem;
-      min-width: 640px;
       overflow-x: auto;
       &__header-cell {
         font-weight: $tc-font-weight-6;

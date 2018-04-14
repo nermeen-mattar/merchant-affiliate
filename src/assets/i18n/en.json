@@ -8,7 +8,6 @@
   "DETAILS": "Details",
   "YES": "Yes",
   "NO": "No",
-  "OUR": "Our",
   "LOG_OUT": "Log out",
   "CONTACT": "Contact",
   "IS_REQUIRED": "is Required",
@@ -18,8 +17,13 @@
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
-    "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
-    "INCORRECT_ADMIN_PASSWRD": "Wrong admin password",
+    "REGISTER": {
+      "UNABLE_TO_REGISTER": "Unable to register a new team"
+    },
+    "LOGIN": {
+      "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
+      "INCORRECT_ADMIN_PASSWRD": "Wrong admin password"
+    },
     "EVENT": {
       "EVENT_DELETING_SUCCESS": "The event has been deleted successfuly",
       "EVENT_DELETING_FAIL": "Unable to delete event",
@@ -137,10 +141,12 @@
     "MAIL": "Mail",
     "EDIT_MEMBER": "Edit member",
     "CREATE_MEMBER": "Create member",
-    "ADD_MYSELF_AS_MEMBER": "Add myself as a member"
+    "ADD_MYSELF_AS_MEMBER": "Add myself as a member",
+    "OUR_MEMBERS": "Our members"
   },
   "REGISTER": {
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "ADMIN_ALREADY_EXIST": "You are already a registered admin. Please enter your admin password to create the team"
   },
   "LOGIN": {
     "LOGIN": "Login",
@@ -165,7 +171,7 @@
     "SECTION3": {
       "TITLE": "How to support us?",
       "TEXT": "You can support our project with buing us a coffee or even more :)",
-      "TEXT2": "And please like us un Facebook and we keep you membersr informed about our progress."
+      "TEXT2": "We would highly appreciate liking us on Facebook this way we can keep you members informed about our progress."
     },
     "SECTION4": {
       "TITLE": "What is next?",
