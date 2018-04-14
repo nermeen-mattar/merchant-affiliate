@@ -1,55 +1,55 @@
 <mat-card class="app-register">
   <mat-card-title class="text-center">{{ 'REGISTER.REGISTER' | translate }} </mat-card-title>
   <mat-card-content>
-    <mat-vertical-stepper linear="true" (selectionChange)= "selectedStepChanged($event)">
+    <mat-vertical-stepper [ngClass]="{'app-register__checking-admin': adminAlreadyExist}" [selectedIndex]="currentStep"
+      linear="true" (selectionChange)="selectedStepChanged($event)">
       <mat-step label="{{ 'TEAM.TEAM_DETAILS' | translate }}" [stepControl]="registerFirstStepForm">
-        <form novalidate #registerFirstStepForm="ngForm">
-          <div class="app-register__section">
-            <mat-form-field class="app-register__section__field">
+        <form novalidate #registerFirstStepForm="ngForm"  class="app-register__form">
+            <mat-form-field class="app-register__form__field">
               <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" ngModel #teamName="ngModel" name="teamName" required type="text">
-              <mat-icon class="app-register__section__field__icon" matPrefix>supervisor_account</mat-icon>
+              <mat-icon class="app-register__form__field__icon" matPrefix>supervisor_account</mat-icon>
               <mat-error *ngIf="teamName.invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{ 'IS_REQUIRED' | translate }}</mat-error>
             </mat-form-field>
-            <mat-form-field class="app-register__section__field">
+            <mat-form-field class="app-register__form__field">
               <input matInput placeholder="{{ 'TEAM.TEAM_PASSWORD' | translate }}" ngModel #teamPassword="ngModel" name="teamPassword"
                 required type="password">
-              <mat-icon class="app-register__section__field__icon" matPrefix>lock</mat-icon>
+              <mat-icon class="app-register__form__field__icon" matPrefix>lock</mat-icon>
               <mat-error *ngIf="teamPassword.invalid">{{ 'TEAM.TEAM_PASSWORD' | translate }} {{ 'IS_REQUIRED' | translate }}</mat-error>
             </mat-form-field>
-            <mat-form-field class="app-register__section__field">
+            <mat-form-field class="app-register__form__field">
               <input matInput placeholder="{{ 'EMAIL' | translate }}" ngModel #email="ngModel" name="email" required email type="text">
-              <mat-icon class="app-register__section__field__icon" matPrefix>email</mat-icon>
+              <mat-icon class="app-register__form__field__icon" matPrefix>email</mat-icon>
               <mat-error *ngIf="email.invalid"> {{ 'EMAIL' | translate }} {{'IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
-          </div>
         </form>
       </mat-step>
       <mat-step label="{{ 'ADMIN.ADMIN_DETAILS' | translate }}" [stepControl]="registerSecondStepForm">
-        <form novalidate #registerSecondStepForm="ngForm">
-
-          <div class="app-register__section">
-            <mat-form-field class="app-register__section__field">
-              <input matInput placeholder="{{ 'MEMBER.FIRST_NAME' | translate }}" ngModel #firstName="ngModel" name="firstName" required
-                type="text">
-              <mat-icon class="app-register__section__field__icon" matPrefix>person_circle</mat-icon>
-              <mat-error *ngIf="firstName.invalid"> {{ 'MEMBER.FIRST_NAME' | translate }} {{'IS_REQUIRED' | translate}}</mat-error>
-            </mat-form-field>
-            <mat-form-field class="app-register__section__field">
-              <input matInput placeholder="{{ 'MEMBER.LAST_NAME' | translate }}" ngModel #lastName="ngModel" name="lastName" required type="text">
-              <mat-icon class="app-register__section__field__icon" matPrefix>person_circle</mat-icon>
-              <mat-error *ngIf="lastName.invalid"> {{ 'MEMBER.LAST_NAME' | translate }} {{IS_REQUIRED | translate}}</mat-error>
-            </mat-form-field>
-            <mat-form-field class="app-register__section__field">
-              <input matInput placeholder="{{ 'ADMIN.ADMIN_PASSWORD' | translate }}" ngModel #adminPassword="ngModel" name="adminPassword"
-                required type="password">
-              <mat-icon class="app-register__section__field__icon" matPrefix>lock</mat-icon>
-              <mat-error *ngIf="adminPassword.invalid"> {{ 'ADMIN.ADMIN_PASSWORD' | translate }} {{IS_REQUIRED | translate}}</mat-error>
-            </mat-form-field>
+        <form novalidate #registerSecondStepForm="ngForm" class="app-register__form">
+          <div class="app-register__form__admin-exist-message" *ngIf="adminAlreadyExist">
+            {{ 'REGISTER.ADMIN_ALREADY_EXIST' | translate }}
           </div>
+          <mat-form-field *ngIf="!adminAlreadyExist" class="app-register__form__field">
+            <input matInput placeholder="{{ 'MEMBER.FIRST_NAME' | translate }}" ngModel #firstName="ngModel" name="firstName" required
+              type="text">
+            <mat-icon class="app-register__form__field__icon" matPrefix>person_circle</mat-icon>
+            <mat-error *ngIf="firstName.invalid"> {{ 'MEMBER.FIRST_NAME' | translate }} {{'IS_REQUIRED' | translate}}</mat-error>
+          </mat-form-field>
+          <mat-form-field *ngIf="!adminAlreadyExist" class="app-register__form__field">
+            <input matInput placeholder="{{ 'MEMBER.LAST_NAME' | translate }}" ngModel #lastName="ngModel" name="lastName" required type="text">
+            <mat-icon class="app-register__form__field__icon" matPrefix>person_circle</mat-icon>
+            <mat-error *ngIf="lastName.invalid"> {{ 'MEMBER.LAST_NAME' | translate }} {{IS_REQUIRED | translate}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="app-register__form__field">
+            <input matInput placeholder="{{ 'ADMIN.ADMIN_PASSWORD' | translate }}" ngModel #adminPassword="ngModel" name="adminPassword"
+              required type="password">
+            <mat-icon class="app-register__form__field__icon" matPrefix>lock</mat-icon>
+            <mat-error *ngIf="adminPassword.invalid"> {{ 'ADMIN.ADMIN_PASSWORD' | translate }} {{IS_REQUIRED | translate}}</mat-error>
+          </mat-form-field>
         </form>
       </mat-step>
     </mat-vertical-stepper>
-    <button mat-raised-button color="primary" class="app-register__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid" (click)="register(registerFirstStepForm.value, registerSecondStepForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
-
+    <mat-spinner *ngIf="adminAlreadyExist" class="app-register__spinner"></mat-spinner>
+    <button mat-raised-button color="primary" class="app-register__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
+      (click)="register(registerFirstStepForm.value, registerSecondStepForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
   </mat-card-content>
 </mat-card>

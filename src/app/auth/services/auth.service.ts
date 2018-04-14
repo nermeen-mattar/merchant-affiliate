@@ -11,7 +11,6 @@ import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { ServerSideLoginInfo } from '../models/server-side-login-info.mdel';
 import { ServerSideRegisterInfo } from '../models/server-side-register-info.model';
-
 @Injectable()
 export class AuthService implements OnDestroy {
   isLoggedIn: BehaviorSubject < boolean > = new BehaviorSubject(false);
@@ -34,7 +33,7 @@ export class AuthService implements OnDestroy {
    */
   login(userCredentials: ServerSideLoginInfo) {
     this.httpRequestsService.httpPost('login', userCredentials, {
-        fail: 'INCORRECT_USERNAME_OR_PASSWORD'
+        fail: 'LOGIN.INCORRECT_USERNAME_OR_PASSWORD'
       })
       .subscribe(
         res => {
@@ -45,11 +44,13 @@ export class AuthService implements OnDestroy {
 
   /**
    * @author Nermeen Mattar
-   * @description sends a post request to the server holding admin credentials to switch from member view to admin vie
+   * @description sends a post request to the server holding admin credentials to switch from the member view to the admin view, the backend
+   * will either respond with an error in case the password is wrong. Or respond with a result if the password is either a member or an
+   * admin password
    * @param {ServerSideLoginInfo} userCredentials
    */
   switchToAdmin(userCredentials: ServerSideLoginInfo) {
-    const switchFailMsg = 'INCORRECT_ADMIN_PASSWRD';
+    const switchFailMsg = 'LOGIN.INCORRECT_ADMIN_PASSWRD';
     this.httpRequestsService.httpPost('login', userCredentials, {
         fail: switchFailMsg
       })
@@ -113,10 +114,17 @@ export class AuthService implements OnDestroy {
   /**
    * @description sends a post request holding user entered info to the server to register a new user
    * @param {ServerSideRegisterInfo} registrationInfo
-   * @returns {Observable<any>}
    */
-  register(registrationInfo: ServerSideRegisterInfo): Observable < any > {
-    return this.httpRequestsService.httpPost('register', registrationInfo);
+  register(registrationInfo: ServerSideRegisterInfo) {
+    this.httpRequestsService.httpPost('register', registrationInfo, {
+      fail: 'UNABLE_TO_REGISTER'
+    }).subscribe(
+      res => {
+        this.login({
+          username: registrationInfo.email,
+          password: registrationInfo.adminpassword
+        });
+      });
   }
 
   /**

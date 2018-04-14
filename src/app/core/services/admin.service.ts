@@ -7,16 +7,14 @@ export class AdminService {
 
   constructor(private httpRequestService: HttpRequestsService) { }
 
-
-  // add desc - try to find better name for function - try to find better place for func -> maybe create admin service
   /**
    * @author Nermeen Mattar
-   * @description checks whether the received email belongs to an admin. There are three cases for the response; first, the email might
-   * not belong to any user. Second, the email might belong to a user who is not an admin. Third, the email might belong to an admin user.
+   * @description Uses the httpRequestsSevrice to send a post request to the backend to check whether the received email belongs to an
+   * already existed admin. Note that an object of type UserMessages is being sent with an empty fail property to disable defulat error.
    * @param emailObj
    */
   isAdminExist(email: string): Observable < any > {
-    return this.httpRequestService.httpPost('teamadmins/check', {email: email});
+    return this.httpRequestService.httpPost('teamadmins/check', {email: email}, {fail: 'NO_ERROR_MESSAGE'});
   }
 
 }

@@ -1,11 +1,12 @@
 import { AdminService } from './../../../core/services/admin.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 import { HttpRequestsService } from '../../../core/services/http-requests.service';
 import { AuthService } from '../../services/auth.service';
 import { AdminRegisterInfo } from './../../models/admin-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
+import { MatHorizontalStepper, MatVerticalStepper } from '@angular/material';
 
 @Component({
   selector: 'tc-register',
@@ -13,7 +14,9 @@ import { TeamRegisterInfo } from './../../models/team-register-info.model';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  adminAlreadyExist = false;
+  currentStep = 0;
+  displayLoader = false;
   constructor(private authService: AuthService, private adminService: AdminService) {}
 
   ngOnInit() {}
@@ -23,20 +26,27 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  checkIfAdminAlreadyExist(firstStepValue) { // add typing
+  /**
+   * @author Nermeen Mattar
+   * @description uses the admin service to check if the admin is already exist. The response has three cases; first, the email might
+   * not belong to any user. Second, the email might belong to a user who is not an admin. Third, the email might belong to an admin user.
+   * For the first and the third cases the backend returns the result inside an error whereas for the second case the result is inside the
+   * response.
+   * @param firstStepValue
+   */
+  checkIfAdminAlreadyExist(firstStepValue: TeamRegisterInfo) { // add typing
+    this.adminAlreadyExist = true;
     this.adminService.isAdminExist(firstStepValue.email).subscribe(
-    (res: {message: string}) => {
-      console.log(res);
-      if (res.message === 'not admin yet') {
-        console.log('user exist but not admin')
+      res => { // user exist but not admin
+        this.adminAlreadyExist = false;
+        this.adminAlreadyExist = false;
+    }, err => {
+      if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
+          this.adminAlreadyExist = true;
+      } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
+          this.adminAlreadyExist = false;
       }
-    }, err => { // received an empty errorFields
-         console.log(err.error);
-      if (err.error.data.message === 'is already admin' || err.status === 'Conflict') {
-          console.log('adminAlreadyExist')
-      } else if(err.error.data.message === "user doesn't exists" || err.status === "Not Found") {
-          console.log('no such user at all  ')
-      }
+      this.adminAlreadyExist = false;
     });
   }
 
@@ -55,11 +65,6 @@ register(teamInfo: TeamRegisterInfo, adminInfo: AdminRegisterInfo) {
       firstname: adminInfo.firstName,
       lastname: adminInfo.lastName,
       adminpassword: adminInfo.adminPassword
-    }).subscribe((res) => {
-      this.authService.login({
-        username: teamInfo.email,
-        password: adminInfo.adminPassword
-      });
     });
   }
 }
