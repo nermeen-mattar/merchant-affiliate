@@ -22,6 +22,7 @@
       padding: 2rem 0;
       /* adds space between tables when they stack on top of each other (on small devices) */
       &__filter {
+        min-width: 200px;
         width: 50%;
       }
       &__header {

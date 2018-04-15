@@ -26,6 +26,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap:wrap;
     &__title {
       color: $tc-color-gray-shade-6;
       font-weight: $tc-font-weight-4;
@@ -39,16 +40,20 @@
     }
   }
   &__filter {
+    min-width: 200px;
     width: 50%;
   }
   &__container {
     overflow-x: auto;
     &__table {
-      min-width: 640px;
       overflow-x: auto;
       &__header-cell {
         font-weight: $tc-font-weight-6;
         font-size: $tc-font-size-h5;
+      }
+      &__header-cell, &__content-cell {
+        word-wrap: unset;
+        text-overflow: ellipsis;
       }
     }
     &__spinner {

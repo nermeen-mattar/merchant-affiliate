@@ -52,6 +52,7 @@ export class HttpRequestsService {
         },
         err => {
           this.userMessagesService.showUserMessage(userMessages, 'fail');
+          obs.error(err);
         });
     });
   }
@@ -66,6 +67,7 @@ export class HttpRequestsService {
         },
         err => {
           this.userMessagesService.showUserMessage(userMessages, 'fail');
+          obs.error(err);
         });
     });
   }
@@ -80,6 +82,7 @@ export class HttpRequestsService {
         },
         err => {
           this.userMessagesService.showUserMessage(userMessages, 'fail');
+          obs.error(err);
         });
     });
   }
@@ -93,8 +96,8 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
-
           this.userMessagesService.showUserMessage(userMessages, 'fail');
+          obs.error(err);
         });
     });
   }
