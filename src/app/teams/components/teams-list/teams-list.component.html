@@ -20,7 +20,7 @@
               {{(role === 'admin' ? 'ADMIN.ADMIN' : 'MEMBER.MEMBER') | translate}}
             </mat-chip>
             <!--  add displayAdminActions to the ngIf if the user must be logged in as an admin -->
-            <mat-chip *ngIf="row.roles && row.roles.length === 1 && row.roles[0]= 'admin'" routerLink="/members/list/new">
+            <mat-chip *ngIf="row.roles && row.roles.length === 1 && row.roles[0] === 'admin'" routerLink="/members/list/new">
               {{ 'MEMBER.ADD_MYSELF_AS_MEMBER' | translate }}
             </mat-chip>
           </mat-chip-list>
