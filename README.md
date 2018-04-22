@@ -47,6 +47,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 - simply run: ./deploy-frontend.sh
 
 this will:
+
 - build the app in ./dist
 
 - tar it,
