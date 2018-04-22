@@ -44,17 +44,19 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Deploy on dev
 
-- simply run:
-  ```bash
-  ./deploy-frontend.sh
+- simply run: ./deploy-frontend.sh
 
-  # this will:
-  # - build the app in ./dist
-  # - tar it,
-  # - copy it to the server
-  # - create a backup of the existing deployed app
-  # - extract the tar into the correct folder
-  ```
+this will:
+- build the app in ./dist
+
+- tar it,
+
+- copy it to the server
+
+- create a backup of the existing deployed app
+
+- extract the tar into the correct folder
+
 
 ## Adding a new language:
 
