@@ -7,22 +7,20 @@ import { AuthService } from '../../services/auth.service';
 import { AdminRegisterInfo } from './../../models/admin-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
 import { MatHorizontalStepper, MatVerticalStepper } from '@angular/material';
-
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  adminAlreadyExist = false;
-  currentStep = 0;
-  displayLoader = false;
+  // currentStep = 0;
+  userType = 'new'; /* possible values: 'admin' 'member' 'new'. Default value is 'new' */
   constructor(private authService: AuthService, private adminService: AdminService) {}
 
   ngOnInit() {}
   selectedStepChanged(changeInfo: StepperSelectionEvent) {
     if (changeInfo.previouslySelectedIndex === 0) {
-      this.checkIfAdminAlreadyExist(changeInfo.previouslySelectedStep.stepControl.value);
+      this.checkUserType(changeInfo.previouslySelectedStep.stepControl.value);
     }
   }
 
@@ -34,36 +32,39 @@ export class RegisterComponent implements OnInit {
    * response.
    * @param firstStepValue
    */
-  checkIfAdminAlreadyExist(firstStepValue: TeamRegisterInfo) { // add typing
-    this.adminAlreadyExist = true;
+  checkUserType(firstStepValue: TeamRegisterInfo) { // add typing
+    this.userType = null;
     this.adminService.isAdminExist(firstStepValue.email).subscribe(
       res => { // user exist but not admin
-        this.adminAlreadyExist = false;
-        this.adminAlreadyExist = false;
-    }, err => {
-      if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
-          this.adminAlreadyExist = true;
-      } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
-          this.adminAlreadyExist = false;
-      }
-      this.adminAlreadyExist = false;
-    });
+        this.userType = 'member';
+      }, err => {
+        if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
+          this.userType = 'admin';
+
+        } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
+          this.userType = 'new';
+
+        }
+      });
   }
 
-/**
- * @author Nermeen Mattar
- * @description registering a new user, once registration is successful the new user will get logged in using credentials received from the
- * server
- * @param {TeamRegisterInfo} teamInfo
- * @param {AdminRegisterInfo} adminInfo
- */
-register(teamInfo: TeamRegisterInfo, adminInfo: AdminRegisterInfo) {
-    this.authService.register({
+  /**
+   * @author Nermeen Mattar
+   * @description registering a new user, once registration is successful the new user will get logged in using credentials received from
+   * the server
+   * @param {TeamRegisterInfo} teamInfo
+   * @param {AdminRegisterInfo} adminInfo
+   */
+  register(teamInfo: TeamRegisterInfo, adminInfo: AdminRegisterInfo) {
+    const newUserInfo = this.userType !== 'new' ? {} : {
+      firstname: adminInfo.firstName,
+      lastname: adminInfo.lastName
+    };
+    this.authService.register( {
+      ...newUserInfo,
       teamname: teamInfo.teamName,
       teampassword: teamInfo.teamPassword,
       email: teamInfo.email,
-      firstname: adminInfo.firstName,
-      lastname: adminInfo.lastName,
       adminpassword: adminInfo.adminPassword
     });
   }
