@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 import { LoginResponse } from './../models/login-response.model';
 import { UserMessagesService } from './../../core/services/user-messages.service';
@@ -31,14 +31,14 @@ export class AuthService implements OnDestroy {
    * @description sends a post request to the server holding user credentials to login an existing user.
    * @param {ServerSideLoginInfo} userCredentials
    */
-  login(userCredentials: ServerSideLoginInfo) {
-    this.httpRequestsService.httpPost('login', userCredentials, {
+  login(userCredentials: ServerSideLoginInfo): Observable <any> {
+    return this.httpRequestsService.httpPost('login', userCredentials, {
         fail: 'LOGIN.INCORRECT_USERNAME_OR_PASSWORD'
       })
-      .subscribe(
+      .pipe(map(
         res => {
           this.onLoginRequestSuccess(res);
-        }
+        })
       );
   }
 

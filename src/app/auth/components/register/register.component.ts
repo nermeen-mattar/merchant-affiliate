@@ -1,19 +1,19 @@
-import { AdminService } from './../../../core/services/admin.service';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { MatHorizontalStepper, MatVerticalStepper } from '@angular/material';
 
 import { HttpRequestsService } from '../../../core/services/http-requests.service';
+import { AdminService } from './../../../core/services/admin.service';
 import { AuthService } from '../../services/auth.service';
 import { AdminRegisterInfo } from './../../models/admin-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
-import { MatHorizontalStepper, MatVerticalStepper } from '@angular/material';
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  // currentStep = 0;
   userType = 'new'; /* possible values: 'admin' 'member' 'new'. Default value is 'new' */
   registerSuccess = false;
   displaySpinner = false;
@@ -54,8 +54,9 @@ export class RegisterComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description registering a new user, once registration is successful the new user will get logged in using credentials received from
-   * the server
+   * @description calling the register function with different parameters depending on the case, as the new user is the only one who sends
+   * the first and last names. Once register is successful a registration success message will be displayed to the new user while the
+   * admin/member users will get logged in using credentials received from.
    * @param {TeamRegisterInfo} teamInfo
    * @param {AdminRegisterInfo} adminInfo
    */
@@ -71,16 +72,29 @@ export class RegisterComponent implements OnInit {
       teampassword: teamInfo.teamPassword,
       email: teamInfo.email,
       adminpassword: adminInfo.adminPassword
-    }).subscribe(res => {
-      this.registerSuccess = true;
-      if (this.userType !== 'new' ) {
-        this.authService.login({
-          username: teamInfo.email,
-          password: adminInfo.adminPassword
-        });
+    }).subscribe(registerRes => {
+      if (this.userType !== 'new') {
+        this.adminOrMemberLogin(teamInfo.email, adminInfo.adminPassword);
       } else {
+        this.registerSuccess = true;
         this.displaySpinner = false;
       }
+    });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description this function uses the member/admin user and password to login, if the password is wrong the spinner will be register form
+   * will appear again
+   * @param {string} adminEmail
+   * @param {string} adminPassword
+   */
+  adminOrMemberLogin(adminEmail: string, adminPassword: string) {
+    this.authService.login({
+      username: adminEmail,
+      password: adminPassword
+    }).subscribe(loginRes => {}, err => {
+      this.displaySpinner = false;
     });
   }
 }
