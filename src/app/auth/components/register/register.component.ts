@@ -15,6 +15,8 @@ import { MatHorizontalStepper, MatVerticalStepper } from '@angular/material';
 export class RegisterComponent implements OnInit {
   // currentStep = 0;
   userType = 'new'; /* possible values: 'admin' 'member' 'new'. Default value is 'new' */
+  registerSuccess = false;
+  displaySpinner = false;
   constructor(private authService: AuthService, private adminService: AdminService) {}
 
   ngOnInit() {}
@@ -33,11 +35,13 @@ export class RegisterComponent implements OnInit {
    * @param firstStepValue
    */
   checkUserType(firstStepValue: TeamRegisterInfo) { // add typing
-    this.userType = null;
+    this.displaySpinner = true;
     this.adminService.isAdminExist(firstStepValue.email).subscribe(
       res => { // user exist but not admin
+        this.displaySpinner = false;
         this.userType = 'member';
       }, err => {
+        this.displaySpinner = false;
         if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
           this.userType = 'admin';
 
@@ -56,16 +60,27 @@ export class RegisterComponent implements OnInit {
    * @param {AdminRegisterInfo} adminInfo
    */
   register(teamInfo: TeamRegisterInfo, adminInfo: AdminRegisterInfo) {
+    this.displaySpinner = true;
     const newUserInfo = this.userType !== 'new' ? {} : {
       firstname: adminInfo.firstName,
       lastname: adminInfo.lastName
     };
-    this.authService.register( {
+    this.authService.register({
       ...newUserInfo,
       teamname: teamInfo.teamName,
       teampassword: teamInfo.teamPassword,
       email: teamInfo.email,
       adminpassword: adminInfo.adminPassword
+    }).subscribe(res => {
+      this.registerSuccess = true;
+      if (this.userType !== 'new' ) {
+        this.authService.login({
+          username: teamInfo.email,
+          password: adminInfo.adminPassword
+        });
+      } else {
+        this.displaySpinner = false;
+      }
     });
   }
 }

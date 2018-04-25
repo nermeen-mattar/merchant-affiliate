@@ -115,16 +115,10 @@ export class AuthService implements OnDestroy {
    * @description sends a post request holding user entered info to the server to register a new user
    * @param {ServerSideRegisterInfo} registrationInfo
    */
-  register(registrationInfo: ServerSideRegisterInfo) {
-    this.httpRequestsService.httpPost('register', registrationInfo, {
+  register(registrationInfo: ServerSideRegisterInfo): Observable<any> {
+   return this.httpRequestsService.httpPost('register', registrationInfo, {
       fail: 'UNABLE_TO_REGISTER'
-    }).subscribe(
-      res => {
-        this.login({
-          username: registrationInfo.email,
-          password: registrationInfo.adminpassword
-        });
-      });
+    });
   }
 
   /**

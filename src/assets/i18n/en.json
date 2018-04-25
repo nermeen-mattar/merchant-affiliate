@@ -18,7 +18,8 @@
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
     "REGISTER": {
-      "UNABLE_TO_REGISTER": "Unable to register a new team"
+      "UNABLE_TO_REGISTER": "Unable to register a new team",
+      "REGISTER_SUCCESS": "Thank you for registration, please check your mail to activate your team registration"
     },
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
@@ -131,7 +132,8 @@
     "ADMIN": "Admin",
     "ADMIN_PASSWORD": "Admin Password",
     "ADMIN_DETAILS": "Administrator details",
-    "ADMIN_PASSWORD_INCORRECT": "Admin password incorrect"
+    "ADMIN_PASSWORD_INCORRECT": "Admin password incorrect",
+    "SETTINGS": "Settings"
   },
   "MEMBER": {
     "MEMBERS": "Members",
