@@ -26,9 +26,9 @@ export class LoginComponent implements OnInit {
       username: loginFormValue.userEmail,
       password: loginFormValue.userPassword
     }).subscribe(res => {
-      this.displaySpinner = false;
     }, err => {
       this.displaySpinner = false;
     });
   }
 }
+ 

@@ -49,12 +49,12 @@ export class AuthService implements OnDestroy {
    * admin password
    * @param {ServerSideLoginInfo} userCredentials
    */
-  switchToAdmin(userCredentials: ServerSideLoginInfo) {
+  switchToAdmin(userCredentials: ServerSideLoginInfo): Observable <any> {
     const switchFailMsg = 'LOGIN.INCORRECT_ADMIN_PASSWRD';
-    this.httpRequestsService.httpPost('login', userCredentials, {
+    return this.httpRequestsService.httpPost('login', userCredentials, {
         fail: switchFailMsg
       })
-      .subscribe(
+      .pipe(map(
         res => {
           if (res.isAuthorized.toLowerCase() === 'admin') {
             this.onLoginRequestSuccess(res);
@@ -64,7 +64,8 @@ export class AuthService implements OnDestroy {
             }, 'fail');
           }
         }
-      );
+      )
+    );
   }
 
   /**
@@ -117,7 +118,7 @@ export class AuthService implements OnDestroy {
    */
   register(registrationInfo: ServerSideRegisterInfo): Observable<any> {
    return this.httpRequestsService.httpPost('register', registrationInfo, {
-      fail: 'UNABLE_TO_REGISTER'
+      fail: 'REGISTER.UNABLE_TO_REGISTER'
     });
   }
 
