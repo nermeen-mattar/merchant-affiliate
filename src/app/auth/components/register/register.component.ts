@@ -8,6 +8,7 @@ import { AdminService } from './../../../core/services/admin.service';
 import { AuthService } from '../../services/auth.service';
 import { AdminRegisterInfo } from './../../models/admin-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
+import { UserMessagesService } from '../../../core/services/user-messages.service';
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
@@ -15,9 +16,10 @@ import { TeamRegisterInfo } from './../../models/team-register-info.model';
 })
 export class RegisterComponent implements OnInit {
   userType = 'new'; /* possible values: 'admin' 'member' 'new'. Default value is 'new' */
-  registerSuccess = false;
   displaySpinner = false;
-  constructor(private authService: AuthService, private adminService: AdminService) {}
+  emailActivationRequired = false;
+  displayMessageCard = false;
+  constructor(private authService: AuthService, private adminService: AdminService, private userMessagesService: UserMessagesService) {}
 
   ngOnInit() {}
   selectedStepChanged(changeInfo: StepperSelectionEvent) {
@@ -55,8 +57,8 @@ export class RegisterComponent implements OnInit {
   /**
    * @author Nermeen Mattar
    * @description calling the register function with different parameters depending on the case, as the new user is the only one who sends
-   * the first and last names. Once register is successful a registration success message will be displayed to the new user while the
-   * admin/member users will get logged in using credentials received from.
+   * the first and last names. Once register is successful a registration success message will be displayed to the new user and the member 
+   * user while the admin user will get logged in using credentials received from.
    * @param {TeamRegisterInfo} teamInfo
    * @param {AdminRegisterInfo} adminInfo
    */
@@ -73,28 +75,84 @@ export class RegisterComponent implements OnInit {
       email: teamInfo.email,
       adminpassword: adminInfo.adminPassword
     }).subscribe(registerRes => {
-      if (this.userType !== 'new') {
-        this.adminOrMemberLogin(teamInfo.email, adminInfo.adminPassword);
+      if (this.userType === 'admin') {
+        this.adminLogin(teamInfo.email, adminInfo.adminPassword);
       } else {
-        this.registerSuccess = true;
+        this.displayMessageCard = true;
         this.displaySpinner = false;
       }
+    }, err => {
+        this.handleRegisterError(err);
     });
   }
 
+
   /**
    * @author Nermeen Mattar
-   * @description this function uses the member/admin user and password to login, if the password is wrong the spinner will be register form
+   * @description this function uses the admin user and password to login if the password is a correct admin password.
    * will appear again
    * @param {string} adminEmail
    * @param {string} adminPassword
    */
-  adminOrMemberLogin(adminEmail: string, adminPassword: string) {
-    this.authService.login({
+  adminLogin(adminEmail: string, adminPassword: string) {
+    this.authService.switchToAdmin({
       username: adminEmail,
       password: adminPassword
-    }).subscribe(loginRes => {}, err => {
-      this.displaySpinner = false;
+    }).subscribe(loginRes => {
+      // if(loginRes.isAuthorized.toLowerCase() === 'admin') {
+        this.displaySpinner = false;
+      // }
+    }, err => {
+      this.handleLoginError(err);
     });
+  }
+
+  resendConfirmationEmail() {
+    this.displaySpinner = true;
+    setTimeout(() => { // temporary to simulate backend request
+      this.displaySpinner = false;
+      this.userMessagesService.showUserMessage({
+          success: 'REGISTER.EMAIL_SEND_AGAIN'
+        },
+        'success');
+    }, 2000);
+  }
+
+
+  handleRegisterError(err) {
+      // this.registrationStepper.previous();  
+      /* conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
+      if (err.status === '409') { // or check if the backend returned certain msg
+        // this.registrationStepper.previous();
+  
+      } else if (this.userType === 'admin') {
+        this.userMessagesService.showUserMessage({
+          fail: 'REGISTER.EMAIL_SEND_AGAIN'
+        },
+        'fail');
+      } else { /* will consider anything else as wrong password since currently errors are not supported from the bakend side */
+        // SOMETHING_WENT_WRONG
+      }
+    }
+    
+  handleLoginError(err) {
+    this.displaySpinner = false;
+
+        /* conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
+    /*    if (err.status === '401') { // or check if the backend returned certain msg
+          this.userMessagesService.showUserMessage({
+            fail: 'LOGIN.INCORRECT_ADMIN_PASSWRD'
+          },
+          'fail');
+        } else */// if (err.error.message === 'email activation required') 
+        {
+          this.informUserToActivateEmail (); /* may move this to happen in the first step (checking step) */
+        }
+  }
+  
+  informUserToActivateEmail() {
+    // this.registrationStepper.previous();
+    this.emailActivationRequired = true;
+    this.displayMessageCard = true;
   }
 }

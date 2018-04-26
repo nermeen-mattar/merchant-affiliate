@@ -1,7 +1,7 @@
 <mat-card class="app-register">
   <mat-card-title class="text-center">{{ 'REGISTER.REGISTER' | translate }} </mat-card-title>
-  <mat-card-content >
-    <div class="app-register__content" [ngClass]="{'app-register__content__hide': displaySpinner || registerSuccess}">
+  <mat-card-content>
+    <div class="app-register__content" [ngClass]="{'app-register__content__hide': displaySpinner || displayMessageCard}">
       <mat-vertical-stepper linear="true" (selectionChange)="selectedStepChanged($event)">
         <!--     [selectedIndex]="currentStep" -->
         <mat-step label="{{ 'TEAM.TEAM_DETAILS' | translate }}" [stepControl]="registerFirstStepForm">
@@ -49,10 +49,21 @@
           </form>
         </mat-step>
       </mat-vertical-stepper>
+      <button *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
+        (click)="register(registerFirstStepForm.value, registerSecondStepForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
     </div>
-    <mat-spinner class="app-register__content__spinner" [ngClass]="{'app-register__content__spinner__hide': !displaySpinner }"></mat-spinner>
-    <div *ngIf="registerSuccess" class="app-register__content__form__register-success"> {{ 'USER_MESSAGES.REGISTER.REGISTER_SUCCESS' | translate }} </div>
-    <button *ngIf="!registerSuccess" mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
-      (click)="register(registerFirstStepForm.value, registerSecondStepForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
+    <mat-spinner class="app-register__spinner" [ngClass]="{'app-register__spinner__hide': !displaySpinner }"></mat-spinner>
+    <div *ngIf="displayMessageCard && !displaySpinner">
+      <div *ngIf="!emailActivationRequired" class="app-register__content__form__register-success"> {{ 'USER_MESSAGES.REGISTER.REGISTER_SUCCESS' | translate }} </div>
+      <div class="app-register__content__resend-mail">
+        <span *ngIf="emailActivationRequired; else emailNotReceived"> {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate}} </span>
+        <ng-template #emailNotReceived>
+          <span> {{'REGISTER.EMAIL_NOT_RECEIVED' | translate}} </span>
+        </ng-template>
+        <span (click)="resendConfirmationEmail()" class="app-register__content__resend-mail__link"> {{'REGISTER.SEND_MAIL_AGAIN' | translate}} </span>
+      </div>
+      <button mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
+        routerLink="/auth/login">{{ 'OK' | translate }}</button>
+    </div>
   </mat-card-content>
 </mat-card>
