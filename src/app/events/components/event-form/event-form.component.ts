@@ -59,7 +59,7 @@ export class EventFormComponent implements OnInit {
    * First the field's value which is in the recevied parameter in the case of editing, and default value in the case of creating.
    * @param {TcEvent} eventValue
    */
-  createEventForm(eventValue ? : TcEvent ) {
+  createEventForm(eventValue?: TcEvent ) {
     this.eventGroup = new FormGroup({
       eventName: new FormControl(eventValue ? eventValue.eventName : '', [Validators.required]),
       date: new FormControl(eventValue ? eventValue.date : '', [Validators.required]),

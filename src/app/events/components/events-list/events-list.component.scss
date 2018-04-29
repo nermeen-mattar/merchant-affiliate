@@ -68,7 +68,9 @@
         /deep/.mat-card-actions {
           text-align: right;
           button {
-            color: white;
+            &.mat-primary {
+              color: white;
+            }
           }
         }
         /deep/.mat-list-item-content {

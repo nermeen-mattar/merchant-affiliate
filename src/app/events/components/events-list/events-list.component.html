@@ -110,6 +110,9 @@
           </mat-list>
         </mat-card-content>
         <mat-card-actions>
+          <button mat-raised-button routerLink="details/{{event.id}}">
+            <span>Info</span>
+          </button>
           <button
             mat-raised-button
             (click)="toogleParticipationInEvent(true, event.id)"
@@ -137,16 +140,12 @@
 <mat-menu #menu="matMenu">
   <ng-container *ngIf="activeEvent">
     <button mat-menu-item (click)="deleteEvent($event, activeEvent.id)">
-      <!-- <mat-icon>trash</mat-icon> -->
+      <mat-icon>delete</mat-icon>
       <span>Delete</span>
     </button>
     <button mat-menu-item [routerLink]="activeEvent.id">
-      <!-- <mat-icon>create</mat-icon> -->
+      <mat-icon>create</mat-icon>
       <span>Edit</span>
-    </button>
-    <button mat-menu-item routerLink="details/{{activeEvent.id}}">
-      <!-- <mat-icon>info</mat-icon> -->
-      <span>Info</span>
     </button>
   </ng-container>
 </mat-menu>
