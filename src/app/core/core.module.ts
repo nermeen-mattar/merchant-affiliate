@@ -18,6 +18,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from '../auth/services/auth.service';
 import { TokenHandlerService } from '../auth/services/token-handler.service';
 import { AdminService } from './services/admin.service';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { DeviceClassesDirective } from './directives/device-classes.directive';
 
 @NgModule({
   imports: [
@@ -26,15 +28,18 @@ import { AdminService } from './services/admin.service';
     SharedModule,
     RouterModule,
     HttpClientModule,
-    TranslateModule
+    TranslateModule,
+    DeviceDetectorModule.forRoot()
   ],
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DeviceClassesDirective
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DeviceClassesDirective
   ],
   providers: [
     UserService,

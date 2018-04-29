@@ -6,6 +6,7 @@ export interface TcEvent {
   criticalValue: number;
   numOfParticipations?: number;
   detailedParticipations?: any; // add type participation
+  myParticipation?: any;
   comment?: string; // not mandatory
   location?: string; // needed in events form requests, but not in event list requests
   startTime: string;

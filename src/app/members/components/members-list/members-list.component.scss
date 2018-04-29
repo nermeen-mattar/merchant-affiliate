@@ -47,3 +47,19 @@
     }
   }
 }
+
+
+body {
+  &.mobile-device {
+    :host {
+      .app-members {
+        &__header {
+          flex-direction: column;
+        }
+        &__filter {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -4480,6 +4480,10 @@ netmask@~1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/netmask/-/netmask-1.0.6.tgz#20297e89d86f6f6400f250d9f4f6b4c1945fcd35"
 
+ngx-device-detector@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/ngx-device-detector/-/ngx-device-detector-1.2.2.tgz#0aa3a21280d42bd296c7d4a73ce43e9e3eaf2cb9"
+
 ngx-parallax@^3.0.0-rc.2:
   version "3.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/ngx-parallax/-/ngx-parallax-3.0.0-rc.2.tgz#a104d765fadf6e2672f13ef6c2e39db86389df1a"

@@ -47,6 +47,7 @@
     overflow-x: auto;
     &__table {
       overflow-x: auto;
+      min-width: 500px;
       &__header-cell {
         font-weight: $tc-font-weight-6;
         font-size: $tc-font-size-h5;
@@ -54,6 +55,32 @@
       &__header-cell, &__content-cell {
         word-wrap: unset;
         text-overflow: ellipsis;
+      }
+    }
+    &__cards-list {
+      &__item {
+        margin-bottom: 10px;
+        /deep/.mat-card-header {
+          .mat-card-header-text {
+            flex: 1;
+          }
+        }
+        /deep/.mat-card-actions {
+          text-align: right;
+          button {
+            color: white;
+          }
+        }
+        /deep/.mat-list-item-content {
+          padding: 0;
+        }
+        &__content {
+          &__item {
+            .mat-icon {
+              margin-right: 16px;
+            }
+          }
+        }
       }
     }
     &__spinner {
@@ -70,3 +97,18 @@
   }
 }
 
+body {
+  &.mobile-device {
+    :host {
+      .app-events {
+        &__header {
+          flex-direction: column;
+
+        }
+        &__filter {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
