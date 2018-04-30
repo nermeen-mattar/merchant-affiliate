@@ -13,6 +13,7 @@
       display: flex;
       align-items: center;
       &__register {
+        background-color:white;
         position: relative;
         width: 90%;
         height: 150px;
@@ -21,6 +22,9 @@
         padding: 10px 20px;
         box-sizing: border-box;
         opacity: 0.85;
+        &__title {
+          font-weight: 400;
+        }
         &__main-input-field {
           margin-top: 2rem;
         }
@@ -30,6 +34,7 @@
           top: 0;
           bottom: 0;
           margin: auto;
+          color: white;
         }
       }
     }
@@ -38,7 +43,13 @@
     }
   }
   &__info {
+    background-color:white;
     padding: 2.2rem 0;
+    &__title {
+      text-align: center;
+      font-weight: 400;
+      font-size: $biggest-font-size;
+    }
     &__sections__container {
       justify-content: center; // space-around;
       display: flex;
@@ -47,6 +58,7 @@
     }
     &__section {
       // remove if space-around
+      text-align:center;
       padding: 2%;
       width: 25%;
       min-width: 250px; // supporting small devices
@@ -54,6 +66,7 @@
         width: 50%;
         margin: 0 auto;
         font-size: $tc-font-size-h3;
+        font-weight: 400;
         margin-bottom: 0.6em;
       }
       &__icon {

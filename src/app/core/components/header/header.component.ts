@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import { UserService } from './../../services/user.service';
 import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
@@ -10,13 +11,15 @@ import { AuthService } from '../../../auth/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   $isUserLoggedIn: Observable<boolean>;
+  $isUserAdmin: Observable<boolean>;
   menuOpened = false;
   @Output() menuClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private userService: UserService) {}
 
   ngOnInit() {
     this.$isUserLoggedIn = this.authService.$userLoggedIn;
+    this.$isUserAdmin =  this.userService.$userAdmin;
   }
 
   /**

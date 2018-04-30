@@ -2,77 +2,124 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
+import { LoginResponse } from './../models/login-response.model';
+import { UserMessagesService } from './../../core/services/user-messages.service';
 import { UserService } from './../../core/services/user.service';
 import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { ServerSideLoginInfo } from '../models/server-side-login-info.mdel';
 import { ServerSideRegisterInfo } from '../models/server-side-register-info.model';
-
 @Injectable()
 export class AuthService implements OnDestroy {
   isLoggedIn: BehaviorSubject < boolean > = new BehaviorSubject(false);
   $userLoggedIn: Observable < boolean > = this.isLoggedIn.asObservable();
+  loginResponse: LoginResponse;
   constructor(
-    private httpRequest: HttpRequestsService,
+    private httpRequestsService: HttpRequestsService,
     private tokenHandler: TokenHandlerService, private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private userMessagesService: UserMessagesService
   ) {
-    this.httpRequest.token = localStorage.getItem('token');
-    if (this.httpRequest.token) {
-      /*  needed in case the page is reloaded and the user is logged in */
-      this.addTokenToHttpHeader();
-      this.isLoggedIn.next(true);
-    } else {
-      this.isLoggedIn.next(false);
-    }
+    this.loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+    this.updateAuthorizationStates();
   }
 
   /**
    * @author Nermeen Mattar
-   * @description sends a post request to the server holding user credentials to login an existing user, upon login success the received
-   * data will be stored in the local storage and the http header will include the token in each subsequent request to the backend.
+   * @description sends a post request to the server holding user credentials to login an existing user.
    * @param {ServerSideLoginInfo} userCredentials
    */
-  login(userCredentials: ServerSideLoginInfo) {
-    this.httpRequest.httpPost('login', userCredentials, {fail: 'UNSUCCESSFUL_LOGIN'})
-      .pipe(
-        first()
-      )
-      .subscribe(
+  login(userCredentials: ServerSideLoginInfo): Observable <any> {
+    return this.httpRequestsService.httpPost('login', userCredentials, {
+        fail: 'LOGIN.INCORRECT_USERNAME_OR_PASSWORD'
+      })
+      .pipe(map(
         res => {
-          this.isLoggedIn.next(true);
-          this.httpRequest.token = res.token; // may use map to only store needed info
-          localStorage.setItem('token', JSON.stringify(this.httpRequest.token));
-          const userReceivedInfo = this.tokenHandler.decodeToken(this.httpRequest.token);
-          this.userService.storeLoggedInUserInfo(userReceivedInfo.sub, userReceivedInfo.teamRoles, res.isAuthorized);
-          this.addTokenToHttpHeader();
-          this.router.navigateByUrl('events');
-        }
+          this.onLoginRequestSuccess(res);
+        })
       );
   }
 
   /**
    * @author Nermeen Mattar
-   * @description logs out the user by firstly changing request header to not include authentication token, secondly removing the login
-   * response object (received upon logging in) from local storage, third resting the local variables (login response and token),
-   * and finally navigating to home.
+   * @description sends a post request to the server holding admin credentials to switch from the member view to the admin view, the backend
+   * will either respond with an error in case the password is wrong. Or respond with a result if the password is either a member or an
+   * admin password
+   * @param {ServerSideLoginInfo} userCredentials
+   */
+  switchToAdmin(userCredentials: ServerSideLoginInfo): Observable <any> {
+    const switchFailMsg = 'LOGIN.INCORRECT_ADMIN_PASSWRD';
+    return this.httpRequestsService.httpPost('login', userCredentials, {
+        fail: switchFailMsg
+      })
+      .pipe(map(
+        res => {
+          if (res.isAuthorized.toLowerCase() === 'admin') {
+            this.onLoginRequestSuccess(res);
+          } else {
+            this.userMessagesService.showUserMessage({
+              fail: switchFailMsg
+            }, 'fail');
+          }
+        }
+      )
+    );
+  }
+
+  /**
+   * @description upon successful user login/switch it sets the login response class property and in the local storage, then it updates all
+   * the authorization states and finally, navigates to the events page (default page for authorized users).
+   * @param {any} loginResponse
+   * @memberof AuthService
+   */
+  onLoginRequestSuccess(loginResponse) {
+    this.loginResponse = loginResponse; // may use map to only store needed info
+    localStorage.setItem('loginResponse', JSON.stringify(this.loginResponse));
+    this.updateAuthorizationStates();
+    this.router.navigateByUrl('events');
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description logs out the user by reseting the login response class property and removing it from the local storage then updating all
+   * the authorization states and finally, navigating to the home page (default page for unauthorized users).
    */
   logout() {
-    this.httpRequest.setHttpRequestOptions(); // any subsequent request will have a token
-    localStorage.removeItem('token');
-    this.httpRequest.token = undefined;
+    this.loginResponse = undefined;
+    localStorage.removeItem('loginResponse');
+    this.updateAuthorizationStates();
     this.router.navigateByUrl('home');
-    this.isLoggedIn.next(false);
   }
+
+  /**
+   * @author Nermeen Mattar
+   * @description The function is the centralized place that updates the authorization states based on the value of the login response.
+   * First, it it changes the request options in the http service so that any subsequent request will either include authorization property
+   * (if user authorized) or not (if user unauthorized). Second, it either calls seting/resetign user info in the user service. Finally, it
+   * emits an event to inform listenting components about the updated authorization state.
+   */
+  updateAuthorizationStates() {
+    if (this.loginResponse) {
+      this.httpRequestsService.appendAuthorizationToRequestHeader(this.loginResponse.token);
+      this.userService.setLoggedInUserInfo(this.tokenHandler.decodeToken(this.loginResponse.token)); // this.loginResponse,
+      this.isLoggedIn.next(true);
+    } else {
+      this.httpRequestsService.deleteAuthorizationInRequestHeader();
+      this.userService.clearLoggedInUserInfo();
+      this.isLoggedIn.next(false);
+    }
+  }
+
   /**
    * @description sends a post request holding user entered info to the server to register a new user
    * @param {ServerSideRegisterInfo} registrationInfo
-   * @returns {Observable<any>}
    */
-  register(registrationInfo: ServerSideRegisterInfo): Observable < any > {
-    return this.httpRequest.httpPost('register', registrationInfo);
+  register(registrationInfo: ServerSideRegisterInfo): Observable<any> {
+   return this.httpRequestsService.httpPost('register', registrationInfo, {
+      fail: 'REGISTER.UNABLE_TO_REGISTER'
+    });
   }
 
   /**
@@ -82,18 +129,10 @@ export class AuthService implements OnDestroy {
    * @returns {boolean}
    */
   isAuthenticated(): boolean {
-    if (this.httpRequest.token) {
-      return this.tokenHandler.isTokenValid(this.httpRequest.token);
+    if (this.loginResponse && this.loginResponse.token) {
+      return this.tokenHandler.isTokenValid(this.loginResponse.token);
     }
     return false;
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description uses the http request service to change the request options so that any subsequent request will include a token
-   */
-  private addTokenToHttpHeader() {
-    this.httpRequest.setHttpRequestOptions(this.httpRequest.token);
   }
 
   ngOnDestroy() {}

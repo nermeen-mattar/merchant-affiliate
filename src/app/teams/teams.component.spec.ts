@@ -1,6 +1,8 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TeamsComponent } from './teams.component';
+import { MaterialModule } from './../shared/material/material.module';
 
 describe('TeamsComponent', () => {
   let component: TeamsComponent;
@@ -8,7 +10,8 @@ describe('TeamsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TeamsComponent ]
+      declarations: [ TeamsComponent ],
+      imports: [RouterTestingModule, MaterialModule]
     })
     .compileComponents();
   }));

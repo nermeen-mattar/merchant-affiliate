@@ -1,0 +1,17 @@
+<mat-card class="app-member-switching">
+  <mat-card-title class="text-center">{{ 'USER_SWITCHING.SWITCH_TO_ADMIN' | translate }} </mat-card-title>
+  <mat-card-content>
+    <form novalidate #memberSwitchingForm="ngForm">
+      <p>
+        {{ 'USER_SWITCHING.SWITCHING_MSG' | translate }}
+      </p>
+      <mat-form-field class="app-member-switching__field">
+        <input matInput placeholder="{{ 'LOGIN.PASSWORD' | translate }}" ngModel #userPassword="ngModel" name="userPassword" required
+          type="password">
+        <mat-icon class="app-member-switching__field__icon" matPrefix> lock</mat-icon>
+        <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="app-member-switching__button" [disabled]="memberSwitchingForm.invalid" (click)="switchToAdmin(userPassword.value)">{{ 'USER_SWITCHING.SWITCH' | translate }}</button>
+    </form>
+  </mat-card-content>
+</mat-card>

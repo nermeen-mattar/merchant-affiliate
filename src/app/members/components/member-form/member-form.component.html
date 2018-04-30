@@ -1,0 +1,31 @@
+<div class="app-member-form">
+    <mat-card>
+      <div class="app-member-form__back" routerLink="../">
+        <mat-icon color="primary">chevron_left</mat-icon>
+        {{'BACK'| translate}}
+      </div>
+      <mat-card-title class="app-member-form__title">{{ (memberId ? 'MEMBER.EDIT_MEMBER' : 'MEMBER.CREATE_MEMBER') | translate }} </mat-card-title>
+      <mat-card-content *ngIf="memberGroup">
+        <form novalidate [formGroup]="memberGroup" (ngSubmit)="save(memberGroup.value)" novalidate>
+          <div class="app-member-form__fields-wrapper ">
+            <mat-form-field class="app-member-form__field">
+              <input matInput placeholder="{{ 'MEMBER.FIRST_NAME' | translate }}" formControlName="firstName" required type="text">
+              <mat-icon color="primary" class="app-member-form__field__icon" matPrefix> person</mat-icon>
+              <mat-error *ngIf="memberGroup.controls['firstName'].invalid"> {{ 'MEMBER.FIRST_NAME' | translate }} {{'IS_REQUIRED' | translate}} </mat-error>
+            </mat-form-field>
+          </div>
+          <mat-form-field class="app-member-form__field">
+            <input matInput placeholder="{{'MEMBER.LAST_NAME'| translate}}" formControlName="lastName" required type="text">
+            <mat-icon color="primary" class="app-member-form__field__icon" matPrefix> person</mat-icon>
+            <mat-error *ngIf="memberGroup.controls['lastName'].invalid"> {{'MEMBER.LAST_NAME'| translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="app-member-form__field">
+            <input matInput placeholder="{{'EMAIL'| translate}}" formControlName="email" type="text">
+            <mat-icon color="primary" class="app-member-form__field__icon" matPrefix> email</mat-icon>
+            <mat-error *ngIf="memberGroup.controls['email'] .invalid"> {{'EMAIL'| translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" class="app-member-form__button" type="submit" [disabled]="!memberGroup.valid">{{ 'SAVE' | translate }}</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

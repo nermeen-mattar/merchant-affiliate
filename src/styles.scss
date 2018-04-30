@@ -1,3 +1,5 @@
+
+
 /* You can add global styles to this file, and also import other style files */
 
 
@@ -5,7 +7,16 @@
 tc-root {
   height: 100%;
   display: block;
-  .mat-drawer-container {
-    height: 100%;
+
+}
+
+
+.business-page {
+  padding: 5rem;
+}
+
+@media only screen and (max-width: 879px) {
+  .business-page {
+    padding: 1rem;
   }
 }

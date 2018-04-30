@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import { UserMessages } from './../../core/models/user-messages.model';
-import { EventItem } from '../models/event-item.model';
+import { TcEvent } from '../models/tc-event.model';
 import { UserService } from './../../core/services/user.service';
 import { HttpRequestsService } from './../../core/services/http-requests.service';
 @Injectable()
@@ -18,7 +18,7 @@ export class EventsService {
    * @param {boolean} isPast
    * @returns {Observable < any >}
    */
-  getEvents(teamId: number, isPast: boolean): Observable < any > { // EventItem[] there are other info!
+  getEvents(teamId: number, isPast: boolean): Observable < any > { // TcEvent [] there are other info!
     const endPoint = isPast ? 'pastsbyteamid' : 'byteamid';
     return this.httpRequestService.httpPost(
       `events/${endPoint}/${teamId}`,
@@ -29,10 +29,10 @@ export class EventsService {
   /**
    * @author Nermeen Mattar
    * @description sends a get request to the server to receive the details for the chosen event
-   * @param {number} eventId
+   * @param {string} eventId
    * @returns {Observable <any>}
    */
-  getEventDetails(eventId: number): Observable < any > {
+  getEventDetails(eventId: string): Observable < any > {
     return this.httpRequestService.httpGet(
       `eventstate/${eventId}`);
   }
@@ -41,35 +41,35 @@ export class EventsService {
    * @author Nermeen Mattar
    * @description sends a request to the server to change the user's participation status for a specific event
    * @param {boolean} isParticipated
-   * @param {number} eventId
+   * @param {string} eventId
    * @param {number} teamMemberId
    * @returns {Observable < any >}
    */
-  toggleEventParticipation(isParticipated: boolean, eventId: number, teamMemberId: number): Observable < any > {
+  toggleEventParticipation(isParticipated: boolean, eventId: string, teamMemberId: number): Observable < any > {
     const participationText = isParticipated ? 'participate' : 'cancel';
-    const userMessage = isParticipated ? 'EVENT.PARTICIPATION_CONFIRMED' : 'EVENT.CANCELATION_CONFIRMED';
+    const toggleSuccessMessage = isParticipated ? 'EVENT.EVENT_PARTICIPATION_CONFIRMED' : 'EVENT.EVENT_CANCELATION_CONFIRMED';
     return this.httpRequestService.httpPut(
       'particips', {
         eventId: eventId,
         participationText: participationText,
         teamMemberId: teamMemberId
       }, {
-        success: userMessage,
-        fail: 'ERROR_CHANGING_PARTICIPATION'
+        success: toggleSuccessMessage,
+        fail: 'EVENT.EVENT_CHANGING_PARTICIPATION_FAIL'
       });
   }
 
   /**
    * @author Nermeen Mattar
    * @description sends a request to the server to delete a specific event
-   * @param {number} eventId
+   * @param {string} eventId
    * @returns {Observable <any>}
    */
-  deleteEvent(eventId: number): Observable < any > {
+  deleteEvent(eventId: string): Observable < any > {
     return this.httpRequestService.httpDelete(
       `events/${eventId}`, {
-        success: 'EVENT_DELETING_SUCCESS',
-        fail: 'EVENT_DELETING_FAIL'
+        success: 'EVENT.EVENT_DELETING_SUCCESS',
+        fail: 'EVENT.EVENT_DELETING_FAIL'
       });
   }
 
@@ -83,21 +83,23 @@ export class EventsService {
    */
   getEvent(eventId: string): Observable < any > {
     return this.httpRequestService.httpGet(
-      `events/${eventId}`);
+      `events/${eventId}`, {
+        fail: 'EVENT.EVENT_GETTING_FAIL'
+      });
   }
 
   /**
    * @author Nermeen Mattar
    * @description sends a post request to the server to create a new event
    * @param {teamId} number
-   * @param {EventItem} event
+   * @param {TcEvent } event
    * @returns {Observable <any>}
    */
-  createEvent(teamId: number, event: EventItem): Observable < any > { // EventItem[] there are other info!
+  createEvent(teamId: number, event: TcEvent ): Observable < any > { // Event [] there are other info!
     return this.httpRequestService.httpPost(
       'events', {teamId: teamId, ...event}, {
-        success: 'EVENT_CREATING_SUCCESS',
-        fail: 'EVENT_CREATING_FAIL'
+        success: 'EVENT.EVENT_CREATING_SUCCESS',
+        fail: 'EVENT.EVENT_CREATING_FAIL'
       });
   }
 
@@ -106,14 +108,14 @@ export class EventsService {
    *  @description sends a get request to the server to update the event with the received id
    * @param {string} eventId
    * @param {number} teamId
-   * @param {EventItem} event
+   * @param {TcEvent } event
    * @returns {Observable <any>}
    */
-  updateEvent(eventId: string, teamId: number, event: EventItem): Observable < any > {
+  updateEvent(eventId: string, teamId: number, event: TcEvent ): Observable < any > {
     return this.httpRequestService.httpPut(
       `events/${eventId}`, event, {
-        success: 'EVENT_UPDATING_SUCCESS',
-        fail: 'EVENT_UPDATING_FAIL'
+        success: 'EVENT.EVENT_UPDATING_SUCCESS',
+        fail: 'EVENT.EVENT_UPDATING_FAIL'
       });
   }
 }

@@ -3,22 +3,23 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 
-import { EventsListComponent } from './events-list/events-list.component';
+import { EventsListComponent } from './components/events-list/events-list.component';
 import { EventsComponent } from './events.component';
 import { EventsRoutingModule } from './events-routing.module';
 import { MaterialModule } from './../shared/material/material.module';
 import { EventsService } from './services/events.service';
-import { EventDetailsComponent } from './event-details/event-details.component';
-import { EventFormComponent } from './event-form/event-form.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { EventFormComponent } from './components/event-form/event-form.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     EventsRoutingModule,
-    MaterialModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     EventsListComponent,

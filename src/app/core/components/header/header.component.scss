@@ -1,6 +1,7 @@
 @import "../../../../styles/toolkit/variables.scss";
 @import "../../../../styles/toolkit/elements.scss";
 .app-header {
+  color: white;
   width: 100%;
   z-index: 2;
   justify-content: space-around;
@@ -59,6 +60,7 @@
     }
   }
   &__nav-toggler {
+    background-color:white;
     border-radius: 0px 20px 20px 0px;
     position: absolute;
     left: 0px;

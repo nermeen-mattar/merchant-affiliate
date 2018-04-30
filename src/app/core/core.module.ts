@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { UserMessagesService } from './services/user-messages.service';
 import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
@@ -13,6 +14,10 @@ import { throwIfAlreadyLoaded } from './guards/module-import-guard';
 import { HttpRequestsService } from './services/http-requests.service';
 import { UserService } from './services/user.service';
 import { FieldValidatorsService } from './services/field-validators.service';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from '../auth/services/auth.service';
+import { TokenHandlerService } from '../auth/services/token-handler.service';
+import { AdminService } from './services/admin.service';
 
 @NgModule({
   imports: [
@@ -33,6 +38,11 @@ import { FieldValidatorsService } from './services/field-validators.service';
   ],
   providers: [
     UserService,
+    AdminService,
+    AuthService,
+    AuthGuard,
+    TokenHandlerService,
+    UserMessagesService,
     HttpRequestsService,
     FieldValidatorsService
   ]

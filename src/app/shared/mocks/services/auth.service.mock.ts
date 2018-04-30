@@ -26,6 +26,7 @@ export class AuthServiceMock {
   private addTokenToHttpHeader() {
   }
 
-  storeLoggedInUserInfo(userInfo) {
+  setLoggedInUserInfo(userInfo) {
   }
+  clearLoggedInUserInfo() {}
 }

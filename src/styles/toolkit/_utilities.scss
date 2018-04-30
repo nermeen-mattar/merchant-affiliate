@@ -3,23 +3,7 @@
 /* Common Styles*/
 
 
-/* Colors Section*/
-
-.font-w-bolder {
-    font-weight: 400 !important;
-}
-
-.font-s-biggest {
-    font-size: $biggest-font-size;
-}
-
-.bg-white {
-    background-color: white;
-}
-
-.bg-orange {
-    background-color: $primary-color;
-}
+/* Messages Section*/
 
 .bg-success {
   background-color: $tc-color-success;
@@ -29,28 +13,8 @@
   background-color: $tc-color-error;
 }
 
-.text-white {
-    color: white !important;
-}
-
-
 /* Positioning Section*/
-
-.float-right {
-    float: right;
-}
 
 .text-center {
     text-align: center;
-}
-
-.align-items-center {
-    align-items: center;
-}
-
-
-/* Sizing Section */
-
-.w-100 {
-    width: 100%;
 }

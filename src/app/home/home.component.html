@@ -1,8 +1,8 @@
 <div class="app-home">
   <div class="app-home__main">
     <div class="app-home__main__top" parallax>
-      <div class="app-home__main__top__register bg-white">
-        <h3 class="font-w-bolder"> {{ 'TEAM.CREATE_YOUR_TEAM' | translate }} </h3>
+      <div class="app-home__main__top__register">
+        <h3 class="app-home__main__top__register__title"> {{ 'TEAM.CREATE_YOUR_TEAM' | translate }} </h3>
         <mat-form-field class="app-home__main__top__register__main-input-field">
           <span matPrefix>
             <mat-icon>supervisor_account</mat-icon> &nbsp;
@@ -12,61 +12,61 @@
             {{'TEAM.TEAM_NAME' | translate}} {{ 'IS_REQUIRED' | translate }}
           </mat-error>
         </mat-form-field>
-        <button mat-mini-fab color="primary" class="text-white app-home__main__top__register__action-btn" (click)="navigateToRegisterPage(teamName.value)">{{ 'HOME.GO' | translate }}
+        <button mat-mini-fab color="primary" class="app-home__main__top__register__action-btn" (click)="navigateToRegisterPage(teamName.value)">{{ 'HOME.GO' | translate }}
         </button>
       </div>
     </div>
   </div>
-  <div class="app-home__info bg-white">
-    <h1 class="text-center font-w-bolder font-s-biggest">{{'HOME.SLOGAN' | translate}}</h1>
+  <div class="app-home__info">
+    <h1 class="app-home__info__title">{{'HOME.SLOGAN' | translate}}</h1>
     <div class="app-home__info__sections__container">
       <div class="app-home__info__section">
-        <div class="app-home__info__section__icon text-center">
+        <div class="app-home__info__section__icon">
           <mat-icon>power_settings_new</mat-icon>
         </div>
-        <h2 class="app-home__info__section__header text-center font-w-bolder">{{'HOME.ADV1.TITLE' | translate}}</h2>
+        <h2 class="app-home__info__section__header">{{'HOME.ADV1.TITLE' | translate}}</h2>
         <p>{{'HOME.ADV1.TEXT' | translate}}</p>
       </div>
       <div class="app-home__info__section">
-        <div class="app-home__info__section__icon text-center">
+        <div class="app-home__info__section__icon">
           <mat-icon>group</mat-icon>
         </div>
 
-        <h2 class="app-home__info__section__header text-center font-w-bolder"> {{'HOME.ADV2.TITLE' | translate}}</h2>
+        <h2 class="app-home__info__section__header"> {{'HOME.ADV2.TITLE' | translate}}</h2>
 
         <p>{{'HOME.ADV2.TEXT' | translate}}</p>
       </div>
       <div class="app-home__info__section">
-        <div class="app-home__info__section__icon text-center">
+        <div class="app-home__info__section__icon">
           <mat-icon>vpn_key</mat-icon>
         </div>
 
-        <h2 class="app-home__info__section__header text-center font-w-bolder">{{'HOME.ADV3.TITLE' | translate}}</h2>
+        <h2 class="app-home__info__section__header">{{'HOME.ADV3.TITLE' | translate}}</h2>
         <p>{{'HOME.ADV3.TEXT' | translate}}</p>
       </div>
       <div class="app-home__info__section">
-        <div class="app-home__info__section__icon text-center">
+        <div class="app-home__info__section__icon">
           <mat-icon>group_work</mat-icon>
         </div>
 
-        <h2 class="app-home__info__section__header text-center font-w-bolder"> {{'HOME.ADV4.TITLE' | translate}}</h2>
+        <h2 class="app-home__info__section__header"> {{'HOME.ADV4.TITLE' | translate}}</h2>
         <p>{{'HOME.ADV4.TEXT' | translate}}</p>
       </div>
       <div class="app-home__info__section">
-        <div class="app-home__info__section__icon text-center">
+        <div class="app-home__info__section__icon ">
           <mat-icon>add_alert</mat-icon>
         </div>
 
-        <h2 class="app-home__info__section__header text-center font-w-bolder"> {{'HOME.ADV5.TITLE' | translate}} </h2>
+        <h2 class="app-home__info__section__header"> {{'HOME.ADV5.TITLE' | translate}} </h2>
         <p>{{'HOME.ADV5.TEXT' | translate}}</p>
       </div>
       <div class="app-home__info__section">
 
-        <div class="app-home__info__section__icon text-center">
+        <div class="app-home__info__section__icon">
           <mat-icon>insert_chart</mat-icon>
         </div>
 
-        <h2 class="app-home__info__section__header text-center font-w-bolder"> {{'HOME.ADV6.TITLE' | translate}} </h2>
+        <h2 class="app-home__info__section__header"> {{'HOME.ADV6.TITLE' | translate}} </h2>
         <p>{{'HOME.ADV6.TEXT' | translate}}</p>
       </div>
     </div>

@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { TeamInfo } from './../../teams/models/team-info.model';
-import { TeamRoles } from './../../teams/models/team-roles.model';
+import { DecodedToken } from './../../auth/models/decoded-token.model';
+import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
+import { TcTeamRoles } from './../../teams/models/tc-team-roles.model';
 
 @Injectable()
 export class UserService {
   /* User static properties (received from the backend) */
   private username: string;
   private userType: string;
-  private teamRoles: TeamRoles;
-  private userTeams: TeamInfo[];
+  private teamRoles: TcTeamRoles;
+  private userTeams: TcTeamInfo[];
   /* user changable properties (can be changed on the client side)*/
-  private selectedTeam: TeamInfo;
-  constructor() {
-    this.setUsername(JSON.parse(localStorage.getItem('username')));
-    this.setTeamRoles(JSON.parse(localStorage.getItem('teamRoles')));
-    this.setUserType(JSON.parse(localStorage.getItem('userType')));
-  }
+  private selectedTeam: TcTeamInfo;
+  /* user state properties */
+  private isAdmin: BehaviorSubject < boolean > = new BehaviorSubject(false);
+  $userAdmin: Observable < boolean > = this.isAdmin.asObservable();
+
+  constructor() {}
 
   /**
    * @author Nermeen Mattar
@@ -40,21 +43,19 @@ export class UserService {
    * @author Nermeen Mattar
    * @description returns the team roles for the logged in user
    * @readonly
-   * @type {TeamRoles}
+   * @type {TcTeamRoles}
    */
-  getTeamRoles(): TeamRoles {
+  getTeamRoles(): TcTeamRoles {
     return this.teamRoles;
   }
   /**
    * @author Nermeen Mattar
    * @description sets the team roles in a private variable
-   * @param {teamRoles} TeamRoles
+   * @param {teamRoles} TcTeamRoles
    */
-  setTeamRoles(teamRoles: TeamRoles) {
+  setTeamRoles(teamRoles: TcTeamRoles) {
     this.teamRoles = teamRoles;
-    if (this.teamRoles) {
     this.setUserTeams();
-    }
   }
 
   /**
@@ -64,26 +65,36 @@ export class UserService {
    */
   setUserTeams() {
     this.userTeams = [];
-    const teamIds = [];
-    this.getTeamRoles().teamAdmins.forEach(team => {
-      this.userTeams.push(team);
-      teamIds.push(team.teamId);
-    });
-    this.getTeamRoles().teamMembers.forEach(team => {
-      if (teamIds.indexOf(team.teamId) === -1) {
-        this.userTeams.push(team);
-      }
-    });
-    this.setSelectedTeam(this.userTeams[0]); // sets an initial value to the select input
+    const teamRoles = this.getTeamRoles();
+    if (teamRoles === undefined) {
+      this.setSelectedTeam(undefined); // sets an initial value to the select input
+    } else {
+      const teamIds = [];
+      Object.keys(teamRoles).forEach( teamRole => {
+        const teams = teamRoles[teamRole];
+        const teamRoleTranslateKey = teamRole === 'teamAdmins' ? 'admin' : 'member';
+        const teamsLen = teams.length;
+        for (let teamIndex = 0; teamIndex < teamsLen; teamIndex++) {
+          const team = teams[teamIndex];
+          if (teamIds.indexOf(team.teamId) === -1) {
+            this.userTeams.push({roles: [teamRoleTranslateKey], ...team});
+            teamIds.push(team.teamId);
+          } else {
+            this.userTeams[teamIndex].roles.push(teamRoleTranslateKey);
+          }
+        }
+      });
+      this.setSelectedTeam(this.userTeams[0]); // sets an initial value to the select input
+    }
   }
 
- /**
-  * @author Nermeen Mattar
-  * @description returns the team roles for the logged in user
-  * @returns {TeamInfo[]}
-  */
+  /**
+   * @author Nermeen Mattar
+   * @description returns the team roles for the logged in user
+   * @returns {TcTeamInfo[]}
+   */
 
- getUserTeams(): TeamInfo[] {
+  getUserTeams(): TcTeamInfo[] {
     return this.userTeams;
   }
 
@@ -103,6 +114,8 @@ export class UserService {
    * @param {userType} string
    */
   setUserType(userType: string) {
+    userType = userType ? userType : ''; // a preventive check to prevent toLowerCase for causing errors when user type is set to undefined
+    this.isAdmin.next(userType.toLowerCase() === 'admin');
     this.userType = userType;
   }
 
@@ -110,7 +123,7 @@ export class UserService {
    * @author Nermeen Mattar
    * @description sets the selected team in a private variable based on the user selection from the list of teams he/she is admin/member of.
    */
-  setSelectedTeam(selectedTeam: TeamInfo) {
+  setSelectedTeam(selectedTeam: TcTeamInfo) {
     this.selectedTeam = selectedTeam;
   }
 
@@ -118,21 +131,30 @@ export class UserService {
    * @author Nermeen Mattar
    * @description returns team the user has selected from the list of team he/she is admin/member of.
    */
-  getSelectedTeam(): TeamInfo {
+  getSelectedTeam(): TcTeamInfo {
     return this.selectedTeam;
   }
+
   /**
    * @author Nermeen Mattar
-   * @description stores the username, the team roles, and the user type ordinary/admin in the local storage and in private variables
-   * @param {string} username
-   * @param {TeamRoles} teamRoles
+   * @description sets the class properties (username, team roles, and user type ordinary/admin)
+   * @param {LoginResponse} loginResponse
+   * @param {DecodedToken} decodedToken
    */
-  storeLoggedInUserInfo(username: string, teamRoles: TeamRoles, userType: string) {
-    this.setUsername(username);
-    localStorage.setItem('username', JSON.stringify(username));
-    this.setTeamRoles(teamRoles);
-    localStorage.setItem('teamRoles', JSON.stringify(teamRoles));
-    this.setUserType(userType);
-    localStorage.setItem('userType', JSON.stringify(userType));
+  /* there are duplicated info between decoded token and loginResponse. Had to decode the token as login response only do not have sub!! */
+  setLoggedInUserInfo(decodedToken: DecodedToken) {
+    this.setUserType(decodedToken.grantedRole);
+    this.setUsername(decodedToken.sub);
+    this.setTeamRoles(decodedToken.teamRoles);
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description clears the class properties (username, team roles, and user type ordinary/admin).
+   */
+  clearLoggedInUserInfo() {
+    this.setUsername(undefined);
+    this.setTeamRoles(undefined);
+    this.setUserType(undefined);
   }
 }

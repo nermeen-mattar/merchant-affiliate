@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Token } from '../models/token.model';
+import { DecodedToken } from '../models/decoded-token.model';
 
 @Injectable()
 export class TokenHandlerService {
@@ -35,7 +35,7 @@ export class TokenHandlerService {
  * @param {string} token
  * @returns {Token}
  */
-decodeToken(token: string): Token {
+decodeToken(token: string): DecodedToken {
     if (token && (typeof token === 'string')) {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace('-', '+').replace('_', '/');
