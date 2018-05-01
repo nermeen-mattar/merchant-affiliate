@@ -69,7 +69,8 @@ export class EventFormComponent implements OnInit {
       }, this.fieldValidatorsService.getValidator('checkIfEndAfterStart')),
       location: new FormControl(eventValue ? eventValue.location : '', [Validators.required]),
       type: new FormControl(eventValue ? JSON.stringify(eventValue.type) : '0', [Validators.required]),
-      criticalValue: new FormControl(eventValue ? eventValue.criticalValue : '', [Validators.required]),
+      minCriticalValue: new FormControl(eventValue ? eventValue.minCriticalValue : '', [Validators.required]),
+      maxCriticalValue: new FormControl(eventValue ? eventValue.maxCriticalValue : '', [Validators.required]),
       comment: new FormControl(eventValue ? eventValue.comment : '', [Validators.maxLength(600)]) // need to check the actual max
     });
   }
@@ -106,7 +107,8 @@ export class EventFormComponent implements OnInit {
       date: format(eventValue.date, 'YYYY-MM-DD'),
       startTime: eventValue.eventTiming.startTime,
       endTime: eventValue.eventTiming.endTime,
-      criticalValue: eventValue.criticalValue,
+      minCriticalValue: eventValue.minCriticalValue,
+      maxCriticalValue: eventValue.maxCriticalValue,
       type: Number(eventValue.type),
       location: eventValue.location,
       comment: eventValue.comment

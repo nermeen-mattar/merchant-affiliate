@@ -3,7 +3,8 @@ export interface TcEvent {
   type: number;
   eventName: string;
   status?: string; // needed in events list requests, but not in event form requests
-  criticalValue: number;
+  minCriticalValue: number;
+  maxCriticalValue: number;
   numOfParticipations?: number;
   detailedParticipations?: any; // add type participation
   comment?: string; // not mandatory

@@ -49,9 +49,14 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field class="app-event-form__field">
-          <input matInput placeholder="{{'EVENT.MIN_MAX_PER_EVENT'| translate}}" formControlName="criticalValue" required type="number">
+          <input matInput placeholder="{{'EVENT.MIN_PER_EVENT'| translate}}" formControlName="minCriticalValue" required type="number">
           <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> shut_down</mat-icon>
-          <mat-error *ngIf="eventGroup.controls['criticalValue'].invalid"> {{'EVENT.MIN_MAX_PER_EVENT'| translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+          <mat-error *ngIf="eventGroup.controls['minCriticalValue'].invalid"> {{'EVENT.MIN_PER_EVENT'| translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="app-event-form__field">
+          <input matInput placeholder="{{'EVENT.MAX_PER_EVENT'| translate}}" formControlName="maxCriticalValue" required type="number">
+          <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> shut_down</mat-icon>
+          <mat-error *ngIf="eventGroup.controls['maxCriticalValue'].invalid"> {{'EVENT.MAX_PER_EVENT'| translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field class="app-event-form__field">
           <input matInput placeholder="{{'EVENT.COMMENT'| translate}}" formControlName="comment" type="text">
