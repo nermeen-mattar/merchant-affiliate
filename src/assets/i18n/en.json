@@ -115,7 +115,8 @@
     "END_SHOULD_BE_AFTER_START": "End time should be after start time",
     "LOCATION": "Location",
     "EVENT_TYPE": "Event to",
-    "MIN_MAX_PER_EVENT": "Min/Max participants per event",
+    "MAX_PER_EVENT": "Max participants per event",
+    "MIN_PER_EVENT": "Min participants per event",
     "COMMENT": "COMMENT",
     "CREATE_EVENT": "Create Event",
     "EDIT_EVENT": "Edit Event"
