@@ -34,6 +34,10 @@
           <mat-icon class="app-container__sidenav__menu__item__icon">lock_outline</mat-icon>
           <span>{{'LOG_OUT' | translate}}</span>
         </div>
+        <div class="app-container__sidenav__menu__item"  routerLink="/admin-user/settings"  *ngIf="($isUserLoggedIn | async) &&  ($isUserAdmin | async)" >
+          <mat-icon class="app-container__sidenav__menu__item__icon">settings</mat-icon>
+          <span>{{'ADMIN.SETTINGS' | translate}}</span>
+        </div>
       </div>
       <div class="app-container__sidenav__menu__item app-container__sidenav__menu__item__language" mat-button [matMenuTriggerFor]="langMenu">
         <mat-icon class="app-container__sidenav__menu__item__icon">language</mat-icon>
