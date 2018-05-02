@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ContactRoutingModule } from './contact-routing.module';
 import { MaterialModule } from '../shared/material/material.module';
+import { ContactService } from './contact.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { MaterialModule } from '../shared/material/material.module';
     TranslateModule.forChild(),
     ParallaxModule
   ],
+  providers: [ContactService],
   declarations: [ContactComponent]
 })
 export class ContactModule { }

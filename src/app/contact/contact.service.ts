@@ -14,8 +14,8 @@ export class ContactService {
    */
   sendUserMessage(contactValues: ContactInfo): void {
     this.httpRequestsService.httpPost('contact', contactValues, {
-      success: 'CONTACT.MESSAGE_SENT_SUCCESSFULY',
-      fail: 'CONTACT.UNABLE_TO_SEND_MESSAGE'
+      success: 'CONTACT.CONTACT_MESSAGE_SENT_SUCCESS',
+      fail: 'CONTACT.CONTACT_MESSAGE_SENT_SUCCESS'
     }).subscribe(res => res);
   }
 }

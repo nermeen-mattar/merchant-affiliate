@@ -10,8 +10,10 @@
   "LOG_OUT": "Log out",
   "EDIT": "Edit",
   "Delete": "Delete",
+  "MESSAGE": "Message",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "FORM": {
+    "ENTER_VALID_EMAIL": "Please enter a valid email address.",
     "END_SHOULD_BE_AFTER_START": "End time should be after start time",
     "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "Confirm new password should be equal to new passsword ",
     "MAX_SHOULD_BE_MORE_THAN_MIN": "Max should be more than min",
