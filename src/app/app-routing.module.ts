@@ -45,6 +45,16 @@ const routes: Routes = [{
     loadChildren: './member-user/member-user.module#MemberUserModule'
   },
   {
+    path: 'admin-user',
+    canActivate: [AuthGuard],
+    loadChildren: './admin-user/admin-user.module#AdminUserModule'
+  },
+  {
+    path: 'contact',
+    canActivate: [AuthGuard],
+    loadChildren: './contact/contact.module#ContactModule'
+  },
+  {
     path: '**',
     redirectTo: 'events'
   }
