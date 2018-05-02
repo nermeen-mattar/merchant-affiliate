@@ -65,7 +65,10 @@ export class MembersListComponent implements OnInit {
    * @param {number} memberId
    */
   deleteMember(memberId: number) {
-    this.openConfirmationDialog();
+    this.openConfirmationDialog({
+      dialogTitle: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_DELETING_HEADER',
+        dialogMessage: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_DELETING_BODY'
+    });
     this.confirmDialogRef.afterClosed().pipe(
       first()
     ).subscribe(confirmed => {
@@ -78,13 +81,10 @@ export class MembersListComponent implements OnInit {
     });
   }
 
-  openConfirmationDialog(): void {
+  openConfirmationDialog(dialogData): void {
     this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
       autoFocus: true,
-      data: {
-        dialogTitle: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_DELETING_HEADER',
-        dialogMessage: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_DELETING_BODY'
-      }
+      data: dialogData
     });
   }
 
@@ -95,12 +95,20 @@ export class MembersListComponent implements OnInit {
    * @param {TcMember} member
    */
   changeMemberActivationStatus(member: TcMember) {
-    this.openConfirmationDialog();
+    const updatedFlag: number = member.flag ? 0 : 1;
+    const ativationMessages = {
+      dialogTitle: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_ACTIVATE_HEADER',
+      dialogMessage: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_ACTIVATE_BODY'
+    };
+    const deativationMessages = {
+      dialogTitle: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_DEACTIVATE_HEADER',
+      dialogMessage: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_DEACTIVATE_BODY'
+    };
+    this.openConfirmationDialog( updatedFlag ? ativationMessages : deativationMessages);
     this.confirmDialogRef.afterClosed().pipe(
       first()
     ).subscribe(confirmed => {
       if (confirmed) {
-        const updatedFlag: number = member.flag ? 0 : 1;
         this.membersService.changeMemberActivationStatus({
           flag: updatedFlag,
           /* backend expects number */
