@@ -10,11 +10,17 @@
   "NO": "No",
   "LOG_OUT": "Log out",
   "CONTACT": "Contact",
-  "IS_REQUIRED": "is Required",
   "EDIT": "Edit",
   "Delete": "Delete",
-  "SAVE": "Save",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
+  "FORM": {
+    "END_SHOULD_BE_AFTER_START": "End time should be after start time",
+    "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "Confirm new password should be equal to new passsword ",
+    "MAX_SHOULD_BE_MORE_THAN_MIN": "Max should be more than min",
+    "SHOULD_BE_POSITIVE": "shoule be a positive number",
+    "SAVE": "Save",
+    "IS_REQUIRED": "is Required"
+  },
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
     "REGISTER": {
@@ -53,6 +59,12 @@
       "MEMBER_CHANGING_ACTIVATION_STATUS_FAIL": "Unable to change member activation status",
       "MEMBER_CONFIRM_DELETING_HEADER": "Delete member",
       "MEMBER_CONFIRM_DELETING_BODY": "Do you really want to delete this member?"
+    },
+    "ADMIN": {
+      "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfuly",
+      "ADMIN_PASSWORD_CHANGING_FAIL": "Unable to change admin password",
+      "TEAM_PASSWORD_CHANGING_SUCCESS": "The team password has been changed successfuly",
+      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change team password"
     }
   },
   "LANGUAGE": {
@@ -109,17 +121,19 @@
     "EVENT_NAME": "Event name",
     "CANCELATION_EVENT": "Cancelation Event",
     "PARTICIPATION_EVENT": "Participation Event",
+    "JOINING": "Joining",
+    "NOT_JOINING": "Not joining",
     "EVENT_DATE": "Event date",
     "START_TIME": "Start time",
     "END_TIME": "End time",
-    "END_SHOULD_BE_AFTER_START": "End time should be after start time",
     "LOCATION": "Location",
     "EVENT_TYPE": "Event to",
-    "MAX_PER_EVENT": "Max participants per event",
-    "MIN_PER_EVENT": "Min participants per event",
+    "MAX_PER_EVENT": "Max members",
+    "MIN_PER_EVENT": "Min members",
     "COMMENT": "COMMENT",
     "CREATE_EVENT": "Create Event",
-    "EDIT_EVENT": "Edit Event"
+    "EDIT_EVENT": "Edit Event",
+    "THIS_EVENT": "this event"
   },
   "TEAM": {
     "TEAMS": "Teams",
@@ -128,14 +142,18 @@
     "TEAM_NAME": "Team Name",
     "TEAM_PASSWORD": "Team Password",
     "TEAM_DETAILS": "Team details",
-    "ROLES": "Roles"
+    "ROLES": "Roles",
+    "DIRECT_LINK": "Direct link"
   },
   "ADMIN": {
     "ADMIN": "Admin",
     "ADMIN_PASSWORD": "Admin Password",
     "ADMIN_DETAILS": "Administrator details",
     "ADMIN_PASSWORD_INCORRECT": "Admin password incorrect",
-    "SETTINGS": "Settings"
+    "SETTINGS": "Settings",
+    "CURRENT_PASSWORD": "Current password",
+    "NEW_PASSWORD": "New password",
+    "CONFIRM_NEW_PASSWORD": "Confirm new password"
   },
   "MEMBER": {
     "MEMBERS": "Members",
@@ -146,7 +164,8 @@
     "EDIT_MEMBER": "Edit member",
     "CREATE_MEMBER": "Create member",
     "ADD_MYSELF_AS_MEMBER": "Add myself as a member",
-    "OUR_MEMBERS": "Our members"
+    "OUR_MEMBERS": "Our members",
+    "BY_DEFAULT_MEMBERS_ARE": " By default all members are:"
   },
   "REGISTER": {
     "REGISTER": "Register",
