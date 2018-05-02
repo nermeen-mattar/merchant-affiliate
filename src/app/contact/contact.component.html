@@ -1,0 +1,39 @@
+<div class="app-contact-form">
+  <mat-card>
+    <div class="app-contact-form__back" routerLink="../">
+      <mat-icon color="primary">chevron_left</mat-icon>
+    </div>
+    <mat-card-title class="app-contact-form__title">
+      {{'CONTACT.DROP_LINE' | translate}}
+    </mat-card-title>
+    <mat-card-content>
+      <form novalidate #contactForm="ngForm" (ngSubmit)="sendMessage(contactForm.value)" novalidate>
+        <div class="app-contact-form__fields-wrapper">
+          <mat-form-field class="app-contact-form__field">
+            <input matInput placeholder="{{'USER.FIRST_NAME' | translate}}" required type="text" ngModel required #firstName="ngModel">
+            <mat-icon color="primary" class="app-contact-form__field__icon" matPrefix> person</mat-icon>
+            <mat-error *ngIf="firstName.invalid"> {{'USER.FIRST_NAME'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field class="app-contact-form__field">
+          <input matInput placeholder="{{'USER.LAST_NAME' | translate}}" required type="text" ngModel required #lastName="ngModel">
+          <mat-icon color="primary" class="app-contact-form__field__icon" matPrefix> person</mat-icon>
+          <mat-error *ngIf="lastName.invalid"> {{'USER.LAST_NAME'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="app-contact-form__field">
+          <input matInput placeholder="{{'USER.EMAIL' | translate}}" required type="text" ngModel required #email="ngModel">
+          <mat-icon color="primary" class="app-contact-form__field__icon" matPrefix> email</mat-icon>
+          <mat-error *ngIf="email.invalid"> {{'USER.EMAIL'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="app-contact-form__field">
+          <textarea matInput placeholder="{{'MESSAGE' | translate}}" type="textarea" ngModel required #message="ngModel">
+          </textarea>
+          <mat-icon color="primary" class="app-contact-form__field__icon" matPrefix> email</mat-icon>
+          <mat-error *ngIf="message.invalid"> {{'EMAIL'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+        </mat-form-field>
+        <!-- (click)="login(loginForm.value)"-->
+        <button mat-raised-button color="primary" class="app-contact-form__button" type="submit" [disabled]="contactForm.invalid">{{ 'FORM.SEND' | translate }}</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
