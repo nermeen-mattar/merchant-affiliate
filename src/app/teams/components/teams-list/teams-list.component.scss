@@ -22,6 +22,11 @@
           text-align: center;
         }
       }
+      .mat-column-action {
+        flex: unset;
+        min-width: 60px;
+        text-align: center;
+      }
       &__team-admin {
         color: white;
         background-color: $primary-color;
@@ -38,6 +43,9 @@
           }
           &:last-of-type {
             margin-bottom: 6px;
+          }
+          &:not(.mat-basic-chip) +.mat-chip:not(.mat-basic-chip) {
+            margin: 3px 0;
           }
         }
       }
