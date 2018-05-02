@@ -1,7 +1,7 @@
 <mat-card class="app-login">
   <mat-card-title class="text-center">{{ 'LOGIN.LOGIN' | translate }} </mat-card-title>
   <mat-card-content>
-    <form novalidate #loginForm="ngForm" class="app-login__content" (ngSubmit)="login(loginForm.value)" [ngClass]="{'app-login__content__hide': displaySpinner}">
+    <form novalidate #loginForm="ngForm" class="app-login__content" (ngSubmit)="login(loginForm.value)" [ngClass]="{'app-login__element-hide': displaySpinner}">
       <mat-form-field class="app-login__content__field">
         <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" ngModel #userEmail="ngModel" name="userEmail" required email
           type="text">
@@ -26,5 +26,5 @@
       <button mat-raised-button color="primary" class="app-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
     </form>
   </mat-card-content>
-  <mat-spinner class="app-login__spinner" [ngClass]="{'app-login__spinner__hide': !displaySpinner }"></mat-spinner>
+  <mat-spinner class="app-login__spinner" [ngClass]="{'app-login__element-hide': !displaySpinner }"></mat-spinner>
 </mat-card>
