@@ -39,7 +39,7 @@
         <mat-form-field class="app-contact-form__field">
           <textarea matInput placeholder="{{'MESSAGE' | translate}}" type="textarea" ngModel required #message="ngModel" name="message">
           </textarea>
-          <mat-icon color="primary" class="app-contact-form__field__icon" matPrefix> email</mat-icon>
+          <mat-icon color="primary" class="app-contact-form__field__icon" matPrefix> comment</mat-icon>
           <mat-error *ngIf="message.invalid"> {{'USER.EMAIL'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
         <!-- (click)="login(loginForm.value)"-->
