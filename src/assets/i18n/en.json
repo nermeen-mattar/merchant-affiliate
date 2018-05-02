@@ -151,8 +151,11 @@
     "ADMIN_DETAILS": "Administrator details",
     "ADMIN_PASSWORD_INCORRECT": "Admin password incorrect",
     "SETTINGS": "Settings",
+    "TEAM_SETTINGS": "Team settings",
     "CURRENT_PASSWORD": "Current password",
     "NEW_PASSWORD": "New password",
+    "CHANGE_TEAM_PASSWORD": "Change team password",
+    "CHANGE_ADMIN_PASSWORD": "Change admin password",
     "CONFIRM_NEW_PASSWORD": "Confirm new password"
   },
   "MEMBER": {
