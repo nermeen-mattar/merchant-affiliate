@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 import { LoginResponse } from './../models/login-response.model';
 import { UserMessagesService } from './../../core/services/user-messages.service';
@@ -31,14 +31,14 @@ export class AuthService implements OnDestroy {
    * @description sends a post request to the server holding user credentials to login an existing user.
    * @param {ServerSideLoginInfo} userCredentials
    */
-  login(userCredentials: ServerSideLoginInfo) {
-    this.httpRequestsService.httpPost('login', userCredentials, {
+  login(userCredentials: ServerSideLoginInfo): Observable <any> {
+    return this.httpRequestsService.httpPost('login', userCredentials, {
         fail: 'LOGIN.INCORRECT_USERNAME_OR_PASSWORD'
       })
-      .subscribe(
+      .pipe(map(
         res => {
           this.onLoginRequestSuccess(res);
-        }
+        })
       );
   }
 
@@ -49,12 +49,12 @@ export class AuthService implements OnDestroy {
    * admin password
    * @param {ServerSideLoginInfo} userCredentials
    */
-  switchToAdmin(userCredentials: ServerSideLoginInfo) {
+  switchToAdmin(userCredentials: ServerSideLoginInfo): Observable <any> {
     const switchFailMsg = 'LOGIN.INCORRECT_ADMIN_PASSWRD';
-    this.httpRequestsService.httpPost('login', userCredentials, {
+    return this.httpRequestsService.httpPost('login', userCredentials, {
         fail: switchFailMsg
       })
-      .subscribe(
+      .pipe(map(
         res => {
           if (res.isAuthorized.toLowerCase() === 'admin') {
             this.onLoginRequestSuccess(res);
@@ -64,7 +64,8 @@ export class AuthService implements OnDestroy {
             }, 'fail');
           }
         }
-      );
+      )
+    );
   }
 
   /**
@@ -115,16 +116,10 @@ export class AuthService implements OnDestroy {
    * @description sends a post request holding user entered info to the server to register a new user
    * @param {ServerSideRegisterInfo} registrationInfo
    */
-  register(registrationInfo: ServerSideRegisterInfo) {
-    this.httpRequestsService.httpPost('register', registrationInfo, {
-      fail: 'UNABLE_TO_REGISTER'
-    }).subscribe(
-      res => {
-        this.login({
-          username: registrationInfo.email,
-          password: registrationInfo.adminpassword
-        });
-      });
+  register(registrationInfo: ServerSideRegisterInfo): Observable<any> {
+   return this.httpRequestsService.httpPost('register', registrationInfo, {
+      fail: 'REGISTER.UNABLE_TO_REGISTER'
+    });
   }
 
   /**

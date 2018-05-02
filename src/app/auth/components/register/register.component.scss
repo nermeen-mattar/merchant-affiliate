@@ -3,31 +3,49 @@
   color: $tc-color-gray-shade-6;
   width: 80%;
   min-width: 200px;
+  min-height:  152px; // 200; // 242px;
   max-width: 500px;
   margin: 120px auto;
-  &__form {
-    margin-top: 2rem;
-    &__field {
-      width: 100%;
-      line-height: 1.5; // was 2.125
-      margin-top: 1rem;
-      &__icon {
-        font-size: $tc-font-size-h3;
-        margin-right: 5px;
+  &__content {
+    &__hide {
+      display:none;
+    }
+    &__form {
+      margin-top: 2rem;
+      &__field {
+        width: 100%;
+        line-height: 1.5; // was 2.125
+        margin-top: 1rem;
+        &__icon {
+          font-size: $tc-font-size-h3;
+          margin-right: 5px;
+        }
+      }
+     &__admin-exist {
+        color: $tc-color-success;
+      }
+      &__register-success {
+        padding-top: 2rem;
       }
     }
-    &__admin-exist-message {
-      color: $tc-color-success;
+    &__button {
+      color: white;
     }
-  }
-  &__button {
-    margin-top: 2.2rem;
-    color: white;
-  }
-  &__checking-admin {
-    display:none;
+    &__resend-mail {
+      margin:  2rem 0;
+      &__link {
+        color: $tc-color-base-bright-shade-2;
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
   }
   &__spinner {
     margin: 50px auto;
+    &__hide {
+      display:none;
+    }
   }
 }

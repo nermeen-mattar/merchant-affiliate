@@ -18,11 +18,12 @@ export class HomeComponent implements OnInit {
  * @param {string} teamName
  */
 navigateToRegisterPage(teamName: string) {
-    this.router.navigate(['/auth/register'], {
-      queryParams: {
-        'team-name': teamName
-      }
-    });
+  const passTeamName = teamName ? {
+    queryParams: {
+      'team-name': teamName
+    }
+  } : {};
+    this.router.navigate(['/auth/register'], passTeamName);
   }
 
 }

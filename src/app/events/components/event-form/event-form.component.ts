@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { format } from 'date-fns';
 
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
 import { UserService } from '../../../core/services/user.service';
 import { EventsService } from '../../services/events.service';
 import { TcEvent } from '../../models/tc-event.model';
+import { TcEventTypeValues } from '../../models/tc-event-type-values';
 
 @Component({
   selector: 'tc-event-form',
@@ -16,6 +17,7 @@ import { TcEvent } from '../../models/tc-event.model';
 export class EventFormComponent implements OnInit {
   selectedTeamId: number;
   eventGroup: FormGroup;
+  displaySpinner = false;
   eventId: string; /* is undefined (in the case of event creation) */
   constructor(private eventsService: EventsService, userService: UserService, private fieldValidatorsService: FieldValidatorsService,
     private route: ActivatedRoute, private router: Router) {
@@ -31,6 +33,7 @@ export class EventFormComponent implements OnInit {
    * if the eventId param not equal to 'new', a request is sent to get the event with that Id.
    */
   initFormEditingOrCreating() {
+    this.displaySpinner = true;
     const eventIdVariable = this.route.snapshot.params['eventId'];
     if (eventIdVariable !== 'new') {
       this.eventId = eventIdVariable;
@@ -66,12 +69,22 @@ export class EventFormComponent implements OnInit {
       eventTiming:  new FormGroup({
         startTime: new FormControl(eventValue ? eventValue.startTime : '', [Validators.required]),
         endTime: new FormControl(eventValue ? eventValue.endTime : '', [Validators.required])
-      }, this.fieldValidatorsService.getValidator('checkIfEndAfterStart')),
+      }, this.fieldValidatorsService.getValidator('validateSecondGreaterThanFirst', {field1: 'startTime', field2: 'endTime'})),
       location: new FormControl(eventValue ? eventValue.location : '', [Validators.required]),
       type: new FormControl(eventValue ? JSON.stringify(eventValue.type) : '0', [Validators.required]),
-      criticalValue: new FormControl(eventValue ? eventValue.criticalValue : '', [Validators.required]),
+      eventCriticalValues:  new FormGroup({
+        min: new FormControl(eventValue ? eventValue.minCriticalValue : '', [
+          this.fieldValidatorsService.getValidator('validatePositive')
+        ]),
+        max: new FormControl(eventValue ? eventValue.maxCriticalValue : '', [
+          this.fieldValidatorsService.getValidator('validatePositive')
+        ])
+      }, [ this.fieldValidatorsService.getValidator('validateSecondGreaterThanFirst', {field1: 'min', field2: 'max'})]),
       comment: new FormControl(eventValue ? eventValue.comment : '', [Validators.maxLength(600)]) // need to check the actual max
     });
+    this.onEventTypeChange();
+    this.displaySpinner = false;
+
   }
 
   /**
@@ -97,6 +110,23 @@ export class EventFormComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
+   * @description disbales the max critical value field when the event type is cancelation
+   */
+  onEventTypeChange() {
+    const maxFormControl = (<FormGroup> this.eventGroup.controls['eventCriticalValues']).controls['max'];
+    switch (Number(this.eventGroup.controls.type.value)) {
+      case TcEventTypeValues.CANCELATION:
+      maxFormControl.setValue(null);
+      maxFormControl.disable();
+      break;
+      case TcEventTypeValues.PARTICIPATION:
+      maxFormControl.enable();
+      break;
+    }
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description maps the properties in the received object to the structure required by the backend and formats the date.
    * @param {any} eventValue
    */
@@ -106,7 +136,8 @@ export class EventFormComponent implements OnInit {
       date: format(eventValue.date, 'YYYY-MM-DD'),
       startTime: eventValue.eventTiming.startTime,
       endTime: eventValue.eventTiming.endTime,
-      criticalValue: eventValue.criticalValue,
+      minCriticalValue: eventValue.eventCriticalValues.min,
+      maxCriticalValue: eventValue.eventCriticalValues.max,
       type: Number(eventValue.type),
       location: eventValue.location,
       comment: eventValue.comment

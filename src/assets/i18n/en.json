@@ -1,6 +1,5 @@
 {
   "TEAM_CENTER": "team.center",
-  "EMAIL": "Email",
   "DELETE": "Delete",
   "CANCEL": "Cancel",
   "CONFIRM": "Confirm",
@@ -9,20 +8,34 @@
   "YES": "Yes",
   "NO": "No",
   "LOG_OUT": "Log out",
-  "CONTACT": "Contact",
-  "IS_REQUIRED": "is Required",
   "EDIT": "Edit",
   "Delete": "Delete",
-  "SAVE": "Save",
+  "MESSAGE": "Message",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
+  "FORM": {
+    "ENTER_VALID_EMAIL": "Please enter a valid email address.",
+    "END_SHOULD_BE_AFTER_START": "End time should be after start time",
+    "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "Confirm new password should be equal to new passsword ",
+    "MAX_SHOULD_BE_MORE_THAN_MIN": "Max should be more than min",
+    "SHOULD_BE_POSITIVE": "shoule be a positive number",
+    "SAVE": "Save",
+    "SEND": "SEND",
+    "IS_REQUIRED": "is Required"
+  },
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
     "REGISTER": {
-      "UNABLE_TO_REGISTER": "Unable to register a new team"
+      "UNABLE_TO_REGISTER": "Unable to register a new team",
+      "REGISTER_SUCCESS": "Thank you for creating your team. Please check your mail to activate your account.",
+      "EMAIL_SEND_AGAIN": "Mail Re-sent successfully"
     },
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
       "INCORRECT_ADMIN_PASSWRD": "Wrong admin password"
+    },
+    "CONTACT": {
+      "CONTACT_MESSAGE_SENT_SUCCESS": "The message has been sent successfuly",
+      "CONTACT_MESSAGE_SENT_FAIL": "Unable to send message"
     },
     "EVENT": {
       "EVENT_DELETING_SUCCESS": "The event has been deleted successfuly",
@@ -51,6 +64,12 @@
       "MEMBER_CHANGING_ACTIVATION_STATUS_FAIL": "Unable to change member activation status",
       "MEMBER_CONFIRM_DELETING_HEADER": "Delete member",
       "MEMBER_CONFIRM_DELETING_BODY": "Do you really want to delete this member?"
+    },
+    "ADMIN": {
+      "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfuly",
+      "ADMIN_PASSWORD_CHANGING_FAIL": "Unable to change admin password",
+      "TEAM_PASSWORD_CHANGING_SUCCESS": "The team password has been changed successfuly",
+      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change team password"
     }
   },
   "LANGUAGE": {
@@ -107,16 +126,19 @@
     "EVENT_NAME": "Event name",
     "CANCELATION_EVENT": "Cancelation Event",
     "PARTICIPATION_EVENT": "Participation Event",
+    "JOINING": "Joining",
+    "NOT_JOINING": "Not joining",
     "EVENT_DATE": "Event date",
     "START_TIME": "Start time",
     "END_TIME": "End time",
-    "END_SHOULD_BE_AFTER_START": "End time should be after start time",
     "LOCATION": "Location",
     "EVENT_TYPE": "Event to",
-    "MIN_MAX_PER_EVENT": "Min/Max participants per event",
+    "MAX_PER_EVENT": "Max members",
+    "MIN_PER_EVENT": "Min members",
     "COMMENT": "COMMENT",
     "CREATE_EVENT": "Create Event",
-    "EDIT_EVENT": "Edit Event"
+    "EDIT_EVENT": "Edit Event",
+    "THIS_EVENT": "this event"
   },
   "TEAM": {
     "TEAMS": "Teams",
@@ -125,28 +147,43 @@
     "TEAM_NAME": "Team Name",
     "TEAM_PASSWORD": "Team Password",
     "TEAM_DETAILS": "Team details",
-    "ROLES": "Roles"
+    "ROLES": "Roles",
+    "DIRECT_LINK": "Direct link"
   },
   "ADMIN": {
     "ADMIN": "Admin",
     "ADMIN_PASSWORD": "Admin Password",
     "ADMIN_DETAILS": "Administrator details",
-    "ADMIN_PASSWORD_INCORRECT": "Admin password incorrect"
+    "ADMIN_PASSWORD_INCORRECT": "Admin password incorrect",
+    "SETTINGS": "Settings",
+    "TEAM_SETTINGS": "Team settings",
+    "CURRENT_PASSWORD": "Current password",
+    "NEW_PASSWORD": "New password",
+    "CHANGE_TEAM_PASSWORD": "Change team password",
+    "CHANGE_ADMIN_PASSWORD": "Change admin password",
+    "CONFIRM_NEW_PASSWORD": "Confirm new password"
   },
   "MEMBER": {
     "MEMBERS": "Members",
     "MEMBER": "Member",
-    "FIRST_NAME": "First name",
-    "LAST_NAME": "Last name",
     "MAIL": "Mail",
     "EDIT_MEMBER": "Edit member",
     "CREATE_MEMBER": "Create member",
     "ADD_MYSELF_AS_MEMBER": "Add myself as a member",
-    "OUR_MEMBERS": "Our members"
+    "OUR_MEMBERS": "Our members",
+    "BY_DEFAULT_MEMBERS_ARE": " By default all members are:"
+  },
+  "USER": {
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "EMAIL": "Email"
   },
   "REGISTER": {
     "REGISTER": "Register",
-    "ADMIN_ALREADY_EXIST": "You are already a registered admin. Please enter your admin password to create the team"
+    "ADMIN_ALREADY_EXIST": "You are already a registered admin. Please enter your admin password to create the team",
+    "EMAIL_NOT_RECEIVED": "Haven't receive an email?",
+    "SEND_MAIL_AGAIN": " Send mail again",
+    "NEED_TO_CONFIRM_EMAIL": "Please confirm your mail first."
   },
   "LOGIN": {
     "LOGIN": "Login",
@@ -180,6 +217,10 @@
       "TEXT3": "Google maps for location entires - Other languages - Mobile Apps (Android & iOS)",
       "TEXT4":  "We are grateful for feedback especially after implementing new features: rene@team.center"
     }
+  },
+  "CONTACT": {
+    "DROP_LINE": "Drop us a Line!",
+    "CONTACT": "Contact"
   },
   "footer_buyACoffee": "Support this project with buying a coffee",
   "footer_LinksTitle": "Content",
