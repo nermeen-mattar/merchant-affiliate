@@ -1,6 +1,5 @@
 {
   "TEAM_CENTER": "team.center",
-  "EMAIL": "Email",
   "DELETE": "Delete",
   "CANCEL": "Cancel",
   "CONFIRM": "Confirm",
@@ -9,7 +8,6 @@
   "YES": "Yes",
   "NO": "No",
   "LOG_OUT": "Log out",
-  "CONTACT": "Contact",
   "EDIT": "Edit",
   "Delete": "Delete",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
@@ -19,6 +17,7 @@
     "MAX_SHOULD_BE_MORE_THAN_MIN": "Max should be more than min",
     "SHOULD_BE_POSITIVE": "shoule be a positive number",
     "SAVE": "Save",
+    "SEND": "SEND",
     "IS_REQUIRED": "is Required"
   },
   "USER_MESSAGES": {
@@ -31,6 +30,10 @@
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
       "INCORRECT_ADMIN_PASSWRD": "Wrong admin password"
+    },
+    "CONTACT": {
+      "CONTACT_MESSAGE_SENT_SUCCESS": "The message has been sent successfuly",
+      "CONTACT_MESSAGE_SENT_FAIL": "Unable to send message"
     },
     "EVENT": {
       "EVENT_DELETING_SUCCESS": "The event has been deleted successfuly",
@@ -161,14 +164,17 @@
   "MEMBER": {
     "MEMBERS": "Members",
     "MEMBER": "Member",
-    "FIRST_NAME": "First name",
-    "LAST_NAME": "Last name",
     "MAIL": "Mail",
     "EDIT_MEMBER": "Edit member",
     "CREATE_MEMBER": "Create member",
     "ADD_MYSELF_AS_MEMBER": "Add myself as a member",
     "OUR_MEMBERS": "Our members",
     "BY_DEFAULT_MEMBERS_ARE": " By default all members are:"
+  },
+  "USER": {
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "EMAIL": "Email"
   },
   "REGISTER": {
     "REGISTER": "Register",
@@ -209,6 +215,10 @@
       "TEXT3": "Google maps for location entires - Other languages - Mobile Apps (Android & iOS)",
       "TEXT4":  "We are grateful for feedback especially after implementing new features: rene@team.center"
     }
+  },
+  "CONTACT": {
+    "DROP_LINE": "Drop us a Line!",
+    "CONTACT": "Contact"
   },
   "footer_buyACoffee": "Support this project with buying a coffee",
   "footer_LinksTitle": "Content",

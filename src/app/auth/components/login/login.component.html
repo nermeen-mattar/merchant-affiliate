@@ -3,9 +3,9 @@
   <mat-card-content>
     <form novalidate #loginForm="ngForm"  class="app-login__content" [ngClass]="{'app-login__content__hide': displaySpinner}">
       <mat-form-field class="app-login__content__field">
-        <input matInput placeholder="{{ 'EMAIL' | translate }}" ngModel #userEmail="ngModel" name="userEmail" required email type="text">
+        <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" ngModel #userEmail="ngModel" name="userEmail" required email type="text">
         <mat-icon class="app-login__content__field__icon" matPrefix>email</mat-icon>
-        <mat-error *ngIf="userEmail.invalid"> {{'EMAIL' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+        <mat-error *ngIf="userEmail.invalid"> {{'USER.EMAIL' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
       <mat-form-field class="app-login__content__field">
         <input matInput placeholder="{{ 'LOGIN.PASSWORD' | translate }}" ngModel #userPassword="ngModel" name="userPassword" required
