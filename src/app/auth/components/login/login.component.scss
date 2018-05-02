@@ -6,10 +6,10 @@
   max-width: 500px;
   min-height: 242px;
   margin: 120px auto;
+  &__element-hide {
+    display:none;
+  }
   &__content {
-    &__hide {
-      display:none;
-    }
     &__field {
       width: 100%;
       line-height: 1.5;
@@ -26,8 +26,5 @@
   }
   &__spinner {
     margin: 50px auto;
-    &__hide {
-      display:none;
-    }
   }
 }
