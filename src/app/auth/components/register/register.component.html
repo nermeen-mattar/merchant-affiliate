@@ -45,9 +45,10 @@
               <mat-error *ngIf="firstName.invalid"> {{ 'USER.FIRST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
             <mat-form-field *ngIf="userType === 'new'" class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'USER.LAST_NAME' | translate }}" ngModel #lastName="ngModel" name="lastName" required type="text">
+              <input matInput placeholder="{{ 'USER.LAST_NAME' | translate }}" ngModel #lastName="ngModel" name="lastName" required
+                type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
-              <mat-error *ngIf="lastName.invalid"> {{ 'USER.LAST_NAME' | translate }} {{FORM.IS_REQUIRED | translate}}</mat-error>
+              <mat-error *ngIf="lastName.invalid"> {{ 'USER.LAST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'ADMIN.ADMIN_PASSWORD' | translate }}" ngModel #adminPassword="ngModel" name="adminPassword"
