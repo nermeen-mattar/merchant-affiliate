@@ -34,15 +34,15 @@
       "INCORRECT_ADMIN_PASSWRD": "Wrong admin password"
     },
     "CONTACT": {
-      "CONTACT_MESSAGE_SENT_SUCCESS": "The message has been sent successfuly",
+      "CONTACT_MESSAGE_SENT_SUCCESS": "The message has been sent successfully",
       "CONTACT_MESSAGE_SENT_FAIL": "Unable to send message"
     },
     "EVENT": {
-      "EVENT_DELETING_SUCCESS": "The event has been deleted successfuly",
+      "EVENT_DELETING_SUCCESS": "The event has been deleted successfully",
       "EVENT_DELETING_FAIL": "Unable to delete event",
-      "EVENT_CREATING_SUCCESS": "The event has been created successfuly",
+      "EVENT_CREATING_SUCCESS": "The event has been created successfully",
       "EVENT_CREATING_FAIL": "Unable to create event",
-      "EVENT_UPDATING_SUCCESS": "The event has been updated successfuly",
+      "EVENT_UPDATING_SUCCESS": "The event has been updated successfully",
       "EVENT_UPDATING_FAIL": "Unable to update event",
       "EVENT_GETTING_FAIL": "Unable to get the event",
       "EVENT_CONFIRM_DELETING_HEADER": "Delete event",
@@ -52,23 +52,27 @@
       "EVENT_CHANGING_PARTICIPATION_FAIL": "Error Changing Participation"
     },
     "MEMBER": {
-      "MEMBER_DELETING_SUCCESS": "The member has been deleted successfuly",
+      "MEMBER_DELETING_SUCCESS": "The member has been deleted successfully",
       "MEMBER_DELETING_FAIL": "Unable to delete member",
-      "MEMBER_CREATING_SUCCESS": "The member has been created successfuly",
+      "MEMBER_CREATING_SUCCESS": "The member has been created successfully",
       "MEMBER_CREATING_FAIL": "Unable to create member",
-      "MEMBER_UPDATING_SUCCESS": "The member has been updated successfuly",
+      "MEMBER_UPDATING_SUCCESS": "The member has been updated successfully",
       "MEMBER_UPDATING_FAIL": "Unable to update member",
-      "MEMBER_ACTIVATE_SUCCESS": "The member has been activated successfuly",
-      "MEMBER_DEACTIVATE_SUCCESS": "The member has been deactivated successfuly",
+      "MEMBER_ACTIVATE_SUCCESS": "The member has been activated successfully",
+      "MEMBER_DEACTIVATE_SUCCESS": "The member has been deactivated successfully",
       "MEMBER_GETTING_FAIL": "Unable to get the member",
       "MEMBER_CHANGING_ACTIVATION_STATUS_FAIL": "Unable to change member activation status",
       "MEMBER_CONFIRM_DELETING_HEADER": "Delete member",
-      "MEMBER_CONFIRM_DELETING_BODY": "Do you really want to delete this member?"
+      "MEMBER_CONFIRM_DELETING_BODY": "Do you really want to delete this member?",
+      "MEMBER_CONFIRM_ACTIVATE_HEADER": "Activate member",
+      "MEMBER_CONFIRM_ACTIVATE_BODY": "Do you really want to activate this member?",
+      "MEMBER_CONFIRM_DEACTIVATE_HEADER": "Deactivate member",
+      "MEMBER_CONFIRM_DEACTIVATE_BODY": "Do you really want to deactivate this member?"
     },
     "ADMIN": {
-      "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfuly",
+      "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfully",
       "ADMIN_PASSWORD_CHANGING_FAIL": "Unable to change admin password",
-      "TEAM_PASSWORD_CHANGING_SUCCESS": "The team password has been changed successfuly",
+      "TEAM_PASSWORD_CHANGING_SUCCESS": "The team password has been changed successfully",
       "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change team password"
     }
   },
