@@ -1,0 +1,56 @@
+@import "../../../../styles/toolkit/variables.scss";
+.app-admin-settings {
+  width: 80%;
+  min-height: 300px;
+  max-width: 700px;
+  margin: 100px auto;
+  &__back {
+    color: $primary-color;
+    font-weight: $tc-font-weight-4;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  &__title {
+    color: $tc-color-gray-shade-6;
+    text-align: center;
+  }
+  &__admin-form,
+  &__team-form {
+    &__title {
+      font-weight: 400;
+      text-align: left;
+      margin-top: 3rem;
+      /* no 3rem for second */
+    }
+    &__fields-wrapper {
+      // flex-wrap: wrap;
+      // display: flex;
+    }
+    &__field {
+      width: 100%; // flex-grow: 1;
+      line-height: 1.5; // margin: 1rem;
+      margin-top: 1rem;
+      &__icon {
+        margin-right: 5px;
+      }
+    }
+  }
+  &__button {
+    margin-top: 2.2rem;
+    color: white;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .app-event-form {
+    width: 95%;
+    &__admin-form,
+    &__team-form {
+      &__fields-wrapper {
+        display: block;
+      }
+    }
+  }
+}
+
