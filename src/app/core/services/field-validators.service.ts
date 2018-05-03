@@ -15,15 +15,34 @@ export class FieldValidatorsService {
    * @private
    */
   private validatorsFunctions = {
-    checkIfEndAfterStart: (): ValidatorFn => {
+    validatePositive: (): ValidatorFn => {
+      return (control: AbstractControl): { [key: string]: any } => {
+        const controlValue = Number(control.value);
+        return !isNaN(controlValue) && controlValue >= 0 ?
+          null : { validatePositive: { value: control.value } };
+      };
+    },
+    validateSecondGreaterThanFirst: (specs): ValidatorFn => {
       return (group: FormGroup): {
         [key: string]: any
       } => {
-        return group.controls.startTime.value < group.controls.endTime.value ?
+        const value1 =  group.controls[specs.field1].value;
+        const value2 =  group.controls[specs.field2].value;
+        const bothAreSet = ((value1 || value1 === 0) && (value2 || value2 ===0 ));
+        return bothAreSet && value1 > value2 ?
+        {
+          validateSecondGreaterThanFirst: 'error'
+        } : null;
+      };
+    },
+    validateEqual: (specs): ValidatorFn => {
+      console.log('specs ', specs);
+      return (group: FormGroup): {
+        [key: string]: any
+      } => {
+        return group.controls[specs.field1].value === group.controls[specs.field2].value ?
           null : {
-            checkIfEndAfterStart: {
-              errorMsg: 'END_SHOULD_BE_AFTER_START'
-            }
+            validateEqual: 'error'
           };
       };
     },

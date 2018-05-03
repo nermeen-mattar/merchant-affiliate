@@ -5,12 +5,12 @@
       {{'BACK'| translate}}
     </div>
     <mat-card-title class="app-event-form__title">{{ (eventId ? 'EVENT.EDIT_EVENT' : 'EVENT.CREATE_EVENT') | translate }} </mat-card-title>
-    <mat-card-content *ngIf="eventGroup">
+    <mat-card-content *ngIf="eventGroup" [ngClass]="{'app-event-form__element-hide': displaySpinner}">
       <form novalidate [formGroup]="eventGroup" (ngSubmit)="save(eventGroup.value)" novalidate>
         <div class="app-event-form__fields-wrapper ">
           <mat-form-field class="app-event-form__field">
             <input matInput placeholder="{{ 'EVENT.EVENT_NAME' | translate }}" formControlName="eventName" required type="text">
-            <mat-error *ngIf="eventGroup.controls['eventName'].invalid"> {{ 'EVENT.EVENT_NAME' | translate }} {{'IS_REQUIRED' | translate}} </mat-error>
+            <mat-error *ngIf="eventGroup.controls['eventName'].invalid"> {{ 'EVENT.EVENT_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
           </mat-form-field>
           <mat-form-field class="app-event-form__field">
             <input matInput [matDatepicker]="picker" placeholder="{{ 'EVENT.EVENT_DATE' | translate }}" formControlName="date" required>
@@ -19,47 +19,64 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div formGroupName="eventTiming">
+        <div formGroupName="eventTiming" class="app-event-form__nested-form-group">
           <div class="app-event-form__fields-wrapper">
             <mat-form-field class="app-event-form__field">
               <input matInput placeholder="{{ 'EVENT.START_TIME' | translate }}" formControlName="startTime" required type="time">
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix>query_builder</mat-icon>
-              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['startTime'].invalid"> {{'EVENT.START_TIME' | translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['startTime'].invalid"> {{'EVENT.START_TIME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field class="app-event-form__field">
               <input matInput placeholder="{{ 'EVENT.END_TIME'| translate }}" formControlName="endTime" required type="time">
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> query_builder</mat-icon>
-              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['endTime'].invalid"> {{'EVENT.END_TIME' | translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['endTime'].invalid"> {{'EVENT.END_TIME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
             </mat-form-field>
           </div>
           <!-- <mat-error *ngIf="eventTimingGroup.invalid && eventId || (eventTimingGroup.controls['endTime'].dirty &&  eventTimingGroup.controls['startTime'].dirty)"> -->
-          <mat-error *ngIf="eventGroup.controls['eventTiming'].invalid && (!eventGroup.controls['eventTiming'].controls['endTime'].invalid &&  !eventGroup.controls['eventTiming'].controls['startTime'].invalid)">
-            {{'EVENT.END_SHOULD_BE_AFTER_START' | translate}}
+          <mat-error class="app-event-form__field__error" *ngIf="eventGroup.controls['eventTiming'].invalid && (!eventGroup.controls['eventTiming'].controls['endTime'].invalid &&  !eventGroup.controls['eventTiming'].controls['startTime'].invalid)">
+            {{'FORM.END_SHOULD_BE_AFTER_START' | translate}}
           </mat-error>
         </div>
         <mat-form-field class="app-event-form__field">
           <input matInput placeholder="{{'EVENT.LOCATION'| translate}}" formControlName="location" required type="text">
           <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> room</mat-icon>
-          <mat-error *ngIf="eventGroup.controls['location'].invalid"> {{'EVENT.LOCATION'| translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+          <mat-error *ngIf="eventGroup.controls['location'].invalid"> {{'EVENT.LOCATION'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
-        <mat-form-field class="app-event-form__field">
-          <mat-select formControlName="type" required>
-            <mat-option value="0">{{'EVENT.CANCELATION_EVENT'| translate}}</mat-option>
-            <mat-option value="1">{{'EVENT.PARTICIPATION_EVENT'| translate}} </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="app-event-form__field">
-          <input matInput placeholder="{{'EVENT.MIN_MAX_PER_EVENT'| translate}}" formControlName="criticalValue" required type="number">
-          <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> shut_down</mat-icon>
-          <mat-error *ngIf="eventGroup.controls['criticalValue'].invalid"> {{'EVENT.MIN_MAX_PER_EVENT'| translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
-        </mat-form-field>
+        <div class="app-event-form__fields-wrapper">
+          <label class="app-event-form__field__label"> {{'MEMBER.BY_DEFAULT_MEMBERS_ARE' | translate}} </label>
+          <mat-form-field class="app-event-form__field app-event-form__field__small">
+            <mat-select formControlName="type" required (change)="onEventTypeChange()">
+              <mat-option value="0">{{'EVENT.JOINING'| translate}}</mat-option>
+              <mat-option value="1">{{'EVENT.NOT_JOINING'| translate}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <label class="app-event-form__field__label"> {{'EVENT.THIS_EVENT' | translate}} </label>
+        </div>
+        <div formGroupName="eventCriticalValues" class="app-event-form__nested-form-group">
+          <div class="app-event-form__fields-wrapper">
+            <mat-form-field class="app-event-form__field">
+              <input matInput placeholder="{{'EVENT.MIN_PER_EVENT'| translate}}" formControlName="min" type="number">
+              <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> shut_down</mat-icon>
+              <mat-error *ngIf="eventGroup.controls['eventCriticalValues'].controls['min'].invalid"> {{'EVENT.MIN_PER_EVENT'| translate}} {{ 'FORM.SHOULD_BE_POSITIVE' | translate }}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="app-event-form__field">
+              <input matInput placeholder="{{'EVENT.MAX_PER_EVENT'| translate}}" formControlName="max" type="number">
+              <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> shut_down</mat-icon>
+              <mat-error *ngIf="eventGroup.controls['eventCriticalValues'].controls['max'].invalid"> {{'EVENT.MAX_PER_EVENT'| translate}} {{ 'FORM.SHOULD_BE_POSITIVE' | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+          <mat-error class="app-event-form__field__error" *ngIf="eventGroup.controls['eventCriticalValues'].invalid && (!eventGroup.controls['eventCriticalValues'].controls['min'].invalid &&  !eventGroup.controls['eventCriticalValues'].controls['max'].invalid)">
+            {{'FORM.MAX_SHOULD_BE_MORE_THAN_MIN' | translate}}
+          </mat-error>
+        </div>
         <mat-form-field class="app-event-form__field">
           <input matInput placeholder="{{'EVENT.COMMENT'| translate}}" formControlName="comment" type="text">
           <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> comment</mat-icon>
-          <mat-error *ngIf="eventGroup.controls['comment'] .invalid"> {{'EVENT.COMMENT'| translate}} {{ 'IS_REQUIRED' | translate }}</mat-error>
+          <mat-error *ngIf="eventGroup.controls['comment'].invalid"> {{'EVENT.COMMENT'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" class="app-event-form__button" type="submit" [disabled]="!eventGroup.valid">{{ 'SAVE' | translate }}</button>
+        <button mat-raised-button color="primary" class="app-event-form__button" type="submit" [disabled]="!eventGroup.valid">{{ 'FORM.SAVE' | translate }}</button>
       </form>
     </mat-card-content>
+    <mat-spinner class="app-event-form__spinner" [ngClass]="{'app-event-form__hide-element': !displaySpinner }"></mat-spinner>
   </mat-card>
 </div>

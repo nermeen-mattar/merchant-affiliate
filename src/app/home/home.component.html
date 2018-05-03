@@ -9,7 +9,7 @@
           </span>
           <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" ngModel name="teamName" #teamName="ngModel" required type="text">
           <mat-error *ngIf="teamName.invalid">
-            {{'TEAM.TEAM_NAME' | translate}} {{ 'IS_REQUIRED' | translate }}
+            {{'TEAM.TEAM_NAME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
           </mat-error>
         </mat-form-field>
         <button mat-mini-fab color="primary" class="app-home__main__top__register__action-btn" (click)="navigateToRegisterPage(teamName.value)">{{ 'HOME.GO' | translate }}

@@ -11,7 +11,7 @@ export class FieldValidatorsMockService {
     } => {
       return group.controls.startTime.value < group.controls.endTime.value ?
         null : {
-          checkIfEndAfterStart: {
+          validateSecondGreaterThanFirst: {
             errorMsg: 'END_SHOULD_BE_AFTER_START'
           }
         };
