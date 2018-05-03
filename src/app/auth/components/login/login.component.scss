@@ -23,6 +23,16 @@
       margin-top: 2.2rem;
       color:white;
     }
+    &__user-message {
+      margin:  2rem 0;
+    }
+    &__link {
+      color: $tc-color-base-bright-shade-2;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
   }
   &__spinner {
     margin: 50px auto;

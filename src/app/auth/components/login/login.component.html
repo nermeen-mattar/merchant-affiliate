@@ -25,6 +25,16 @@
       </mat-form-field>
       <button mat-raised-button color="primary" class="app-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
     </form>
+    <div *ngIf="displayMessage && !displaySpinner" class="app-login__content__user-message">
+      <ng-container *ngIf="displayMessage === 'mailNotActivated'">
+        <span> {{  'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate}} </span>
+        <span (click)="resendConfirmationEmail()" class="app-login__content__link"> {{'REGISTER.SEND_MAIL_AGAIN' | translate}} </span>
+      </ng-container>
+      <ng-container *ngIf="displayMessage === 'mailNotExist'">
+        <span> {{  'REGISTER.NEED_TO_REGISTER_EMAIL' | translate}} </span>
+        <span routerLink="/auth/register" class="app-login__content__link"> {{'REGISTER.REGISTER_NOW' | translate}} </span>
+      </ng-container>
+    </div>
   </mat-card-content>
   <mat-spinner class="app-login__spinner" [ngClass]="{'app-login__element-hide': !displaySpinner }"></mat-spinner>
 </mat-card>
