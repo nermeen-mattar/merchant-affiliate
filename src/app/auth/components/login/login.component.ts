@@ -11,7 +11,7 @@ import { ClientSideLoginInfo } from '../../models/client-side-login-info.model';
 })
 export class LoginComponent implements OnInit {
   displaySpinner = false;
-  displayMessage= "mailNotExist";
+  displayMessage: string;
   enteredEmail: string;
   constructor(private authService: AuthService, private registerService: RegisterService) {}
 
