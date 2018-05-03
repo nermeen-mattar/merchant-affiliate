@@ -10,10 +10,6 @@
       color: $tc-color-gray-shade-6;
       font-weight: $tc-font-weight-4;
   }
-  &__filter {
-    min-width: 200px;
-    width: 50%;
-  }
   &__container {
     overflow-x: auto;
     &__table {
@@ -22,10 +18,36 @@
       &__header-cell {
         font-weight: $tc-font-weight-6;
         font-size: $tc-font-size-h5;
+        &:nth-child(2) {
+          text-align: center;
+        }
+      }
+      .mat-column-action {
+        flex: unset;
+        min-width: 60px;
+        text-align: center;
       }
       &__team-admin {
         color: white;
         background-color: $primary-color;
+      }
+      /deep/.mat-chip-list-wrapper {
+        flex-direction: column;
+        align-items: center;
+        .mat-chip {
+          margin: 3px 0;
+          min-width: 80px;
+          justify-content: center;
+          &:first-of-type {
+            margin-top: 6px;
+          }
+          &:last-of-type {
+            margin-bottom: 6px;
+          }
+          &:not(.mat-basic-chip) +.mat-chip:not(.mat-basic-chip) {
+            margin: 3px 0;
+          }
+        }
       }
     }
     &__spinner {
@@ -34,3 +56,20 @@
   }
 }
 
+
+body {
+  &.mobile-device {
+    :host {
+      .app-teams {
+        &__title {
+          text-align: center;
+        }
+        &__container {
+          &__table {
+
+          }
+        }
+      }
+    }
+  }
+}

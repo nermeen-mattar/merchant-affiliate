@@ -27,8 +27,8 @@
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="action" *ngIf="displayAdminActions">
-        <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
-        <mat-cell style="text-align: right;" *matCellDef="let row">
+        <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let row">
           <mat-icon class="app-teams__action" (click)="deleteTeam(row.teamId)" color="primary">delete</mat-icon>
         </mat-cell>
       </ng-container>

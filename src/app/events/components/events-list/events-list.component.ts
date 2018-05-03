@@ -9,6 +9,7 @@ import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { UserService } from '../../../core/services/user.service';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'tc-events-list',
@@ -25,8 +26,16 @@ export class EventsListComponent implements OnInit {
   isPastEvents: boolean;
   displayAdminActions: boolean;
   filterString = '';
+  isMobile: boolean;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
-  constructor(private eventsService: EventsService, private userService: UserService, public dialog: MatDialog) {
+  activeEvent: TcEvent = null;
+  constructor(
+    private eventsService: EventsService,
+    private userService: UserService,
+    public dialog: MatDialog,
+    private deviceService: DeviceDetectorService
+  ) {
+    this.isMobile = this.deviceService.isMobile();
     this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
     this.userTeams = this.userService.getUserTeams();
     this.selectedTeam = this.userService.getSelectedTeam();
@@ -52,6 +61,10 @@ export class EventsListComponent implements OnInit {
       this.addNumOfParticipationsToEvents(events);
       this.updateEventsDataSource(events);
     });
+  }
+
+  setActiveEvent(event: TcEvent) {
+    this.activeEvent = event;
   }
 
   /**
