@@ -77,8 +77,8 @@
     <div *ngIf="isMobile" class="app-events__container__cards-list">
       <mat-card class="app-events__container__cards-list__item" *ngFor="let event of eventsDataSource?.data">
         <mat-card-header>
-          <div mat-card-avatar class="example-header-image">
-            <i class="material-icons">event</i>
+          <div mat-card-avatar>
+            <i>event</i>
           </div>
           <mat-card-title routerLink="details/{{event.id}}">{{event.eventName}}</mat-card-title>
           <mat-card-subtitle>{{event.date}}</mat-card-subtitle>
@@ -91,7 +91,7 @@
           <mat-list class="app-events__container__cards-list__item__content">
             <mat-list-item class="app-events__container__cards-list__item__content__item">
               <mat-icon>alarm</mat-icon>
-              <div class="content">
+              <div>
                 {{'EVENT.TIME' | translate}}: {{event.startTime}} - {{event.endTime}}
               </div>
             </mat-list-item>
@@ -119,7 +119,7 @@
             color="primary"
             *ngIf="!event.myParticipation || event.myParticipation.action === 'cancel'"
             [disabled]="isPastEvents">
-            GOING
+            {{'GOING' | translate}}
           </button>
           <button
             mat-raised-button
@@ -127,7 +127,7 @@
             (click)="toogleParticipationInEvent(false, event.id)"
             *ngIf="event.myParticipation && event.myParticipation.action !== 'cancel'"
             [disabled]="isPastEvents">
-            NOT GOING
+            {{'NOT_GOING' | translate}}
           </button>
 
         </mat-card-actions>
