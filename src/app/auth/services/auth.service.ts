@@ -33,7 +33,7 @@ export class AuthService implements OnDestroy {
    */
   login(userCredentials: ServerSideLoginInfo): Observable <any> {
     return this.httpRequestsService.httpPost('login', userCredentials, {
-        fail: 'LOGIN.INCORRECT_USERNAME_OR_PASSWORD'
+        failDefault: 'LOGIN.INCORRECT_USERNAME_OR_PASSWORD'
       })
       .pipe(map(
         res => {
