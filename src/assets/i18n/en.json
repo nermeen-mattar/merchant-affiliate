@@ -17,6 +17,7 @@
   "FORM": {
     "ENTER_VALID_EMAIL": "Please enter a valid email address.",
     "END_SHOULD_BE_AFTER_START": "End time should be after start time",
+    "PASSWORD_MUST_INCLUDE": "Password must include a minimum of 8 characters, an alphabetic character, and a numeric character.",
     "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "Confirm new password should be equal to new passsword ",
     "MAX_SHOULD_BE_MORE_THAN_MIN": "Max should be more than min",
     "SHOULD_BE_POSITIVE": "shoule be a positive number",
@@ -26,10 +27,17 @@
   },
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
+    "BACKEND": {
+      "ERROR.MAIL.NOT.EXIST" : "Mail does not exist.",
+      "ERROR.MAIL.CONFIRMED": "Mail already confirmed",
+      "ERROR.NOT.EXISTING.TEAM.ADMIN": "Team admin does not exist",
+      "ERROR.MAIL.NOT.CONFIRMED": "You need to confirm your mail"
+    },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Unable to register a new team",
       "REGISTER_SUCCESS": "Thank you for creating your team. Please check your mail to activate your account.",
-      "EMAIL_SEND_AGAIN": "Mail Re-sent successfully"
+      "ACTIVATION_MAIL_RESEND__SUCCESS": "Activation mail re-sent successfully",
+      "ACTIVATION_MAIL_RESEND__FAIL": "Unable to Re-send activatin mail"
     },
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
@@ -167,6 +175,7 @@
     "NEW_PASSWORD": "New password",
     "CHANGE_TEAM_PASSWORD": "Change team password",
     "CHANGE_ADMIN_PASSWORD": "Change admin password",
+    "CONFIRM_ADMIN_PASSWORD": "Confirm admin password",
     "CONFIRM_NEW_PASSWORD": "Confirm new password"
   },
   "MEMBER": {
@@ -189,7 +198,9 @@
     "ADMIN_ALREADY_EXIST": "You are already a registered admin. Please enter your admin password to create the team",
     "EMAIL_NOT_RECEIVED": "Haven't receive an email?",
     "SEND_MAIL_AGAIN": " Send mail again",
-    "NEED_TO_CONFIRM_EMAIL": "Please confirm your mail first."
+    "NEED_TO_CONFIRM_EMAIL": "Please confirm your mail first.",
+    "NEED_TO_REGISTER_EMAIL": "You are not registered yet.",
+    "REGISTER_NOW": "Register now!"
   },
   "LOGIN": {
     "LOGIN": "Login",

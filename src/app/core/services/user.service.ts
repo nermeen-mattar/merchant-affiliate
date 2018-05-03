@@ -143,9 +143,11 @@ export class UserService {
    */
   /* there are duplicated info between decoded token and loginResponse. Had to decode the token as login response only do not have sub!! */
   setLoggedInUserInfo(decodedToken: DecodedToken) {
-    this.setUserType(decodedToken.grantedRole);
-    this.setUsername(decodedToken.sub);
-    this.setTeamRoles(decodedToken.teamRoles);
+    if (decodedToken) {
+      this.setUserType(decodedToken.grantedRole);
+      this.setUsername(decodedToken.sub);
+      this.setTeamRoles(decodedToken.teamRoles);
+    }
   }
 
   /**

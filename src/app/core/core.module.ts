@@ -20,6 +20,7 @@ import { TokenHandlerService } from '../auth/services/token-handler.service';
 import { AdminService } from './services/admin.service';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { DeviceClassesDirective } from './directives/device-classes.directive';
+import { RegisterService } from '../auth/services/register.service';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { DeviceClassesDirective } from './directives/device-classes.directive';
   providers: [
     UserService,
     AdminService,
+    RegisterService, /* check if it is better to place it in auth module */
     AuthService,
     AuthGuard,
     TokenHandlerService,

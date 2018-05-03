@@ -8,12 +8,12 @@ export class UserMessagesService {
 
   constructor(public snackBar: MatSnackBar, private translateService: TranslateService) {}
 
-  showUserMessage(userMessages: UserMessages, messageType) {
+  showUserMessage(userMessages: UserMessages, messageType, err?) {
     if (messageType === 'fail') {
       if (userMessages && userMessages.fail === 'NO_ERROR_MESSAGE') {
         return; // do not display an error message
       }
-      userMessages = this.addDefaultFailMessageIfNoFailMessage(userMessages);
+      userMessages = this.getFailMessageIfNoFailMessage(userMessages, err);
     }
     if (userMessages && userMessages[messageType]) {
       this.translateService.get('USER_MESSAGES.'.concat(userMessages[messageType])).subscribe(
@@ -26,12 +26,20 @@ export class UserMessagesService {
       );
     }
   }
-  addDefaultFailMessageIfNoFailMessage(userMessages): UserMessages {
+  getFailMessageIfNoFailMessage(userMessages: UserMessages, err): UserMessages {
+    const userFailMessage = {fail: null};
     if (!userMessages || userMessages.fail === undefined) {
-      userMessages = {
-        fail: 'SOMETHING_WENT_WRONG'
-      };
+      const translationKey = 'BACKEND.'.concat(err.error.message.toUpperCase());
+      this.translateService.get('USER_MESSAGES.'.concat(translationKey)).subscribe(
+        translatedMessage => {
+         if (translatedMessage.indexOf(translationKey) ===  -1 ) {
+          userFailMessage.fail = translationKey;
+         } else {
+          userFailMessage.fail = userMessages.failDefault ?  userMessages.failDefault : 'SOMETHING_WENT_WRONG'; /* default message */
+         }
+        }
+      );
     }
-    return userMessages;
+    return userFailMessage;
   }
 }
