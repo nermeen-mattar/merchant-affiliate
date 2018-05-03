@@ -18,6 +18,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from '../auth/services/auth.service';
 import { TokenHandlerService } from '../auth/services/token-handler.service';
 import { AdminService } from './services/admin.service';
+import { RegisterService } from '../auth/services/register.service';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { AdminService } from './services/admin.service';
   providers: [
     UserService,
     AdminService,
+    RegisterService, /* check if it is better to place it in auth module */
     AuthService,
     AuthGuard,
     TokenHandlerService,
