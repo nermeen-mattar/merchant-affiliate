@@ -17,8 +17,12 @@ export class AppComponent implements OnInit {
   $isUserLoggedIn: Observable < boolean > ;
   $isUserAdmin: Observable < boolean > ;
   menuOpened = false;
-  constructor(private translate: TranslateService, private authService: AuthService, private router: Router,
-    private userService: UserService) {}
+  constructor(
+    private translate: TranslateService,
+    private authService: AuthService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.$isUserLoggedIn = this.authService.$userLoggedIn;

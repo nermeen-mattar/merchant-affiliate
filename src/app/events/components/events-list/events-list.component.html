@@ -10,7 +10,7 @@
       <button mat-mini-fab *ngIf="displayAdminActions" color="primary" class="app-events__action app-events__add" routerLink="new">
         + </button>
     </h3>
-    <div>
+    <div class="app-events__header__team-selector">
       <mat-form-field>
         <mat-select [(value)]="selectedTeam" (change)="changeSelectedTeam()">
           <mat-option *ngFor="let team of userTeams" [value]="team">
@@ -25,7 +25,7 @@
   </mat-form-field>
   <!-- <mat-icon *ngIf="displayAdminActions" class="app-events__action" routerLink="new" color="primary">add</mat-icon> -->
   <div class="app-events__container">
-    <mat-table class="app-events__container__table" [dataSource]="eventsDataSource" matSort>
+    <mat-table *ngIf="!isMobile" class="app-events__container__table" [dataSource]="eventsDataSource" matSort>
       <ng-container matColumnDef="id">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.OUT' | translate}}
           <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
@@ -74,8 +74,78 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;">
       </mat-row>
     </mat-table>
+    <div *ngIf="isMobile" class="app-events__container__cards-list">
+      <mat-card class="app-events__container__cards-list__item" *ngFor="let event of eventsDataSource?.data">
+        <mat-card-header>
+          <div mat-card-avatar>
+            <i>event</i>
+          </div>
+          <mat-card-title routerLink="details/{{event.id}}">{{event.eventName}}</mat-card-title>
+          <mat-card-subtitle>{{event.date}}</mat-card-subtitle>
+          <button class="app-events__container__cards-list__item__more-btn" mat-icon-button [matMenuTriggerFor]="menu" (click)="setActiveEvent(event)" *ngIf="displayAdminActions">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </mat-card-header>
+        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+        <mat-card-content>
+          <mat-list class="app-events__container__cards-list__item__content">
+            <mat-list-item class="app-events__container__cards-list__item__content__item">
+              <mat-icon>alarm</mat-icon>
+              <div>
+                {{'EVENT.TIME' | translate}}: {{event.startTime}} - {{event.endTime}}
+              </div>
+            </mat-list-item>
+            <mat-list-item class="app-events__container__cards-list__item__content__item">
+              <mat-icon>insert_chart</mat-icon>
+              <div class="content">
+                {{'EVENT.STATUS' | translate}}: {{event.numOfParticipations}} / {{event.detailedParticipations.length}}
+              </div>
+            </mat-list-item>
+            <mat-list-item class="app-events__container__cards-list__item__content__item">
+              <mat-icon>warning</mat-icon>
+              <div class="content">
+                  {{'EVENT.CRITICAL_VALUE' | translate}}: {{event.criticalValue}}
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button routerLink="details/{{event.id}}">
+            <span>Info</span>
+          </button>
+          <button
+            mat-raised-button
+            (click)="toogleParticipationInEvent(true, event.id)"
+            color="primary"
+            *ngIf="!event.myParticipation || event.myParticipation.action === 'cancel'"
+            [disabled]="isPastEvents">
+            {{'GOING' | translate}}
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="toogleParticipationInEvent(false, event.id)"
+            *ngIf="event.myParticipation && event.myParticipation.action !== 'cancel'"
+            [disabled]="isPastEvents">
+            {{'NOT_GOING' | translate}}
+          </button>
+
+        </mat-card-actions>
+      </mat-card>
+    </div>
     <mat-spinner class="app-events__container__spinner" *ngIf="!eventsDataSource"></mat-spinner>
   </div>
 </div>
 
-<!-- test pushing to BitBucket-->
+<mat-menu #menu="matMenu">
+  <ng-container *ngIf="activeEvent">
+    <button mat-menu-item (click)="deleteEvent($event, activeEvent.id)">
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+    <button mat-menu-item [routerLink]="activeEvent.id">
+      <mat-icon>create</mat-icon>
+      <span>Edit</span>
+    </button>
+  </ng-container>
+</mat-menu>

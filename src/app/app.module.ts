@@ -29,7 +29,7 @@ import { createTranslateLoader } from './core/loaders/translate-loader';
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-    }),
+    })
   ],
   bootstrap: [AppComponent],
 })
