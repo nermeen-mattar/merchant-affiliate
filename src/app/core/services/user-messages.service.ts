@@ -13,7 +13,9 @@ export class UserMessagesService {
       if (userMessages && userMessages.fail === 'NO_ERROR_MESSAGE') {
         return; // do not display an error message
       }
-      userMessages = this.getFailMessageIfNoFailMessage(userMessages, err);
+      if (!userMessages || userMessages.fail === undefined) {
+        userMessages = this.getFailMessage(userMessages, err);
+      }
     }
     if (userMessages && userMessages[messageType]) {
       this.translateService.get('USER_MESSAGES.'.concat(userMessages[messageType])).subscribe(
@@ -26,9 +28,9 @@ export class UserMessagesService {
       );
     }
   }
-  getFailMessageIfNoFailMessage(userMessages: UserMessages, err): UserMessages {
+
+  getFailMessage(userMessages: UserMessages, err): UserMessages {
     const userFailMessage = {fail: null};
-    if (!userMessages || userMessages.fail === undefined) {
       const translationKey = 'BACKEND.'.concat(err.error.message.toUpperCase());
       this.translateService.get('USER_MESSAGES.'.concat(translationKey)).subscribe(
         translatedMessage => {
@@ -39,7 +41,6 @@ export class UserMessagesService {
          }
         }
       );
-    }
     return userFailMessage;
   }
 }
