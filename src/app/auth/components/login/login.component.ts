@@ -45,8 +45,8 @@ export class LoginComponent implements OnInit {
       password: loginFormValue.userPassword
     }).subscribe(res => {
       /* we can remove the following two lines as once successful login the user will get navigated. */
-      this.displaySpinner = false;
-      this.displayMessage = null;
+      // this.displaySpinner = false;
+      // this.displayMessage = null;
     }, err => {
       this.displaySpinner = false;
       if (err.error.message === 'error.mail.not.confirmed') {
