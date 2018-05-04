@@ -16,6 +16,7 @@
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "FORM": {
     "ENTER_VALID_EMAIL": "Please enter a valid email address.",
+    "ENTER_VALID_PASSWORD": "Please enter a valid password.",
     "END_SHOULD_BE_AFTER_START": "End time should be after start time",
     "PASSWORD_MUST_INCLUDE": "Password must include a minimum of 8 characters, an alphabetic character, and a numeric character.",
     "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "Confirm new password should be equal to new passsword ",

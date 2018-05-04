@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { LoginComponent } from './components/login/login.component';
@@ -14,6 +14,7 @@ import { MaterialModule } from '../shared/material/material.module';
   imports: [
     CommonModule,
     AuthRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     MaterialModule,
     TranslateModule

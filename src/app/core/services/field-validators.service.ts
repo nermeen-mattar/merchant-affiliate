@@ -36,7 +36,6 @@ export class FieldValidatorsService {
       };
     },
     validateEqual: (specs): ValidatorFn => {
-      console.log('specs ', specs);
       return (group: FormGroup): {
         [key: string]: any
       } => {
@@ -44,6 +43,14 @@ export class FieldValidatorsService {
           null : {
             validateEqual: 'error'
           };
+      };
+    },
+    validatePassword: (): ValidatorFn => {
+      return (control: AbstractControl): { [key: string]: any } => {
+        const passRegExp = /^(?=.*\d)(?=.*([a-z]|[A-Z]))[0-9a-zA-Z]{8,}$/;
+        const controlValue = control.value;
+        return controlValue.match(passRegExp) ?
+          null : { validatePassword: { value: control.value } };
       };
     },
   };

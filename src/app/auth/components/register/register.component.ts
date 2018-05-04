@@ -1,8 +1,10 @@
-
+import { RegisterService } from './../../services/register.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatHorizontalStepper, MatVerticalStepper } from '@angular/material';
 
+import { FieldValidatorsService } from './../../../core/services/field-validators.service';
 import { HttpRequestsService } from '../../../core/services/http-requests.service';
 import { AdminService } from './../../../core/services/admin.service';
 import { AuthService } from '../../services/auth.service';
@@ -19,13 +21,40 @@ export class RegisterComponent implements OnInit {
   displaySpinner = false;
   emailActivationRequired = false;
   displayMessageCard = false;
-  constructor(private authService: AuthService, private adminService: AdminService, private userMessagesService: UserMessagesService) {}
+  registerFirstStepForm: FormGroup;
+  registerSecondStepForm: FormGroup;
+  constructor(private authService: AuthService, private adminService: AdminService,
+    private registerService: RegisterService,
+    private fieldValidatorsService: FieldValidatorsService, private userMessagesService: UserMessagesService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.createRegisterFirstStepForm();
+    this.createRegisterSecondStepForm();
+  }
   selectedStepChanged(changeInfo: StepperSelectionEvent) {
     if (changeInfo.previouslySelectedIndex === 0) {
       this.checkUserType(changeInfo.previouslySelectedStep.stepControl.value);
     }
+  }
+  createRegisterFirstStepForm() {
+    this.registerFirstStepForm = new FormGroup({
+      teamName: new FormControl('', [Validators.required]),
+      teamPassword: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required])
+    });
+  }
+
+  createRegisterSecondStepForm() {
+    this.registerSecondStepForm = new FormGroup({
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      adminPassword: new FormControl('', [Validators.required, this.fieldValidatorsService.getValidator('validatePassword')]),
+      adminConfirmPassword: new FormControl('', [Validators.required])
+    }, [this.fieldValidatorsService.getValidator('validateEqual', {
+      field1: 'adminPassword',
+      field2: 'adminConfirmPassword'
+    })]
+  );
   }
 
   /**
@@ -42,22 +71,42 @@ export class RegisterComponent implements OnInit {
       res => { // user exist but not admin
         this.displaySpinner = false;
         this.userType = 'member';
+        this.disableFirstAndLastNameFormControls();
       }, err => {
         this.displaySpinner = false;
         if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
           this.userType = 'admin';
+          this.disableFirstAndLastNameFormControls();
 
         } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
           this.userType = 'new';
-
+          this.enableFirstAndLastNameFormControls();
         }
       });
   }
 
   /**
    * @author Nermeen Mattar
+   * @description disables the first name and the last name form controls in case the user already exist (admin or member).
+   */
+  disableFirstAndLastNameFormControls() {
+    this.registerSecondStepForm.controls.firstName.disable();
+    this.registerSecondStepForm.controls.lastName.disable();
+  }
+
+    /**
+   * @author Nermeen Mattar
+   * @description enables the first name and the last name form controls in case the case of new user.
+   */
+  enableFirstAndLastNameFormControls() {
+    this.registerSecondStepForm.controls.firstName.enable();
+    this.registerSecondStepForm.controls.lastName.enable();
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description calling the register function with different parameters depending on the case, as the new user is the only one who sends
-   * the first and last names. Once register is successful a registration success message will be displayed to the new user and the member 
+   * the first and last names. Once register is successful a registration success message will be displayed to the new user and the member
    * user while the admin user will get logged in using credentials received from.
    * @param {TeamRegisterInfo} teamInfo
    * @param {AdminRegisterInfo} adminInfo
@@ -109,32 +158,36 @@ export class RegisterComponent implements OnInit {
 
   resendConfirmationEmail() {
     this.displaySpinner = true;
-    setTimeout(() => { // temporary to simulate backend request
+    this.registerService.resendActivationMail('testttetettetttettee@posss.com').subscribe(res => {
+      // this.registerFirstStepForm.controls.email.value;
       this.displaySpinner = false;
-      this.userMessagesService.showUserMessage({
-          success: 'REGISTER.EMAIL_SEND_AGAIN'
-        },
-        'success');
-    }, 2000);
+
+    }, err => {
+      this.displaySpinner = false;
+      // const mailActivationUserMessages =
+      //  {fail: 'REGISTER.ACTIVATION_MAIL_RESEND__FAIL', success: 'REGISTER.ACTIVATION_MAIL_RESEND__SUCCESS'};
+      // switch(err.error.message) {
+      //   case
+      // }
+    });
   }
 
-
   handleRegisterError(err) {
-      // this.registrationStepper.previous();  
+      // this.registrationStepper.previous();
       /* conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
       if (err.status === '409') { // or check if the backend returned certain msg
         // this.registrationStepper.previous();
-  
+
       } else if (this.userType === 'admin') {
         this.userMessagesService.showUserMessage({
-          fail: 'REGISTER.EMAIL_SEND_AGAIN'
+          fail: 'REGISTER.ACTIVATION_MAIL_RESEND__SUCCESS'
         },
         'fail');
       } else { /* will consider anything else as wrong password since currently errors are not supported from the bakend side */
         // SOMETHING_WENT_WRONG
       }
     }
-    
+
   handleLoginError(err) {
     this.displaySpinner = false;
 
@@ -144,12 +197,12 @@ export class RegisterComponent implements OnInit {
             fail: 'LOGIN.INCORRECT_ADMIN_PASSWRD'
           },
           'fail');
-        } else */// if (err.error.message === 'email activation required') 
+        } else */// if (err.error.message === 'email activation required')
         {
           this.informUserToActivateEmail (); /* may move this to happen in the first step (checking step) */
         }
   }
-  
+
   informUserToActivateEmail() {
     // this.registrationStepper.previous();
     this.emailActivationRequired = true;
