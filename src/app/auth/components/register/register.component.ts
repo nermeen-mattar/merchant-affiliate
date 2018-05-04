@@ -48,10 +48,11 @@ export class RegisterComponent implements OnInit {
     this.registerSecondStepForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
-      adminPassword: new FormControl('', [Validators.required, this.fieldValidatorsService.getValidator('validatePassword')]),
+      adminPassword: new FormControl('', [Validators.required]),
+      adminNewPassword: new FormControl('', [Validators.required, this.fieldValidatorsService.getValidator('validatePassword')]),
       adminConfirmPassword: new FormControl('', [Validators.required])
     }, [this.fieldValidatorsService.getValidator('validateEqual', {
-      field1: 'adminPassword',
+      field1: 'adminNewPassword',
       field2: 'adminConfirmPassword'
     })]
   );
@@ -71,36 +72,42 @@ export class RegisterComponent implements OnInit {
       res => { // user exist but not admin
         this.displaySpinner = false;
         this.userType = 'member';
-        this.disableFirstAndLastNameFormControls();
+        this.disableFormControls(['firstName', 'lastName', 'adminPassword']);
+        this.enableFormControls(['adminNewPassword', 'adminConfirmPassword']);
       }, err => {
         this.displaySpinner = false;
         if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
           this.userType = 'admin';
-          this.disableFirstAndLastNameFormControls();
-
+          this.disableFormControls(['firstName', 'lastName', 'adminConfirmPassword', 'adminNewPassword']);
+          this.enableFormControls(['adminPassword']);
         } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
           this.userType = 'new';
-          this.enableFirstAndLastNameFormControls();
+          this.disableFormControls([ 'adminPassword']);
+          this.enableFormControls(['firstName', 'lastName', 'adminNewPassword', 'adminConfirmPassword']);
         }
       });
   }
 
   /**
    * @author Nermeen Mattar
-   * @description disables the first name and the last name form controls in case the user already exist (admin or member).
+   * @description disables the form controls with the received names
    */
-  disableFirstAndLastNameFormControls() {
-    this.registerSecondStepForm.controls.firstName.disable();
-    this.registerSecondStepForm.controls.lastName.disable();
+  disableFormControls(formControlsNames: string[]) {
+    const formControlsLen = formControlsNames.length;
+    for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++ ) {
+      this.registerSecondStepForm.controls[formControlsNames[formControlIndex]].disable();
+    }
   }
 
-    /**
+  /**
    * @author Nermeen Mattar
-   * @description enables the first name and the last name form controls in case the case of new user.
+   * @description  enables the form controls with the received names
    */
-  enableFirstAndLastNameFormControls() {
-    this.registerSecondStepForm.controls.firstName.enable();
-    this.registerSecondStepForm.controls.lastName.enable();
+  enableFormControls(formControlsNames: string[]) {
+    const formControlsLen = formControlsNames.length;
+    for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++ ) {
+      this.registerSecondStepForm.controls[formControlsNames[formControlIndex]].enable();
+    }
   }
 
   /**
@@ -117,15 +124,16 @@ export class RegisterComponent implements OnInit {
       firstname: adminInfo.firstName,
       lastname: adminInfo.lastName
     };
+    const adminPassword = adminInfo.adminPassword || adminInfo.adminNewPassword;
     this.authService.register({
       ...newUserInfo,
       teamname: teamInfo.teamName,
       teampassword: teamInfo.teamPassword,
       email: teamInfo.email,
-      adminpassword: adminInfo.adminPassword
+      adminpassword: adminPassword
     }).subscribe(registerRes => {
       if (this.userType === 'admin') {
-        this.adminLogin(teamInfo.email, adminInfo.adminPassword);
+        this.adminLogin(teamInfo.email, adminPassword);
       } else {
         this.displayMessageCard = true;
         this.displaySpinner = false;
