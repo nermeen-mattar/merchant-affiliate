@@ -37,7 +37,10 @@ export class AuthService implements OnDestroy {
       })
       .pipe(map(
         res => {
-          this.onLoginRequestSuccess(res);
+          if (!res.message) { // this if statement is temp until the backend fixes the case of email not confirmed by returning an error
+            this.onLoginRequestSuccess(res);
+          }
+          return res;
         })
       );
   }
@@ -63,6 +66,7 @@ export class AuthService implements OnDestroy {
               fail: switchFailMsg
             }, 'fail');
           }
+          return res;
         }
       )
     );

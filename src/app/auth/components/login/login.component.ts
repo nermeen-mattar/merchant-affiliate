@@ -44,16 +44,17 @@ export class LoginComponent implements OnInit {
       username: loginFormValue.userEmail,
       password: loginFormValue.userPassword
     }).subscribe(res => {
-      /* we can remove the following two lines as once successful login the user will get navigated. */
-      // this.displaySpinner = false;
-      // this.displayMessage = null;
+      if (res.statusCode) { // temp until the backend fixes the case of email not confirmed by returning an error
+        this.displaySpinner = false;
+      }
     }, err => {
       this.displaySpinner = false;
-      if (err.error.message === 'error.mail.not.confirmed') {
+     /* Commented until we confirm if we want to give more information (security wise)
+     if (err.error.message === 'error.mail.not.confirmed') {
         this.displayMessage = 'mailNotActivated';
       } else if (err.error.message === 'error.mail.not.exist') {
         this.displayMessage = 'mailNotExist';
-      }
+      }*/
     });
   }
 }
