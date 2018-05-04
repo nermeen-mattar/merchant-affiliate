@@ -18,7 +18,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 
 export class EventsListComponent implements OnInit {
-  displayedColumns = ['id', 'date', 'time', 'event', 'status', 'critical-value', 'actions'];
+  displayedColumns = ['id', 'date', 'time', 'event', 'status', 'minCriticalValue', 'mamaxCriticalValuex', 'actions'];
   eventsDataSource: MatTableDataSource < TcEvent > ;
   userTeams: TcTeamInfo[];
   selectedTeam: TcTeamInfo;
