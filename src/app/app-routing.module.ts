@@ -20,6 +20,10 @@ const routes: Routes = [{
     loadChildren: './about/about.module#AboutModule'
   },
   {
+    path: 'contact',
+    loadChildren: './contact/contact.module#ContactModule'
+  },
+  {
     path: 'auth',
     canActivate: [AuthGuard],
     loadChildren: './auth/auth.module#AuthModule',
@@ -48,11 +52,6 @@ const routes: Routes = [{
     path: 'admin-user',
     canActivate: [AuthGuard],
     loadChildren: './admin-user/admin-user.module#AdminUserModule'
-  },
-  {
-    path: 'contact',
-    canActivate: [AuthGuard],
-    loadChildren: './contact/contact.module#ContactModule'
   },
   {
     path: '**',
