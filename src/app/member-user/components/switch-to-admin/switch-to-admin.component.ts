@@ -9,7 +9,7 @@ import { UserService } from './../../../core/services/user.service';
   styleUrls: ['./switch-to-admin.component.scss']
 })
 export class SwitchToAdminComponent implements OnInit {
-
+  displaySpinner = false;
   constructor(private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
@@ -21,9 +21,14 @@ export class SwitchToAdminComponent implements OnInit {
   * @param {ClientSideLoginInfo} loginFormValue
   */
  switchToAdmin(password: string) {
+  this.displaySpinner = true;
   this.authService.switchToAdmin({
     username: this.userService.getUsername(),
     password: password
+  }).subscribe(res => {
+    this.displaySpinner = false;
+  }, err => {
+    this.displaySpinner = false;
   });
 }
 }
