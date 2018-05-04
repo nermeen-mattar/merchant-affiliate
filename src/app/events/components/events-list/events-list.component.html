@@ -57,11 +57,11 @@
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="minCriticalValue">
-        <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.MAX_MEMBERS' | translate}} </mat-header-cell>
+        <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.MIN_PER_EVENT' | translate}} </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.minCriticalValue}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="maxCriticalValue">
-        <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.MAX_MEMBERS' | translate}} </mat-header-cell>
+        <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.MAX_PER_EVENT' | translate}} </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.maxCriticalValue}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="actions">
@@ -108,13 +108,13 @@
             <mat-list-item class="app-events__container__cards-list__item__content__item">
               <mat-icon>warning</mat-icon>
               <div class="content">
-                  {{'EVENT.CRITICAL_VALUE' | translate}}: {{event.minCriticalValue}}
+                  {{'EVENT.MIN_PER_EVENT' | translate}}: {{event.minCriticalValue}}
               </div>
             </mat-list-item>
             <mat-list-item class="app-events__container__cards-list__item__content__item">
               <mat-icon>warning</mat-icon>
               <div class="content">
-                  {{'EVENT.CRITICAL_VALUE' | translate}}: {{event.maxCriticalValue}}
+                  {{'EVENT.MAX_PER_EVENT' | translate}}: {{event.maxCriticalValue}}
               </div>
             </mat-list-item>
           </mat-list>
