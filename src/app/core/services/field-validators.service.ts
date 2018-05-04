@@ -28,7 +28,7 @@ export class FieldValidatorsService {
       } => {
         const value1 =  group.controls[specs.field1].value;
         const value2 =  group.controls[specs.field2].value;
-        const bothAreSet = ((value1 || value1 === 0) && (value2 || value2 ===0 ));
+        const bothAreSet = ((value1 || value1 === 0) && (value2 || value2 === 0 ));
         return bothAreSet && value1 > value2 ?
         {
           validateSecondGreaterThanFirst: 'error'
@@ -39,10 +39,13 @@ export class FieldValidatorsService {
       return (group: FormGroup): {
         [key: string]: any
       } => {
-        return group.controls[specs.field1].value === group.controls[specs.field2].value ?
-          null : {
-            validateEqual: 'error'
-          };
+        const value1 =  group.controls[specs.field1].value;
+        const value2 =  group.controls[specs.field2].value;
+        const bothAreSet = value1 && value2;
+        return bothAreSet && (group.controls[specs.field1].value !== group.controls[specs.field2].value) ?
+        {
+          validateEqual: 'error'
+        } : null;
       };
     },
     validatePassword: (): ValidatorFn => {
@@ -50,7 +53,7 @@ export class FieldValidatorsService {
         const passRegExp = /^(?=.*\d)(?=.*([a-z]|[A-Z]))[0-9a-zA-Z]{8,}$/;
         const controlValue = control.value;
         return controlValue.match(passRegExp) ?
-          null : { validatePassword: { value: control.value } };
+          null : { validatePassword: { invalid: true } };
       };
     },
   };
