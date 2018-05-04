@@ -26,7 +26,6 @@ export class SwitchToAdminComponent implements OnInit {
     username: this.userService.getUsername(),
     password: password
   }).subscribe(res => {
-    this.displaySpinner = false;
   }, err => {
     this.displaySpinner = false;
   });
