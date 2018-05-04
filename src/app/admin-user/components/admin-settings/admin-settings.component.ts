@@ -35,11 +35,9 @@ export class AdminSettingsComponent implements OnInit {
    * @description calls the funcitons that create 1- the admin form 2- the team name form control 3- the team form.
    */
   initSettingsForm() {
-    // this.adminService.getSettings(this.eventId).subscribe(res => {
     this.createAdminSettingsForm();
     this.createTeamNameFormControls();
     this.createTeamSettingsForm();
-    // });
   }
 
   /**
