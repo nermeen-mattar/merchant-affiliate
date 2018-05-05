@@ -20,6 +20,10 @@
           font-size: $tc-font-size-h3;
           margin-right: 5px;
         }
+        &__error {
+          font-size: 75%;
+          font-weight: normal;
+        }
       }
      &__admin-exist {
         color: $tc-color-success;
