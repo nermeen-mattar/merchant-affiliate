@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
    * @param {ClientSideLoginInfo} loginFormValue
    */
   login(loginFormValue: ClientSideLoginInfo) {
-    this.displayMessage = null;
     this.displaySpinner = true;
+    this.displayMessage = null;
     this.enteredEmail = loginFormValue.userEmail;
     this.authService.login({
       username: loginFormValue.userEmail,

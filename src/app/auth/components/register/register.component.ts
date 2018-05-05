@@ -166,8 +166,7 @@ export class RegisterComponent implements OnInit {
 
   resendConfirmationEmail() {
     this.displaySpinner = true;
-    this.registerService.resendActivationMail('testttetettetttettee@posss.com').subscribe(res => {
-      // this.registerFirstStepForm.controls.email.value;
+    this.registerService.resendActivationMail(this.registerFirstStepForm.controls.email.value).subscribe(res => {
       this.displaySpinner = false;
 
     }, err => {
