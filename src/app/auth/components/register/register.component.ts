@@ -1,9 +1,9 @@
-import { RegisterService } from './../../services/register.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatHorizontalStepper, MatVerticalStepper } from '@angular/material';
 
+import { RegisterService } from './../../services/register.service';
 import { FieldValidatorsService } from './../../../core/services/field-validators.service';
 import { HttpRequestsService } from '../../../core/services/http-requests.service';
 import { AdminService } from './../../../core/services/admin.service';
@@ -39,7 +39,9 @@ export class RegisterComponent implements OnInit {
   createRegisterFirstStepForm() {
     this.registerFirstStepForm = new FormGroup({
       teamName: new FormControl('', [Validators.required]),
-      teamPassword: new FormControl('', [Validators.required]),
+      teamPassword: new FormControl('', [Validators.required,
+        this.fieldValidatorsService.getValidator('validatePassword')
+      ]),
       email: new FormControl('', [Validators.required])
     });
   }
@@ -54,8 +56,7 @@ export class RegisterComponent implements OnInit {
     }, [this.fieldValidatorsService.getValidator('validateEqual', {
       field1: 'adminNewPassword',
       field2: 'adminConfirmPassword'
-    })]
-  );
+    })]);
   }
 
   /**
@@ -82,7 +83,7 @@ export class RegisterComponent implements OnInit {
           this.enableFormControls(['adminPassword']);
         } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
           this.userType = 'new';
-          this.disableFormControls([ 'adminPassword']);
+          this.disableFormControls(['adminPassword']);
           this.enableFormControls(['firstName', 'lastName', 'adminNewPassword', 'adminConfirmPassword']);
         }
       });
@@ -94,7 +95,7 @@ export class RegisterComponent implements OnInit {
    */
   disableFormControls(formControlsNames: string[]) {
     const formControlsLen = formControlsNames.length;
-    for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++ ) {
+    for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++) {
       this.registerSecondStepForm.controls[formControlsNames[formControlIndex]].disable();
     }
   }
@@ -102,10 +103,11 @@ export class RegisterComponent implements OnInit {
   /**
    * @author Nermeen Mattar
    * @description  enables the form controls with the received names
+   * @param {string[]} formControlsNames
    */
   enableFormControls(formControlsNames: string[]) {
     const formControlsLen = formControlsNames.length;
-    for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++ ) {
+    for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++) {
       this.registerSecondStepForm.controls[formControlsNames[formControlIndex]].enable();
     }
   }
@@ -139,10 +141,9 @@ export class RegisterComponent implements OnInit {
         this.displaySpinner = false;
       }
     }, err => {
-        this.handleRegisterError(err);
+      this.handleRegisterError(err);
     });
   }
-
 
   /**
    * @author Nermeen Mattar
@@ -156,62 +157,53 @@ export class RegisterComponent implements OnInit {
       username: adminEmail,
       password: adminPassword
     }).subscribe(loginRes => {
-      // if(loginRes.isAuthorized.toLowerCase() === 'admin') {
-        this.displaySpinner = false;
-      // }
+      this.displaySpinner = false;
     }, err => {
       this.handleLoginError(err);
     });
   }
 
+  /**
+   * @author Nermeen Mattar
+   * @description requests the backend to resend the activation mail to the email the user entered
+   */
   resendConfirmationEmail() {
     this.displaySpinner = true;
     this.registerService.resendActivationMail(this.registerFirstStepForm.controls.email.value).subscribe(res => {
       this.displaySpinner = false;
-
     }, err => {
       this.displaySpinner = false;
-      // const mailActivationUserMessages =
-      //  {fail: 'REGISTER.ACTIVATION_MAIL_RESEND__FAIL', success: 'REGISTER.ACTIVATION_MAIL_RESEND__SUCCESS'};
-      // switch(err.error.message) {
-      //   case
-      // }
     });
   }
 
+  /**
+   * @author Nermeen Mattar
+   * @description handles the registration fail
+   */
   handleRegisterError(err) {
-      // this.registrationStepper.previous();
-      /* conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
-      if (err.status === '409') { // or check if the backend returned certain msg
-        // this.registrationStepper.previous();
-
-      } else if (this.userType === 'admin') {
-        this.userMessagesService.showUserMessage({
-          fail: 'REGISTER.ACTIVATION_MAIL_RESEND__SUCCESS'
-        },
-        'fail');
-      } else { /* will consider anything else as wrong password since currently errors are not supported from the bakend side */
-        // SOMETHING_WENT_WRONG
-      }
+    /* 409 conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
+    if (this.userType === 'admin') {
+      /* this.userMessagesService.showUserMessage({}, 'fail'); */
     }
-
-  handleLoginError(err) {
-    this.displaySpinner = false;
-
-        /* conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
-    /*    if (err.status === '401') { // or check if the backend returned certain msg
-          this.userMessagesService.showUserMessage({
-            fail: 'LOGIN.INCORRECT_ADMIN_PASSWRD'
-          },
-          'fail');
-        } else */// if (err.error.message === 'email activation required')
-        {
-          this.informUserToActivateEmail (); /* may move this to happen in the first step (checking step) */
-        }
+     /* will consider anything else as wrong password */
   }
 
+  /**
+   * @author Nermeen Mattar
+   * @description handles the login fail
+   */
+  handleLoginError(err) {
+    this.displaySpinner = false;
+    if (err.error.message === 'error.mail.not.confirmed') {
+      this.informUserToActivateEmail(); /* better to move this to happen in the first step (checking).. need support from backend */
+    }
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description displays a message to inform the user of the need to activate email. A resend activation mail link will be displayed too.
+   */
   informUserToActivateEmail() {
-    // this.registrationStepper.previous();
     this.emailActivationRequired = true;
     this.displayMessageCard = true;
   }
