@@ -1,5 +1,6 @@
 
 @import "../../../styles/toolkit/variables.scss";
+
 .app-page-not-found {
   margin: 0 auto;
   display: flex;
@@ -9,7 +10,6 @@
     margin: 0 auto;
     text-align:center;
     &__404 {
-      display:inline-block;
       color: $tc-color-gray-shade-4;
       font-size: 6rem;
     }
