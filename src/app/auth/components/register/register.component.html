@@ -3,7 +3,6 @@
   <mat-card-content>
     <div class="app-register__content" [ngClass]="{'app-register__content__hide': displaySpinner || displayMessageCard}">
       <mat-vertical-stepper linear="true" (selectionChange)="selectedStepChanged($event)">
-        <!--     [selectedIndex]="currentStep" -->
         <mat-step label="{{ 'TEAM.TEAM_DETAILS' | translate }}" *ngIf="registerFirstStepForm" [stepControl]="registerFirstStepForm">
           <form novalidate [formGroup]="registerFirstStepForm" class="app-register__content__form">
             <mat-form-field class="app-register__content__form__field">
@@ -47,29 +46,39 @@
               <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
               <mat-error *ngIf="registerSecondStepForm.controls['lastName'].invalid"> {{ 'USER.LAST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
-            <mat-form-field class="app-register__content__form__field">
+            <mat-form-field *ngIf="userType === 'admin'; else newPassword" class="app-register__content__form__field">
               <input matInput placeholder="{{ 'ADMIN.ADMIN_PASSWORD' | translate }}" formControlName="adminPassword" type="password">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
-              <mat-icon *ngIf="registerSecondStepForm.controls['adminPassword'].invalid" class="app-register__content__form__field__icon"
-                matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}" matTooltipPosition="below">
-                info </mat-icon>
               <mat-error *ngIf="registerSecondStepForm.controls['adminPassword'].invalid">
-                <span *ngIf="registerSecondStepForm.controls['adminPassword'].errors.required; else passwordInvalid">
-                  {{ 'ADMIN.ADMIN_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
-                </span>
-                <ng-template #passwordInvalid>
-                  <span *ngIf="registerSecondStepForm.controls['adminPassword'].errors.validatePassword">
-                    {{'FORM.ENTER_VALID_PASSWORD' | translate}}
-                  </span>
-                </ng-template>
+                {{ 'ADMIN.ADMIN_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
               </mat-error>
             </mat-form-field>
-            <mat-form-field class="app-register__content__form__field">
+            <ng-template #newPassword>
+              <mat-form-field class="app-register__content__form__field">
+                <input matInput placeholder="{{ 'ADMIN.ADMIN_PASSWORD' | translate }}" formControlName="adminNewPassword" type="password">
+                <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
+                <mat-icon *ngIf="registerSecondStepForm.controls['adminNewPassword'].dirty && registerSecondStepForm.controls['adminNewPassword'].invalid&&registerSecondStepForm.controls['adminNewPassword'].errors.validatePassword"
+                  class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
+                  matTooltipPosition="below">
+                  info </mat-icon>
+                <mat-error *ngIf="registerSecondStepForm.controls['adminNewPassword'].invalid">
+                  <span *ngIf="registerSecondStepForm.controls['adminNewPassword'].errors.required; else passwordInvalid">
+                    {{ 'ADMIN.ADMIN_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
+                  </span>
+                  <ng-template #passwordInvalid>
+                    <span *ngIf="registerSecondStepForm.controls['adminNewPassword'].errors.validatePassword">
+                      {{'FORM.ENTER_VALID_PASSWORD' | translate}}
+                    </span>
+                  </ng-template>
+                </mat-error>
+              </mat-form-field>
+            </ng-template>
+            <mat-form-field *ngIf="userType !== 'admin'" class="app-register__content__form__field">
               <input matInput placeholder="{{ 'ADMIN.CONFIRM_ADMIN_PASSWORD' | translate }}" formControlName="adminConfirmPassword" type="password">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
               <mat-error *ngIf="registerSecondStepForm.controls['adminConfirmPassword'].invalid"> {{ 'ADMIN.CONFIRM_ADMIN_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
-            <mat-error *ngIf="registerSecondStepForm.invalid && registerSecondStepForm.controls['adminPassword'].touched && registerSecondStepForm.controls['adminConfirmPassword'].touched">
+            <mat-error *ngIf="registerSecondStepForm.invalid && registerSecondStepForm.validateEqual" class="app-register__content__form__field__error">
               {{'FORM.CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD' | translate}}
             </mat-error>
           </form>
