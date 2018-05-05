@@ -1,0 +1,24 @@
+
+@import "../../../styles/toolkit/variables.scss";
+.app-page-not-found {
+  margin: 0 auto;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  &__wrapper {
+    margin: 0 auto;
+    text-align:center;
+    &__404 {
+      display:inline-block;
+      color: $tc-color-gray-shade-4;
+      font-size: 6rem;
+    }
+    &__message {
+      font-size: $biggest-font-size;
+    }
+    &__button {
+      margin: 1rem;
+      color: white;
+    }
+  }
+}
