@@ -7,7 +7,6 @@ import { AdminService } from './../../../core/services/admin.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
 import { UserService } from '../../../core/services/user.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
-
 @Component({
   selector: 'tc-admin-settings',
   templateUrl: './admin-settings.component.html',
@@ -18,6 +17,7 @@ export class AdminSettingsComponent implements OnInit {
   adminSettingsGroup: FormGroup;
   teamSettingsGroup: FormGroup;
   teamNameControl: FormControl;
+  directLinkControl: FormControl;
   userTeams: TcTeamInfo[];
   eventId: string; /* is undefined (in the case of event creation) */
   constructor(userService: UserService, private fieldValidatorsService: FieldValidatorsService,
@@ -35,11 +35,9 @@ export class AdminSettingsComponent implements OnInit {
    * @description calls the funcitons that create 1- the admin form 2- the team name form control 3- the team form.
    */
   initSettingsForm() {
-    // this.adminService.getSettings(this.eventId).subscribe(res => {
     this.createAdminSettingsForm();
-    this.createTeamNameFormControls();
+    this.createTeamNameAndDirectLinkFormControls();
     this.createTeamSettingsForm();
-    // });
   }
 
   /**
@@ -49,7 +47,9 @@ export class AdminSettingsComponent implements OnInit {
   createAdminSettingsForm() {
     this.adminSettingsGroup = new FormGroup({
       adminPassword: new FormControl('', [Validators.required]),
-      adminNewPassword: new FormControl('', [Validators.required]),
+      adminNewPassword: new FormControl('', [Validators.required,
+        this.fieldValidatorsService.getValidator('validatePassword')
+      ]),
       adminConfirmNewPassword: new FormControl('', [Validators.required])
     }, [this.fieldValidatorsService.getValidator('validateEqual', {
       field1: 'adminNewPassword',
@@ -59,10 +59,11 @@ export class AdminSettingsComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description creates the team name form control (a standalone form control).
+   * @description creates the team name and direct link form controls (standalone form controls).
    */
-  createTeamNameFormControls() {
+  createTeamNameAndDirectLinkFormControls() {
     this.teamNameControl = new FormControl('', [Validators.required]);
+    this.directLinkControl = new FormControl('', [Validators.required]);
   }
 
   /**
@@ -72,10 +73,14 @@ export class AdminSettingsComponent implements OnInit {
   createTeamSettingsForm() {
     this.teamSettingsGroup = new FormGroup({
       teamPassword: new FormControl('', [Validators.required]),
-      teamNewPassword: new FormControl('', [Validators.required]),
+      teamNewPassword: new FormControl('', [Validators.required,
+        this.fieldValidatorsService.getValidator('validatePassword')
+      ]),
       teamConfirmNewPassword: new FormControl('', [Validators.required]),
-      // directLink: new FormControl('', [Validators.required])
-    });
+    }, [this.fieldValidatorsService.getValidator('validateEqual', {
+      field1: 'teamNewPassword',
+      field2: 'teamConfirmNewPassword'
+    })]);
   }
   /**
    * @author Nermeen Mattar
@@ -108,4 +113,23 @@ export class AdminSettingsComponent implements OnInit {
       this.adminService.changeTeamName(this.teamNameControl.value);
     }
   }
+  generateDirectLink() {
+    this.directLinkControl.setValue('http://dev.team.center/'.concat(this.getUUID())); // will be replaced by a call to the backend
+  }
+
+  /* temp function until backend supports generating links*/
+  getUUID() {
+    let uuid = '', i, random;
+    for (i = 0; i < 32; i++) {
+      // tslint:disable-next-line:no-bitwise
+      random = Math.random() * 16 | 0;
+      if (i === 8 || i === 12 || i === 16 || i === 20) {
+        uuid += '-';
+      }
+      // tslint:disable-next-line:no-bitwise
+      uuid += (i === 12 ? 4 : (i === 16 ? (random & 3 | 8) : random)).toString(16);
+    }
+    return uuid;
+  }
+
 }
