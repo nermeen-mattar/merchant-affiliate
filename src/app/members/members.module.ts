@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MaterialModule } from './../shared/material/material.module';
 import { MembersService } from './services/members.service';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersComponent } from './members.component';
