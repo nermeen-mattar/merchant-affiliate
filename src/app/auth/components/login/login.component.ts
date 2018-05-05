@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
    */
   login(loginFormValue: ClientSideLoginInfo) {
     this.displaySpinner = true;
+    this.displayMessage = null;
     this.enteredEmail = loginFormValue.userEmail;
     this.authService.login({
       username: loginFormValue.userEmail,

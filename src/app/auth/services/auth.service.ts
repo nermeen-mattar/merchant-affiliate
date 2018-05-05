@@ -52,7 +52,7 @@ export class AuthService implements OnDestroy {
   switchToAdmin(userCredentials: ServerSideLoginInfo): Observable <any> {
     const switchFailMsg = 'LOGIN.INCORRECT_ADMIN_PASSWRD';
     return this.httpRequestsService.httpPost('login', userCredentials, {
-        fail: switchFailMsg
+      failDefault: switchFailMsg
       })
       .pipe(map(
         res => {
