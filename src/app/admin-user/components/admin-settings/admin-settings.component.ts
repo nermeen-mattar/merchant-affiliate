@@ -47,7 +47,8 @@ export class AdminSettingsComponent implements OnInit {
   createAdminSettingsForm() {
     this.adminSettingsGroup = new FormGroup({
       adminPassword: new FormControl('', [Validators.required]),
-      adminNewPassword: new FormControl('', [Validators.required]),
+      adminNewPassword: new FormControl('', [Validators.required,
+        this.fieldValidatorsService.getValidator('validatePassword')]),
       adminConfirmNewPassword: new FormControl('', [Validators.required])
     }, [this.fieldValidatorsService.getValidator('validateEqual', {
       field1: 'adminNewPassword',
@@ -70,7 +71,8 @@ export class AdminSettingsComponent implements OnInit {
   createTeamSettingsForm() {
     this.teamSettingsGroup = new FormGroup({
       teamPassword: new FormControl('', [Validators.required]),
-      teamNewPassword: new FormControl('', [Validators.required]),
+      teamNewPassword: new FormControl('', [Validators.required,
+        this.fieldValidatorsService.getValidator('validatePassword')]),
       teamConfirmNewPassword: new FormControl('', [Validators.required]),
       // directLink: new FormControl('', [Validators.required])
     });
