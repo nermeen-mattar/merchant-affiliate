@@ -13,7 +13,16 @@
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'TEAM.TEAM_PASSWORD' | translate }}" formControlName="teamPassword" type="password">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
-              <mat-error *ngIf="registerFirstStepForm.controls['teamPassword'].invalid">{{ 'TEAM.TEAM_PASSWORD' | translate }} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+              <mat-error *ngIf="registerFirstStepForm.controls['teamPassword'].invalid">
+                <span *ngIf="registerFirstStepForm.controls['teamPassword'].errors.required; else teamPasswordInvalid">
+                  {{'TEAM.TEAM_PASSWORD' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
+                </span>
+                <ng-template #teamPasswordInvalid>
+                  <span *ngIf="registerFirstStepForm.controls['teamPassword'].errors.validatePassword">
+                    {{'FORM.ENTER_VALID_EMAIL' | translate}}
+                  </span>
+                </ng-template>
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" formControlName="email" type="text">
@@ -62,10 +71,10 @@
                   matTooltipPosition="below">
                   info </mat-icon>
                 <mat-error *ngIf="registerSecondStepForm.controls['adminNewPassword'].invalid">
-                  <span *ngIf="registerSecondStepForm.controls['adminNewPassword'].errors.required; else passwordInvalid">
+                  <span *ngIf="registerSecondStepForm.controls['adminNewPassword'].errors.required; else adminPasswordInvalid">
                     {{ 'ADMIN.ADMIN_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
                   </span>
-                  <ng-template #passwordInvalid>
+                  <ng-template #adminPasswordInvalid>
                     <span *ngIf="registerSecondStepForm.controls['adminNewPassword'].errors.validatePassword">
                       {{'FORM.ENTER_VALID_PASSWORD' | translate}}
                     </span>
