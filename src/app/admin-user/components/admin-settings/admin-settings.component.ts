@@ -63,7 +63,7 @@ export class AdminSettingsComponent implements OnInit {
    */
   createTeamNameAndDirectLinkFormControls() {
     this.teamNameControl = new FormControl('', [Validators.required]);
-    this.directLinkControl = new FormControl('', [Validators.required]);
+    this.directLinkControl = new FormControl('');
   }
 
   /**

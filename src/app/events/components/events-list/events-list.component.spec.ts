@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { EventsListComponent } from './events-list.component';
 import { MaterialModule } from '../../../shared/material/material.module';
@@ -32,7 +33,8 @@ describe('EventsListComponent', () => {
         {
           provide: UserService,
           useClass: UserServiceMock
-        }
+        },
+        DeviceDetectorService
       ]
     })
     .compileComponents();
