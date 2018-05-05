@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './core/guards/auth.guard';
 import { TeamsComponent } from './teams/teams.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 /* The default route is the team center module but if the user is not logged in auth gaurd will redirect the user to the home */
 const routes: Routes = [{
@@ -55,7 +56,7 @@ const routes: Routes = [{
   },
   {
     path: '**',
-    redirectTo: 'events'
+    component: PageNotFoundComponent
   }
 ];
 

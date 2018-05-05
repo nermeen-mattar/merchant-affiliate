@@ -7,7 +7,6 @@ import { SharedModule } from './../shared/shared.module';
 import { AdminUserRoutingModule } from './admin-user-routing.module';
 import { AdminUserComponent } from '../admin-user/admin-user.component';
 import { AdminSettingsComponent } from './components/admin-settings/admin-settings.component';
-import { MaterialModule } from './../shared/material/material.module';
 
 @NgModule({
   imports: [
@@ -16,8 +15,7 @@ import { MaterialModule } from './../shared/material/material.module';
     TranslateModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule,
-    MaterialModule
+    SharedModule
   ],
   declarations: [AdminUserComponent, AdminSettingsComponent]
 })

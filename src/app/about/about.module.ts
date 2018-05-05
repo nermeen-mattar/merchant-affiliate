@@ -5,13 +5,13 @@ import { ParallaxModule } from 'ngx-parallax';
 
 import { AboutRoutingModule } from './about-routing.module';
 import { AboutComponent } from '../about/about.component';
-import { MaterialModule } from '../shared/material/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AboutRoutingModule,
-    MaterialModule,
+    SharedModule,
     TranslateModule.forChild(),
     ParallaxModule
   ],

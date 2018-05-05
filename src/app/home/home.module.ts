@@ -5,15 +5,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ParallaxModule } from 'ngx-parallax';
 
 import { HomeComponent } from './home.component';
-import { MaterialModule } from '../shared/material/material.module';
 import { HomeRoutingModule } from './home-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     HomeRoutingModule,
     FormsModule,
-    MaterialModule,
+    SharedModule,
     TranslateModule.forChild(),
     ParallaxModule
   ],

@@ -6,15 +6,15 @@ import { ParallaxModule } from 'ngx-parallax';
 import { FormsModule } from '@angular/forms';
 
 import { ContactRoutingModule } from './contact-routing.module';
-import { MaterialModule } from '../shared/material/material.module';
 import { ContactService } from './contact.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ContactRoutingModule,
-    MaterialModule,
+    SharedModule,
     TranslateModule.forChild(),
     ParallaxModule
   ],
