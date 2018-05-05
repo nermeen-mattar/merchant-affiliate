@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MemberFormComponent } from './components/member-form/member-form.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersComponent } from './members.component';
+import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       , {
           path: 'list/:memberId',
           component: MemberFormComponent
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent
       }
     ]
   }

@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
-
-const routes: Routes = [
-  {
+import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
+const routes: Routes = [{
     path: '',
     component: HomeComponent,
     // will be uncommented if confirmed that about component goes in the same module with home
@@ -20,6 +19,10 @@ const routes: Routes = [
     //         component: AboutComponent
     //     }
     // ]
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 
@@ -27,4 +30,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}
