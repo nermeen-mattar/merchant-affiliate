@@ -62,18 +62,18 @@
   },
   "HOME": {
     "GO": "Go!",
-    "SLOGAN": "Simplified Team Management",
+    "SLOGAN": "Your Team Thing",
     "ADV1": {
       "TITLE": "Participations & Cancellations",
-      "TEXT": "Create Participation or Cancellation events and enter a maximum of participant or minimum of remaining team members per event."
+      "TEXT": "Create Participation & Cancellation events. If you want you can also define per event a minimum and a maximum for the team members."
     },
     "ADV2": {
       "TITLE": "Volunteer work Management",
-      "TEXT": "Many clubs have difficulties organizing the many Volunteer work. Teamcenter makes it easy to manage them."
+      "TEXT": "Many clubs have difficulties organizing the many Volunteer work. team.center makes it easy to manage them."
     },
     "ADV3": {
       "TITLE": "One password for all",
-      "TEXT": "Teamcenter makes it possible to set the same password for all team members and still have personal logins. Just ask your teammate or use the direct link if you forget your password."
+      "TEXT": "team.center makes it possible to set the same password for all team members and still have personal logins. Just ask your teammate or use the direct link if you forget your password."
     },
     "ADV4": {
       "TITLE": "Be a member of several teams",
@@ -81,11 +81,11 @@
     },
     "ADV5": {
       "TITLE": "Activate mail notifications",
-      "TEXT": "When creating an event, the admin can decide if the event should be created with automatic mail reminders, indicating how many days before the event the reminder will be sent"
+      "TEXT": "When creating an event, the admin can decide if the event should be created with automatic mail reminders. The admin can set reminders for 1 day and 7 days before the event starts."
     },
     "ADV6": {
       "TITLE": "Team overview and reporting",
-      "TEXT": "Each team member has full transparency about the number of registrations and cancellations of his team mates. For example, club members remember each other for entering a helper mission, or to cancel a training session."
+      "TEXT": "Each team member has full transparency about the number of registrations and cancellations of his team mates. For example, club members remember each other automatically for chosing a helper mission, or to cancel a training session. team.center makes life for all coaches much easier."
     }
   },
   "USER_SWITCHING": {
@@ -116,7 +116,7 @@
     "LOCATION": "Location",
     "EVENT_TYPE": "Event to",
     "MIN_MAX_PER_EVENT": "Min/Max participants per event",
-    "COMMENT": "COMMENT",
+    "COMMENT": "Comment",
     "CREATE_EVENT": "Create Event",
     "EDIT_EVENT": "Edit Event"
   },
@@ -149,7 +149,7 @@
   },
   "REGISTER": {
     "REGISTER": "Register",
-    "ADMIN_ALREADY_EXIST": "You are already a registered admin. Please enter your admin password to create the team",
+    "ADMIN_ALREADY_EXIST": "You are already a registered admin. Please enter your admin password to create a new team",
     "EMAIL_NOT_RECEIVED": "Haven't receive an email?",
     "SEND_MAIL_AGAIN": " Send mail again",
     "NEED_TO_CONFIRM_EMAIL": "Please confirm your mail first."
@@ -162,17 +162,17 @@
   "FOOTER": {
     "TERMS_CONDITIONS": "Terms & Conditions",
     "IMPRESSUM": "Impressum",
-    "COPY_RIGHT": "© 2018 Copyright teamcenter"
+    "COPY_RIGHT": "© 2018 Copyright team.center"
   },
   "ABOUT": {
     "ABOUT": "About",
     "SECTION1": {
       "TITLE": "Who are we?",
-      "TEXT": "Hi. We are team.center. The first events management software you will actually like. We’d love to tell you a bit about us."
+      "TEXT": "Hi. We are team.center. The first events management software you will actually like, because we keep it simple. We’d love to tell you a bit about us."
     },
     "SECTION2": {
       "TITLE": "About Team.center",
-      "TEXT": "What we are team.center is a private sponsered web project from Switzerland. We are currently in Beta status and therefore a lot of improvements to improve the user experiance are ongoing."
+      "TEXT": "team.center is a private sponsered web project from Switzerland. We are currently in Beta status and therefore a lot of new features to improve the user experiance are ongoing. We are happy to receive many feedbacks from you out there. Please just use our contact form."
     },
     "SECTION3": {
       "TITLE": "How to support us?",
@@ -184,7 +184,7 @@
       "TEXT": "Excel (CSV) Upload function to create multiple events and members per one click",
       "TEXT2": "Ability for Admins to enable \"Event log\" view for the members",
       "TEXT3": "Google maps for location entires - Other languages - Mobile Apps (Android & iOS)",
-      "TEXT4":  "We are grateful for feedback especially after implementing new features: rene@team.center"
+      "TEXT4":  "We are grateful for feedbacks, or recommondations for new features. Please just use our contact form"
     }
   },
   "footer_buyACoffee": "Support this project with buying a coffee",
@@ -197,15 +197,15 @@
   "menu_MobileLogOut": "Log out",
   "menu_MobileDownload": "Downloads",
   "settings": "Settings",
-  "directLink": " Direct link",
-  "directLinkRequired": " Direct link required ",
+  "directLink": "Direct link",
+  "directLinkRequired": "Direct link required ",
   "passwordMatchError": "Passwords do not match",
-  "repeat": " Repeat",
+  "repeat": "Repeat",
   "new": "New",
   "old": "Old",
   "agb_title": "General terms and conditions",
   "agb_p1": "Make team organisation for your team. The full potential of this tool will be in regulary apointments with a group of peaople where the organisator needs to know how many will take part.",
-  "agb_p2": "This tool is in alpha version available at the moment. We are working continuously on improvements and new fewatures. Input is welcome. If you like to suport us you can buy us a coffee:",
+  "agb_p2": "We are currently in Beta status and therefore a lot of new features to improve the user experiance are ongoing. We are happy to receive many feedbacks from you out there. Please just use our contact form.",
   "userAdmin_password": "Password",
   "userAdmin_passwordRequired": "Password is required",
   "userAdmin_buttonLogin": "Login",
