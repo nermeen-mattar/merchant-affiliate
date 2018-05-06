@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -8,7 +7,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent implements OnInit {
-  constructor(router: Router, private _location: Location) {
+  constructor(private _location: Location) {
   }
 
   goToPreviousPage() {

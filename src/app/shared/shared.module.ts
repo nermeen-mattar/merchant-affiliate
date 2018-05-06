@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material/material.module';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UnderMaintenanceComponent } from './components/under-maintenance/under-maintenance.component';
 
 @NgModule({
   imports: [
@@ -12,12 +13,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     MaterialModule,
     TranslateModule
   ],
-  declarations: [ConfirmDialogComponent, PageNotFoundComponent],
+  declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent],
   entryComponents: [ConfirmDialogComponent],
   exports: [
     MaterialModule,
     ConfirmDialogComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    UnderMaintenanceComponent
   ]
 })
 export class SharedModule { }

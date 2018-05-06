@@ -124,6 +124,13 @@
     "MESSAGE_404": "Woops, the page you're looking for isn't there!",
     "GO_TO_PREVIOUS_PAGE": "Go to previous page"
   },
+  "UNDER_MAINTENANCE": {
+    "DOWN_FOR_MAINTENANCE": "team.center is currently down for maintenance.",
+    "BACK_WITH_IMPROVEMENTS": "We will be back soon with improvements.",
+    "APPOLOGIZE": "We apologize for the inconvenience and appreciate your patience.",
+    "THANKS": "Thank you for using team.center.",
+    "SORRY": "We're Sorry"
+  },
   "USER_SWITCHING": {
     "SWITCH_TO_ADMIN": "Switch to admin",
     "SWITCHING_MSG": "You are logged in as a team member. To authenticate as a team admin, please enter a admin password.",
