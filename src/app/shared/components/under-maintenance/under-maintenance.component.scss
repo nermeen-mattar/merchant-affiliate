@@ -1,0 +1,33 @@
+
+@import "../../../../styles/toolkit/variables.scss";
+
+.app-under-maintenance {
+  margin: 0 auto;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  &__wrapper {
+    margin: 0 auto;
+    text-align:center;
+    &__title {
+      color: $tc-color-gray-shade-4;
+      font-size: $tc-font-size-h2;
+      color: $primary-color;
+    }
+    &__message {
+      font-size: $tc-font-size-h4;
+      margin: 1.2rem 0;
+    }
+    &__button {
+      margin: 1rem;
+      color: white;
+    }
+    &__icon {
+      .mat-icon {
+        font-size: $tc-font-size-h1;
+        margin-right: 2rem;
+        color: $dark-brown;
+      }
+    }
+  }
+}
