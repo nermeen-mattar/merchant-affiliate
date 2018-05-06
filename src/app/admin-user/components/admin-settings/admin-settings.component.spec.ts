@@ -4,6 +4,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AdminService } from './../../../core/services/admin.service';
+import { AdminMockService } from './../../../shared/mocks/services/admin.service.mock';
 import { FieldValidatorsService } from './../../../core/services/field-validators.service';
 import { FieldValidatorsMockService } from './../../../shared/mocks/services/field-validators.service.mock';
 import { UserServiceMock } from './../../../shared/mocks/services/user.serivce.mock';
@@ -22,7 +24,8 @@ describe('AdminSettingsComponent', () => {
       imports: [
         TranslateModule.forRoot(),
         MaterialModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        RouterTestingModule
       ],
       declarations: [ AdminSettingsComponent ],
       providers: [
@@ -33,6 +36,9 @@ describe('AdminSettingsComponent', () => {
         {
           provide: FieldValidatorsService,
           useClass: FieldValidatorsMockService
+        }, {
+          provide: AdminService,
+          useClass: AdminMockService
         }
       ]
     })
