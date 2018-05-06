@@ -29,7 +29,7 @@ describe('LoginComponent', () => {
           provide: AuthService,
           useClass: AuthServiceMock
         }, {
-          provide: [RegisterService],
+          provide: RegisterService,
           useClass: RegisterServiceMock
         }]
       }).compileComponents();
