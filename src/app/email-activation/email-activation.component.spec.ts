@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 
-import { TranslateModule } from '@ngx-translate/core';
 import { EmailActivationComponent } from './email-activation.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { HttpRequestsService } from '../core/services/http-requests.service';
@@ -15,6 +16,7 @@ describe('EmailActivationComponent', () => {
     TestBed.configureTestingModule({
       schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
       imports: [
+        RouterTestingModule,
         MaterialModule,
         TranslateModule.forRoot()
       ],
