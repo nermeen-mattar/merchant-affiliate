@@ -2,6 +2,7 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { EmailActivationComponent } from './email-activation/email-activation.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { TeamsComponent } from './teams/teams.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
@@ -58,6 +59,10 @@ const routes: Routes = [{
   {
     path: 'under-maintenance',
     component: UnderMaintenanceComponent
+  },
+  {
+    path: 'activation',
+    component: EmailActivationComponent
   },
   {
     path: '**',

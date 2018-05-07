@@ -11,10 +11,12 @@ import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
 import { createTranslateLoader } from './core/loaders/translate-loader';
+import { EmailActivationComponent } from './email-activation/email-activation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    EmailActivationComponent,
   ],
   imports: [
     BrowserModule,
