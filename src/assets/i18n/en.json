@@ -1,5 +1,6 @@
 {
   "TEAM_CENTER": "team.center",
+  "WELCOME": "Welcome",
   "DELETE": "Delete",
   "CANCEL": "Cancel",
   "CONFIRM": "Confirm",
@@ -120,6 +121,11 @@
       "TEXT": "Each team member has full transparency about the number of registrations and cancellations of his team mates. For example, club members remember each other automatically for chosing a helper mission, or to cancel a training session. team.center makes life for all coaches much easier."
     }
   },
+  "ACTIVATION": {
+    "EXPIRED_LINK": "The link has expired",
+    "ALREADY_ACTIVATED": "You're mail has already been activated",
+    "ACTIVATION_SUCCESS":  "You're mail has been activated successfully"
+  },
   "PAGE_NOT_FOUND": {
     "MESSAGE_404": "Woops, the page you're looking for isn't there!",
     "GO_TO_PREVIOUS_PAGE": "Go to previous page"
@@ -216,7 +222,8 @@
   "LOGIN": {
     "LOGIN": "Login",
     "PASSWORD": "Password",
-    "REGISTER": "Register Now!"
+    "REGISTER": "Register Now!",
+    "GO_TO_LOGIN": "Go to Login Page"
   },
   "FOOTER": {
     "TERMS_CONDITIONS": "Terms & Conditions",

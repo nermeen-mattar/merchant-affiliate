@@ -1,0 +1,34 @@
+<div class="app-mail-activation" *ngIf="!displayPageNotFound; else pageNotFound">
+  <mat-card>
+    <mat-card-title class="app-mail-activation__title">
+      {{'WELCOME' | translate}}
+      <span *ngIf="userInfo" class="app-mail-activation__title__user-name"> {{userInfo.firstname}} {{userInfo.lastname}}</span>
+    </mat-card-title>
+    <mat-card-content *ngIf="!displaySpinner; else spinner">
+      <div *ngIf="mailState !== mailActivationState.ACTIVATION_LINK_EXPIRED; else expiredLink">
+        <img class="app-mail-activation__wrapper__img" width="350" alt="dropped coffee" src="../../assets/img/mail-activated.png">
+        <div *ngIf="mailState === mailActivationState.SUCCESS; else alreadyActivated" class="app-mail-activation__message app-mail-activation__success">
+          {{'ACTIVATION.ACTIVATION_SUCCESS' | translate}}
+        </div>
+        <ng-template #alreadyActivated>
+          <div *ngIf="mailState === mailActivationState.ALREADY_ACTIVATED;" class="app-mail-activation__message app-mail-activation__success">
+            {{ 'ACTIVATION.ALREADY_ACTIVATED' | translate}}
+          </div>
+        </ng-template>
+      </div>
+      <ng-template #expiredLink>
+        <img class="app-mail-activation__wrapper__img" width="350" alt="dropped coffee" src="../../assets/img/link-expired.png">
+        <div class="app-mail-activation__message app-mail-activation__fail">
+          {{ 'ACTIVATION.EXPIRED_LINK' | translate}}
+        </div>
+      </ng-template>
+      <button routerLink="/auth/login" mat-raised-button color="primary" class="app-mail-activation__button">{{'LOGIN.GO_TO_LOGIN' | translate}}</button>
+    </mat-card-content>
+    <ng-template #spinner>
+      <mat-spinner class="app-mail-activation__spinner"></mat-spinner>
+    </ng-template>
+  </mat-card>
+</div>
+<ng-template #pageNotFound>
+  <tc-page-not-found> </tc-page-not-found>
+</ng-template>

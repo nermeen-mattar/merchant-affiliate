@@ -37,7 +37,7 @@ export class UserMessagesService {
          if (translatedMessage.indexOf(translationKey) ===  -1 ) {
           userFailMessage.fail = translationKey;
          } else {
-          userFailMessage.fail = userMessages.failDefault ?  userMessages.failDefault : 'SOMETHING_WENT_WRONG'; /* default message */
+          userFailMessage.fail = userMessages && userMessages.failDefault ?  userMessages.failDefault : 'SOMETHING_WENT_WRONG';
          }
         }
       );
