@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UnderMaintenanceComponent } from './under-maintenance.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('UnderMaintenanceComponent', () => {
   let component: UnderMaintenanceComponent;
@@ -8,6 +9,9 @@ describe('UnderMaintenanceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        TranslateModule.forRoot()
+      ],
       declarations: [ UnderMaintenanceComponent ]
     })
     .compileComponents();
