@@ -10,6 +10,8 @@
     <span class="app-header__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'EVENT.EVENTS' | translate}} </span>
     </span>
+    {{($isUserLoggedIn | async)}}
+
     <span class="app-header__menu__item" routerLink="/members" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'MEMBER.MEMBERS' | translate}} </span>
     </span>

@@ -6,6 +6,7 @@
           <mat-icon class="app-container__sidenav__menu__item__icon">event</mat-icon>
           <span> {{'EVENT.EVENTS' | translate}} </span>
         </div>
+      {{($isUserLoggedIn | async)}}
         <div class="app-container__sidenav__menu__item" routerLink="/members" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
           <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
           <span> {{'MEMBER.MEMBERS' | translate}} </span>

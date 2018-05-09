@@ -1,7 +1,7 @@
 <mat-card class="app-register">
   <mat-card-title class="text-center">{{ 'REGISTER.REGISTER' | translate }} </mat-card-title>
   <mat-card-content>
-    <div class="app-register__content" [ngClass]="{'app-register__content__hide': displaySpinner || displayMessageCard}">
+    <div class="app-register__content" [ngClass]="{'app-register__element-hide': displaySpinner || displayMessageCard}">
       <mat-vertical-stepper linear="true" (selectionChange)="selectedStepChanged($event)">
         <mat-step label="{{ 'TEAM.TEAM_DETAILS' | translate }}" *ngIf="registerFirstStepForm" [stepControl]="registerFirstStepForm">
           <form novalidate [formGroup]="registerFirstStepForm" class="app-register__content__form">
@@ -96,7 +96,7 @@
       <button *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
         (click)="register(registerFirstStepForm.value, registerSecondStepForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
     </div>
-    <mat-spinner class="app-register__spinner" [ngClass]="{'app-register__spinner__hide': !displaySpinner }"></mat-spinner>
+    <mat-spinner class="app-register__spinner" [ngClass]="{'app-register__element-hide': !displaySpinner }"></mat-spinner>
     <div *ngIf="displayMessageCard && !displaySpinner">
       <div *ngIf="!emailActivationRequired" class="app-register__content__form__register-success"> {{ 'USER_MESSAGES.REGISTER.REGISTER_SUCCESS' | translate }} </div>
       <div class="app-register__content__resend-mail">

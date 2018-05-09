@@ -1,11 +1,23 @@
 <div class="app-footer">
-  <mat-list color="primary" class="app-footer__menu">
-    <mat-list-item class="app-footer__menu__item"> {{"FOOTER.TERMS_CONDITIONS" | translate}} </mat-list-item>
-    <mat-list-item class="app-footer__menu__item" routerLink="/about"> {{"ABOUT.ABOUT" | translate}} </mat-list-item>
-    <mat-list-item class="app-footer__menu__item"> {{"FOOTER.IMPRESSUM" | translate}} </mat-list-item>
+  <div class="app-footer__main">
+  <mat-list class="app-footer__main__menu">
+    <mat-list-item class="app-footer__main__menu__item"> {{"FOOTER.TERMS_CONDITIONS" | translate}} </mat-list-item>
+    <mat-list-item class="app-footer__main__menu__item" routerLink="/about"> {{"ABOUT.ABOUT" | translate}} </mat-list-item>
+    <mat-list-item class="app-footer__main__menu__item"> {{"FOOTER.IMPRESSUM" | translate}} </mat-list-item>
     <!-- *** what is impressum a page -->
-    <mat-list-item class="app-footer__menu__item" routerLink="/contact"> {{"CONTACT.CONTACT" | translate}} </mat-list-item>
+    <mat-list-item class="app-footer__main__menu__item" routerLink="/contact"> {{"CONTACT.CONTACT" | translate}} </mat-list-item>
   </mat-list>
+  <div> Support this project with buying a coffee </div>
+  <div> 
+
+      <button mat-raised-button color="primary" class="app-register__content__button" >
+        SHARE
+      </button>
+      <button mat-raised-button color="primary" class="app-register__content__button" >
+          TWEET
+        </button>
+     </div>
+</div>
   <div class="app-footer__copyright">
     <span class="app-footer__copyright__text">
       {{"FOOTER.COPY_RIGHT" | translate}}
