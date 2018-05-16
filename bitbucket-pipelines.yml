@@ -15,4 +15,4 @@ pipelines:
           caches:
             - node
           script: # Modify the commands below to build your repository.
-            - deploy-frontend.sh
+            - bash deploy-frontend.sh
