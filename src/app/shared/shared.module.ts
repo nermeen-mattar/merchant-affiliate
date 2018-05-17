@@ -6,6 +6,7 @@ import { MaterialModule } from './material/material.module';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UnderMaintenanceComponent } from './components/under-maintenance/under-maintenance.component';
+import { StringNormalizerPipe } from './pipes/string-normalizer.pipe';
 
 @NgModule({
   imports: [
@@ -13,13 +14,14 @@ import { UnderMaintenanceComponent } from './components/under-maintenance/under-
     MaterialModule,
     TranslateModule
   ],
-  declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent],
+  declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent, StringNormalizerPipe],
   entryComponents: [ConfirmDialogComponent],
   exports: [
     MaterialModule,
     ConfirmDialogComponent,
     PageNotFoundComponent,
-    UnderMaintenanceComponent
+    UnderMaintenanceComponent,
+    StringNormalizerPipe
   ]
 })
 export class SharedModule { }
