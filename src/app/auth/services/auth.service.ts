@@ -134,8 +134,10 @@ export class AuthService implements OnDestroy {
    */
   isAuthenticated(): boolean {
     if (this.loginResponse && this.loginResponse.token) {
-      return true; // hiding checking if token is expired until discussing the requirements
-      // return this.tokenHandler.isTokenValid(this.loginResponse.token);
+      this.tokenHandler.isTokenValid(this.loginResponse.token));
+      return true;
+      /*  hiding checking if token is expired until discussing the requirements
+     return this.tokenHandler.isTokenValid(this.loginResponse.token); */
     }
     return false;
   }
