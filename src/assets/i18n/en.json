@@ -1,4 +1,6 @@
 {
+  "en": "English",
+  "de": "German",
   "TEAM_CENTER": "team.center",
   "WELCOME": "Welcome",
   "DELETE": "Delete",
@@ -169,7 +171,9 @@
     "COMMENT": "Comment",
     "CREATE_EVENT": "Create Event",
     "EDIT_EVENT": "Edit Event",
-    "THIS_EVENT": "this event"
+    "THIS_EVENT": "this event",
+    "MIN_PER_EVENT": "Min allowed members",
+    "MAX_PER_EVENT": "Max allowed members"
   },
   "TEAM": {
     "TEAMS": "Teams",
