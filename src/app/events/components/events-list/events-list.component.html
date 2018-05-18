@@ -52,18 +52,50 @@
       </ng-container>
       <ng-container matColumnDef="status">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.STATUS' | translate}} </mat-header-cell>
-        <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row">
-          <span *ngIf="row.detailedParticipations">{{row.numOfParticipations}} / {{row.detailedParticipations.length}}</span>
+        <mat-cell  style="min-width: 178px !important;" class="app-events__container__table__content-cell" *matCellDef="let row">
+          <!-- <span *ngIf="row.detailedParticipations">{{row.numOfParticipations}} / {{row.detailedParticipations.length}}</span> -->
+          <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members">
+            <div>
+                <div style="width: 24px; display:inline-block;"></div>
+              <div *ngIf="row.minCriticalValue" class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__min">
+              Min </div>
+              <!-- {{'EVENT.MIN_PER_EVENT' | translate}} -->
+              <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__seperator"></div>
+              <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__actual">Actual</div>
+              <!--  {{'EVENT.MAX_PER_EVENT' | translate}} -->
+
+              <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__seperator"> </div>
+              <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__max">Max</div>
+              <!--  {{'EVENT.MAX_PER_EVENT' | translate}} -->
+            </div>
+            <div style="display:flex; align-items:center;">
+                <mat-icon style="margin-bottom:2  px; color:red;"  *ngIf="(row.minCriticalValue && row.minCriticalValue > row.numOfParticipations) || (row.maxCriticalValue && row.maxCriticalValue < row.numOfParticipations); else success">error</mat-icon>
+                <div>
+                    <ng-template #success>
+                      <mat-icon style="margin-bottom:2  px; color:green;"  >check_circle</mat-icon>
+                    </ng-template>
+                    <div *ngIf="row.minCriticalValue" class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__min">[ {{row.minCriticalValue}}</div>
+                    <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__seperator"> {{row.minCriticalValue ? "-" : "("}}</div>
+
+                    <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__actual"> {{row.numOfParticipations}} </div>
+                    <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__seperator"> {{row.maxCriticalValue ? "-" : ")"}}
+                        </div>
+                        <div *ngIf="row.maxCriticalValue" class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__max">
+                        {{row.maxCriticalValue}} ]</div>
+                    </div>
+            </div>
+
+            </div>
         </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="minCriticalValue">
+      <!-- <ng-container matColumnDef="minCriticalValue">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.MIN_PER_EVENT' | translate}} </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.minCriticalValue}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="maxCriticalValue">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.MAX_PER_EVENT' | translate}} </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.maxCriticalValue}} </mat-cell>
-      </ng-container>
+      </ng-container> -->
       <ng-container matColumnDef="actions">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row">
@@ -71,7 +103,7 @@
             <mat-icon class="app-events__action" [routerLink]="row.id" color="primary">edit</mat-icon>
             <mat-icon class="app-events__action" (click)="deleteEvent($event, row.id)" color="primary">delete</mat-icon>
           </ng-container>
-          <mat-icon class="app-events__action" routerLink="details/{{row.id}}" color="primary">info</mat-icon>
+          <mat-icon class="app-events__action" routerLink="details/{{row.id}}" color="primary">ellipsis-h</mat-icon>
         </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -84,11 +116,11 @@
       <mat-expansion-panel *ngFor="let event of eventsDataSource?.data" class="app-events__container__accordion__expandable-item">
         <mat-expansion-panel-header>
           <mat-panel-title lass="app-events__container__accordion__expandable-item__title">
-            <mat-slide-toggle color="primary" (change)="toogleParticipationInEvent($event.checked, event.id)" [disabled]="isPastEvents"
-              [checked]="event.myParticipation && event.myParticipation.action !== 'cancel'">
+            <mat-slide-toggle color="primary" (change)="toogleParticipationInEvent($event.checked, event.id)" (click)="preventTriggeringAccordion($event)"
+              [disabled]="isPastEvents" [checked]="event.myParticipation && event.myParticipation.action !== 'cancel'">
             </mat-slide-toggle>
-            <span  style="margin: 0rem 1rem;">{{event.date}}</span>
-            <span >   {{event.eventName}} </span>
+            <span style="margin: 0rem 1rem;">{{event.date}}</span>
+            <span> {{event.eventName}} </span>
             <!-- {{'EVENT.TIME' | translate}}:  -->
           </mat-panel-title>
           <mat-panel-description>
@@ -99,28 +131,31 @@
         </mat-expansion-panel-header>
         <mat-card-content>
           <div class="app-events__container__accordion__expandable-item__expanded-content">
-            <div >
-              <!-- <mat-icon color="primary">alarm</mat-icon> -->
+            <div>
+              <mat-icon color="primary">alarm</mat-icon>
+              <mat-icon color="primary">check_circle</mat-icon>
+              <mat-icon color="primary">error</mat-icon>
+
               {{event.startTime | stringNormalizer:timeFormat }} - {{event.endTime | stringNormalizer:timeFormat }}</div>
-            <div  style="margin: 0rem 1rem;" class="app-events__container__accordion__expandable-item__expanded-content__number-of-members">
+            <div style="margin: 0rem 1rem;" class="app-events__container__accordion__expandable-item__expanded-content__number-of-members">
               <div>
-                <div  class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__min" > Min </div>
+                <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__min"> Min </div>
                 <!-- {{'EVENT.MIN_PER_EVENT' | translate}} -->
-                <div  class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__seperator"> - </div>
-                <div   class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__actual">Actual</div>
+                <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__seperator"> - </div>
+                <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__actual">Actual</div>
                 <!--  {{'EVENT.MAX_PER_EVENT' | translate}} -->
 
                 <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__seperator"> - </div>
-                <div   class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__max">Max</div>
+                <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__max">Max</div>
                 <!--  {{'EVENT.MAX_PER_EVENT' | translate}} -->
               </div>
               <div>
-                <div   class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__min" >{{event.minCriticalValue}}</div>
+                <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__min">{{event.minCriticalValue}}</div>
                 <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__seperator"> - </div>
 
-                <div  class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__actual"> {{event.numOfParticipations}} </div>
+                <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__actual"> {{event.numOfParticipations}} </div>
                 <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__seperator"> - </div>
-                <div   class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__max"> {{event.maxCriticalValue}}</div>
+                <div class="app-events__container__accordion__expandable-item__expanded-content__number-of-members__max"> {{event.maxCriticalValue}}</div>
               </div>
             </div>
 
@@ -144,90 +179,90 @@
     </mat-accordion>
 
     <mat-spinner class="app-events__container__spinner" *ngIf="!eventsDataSource"></mat-spinner>
+    </div>
   </div>
-</div>
 
-<mat-menu #menu="matMenu">
-  <ng-container *ngIf="activeEvent">
-    <button mat-menu-item (click)="deleteEvent($event, activeEvent.id)">
-      <mat-icon>delete</mat-icon>
-      <span>Delete</span>
-    </button>
-    <button mat-menu-item [routerLink]="activeEvent.id">
-      <mat-icon>create</mat-icon>
-      <span>Edit</span>
-    </button>
-  </ng-container>
-</mat-menu>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- start of mob-->
-<div *ngIf="test" class="app-events__container__cards-list">
-  <mat-card class="app-events__container__cards-list__item" *ngFor="let event of eventsDataSource?.data">
-    <mat-card-header>
-      <div mat-card-avatar>
-        <i>event</i>
-      </div>
-      <mat-card-title routerLink="details/{{event.id}}">{{event.eventName}}</mat-card-title>
-      <mat-card-subtitle>{{event.date}}</mat-card-subtitle>
-      <button class="app-events__container__cards-list__item__more-btn" mat-icon-button [matMenuTriggerFor]="menu" (click)="setActiveEvent(event)"
-        *ngIf="displayAdminActions">
-        <mat-icon>more_vert</mat-icon>
+  <mat-menu #menu="matMenu">
+    <ng-container *ngIf="activeEvent">
+      <button mat-menu-item (click)="deleteEvent($event, activeEvent.id)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
       </button>
-    </mat-card-header>
-    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-    <mat-card-content>
-      <mat-list class="app-events__container__cards-list__item__content">
-        <mat-list-item class="app-events__container__cards-list__item__content__item">
-          <mat-icon>alarm</mat-icon>
-          <div>
-            {{'EVENT.TIME' | translate}}: {{event.startTime | stringNormalizer:timeFormat}} - {{event.endTime | stringNormalizer:timeFormat}}
-          </div>
-        </mat-list-item>
-        <mat-list-item class="app-events__container__cards-list__item__content__item">
-          <mat-icon>insert_chart</mat-icon>
-          <div class="content">
-            {{'EVENT.STATUS' | translate}}: {{event.numOfParticipations}} / {{event.detailedParticipations.length}}
-          </div>
-        </mat-list-item>
-        <mat-list-item class="app-events__container__cards-list__item__content__item">
-          <mat-icon>warning</mat-icon>
-          <div class="content">
-            {{'EVENT.MIN_PER_EVENT' | translate}}: {{event.minCriticalValue}}
-          </div>
-        </mat-list-item>
-        <mat-list-item class="app-events__container__cards-list__item__content__item">
-          <mat-icon>warning</mat-icon>
-          <div class="content">
-            {{'EVENT.MAX_PER_EVENT' | translate}}: {{event.maxCriticalValue}}
-          </div>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button routerLink="details/{{event.id}}">
-        <span>Info</span>
+      <button mat-menu-item [routerLink]="activeEvent.id">
+        <mat-icon>create</mat-icon>
+        <span>Edit</span>
       </button>
-      <button mat-raised-button (click)="toogleParticipationInEvent(true, event.id)" color="primary" *ngIf="!event.myParticipation || event.myParticipation.action === 'cancel'"
-        [disabled]="isPastEvents">
-        {{'GOING' | translate}}
-      </button>
-      <button mat-raised-button color="primary" (click)="toogleParticipationInEvent(false, event.id)" *ngIf="event.myParticipation && event.myParticipation.action !== 'cancel'"
-        [disabled]="isPastEvents">
-        {{'NOT_GOING' | translate}}
-      </button>
+    </ng-container>
+  </mat-menu>
 
-    </mat-card-actions>
-  </mat-card>
-</div>
-<!-- end of mob-->
+
+
+
+
+
+
+
+
+
+
+
+  <!-- start of mob-->
+  <div *ngIf="test" class="app-events__container__cards-list">
+    <mat-card class="app-events__container__cards-list__item" *ngFor="let event of eventsDataSource?.data">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <i>event</i>
+        </div>
+        <mat-card-title routerLink="details/{{event.id}}">{{event.eventName}}</mat-card-title>
+        <mat-card-subtitle>{{event.date}}</mat-card-subtitle>
+        <button class="app-events__container__cards-list__item__more-btn" mat-icon-button [matMenuTriggerFor]="menu" (click)="setActiveEvent(event)"
+          *ngIf="displayAdminActions">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-card-header>
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+      <mat-card-content>
+        <mat-list class="app-events__container__cards-list__item__content">
+          <mat-list-item class="app-events__container__cards-list__item__content__item">
+            <mat-icon>alarm</mat-icon>
+            <div>
+              {{'EVENT.TIME' | translate}}: {{event.startTime | stringNormalizer:timeFormat}} - {{event.endTime | stringNormalizer:timeFormat}}
+            </div>
+          </mat-list-item>
+          <mat-list-item class="app-events__container__cards-list__item__content__item">
+            <mat-icon>insert_chart</mat-icon>
+            <div class="content">
+              {{'EVENT.STATUS' | translate}}: {{event.numOfParticipations}} / {{event.detailedParticipations.length}}
+            </div>
+          </mat-list-item>
+          <mat-list-item class="app-events__container__cards-list__item__content__item">
+            <mat-icon>warning</mat-icon>
+            <div class="content">
+              {{'EVENT.MIN_PER_EVENT' | translate}}: {{event.minCriticalValue}}
+            </div>
+          </mat-list-item>
+          <mat-list-item class="app-events__container__cards-list__item__content__item">
+            <mat-icon>warning</mat-icon>
+            <div class="content">
+              {{'EVENT.MAX_PER_EVENT' | translate}}: {{event.maxCriticalValue}}
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button routerLink="details/{{event.id}}">
+          <span>Info</span>
+        </button>
+        <button mat-raised-button (click)="toogleParticipationInEvent(true, event.id)" color="primary" *ngIf="!event.myParticipation || event.myParticipation.action === 'cancel'"
+          [disabled]="isPastEvents">
+          {{'GOING' | translate}}
+        </button>
+        <button mat-raised-button color="primary" (click)="toogleParticipationInEvent(false, event.id)" *ngIf="event.myParticipation && event.myParticipation.action !== 'cancel'"
+          [disabled]="isPastEvents">
+          {{'NOT_GOING' | translate}}
+        </button>
+
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <!-- end of mob-->
