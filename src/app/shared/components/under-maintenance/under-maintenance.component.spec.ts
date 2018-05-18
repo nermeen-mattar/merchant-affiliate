@@ -1,7 +1,9 @@
+import { Location } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { UnderMaintenanceComponent } from './under-maintenance.component';
-import { TranslateModule } from '@ngx-translate/core';
 
 describe('UnderMaintenanceComponent', () => {
   let component: UnderMaintenanceComponent;
@@ -10,6 +12,7 @@ describe('UnderMaintenanceComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule,
         TranslateModule.forRoot()
       ],
       declarations: [ UnderMaintenanceComponent ]
@@ -18,6 +21,7 @@ describe('UnderMaintenanceComponent', () => {
   }));
 
   beforeEach(() => {
+    location = TestBed.get(Location);
     fixture = TestBed.createComponent(UnderMaintenanceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
