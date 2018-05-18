@@ -2,7 +2,6 @@ import { first } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
-import { DatePipe } from '@angular/common';
 
 import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
@@ -28,6 +27,7 @@ export class EventsListComponent implements OnInit {
   filterString = '';
   isMobile: boolean;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
+  timeFormat = {subString: { to: 5 }};
   activeEvent: TcEvent = null;
   constructor(
     private eventsService: EventsService,

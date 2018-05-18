@@ -26,7 +26,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     &__title {
       color: $tc-color-gray-shade-6;
       font-weight: $tc-font-weight-4;
@@ -52,9 +52,38 @@
         font-weight: $tc-font-weight-6;
         font-size: $tc-font-size-h5;
       }
-      &__header-cell, &__content-cell {
+      &__header-cell,
+      &__content-cell {
         word-wrap: unset;
         text-overflow: ellipsis;
+      }
+    }
+    &__accordion {
+      display:none;
+      &__expandable-item {
+        &__expanded-content {
+          display: flex;
+          &__number-of-members {
+            &__min,
+            &__max,
+            &__actual,
+            &__seperator {
+              width: 30px;
+              display: inline-block;
+              text-align: center;
+            }
+            &__actual {
+              width: 60px;
+            }
+            &__seperator {
+              width: 5px;
+            }
+          }
+        }
+        &__button {
+          margin-top: 1rem;
+          color: white;
+        }
       }
     }
     &__cards-list {
@@ -93,7 +122,7 @@
 
 :host {
   ::ng-deep {
-   .mat-checked.mat-disabled .mat-slide-toggle-bar {
+    .mat-checked.mat-disabled .mat-slide-toggle-bar {
       background-color: $primary-color;
     }
   }
@@ -105,12 +134,20 @@ body {
       .app-events {
         &__header {
           flex-direction: column;
-
         }
         &__filter {
           width: 100%;
         }
       }
     }
+  }
+}
+
+@media only screen and (max-width: 579px) {
+  .app-events__container__table {
+    display: none;
+  }
+  .app-events__container__accordion {
+    display: block;
   }
 }
