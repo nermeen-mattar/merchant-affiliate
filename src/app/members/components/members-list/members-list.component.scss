@@ -52,18 +52,14 @@
   }
 }
 
-
-body {
-  &.mobile-device {
-    :host {
-      .app-members {
-        &__header {
-          flex-direction: column;
-        }
-        &__filter {
-          width: 100%;
-        }
-      }
+@media only screen and (max-width: 768px) {
+  .app-members {
+    &__header {
+      flex-direction: column;
+    }
+    &__filter {
+      width: 100%;
     }
   }
 }
+

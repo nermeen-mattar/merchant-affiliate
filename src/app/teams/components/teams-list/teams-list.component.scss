@@ -1,14 +1,15 @@
 @import "../../../../styles/toolkit/variables.scss";
 .app-teams {
-  padding: 14px 8px; /* to leave space to the back button */
+  padding: 14px 8px;
+  /* to leave space to the back button */
   max-width: 1000px;
   margin: 0 auto;
   &__action {
     cursor: pointer;
   }
   &__title {
-      color: $tc-color-gray-shade-6;
-      font-weight: $tc-font-weight-4;
+    color: $tc-color-gray-shade-6;
+    font-weight: $tc-font-weight-4;
   }
   &__container {
     overflow-x: auto;
@@ -44,7 +45,7 @@
           &:last-of-type {
             margin-bottom: 6px;
           }
-          &:not(.mat-basic-chip) +.mat-chip:not(.mat-basic-chip) {
+          &:not(.mat-basic-chip)+.mat-chip:not(.mat-basic-chip) {
             margin: 3px 0;
           }
         }
@@ -56,20 +57,10 @@
   }
 }
 
-
-body {
-  &.mobile-device {
-    :host {
-      .app-teams {
-        &__title {
-          text-align: center;
-        }
-        &__container {
-          &__table {
-
-          }
-        }
-      }
+@media only screen and (max-width: 768px) {
+  .app-teams {
+    &__title {
+      text-align: center;
     }
   }
 }
