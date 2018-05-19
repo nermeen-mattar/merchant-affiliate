@@ -13,6 +13,7 @@
       margin-right:0.5rem;
     }
     &__members {
+      min-width:178px!important;
       &__values {
         display:flex;
         align-items:center;
@@ -137,7 +138,7 @@
   }
 }
 
-@media only screen and (max-width: 530px) {
+@media only screen and (max-width: 720px) {
     .app-events {
       &__header {
         flex-direction: column;

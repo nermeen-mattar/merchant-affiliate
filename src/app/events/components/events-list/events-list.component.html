@@ -50,10 +50,9 @@
         <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.eventName}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="status">
-        <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.PARTICIPATION_STATUS' | translate}} </mat-header-cell>
-        <mat-cell style="min-width: 178px !important;" class="app-events__container__table__content-cell" *matCellDef="let row">
+        <mat-header-cell class="app-events__container__table__header-cell app-events__event__members" *matHeaderCellDef mat-sort-header> {{'EVENT.PARTICIPATION_STATUS' | translate}} </mat-header-cell>
+        <mat-cell class="app-events__container__table__content-cell app-events__event__members"  *matCellDef="let row">
           <!-- <span *ngIf="row.detailedParticipations">{{row.numOfParticipations}} / {{row.detailedParticipations.length}}</span> -->
-          <div class="app-events__event__members">
             <div>
               <div style="width: 24px; display:inline-block;"></div>
               <div *ngIf="row.minCriticalValue" class="app-events__event__members__min">
@@ -84,7 +83,6 @@
               </div>
             </div>
 
-          </div>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="actions">
@@ -149,7 +147,6 @@
                 <div *ngIf="event.minCriticalValue" class="app-events__event__members__min">[ {{event.minCriticalValue}}</div>
                 <div *ngIf="event.minCriticalValue" class="app-events__event__members__seperator">
                   -</div>
-
                 <div class="app-events__event__members__actual"> {{event.minCriticalValue ? "" : "("}} {{event.numOfParticipations}} {{event.maxCriticalValue ? "" : ")"}}</div>
                 <div *ngIf="event.maxCriticalValue" class="app-events__event__members__seperator">
                   -
@@ -157,9 +154,7 @@
                 <div *ngIf="event.maxCriticalValue" class="app-events__event__members__max">
                   {{event.maxCriticalValue}} ]</div>
               </div>
-
             </div>
-
           </div>
           <mat-divider class="app-events__container__accordion__expandable-item__divider"></mat-divider>
           <div class="app-events__container__accordion__expandable-item__expanded-content__actions">
@@ -176,9 +171,6 @@
     <mat-spinner class="app-events__container__spinner" *ngIf="!eventsDataSource"></mat-spinner>
   </div>
 </div>
-
-
-
 <!-- <button mat-raised-button (click)="toogleParticipationInEvent(true, event.id)" color="primary" *ngIf="!event.myParticipation || event.myParticipation.action === 'cancel'"
         [disabled]="isPastEvents">
         {{'GOING' | translate}}
