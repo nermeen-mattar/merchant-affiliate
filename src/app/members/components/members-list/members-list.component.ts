@@ -25,12 +25,12 @@ export class MembersListComponent implements OnInit {
   filterString = '';
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
   constructor(private membersService: MembersService, private userService: UserService, public dialog: MatDialog) {
-    this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
+    this.displayAdminActions = this.userService.userType.toLowerCase() === 'admin';
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
     }
-    this.userTeams = this.userService.getUserTeams();
-    this.selectedTeam = this.userService.getSelectedTeam();
+    this.userTeams = this.userService.userTeams;
+    this.selectedTeam = this.userService.selectedTeam;
     this.updateMembers();
   }
 
@@ -43,7 +43,7 @@ export class MembersListComponent implements OnInit {
    */
   updateMembers() {
     this.membersDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.userService.setSelectedTeam(this.selectedTeam); // *** temp (to enhance)
+    this.userService.selectedTeam = this.selectedTeam; // *** temp (to enhance)
     this.membersService.getMembers(this.selectedTeam.teamId).subscribe((res) => { // {members= [], myTeamMemberId}
       // this.teamMemberId = myTeamMemberId;
       this.updateMembersDataSource(res);
