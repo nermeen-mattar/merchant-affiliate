@@ -154,8 +154,8 @@ export class UserService {
    * @description clears the class properties (username, team roles, and user type ordinary/admin).
    */
   clearLoggedInUserInfo() {
-    this.username = undefined;
-    this.teamRoles = undefined;
-    this.userType = undefined;
+    this.username = null;
+    this.teamRoles = null;
+    this.userType = null;
   }
 }

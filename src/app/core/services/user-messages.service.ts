@@ -38,9 +38,10 @@ export class UserMessagesService {
       const translationKey = 'BACKEND.'.concat(err.error.message.toUpperCase());
       this.translateService.get('USER_MESSAGES.'.concat(translationKey)).subscribe(
         translatedMessage => {
-          if (translatedMessage.indexOf(translationKey) === -1) {
+          if (translatedMessage.includes(translationKey)) {
             userFailMessage.fail = translationKey;
           }
+
         }
       );
     }
