@@ -22,7 +22,7 @@ export class EventsService {
     const endPoint = isPast ? 'pastsbyteamid' : 'byteamid';
     return this.httpRequestService.httpPost(
       `events/${endPoint}/${teamId}`,
-      this.userService.getUsername()
+      this.userService.username
     );
   }
 
