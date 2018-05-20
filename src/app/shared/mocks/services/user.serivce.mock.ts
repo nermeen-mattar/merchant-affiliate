@@ -8,7 +8,7 @@ export class UserServiceMock {
     return 'ahsan';
   }
   set username(username: string) {}
-  getUserType(): string {
+  get userType(): string {
     return 'ADMIN';
   }
 
