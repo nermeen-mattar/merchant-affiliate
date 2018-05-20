@@ -36,9 +36,9 @@ export class EventsListComponent implements OnInit {
     private deviceService: DeviceDetectorService
   ) {
     this.isMobile = this.deviceService.isMobile();
-    this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
-    this.userTeams = this.userService.getUserTeams();
-    this.selectedTeam = this.userService.getSelectedTeam();
+    this.displayAdminActions = this.userService.userType.toLowerCase() === 'admin';
+    this.userTeams = this.userService.userTeams;
+    this.selectedTeam = this.userService.selectedTeam;
     this.updateEvents(this.isPastEvents);
   }
 
@@ -73,7 +73,7 @@ export class EventsListComponent implements OnInit {
    * selected team, and updates the displayed events to displays the events that belongs to the selected team.
    */
   changeSelectedTeam() {
-    this.userService.setSelectedTeam(this.selectedTeam);
+    this.userService.selectedTeam = this.selectedTeam;
     this.updateEvents(false);
   }
 
