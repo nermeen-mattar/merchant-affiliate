@@ -4,15 +4,15 @@ export class UserServiceMock {
 
   constructor() {}
 
-  getUsername(): string {
+  get username(): string {
     return 'ahsan';
   }
-  setUsername(username: string): void {}
-  getUserType(): string {
+  set username(username: string) {}
+  get userType(): string {
     return 'ADMIN';
   }
 
-  getTeamRoles(): TcTeamRoles {
+  get teamRoles(): TcTeamRoles {
     return {
       teamAdmins: [{
         teamId: 1,
@@ -25,20 +25,20 @@ export class UserServiceMock {
     };
   }
 
-  setTeamRoles(teamRoles): void {}
-  getSelectedTeam(): TcTeamInfo {
+  set teamRoles(teamRoles) {}
+  get selectedTeam(): TcTeamInfo {
     return {
       teamId: 1,
       teamName: 'test'
     };
   }
-  setSelectedTeam(selectedTeam: TcTeamInfo) {}
-  getUserTeams() {
+  set selectedTeam(selectedTeam: TcTeamInfo) {}
+  get userTeams() {
     return [{
       teamId: 1,
       teamName: 'test'
     }];
   }
-  setUserTeams() {}
+  set userTeams(userTeams) {}
   clearLoggedInUserInfo () {}
 }

@@ -37,7 +37,6 @@ export class EventDetailsComponent implements OnInit {
    * @param {string} eventType
    */
   applyFilterToEventDetails(filterValue: string, eventType: string) {
-    debugger;
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.eventDetailsDatasource[eventType].filter = filterValue;

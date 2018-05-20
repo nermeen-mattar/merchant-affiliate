@@ -22,7 +22,7 @@ export class EventsService {
     const endPoint = isPast ? 'pastsbyteamid' : 'byteamid';
     return this.httpRequestService.httpPost(
       `events/${endPoint}/${teamId}`,
-      this.userService.getUsername()
+      this.userService.username
     );
   }
 
@@ -55,7 +55,7 @@ export class EventsService {
         teamMemberId: teamMemberId
       }, {
         success: toggleSuccessMessage,
-        fail: 'EVENT.EVENT_CHANGING_PARTICIPATION_FAIL'
+        failDefault: 'EVENT.EVENT_CHANGING_PARTICIPATION_FAIL'
       });
   }
 
@@ -69,7 +69,7 @@ export class EventsService {
     return this.httpRequestService.httpDelete(
       `events/${eventId}`, {
         success: 'EVENT.EVENT_DELETING_SUCCESS',
-        fail: 'EVENT.EVENT_DELETING_FAIL'
+        failDefault: 'EVENT.EVENT_DELETING_FAIL'
       });
   }
 
@@ -84,7 +84,7 @@ export class EventsService {
   getEvent(eventId: string): Observable < any > {
     return this.httpRequestService.httpGet(
       `events/${eventId}`, {
-        fail: 'EVENT.EVENT_GETTING_FAIL'
+        failDefault: 'EVENT.EVENT_GETTING_FAIL'
       });
   }
 
@@ -99,7 +99,7 @@ export class EventsService {
     return this.httpRequestService.httpPost(
       'events', {teamId: teamId, ...event}, {
         success: 'EVENT.EVENT_CREATING_SUCCESS',
-        fail: 'EVENT.EVENT_CREATING_FAIL'
+        failDefault: 'EVENT.EVENT_CREATING_FAIL'
       });
   }
 
@@ -115,7 +115,7 @@ export class EventsService {
     return this.httpRequestService.httpPut(
       `events/${eventId}`, event, {
         success: 'EVENT.EVENT_UPDATING_SUCCESS',
-        fail: 'EVENT.EVENT_UPDATING_FAIL'
+        failDefault: 'EVENT.EVENT_UPDATING_FAIL'
       });
   }
 }

@@ -14,13 +14,13 @@
       </mat-form-field>
       <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.present">
         <ng-container matColumnDef="name">
-          <mat-header-cell class="app-event-details__container__table__cell-header" *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-event-details__container__table__header-cell" *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             {{row.firstname}} {{row.name}}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="mail">
-          <mat-header-cell class="app-event-details__container__table__cell-header" *matHeaderCellDef> {{'USER.EMAIL' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-event-details__container__table__header-cell" *matHeaderCellDef> {{'USER.EMAIL' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.member.mail}} </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -37,13 +37,13 @@
       </mat-form-field>
       <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.absent">
         <ng-container matColumnDef="name">
-          <mat-header-cell class="app-event-details__container__table__cell-header" *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-event-details__container__table__header-cell" *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             {{row.firstname}} {{row.name}}
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="mail">
-          <mat-header-cell class="app-event-details__container__table__cell-header" *matHeaderCellDef> {{'USER.EMAIL' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-event-details__container__table__header-cell" *matHeaderCellDef> {{'USER.EMAIL' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.member.mail}} </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
