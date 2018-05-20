@@ -16,11 +16,11 @@ export class TeamsListComponent implements OnInit {
   filterString = '';
 
   constructor(private userService: UserService) {
-    this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
+    this.displayAdminActions = this.userService.userType.toLowerCase() === 'admin';
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
     }
-    this.updateTeamsDataSource(this.userService.getUserTeams());
+    this.updateTeamsDataSource(this.userService.userTeams);
   }
 
   ngOnInit() {}

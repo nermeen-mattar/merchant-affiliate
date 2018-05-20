@@ -21,7 +21,7 @@ export class EventFormComponent implements OnInit {
   eventId: string; /* is undefined (in the case of event creation) */
   constructor(private eventsService: EventsService, userService: UserService, private fieldValidatorsService: FieldValidatorsService,
     private route: ActivatedRoute, private router: Router) {
-      this.selectedTeamId = userService.getSelectedTeam().teamId;
+      this.selectedTeamId = userService.selectedTeam.teamId;
       this.initFormEditingOrCreating();
   }
 

@@ -23,8 +23,8 @@ export class AdminSettingsComponent implements OnInit {
   constructor(userService: UserService, private fieldValidatorsService: FieldValidatorsService,
     private adminService: AdminService,
     private route: ActivatedRoute, private router: Router) {
-    this.userTeams = userService.getUserTeams();
-    this.selectedTeam = userService.getSelectedTeam();
+    this.userTeams = userService.userTeams;
+    this.selectedTeam = userService.selectedTeam;
     this.initSettingsForm();
   }
 

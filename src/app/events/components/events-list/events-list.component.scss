@@ -3,6 +3,38 @@
   position: relative;
   padding: 14px 8px;
   /* to leave space to the back button */
+  &__event {
+    &__error {
+      color:$tc-color-error;
+      margin-right:0.5rem;
+    }
+    &__success {
+      color:$tc-color-success;
+      margin-right:0.5rem;
+    }
+    &__members {
+      min-width:178px!important;
+      &__values {
+        display:flex;
+        align-items:center;
+      }
+      // margin-left:1rem;
+      &__min,
+      &__max,
+      &__actual,
+      &__seperator {
+        width: 30px;
+        display: inline-block;
+        text-align: center;
+      }
+      &__actual {
+        width: 50px;
+      }
+      &__seperator {
+        width: 5px;
+      }
+    }
+  }
   &__action {
     cursor: pointer;
     margin: 0px 8px;
@@ -63,54 +95,40 @@
       &__expandable-item {
         &__expanded-content {
           display: flex;
-          &__number-of-members {
-            &__min,
-            &__max,
-            &__actual,
-            &__seperator {
-              width: 30px;
-              display: inline-block;
-              text-align: center;
-            }
-            &__actual {
-              width: 60px;
-            }
-            &__seperator {
-              width: 5px;
-            }
+          &__actions {
+            display:flex;
+            justify-content: space-between;
           }
         }
-        &__button {
-          margin-top: 1rem;
-          color: white;
+        &__divider {
+          margin: 0.5rem 0rem;
+
         }
-      }
-    }
-    &__cards-list {
-      &__item {
-        margin-bottom: 10px;
-        /deep/.mat-card-header {
-          .mat-card-header-text {
-            flex: 1;
-          }
+        &__title {
+          width:25%!important;
         }
-        /deep/.mat-card-actions {
-          text-align: right;
-          button {
-            &.mat-primary {
-              color: white;
-            }
-          }
+        &__error, &__success {
+        margin-bottom:2px;
+         margin-left:2px;
         }
-        /deep/.mat-list-item-content {
-          padding: 0;
+        &__delete-button , &__edit-button  {
+          color:white;
         }
-        &__content {
-          &__item {
-            .mat-icon {
-              margin-right: 16px;
-            }
-          }
+        &__delete-button {
+          background-color:$tc-color-error;
+        }
+        /deep/.mat-expansion-panel-header-title, .mat-expansion-panel-header-description{
+          align-items:center;
+        }
+
+        /deep/.mat-expansion-panel-body{
+          padding-bottom:0.5rem!important;
+        }
+        /deep/.mat-checked.mat-disabled .mat-slide-toggle-bar {
+          background-color: $primary-color;
+        }
+        /deep/.mat-expansion-panel-header-title{
+          width:40%;
         }
       }
     }
@@ -120,34 +138,22 @@
   }
 }
 
-:host {
-  ::ng-deep {
-    .mat-checked.mat-disabled .mat-slide-toggle-bar {
-      background-color: $primary-color;
-    }
-  }
-}
-
-body {
-  &.mobile-device {
-    :host {
-      .app-events {
-        &__header {
-          flex-direction: column;
+@media only screen and (max-width: 768px) {
+    .app-events {
+      &__header {
+        flex-direction: column;
+      }
+      &__filter {
+        width: 100%;
+      }
+      &__container {
+        &__table {
+          display: none;
         }
-        &__filter {
-          width: 100%;
+        &__accordion {
+          display: block;
         }
       }
     }
-  }
 }
 
-@media only screen and (max-width: 579px) {
-  .app-events__container__table {
-    display: none;
-  }
-  .app-events__container__accordion {
-    display: block;
-  }
-}
