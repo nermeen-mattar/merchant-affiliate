@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject } from 'rxjs';
 import { UserMessages } from './../../core/models/user-messages.model';
 import { TcEvent } from '../models/tc-event.model';
 import { UserService } from './../../core/services/user.service';

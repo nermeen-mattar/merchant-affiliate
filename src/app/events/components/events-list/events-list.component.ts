@@ -1,6 +1,6 @@
 import { first } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
 
 import { TcEvent } from '../../models/tc-event.model';

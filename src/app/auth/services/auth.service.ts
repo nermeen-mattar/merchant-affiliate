@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
+
 import { first, map } from 'rxjs/operators';
 
 import { LoginResponse } from './../models/login-response.model';
@@ -11,6 +11,7 @@ import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { ServerSideLoginInfo } from '../models/server-side-login-info.mdel';
 import { ServerSideRegisterInfo } from '../models/server-side-register-info.model';
+import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class AuthService implements OnDestroy {
   isLoggedIn: BehaviorSubject < boolean > = new BehaviorSubject(false);

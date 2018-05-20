@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs';
 
 import { TcEvent } from '../../../events/models/tc-event.model';
 

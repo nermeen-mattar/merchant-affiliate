@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject } from 'rxjs';
 import { TcActivationStatusInfo } from './../models/tc-activation-status-info.model';
 import { UserMessages } from './../../core/models/user-messages.model';
 import { TcMember } from '../models/tc-member.model';
