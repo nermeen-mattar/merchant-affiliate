@@ -17,7 +17,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 
 export class EventsListComponent implements OnInit {
-  displayedColumns = ['id', 'date', 'time', 'event', 'status', 'minCriticalValue', 'maxCriticalValue', 'actions'];
+  displayedColumns = ['id', 'date', 'time', 'event', 'status', 'actions']; //  'minCriticalValue', 'maxCriticalValue',
   eventsDataSource: MatTableDataSource < TcEvent > ;
   userTeams: TcTeamInfo[];
   selectedTeam: TcTeamInfo;
@@ -112,7 +112,9 @@ export class EventsListComponent implements OnInit {
       this.triggerTableToRefreshData();
     });
   }
-
+  preventTriggeringAccordion($event) {
+    $event.stopPropagation();
+  }
   getIndexOfTargetEvent(eventId: string) {
     return this.eventsDataSource.data.findIndex(event => event.id === eventId);
   }
