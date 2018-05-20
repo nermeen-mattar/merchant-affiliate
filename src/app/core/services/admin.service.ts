@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
 
 import { UserService } from './user.service';
