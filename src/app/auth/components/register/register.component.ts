@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
       teamPassword: new FormControl('', [Validators.required,
         this.fieldValidatorsService.getValidator('validatePassword')
       ]),
-      email: new FormControl('', [Validators.required, Validators.email]])
+      email: new FormControl('', [Validators.required, Validators.email])
     });
   }
 
