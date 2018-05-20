@@ -16,6 +16,8 @@
   "NOT_GOING": "Not Going",
   "Delete": "Delete",
   "MESSAGE": "Message",
+  "FROM": "From",
+  "To": "To",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "FORM": {
     "ENTER_VALID_EMAIL": "Please enter a valid email address.",
@@ -35,7 +37,8 @@
       "ERROR.MAIL.NOT.EXIST" : "Mail does not exist.",
       "ERROR.MAIL.CONFIRMED": "Mail already confirmed",
       "ERROR.NOT.EXISTING.TEAM.ADMIN": "Team admin does not exist",
-      "ERROR.MAIL.NOT.CONFIRMED": "You need to confirm your mail"
+      "ERROR.MAIL.NOT.CONFIRMED": "You need to confirm your mail",
+      "ERROR.MEMBER.NOT.FOUND": "Member does not exist"
     },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Unable to register a new team",
@@ -202,6 +205,8 @@
   "MEMBER": {
     "MEMBERS": "Members",
     "MEMBER": "Member",
+    "MEMBERS_STATISTICS": "Members Statistics",
+    "MEMBERS_LIST": "Members list",
     "MAIL": "Mail",
     "EDIT_MEMBER": "Edit member",
     "CREATE_MEMBER": "Create member",
