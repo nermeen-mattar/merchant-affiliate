@@ -51,7 +51,7 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
-          this.userMessagesService.showUserMessage(userMessages, 'fail');
+          this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
     });
