@@ -45,7 +45,7 @@
         <h4 class="app-settings__team-form__title "> {{'ADMIN.TEAM_SETTINGS' | translate}}</h4>
         <div>
           <mat-form-field>
-            <mat-select [(value)]="selectedTeam" (change)="changeSelectedTeam()">
+            <mat-select [(value)]="selectedTeam" (selectionChange)="changeSelectedTeam()">
               <mat-option *ngFor="let team of userTeams" [value]="team">
                 {{ team.teamName }}
               </mat-option>

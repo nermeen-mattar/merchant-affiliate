@@ -1,6 +1,5 @@
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs';
 import { TcMember } from '../../../members/models/tc-member.model';
 
 export class MembersServiceMock {

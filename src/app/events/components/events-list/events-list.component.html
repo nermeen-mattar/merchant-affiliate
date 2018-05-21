@@ -12,7 +12,7 @@
     </h3>
     <div class="app-events__header__team-selector">
       <mat-form-field>
-        <mat-select [(value)]="selectedTeam" (change)="changeSelectedTeam()">
+        <mat-select [(value)]="selectedTeam" (selectionChange)="changeSelectedTeam()">
           <mat-option *ngFor="let team of userTeams" [value]="team">
             {{ team.teamName }}
           </mat-option>
