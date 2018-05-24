@@ -10,8 +10,14 @@
     <span class="app-header__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'EVENT.EVENTS' | translate}} </span>
     </span>
-    <span class="app-header__menu__item" routerLink="/members" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
-      <span> {{'MEMBER.MEMBERS' | translate}} </span>
+    <span class="app-header__menu__item" *ngIf="($isUserLoggedIn | async)" mat-button [matMenuTriggerFor]="memberStatisticsMenu">
+      <span> {{'MEMBER.MEMBERS' | translate}}
+          <mat-icon class="app-header__menu__item__arrow">keyboard_arrow_down</mat-icon>
+          <mat-menu #memberStatisticsMenu="matMenu">
+            <button  routerLink="/members/list"  mat-menu-item>{{'MEMBER.MEMBERS_LIST' | translate}}</button>
+            <button  *ngIf="($isUserAdmin | async)" routerLink="/members/statistics" mat-menu-item>{{'MEMBER.MEMBERS_STATISTICS' | translate}}</button>
+          </mat-menu>
+      </span>
     </span>
     <span class="app-header__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'TEAM.TEAMS' | translate}} </span>
