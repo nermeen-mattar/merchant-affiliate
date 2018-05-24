@@ -55,7 +55,9 @@ export class UserService {
    */
   set teamRoles(teamRoles: TcTeamRoles) {
     this._teamRoles = teamRoles;
-    this.setUserTeams();
+    if (this.teamRoles){
+      this.setUserTeams();
+    }
   }
 
   /**
