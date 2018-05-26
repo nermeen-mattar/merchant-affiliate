@@ -65,7 +65,7 @@ export class UserService {
    */
   setUserTeams() {
     this._userTeams = [];
-    if (this.teamRoles === undefined) {
+    if (!this.teamRoles) {
       this.selectedTeam = undefined; // sets an initial value to the select input
     } else {
       const teamIds = [];
