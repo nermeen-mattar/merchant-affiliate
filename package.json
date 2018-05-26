@@ -8,6 +8,7 @@
     "serve": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --prod",
+    "build:dev": "ng build --aot",
     "test": "ng test --source-map false",
     "test:single": "ng test --single-run true",
     "test:ci": "./node_modules/.bin/ng test --config 'karma-ci.conf.js' --watch false  --sm false",
