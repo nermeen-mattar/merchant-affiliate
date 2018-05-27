@@ -1,7 +1,5 @@
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-
-
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject } from 'rxjs';
 export class AuthServiceMock {
   isLoggedIn: BehaviorSubject < boolean > = new BehaviorSubject(false);
   $userLoggedIn: Observable < boolean > = this.isLoggedIn.asObservable();

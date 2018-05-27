@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { DecodedToken } from './../../auth/models/decoded-token.model';
 import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
 import { TcTeamRoles } from './../../teams/models/tc-team-roles.model';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable()
 export class UserService {
@@ -67,7 +67,7 @@ export class UserService {
    */
   setUserTeams() {
     this._userTeams = [];
-    if (this.teamRoles === undefined) {
+    if (!this.teamRoles) {
       this.selectedTeam = undefined; // sets an initial value to the select input
     } else {
       const teamIds = [];

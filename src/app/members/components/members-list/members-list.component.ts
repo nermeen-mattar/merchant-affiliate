@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/internal/Observable';
 import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
 import { DatePipe } from '@angular/common';
 import { first } from 'rxjs/operators';

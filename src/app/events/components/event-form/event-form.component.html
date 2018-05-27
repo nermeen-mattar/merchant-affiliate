@@ -45,7 +45,7 @@
         <div class="app-event-form__fields-wrapper">
           <label class="app-event-form__field__label"> {{'MEMBER.BY_DEFAULT_MEMBERS_ARE' | translate}} </label>
           <mat-form-field class="app-event-form__field app-event-form__field__small">
-            <mat-select formControlName="type" required (change)="onEventTypeChange()">
+            <mat-select formControlName="type" required (selectionChange)="onEventTypeChange()">
               <mat-option value="0">{{'EVENT.JOINING'| translate}}</mat-option>
               <mat-option value="1">{{'EVENT.NOT_JOINING'| translate}} </mat-option>
             </mat-select>
