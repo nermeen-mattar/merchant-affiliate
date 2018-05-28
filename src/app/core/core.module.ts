@@ -18,8 +18,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from '../auth/services/auth.service';
 import { TokenHandlerService } from '../auth/services/token-handler.service';
 import { AdminService } from './services/admin.service';
-import { DeviceDetectorModule } from 'ngx-device-detector';
-import { DeviceClassesDirective } from './directives/device-classes.directive';
 import { RegisterService } from '../auth/services/register.service';
 import { TeamsService } from './services/teams.service';
 
@@ -31,17 +29,14 @@ import { TeamsService } from './services/teams.service';
     RouterModule,
     HttpClientModule,
     TranslateModule,
-    DeviceDetectorModule.forRoot()
   ],
   declarations: [
     HeaderComponent,
     FooterComponent,
-    DeviceClassesDirective
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
-    DeviceClassesDirective
   ],
   providers: [
     UserService,

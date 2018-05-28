@@ -10,7 +10,6 @@ import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { UserService } from '../../../core/services/user.service';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'tc-events-list',
@@ -36,10 +35,8 @@ export class EventsListComponent implements OnInit {
     userService: UserService,
     private teamsService: TeamsService,
     public dialog: MatDialog,
-    private deviceService: DeviceDetectorService,
     private router: Router
   ) {
-    this.isMobile = this.deviceService.isMobile();
     this.displayAdminActions = userService.userType.toLowerCase() === 'admin';
     this.userTeams = this.teamsService.userTeams;
     this.selectedTeamId = this.teamsService.selectedTeamId;
