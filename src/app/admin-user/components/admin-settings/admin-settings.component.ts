@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { format } from 'date-fns';
 
+import { TeamsService } from './../../../core/services/teams.service';
 import { AdminService } from './../../../core/services/admin.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
-import { UserService } from '../../../core/services/user.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 @Component({
   selector: 'tc-admin-settings',
@@ -20,11 +20,11 @@ export class AdminSettingsComponent implements OnInit {
   directLinkControl: FormControl;
   userTeams: TcTeamInfo[];
   eventId: string; /* is undefined (in the case of event creation) */
-  constructor(userService: UserService, private fieldValidatorsService: FieldValidatorsService,
-    private adminService: AdminService,
+  constructor(private fieldValidatorsService: FieldValidatorsService,
+    private adminService: AdminService, private teamsService: TeamsService,
     private route: ActivatedRoute, private router: Router) {
-    this.userTeams = userService.userTeams;
-    this.selectedTeam = userService.selectedTeam;
+    this.userTeams = teamsService.userTeams;
+    this.selectedTeam = teamsService.selectedTeam;
     this.initSettingsForm();
   }
 

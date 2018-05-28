@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
 
-import { UserService } from './user.service';
 import { HttpRequestsService } from './http-requests.service';
+import { TeamsService } from './teams.service';
 
 @Injectable()
 export class AdminService {
 
-  constructor(private httpRequestService: HttpRequestsService, private userService: UserService) { }
+  constructor(private httpRequestService: HttpRequestsService, private teamsService: TeamsService) { }
 
   /**
    * @author Nermeen Mattar
@@ -39,7 +39,7 @@ export class AdminService {
    * @param {string} email
    */
   changeTeamName(teamName: string) {
-    this.httpRequestService.httpPut('teams/' + this.userService.selectedTeam.teamId + '/change_team_name', {teamName: teamName},
+    this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeam.teamId + '/change_team_name', {teamName: teamName},
      {
        success: 'ADMIN.TEAM_PASSWORD_CHANGING_SUCCESS',
        fail: 'ADMIN.TEAM_PASSWORD_CHANGING_FAIL'
@@ -54,7 +54,7 @@ export class AdminService {
    * @param {any} oldAndNewPasswords
    */
   changeTeamPassword(oldAndNewPasswords) {
-   this.httpRequestService.httpPut('teams/' + this.userService.selectedTeam.teamId + '/change_team_password', oldAndNewPasswords,
+   this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeam.teamId + '/change_team_password', oldAndNewPasswords,
     {
       success: 'ADMIN.TEAM_PASSWORD_CHANGING_SUCCESS',
       fail: 'ADMIN.TEAM_PASSWORD_CHANGING_FAIL'

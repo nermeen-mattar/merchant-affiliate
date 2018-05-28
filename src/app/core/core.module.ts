@@ -21,6 +21,7 @@ import { AdminService } from './services/admin.service';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { DeviceClassesDirective } from './directives/device-classes.directive';
 import { RegisterService } from '../auth/services/register.service';
+import { TeamsService } from './services/teams.service';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { RegisterService } from '../auth/services/register.service';
     TokenHandlerService,
     UserMessagesService,
     HttpRequestsService,
-    FieldValidatorsService
+    FieldValidatorsService,
+    TeamsService
   ]
 })
 export class CoreModule {

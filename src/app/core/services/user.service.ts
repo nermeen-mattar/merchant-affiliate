@@ -1,25 +1,22 @@
+import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import { TeamsService } from './teams.service';
+import { TcDateRange } from './../../shared/models/tc-date-range.model';
 import { DecodedToken } from './../../auth/models/decoded-token.model';
-import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
 import { TcTeamRoles } from './../../teams/models/tc-team-roles.model';
-import { Observable } from 'rxjs/internal/Observable';
-
 @Injectable()
 export class UserService {
   /* User static properties (received from the backend) */
   private _username: string;
   private _userType: string;
   private _teamRoles: TcTeamRoles;
-  private _userTeams: TcTeamInfo[];
-  /* user changable properties (can be changed on the client side)*/
-  private _selectedTeam: TcTeamInfo;
   /* user state properties */
   private isAdmin: BehaviorSubject < boolean > = new BehaviorSubject(false);
   $userAdmin: Observable < boolean > = this.isAdmin.asObservable();
 
-  constructor() {}
+  constructor(private teamsService: TeamsService) {}
 
   /**
    * @author Nermeen Mattar
@@ -55,46 +52,9 @@ export class UserService {
    */
   set teamRoles(teamRoles: TcTeamRoles) {
     this._teamRoles = teamRoles;
-    this.setUserTeams();
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description sets the user's teams by combining the teams that the user is admin of with the teams that the user is member of
-   * each time we set new user teams we initialize the selected team by the first one
-   */
-  setUserTeams() {
-    this._userTeams = [];
-    if (!this.teamRoles) {
-      this.selectedTeam = undefined; // sets an initial value to the select input
-    } else {
-      const teamIds = [];
-      Object.keys(this.teamRoles).forEach( teamRole => {
-        const teams = this.teamRoles[teamRole];
-        const teamRoleTranslateKey = teamRole === 'teamAdmins' ? 'admin' : 'member';
-        const teamsLen = teams.length;
-        for (let teamIndex = 0; teamIndex < teamsLen; teamIndex++) {
-          const team = teams[teamIndex];
-          if (teamIds.indexOf(team.teamId) === -1) {
-            this._userTeams.push({roles: [teamRoleTranslateKey], ...team});
-            teamIds.push(team.teamId);
-          } else {
-            this._userTeams[teamIndex].roles.push(teamRoleTranslateKey);
-          }
-        }
-      });
-      this.selectedTeam = this._userTeams[0]; // sets an initial value to the select input
+    if (this.teamRoles) {
+      this.teamsService.setUserTeams(teamRoles);
     }
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description returns the team roles for the logged in user
-   * @returns {TcTeamInfo[]}
-   */
-
-  get userTeams(): TcTeamInfo[] {
-    return this._userTeams;
   }
 
   /**
@@ -116,22 +76,6 @@ export class UserService {
     userType = userType ? userType : ''; // a preventive check to prevent toLowerCase for causing errors when user type is set to undefined
     this.isAdmin.next(userType.toLowerCase() === 'admin');
     this._userType = userType;
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description sets the selected team in a private variable based on the user selection from the list of teams he/she is admin/member of.
-   */
-  set selectedTeam(selectedTeam: TcTeamInfo) {
-    this._selectedTeam = selectedTeam;
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description returns team the user has selected from the list of team he/she is admin/member of.
-   */
-  get selectedTeam(): TcTeamInfo {
-    return this._selectedTeam;
   }
 
   /**

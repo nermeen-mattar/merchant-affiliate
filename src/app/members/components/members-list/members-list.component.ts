@@ -4,6 +4,7 @@ import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
 import { DatePipe } from '@angular/common';
 import { first } from 'rxjs/operators';
 
+import { TeamsService } from './../../../core/services/teams.service';
 import { MembersService } from '../../services/members.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { UserService } from '../../../core/services/user.service';
@@ -24,13 +25,14 @@ export class MembersListComponent implements OnInit {
   displayAdminActions: boolean;
   filterString = '';
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
-  constructor(private membersService: MembersService, private userService: UserService, public dialog: MatDialog) {
-    this.displayAdminActions = this.userService.userType.toLowerCase() === 'admin';
+  constructor(private membersService: MembersService, userService: UserService,  private teamsService: TeamsService,
+    public dialog: MatDialog) {
+    this.displayAdminActions = userService.userType.toLowerCase() === 'admin';
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
     }
-    this.userTeams = this.userService.userTeams;
-    this.selectedTeam = this.userService.selectedTeam;
+    this.userTeams = this.teamsService.userTeams;
+    this.selectedTeam = this.teamsService.selectedTeam;
     this.updateMembers();
   }
 
@@ -43,7 +45,7 @@ export class MembersListComponent implements OnInit {
    */
   updateMembers() {
     this.membersDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.userService.selectedTeam = this.selectedTeam; // *** temp (to enhance)
+    this.teamsService.selectedTeam = this.selectedTeam; // *** temp (to enhance)
     this.membersService.getMembers(this.selectedTeam.teamId).subscribe((res) => { // {members= [], myTeamMemberId}
       // this.teamMemberId = myTeamMemberId;
       this.updateMembersDataSource(res);

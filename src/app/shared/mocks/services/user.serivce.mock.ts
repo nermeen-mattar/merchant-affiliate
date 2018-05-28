@@ -32,13 +32,5 @@ export class UserServiceMock {
       teamName: 'test'
     };
   }
-  set selectedTeam(selectedTeam: TcTeamInfo) {}
-  get userTeams() {
-    return [{
-      teamId: 1,
-      teamName: 'test'
-    }];
-  }
-  set userTeams(userTeams) {}
   clearLoggedInUserInfo () {}
 }
