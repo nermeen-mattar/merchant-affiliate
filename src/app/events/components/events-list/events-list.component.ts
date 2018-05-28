@@ -22,7 +22,7 @@ export class EventsListComponent implements OnInit {
   displayedColumns = ['id', 'date', 'time', 'event', 'status', 'actions']; //  'minCriticalValue', 'maxCriticalValue',
   eventsDataSource: MatTableDataSource < TcEvent > ;
   userTeams: TcTeamInfo[];
-  selectedTeam: TcTeamInfo;
+  selectedTeamId: number;
   teamMemberId: number;
   isPastEvents: boolean;
   displayAdminActions: boolean;
@@ -42,7 +42,7 @@ export class EventsListComponent implements OnInit {
     this.isMobile = this.deviceService.isMobile();
     this.displayAdminActions = userService.userType.toLowerCase() === 'admin';
     this.userTeams = this.teamsService.userTeams;
-    this.selectedTeam = this.teamsService.selectedTeam;
+    this.selectedTeamId = this.teamsService.selectedTeamId;
     this.updateEvents(this.isPastEvents);
   }
 
@@ -57,7 +57,7 @@ export class EventsListComponent implements OnInit {
   updateEvents(isPast: boolean) {
     this.isPastEvents = isPast;
     this.eventsDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe(({
+    this.eventsService.getEvents(this.selectedTeamId, isPast).subscribe(({
       events = [],
       myTeamMemberId
     }) => {
@@ -77,7 +77,7 @@ export class EventsListComponent implements OnInit {
    * selected team, and updates the displayed events to displays the events that belongs to the selected team.
    */
   changeSelectedTeam() {
-    this.teamsService.selectedTeam = this.selectedTeam;
+    this.teamsService.selectedTeamId = this.selectedTeamId;
     this.updateEvents(false);
   }
 

@@ -1,3 +1,4 @@
+import { UserService } from './user.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
 
@@ -7,7 +8,7 @@ import { TeamsService } from './teams.service';
 @Injectable()
 export class AdminService {
 
-  constructor(private httpRequestService: HttpRequestsService, private teamsService: TeamsService) { }
+  constructor(private httpRequestService: HttpRequestsService, private userService: UserService, private teamsService: TeamsService) { }
 
   /**
    * @author Nermeen Mattar
@@ -33,17 +34,29 @@ export class AdminService {
     });
   }
 
+
   /**
    * @author Nermeen Mattar
-   * @description attemps to update the team name Using the httpPut function from httpRequestsSevrice.
-   * @param {string} email
+   * @description attemps to update the team name Using the httpPut function from httpRequestsSevrice. Upon successful request the team name
+   * For the modifier team will be changed in team roles.
+   * @param {string} newTeamName
    */
-  changeTeamName(teamName: string) {
-    this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeam.teamId + '/change_team_name', {teamName: teamName},
+ changeTeamName(newTeamName: string) {
+    this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeamId + '/change_team_name', {teamName: newTeamName},
      {
        success: 'ADMIN.TEAM_PASSWORD_CHANGING_SUCCESS',
        fail: 'ADMIN.TEAM_PASSWORD_CHANGING_FAIL'
      }).subscribe(res => {
+      const updateTeamRoles = Object.assign( this.userService.teamRoles, {});
+       const teamToModifyForAdmins = updateTeamRoles.teamAdmins.filter(team => team.teamId === this.teamsService.selectedTeamId )[0];
+       if (teamToModifyForAdmins) {
+        teamToModifyForAdmins.teamName = newTeamName;
+       }
+       const teamToModifyForMembers = updateTeamRoles.teamMembers.filter(team => team.teamId === this.teamsService.selectedTeamId )[0];
+       if (teamToModifyForMembers) {
+        teamToModifyForMembers.teamName = newTeamName;
+       }
+      this.userService.teamRoles = updateTeamRoles;
      });
    }
 
@@ -54,7 +67,7 @@ export class AdminService {
    * @param {any} oldAndNewPasswords
    */
   changeTeamPassword(oldAndNewPasswords) {
-   this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeam.teamId + '/change_team_password', oldAndNewPasswords,
+   this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeamId + '/change_team_password', oldAndNewPasswords,
     {
       success: 'ADMIN.TEAM_PASSWORD_CHANGING_SUCCESS',
       fail: 'ADMIN.TEAM_PASSWORD_CHANGING_FAIL'

@@ -8,7 +8,7 @@ import { TcTeamRoles } from './../../teams/models/tc-team-roles.model';
 })
 export class TeamsService {
   private _userTeams: TcTeamInfo[];
-  private _selectedTeam: TcTeamInfo;
+  private _selectedTeamId: number;
   constructor() {}
 
   /**
@@ -19,7 +19,7 @@ export class TeamsService {
   setUserTeams(teamRoles: TcTeamRoles) {
     this._userTeams = [];
     if (!teamRoles) {
-      this.selectedTeam = undefined; // sets an initial value to the select input
+      this.selectedTeamId = undefined; // sets an initial value to the select input
     } else {
       const teamIds = [];
       Object.keys(teamRoles).forEach(teamRole => {
@@ -39,7 +39,9 @@ export class TeamsService {
           }
         }
       });
-      this.selectedTeam = this._userTeams[0]; // sets an initial value to the select input
+      if (!this.selectedTeamId) {
+        this.selectedTeamId = this._userTeams[0].teamId; // sets an initial value to the select input
+      }
     }
   }
 
@@ -57,16 +59,16 @@ export class TeamsService {
    * @author Nermeen Mattar
    * @description returns team the user has selected from the list of team he/she is admin/member of.
    */
-  get selectedTeam(): TcTeamInfo {
-    return this._selectedTeam;
+  get selectedTeamId(): number {
+    return this._selectedTeamId;
   }
 
   /**
    * @author Nermeen Mattar
    * @description sets the selected team in a private variable based on the user selection from the list of teams he/she is admin/member of.
    */
-  set selectedTeam(selectedTeam: TcTeamInfo) {
-    this._selectedTeam = selectedTeam;
+  set selectedTeamId(selectedTeam: number) {
+    this._selectedTeamId = selectedTeam;
   }
 
 }

@@ -13,22 +13,43 @@ import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
   styleUrls: ['./admin-settings.component.scss']
 })
 export class AdminSettingsComponent implements OnInit {
-  selectedTeam: TcTeamInfo;
+  selectedTeamId: number;
+  selectedTeamInfo: TcTeamInfo;
   adminSettingsGroup: FormGroup;
   teamSettingsGroup: FormGroup;
   teamNameControl: FormControl;
   directLinkControl: FormControl;
-  userTeams: TcTeamInfo[];
+  // userTeams: TcTeamInfo[];
   eventId: string; /* is undefined (in the case of event creation) */
   constructor(private fieldValidatorsService: FieldValidatorsService,
-    private adminService: AdminService, private teamsService: TeamsService,
+    private adminService: AdminService, public teamsService: TeamsService,
     private route: ActivatedRoute, private router: Router) {
-    this.userTeams = teamsService.userTeams;
-    this.selectedTeam = teamsService.selectedTeam;
+    // this.userTeams = teamsService.userTeams; used teamsService.userTeams directly to get immediately updated when changing a team name
+    this.selectedTeamId = teamsService.selectedTeamId;
     this.initSettingsForm();
+    this.selectedTeamInfo = this.getInfoForSelectedTeam();
   }
 
   ngOnInit() {}
+
+  /**
+   * @author Nermeen Mattar
+   * @description gets the info for the current selected by its id
+   * @returns {TcTeamInfo}
+   */
+  getInfoForSelectedTeam(): TcTeamInfo {
+    return this.teamsService.userTeams.filter(userTeam => userTeam.teamId ===  this.selectedTeamId)[0];
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description When the user changes the selected team from the menu, it updates the selected team in user service with the newly
+   * selected team, and updates the displayed events to displays the events that belongs to the selected team.
+   */
+  changeSelectedTeam() {
+    this.teamsService.selectedTeamId = this.selectedTeamId;
+    this.selectedTeamInfo = this.getInfoForSelectedTeam();
+  }
 
   /**
    * @author Nermeen Mattar

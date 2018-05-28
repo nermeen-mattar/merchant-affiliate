@@ -45,6 +45,7 @@ export class UserService {
   get teamRoles(): TcTeamRoles {
     return this._teamRoles;
   }
+
   /**
    * @author Nermeen Mattar
    * @description sets the team roles in a private variable

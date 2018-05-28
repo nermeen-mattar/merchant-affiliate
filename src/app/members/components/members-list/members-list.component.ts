@@ -20,7 +20,7 @@ export class MembersListComponent implements OnInit {
   displayedColumns = ['member', 'mail'];
   membersDataSource: MatTableDataSource < TcMember > ;
   userTeams: TcTeamInfo[];
-  selectedTeam: TcTeamInfo;
+  selectedTeamId: number;
   teamMemberId: number;
   displayAdminActions: boolean;
   filterString = '';
@@ -32,7 +32,7 @@ export class MembersListComponent implements OnInit {
       this.displayedColumns.push('action');
     }
     this.userTeams = this.teamsService.userTeams;
-    this.selectedTeam = this.teamsService.selectedTeam;
+    this.selectedTeamId = this.teamsService.selectedTeamId;
     this.updateMembers();
   }
 
@@ -45,8 +45,8 @@ export class MembersListComponent implements OnInit {
    */
   updateMembers() {
     this.membersDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.teamsService.selectedTeam = this.selectedTeam; // *** temp (to enhance)
-    this.membersService.getMembers(this.selectedTeam.teamId).subscribe((res) => { // {members= [], myTeamMemberId}
+    this.teamsService.selectedTeamId = this.selectedTeamId; // *** temp (to enhance)
+    this.membersService.getMembers(this.selectedTeamId).subscribe((res) => { // {members= [], myTeamMemberId}
       // this.teamMemberId = myTeamMemberId;
       this.updateMembersDataSource(res);
     });
@@ -114,7 +114,7 @@ export class MembersListComponent implements OnInit {
         this.membersService.changeMemberActivationStatus({
           flag: updatedFlag,
           /* backend expects number */
-          teamId: this.selectedTeam.teamId,
+          teamId: this.selectedTeamId,
           teamMemberId: member.id
         }).subscribe(res => {
           this.membersDataSource.data[this.getIndexOfTargetMember(member.id)].flag = updatedFlag;

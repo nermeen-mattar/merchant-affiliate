@@ -49,8 +49,8 @@
         <h4 class="app-settings__team-form__title "> {{'ADMIN.TEAM_SETTINGS' | translate}}</h4>
         <div>
           <mat-form-field>
-            <mat-select [(value)]="selectedTeam" (selectionChange)="changeSelectedTeam()">
-              <mat-option *ngFor="let team of userTeams" [value]="team">
+            <mat-select [(value)]="selectedTeamId"  (selectionChange)="changeSelectedTeam()">
+              <mat-option *ngFor="let team of teamsService.userTeams" [value]="team.teamId">
                 {{ team.teamName }}
               </mat-option>
             </mat-select>
@@ -58,7 +58,7 @@
         </div>
         <div style="display:flex;">
           <mat-form-field class="app-settings__admin-form__field">
-            <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" [value]="selectedTeam.teamName" [formControl]="teamNameControl"
+            <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" [value]="selectedTeamInfo.teamName" [formControl]="teamNameControl"
               type="text">
             <mat-error *ngIf="teamNameControl.invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
           </mat-form-field>

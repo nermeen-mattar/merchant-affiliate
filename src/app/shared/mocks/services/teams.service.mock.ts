@@ -4,7 +4,11 @@ export class TeamsServiceMock {
 
   constructor() {}
 
-set selectedTeam(selectedTeam: TcTeamInfo) {}
+set selectedTeamId(selectedTeam: number) {}
+
+get selectedTeamId(): number {
+  return 1;
+}
 
 get userTeams() {
   return [{

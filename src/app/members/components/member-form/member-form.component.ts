@@ -17,7 +17,7 @@ export class MemberFormComponent implements OnInit {
   memberId: number; /* is undefined (in the case of member creation) */
   constructor(private membersService: MembersService, teamsService: TeamsService,
     private route: ActivatedRoute, private router: Router) {
-    this.selectedTeamId = teamsService.selectedTeam.teamId;
+    this.selectedTeamId = teamsService.selectedTeamId;
     this.initFormEditingOrCreating();
   }
 
