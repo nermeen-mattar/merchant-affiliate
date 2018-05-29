@@ -12,8 +12,8 @@
     </h3>
     <div class="app-events__header__team-selector">
       <mat-form-field>
-        <mat-select [(value)]="selectedTeam" (change)="changeSelectedTeam()">
-          <mat-option *ngFor="let team of userTeams" [value]="team">
+        <mat-select [(value)]="selectedTeamId" (selectionChange)="changeSelectedTeam()">
+          <mat-option *ngFor="let team of userTeams" [value]="team.teamId">
             {{ team.teamName }}
           </mat-option>
         </mat-select>
@@ -163,7 +163,7 @@
               <button (click)="deleteEvent($event, event.id)" mat-raised-button class="app-events__container__accordion__expandable-item__delete-button">{{ 'DELETE' | translate }}</button>
             </div>
             <button mat-raised-button routerLink="details/{{event.id}}">{{ 'MORE' | translate }}</button>
-          </div>
+git fetch && git checkout feat/team-service          </div>
         </mat-card-content>
       </mat-expansion-panel>
     </mat-accordion>

@@ -10,8 +10,6 @@ import { EventsService } from './services/events.service';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventFormComponent } from './components/event-form/event-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { DeviceDetectorModule } from 'ngx-device-detector';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +18,6 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    DeviceDetectorModule
   ],
   declarations: [
     EventsListComponent,

@@ -1,22 +1,15 @@
+import { TeamsService } from './../../../core/services/teams.service';
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-<<<<<<< Updated upstream
+import { Observable } from 'rxjs/internal/Observable';
 import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
-=======
-import { MatTableDataSource, MatDialog, MatDialogRef, MatSlideToggle} from '@angular/material';
->>>>>>> Stashed changes
 
 import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { UserService } from '../../../core/services/user.service';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-<<<<<<< Updated upstream
-import { DeviceDetectorService } from 'ngx-device-detector';
-
-=======
->>>>>>> Stashed changes
 @Component({
   selector: 'tc-events-list',
   templateUrl: './events-list.component.html',
@@ -27,7 +20,7 @@ export class EventsListComponent implements OnInit {
   displayedColumns = ['id', 'date', 'time', 'event', 'status', 'actions']; //  'minCriticalValue', 'maxCriticalValue',
   eventsDataSource: MatTableDataSource < TcEvent > ;
   userTeams: TcTeamInfo[];
-  selectedTeam: TcTeamInfo;
+  selectedTeamId: number;
   teamMemberId: number;
   isPastEvents: boolean;
   displayAdminActions: boolean;
@@ -42,22 +35,15 @@ export class EventsListComponent implements OnInit {
   activeEvent: TcEvent = null;
   constructor(
     private eventsService: EventsService,
-    private userService: UserService,
+    userService: UserService,
+    private teamsService: TeamsService,
     public dialog: MatDialog,
-    private deviceService: DeviceDetectorService
+    private router: Router
   ) {
-<<<<<<< Updated upstream
-    this.isMobile = this.deviceService.isMobile();
-    this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
-    this.userTeams = this.userService.getUserTeams();
-    this.selectedTeam = this.userService.getSelectedTeam();
-    this.updateEvents(this.isPastEvents);
-=======
     this.displayAdminActions = userService.userType.toLowerCase() === 'admin';
     this.userTeams = this.teamsService.userTeams;
     this.selectedTeamId = this.teamsService.selectedTeamId;
-    this.updateEvents();
->>>>>>> Stashed changes
+    this.updateEvents()
   }
 
   ngOnInit() {}
@@ -70,16 +56,12 @@ export class EventsListComponent implements OnInit {
    */
   updateEvents() {
     this.eventsDataSource = undefined; // reset data source to display the loader as new data will be received
-<<<<<<< Updated upstream
-    this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe(({
-=======
     this.eventsService.getEvents(this.selectedTeamId, this.isPastEvents).subscribe(({
->>>>>>> Stashed changes
       events = [],
       myTeamMemberId
     }) => {
       this.teamMemberId = myTeamMemberId;
-      this.addNumOfParticipationsToEvents(events);
+      this.eventsService.addNumOfParticipationsToEvents(events);
       this.updateEventsDataSource(events);
     });
   }
@@ -112,36 +94,8 @@ export class EventsListComponent implements OnInit {
    * selected team, and updates the displayed events to displays the events that belongs to the selected team.
    */
   changeSelectedTeam() {
-<<<<<<< Updated upstream
-    this.userService.setSelectedTeam(this.selectedTeam);
-    this.updateEvents(false);
-=======
     this.teamsService.selectedTeamId = this.selectedTeamId;
     this.updateEvents();
->>>>>>> Stashed changes
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description calculates the number of participations for each event and add it to the event object
-   * @param {Event []} events
-   */
-  addNumOfParticipationsToEvents(events: TcEvent[]) {
-    let numOfParitications;
-    const eventsListLen = events.length;
-    for (let eventIndex = 0; eventIndex < eventsListLen; eventIndex++) {
-      numOfParitications = 0;
-      const eventParticipations = events[eventIndex].detailedParticipations;
-      if (eventParticipations) {
-        const eventParticipationsLen = eventParticipations.length;
-        for (let participationIndex = 0; participationIndex < eventParticipationsLen; participationIndex++) {
-          if (eventParticipations[participationIndex].action === 'participate') {
-            numOfParitications++;
-          }
-        }
-      }
-      events[eventIndex].numOfParticipations = numOfParitications;
-    }
   }
 
   /**

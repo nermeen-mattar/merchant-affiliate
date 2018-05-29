@@ -6,11 +6,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/internal/Observable';
 
 import { UserMessages } from './../models/user-messages.model';
 import { environment } from './../../../environments/environment';
 import { UserMessagesService } from './user-messages.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class HttpRequestsService {
@@ -31,7 +32,8 @@ export class HttpRequestsService {
     this.requestHeader =  this.requestHeader.append('Authorization', `Bearer ${token}`);
     this.setHttpRequestOptions();
   }
-  deleteAuthorizationInRequestHeader() {
+
+  removeAuthorizationFromRequestHeader() {
     this.requestHeader =  this.requestHeader.delete('Authorization');
     this.setHttpRequestOptions();
   }
@@ -57,7 +59,7 @@ export class HttpRequestsService {
     });
   }
 
-  public httpPost(requestUrl: string, requestParams ? : Object, userMessages ?: UserMessages): Observable < any > {
+  public httpPost(requestUrl: string, requestParams ?: Object, userMessages ?: UserMessages): Observable < any > {
     return Observable.create(obs => {
       this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
@@ -72,7 +74,7 @@ export class HttpRequestsService {
     });
   }
 
-  public httpPut(requestUrl: string, requestParams ? : Object, userMessages?: UserMessages): Observable < any > {
+  public httpPut(requestUrl: string, requestParams ?: Object, userMessages?: UserMessages): Observable < any > {
     return Observable.create(obs => {
       this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
           res = res.data ? res.data : res;
@@ -128,7 +130,6 @@ export class HttpRequestsService {
         `body was: ${error.error}`);
     }
     // return an ErrorObservable with a user-facing error message
-    return new ErrorObservable(
-      'Something bad happened; please try again later.');
+    return new ErrorObservable<string>().pipe(tap(() => 'Something bad happened; please try again later.'));
   }
 }
