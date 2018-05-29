@@ -44,8 +44,7 @@
         {{'LANGUAGE.LANGUAGE' | translate}}
         <mat-icon class="app-container__sidenav__menu__item__arrow">keyboard_arrow_down</mat-icon>
         <mat-menu #langMenu="matMenu">
-          <button mat-menu-item>{{'LANGUAGE.GERMAN' | translate}}</button>
-          <button mat-menu-item>{{'LANGUAGE.ENGLISH' | translate}}</button>
+          <button (click)="translate.use(lang.code)" *ngFor="let lang of appLanguages" mat-menu-item>{{ lang.code | translate}}</button>
         </mat-menu>
       </div>
     </div>
