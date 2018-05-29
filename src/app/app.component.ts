@@ -1,8 +1,8 @@
-import { UserService } from './core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/internal/Observable';
 
+import { UserService } from './core/services/user.service';
 import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
 import { AuthService } from './auth/services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';

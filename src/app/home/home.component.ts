@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
  * @param {string} teamName
  */
 navigateToRegisterPage(teamName: string) {
+  debugger;
   const passTeamName = teamName ? {
     queryParams: {
       'team-name': teamName

@@ -34,7 +34,7 @@ ng build -c devopt
 ng build -c test
 ```
 
-### DEV Environment Build
+### PRODUCTION Environment Build
 
 ```bash
 ng build -c production

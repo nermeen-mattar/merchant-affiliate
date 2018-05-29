@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { format } from 'date-fns';
 
+import { TeamsService } from './../../../core/services/teams.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
-import { UserService } from '../../../core/services/user.service';
 import { EventsService } from '../../services/events.service';
 import { TcEvent } from '../../models/tc-event.model';
 import { TcEventTypeValues } from '../../models/tc-event-type-values';
@@ -19,9 +19,9 @@ export class EventFormComponent implements OnInit {
   eventGroup: FormGroup;
   displaySpinner = false;
   eventId: string; /* is undefined (in the case of event creation) */
-  constructor(private eventsService: EventsService, userService: UserService, private fieldValidatorsService: FieldValidatorsService,
+  constructor(private eventsService: EventsService, teamsService: TeamsService, private fieldValidatorsService: FieldValidatorsService,
     private route: ActivatedRoute, private router: Router) {
-      this.selectedTeamId = userService.selectedTeam.teamId;
+      this.selectedTeamId = teamsService.selectedTeamId;
       this.initFormEditingOrCreating();
   }
 

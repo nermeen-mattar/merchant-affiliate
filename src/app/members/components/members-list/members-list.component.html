@@ -7,8 +7,8 @@
     </h3>
     <div>
       <mat-form-field>
-        <mat-select [(value)]="selectedTeam" (selectionChange)="updateMembers()">
-          <mat-option *ngFor="let team of userTeams" [value]="team">
+        <mat-select [(value)]="selectedTeamId" (selectionChange)="updateMembers()">
+          <mat-option *ngFor="let team of userTeams" [value]="team.teamId">
             {{ team.teamName }}
           </mat-option>
         </mat-select>

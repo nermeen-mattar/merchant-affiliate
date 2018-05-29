@@ -30,7 +30,7 @@ export class HttpRequestsServiceMock {
   private handleError(error: Response | any) {
   }
 
-  public deleteAuthorizationInRequestHeader() {
+  public removeAuthorizationFromRequestHeader() {
   }
 
 }
