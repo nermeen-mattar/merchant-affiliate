@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
+import { MatTableDataSource, MatDialog, MatDialogRef, MatSlideToggle} from '@angular/material';
 
 import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
@@ -106,7 +106,9 @@ export class EventsListComponent implements OnInit {
    */
   toggleParticipationInEvent(toggleValue: boolean, eventId: string, currToggle: MatSlideToggle) {
     this.eventsService.toggleEventParticipation(toggleValue, eventId, this.teamMemberId).subscribe(res => {
-      this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)].numOfParticipations += toggleValue ? 1 : -1;
+      const event = this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)];
+      event.numOfParticipations += toggleValue ? 1 : -1;
+      event.myParticipation.action =  toggleValue ? 'participate' : 'cancel';
       this.triggerTableToRefreshData();
     }, err => {
       currToggle.toggle();
