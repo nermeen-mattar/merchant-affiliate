@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { TeamsService } from './teams.service';
-import { TcDateRange } from './../../shared/models/tc-date-range.model';
 import { DecodedToken } from './../../auth/models/decoded-token.model';
 import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
 import { TcClientSideTeamRoles } from './../../teams/models/tc-client-side-team-roles.model';
