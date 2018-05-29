@@ -19,12 +19,10 @@ export class AdminSettingsComponent implements OnInit {
   teamSettingsGroup: FormGroup;
   teamNameControl: FormControl;
   directLinkControl: FormControl;
-  // userTeams: TcTeamInfo[];
   eventId: string; /* is undefined (in the case of event creation) */
   constructor(private fieldValidatorsService: FieldValidatorsService,
     private adminService: AdminService, public teamsService: TeamsService,
     private route: ActivatedRoute, private router: Router) {
-    // this.userTeams = teamsService.userTeams; used teamsService.userTeams directly to get immediately updated when changing a team name
     this.selectedTeamId = teamsService.selectedTeamId;
     this.initSettingsForm();
     this.selectedTeamInfo = this.getInfoForSelectedTeam();

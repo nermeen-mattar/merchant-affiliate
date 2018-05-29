@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-
 import { first, map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 import { LoginResponse } from './../models/login-response.model';
 import { UserMessagesService } from './../../core/services/user-messages.service';
@@ -11,7 +11,6 @@ import { TokenHandlerService } from './token-handler.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { ServerSideLoginInfo } from '../models/server-side-login-info.mdel';
 import { ServerSideRegisterInfo } from '../models/server-side-register-info.model';
-import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class AuthService implements OnDestroy {
   isLoggedIn: BehaviorSubject < boolean > = new BehaviorSubject(false);
@@ -74,45 +73,45 @@ export class AuthService implements OnDestroy {
   }
 
   /**
-   * @description upon successful user login/switch it sets the login response class property and in the local storage, then it updates all
-   * the authorization states and finally, navigates to the events page (default page for authorized users).
+   * @author Nermeen Mattar
+   * @description upon successful user login/switch this function sets the login response class property and in the local storage. Sets the
+   *  user info in the user service. Updates all the authorization states. Navigates to the events page (default page for authorized users).
    * @param {any} loginResponse
    * @memberof AuthService
    */
   onLoginRequestSuccess(loginResponse) {
     this.loginResponse = loginResponse; // may use map to only store needed info
     localStorage.setItem('loginResponse', JSON.stringify(this.loginResponse));
+    this.userService.setLoggedInUserInfo(this.tokenHandler.decodeToken(this.loginResponse.token)); // this.loginResponse,
     this.updateAuthorizationStates();
     this.router.navigateByUrl('events');
   }
 
   /**
    * @author Nermeen Mattar
-   * @description logs out the user by reseting the login response class property and removing it from the local storage then updating all
-   * the authorization states and finally, navigating to the home page (default page for unauthorized users).
+   * @description logs out the user. Resets the login response class property and removing it from the local storage. Updates all the
+   * authorization states. Resets the user info in the user service. Navigates to the home page (default page for unauthorized users).
    */
   logout() {
     this.loginResponse = undefined;
     localStorage.removeItem('loginResponse');
+    this.userService.clearLoggedInUserInfo();
     this.updateAuthorizationStates();
     this.router.navigateByUrl('home');
   }
 
   /**
    * @author Nermeen Mattar
-   * @description The function is the centralized place that updates the authorization states based on the value of the login response.
-   * First, it it changes the request options in the http service so that any subsequent request will either include authorization property
-   * (if user authorized) or not (if user unauthorized). Second, it either calls seting/resetign user info in the user service. Finally, it
-   * emits an event to inform listenting components about the updated authorization state.
+   * @description updates the authorization states based on the value of the login response. First, it it changes the request options in the
+   * http service so that any subsequent request will either include authorization property (authorized user) or not (unauthorized user)
+   * then emits an event to inform listenting components about the updated authorization state.
    */
   updateAuthorizationStates() {
     if (this.loginResponse) {
       this.httpRequestsService.appendAuthorizationToRequestHeader(this.loginResponse.token);
-      this.userService.setLoggedInUserInfo(this.tokenHandler.decodeToken(this.loginResponse.token)); // this.loginResponse,
       this.isLoggedIn.next(true);
     } else {
-      this.httpRequestsService.deleteAuthorizationInRequestHeader();
-      this.userService.clearLoggedInUserInfo();
+      this.httpRequestsService.removeAuthorizationFromRequestHeader();
       this.isLoggedIn.next(false);
     }
   }

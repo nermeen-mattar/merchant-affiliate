@@ -32,7 +32,8 @@ export class HttpRequestsService {
     this.requestHeader =  this.requestHeader.append('Authorization', `Bearer ${token}`);
     this.setHttpRequestOptions();
   }
-  deleteAuthorizationInRequestHeader() {
+
+  removeAuthorizationFromRequestHeader() {
     this.requestHeader =  this.requestHeader.delete('Authorization');
     this.setHttpRequestOptions();
   }
