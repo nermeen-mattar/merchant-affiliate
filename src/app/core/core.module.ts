@@ -18,7 +18,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from '../auth/services/auth.service';
 import { TokenHandlerService } from '../auth/services/token-handler.service';
 import { AdminService } from './services/admin.service';
-import { DeviceClassesDirective } from './directives/device-classes.directive';
 import { RegisterService } from '../auth/services/register.service';
 import { TeamsService } from './services/teams.service';
 
