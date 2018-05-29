@@ -17,6 +17,10 @@
             </mat-form-field>
             <mat-form-field class="app-settings__admin-form__field">
               <input matInput type="password" placeholder="{{ 'ADMIN.NEW_PASSWORD' | translate }}" formControlName="adminNewPassword">
+              <mat-icon *ngIf="adminSettingsGroup.controls['adminNewPassword'].dirty && adminSettingsGroup.controls['adminNewPassword'].invalid&&adminSettingsGroup.controls['adminNewPassword'].errors.validatePassword"
+                class="app-settings__admin-form__field__icon" matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
+                matTooltipPosition="below">
+                info </mat-icon>
               <mat-error *ngIf="adminSettingsGroup.controls['adminNewPassword'].invalid">
                 <span *ngIf="adminSettingsGroup.controls['adminNewPassword'].errors.required; else passwordInvalid">
                   {{ 'ADMIN.NEW_PASSWORD'| translate }} {{'FORM.IS_REQUIRED' | translate}}
@@ -45,8 +49,8 @@
         <h4 class="app-settings__team-form__title "> {{'ADMIN.TEAM_SETTINGS' | translate}}</h4>
         <div>
           <mat-form-field>
-            <mat-select [(value)]="selectedTeam" (change)="changeSelectedTeam()">
-              <mat-option *ngFor="let team of userTeams" [value]="team">
+            <mat-select [(value)]="selectedTeamInfo">
+              <mat-option *ngFor="let team of teamsTheUserIsAdminOf" [value]="team">
                 {{ team.teamName }}
               </mat-option>
             </mat-select>
@@ -54,7 +58,7 @@
         </div>
         <div style="display:flex;">
           <mat-form-field class="app-settings__admin-form__field">
-            <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" [value]="selectedTeam.teamName" [formControl]="teamNameControl"
+            <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" [value]="selectedTeamInfo.teamName" [formControl]="teamNameControl"
               type="text">
             <mat-error *ngIf="teamNameControl.invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
           </mat-form-field>

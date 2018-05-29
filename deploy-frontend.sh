@@ -104,11 +104,16 @@ BUILD_OUTPUT="build.output"
 echo "Starting build and save output in ${BUILD_OUTPUT}"
 if [ "${PROFILE}" == "prod" ]
 then
-	echo "ng build --prod > ${BUILD_OUTPUT}"
-	ng build --prod > ${BUILD_OUTPUT}
-else
-	echo "ng build --${PROFILE} > ${BUILD_OUTPUT}"
-	ng build --${PROFILE} > ${BUILD_OUTPUT}
+	echo "ng build -c production > ${BUILD_OUTPUT}"
+	ng build -c production > ${BUILD_OUTPUT}
+elif [ "${PROFILE}" == "dev" ]
+then
+	echo "ng build -c devopt > ${BUILD_OUTPUT}"
+	ng build -c devopt > ${BUILD_OUTPUT}
+elif [ "${PROFILE}" == "test" ]
+then
+	echo "ng build -c ${PROFILE} > ${BUILD_OUTPUT}"
+	ng build -c ${PROFILE} > ${BUILD_OUTPUT}
 fi
 
 # tar dist folder

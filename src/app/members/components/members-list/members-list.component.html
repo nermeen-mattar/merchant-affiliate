@@ -7,8 +7,8 @@
     </h3>
     <div>
       <mat-form-field>
-        <mat-select [(value)]="selectedTeam" (change)="updateMembers()">
-          <mat-option *ngFor="let team of userTeams" [value]="team">
+        <mat-select [(value)]="selectedTeamId" (selectionChange)="updateMembers()">
+          <mat-option *ngFor="let team of userTeams" [value]="team.teamId">
             {{ team.teamName }}
           </mat-option>
         </mat-select>
@@ -22,11 +22,11 @@
     <mat-table class="app-members__container__table" [dataSource]="membersDataSource" matSort>
       <ng-container matColumnDef="member">
         <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-          {{'USER.FIRST_NAME' | translate}} </mat-header-cell>
+          {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
         <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.flag ? 'app-members__container__table__inactive-cell' : ''"> {{row.firstname}} {{row.name}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="mail">
-        <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'MEMBER.MEMBER' | translate}}
+        <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'USER.EMAIL' | translate}}
         </mat-header-cell>
         <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.flag ? 'app-members__container__table__inactive-cell' : ''"> {{row.member.mail}} </mat-cell>
       </ng-container>

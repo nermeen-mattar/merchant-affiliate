@@ -13,13 +13,18 @@
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'TEAM.TEAM_PASSWORD' | translate }}" formControlName="teamPassword" type="password">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
+              <!-- display information message to elaborate password specifications -->
+              <mat-icon *ngIf="registerFirstStepForm.controls['teamPassword'].dirty && registerFirstStepForm.controls['teamPassword'].invalid&&registerFirstStepForm.controls['teamPassword'].errors.validatePassword"
+              class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
+              matTooltipPosition="below">
+              info </mat-icon>
               <mat-error *ngIf="registerFirstStepForm.controls['teamPassword'].invalid">
                 <span *ngIf="registerFirstStepForm.controls['teamPassword'].errors.required; else teamPasswordInvalid">
                   {{'TEAM.TEAM_PASSWORD' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
                 </span>
                 <ng-template #teamPasswordInvalid>
                   <span *ngIf="registerFirstStepForm.controls['teamPassword'].errors.validatePassword">
-                    {{'FORM.ENTER_VALID_EMAIL' | translate}}
+                    {{'FORM.ENTER_VALID_PASSWORD' | translate}}
                   </span>
                 </ng-template>
               </mat-error>
@@ -27,6 +32,10 @@
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" formControlName="email" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>email</mat-icon>
+              <mat-icon *ngIf="registerFirstStepForm.controls['email'].dirty && registerFirstStepForm.controls['email'].invalid&&registerFirstStepForm.controls['email'].errors.email"
+              class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.EMAIL_VALID_FORMAT' | translate}}"
+              matTooltipPosition="below">
+              info </mat-icon>
               <mat-error *ngIf="registerFirstStepForm.controls['email'].invalid">
                 <span *ngIf="registerFirstStepForm.controls['email'].errors.required; else invalidEmail">
                   {{'USER.EMAIL' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}

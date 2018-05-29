@@ -1,6 +1,5 @@
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs';
 export class HttpRequestsServiceMock {
   private requestHeader: Headers;
   private requestOptions: Object;
@@ -31,7 +30,7 @@ export class HttpRequestsServiceMock {
   private handleError(error: Response | any) {
   }
 
-  public deleteAuthorizationInRequestHeader() {
+  public removeAuthorizationFromRequestHeader() {
   }
 
 }
