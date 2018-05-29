@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -91,7 +92,7 @@ export class UserService {
     this.isAdmin.next(userType.toLowerCase() === 'admin');
     this._userType = userType;
     if (userType) {
-      localStorage.setItem('userType', userType );
+      localStorage.setItem('userType', userType);
     } else {
       localStorage.removeItem('userType');
     }
@@ -104,7 +105,7 @@ export class UserService {
    * Side note: there are duplicated info between token and loginResponse. Had to decode the token as login response only do not have sub!
    * @param {DecodedToken} decodedToken
    */
-  setLoggedInUserInfo(decodedToken?: DecodedToken) {
+  setLoggedInUserInfo(decodedToken ? : DecodedToken) {
     if (decodedToken) {
       this.userType = decodedToken.grantedRole;
       this.username = decodedToken.sub;
@@ -118,37 +119,51 @@ export class UserService {
 
   /**
    * @author Nermeen Mattar
-   * @description sets the user's teams by combining the teams that the user is admin of with the teams that the user is member of.
-   * Then it sets the teamRoles to the backendTeamRoles after mapping it to the clientSideTeamRoles. Mapping happens by changing teams
-   * property from array of TcTeamInfo objects to array of numbers.
-   * @param {*} teamsAndTeamsRolesInfo
+   * @description prepares an array for teams list and an array for teams roles then calls a function to fill the two arrays. The function
+   * is called twice; first to push the teams the user is admin of and second to push the teams the user is member of. The result of the two
+   * calls is combined.
+   * @param {TcServerSideTeamRoles} backendTeamRoles
    */
   initTeamRolesAndTeamsList(backendTeamRoles: TcServerSideTeamRoles) {
-    const userTeams: TcTeamInfo[] = [];
-    const teamsIds = [];
+    const teamsList: TcTeamInfo[] = [];
     const teamRoles: TcClientSideTeamRoles = {};
-    Object.keys(backendTeamRoles).forEach(teamRole => {
-      teamRoles[teamRole] = [];
-      const teams = backendTeamRoles[teamRole];
-      const teamRoleTranslateKey = teamRole === 'teamAdmins' ? 'admin' : 'member';
-      const teamsLen = teams.length;
-      for (let teamIndex = 0; teamIndex < teamsLen; teamIndex++) {
-        const team: TcTeamInfo = teams[teamIndex];
-        if (teamsIds.indexOf(team.teamId) === -1) {
-          userTeams.push({
-            roles: [teamRoleTranslateKey],
-            ...team
-          });
-          teamsIds.push(team.teamId);
-        } else {
-          userTeams[teamIndex].roles.push(teamRoleTranslateKey);
-        }
-        teamRoles[teamRole].push(team.teamId);
-      }
-    });
+
+    this.pushTeamRolesAndTeamsList(backendTeamRoles['teamAdmins'], 'teamAdmins', teamRoles, teamsList);
+    this.pushTeamRolesAndTeamsList(backendTeamRoles['teamMembers'], 'teamMembers', teamRoles, teamsList);
+
     this.teamRoles = teamRoles;
-    this.teamsService.userTeams = userTeams;
+    this.teamsService.userTeams = teamsList;
   }
+  /**
+   * @author Nermeen Mattar
+   * @description pushes teams to the teams list to combine the teams that the user is admin of with the teams that the user is member of.
+   * Then it sets the teamRoles to the backendTeamRoles after mapping it to the clientSideTeamRoles. Mapping happens by changing teams
+   * property from array of TcTeamInfo objects to array of numbers.
+   *
+   *
+   * @param {TcTeamInfo[]} backendTeams
+   * @param {string} teamRoleName
+   * @param {TcClientSideTeamRoles} teamRoles
+   * @param {TcTeamInfo[]} teamsList
+   */
+  pushTeamRolesAndTeamsList(backendTeams: TcTeamInfo[], teamRoleName: string, teamRoles: TcClientSideTeamRoles, teamsList: TcTeamInfo[]) {
+    teamRoles[teamRoleName] = [];
+    const normalizedTeamRole = teamRoleName === 'teamAdmins' ? 'admin' : 'member';
+    const backendTeamsLen = backendTeams.length;
+    for (let teamIndex = 0; teamIndex < backendTeamsLen; teamIndex++) {
+      const teamToUpdate: TcTeamInfo = teamsList.filter(team => team.teamId === backendTeams[teamIndex].teamId)[0];
+      if (teamToUpdate) {
+        teamToUpdate.roles.push(normalizedTeamRole);
+      } else {
+        teamsList.push({
+          roles: [normalizedTeamRole],
+          ...backendTeams[teamIndex]
+        });
+      }
+      teamRoles[teamRoleName].push(backendTeams[teamIndex].teamId);
+    }
+  }
+
 
   /**
    * @author Nermeen Mattar

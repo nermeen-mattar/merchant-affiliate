@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { format } from 'date-fns';
 
+import { UserService } from './../../../core/services/user.service';
 import { TeamsService } from './../../../core/services/teams.service';
 import { AdminService } from './../../../core/services/admin.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
@@ -13,22 +14,30 @@ import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
   styleUrls: ['./admin-settings.component.scss']
 })
 export class AdminSettingsComponent implements OnInit {
-  selectedTeamId: number;
-  selectedTeamInfo: TcTeamInfo;
   adminSettingsGroup: FormGroup;
   teamSettingsGroup: FormGroup;
   teamNameControl: FormControl;
   directLinkControl: FormControl;
-  eventId: string; /* is undefined (in the case of event creation) */
+  selectedTeamInfo: TcTeamInfo;
+  teamsTheUserIsAdminOf: TcTeamInfo[];
   constructor(private fieldValidatorsService: FieldValidatorsService,
-    private adminService: AdminService, public teamsService: TeamsService,
-    private route: ActivatedRoute, private router: Router) {
-    this.selectedTeamId = teamsService.selectedTeamId;
+    private adminService: AdminService, private teamsService: TeamsService,
+    private userService: UserService, private route: ActivatedRoute, private router: Router) {
+    this.updateTeamsTheUserIsAdminOf();
+    this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
     this.initSettingsForm();
-    this.selectedTeamInfo = this.getInfoForSelectedTeam();
   }
 
   ngOnInit() {}
+
+  /**
+   * @author Nermeen Mattar
+   * @description filters the teams list to get only the teams that the user is admin of and sets this value in the teamsTheUserIsAdminOf.
+   */
+  updateTeamsTheUserIsAdminOf() {
+    this.teamsTheUserIsAdminOf =
+     this.teamsService.userTeams.filter( team => this.userService.teamRoles.teamAdmins.indexOf(team.teamId) !== -1);
+  }
 
   /**
    * @author Nermeen Mattar
@@ -36,17 +45,7 @@ export class AdminSettingsComponent implements OnInit {
    * @returns {TcTeamInfo}
    */
   getInfoForSelectedTeam(): TcTeamInfo {
-    return this.teamsService.userTeams.filter(userTeam => userTeam.teamId ===  this.selectedTeamId)[0];
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description When the user changes the selected team from the menu, it updates the selected team in user service with the newly
-   * selected team, and updates the displayed events to displays the events that belongs to the selected team.
-   */
-  changeSelectedTeam() {
-    this.teamsService.selectedTeamId = this.selectedTeamId;
-    this.selectedTeamInfo = this.getInfoForSelectedTeam();
+    return this.teamsTheUserIsAdminOf.filter(userTeam => userTeam.teamId ===  55)[0]; // this.idForTeamToEdit
   }
 
   /**
@@ -130,6 +129,7 @@ export class AdminSettingsComponent implements OnInit {
   saveTeamName() {
     if (this.teamNameControl.valid) {
       this.adminService.changeTeamName(this.teamNameControl.value);
+      this.updateTeamsTheUserIsAdminOf();
     }
   }
   generateDirectLink() {
