@@ -57,13 +57,11 @@
           <span class="app-events__event__members__actual"> {{row.numOfParticipations}} </span>
           (
           <span *ngIf="row.minCriticalValue || row.minCriticalValue === 0">
-            {{'EVENT.MIN' | translate}}:
-            <span class="app-events__event__members__min">{{row.minCriticalValue}}</span>
+            {{'EVENT.MIN' | translate}}: {{row.minCriticalValue}}
           </span>
           <span *ngIf="(row.minCriticalValue || row.minCriticalValue === 0 ) && (row.minCriticalValue || row.minCriticalValue === 0 )"
             class="app-events__event__members__seperator"> , </span>
-          <span *ngIf="row.maxCriticalValue || row.maxCriticalValue === 0"> {{'EVENT.MAX' | translate}} :
-            <span class="app-events__event__members__max"> {{row.maxCriticalValue}} </span>
+          <span *ngIf="row.maxCriticalValue || row.maxCriticalValue === 0"> {{'EVENT.MAX' | translate}} : {{row.maxCriticalValue}}
           </span> )
           <mat-icon class="app-events__event__error" *ngIf="((row.minCriticalValue || row.minCriticalValue === 0 ) && row.minCriticalValue > row.numOfParticipations) ||
             ((row.maxCriticalValue || row.maxCriticalValue === 0 ) && row.maxCriticalValue < row.numOfParticipations); else success">error</mat-icon>
@@ -117,13 +115,11 @@
               <span class="app-events__event__members__actual"> {{event.numOfParticipations}} </span>
               (
               <span *ngIf="(event.minCriticalValue || event.minCriticalValue === 0)">
-                {{'EVENT.MIN' | translate}}:
-                <span class="app-events__event__members__min">{{event.minCriticalValue}}</span>
+                {{'EVENT.MIN' | translate}}: {{event.minCriticalValue}}
               </span>
               <span *ngIf="(event.minCriticalValue || event.minCriticalValue === 0) && (event.maxCriticalValue || event.maxCriticalValue === 0) "
                 class="app-events__event__members__seperator"> , </span>
-              <span *ngIf="(event.maxCriticalValue || event.maxCriticalValue === 0) "> {{'EVENT.MAX' | translate}} :
-                <span class="app-events__event__members__max"> {{event.maxCriticalValue}} </span>
+              <span *ngIf="(event.maxCriticalValue || event.maxCriticalValue === 0) "> {{'EVENT.MAX' | translate}} : {{event.maxCriticalValue}}
               </span> )
             </div>
           </div>
