@@ -64,4 +64,14 @@ export class AdminService {
     }).subscribe(res => {});
   }
 
+  /**
+   * @author Nermeen Mattar
+   * @description requests a new direct link for the passed team.
+   */
+  changeDirectLink(): Observable <any> {
+    return this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeamId + '/change_direct_link', {
+      success: 'ADMIN.TEAM_PASSWORD_CHANGING_SUCCESS',
+      fail: 'ADMIN.TEAM_PASSWORD_CHANGING_FAIL'
+    });
+  }
 }
