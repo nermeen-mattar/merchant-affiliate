@@ -17,7 +17,7 @@
           </ng-template>
         </mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" class="app-email-login__content__button" [disabled]="loginUsingOnlyEmail.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
+      <button mat-raised-button color="primary" class="app-email-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
     </form>
   </mat-card-content>
   <mat-spinner class="app-email-login__spinner" [ngClass]="{'app-email-login__element-hide': !displaySpinner }"></mat-spinner>
