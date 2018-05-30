@@ -44,6 +44,27 @@ export class AuthService implements OnDestroy {
         })
       );
   }
+  /**
+   * @author Nermeen Mattar
+   * @description a team login function using the email and the teamirect link
+   * @param {string} directLink
+   * @param {string} email
+   * @returns {Observable <any>}
+   */
+  loginUsingDirectLink(directLink: string, email: string) : Observable <any> {
+    return this.httpRequestsService.httpPost('login/directlink', {directlink: directLink, email: email} , {
+        failDefault: 'LOGIN.INCORRECT_USERNAME'
+      })
+      .pipe(map(
+        res => {
+          if (!res.message) { // this if statement is temp until the backend fixes the case of email not confirmed by returning an error
+            this.logout();
+            this.onLoginRequestSuccess(res);
+          }
+          return res;
+        })
+      );
+  }
 
   /**
    * @author Nermeen Mattar

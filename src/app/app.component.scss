@@ -13,8 +13,7 @@
         font-size: $tc-font-size-h5;
         padding: 17px 15px;
         cursor: pointer;
-        &:hover,
-        &.active {
+        &:hover {
           background-color: rgba(235, 235, 235, 0.8);
           color: $tc-color-gray-shade-10;
         }
@@ -41,6 +40,11 @@
     // min-height: 100%; replaced with the following line to fix no (or small) content
     min-height: 526px;
   }
+}
+
+.active {
+  background-color: rgba(235, 235, 235, 0.8);
+  color: $tc-color-gray-shade-10;
 }
 
 @media only screen and (min-width: 900px) {

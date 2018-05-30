@@ -1,0 +1,24 @@
+<mat-card class="app-email-login">
+  <mat-card-title class="text-center">{{ 'LOGIN.LOGIN' | translate }} </mat-card-title>
+  <mat-card-content>
+    <form novalidate #loginForm="ngForm" class="app-email-login__content" (ngSubmit)="loginUsingOnlyEmail(loginForm.value)" [ngClass]="{'app-email-login__element-hide': displaySpinner}">
+      <mat-form-field class="app-email-login__content__field">
+        <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" ngModel #userEmail="ngModel" name="userEmail" required email
+          type="text">
+        <mat-icon class="app-email-login__content__field__icon" matPrefix>email</mat-icon>
+        <mat-error *ngIf="userEmail.invalid">
+          <span *ngIf="userEmail.errors.required; else emailError">
+            {{'USER.EMAIL' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
+          </span>
+          <ng-template #emailError>
+            <span *ngIf="userEmail.errors.email">
+              {{'FORM.ENTER_VALID_EMAIL' | translate}}
+            </span>
+          </ng-template>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="app-email-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
+    </form>
+  </mat-card-content>
+  <mat-spinner class="app-email-login__spinner" [ngClass]="{'app-email-login__element-hide': !displaySpinner }"></mat-spinner>
+</mat-card>
