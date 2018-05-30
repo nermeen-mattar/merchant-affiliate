@@ -28,7 +28,8 @@
           <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
         </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row">
-          <mat-slide-toggle color="primary" (change)="toggleParticipationInEvent($event.checked, row.id)" [disabled]="isPastEvents || ( row.myParticipation.action === 'cancel' && row.maxCriticalValue && row.numOfParticipations >= row.maxCriticalValue)"
+          <mat-slide-toggle color="primary" #participationToggeler (change)="toggleParticipationInEvent($event.checked, row.id, participationToggeler)" 
+          [disabled]="isPastEvents || (row.myParticipation && row.myParticipation.action === 'cancel' && (row.maxCriticalValue || row.maxCriticalValue == 0)&& row.numOfParticipations >= row.maxCriticalValue)"
             [checked]="row.myParticipation && row.myParticipation.action !== 'cancel'">
           </mat-slide-toggle>
         </mat-cell>
@@ -85,8 +86,8 @@
       <mat-expansion-panel *ngFor="let event of eventsDataSource?.data" class="app-events__container__accordion__expandable-item">
         <mat-expansion-panel-header>
           <mat-panel-title class="app-events__container__accordion__expandable-event__title">
-            <mat-slide-toggle color="primary" (change)="toggleParticipationInEvent($event.checked, event.id)" (click)="preventTriggeringAccordion($event)"
-              [disabled]="isPastEvents || ( event.myParticipation.action === 'cancel' && event.maxCriticalValue && event.numOfParticipations >= event.maxCriticalValue)"
+            <mat-slide-toggle color="primary" #participationToggeler (change)="toggleParticipationInEvent($event.checked, event.id, participationToggeler)" (click)="preventTriggeringAccordion($event)"
+              [disabled]="isPastEvents || (event.myParticipation && event.myParticipation.action === 'cancel' && (event.maxCriticalValue || event.maxCriticalValue == 0) && event.numOfParticipations >= event.maxCriticalValue)"
               [checked]="event.myParticipation && event.myParticipation.action !== 'cancel'">
             </mat-slide-toggle>
             <span class="app-events__container__accordion__expandable-event__title__event-name"> {{event.eventName}} </span>

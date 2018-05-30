@@ -37,6 +37,7 @@ export class MemberFormComponent implements OnInit {
       this.membersService.getMember(this.memberId).subscribe(res => {
         this.updateMemberValues(res);
       });
+      this.memberGroup.controls.email.disable();
     }
   }
 
@@ -51,7 +52,6 @@ export class MemberFormComponent implements OnInit {
       lastName: new FormControl( '', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email])
     });
-    this.memberGroup.controls.email.disable();
   }
 
   /**
