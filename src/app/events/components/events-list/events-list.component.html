@@ -59,7 +59,7 @@
           <span *ngIf="row.minCriticalValue || row.minCriticalValue === 0">
             {{'EVENT.MIN' | translate}}: {{row.minCriticalValue}}
           </span>
-          <span *ngIf="(row.minCriticalValue || row.minCriticalValue === 0 ) && (row.minCriticalValue || row.minCriticalValue === 0 )"
+          <span *ngIf="(row.minCriticalValue || row.minCriticalValue === 0 ) && (row.maxCriticalValue || row.maxCriticalValue === 0 )"
             class="app-events__event__members__seperator"> , </span>
           <span *ngIf="row.maxCriticalValue || row.maxCriticalValue === 0"> {{'EVENT.MAX' | translate}} : {{row.maxCriticalValue}}
           </span> )
