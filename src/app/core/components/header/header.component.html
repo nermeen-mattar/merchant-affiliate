@@ -39,7 +39,7 @@
       {{'LANGUAGE.LANGUAGE' | translate}}
       <mat-icon class="app-header__menu__item__arrow">keyboard_arrow_down</mat-icon>
       <mat-menu #langMenu="matMenu">
-            <button (click)="translate.use(lang.code)" *ngFor="let lang of appLanguages" mat-menu-item>{{ lang.code | translate}}</button>
+        <button (click)="languageSelected(lang.code)" *ngFor="let lang of appLanguages" mat-menu-item>{{lang.name}}</button>
       </mat-menu>
     </span>
   </div>

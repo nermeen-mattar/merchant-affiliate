@@ -57,8 +57,9 @@
   },
   "LANGUAGE": {
     "LANGUAGE": "Sprache",
-    "ENGLISH": "Englisch",
-    "GERMAN": "Deutsch"
+    "en": "Englisch",
+    "de": "Deutsch",
+    "fr": "Frensh"
   },
   "HOME": {
     "GO": "Los!",

@@ -1,6 +1,4 @@
 {
-  "en": "English",
-  "de": "German",
   "TEAM_CENTER": "team.center",
   "WELCOME": "Welcome",
   "DELETE": "Delete",
@@ -96,8 +94,9 @@
   },
   "LANGUAGE": {
     "LANGUAGE": "Language",
-    "ENGLISH": "English",
-    "GERMAN": "German"
+    "en": "English",
+    "de": "German",
+    "fr": "Frensh"
   },
   "HOME": {
     "GO": "Go!",
