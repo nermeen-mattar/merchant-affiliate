@@ -3,14 +3,13 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
+import { MatTableDataSource, MatDialog, MatDialogRef, MatSlideToggle} from '@angular/material';
 
 import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { UserService } from '../../../core/services/user.service';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-
 @Component({
   selector: 'tc-events-list',
   templateUrl: './events-list.component.html',
@@ -28,7 +27,11 @@ export class EventsListComponent implements OnInit {
   filterString = '';
   isMobile: boolean;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
-  timeFormat = {subString: { to: 5 }};
+  timeFormat = {
+    subString: {
+      to: 5
+    }
+  };
   activeEvent: TcEvent = null;
   constructor(
     private eventsService: EventsService,
@@ -40,7 +43,7 @@ export class EventsListComponent implements OnInit {
     this.displayAdminActions = userService.userType.toLowerCase() === 'admin';
     this.userTeams = this.teamsService.userTeams;
     this.selectedTeamId = this.teamsService.selectedTeamId;
-    this.updateEvents(this.isPastEvents);
+    this.updateEvents()
   }
 
   ngOnInit() {}
@@ -51,10 +54,9 @@ export class EventsListComponent implements OnInit {
    * received events to initEventsDataSource function which initializes the eventsDataSource for the events table
    * @param {boolean} isPast
    */
-  updateEvents(isPast: boolean) {
-    this.isPastEvents = isPast;
+  updateEvents() {
     this.eventsDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.eventsService.getEvents(this.selectedTeamId, isPast).subscribe(({
+    this.eventsService.getEvents(this.selectedTeamId, this.isPastEvents).subscribe(({
       events = [],
       myTeamMemberId
     }) => {
@@ -70,12 +72,30 @@ export class EventsListComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
+   * @description Updates the displayed events to displays the past events.
+   */
+  displayPastEvents() {
+    this.isPastEvents = true;
+    this.updateEvents();
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description Updates the displayed events to displays the future events.
+   */
+  displayFutureEvents() {
+    this.isPastEvents = false;
+    this.updateEvents();
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description When the user changes the selected team from the menu, it updates the selected team in user service with the newly
    * selected team, and updates the displayed events to displays the events that belongs to the selected team.
    */
   changeSelectedTeam() {
     this.teamsService.selectedTeamId = this.selectedTeamId;
-    this.updateEvents(false);
+    this.updateEvents();
   }
 
   /**
@@ -84,10 +104,14 @@ export class EventsListComponent implements OnInit {
    * @param {boolean} toggleValue
    * @param {string} eventId
    */
-  toogleParticipationInEvent(toggleValue: boolean, eventId: string) {
+  toggleParticipationInEvent(toggleValue: boolean, eventId: string, currToggle: MatSlideToggle) {
     this.eventsService.toggleEventParticipation(toggleValue, eventId, this.teamMemberId).subscribe(res => {
-      this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)].numOfParticipations += toggleValue ? 1 : -1;
+      const event = this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)];
+      event.numOfParticipations += toggleValue ? 1 : -1;
+      event.myParticipation.action =  toggleValue ? 'participate' : 'cancel';
       this.triggerTableToRefreshData();
+    }, err => {
+      currToggle.toggle();
     });
   }
   preventTriggeringAccordion($event) {

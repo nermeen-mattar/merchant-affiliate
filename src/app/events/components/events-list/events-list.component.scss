@@ -6,32 +6,26 @@
   &__event {
     &__error {
       color:$tc-color-error;
-      margin-right:0.5rem;
+      margin: 0rem 0.5rem;
     }
     &__success {
       color:$tc-color-success;
-      margin-right:0.5rem;
+      margin: 0rem 0.5rem;
     }
     &__members {
-      min-width:178px!important;
-      &__values {
-        display:flex;
-        align-items:center;
-      }
-      // margin-left:1rem;
+      min-width:188px!important;
+      display: flex;
+      align-items: center;
       &__min,
       &__max,
-      &__actual,
+      &__actual {
+        font-weight: $tc-font-weight-5;
+      }
       &__seperator {
-        width: 30px;
-        display: inline-block;
-        text-align: center;
+        margin: 0px 5px;
       }
       &__actual {
-        width: 50px;
-      }
-      &__seperator {
-        width: 5px;
+        margin: 0px 5px;
       }
     }
   }
@@ -71,10 +65,6 @@
       }
     }
   }
-  &__filter {
-    min-width: 200px;
-    width: 50%;
-  }
   &__container {
     overflow-x: auto;
     &__table {
@@ -92,8 +82,13 @@
     }
     &__accordion {
       display:none;
-      &__expandable-item {
+      &__expandable-event {
         &__expanded-content {
+          &__times {
+            display:flex;
+            align-items:center;
+            color: $tc-color-gray-shade-5;
+          }
           display: flex;
           &__actions {
             display:flex;
@@ -106,10 +101,9 @@
         }
         &__title {
           width:25%!important;
-        }
-        &__error, &__success {
-        margin-bottom:2px;
-         margin-left:2px;
+          &__event-name{
+            margin: 0rem 1rem;
+          }
         }
         &__delete-button , &__edit-button  {
           color:white;
@@ -140,6 +134,11 @@
 
 @media only screen and (max-width: 768px) {
     .app-events {
+      &__event {
+        &__members {
+          margin: 0rem 1rem;
+        }
+      }
       &__header {
         flex-direction: column;
       }
