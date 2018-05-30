@@ -72,7 +72,7 @@
   color: $tc-color-gray-shade-6;
 }
 
-@media only screen and (max-width: 899px) {
+@media only screen and (max-width: 987px) {
   .app-header {
     &__logo {
       justify-content: center;
@@ -83,7 +83,7 @@
   }
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 988px) {
   .app-header {
     &__nav-toggler {
       display: none;
