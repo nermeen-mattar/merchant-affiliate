@@ -139,7 +139,7 @@ export class AdminSettingsComponent implements OnInit {
    */
   generateDirectLink() {
     this.adminService.changeDirectLink().subscribe(res => {
-      this.directLinkControl.setValue(res.data.directlink);
+      this.directLinkControl.setValue(res.directlink);
     });
   }
 }
