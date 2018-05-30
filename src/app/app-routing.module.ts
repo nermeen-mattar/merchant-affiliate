@@ -2,11 +2,12 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EmailActivationComponent } from './email-activation/email-activation.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { TeamsComponent } from './teams/teams.component';
+import { DirectLinksComponent } from './components/direct-links/direct-links.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { UnderMaintenanceComponent } from './shared/components/under-maintenance/under-maintenance.component';
+import { EmailActivationComponent } from './components/email-activation/email-activation.component';
 
 /* The default route is the team center module but if the user is not logged in auth gaurd will redirect the user to the home */
 const routes: Routes = [{
@@ -62,6 +63,10 @@ const routes: Routes = [{
   {
     path: 'activation',
     component: EmailActivationComponent
+  },
+  {
+    path: 'team/:hash',
+    component: DirectLinksComponent
   },
   {
     path: '**',

@@ -60,11 +60,16 @@
     }
   }
   &__nav-toggler {
-    background-color:white;
+    background-color: white;
     border-radius: 0px 20px 20px 0px;
     position: absolute;
     left: 0px;
   }
+}
+
+.active {
+  background-color: rgba(235, 235, 235, 0.8);
+  color: $tc-color-gray-shade-6;
 }
 
 @media only screen and (max-width: 899px) {

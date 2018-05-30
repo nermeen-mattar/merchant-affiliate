@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   $isUserAdmin: Observable<boolean>;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
+  selectedLanguageCode: string;
   @Output() menuClicked: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public translate: TranslateService, private authService: AuthService, private userService: UserService) {}
@@ -41,6 +42,7 @@ export class HeaderComponent implements OnInit {
    * @param {string} langCode
    */
   languageSelected(langCode: string) {
+    this.selectedLanguageCode = langCode;
     this.translate.use(langCode);
     localStorage.setItem('lang', langCode);
   }

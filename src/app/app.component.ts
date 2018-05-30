@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   $isUserAdmin: Observable < boolean > ;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
+  selectedLanguageCode: string;
   constructor(
     public translate: TranslateService,
     private authService: AuthService,
@@ -40,11 +41,11 @@ export class AppComponent implements OnInit {
    */
   initLanguageRelatedVariables() {
     this.appLanguages = JSON.parse(JSON.stringify(availableLanguages)); // copying available languages object
-    this.appLanguage = localStorage.getItem('lang');
-    if (!this.appLanguage) {
-      this.appLanguage = this.translate.getBrowserLang() || defaultLanguage;
+    this.selectedLanguageCode = localStorage.getItem('lang');
+    if (!this.selectedLanguageCode) {
+      this.selectedLanguageCode = this.translate.getBrowserLang() || defaultLanguage;
     }
-    this.appLanguage = this.getSuitableLanguage(this.appLanguage);
+    this.appLanguage = this.getSuitableLanguage(this.selectedLanguageCode);
     this.translate.use(this.appLanguage);
     sysOptions.systemLanguage = this.appLanguage;
   }
@@ -79,6 +80,7 @@ export class AppComponent implements OnInit {
    * @param {string} langCode
    */
   languageSelected(langCode: string) {
+    this.selectedLanguageCode = langCode;
     this.translate.use(langCode);
     localStorage.setItem('lang', langCode);
   }
