@@ -68,6 +68,12 @@
     &__table {
       overflow-x: auto;
       min-width: 500px;
+      &__user-action {
+        max-width:30px;
+      }
+      &__admin-actions {
+        max-width:72px;
+      }
       &__header-cell {
         font-weight: $tc-font-weight-6;
         font-size: $tc-font-size-h5;
