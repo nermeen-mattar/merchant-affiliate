@@ -131,7 +131,6 @@ export class MembersListComponent implements OnInit {
   updateMembersDataSource(members: TcMember[]) {
     this.filterString = ''; // reset any string the user entered in the search input
     this.membersDataSource = new MatTableDataSource(members); // Assign the data to the data source for the table to render
-    console.log('this.membersDataSource ', this.membersDataSource);
   }
 
   /**
