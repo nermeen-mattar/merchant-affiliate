@@ -74,8 +74,10 @@
       }
       &__header-cell,
       &__content-cell {
-        word-wrap: unset;
+        margin-right: 4px;
         text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
     &__accordion {
@@ -100,7 +102,10 @@
         &__title {
           width:25%!important;
           &__event-name{
-            margin: 0rem 1rem;
+            margin-left: 1rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
           }
         }
         &__delete-button , &__edit-button  {

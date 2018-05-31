@@ -88,9 +88,15 @@
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfully",
-      "ADMIN_PASSWORD_CHANGING_FAIL": "Unable to change admin password",
+      "ADMIN_PASSWORD_CHANGING_FAIL": "Unable to change admin password"
+    },
+    "TEAM": {
+      "TEAM_NAME_CHANGING_SUCCESS": "The team name has been changed successfully",
+      "TEAM_NAME_CHANGING_FAIL": "Unable to change the team name",
+      "DIRECT_LINK_CHANGING_SUCCESS": "The team direct link has been changed successfully",
+      "DIRECT_LINK_CHANGING_FAIL": "Unable to change the team direct link",
       "TEAM_PASSWORD_CHANGING_SUCCESS": "The team password has been changed successfully",
-      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change team password"
+      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change the team password"
     }
   },
   "LANGUAGE": {

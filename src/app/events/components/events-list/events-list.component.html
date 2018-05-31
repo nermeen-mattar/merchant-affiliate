@@ -28,7 +28,7 @@
           <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
         </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row">
-          <mat-slide-toggle color="primary" #participationToggeler (change)="toggleParticipationInEvent($event.checked, row.id, participationToggeler)" 
+          <mat-slide-toggle color="primary" #participationToggeler (change)="toggleParticipationInEvent($event.checked, row.id, participationToggeler)"
           [disabled]="isPastEvents || (row.myParticipation && row.myParticipation.action === 'cancel' && (row.maxCriticalValue || row.maxCriticalValue == 0)&& row.numOfParticipations >= row.maxCriticalValue)"
             [checked]="row.myParticipation && row.myParticipation.action !== 'cancel'">
           </mat-slide-toggle>
@@ -46,7 +46,9 @@
       <ng-container matColumnDef="event">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.EVENT' | translate}}
         </mat-header-cell>
-        <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.eventName}} </mat-cell>
+        <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row">
+         <span  class="app-events__container__table__content-cell" > {{row.eventName}} </span>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="status">
         <mat-header-cell class="app-events__container__table__header-cell app-events__event__members" *matHeaderCellDef mat-sort-header>

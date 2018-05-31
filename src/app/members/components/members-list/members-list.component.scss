@@ -34,8 +34,9 @@
         font-size: $tc-font-size-h5;
       }
       &__header-cell, &__content-cell {
-        word-wrap: unset;
         text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         &.mat-column-action {
           display: flex;
           align-items: center;
