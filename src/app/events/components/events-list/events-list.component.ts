@@ -23,9 +23,9 @@ export class EventsListComponent implements OnInit {
   selectedTeamId: number;
   teamMemberId: number;
   isPastEvents: boolean;
-  displayAdminActions: boolean;
   filterString = '';
-  isMobile: boolean;
+  isTeamAdmin: boolean;
+  isTeamMember: boolean;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
   timeFormat = {
     subString: {
@@ -35,15 +35,17 @@ export class EventsListComponent implements OnInit {
   activeEvent: TcEvent = null;
   constructor(
     private eventsService: EventsService,
-    userService: UserService,
+    private userService: UserService,
     private teamsService: TeamsService,
     public dialog: MatDialog,
     private router: Router
   ) {
-    this.displayAdminActions = userService.userType.toLowerCase() === 'admin';
+    // this.displayAdminActions = userService.userType.toLowerCase() === 'admin';
     this.userTeams = this.teamsService.userTeams;
+    this.isTeamMember = this.teamsService.hasMemberRole(this.teamMemberId, this.selectedTeamId);
+    this.isTeamAdmin = this.teamsService.hasAdminRole(this.teamMemberId, this.selectedTeamId);
     this.selectedTeamId = this.teamsService.selectedTeamId;
-    this.updateEvents()
+    this.updateEvents();
   }
 
   ngOnInit() {}
@@ -94,6 +96,8 @@ export class EventsListComponent implements OnInit {
    * selected team, and updates the displayed events to displays the events that belongs to the selected team.
    */
   changeSelectedTeam() {
+    this.isTeamMember = this.teamsService.hasMemberRole(this.teamMemberId, this.selectedTeamId);
+    this.isTeamAdmin = this.teamsService.hasAdminRole(this.teamMemberId, this.selectedTeamId);
     this.teamsService.selectedTeamId = this.selectedTeamId;
     this.updateEvents();
   }

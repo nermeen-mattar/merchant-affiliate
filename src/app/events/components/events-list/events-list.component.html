@@ -7,7 +7,7 @@
     <h3 class="app-events__header__title">
       <span class="app-events__header__title__text">{{ (isPastEvents ? 'EVENT.PAST_EVENTS' : 'EVENT.EVENTS') | translate}}</span>
       <mat-icon *ngIf="!isPastEvents" class="app-events__action" (click)="displayPastEvents()" color="primary">history</mat-icon>
-      <button mat-mini-fab *ngIf="displayAdminActions" color="primary" class="app-events__action app-events__add" routerLink="new">
+      <button mat-mini-fab *ngIf="isTeamAdmin" color="primary" class="app-events__action app-events__add" routerLink="new">
         <mat-icon>add</mat-icon>
       </button>
     </h3>
@@ -73,7 +73,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row">
-          <ng-container *ngIf="displayAdminActions">
+          <ng-container *ngIf="isTeamAdmin">
             <mat-icon class="app-events__action" [routerLink]="row.id" color="primary">edit</mat-icon>
             <mat-icon class="app-events__action" (click)="deleteEvent($event, row.id)" color="primary">delete</mat-icon>
           </ng-container>
@@ -88,7 +88,7 @@
       <mat-expansion-panel *ngFor="let event of eventsDataSource?.data" class="app-events__container__accordion__expandable-item">
         <mat-expansion-panel-header>
           <mat-panel-title class="app-events__container__accordion__expandable-event__title">
-            <mat-slide-toggle color="primary" #participationToggeler (change)="toggleParticipationInEvent($event.checked, event.id, participationToggeler)" (click)="preventTriggeringAccordion($event)"
+            <mat-slide-toggle  *ngIf="isTeamMember" color="primary" #participationToggeler (change)="toggleParticipationInEvent($event.checked, event.id, participationToggeler)" (click)="preventTriggeringAccordion($event)"
               [disabled]="isPastEvents || (event.myParticipation && event.myParticipation.action === 'cancel' && (event.maxCriticalValue || event.maxCriticalValue == 0) && event.numOfParticipations >= event.maxCriticalValue)"
               [checked]="event.myParticipation && event.myParticipation.action !== 'cancel'">
             </mat-slide-toggle>
@@ -128,7 +128,7 @@
           </div>
           <mat-divider class="app-events__container__accordion__expandable-event__divider"></mat-divider>
           <div class="app-events__container__accordion__expandable-event__expanded-content__actions">
-            <div *ngIf="displayAdminActions">
+            <div *ngIf="isTeamAdmin">
               <button [routerLink]="event.id" mat-raised-button color="primary" class="app-events__container__accordion__expandable-event__edit-button">{{ 'EDIT' | translate }}</button>
               <button (click)="deleteEvent($event, event.id)" mat-raised-button class="app-events__container__accordion__expandable-event__delete-button">{{ 'DELETE' | translate }}</button>
             </div>
