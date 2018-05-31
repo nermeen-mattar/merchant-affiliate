@@ -29,7 +29,6 @@ const routes: Routes = [{
   },
   {
     path: 'auth',
-    canActivate: [AuthGuard],
     loadChildren: './auth/auth.module#AuthModule',
   },
   {

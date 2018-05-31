@@ -48,7 +48,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.get(this.baseUrl + requestUrl, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
-          res = res.data ? res.data : res;
+          res = res.data;
           obs.next(res);
           obs.complete();
         },
@@ -63,7 +63,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
-          res = res.data ? res.data : res;
+          res = res.data? res.data : res;
           obs.next(res);
           obs.complete();
         },
@@ -77,7 +77,7 @@ export class HttpRequestsService {
   public httpPut(requestUrl: string, requestParams ?: Object, userMessages?: UserMessages): Observable < any > {
     return Observable.create(obs => {
       this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
-          res = res.data ? res.data : res;
+          res = res.data;
           obs.next(res);
           this.userMessagesService.showUserMessage(userMessages, 'success');
           obs.complete();
@@ -92,7 +92,7 @@ export class HttpRequestsService {
   public httpDelete(requestUrl: string, userMessages?: UserMessages): Observable < any > {
     return Observable.create(obs => {
       this.http.delete(this.baseUrl + requestUrl, this.requestOptions).subscribe((res: any) => {
-          res = res.data ? res.data : res;
+          res = res.data;
           obs.next(res);
           this.userMessagesService.showUserMessage(userMessages, 'success');
           obs.complete();

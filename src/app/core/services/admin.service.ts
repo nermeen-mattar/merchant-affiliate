@@ -19,7 +19,7 @@ export class AdminService {
     return this.httpRequestService.httpPost('teamadmins/check', {
       email: email
     }, {
-      fail: 'NO_ERROR_MESSAGE'
+      failDefault: 'NO_ERROR_MESSAGE'
     });
   }
 
@@ -31,7 +31,7 @@ export class AdminService {
   changeAdminPassword(oldAndNewPasswords) {
     this.httpRequestService.httpPut('teamadmins/change_admin_password', oldAndNewPasswords, {
       success: 'ADMIN.ADMIN_PASSWORD_CHANGING_SUCCESS',
-      fail: 'ADMIN.ADMIN_PASSWORD_CHANGING_FAIL'
+      failDefault: 'ADMIN.ADMIN_PASSWORD_CHANGING_FAIL'
     }).subscribe(res => {});
   }
 
@@ -45,8 +45,8 @@ export class AdminService {
     this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeamId + '/change_team_name', {
       teamName: newTeamName
     }, {
-      success: 'ADMIN.TEAM_PASSWORD_CHANGING_SUCCESS',
-      fail: 'ADMIN.TEAM_PASSWORD_CHANGING_FAIL'
+      success: 'TEAM.TEAM_NAME_CHANGING_SUCCESS',
+      failDefault: 'TEAM.TEAM_NAME_CHANGING_FAIL'
     }).subscribe(res => {
       this.teamsService.updateTeamName(this.teamsService.selectedTeamId, newTeamName);
     });
@@ -59,8 +59,8 @@ export class AdminService {
    */
   changeTeamPassword(oldAndNewPasswords) {
     this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeamId + '/change_team_password', oldAndNewPasswords, {
-      success: 'ADMIN.TEAM_PASSWORD_CHANGING_SUCCESS',
-      fail: 'ADMIN.TEAM_PASSWORD_CHANGING_FAIL'
+      success: 'TEAM.TEAM_PASSWORD_CHANGING_SUCCESS',
+      failDefault: 'TEAM.TEAM_PASSWORD_CHANGING_FAIL'
     }).subscribe(res => {});
   }
 
@@ -69,9 +69,8 @@ export class AdminService {
    * @description requests a new direct link for the passed team.
    */
   changeDirectLink(): Observable <any> {
-    return this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeamId + '/change_direct_link', {
-      success: 'ADMIN.TEAM_PASSWORD_CHANGING_SUCCESS',
-      fail: 'ADMIN.TEAM_PASSWORD_CHANGING_FAIL'
+    return this.httpRequestService.httpPut('teassms/' + this.teamsService.selectedTeamId + '/change_direct_link', {
+      failDefault: 'TEAM.DIRECT_LINK_CHANGING_FAIL'
     });
   }
 }
