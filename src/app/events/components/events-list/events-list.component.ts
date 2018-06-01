@@ -107,7 +107,6 @@ export class EventsListComponent implements OnInit {
   changeDisplayedColumnsPerRoleChange() {
     this.isTeamMember = this.teamsService.hasMemberRole(this.teamMemberId, this.selectedTeamId);
     this.isTeamAdmin = this.teamsService.hasAdminRole(this.teamMemberId, this.selectedTeamId);
-    debugger;
     if (this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') === -1) {
       this.columnsToDisplay.push('admin-actions');
     } else if (!this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') !== -1) {
