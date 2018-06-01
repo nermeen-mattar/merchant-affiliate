@@ -36,20 +36,19 @@
       float: left;
       transition: background-color .3s;
       font-size: $tc-font-size-h5;
-      padding: 6px 15px;
+      padding: 8px 15px;
       cursor: pointer;
       &:hover,
       &.active {
         background-color: rgba(235, 235, 235, 0.8);
         color: $tc-color-gray-shade-6;
       }
-      &__language {
+      &__sub-menu {
         padding-right: 2rem;
       }
       &__arrow {
         position: absolute;
         bottom: 12px;
-        right: 38px;
       }
       &__icon {
         color: $primary-color;
@@ -72,7 +71,7 @@
   color: $tc-color-gray-shade-6;
 }
 
-@media only screen and (max-width: 987px) {
+@media only screen and (max-width: 1019px) {
   .app-header {
     &__logo {
       justify-content: center;
@@ -83,7 +82,7 @@
   }
 }
 
-@media only screen and (min-width: 988px) {
+@media only screen and (min-width: 1020px) {
   .app-header {
     &__nav-toggler {
       display: none;

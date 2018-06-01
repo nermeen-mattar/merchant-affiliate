@@ -1,50 +1,55 @@
 <mat-sidenav-container class="app-container" tcDeviceClasses>
   <mat-sidenav class="app-container__sidenav" #sidenav mode="over" [opened]="menuOpened">
     <div class="app-container__sidenav__menu">
-      <div (click)="sidenav.close()">
-        <div class="app-container__sidenav__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
-          <mat-icon class="app-container__sidenav__menu__item__icon">event</mat-icon>
-          <span> {{'EVENT.EVENTS' | translate}} </span>
-        </div>
-        <div class="app-container__sidenav__menu__item" routerLink="/members" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
-          <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
-          <span> {{'MEMBER.MEMBERS' | translate}} </span>
-        </div>
-        <div class="app-container__sidenav__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
-          <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
-          <span> {{'TEAM.TEAMS' | translate}} </span>
-        </div>
-        <div class="app-container__sidenav__menu__item" routerLink="/member-user/switch-to-admin" *ngIf="($isUserLoggedIn | async) && !($isUserAdmin | async)" routerLinkActive="active">
-          <mat-icon class="app-container__sidenav__menu__item__icon">person_circle</mat-icon>
-          <span> {{'ADMIN.ADMIN' | translate}} </span>
-        </div>
-        <div class="app-container__sidenav__menu__item" routerLink="/auth/register" routerLinkActive="active">
-          <mat-icon class="app-container__sidenav__menu__item__icon">lock_open</mat-icon>
-          <span> {{'REGISTER.REGISTER' | translate}}</span>
-        </div>
-        <div class="app-container__sidenav__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
-          <mat-icon class="app-container__sidenav__menu__item__icon">lock_open</mat-icon>
-          <span> {{'LOGIN.LOGIN' | translate}}</span>
-        </div>
-        <div class="app-container__sidenav__menu__item" routerLink="/about" routerLinkActive="active">
-          <mat-icon class="app-container__sidenav__menu__item__icon">info_circle</mat-icon>
-          <span> {{'ABOUT.ABOUT' | translate}} </span>
-        </div>
-        <div class="app-container__sidenav__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async)">
-          <mat-icon class="app-container__sidenav__menu__item__icon">lock_outline</mat-icon>
-          <span>{{'LOG_OUT' | translate}}</span>
-        </div>
-        <div class="app-container__sidenav__menu__item"  routerLink="/admin-user/settings"  *ngIf="($isUserLoggedIn | async) &&  ($isUserAdmin | async)" >
-          <mat-icon class="app-container__sidenav__menu__item__icon">settings</mat-icon>
-          <span>{{'ADMIN.SETTINGS' | translate}}</span>
-        </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">event</mat-icon>
+        <span> {{'EVENT.EVENTS' | translate}} </span>
       </div>
-      <div class="app-container__sidenav__menu__item app-container__sidenav__menu__item__language" mat-button [matMenuTriggerFor]="langMenu">
+      <div class="app-container__sidenav__menu__item app-container__sidenav__menu__item__sub-menu" *ngIf="($isUserLoggedIn | async)" [matMenuTriggerFor]="membersMenu">
+        <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
+        {{'MEMBER.MEMBERS' | translate}}
+        <mat-icon class="app-container__sidenav__menu__item__arrow">keyboard_arrow_down</mat-icon>
+        <mat-menu #membersMenu="matMenu">
+          <button routerLink="/members/list" routerLinkActive="active" mat-menu-item> {{ 'MEMBER.MEMBERS_LIST' | translate}} </button>
+          <button routerLink="/members/statistics" routerLinkActive="active" mat-menu-item> {{ 'MEMBER.MEMBERS_STATISTICS'| translate}} </button>
+        </mat-menu>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
+        <span> {{'TEAM.TEAMS' | translate}} </span>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/member-user/switch-to-admin" *ngIf="($isUserLoggedIn | async) && !($isUserAdmin | async)"
+        routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">person_circle</mat-icon>
+        <span> {{'ADMIN.ADMIN' | translate}} </span>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/auth/register" routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">lock_open</mat-icon>
+        <span> {{'REGISTER.REGISTER' | translate}}</span>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">lock_open</mat-icon>
+        <span> {{'LOGIN.LOGIN' | translate}}</span>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/about" routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">info_circle</mat-icon>
+        <span> {{'ABOUT.ABOUT' | translate}} </span>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" (click)="logout()" *ngIf="($isUserLoggedIn | async)">
+        <mat-icon class="app-container__sidenav__menu__item__icon">lock_outline</mat-icon>
+        <span>{{'LOG_OUT' | translate}}</span>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/admin-user/settings" *ngIf="($isUserLoggedIn | async) &&  ($isUserAdmin | async)">
+        <mat-icon class="app-container__sidenav__menu__item__icon">settings</mat-icon>
+        <span>{{'ADMIN.SETTINGS' | translate}}</span>
+      </div>
+      <div class="app-container__sidenav__menu__item app-container__sidenav__menu__item__sub-menu" mat-button [matMenuTriggerFor]="langMenu">
         <mat-icon class="app-container__sidenav__menu__item__icon">language</mat-icon>
         {{'LANGUAGE.LANGUAGE' | translate}}
         <mat-icon class="app-container__sidenav__menu__item__arrow">keyboard_arrow_down</mat-icon>
         <mat-menu #langMenu="matMenu">
-          <button [ngClass]="{'active': selectedLanguageCode === lang.code}" (click)="languageSelected(lang.code)" *ngFor="let lang of appLanguages" mat-menu-item> {{ ('LANGUAGE.' + lang.code) | translate}} </button>
+          <button [ngClass]="{'active': selectedLanguageCode === lang.code}" (click)="languageSelected(lang.code)" *ngFor="let lang of appLanguages"
+            mat-menu-item> {{ ('LANGUAGE.' + lang.code) | translate}} </button>
         </mat-menu>
       </div>
     </div>
