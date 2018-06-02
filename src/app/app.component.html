@@ -35,13 +35,6 @@
         <mat-icon class="app-container__sidenav__menu__item__icon">info_circle</mat-icon>
         <span> {{'ABOUT.ABOUT' | translate}} </span>
       </div>
-<<<<<<< HEAD
-=======
-      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" (click)="logout()" *ngIf="($isUserLoggedIn | async)">
-        <mat-icon class="app-container__sidenav__menu__item__icon">lock_outline</mat-icon>
-        <span>{{'LOG_OUT' | translate}}</span>
-      </div>
->>>>>>> 4d7f9d3669e87b56193e196adec31b1decd4c60b
       <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/admin-user/settings" *ngIf="($isUserLoggedIn | async) &&  ($isUserAdmin | async)">
         <mat-icon class="app-container__sidenav__menu__item__icon">settings</mat-icon>
         <span>{{'ADMIN.SETTINGS' | translate}}</span>
