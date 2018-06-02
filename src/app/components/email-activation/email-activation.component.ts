@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { HttpRequestsService } from './../core/services/http-requests.service';
-import { MailActivationState } from './../models/mail-activation-state.model';
+import { HttpRequestsService } from '../../core/services/http-requests.service';
+import { MailActivationState } from '../../models/mail-activation-state.model';
 
 @Component({
   selector: 'tc-email-activation',

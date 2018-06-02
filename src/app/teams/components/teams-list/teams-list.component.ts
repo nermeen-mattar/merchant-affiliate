@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../../../core/services/user.service';
 import { TcTeamInfo } from '../../models/tc-team-info.model';
+import { TeamsService } from '../../../core/services/teams.service';
 
 @Component({
   selector: 'tc-teams-list',
@@ -15,12 +16,12 @@ export class TeamsListComponent implements OnInit {
   displayAdminActions: boolean;
   filterString = '';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, teamsService: TeamsService) {
     this.displayAdminActions = this.userService.userType.toLowerCase() === 'admin';
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
     }
-    this.updateTeamsDataSource(this.userService.userTeams);
+    this.updateTeamsDataSource(teamsService.userTeams);
   }
 
   ngOnInit() {}

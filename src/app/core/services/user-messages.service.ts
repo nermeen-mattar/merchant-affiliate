@@ -40,7 +40,6 @@ export class UserMessagesService {
           if (!translatedMessage.includes(translationKey)) {
             userFailMessage.fail = translationKey;
           }
-
         }
       );
     }

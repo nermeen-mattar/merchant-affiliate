@@ -1,6 +1,4 @@
 {
-  "en": "English",
-  "de": "German",
   "TEAM_CENTER": "team.center",
   "WELCOME": "Welcome",
   "DELETE": "Delete",
@@ -34,6 +32,7 @@
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
     "BACKEND": {
+      "ERROR.UNAUTHORIZED" : "You are unauthorized. Please login to view this page.",
       "ERROR.MAIL.NOT.EXIST" : "Mail does not exist.",
       "ERROR.MAIL.CONFIRMED": "Mail already confirmed",
       "ERROR.NOT.EXISTING.TEAM.ADMIN": "Team admin does not exist",
@@ -68,7 +67,7 @@
       "EVENT_CONFIRM_DELETING_BODY": "Do you really want to delete this event?",
       "EVENT_PARTICIPATION_CONFIRMED": "Participation confirmed",
       "EVENT_CANCELATION_CONFIRMED": "Cancelation confirmed",
-      "EVENT_CHANGING_PARTICIPATION_FAIL": "Error Changing Participation"
+      "EVENT_CHANGING_PARTICIPATION_FAIL": "Error changing Participation"
     },
     "MEMBER": {
       "MEMBER_DELETING_SUCCESS": "The member has been deleted successfully",
@@ -90,15 +89,22 @@
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfully",
-      "ADMIN_PASSWORD_CHANGING_FAIL": "Unable to change admin password",
+      "ADMIN_PASSWORD_CHANGING_FAIL": "Unable to change admin password"
+    },
+    "TEAM": {
+      "TEAM_NAME_CHANGING_SUCCESS": "The team name has been changed successfully",
+      "TEAM_NAME_CHANGING_FAIL": "Unable to change the team name",
+      "DIRECT_LINK_CHANGING_SUCCESS": "The team direct link has been changed successfully",
+      "DIRECT_LINK_CHANGING_FAIL": "Unable to change the team direct link",
       "TEAM_PASSWORD_CHANGING_SUCCESS": "The team password has been changed successfully",
-      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change team password"
+      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change the team password"
     }
   },
   "LANGUAGE": {
     "LANGUAGE": "Language",
-    "ENGLISH": "English",
-    "GERMAN": "German"
+    "en": "English",
+    "de": "German",
+    "fr": "Frensh"
   },
   "HOME": {
     "GO": "Go!",

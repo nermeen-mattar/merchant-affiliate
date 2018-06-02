@@ -11,6 +11,8 @@ import { MembersComponent } from './members.component';
 import { MembersRoutingModule } from './members-routing.module';
 import { MemberFormComponent } from './components/member-form/member-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { MembersStatisticsComponent } from './components/members-statistics/members-statistics.component';
+import { MemberStatisticsDetailsComponent } from './components/member-statistics-details/member-statistics-details.component';
 
 @NgModule({
   imports: [

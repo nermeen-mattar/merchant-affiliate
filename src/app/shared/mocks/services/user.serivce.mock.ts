@@ -1,5 +1,5 @@
+import { TcClientSideTeamRoles } from './../../../teams/models/tc-client-side-team-roles.model';
 import { TcTeamInfo } from './../../../teams/models/tc-team-info.model';
-import { TcTeamRoles } from './../../../teams/models/tc-team-roles.model';
 export class UserServiceMock {
 
   constructor() {}
@@ -12,33 +12,14 @@ export class UserServiceMock {
     return 'ADMIN';
   }
 
-  get teamRoles(): TcTeamRoles {
+  get teamRoles(): TcClientSideTeamRoles {
     return {
-      teamAdmins: [{
-        teamId: 1,
-        teamName: 'test team'
-      }],
-      teamMembers: [{
-        teamId: 1,
-        teamName: 'test team'
-      }]
+      teamAdmins: [1],
+      teamMembers: [1]
     };
   }
 
   set teamRoles(teamRoles) {}
-  get selectedTeam(): TcTeamInfo {
-    return {
-      teamId: 1,
-      teamName: 'test'
-    };
-  }
-  set selectedTeam(selectedTeam: TcTeamInfo) {}
-  get userTeams() {
-    return [{
-      teamId: 1,
-      teamName: 'test'
-    }];
-  }
-  set userTeams(userTeams) {}
+
   clearLoggedInUserInfo () {}
 }

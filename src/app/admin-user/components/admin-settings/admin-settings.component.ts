@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { format } from 'date-fns';
 
+import { TeamsService } from './../../../core/services/teams.service';
 import { AdminService } from './../../../core/services/admin.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
-import { UserService } from '../../../core/services/user.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 @Component({
   selector: 'tc-admin-settings',
@@ -13,22 +13,39 @@ import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
   styleUrls: ['./admin-settings.component.scss']
 })
 export class AdminSettingsComponent implements OnInit {
-  selectedTeam: TcTeamInfo;
   adminSettingsGroup: FormGroup;
   teamSettingsGroup: FormGroup;
   teamNameControl: FormControl;
   directLinkControl: FormControl;
-  userTeams: TcTeamInfo[];
-  eventId: string; /* is undefined (in the case of event creation) */
-  constructor(userService: UserService, private fieldValidatorsService: FieldValidatorsService,
-    private adminService: AdminService,
+  selectedTeamInfo: TcTeamInfo;
+  teamsTheUserIsAdminOf: TcTeamInfo[];
+  constructor(private fieldValidatorsService: FieldValidatorsService,
+    private adminService: AdminService, private teamsService: TeamsService,
     private route: ActivatedRoute, private router: Router) {
-    this.userTeams = userService.userTeams;
-    this.selectedTeam = userService.selectedTeam;
+    this.updateTeamsTheUserIsAdminOf();
+    this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
     this.initSettingsForm();
   }
 
   ngOnInit() {}
+
+  /**
+   * @author Nermeen Mattar
+   * @description filters the teams list to get only the teams that the user is admin of and sets this value in the teamsTheUserIsAdminOf.
+   */
+  updateTeamsTheUserIsAdminOf() {
+    this.teamsTheUserIsAdminOf =
+     this.teamsService.userTeams.filter( team => this.teamsService.teamRoles.teamAdmins.indexOf(team.teamId) !== -1);
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description gets the info for the current selected by its id
+   * @returns {TcTeamInfo}
+   */
+  getInfoForSelectedTeam(): TcTeamInfo {
+    return this.teamsTheUserIsAdminOf.filter(userTeam => userTeam.teamId ===  55)[0]; // this.idForTeamToEdit
+  }
 
   /**
    * @author Nermeen Mattar
@@ -101,7 +118,7 @@ export class AdminSettingsComponent implements OnInit {
     this.adminService.changeTeamPassword({
       teamPassword: this.teamSettingsGroup.value.teamPassword,
       teamNewPassword: this.teamSettingsGroup.value.teamNewPassword
-    });
+    }, this.selectedTeamInfo.teamId);
   }
 
   /**
@@ -110,26 +127,18 @@ export class AdminSettingsComponent implements OnInit {
    */
   saveTeamName() {
     if (this.teamNameControl.valid) {
-      this.adminService.changeTeamName(this.teamNameControl.value);
+      this.adminService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
+      this.updateTeamsTheUserIsAdminOf();
     }
   }
+
+  /**
+   * @author Nermeen Mattar
+   * @description gets a new direct link and displays it in the direct link form control
+   */
   generateDirectLink() {
-    this.directLinkControl.setValue('http://dev.team.center/'.concat(this.getUUID())); // will be replaced by a call to the backend
+    this.adminService.changeDirectLink(this.selectedTeamInfo.teamId).subscribe(res => {
+      this.directLinkControl.setValue(res.directlink);
+    });
   }
-
-  /* temp function until backend supports generating links*/
-  getUUID() {
-    let uuid = '', i, random;
-    for (i = 0; i < 32; i++) {
-      // tslint:disable-next-line:no-bitwise
-      random = Math.random() * 16 | 0;
-      if (i === 8 || i === 12 || i === 16 || i === 20) {
-        uuid += '-';
-      }
-      // tslint:disable-next-line:no-bitwise
-      uuid += (i === 12 ? 4 : (i === 16 ? (random & 3 | 8) : random)).toString(16);
-    }
-    return uuid;
-  }
-
 }

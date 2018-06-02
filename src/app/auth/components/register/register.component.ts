@@ -141,6 +141,7 @@ export class RegisterComponent implements OnInit {
         this.displaySpinner = false;
       }
     }, err => {
+      this.displaySpinner = false;
       this.handleRegisterError(err);
     });
   }

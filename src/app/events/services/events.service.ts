@@ -9,6 +9,7 @@ import { HttpRequestsService } from './../../core/services/http-requests.service
 export class EventsService {
 
   constructor(private httpRequestService: HttpRequestsService, private userService: UserService) {}
+  currentEvent: Event;
 
   /**
    * @author Nermeen Mattar
@@ -116,5 +117,28 @@ export class EventsService {
         success: 'EVENT.EVENT_UPDATING_SUCCESS',
         failDefault: 'EVENT.EVENT_UPDATING_FAIL'
       });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description calculates the number of participations for each event and add it to the event object
+   * @param {Event []} events
+   */
+  addNumOfParticipationsToEvents(events: TcEvent[]) {
+    let numOfParitications;
+    const eventsListLen = events.length;
+    for (let eventIndex = 0; eventIndex < eventsListLen; eventIndex++) {
+      numOfParitications = 0;
+      const eventParticipations = events[eventIndex].detailedParticipations;
+      if (eventParticipations) {
+        const eventParticipationsLen = eventParticipations.length;
+        for (let participationIndex = 0; participationIndex < eventParticipationsLen; participationIndex++) {
+          if (eventParticipations[participationIndex].action === 'participate') {
+            numOfParitications++;
+          }
+        }
+      }
+      events[eventIndex].numOfParticipations = numOfParitications;
+    }
   }
 }

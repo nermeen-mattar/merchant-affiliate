@@ -57,8 +57,9 @@
   },
   "LANGUAGE": {
     "LANGUAGE": "Language",
-    "ENGLISH": "Anglais",
-    "GERMAN": "Allemand"
+    "en": "Anglais",
+    "de": "Allemand",
+    "fr": "Frensh"
   },
   "HOME": {
     "GO": "C’est parti!",

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { TeamsService } from './../../../core/services/teams.service';
 import { MembersService } from '../../services/members.service';
-import { UserService } from '../../../core/services/user.service';
 import { TcMember } from '../../models/tc-member.model';
 
 @Component({
@@ -15,9 +15,9 @@ export class MemberFormComponent implements OnInit {
   selectedTeamId: number;
   memberGroup: FormGroup;
   memberId: number; /* is undefined (in the case of member creation) */
-  constructor(private membersService: MembersService, userService: UserService,
+  constructor(private membersService: MembersService, teamsService: TeamsService,
     private route: ActivatedRoute, private router: Router) {
-    this.selectedTeamId = userService.selectedTeam.teamId;
+    this.selectedTeamId = teamsService.selectedTeamId;
     this.initFormEditingOrCreating();
   }
 
@@ -38,6 +38,7 @@ export class MemberFormComponent implements OnInit {
       this.membersService.getMember(this.memberId).subscribe(memberInfo => {
         this.updateMemberValues(memberInfo);
       });
+      this.memberGroup.controls.email.disable();
     }
   }
 
