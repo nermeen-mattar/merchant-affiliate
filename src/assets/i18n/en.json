@@ -17,6 +17,10 @@
   "FROM": "From",
   "To": "To",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
+  "SOCIAL_MEDIA": {
+    "SHARE": "SHARE",
+    "TWEET": "TWEET"
+  },
   "FORM": {
     "ENTER_VALID_EMAIL": "Please enter a valid email address.",
     "ENTER_VALID_PASSWORD": "Please enter a valid password.",
@@ -247,6 +251,7 @@
   "FOOTER": {
     "TERMS_CONDITIONS": "Terms & Conditions",
     "IMPRESSUM": "Impressum",
+    "SUPPORT_BY_DONATING": "Support this project with buying a coffee",
     "COPY_RIGHT": "© 2018 Copyright team.center"
   },
   "ABOUT": {
