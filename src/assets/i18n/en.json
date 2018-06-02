@@ -70,7 +70,7 @@
       "EVENT_CONFIRM_DELETING_BODY": "Do you really want to delete this event?",
       "EVENT_PARTICIPATION_CONFIRMED": "Participation confirmed",
       "EVENT_CANCELATION_CONFIRMED": "Cancelation confirmed",
-      "EVENT_CHANGING_PARTICIPATION_FAIL": "Error Changing Participation"
+      "EVENT_CHANGING_PARTICIPATION_FAIL": "Error changing Participation"
     },
     "MEMBER": {
       "MEMBER_DELETING_SUCCESS": "The member has been deleted successfully",

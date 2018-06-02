@@ -1,0 +1,72 @@
+@import "../../../../styles/toolkit/variables.scss";
+.app-members-statistics {
+  padding: 14px 8px; /* to leave space to the back button */
+  max-width: 1000px;
+  margin: 0 auto;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    &__title {
+      color: $tc-color-gray-shade-6;
+      font-weight: $tc-font-weight-4;
+    }
+  }
+  &__filter {
+    min-width: 200px;
+    width: 50%;
+  }
+  &__container {
+    overflow-x: auto;
+    &__table {
+      overflow-x: auto;
+      &__cell {
+        &__overflow-ellipsis {
+          overflow:hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      &__header-cell {
+        font-weight: $tc-font-weight-6;
+        font-size: $tc-font-size-h5;
+      }
+      &__participation-cell{
+        color:$tc-color-success;
+      }
+      &__cancelation-cell {
+        color:$tc-color-error;
+      }
+      &__participation-cell, &__cancelation-cell {
+        max-width:100px;
+      }
+      &__action-cell {
+        max-width:28px;
+        cursor: pointer;
+      }
+      &__inactive-cell {
+        text-decoration: line-through;
+      }
+    }
+    &__spinner {
+      margin: 50px auto;
+    }
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media only screen and (max-width: 720px) {
+  .app-members-statistics {
+    &__header {
+      flex-direction: column;
+      &__title {
+        margin-bottom: 1rem;
+      }
+    }
+    /* &__filter {width: 100%;} -- used below instead */
+    mat-form-field {
+      width:100%!important;
+    }
+  }
+}

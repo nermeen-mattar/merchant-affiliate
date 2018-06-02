@@ -40,15 +40,16 @@ export class AdminService {
    * @description attemps to update the team name Using the httpPut function from httpRequestsSevrice. Upon successful request the team name
    * For the modifier team will be changed in team roles.
    * @param {string} newTeamName
+   * @param {number} teamId
    */
-  changeTeamName(newTeamName: string) {
-    this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeamId + '/change_team_name', {
+  changeTeamName(newTeamName: string, teamId: number) {
+    this.httpRequestService.httpPut('teams/' + teamId + '/change_team_name', {
       teamName: newTeamName
     }, {
       success: 'TEAM.TEAM_NAME_CHANGING_SUCCESS',
       failDefault: 'TEAM.TEAM_NAME_CHANGING_FAIL'
     }).subscribe(res => {
-      this.teamsService.updateTeamName(this.teamsService.selectedTeamId, newTeamName);
+      this.teamsService.updateTeamName(teamId, newTeamName);
     });
   }
 
@@ -56,9 +57,10 @@ export class AdminService {
    * @author Nermeen Mattar
    * @description attemps to update the team password Using the httpPut function from httpRequestsSevrice.
    * @param {any} oldAndNewPasswords
+   * @param {number} teamId
    */
-  changeTeamPassword(oldAndNewPasswords) {
-    this.httpRequestService.httpPut('teams/' + this.teamsService.selectedTeamId + '/change_team_password', oldAndNewPasswords, {
+  changeTeamPassword(oldAndNewPasswords, teamId: number) {
+    this.httpRequestService.httpPut('teams/' + teamId + '/change_team_password', oldAndNewPasswords, {
       success: 'TEAM.TEAM_PASSWORD_CHANGING_SUCCESS',
       failDefault: 'TEAM.TEAM_PASSWORD_CHANGING_FAIL'
     }).subscribe(res => {});
@@ -67,9 +69,10 @@ export class AdminService {
   /**
    * @author Nermeen Mattar
    * @description requests a new direct link for the passed team.
+   * @param {teamId} number
    */
-  changeDirectLink(): Observable <any> {
-    return this.httpRequestService.httpPut('teassms/' + this.teamsService.selectedTeamId + '/change_direct_link', {
+  changeDirectLink(teamId: number): Observable <any> {
+    return this.httpRequestService.httpPut('teassms/' + teamId + '/change_direct_link', {
       failDefault: 'TEAM.DIRECT_LINK_CHANGING_FAIL'
     });
   }
