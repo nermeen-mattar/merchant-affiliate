@@ -15,7 +15,7 @@
       <mat-icon class="app-header__menu__item__arrow">keyboard_arrow_down</mat-icon>
       <mat-menu #membersMenu="matMenu">
         <button routerLink="/members/list" routerLinkActive="active" mat-menu-item> {{ 'MEMBER.MEMBERS_LIST' | translate}} </button>
-        <button *ngIf="($isUserAdmin | async)" routerLink="/members/statistics" routerLinkActive="active" mat-menu-item> {{ 'MEMBER.MEMBERS_STATISTICS'| translate}} </button>
+        <button *ngIf="($isUserAdmin | async)"  routerLink="/members/statistics" routerLinkActive="active" mat-menu-item> {{ 'MEMBER.MEMBERS_STATISTICS'| translate}} </button>
       </mat-menu>
     </span>
     <span class="app-header__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
