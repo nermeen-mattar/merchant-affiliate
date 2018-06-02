@@ -8,7 +8,6 @@ import { MatTableDataSource, MatDialog, MatDialogRef, MatSlideToggle} from '@ang
 import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
-import { UserService } from '../../../core/services/user.service';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 @Component({
   selector: 'tc-events-list',
@@ -17,15 +16,15 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 })
 
 export class EventsListComponent implements OnInit {
-  displayedColumns = ['id', 'date', 'time', 'event', 'status', 'actions']; //  'minCriticalValue', 'maxCriticalValue',
+  columnsToDisplay = ['toggeler', 'date', 'time', 'event', 'status', 'user-action',  'admin-actions'];
   eventsDataSource: MatTableDataSource < TcEvent > ;
   userTeams: TcTeamInfo[];
   selectedTeamId: number;
   teamMemberId: number;
   isPastEvents: boolean;
-  displayAdminActions: boolean;
   filterString = '';
-  isMobile: boolean;
+  isTeamAdmin: boolean;
+  isTeamMember: boolean;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
   timeFormat = {
     subString: {
@@ -35,15 +34,16 @@ export class EventsListComponent implements OnInit {
   activeEvent: TcEvent = null;
   constructor(
     private eventsService: EventsService,
-    userService: UserService,
     private teamsService: TeamsService,
     public dialog: MatDialog,
     private router: Router
   ) {
-    this.displayAdminActions = userService.userType.toLowerCase() === 'admin';
     this.userTeams = this.teamsService.userTeams;
+    this.isTeamMember = this.teamsService.hasMemberRole(this.teamMemberId, this.selectedTeamId);
+    this.isTeamAdmin = this.teamsService.hasAdminRole(this.teamMemberId, this.selectedTeamId);
     this.selectedTeamId = this.teamsService.selectedTeamId;
-    this.updateEvents()
+    this.changeDisplayedColumnsPerRoleChange();
+    this.updateEvents();
   }
 
   ngOnInit() {}
@@ -90,12 +90,33 @@ export class EventsListComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description When the user changes the selected team from the menu, it updates the selected team in user service with the newly
+   * @description When the user changes the selected team from the menu, it updates the selected team in teamsService with the newly
    * selected team, and updates the displayed events to displays the events that belongs to the selected team.
    */
   changeSelectedTeam() {
+    this.changeDisplayedColumnsPerRoleChange();
     this.teamsService.selectedTeamId = this.selectedTeamId;
     this.updateEvents();
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description checks the user's roles and display the proper columns accordingaly. For admin role will push admin actions column which
+   * includes the edit and delete actions and for member role will push toggeler column
+   */
+  changeDisplayedColumnsPerRoleChange() {
+    this.isTeamMember = this.teamsService.hasMemberRole(this.teamMemberId, this.selectedTeamId);
+    this.isTeamAdmin = this.teamsService.hasAdminRole(this.teamMemberId, this.selectedTeamId);
+    if (this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') === -1) {
+      this.columnsToDisplay.push('admin-actions');
+    } else if (!this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') !== -1) {
+      this.columnsToDisplay.pop();
+    }
+    if (this.isTeamMember && this.columnsToDisplay.indexOf('toggeler') === -1) {
+      this.columnsToDisplay.unshift('toggeler');
+    } else if (!this.isTeamMember && this.columnsToDisplay.indexOf('toggeler') !== -1) {
+      this.columnsToDisplay.shift();
+    }
   }
 
   /**
@@ -114,9 +135,11 @@ export class EventsListComponent implements OnInit {
       currToggle.toggle();
     });
   }
+
   preventTriggeringAccordion($event) {
     $event.stopPropagation();
   }
+
   getIndexOfTargetEvent(eventId: string) {
     return this.eventsDataSource.data.findIndex(event => event.id === eventId);
   }

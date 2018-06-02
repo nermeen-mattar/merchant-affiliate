@@ -17,12 +17,11 @@
           background-color: rgba(235, 235, 235, 0.8);
           color: $tc-color-gray-shade-10;
         }
-        &__language {
+        &__sub-menu {
           position: relative;
         }
         &__arrow {
           position: absolute;
-          right: 50px;
           top: 24px;
         }
         &__icon {
@@ -47,7 +46,7 @@
   color: $tc-color-gray-shade-10;
 }
 
-@media only screen and (min-width: 988px) {
+@media only screen and (min-width: 1019px) {
   .app-container {
     &__sidenav {
       display: none;

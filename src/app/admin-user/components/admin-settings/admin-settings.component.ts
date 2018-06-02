@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { format } from 'date-fns';
 
-import { UserService } from './../../../core/services/user.service';
 import { TeamsService } from './../../../core/services/teams.service';
 import { AdminService } from './../../../core/services/admin.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
@@ -22,7 +21,7 @@ export class AdminSettingsComponent implements OnInit {
   teamsTheUserIsAdminOf: TcTeamInfo[];
   constructor(private fieldValidatorsService: FieldValidatorsService,
     private adminService: AdminService, private teamsService: TeamsService,
-    private userService: UserService, private route: ActivatedRoute, private router: Router) {
+    private route: ActivatedRoute, private router: Router) {
     this.updateTeamsTheUserIsAdminOf();
     this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
     this.initSettingsForm();
@@ -36,7 +35,7 @@ export class AdminSettingsComponent implements OnInit {
    */
   updateTeamsTheUserIsAdminOf() {
     this.teamsTheUserIsAdminOf =
-     this.teamsService.userTeams.filter( team => this.userService.teamRoles.teamAdmins.indexOf(team.teamId) !== -1);
+     this.teamsService.userTeams.filter( team => this.teamsService.teamRoles.teamAdmins.indexOf(team.teamId) !== -1);
   }
 
   /**
@@ -119,7 +118,7 @@ export class AdminSettingsComponent implements OnInit {
     this.adminService.changeTeamPassword({
       teamPassword: this.teamSettingsGroup.value.teamPassword,
       teamNewPassword: this.teamSettingsGroup.value.teamNewPassword
-    });
+    }, this.selectedTeamInfo.teamId);
   }
 
   /**
@@ -128,7 +127,7 @@ export class AdminSettingsComponent implements OnInit {
    */
   saveTeamName() {
     if (this.teamNameControl.valid) {
-      this.adminService.changeTeamName(this.teamNameControl.value);
+      this.adminService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
       this.updateTeamsTheUserIsAdminOf();
     }
   }
@@ -138,7 +137,7 @@ export class AdminSettingsComponent implements OnInit {
    * @description gets a new direct link and displays it in the direct link form control
    */
   generateDirectLink() {
-    this.adminService.changeDirectLink().subscribe(res => {
+    this.adminService.changeDirectLink(this.selectedTeamInfo.teamId).subscribe(res => {
       this.directLinkControl.setValue(res.directlink);
     });
   }
