@@ -51,6 +51,7 @@
             (
             <span *ngIf="row.minCriticalValue || row.minCriticalValue === 0">
               {{'EVENT.MIN' | translate}}: {{row.minCriticalValue}}
+              {{numberOfRecords < pageSize ? numberOfRecords : pageSize}}
             </span>
             <span *ngIf="(row.minCriticalValue || row.minCriticalValue === 0 ) && (row.maxCriticalValue || row.maxCriticalValue === 0 )"
               class="app-member-statistics-details__item__members__seperator"> , </span>
@@ -64,8 +65,8 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;">
         </mat-row>
       </mat-table>
-      <mat-paginator #paginator [length]="numberOfRecords/pageSize < 1 ? 1 : numberOfRecords/pageSize " (page)="getDataForSelectedPage($event)"
-        [pageSize]="numberOfRecords < pageSize ? numberOfRecords : pageSize">
+      <mat-paginator #paginator [length]="(numberOfRecords/pageSize < 1 && numberOfRecords/pageSize > 0) ? 1 : numberOfRecords/pageSize " (page)="getDataForSelectedPage($event)"
+        [pageSize]="pageSize">
       </mat-paginator>
     </div>
   </div>
