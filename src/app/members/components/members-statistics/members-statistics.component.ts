@@ -54,7 +54,7 @@ export class MembersStatisticsComponent implements OnInit {
    * @description creates the start date and end date form controls (standalone form controls).
    */
   createDateRangeFormGroup() {
-    this.dateRangeFormGroup.addControl('dateFrom', new FormControl(this.dateService.selectedDateRange.dateForm,
+    this.dateRangeFormGroup.addControl('dateFrom', new FormControl(this.dateService.selectedDateRange.dateFrom,
       [Validators.required]));
     this.dateRangeFormGroup.addControl('dateTo', new FormControl(this.dateService.selectedDateRange.dateTo, [Validators.required]));
   }

@@ -90,12 +90,11 @@ export class UserService {
 
   /**
    * @author Nermeen Mattar
-   * @description clears the username, team roles, user type ordinary/admin, and user teams.
+   * @description resets the class variables
    */
-  clearLoggedInUserInfo() {
+  resetData() {
     this.username = null;
     this.userType = null;
-    this.teamsService.userTeams = null;
-    this.teamsService.teamRoles = null;
+    this.teamsService.resetData();
   }
 }
