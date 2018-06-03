@@ -57,12 +57,12 @@
     &__social-media {
       width: 30%;
       padding-bottom: 1rem;
-      min-width: 160px;
+      min-width: 224px;
       &__btn {
         display: block;
         margin: 1rem auto;
         color: white;
-        width: 140px;
+        min-width: 140px;
         &__icon {
           margin-right: 10px;
           font-size: 1.3rem;
