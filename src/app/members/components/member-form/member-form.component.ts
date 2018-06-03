@@ -32,10 +32,11 @@ export class MemberFormComponent implements OnInit {
     const memberIdVariable = this.route.snapshot.params['memberId'];
     this.createMemberForm();
     if (memberIdVariable !== 'new') {
+      this.memberGroup.controls.email.disable();
       this.memberId = memberIdVariable;
       this.leavePageIfWrongId();
-      this.membersService.getMember(this.memberId).subscribe(res => {
-        this.updateMemberValues(res);
+      this.membersService.getMember(this.memberId).subscribe(memberInfo => {
+        this.updateMemberValues(memberInfo);
       });
       this.memberGroup.controls.email.disable();
     }
@@ -59,11 +60,11 @@ export class MemberFormComponent implements OnInit {
    * @description updates the member's form group with the received value.
    * @param {TcMember} memberValue
    */
-  updateMemberValues(memberValue: TcMember) {
+  updateMemberValues(memberInfo: TcMember) {
     this.memberGroup.patchValue({
-      firstName: memberValue.firstname,
-      lastName: memberValue.lastname,
-      email: memberValue.email
+      firstName: memberInfo.firstname,
+      lastName: memberInfo.lastname,
+      email: memberInfo.email
     });
   }
 

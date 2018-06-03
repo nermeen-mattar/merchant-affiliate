@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { MembersStatisticsComponent } from './components/members-statistics/members-statistics.component';
 import { MemberFormComponent } from './components/member-form/member-form.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersComponent } from './members.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
-import { MembersStatisticsComponent } from './components/members-statistics/members-statistics.component';
 import { MemberStatisticsDetailsComponent } from './components/member-statistics-details/member-statistics-details.component';
 
 const routes: Routes = [{
@@ -23,6 +23,10 @@ const routes: Routes = [{
     {
       path: 'statistics',
       component: MembersStatisticsComponent
+    },
+    {
+      path: 'statistics/details/:memberId',
+      component: MemberStatisticsDetailsComponent
     }
     /* The member form component will be used for creating and form editing, creation if the path was /new, edit otherwise */
     , {

@@ -1,4 +1,4 @@
 export interface TcDateRange {
-  dateForm: string;
-  dateTo: string;
+  dateFrom: Date;
+  dateTo: Date;
 }

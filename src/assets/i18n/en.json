@@ -15,7 +15,7 @@
   "NOT_GOING": "Not Going",
   "MESSAGE": "Message",
   "FROM": "From",
-  "To": "To",
+  "TO": "To",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "SOCIAL_MEDIA": {
     "SHARE": "SHARE",
@@ -220,13 +220,14 @@
     "MEMBERS": "Members",
     "MEMBER": "Member",
     "MEMBERS_STATISTICS": "Members Statistics",
-    "MEMBERS_LIST": "Members list",
+    "MEMBERS_LIST": "Members List",
     "MAIL": "Mail",
     "EDIT_MEMBER": "Edit member",
     "CREATE_MEMBER": "Create member",
     "ADD_MYSELF_AS_MEMBER": "Add myself as a member",
     "OUR_MEMBERS": "Our members",
-    "BY_DEFAULT_MEMBERS_ARE": " By default all members are:"
+    "BY_DEFAULT_MEMBERS_ARE": " By default all members are:",
+    "ALL_PARTICIPATION": "All Participations"
   },
   "USER": {
     "FIRST_NAME": "First name",

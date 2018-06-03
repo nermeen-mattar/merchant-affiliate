@@ -13,16 +13,15 @@ import { HttpRequestsService } from './../../core/services/http-requests.service
 @Injectable()
 export class MembersStatisticsService {
   constructor(private httpRequestService: HttpRequestsService, private teamsService: TeamsService,
-  private dateService: DateService) {}
+    private dateService: DateService) {}
 
   /**
    * @author Nermeen Mattar
-   * @description sends a get request to the server to get the list of members for a specific user and team
+   * @description sends the statistics list for members of a specific team in a specific date range
    * @param {number} teamId
-   * @param {boolean} isPast
    * @returns {Observable < any >}
    */
-  getMembersStatistics(teamId: number): Observable < any > { // Member[] there are other info!
+  getMembersStatistics(teamId: number): Observable < any > {
     return this.httpRequestService.httpPost(
       `statistics/byteam/`, {
         ...this.dateService.selectedDateRange,
@@ -34,31 +33,23 @@ export class MembersStatisticsService {
 
   /**
    * @author Nermeen Mattar
-   * @description sends a get request to the server to get the list of members for a specific user and team
+   * @description gets the statistics details for a member of a specific team in a specific date range
    * @param {number} teamId
-   * @param {boolean} isPast
+   * @param {number} memberId
+   * @param {number} pageNumber
+   * @param {number} pageSize
    * @returns {Observable < any >}
    */
-  getMemberStatisticsDetails(action: string, memberId: number): Observable < any > {
+  getMemberStatisticsDetails(action: string, memberId: number, pageNumber: number, pageSize: number): Observable < any > {
     return this.httpRequestService.httpPost(
       `statistics/perteammember/`, {
         action: action,
         ...this.dateService.selectedDateRange,
         teamId: this.teamsService.selectedTeamId,
         teamMemberId: memberId,
-        page: 1,
-        size: 1,
+        page: pageNumber,
+        size: pageSize,
       }
     );
   }
-  /*
-  {
-  "action": "participate",
-  "dateFrom": "2018-05-20",
-  "dateTo": "2018-05-20",
-  "page": 0,
-  "size": 0,
-  "teamId": 0,
-  "teamMemberId": 0
-}*/
 }

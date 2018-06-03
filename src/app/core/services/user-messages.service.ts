@@ -33,8 +33,7 @@ export class UserMessagesService {
     const userFailMessage = {
       fail: null
     };
-    const errorMessage = err.error.message;
-    if (errorMessage) {
+    if (err && err.error && err.error.message) {
       const translationKey = 'BACKEND.'.concat(err.error.message.toUpperCase());
       this.translateService.get('USER_MESSAGES.'.concat(translationKey)).subscribe(
         translatedMessage => {
