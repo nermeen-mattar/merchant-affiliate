@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { MatIconRegistry } from '@angular/material';
 
 import { AvailableLanguageInfo } from './core/models/available-language-info.model';
 import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
@@ -24,8 +25,11 @@ export class AppComponent implements OnInit {
     public translate: TranslateService,
     private authService: AuthService,
     private router: Router,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    public matIconRegistry: MatIconRegistry
+  ) {
+    matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+  }
 
   ngOnInit() {
     this.$isUserLoggedIn = this.authService.$userLoggedIn;

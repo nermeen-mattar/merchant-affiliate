@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatIconModule, MatIconRegistry } from '@angular/material';
 
 // Modules imported at app level
 import { SharedModule } from './shared/shared.module';
@@ -20,7 +21,7 @@ import { DirectLinksComponent } from './components/direct-links/direct-links.com
     AppComponent,
     EmailActivationComponent,
     DirectLinksComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +30,7 @@ import { DirectLinksComponent } from './components/direct-links/direct-links.com
     FormsModule,
     SharedModule,
     HttpClientModule,
+    MatIconModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -37,6 +39,7 @@ import { DirectLinksComponent } from './components/direct-links/direct-links.com
       }
     })
   ],
+  providers: [MatIconRegistry],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
