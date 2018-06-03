@@ -6,10 +6,13 @@
   <h3 class="app-event-details__header app-event-details__label">{{'EVENT.EVENT' | translate}} {{'DETAILS' | translate}}
   </h3>
   <div>
-    <div>
+    <div *ngIf="eventDetails">
       <div class="app-event-details__basic-info">
         <span class="app-event-details__label"> {{"EVENT.EVENT" | translate }}: </span>{{eventDetails.eventName}}</div>
       <div class="app-event-details__basic-info">
+          <span class="app-event-details__label"> {{"EVENT.TYPE" | translate }}:
+          </span>{{(eventDetails.type === 1 ? "EVENT.PARTICIPATION" : "EVENT.CANCELATION") | translate}}</div>
+          <div class="app-event-details__basic-info">
         <span class="app-event-details__label"> {{"EVENT.DATE" | translate}}:</span>
         {{eventDetails.date | date:"MM/dd/yyyy hh:mm a" }}</div>
       <div class="app-event-details__basic-info">

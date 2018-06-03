@@ -17,19 +17,24 @@ import { MembersStatisticsService } from '../../services/members-statistics.serv
 })
 
 export class MembersStatisticsComponent implements OnInit {
-  displayedColumns = ['member', 'email',  'participations', 'cancelations', 'actions'];
+  displayedColumns = ['member', 'email', 'participations', 'cancelations', 'actions'];
   membersStatisticsDataSource: MatTableDataSource < any > ;
   userTeams: TcTeamInfo[];
   selectedTeamId: number;
   teamMemberId: number;
   filterString: string;
   dateRangeFormGroup: FormGroup = new FormGroup({});
+  teamsTheUserIsAdminOf: TcTeamInfo[];
   constructor(private membersStatisticsService: MembersStatisticsService,
-     private teamsService: TeamsService, private dateService: DateService) {
-    this.createDateRangeFormGroup();
-    this.dateRangeFormGroup.valueChanges.subscribe (res => this.dateRangeChange());
-    this.userTeams = this.teamsService.userTeams;
+    private teamsService: TeamsService, private dateService: DateService) {
+    this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
     this.selectedTeamId = this.teamsService.selectedTeamId;
+    if (!this.teamsService.hasAdminRole(this.selectedTeamId)) {
+      this.selectedTeamId = this.teamsTheUserIsAdminOf[0].teamId;
+    }
+    this.createDateRangeFormGroup();
+    this.dateRangeFormGroup.valueChanges.subscribe(res => this.dateRangeChange());
+    this.userTeams = this.teamsService.userTeams;
     this.updateMembersStatistics();
   }
 
@@ -53,12 +58,11 @@ export class MembersStatisticsComponent implements OnInit {
    * @description creates the start date and end date form controls (standalone form controls).
    */
   createDateRangeFormGroup() {
-    this.dateRangeFormGroup.addControl('dateFrom', new FormControl(this.dateService.selectedDateRange.dateFrom,
-      [Validators.required]));
+    this.dateRangeFormGroup.addControl('dateFrom', new FormControl(this.dateService.selectedDateRange.dateFrom, [Validators.required]));
     this.dateRangeFormGroup.addControl('dateTo', new FormControl(this.dateService.selectedDateRange.dateTo, [Validators.required]));
   }
 
-   /**
+  /**
    * @author Nermeen Mattar
    * @description sets the selected date range in the date service and calls update members statistics function
    */
@@ -71,7 +75,7 @@ export class MembersStatisticsComponent implements OnInit {
    * @author Nermeen Mattar
    * @description When the user changes the selected team from the menu, it updates the selected team in user service with the newly
    * selected team, and updates the displayed events to displays the events that belongs to the selected team.
-  */
+   */
   changeSelectedTeam() {
     this.teamsService.selectedTeamId = this.selectedTeamId;
     this.updateMembersStatistics();

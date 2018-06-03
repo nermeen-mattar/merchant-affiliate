@@ -16,7 +16,9 @@ export class DateService {
       }
     });
     const dateRange = JSON.parse(localStorage.getItem('selectedDateRange'));
-    this.selectedDateRange = {dateFrom: new Date(dateRange.dateFrom), dateTo: new Date(dateRange.dateTo) };
+    if (dateRange) {
+      this.selectedDateRange = {dateFrom: new Date(dateRange.dateFrom), dateTo: new Date(dateRange.dateTo) };
+    }
   }
 
 

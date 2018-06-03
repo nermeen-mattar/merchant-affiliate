@@ -61,22 +61,20 @@ export class TeamsService {
   /**
    * @author Nermeen Mattar
    * @description check wether the user with the passed id has a member role
-   * @param {number} memberId
    * @param {number} teamId
    * @returns {boolean}
    */
-  hasMemberRole(memberId: number, teamId: number): boolean {
+  hasMemberRole(teamId: number): boolean {
     return this.teamRoles.teamMembers.indexOf(teamId) !== -1;
   }
 
   /**
    * @author Nermeen Mattar
    * @description check wether the user with the passed id has an admin role
-   * @param {number} memberId
    * @param {number} teamId
    * @returns {boolean}
    */
-  hasAdminRole(memberId: number, teamId: number): boolean {
+  hasAdminRole(teamId: number): boolean {
     return this.teamRoles.teamAdmins.indexOf(teamId) !== -1;
   }
 
@@ -109,6 +107,15 @@ export class TeamsService {
       teamRoles[teamRoleName].push(backendTeams[teamIndex].teamId);
     }
   }
+
+  /**
+   * @author Nermeen Mattar
+   * @description filters the teams list to get only the teams that the user is admin of and sets this value in the teamsTheUserIsAdminOf.
+   */
+  getTeamsTheUserIsAdminOf() {
+    return this.userTeams.filter( team => this.teamRoles.teamAdmins.indexOf(team.teamId) !== -1);
+  }
+
 
   /**
    * @author Nermeen Mattar

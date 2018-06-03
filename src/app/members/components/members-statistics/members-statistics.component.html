@@ -22,7 +22,7 @@
     <div>
       <mat-form-field>
         <mat-select [(value)]="selectedTeamId" (selectionChange)="changeSelectedTeam()">
-          <mat-option *ngFor="let team of userTeams" [value]="team.teamId">
+          <mat-option *ngFor="let team of teamsTheUserIsAdminOf" [value]="team.teamId">
             {{ team.teamName }}
           </mat-option>
         </mat-select>
