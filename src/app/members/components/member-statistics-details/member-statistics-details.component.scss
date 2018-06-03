@@ -44,8 +44,9 @@
     cursor: pointer;
   }
   &__container {
-    display: flex;
-    flex-wrap: wrap;
+    &__basic-info {
+      margin-top: 1rem;
+    }
     &__table {
       flex-grow: 1;
       padding: 2rem 0;

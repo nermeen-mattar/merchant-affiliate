@@ -6,30 +6,34 @@
   <h3 class="app-member-statistics-details__header app-member-statistics-details__label">{{'MEMBER.MEMBER' | translate}} {{'DETAILS' | translate}}
   </h3>
   <div class="app-member-statistics-details__container">
-    <!-- Participation Table -->
+    <p class="app-member-statistics-details__label app-member-statistics-details__container__basic-info">
+      {{"MEMBER.ALL_PARTICIPATION" | translate}} {{"FROM" | translate}}
+      <span class="app-member-statistics-details__date">{{dateRange.dateFrom | date:"MM/dd/yyyy hh:mm a" }} </span>
+      {{"TO" | translate}}
+      <span class="app-member-statistics-details__date">{{dateRange.dateTo | date:"MM/dd/yyyy hh:mm a" }}</span>
+    </p>
+    <div class="app-member-statistics-details__container__basic-info">
+      <span class="app-member-statistics-details__label"> {{"MEMBER.MEMBER" | translate}}:</span>
+      {{member}}</div>
+    <div class="app-member-statistics-details__container__basic-info">
+      <span class="app-member-statistics-details__label"> {{"USER.EMAIL" | translate }}: </span>{{email}}</div>
     <div class="app-member-statistics-details__container__table">
-      <p class="app-member-statistics-details__label">
-        {{"MEMBER.ALL_PARTICIPATION" | translate}} {{"FROM" | translate}}
-        <span class="app-member-statistics-details__date">{{dateRange.dateFrom | date:"MM/dd/yyyy hh:mm a" }} </span>
-        {{"TO" | translate}}
-        <span class="app-member-statistics-details__date">{{dateRange.dateTo | date:"MM/dd/yyyy hh:mm a" }}</span>
-      </p>
-      <div style="margin: 1rem 0rem;"> <span> {{"MEMBER.MEMBER" | translate}}:</span>
-         {{member}}</div>
-      <div style="margin: 1rem 0rem;"><span> {{"USER.EMAIL" | translate }}: </span>{{email}}</div>
       <mat-table [dataSource]="memberStatisticsDetailsDatasource">
         <ng-container matColumnDef="date">
-          <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label" *matHeaderCellDef> {{'EVENT.DATE' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label"
+            *matHeaderCellDef> {{'EVENT.DATE' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <span class="app-member-statistics-details__date"> {{row.date}}</span>
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="eventName">
-          <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label" *matHeaderCellDef> {{'EVENT.EVENT' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label"
+            *matHeaderCellDef> {{'EVENT.EVENT' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.eventName}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="time">
-          <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label" *matHeaderCellDef> {{'EVENT.TIME' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label"
+            *matHeaderCellDef> {{'EVENT.TIME' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <span class="app-member-statistics-details__date"> {{row.startTime | stringNormalizer:timeFormat}} {{row.endTime | stringNormalizer:timeFormat}} </span>
           </mat-cell>
