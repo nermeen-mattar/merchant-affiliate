@@ -116,7 +116,7 @@ export class AuthService implements OnDestroy {
   logout() {
     this.loginResponse = undefined;
     localStorage.removeItem('loginResponse');
-    this.userService.clearLoggedInUserInfo();
+    this.userService.resetData();
     this.updateAuthorizationStates();
     this.router.navigateByUrl('home');
   }

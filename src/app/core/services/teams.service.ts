@@ -179,4 +179,12 @@ export class TeamsService {
     }
   }
 
+  /**
+   * @author Nermeen Mattar
+   * @description resets the class variables
+   */
+  resetData() {
+    this.userTeams = null;
+    this.teamRoles = null;
+  }
 }

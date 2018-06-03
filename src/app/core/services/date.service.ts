@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
+import { format } from 'date-fns';
 
+import { AuthService } from './../../auth/services/auth.service';
 import { TcDateRange } from '../models/tc-date-range.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DateService {
-  _selectedDateRange: TcDateRange;
-  constructor() {
-    this.selectedDateRange = JSON.parse(localStorage.getItem('selectedDateRange'));
+  private _selectedDateRange: TcDateRange;
+  constructor(authService: AuthService) {
+    authService.$userLoggedIn.subscribe(isUserLoggedIn => {
+      if (!isUserLoggedIn) {
+        this.resetData();
+      }
+    });
+    const dateRange = JSON.parse(localStorage.getItem('selectedDateRange'));
+    this.selectedDateRange = {dateFrom: new Date(dateRange.dateFrom), dateTo: new Date(dateRange.dateTo) };
   }
 
 
@@ -19,8 +27,8 @@ export class DateService {
   get selectedDateRange(): TcDateRange {
     if (!this._selectedDateRange) {
       const yesterdayDate =  new Date();
-      yesterdayDate.setDate(yesterdayDate.getDate() - 1);
-      this.selectedDateRange =  { dateForm: String(yesterdayDate), dateTo: String(new Date())};
+      yesterdayDate.setDate(yesterdayDate.getDate() - 30);
+      this.selectedDateRange =  { dateFrom: yesterdayDate, dateTo: new Date()};
     }
     return this._selectedDateRange;
   }
@@ -36,5 +44,13 @@ export class DateService {
     } else {
       localStorage.removeItem('selectedDateRange');
     }
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description resets the class variables.
+   */
+  resetData() {
+    this.selectedDateRange = null;
   }
 }

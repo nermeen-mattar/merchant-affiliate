@@ -3,9 +3,6 @@
     <h3 class="app-members-statistics__header__title">
       {{ 'MEMBER.MEMBERS_STATISTICS' | translate}}
       <span *ngIf="membersStatisticsDataSource"> ({{membersStatisticsDataSource.data.length}})</span>
-      <button mat-mini-fab *ngIf="displayAdminActions" color="primary" class="app-members-statistics__action app-members-statistics__add"
-        routerLink="new">
-        + </button>
     </h3>
     <div [formGroup]="dateRangeFormGroup">
       <mat-form-field>
@@ -24,8 +21,8 @@
     </div>
     <div>
       <mat-form-field>
-        <mat-select [(value)]="selectedTeam" (change)="changeSelectedTeam()">
-          <mat-option *ngFor="let team of userTeams" [value]="team">
+        <mat-select [(value)]="selectedTeamId" (selectionChange)="changeSelectedTeam()">
+          <mat-option *ngFor="let team of userTeams" [value]="team.teamId">
             {{ team.teamName }}
           </mat-option>
         </mat-select>
@@ -65,9 +62,9 @@
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="actions">
-        <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
-        <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row">
-          <mat-icon class="app-events__action" routerLink="details/{{row.teamMemberId}}" color="primary">info</mat-icon>
+        <mat-header-cell class="app-members-statistics__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-cell class="app-members-statistics__container__table__content-cell" *matCellDef="let row">
+          <mat-icon class="app-members-statistics__action" routerLink="details/{{row.teamMemberId}}" color="primary">info</mat-icon>
           <!--  [queryParams]="{ memberId: row.teamMemberId, form: }"-->
         </mat-cell>
       </ng-container>

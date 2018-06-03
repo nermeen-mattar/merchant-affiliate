@@ -3,6 +3,9 @@
   padding: 14px 8px; /* to leave space to the back button */
   max-width: 1000px;
   margin: 0 auto;
+  &__action {
+    cursor: pointer;
+  }
   &__header {
     display: flex;
     justify-content: space-between;

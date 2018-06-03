@@ -15,7 +15,7 @@
   "NOT_GOING": "Not Going",
   "MESSAGE": "Message",
   "FROM": "From",
-  "To": "To",
+  "TO": "To",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "SOCIAL_MEDIA": {
     "SHARE": "SHARE",
@@ -42,8 +42,7 @@
       "ERROR.NOT.EXISTING.TEAM.ADMIN": "Team admin does not exist",
       "ERROR.MAIL.NOT.CONFIRMED": "You need to confirm your mail",
       "ERROR.MEMBER.NOT.FOUND": "Member does not exist",
-      "ERROR.MAX.PARTICIPANTS": "Unable to participate. This event is already full.",
-      "ERROR.UNAUTHORIZED": "You are unauthorized please login."
+      "ERROR.MAX.PARTICIPANTS": "Unable to participate. This event is already full."
     },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Unable to register a new team",
@@ -227,7 +226,8 @@
     "CREATE_MEMBER": "Create member",
     "ADD_MYSELF_AS_MEMBER": "Add myself as a member",
     "OUR_MEMBERS": "Our members",
-    "BY_DEFAULT_MEMBERS_ARE": " By default all members are:"
+    "BY_DEFAULT_MEMBERS_ARE": " By default all members are:",
+    "ALL_PARTICIPATION": "All Participations"
   },
   "USER": {
     "FIRST_NAME": "First name",

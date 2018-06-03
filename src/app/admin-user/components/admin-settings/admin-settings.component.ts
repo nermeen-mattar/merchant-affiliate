@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { format } from 'date-fns';
 
 import { TeamsService } from './../../../core/services/teams.service';
 import { AdminService } from './../../../core/services/admin.service';
