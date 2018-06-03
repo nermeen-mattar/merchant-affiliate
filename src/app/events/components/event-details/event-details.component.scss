@@ -4,6 +4,9 @@
   padding: 30px 8px;
   /* to leave space to the back button */
   position: relative;
+  &__label {
+    font-weight: $tc-font-weight-6;
+  }
   &__back {
     position: absolute;
     top: 0px;
@@ -13,6 +16,9 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+  }
+  &__basic-info {
+    margin-top: 1rem;
   }
   &__container {
     display: flex;
@@ -26,11 +32,9 @@
         width: 50%;
       }
       &__header {
-        font-weight: $tc-font-weight-6;
         font-size: $tc-font-size-h5;
       }
       &__header-cell {
-        font-weight: $tc-font-weight-6;
         font-size: $tc-font-size-h5;
       }
     }
