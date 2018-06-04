@@ -19,11 +19,11 @@
     cursor: pointer;
     flex-direction: row;
     &__icon {
-      background: url('../../../../assets/img/core/logo.png') 50% 50% no-repeat;
+      background: url('../../../../assets/img/core/logo2.png') 50% 50% no-repeat;
       background-size: contain;
-      width: 20px;
+      width: 220px;
       margin-right: 10px;
-      height: 22px;
+      height: 45px;
     }
     &__text {
       font-family: 'Baloo Thambi', cursive; // replace with variable or class
