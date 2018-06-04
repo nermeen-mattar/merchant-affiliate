@@ -13,7 +13,7 @@
       <div class="app-home__main__top__register">
 
         <h3 class="app-home__main__top__register__title"> {{ 'TEAM.CREATE_YOUR_TEAM' | translate }} </h3>
-        <mat-form-field class="app-home__main__top__register__main-input-field">
+        <!-- <mat-form-field class="app-home__main__top__register__main-input-field">
           <span matPrefix>
             <mat-icon>supervisor_account</mat-icon> &nbsp;
           </span>
@@ -21,7 +21,7 @@
           <mat-error *ngIf="teamName.invalid">
             {{'TEAM.TEAM_NAME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
         <button mat-mini-fab color="primary" class="app-home__main__top__register__action-btn" (click)="navigateToRegisterPage(teamName.value)">{{ 'HOME.GO' | translate }}
         </button>
       </div>
