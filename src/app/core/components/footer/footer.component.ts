@@ -12,4 +12,8 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
+  openDonateWindow() {
+    window.open('https://paypal.me/coffeeforteamcenter/4', '_blank', 'top=0,left=0,height=500px,width=auto');
+  }
+
 }
