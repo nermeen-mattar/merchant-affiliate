@@ -1,9 +1,19 @@
 <div class="app-home">
   <div class="app-home__main">
     <div class="app-home__main__top" parallax>
+      <div class="app-home__main__top__logo">
+      </div>
+      <div class="app-home__main__top__text">
+        <h2>{{'TEAM_CENTER_INFO1' | translate}}</h2>
+      </div>
+      <div class="app-home__main__top__text">
+          <h3>{{'TEAM_CENTER_INFO2' | translate}}</h3>
+      </div>
+
       <div class="app-home__main__top__register">
+
         <h3 class="app-home__main__top__register__title"> {{ 'TEAM.CREATE_YOUR_TEAM' | translate }} </h3>
-        <mat-form-field class="app-home__main__top__register__main-input-field">
+        <!-- <mat-form-field class="app-home__main__top__register__main-input-field">
           <span matPrefix>
             <mat-icon>supervisor_account</mat-icon> &nbsp;
           </span>
@@ -11,14 +21,13 @@
           <mat-error *ngIf="teamName.invalid">
             {{'TEAM.TEAM_NAME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
           </mat-error>
-        </mat-form-field>
-        <button mat-mini-fab color="primary" class="app-home__main__top__register__action-btn" (click)="navigateToRegisterPage(teamName.value)">{{ 'HOME.GO' | translate }}
+        </mat-form-field> -->
+        <button mat-mini-fab color="primary" class="app-home__main__top__register__action-btn" (click)="navigateToRegisterPage('bla')">{{ 'HOME.GO' | translate }}
         </button>
       </div>
     </div>
   </div>
   <div class="app-home__info">
-    <h1 class="app-home__info__title">{{'HOME.SLOGAN' | translate}}</h1>
     <div class="app-home__info__sections__container">
       <div class="app-home__info__section">
         <div class="app-home__info__section__icon">
@@ -68,6 +77,18 @@
 
         <h2 class="app-home__info__section__header"> {{'HOME.ADV6.TITLE' | translate}} </h2>
         <p>{{'HOME.ADV6.TEXT' | translate}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="app-home__main">
+    <div class="app-home__main__middle" parallax [config]="{initialValue: -100, ratio: .2}">
+    </div>
+  </div>
+  <div class="app-home__info">
+    <h1 class="app-home__info__title">{{'HOME.SLOGAN' | translate}}</h1>
+    <div class="app-home__info__sections__container">
+      <div class="app-home__info__section">
+        <p>{{'HOME.SLOGAN_TEXT' | translate}}</p>
       </div>
     </div>
   </div>

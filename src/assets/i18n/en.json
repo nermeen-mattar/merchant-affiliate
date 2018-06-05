@@ -1,5 +1,7 @@
 {
   "TEAM_CENTER": "team.center",
+  "TEAM_CENTER_INFO1": "helps you to organize team events - pure & simple",
+  "TEAM_CENTER_INFO2": "It's free and always will be",
   "WELCOME": "Welcome",
   "DELETE": "Delete",
   "MORE": "More",
@@ -112,6 +114,7 @@
   "HOME": {
     "GO": "Go!",
     "SLOGAN": "Your Team Thing",
+    "SLOGAN_TEXT": "team.center is reduced to the minimum to organize all your team events like regularly trainings or unregularly events like helper jobs. Use your precious time to train and play instead of using it to organize.",
     "ADV1": {
       "TITLE": "Participations & Cancellations",
       "TEXT": "Create Participation & Cancellation events. If you want you can also define per event a minimum and a maximum for the team members."
@@ -197,7 +200,7 @@
   "TEAM": {
     "TEAMS": "Teams",
     "YOUR_TEAMS": "Your teams",
-    "CREATE_YOUR_TEAM": "Create your team - 100% free",
+    "CREATE_YOUR_TEAM": "Create your team ",
     "TEAM_NAME": "Team Name",
     "TEAM_PASSWORD": "Team Password",
     "TEAM_DETAILS": "Team details",
