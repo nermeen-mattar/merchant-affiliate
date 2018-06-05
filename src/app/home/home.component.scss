@@ -3,6 +3,7 @@
 .app-home {
   &__main {
     &__top,
+
     &__bottom {
       background-attachment: fixed;
       background-size: cover;
@@ -10,14 +11,15 @@
     }
     &__top {
       background: url('../../assets/img/squash-793062.jpg') no-repeat center fixed;
-      display: flex;
+      // display: flex;
       align-items: center;
       &__register {
         background-color:white;
         position: relative;
         width: 90%;
-        height: 150px;
+        height: 60px;
         margin: 0 auto;
+        margin-top: 50px;
         max-width: 500px;
         padding: 10px 20px;
         box-sizing: border-box;
@@ -37,6 +39,26 @@
           color: white;
         }
       }
+      &__logo {
+        background: url('../../assets/img/core/tc_no_bg.png') no-repeat center;
+        background-size: contain;
+        width: 250px;
+        margin-right: 10px;
+        height: 45px;
+        margin-left: 50px;
+        padding-top: 100px;
+      }
+      &__text{
+        color: #ededed;
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+    }
+    &__middle {
+      background-attachment: fixed;
+      background-size: cover;
+      min-height: 650px;
+      background: url('../../assets/img/viewsResponsive.jpg') no-repeat center fixed;
     }
     &__bottom {
       background: url('../../assets/img/basketball3.jpg') no-repeat center fixed;
@@ -78,4 +100,7 @@
       }
     }
   }
+}
+p {
+  font-size: 1.3em;
 }
