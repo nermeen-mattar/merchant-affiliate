@@ -28,9 +28,8 @@ export class DateService {
    */
   get selectedDateRange(): TcDateRange {
     if (!this._selectedDateRange) {
-      const yesterdayDate =  new Date();
-      yesterdayDate.setDate(yesterdayDate.getDate() - 30);
-      this.selectedDateRange =  { dateFrom: yesterdayDate, dateTo: new Date()};
+      const todayDate =  new Date();
+      this.selectedDateRange =  { dateFrom: new Date('01/01/' + todayDate.getFullYear()), dateTo: todayDate};
     }
     return this._selectedDateRange;
   }
