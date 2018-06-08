@@ -35,6 +35,7 @@ export class MemberStatisticsDetailsComponent implements OnInit {
   constructor(private membersStatisticsService: MembersStatisticsService, private eventsService: EventsService, route: ActivatedRoute,
     dateService: DateService) {
     this.memberId = route.snapshot.params['memberId'];
+    this.actionType = route.snapshot.params['action-type'];
     this.dateRange = dateService.selectedDateRange;
     if (this.memberId && this.dateRange) {
       this.updateMemberDetailsStatistics();
@@ -51,7 +52,7 @@ export class MemberStatisticsDetailsComponent implements OnInit {
    */
   updateMemberDetailsStatistics() {
     this.memberStatisticsDetailsDatasource = undefined; // reset data source to display the loader as new data will be received
-    this.membersStatisticsService.getMemberStatisticsDetails('participate', this.memberId, this.selectedPage, this.pageSize).subscribe(({
+    this.membersStatisticsService.getMemberStatisticsDetails(this.actionType, this.memberId, this.selectedPage, this.pageSize).subscribe(({
       dateFrom,
       dateTo,
       firstName,
