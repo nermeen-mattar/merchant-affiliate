@@ -17,7 +17,7 @@ import { MembersStatisticsService } from '../../services/members-statistics.serv
 })
 
 export class MembersStatisticsComponent implements OnInit {
-  displayedColumns = ['member', 'email', 'participations', 'cancelations', 'actions'];
+  displayedColumns = ['member', 'email', 'participations', 'cancelations'];
   membersStatisticsDataSource: MatTableDataSource < any > ;
   userTeams: TcTeamInfo[];
   selectedTeamId: number;
