@@ -1,6 +1,6 @@
 {
   "TEAM_CENTER": "team.center ",
-  "TEAM_CENTER_INFO1": "Vereinfacht dir die Organisation von Teamevents - Spielend einfach",
+  "TEAM_CENTER_INFO1": "Für deine Organisation von Teamevents - spielend leicht",
   "TEAM_CENTER_INFO2": "team.center ist und bleibt kostenlos",
   "WELCOME": "Willkommen",
   "DELETE": "Löschen",
@@ -174,6 +174,8 @@
     "IN": "An",
     "CANCELATIONS": "Abmeldungen",
     "PARTICIPATIONS": "Anmeldungen",
+    "CANCELATION": "Anmeldung",
+    "PARTICIPATION": "Abmeldung",
     "EVENT_NAME": "Event Name",
     "CANCELATION_EVENT": "Abmelde-Event",
     "PARTICIPATION_EVENT": "Anmelde-Event",
