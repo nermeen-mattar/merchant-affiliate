@@ -55,6 +55,14 @@
         text-shadow: 0em 0em 0.2em #323232;
       }
     }
+    @media only screen and (max-width: 720px) {
+      &__top{
+        background: url('../../assets/img/squash_light-min2.jpg') no-repeat center fixed;
+        background-size: 1000px auto;
+        background-position: center !important; 
+      }           
+    }
+
     &__middle {
       background-attachment: fixed;
       background-size: cover;
