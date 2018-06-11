@@ -25,7 +25,7 @@ const routes: Routes = [{
       component: MembersStatisticsComponent
     },
     {
-      path: 'statistics/details/:memberId',
+      path: 'statistics/details/:memberId/:action-type',
       component: MemberStatisticsDetailsComponent
     }
     /* The member form component will be used for creating and form editing, creation if the path was /new, edit otherwise */

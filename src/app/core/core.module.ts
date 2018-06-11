@@ -20,6 +20,7 @@ import { TokenHandlerService } from '../auth/services/token-handler.service';
 import { AdminService } from './services/admin.service';
 import { RegisterService } from '../auth/services/register.service';
 import { TeamsService } from './services/teams.service';
+import { DateService } from './services/date.service';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { TeamsService } from './services/teams.service';
     UserMessagesService,
     HttpRequestsService,
     FieldValidatorsService,
-    TeamsService
+    TeamsService,
+    DateService
   ]
 })
 export class CoreModule {

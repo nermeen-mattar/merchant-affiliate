@@ -11,7 +11,7 @@
         <mat-icon class="app-container__sidenav__menu__item__arrow">keyboard_arrow_down</mat-icon>
         <mat-menu #membersMenu="matMenu">
           <button (click)="sidenav.close()" routerLink="/members/list" routerLinkActive="active" mat-menu-item> {{ 'MEMBER.MEMBERS_LIST' | translate}} </button>
-          <button (click)="sidenav.close()" routerLink="/members/statistics" routerLinkActive="active" mat-menu-item> {{ 'MEMBER.MEMBERS_STATISTICS'| translate}} </button>
+          <button *ngIf="($isUserAdmin | async)" (click)="sidenav.close()" routerLink="/members/statistics" routerLinkActive="active" mat-menu-item> {{ 'MEMBER.MEMBERS_STATISTICS'| translate}} </button>
         </mat-menu>
       </div>
       <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">

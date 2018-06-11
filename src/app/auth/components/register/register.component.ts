@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
@@ -22,12 +23,16 @@ export class RegisterComponent implements OnInit {
   displaySpinner = false;
   emailActivationRequired = false;
   displayMessageCard = false;
+  teamName: string;
   registerFirstStepForm: FormGroup;
   registerSecondStepForm: FormGroup;
   roles = roles; /* needed to declare a class property to make it available on the component html */
   constructor(private authService: AuthService, private adminService: AdminService,
-    private registerService: RegisterService,
-    private fieldValidatorsService: FieldValidatorsService, private userMessagesService: UserMessagesService) {}
+    private registerService: RegisterService, activatedRoute: ActivatedRoute,
+    private fieldValidatorsService: FieldValidatorsService, private userMessagesService: UserMessagesService) {
+    const queryParams = activatedRoute.snapshot.queryParams;
+    this.teamName = queryParams && queryParams['team-name'];
+  }
 
   ngOnInit() {
     this.createRegisterFirstStepForm();
@@ -40,7 +45,7 @@ export class RegisterComponent implements OnInit {
   }
   createRegisterFirstStepForm() {
     this.registerFirstStepForm = new FormGroup({
-      teamName: new FormControl('', [Validators.required]),
+      teamName: new FormControl(this.teamName || '', [Validators.required]),
       teamPassword: new FormControl('', [Validators.required,
         this.fieldValidatorsService.getValidator('validatePassword')
       ]),
@@ -188,7 +193,7 @@ export class RegisterComponent implements OnInit {
     if (this.userType === roles.admin) {
       /* this.userMessagesService.showUserMessage({}, 'fail'); */
     }
-     /* will consider anything else as wrong password */
+    /* will consider anything else as wrong password */
   }
 
   /**
