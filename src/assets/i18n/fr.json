@@ -1,7 +1,10 @@
 {
   "TEAM_CENTER": "team.center",
-  "EMAIL": "Mail",
+  "TEAM_CENTER_INFO1": "",
+  "TEAM_CENTER_INFO2": "",
+  "WELCOME": "",
   "DELETE": "Supprimer",
+  "MORE": "",
   "CANCEL": "Annuler",
   "CONFIRM": "Confirmer",
   "BACK": "Retour",
@@ -9,22 +12,53 @@
   "YES": "Oui",
   "NO": "Non",
   "LOG_OUT": "Se déconnecter",
-  "CONTACT": "Contact",
-  "IS_REQUIRED": "est requis",
   "EDIT": "Modifier",
-  "Delete": "Supprimer",
-  "SAVE": "Sauvegarder",
+  "GOING": "",
+  "NOT_GOING": "",
+  "MESSAGE": "",
+  "FROM": "",
+  "TO": "",
   "SEARCH_PLACEHOLDER": "Rechercher parmi toutes les colonnes du tableau",
+  "SOCIAL_MEDIA": {
+    "SHARE": "",
+    "TWEET": ""
+  },
+  "FORM": {
+    "ENTER_VALID_EMAIL": "",
+    "ENTER_VALID_PASSWORD": "",
+    "END_SHOULD_BE_AFTER_START": "",
+    "PASSWORD_MUST_INCLUDE": "",
+    "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "",
+    "MAX_SHOULD_BE_MORE_THAN_MIN": "",
+    "SHOULD_BE_POSITIVE": "",
+    "SAVE": "",
+    "SEND": "",
+    "IS_REQUIRED": ""
+  },
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Quelque chose s'est mal passé",
+    "BACKEND": {
+      "ERROR.UNAUTHORIZED" : "",
+      "ERROR.MAIL.NOT.EXIST" : "",
+      "ERROR.MAIL.CONFIRMED": "",
+      "ERROR.NOT.EXISTING.TEAM.ADMIN": "",
+      "ERROR.MAIL.NOT.CONFIRMED": "",
+      "ERROR.MEMBER.NOT.FOUND": "",
+      "ERROR.MAX.PARTICIPANTS": ""
+    },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Impossible d'enregistrer une nouvelle équipe",
       "REGISTER_SUCCESS": "Merci d'avoir créé votre équipe. Veuillez vérifier vos mails pour activer votre compte. ",
-      "EMAIL_SEND_AGAIN": "Mail envoyé de nouveau avec succès"
+      "ACTIVATION_MAIL_RESEND__SUCCESS": "",
+      "ACTIVATION_MAIL_RESEND__FAIL": ""
     },
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Mauvais nom d'utilisateur ou mot de passe",
       "INCORRECT_ADMIN_PASSWRD": "Mot de passe administrateur incorrect"
+    },
+    "CONTACT": {
+      "CONTACT_MESSAGE_SENT_SUCCESS": "",
+      "CONTACT_MESSAGE_SENT_FAIL": ""
     },
     "EVENT": {
       "EVENT_DELETING_SUCCESS": "L'événement a été supprimé avec succès",
@@ -52,42 +86,75 @@
       "MEMBER_GETTING_FAIL": "Impossible d'obtenir le membre",
       "MEMBER_CHANGING_ACTIVATION_STATUS_FAIL": "Impossible de changer le statut d'activation du membre",
       "MEMBER_CONFIRM_DELETING_HEADER": " Supprimer le membre",
-      "MEMBER_CONFIRM_DELETING_BODY": "Voulez-vous vraiment supprimer ce membre?"
+      "MEMBER_CONFIRM_DELETING_BODY": "Voulez-vous vraiment supprimer ce membre?",
+      "MEMBER_CONFIRM_ACTIVATE_HEADER": "",
+      "MEMBER_CONFIRM_ACTIVATE_BODY": "",
+      "MEMBER_CONFIRM_DEACTIVATE_HEADER": "",
+      "MEMBER_CONFIRM_DEACTIVATE_BODY": ""
+    },
+    "ADMIN": {
+      "ADMIN_PASSWORD_CHANGING_SUCCESS": "",
+      "ADMIN_PASSWORD_CHANGING_FAIL": ""
+    },
+    "TEAM": {
+      "TEAM_NAME_CHANGING_SUCCESS": "",
+      "TEAM_NAME_CHANGING_FAIL": "",
+      "DIRECT_LINK_CHANGING_SUCCESS": "",
+      "DIRECT_LINK_CHANGING_FAIL": "",
+      "TEAM_PASSWORD_CHANGING_SUCCESS": "",
+      "TEAM_PASSWORD_CHANGING_FAIL": ""
     }
   },
   "LANGUAGE": {
     "LANGUAGE": "Language",
     "en": "Anglais",
     "de": "Allemand",
-    "fr": "Frensh"
+    "fr": "Français"
   },
   "HOME": {
-    "GO": "C’est parti!",
+    "GO": "Go!",
     "SLOGAN": "Votre équipe",
+    "SLOGAN_TEXT": "",
     "ADV1": {
-      "TITLE": "Participations et annulations",
-      "TEXT": "Créez des événements de participation ou d'annulation et entrez un maximum de participants et un minimum de membres d'équipe restants par événement."
+      "TITLE": "",
+      "TEXT": ""
     },
     "ADV2": {
-      "TITLE": "Gestion du travail bénévole",
-      "TEXT": "Beaucoup de clubs ont du mal à organiser le travail des bénévoles, Teamcenter facilite la gestion de ces derniers."
+      "TITLE": "",
+      "TEXT": ""
     },
     "ADV3": {
-      "TITLE": "Un même mot de passe pour tous",
-      "TEXT": "Teamcenter permet de définir un même mot de passe pour tous les membres de l'équipe tout en ayant des connexions personnelles, il suffit de le demander à votre coéquipier ou d'utiliser un lien direct si vous avez oublié votre mot de passe."
+      "TITLE": "",
+      "TEXT": ""
     },
     "ADV4": {
-      "TITLE": "Soyez membre de plusieurs équipes",
-      "TEXT": "Dans l'aperçu de l'événement, vous verrez tous les événements dans lesquels vous êtes inclus en tant que membre de l'équipe.Tous les événements de votre équipe sont affichés dans un seul emplacement central"
+      "TITLE": "",
+      "TEXT": ""
     },
     "ADV5": {
-      "TITLE": "Activer les notifications par mails",
-      "TEXT": "Lors de la création d'un événement, l'administrateur peut décider si l'événement doit être créé avec des rappels automatiques, indiquant combien de jours avant l'événement le rappel sera envoyé"
+      "TITLE": "",
+      "TEXT": ""
     },
     "ADV6": {
-      "TITLE": "Présentation de l'équipe et rapports",
-      "TEXT": "Chaque membre de l'équipe a une transparence totale sur le nombre d'inscriptions et d'annulations de ses coéquipiers, par exemple, les membres du club se souviennent les uns des autres pour participer à une mission d'aide ou pour annuler une séance d'entraînement."
+      "TITLE": "",
+      "TEXT": ""
     }
+  },
+  "ACTIVATION": {
+    "EXPIRED_LINK": "",
+    "ALREADY_ACTIVATED": "",
+    "ACTIVATION_SUCCESS":  ""
+  },
+  "PAGE_NOT_FOUND": {
+    "MESSAGE_404": "",
+    "GO_TO_PREVIOUS_PAGE": ""
+  },
+  "UNDER_MAINTENANCE": {
+    "DOWN_FOR_MAINTENANCE": "",
+    "BACK_WITH_IMPROVEMENTS": "",
+    "APPOLOGIZE": "",
+    "THANKS": "",
+    "SORRY": ""
   },
   "USER_SWITCHING": {
     "SWITCH_TO_ADMIN": "Passer au statut d'administrateur",
@@ -101,7 +168,7 @@
     "TYPE": "Catégorie",
     "DATE": "Date",
     "TIME": "Temps",
-    "STATUS": "Statut",
+    "PARTICIPATION_STATUS": "",
     "CRITICAL_VALUE": "Valeur critique",
     "OUT": "En dehors",
     "IN": "Dedans",
@@ -110,16 +177,23 @@
     "EVENT_NAME": "Nom de l’événement",
     "CANCELATION_EVENT": "Annulation de l’événement",
     "PARTICIPATION_EVENT": "Participation à l’événement",
+    "JOINING": "",
+    "NOT_JOINING": "",
     "EVENT_DATE": "Date de l’événement",
     "START_TIME": "Heure de début",
     "END_TIME": "Heure de fin",
-    "END_SHOULD_BE_AFTER_START": "L'heure de fin doit être après l'heure de début",
     "LOCATION": "Emplacement",
     "EVENT_TYPE": "Événement à",
-    "MIN_MAX_PER_EVENT": "Min / Max participants par événement",
+    "MAX": "",
+    "MIN": "",
+    "ACTUAL": "",
+    "MIN_MAX_PER_EVENT": "",
+    "MIN_PER_EVENT": "",
+    "MAX_PER_EVENT": "",
     "COMMENT": "COMMENTAIRE",
     "CREATE_EVENT": " Créer un évènement",
-    "EDIT_EVENT": "Modifier un événement"
+    "EDIT_EVENT": "Modifier un événement",
+    "THIS_EVENT": ""
   },
   "TEAM": {
     "TEAMS": "Equipes",
@@ -128,42 +202,61 @@
     "TEAM_NAME": "Nom de l‘équipe",
     "TEAM_PASSWORD": "Mot de passe de l‘équipe",
     "TEAM_DETAILS": "Détails de l'équipe",
-    "ROLES": "Les rôles"
+    "ROLES": "Les rôles",
+    "DIRECT_LINK": ""
   },
   "ADMIN": {
     "ADMIN": "Administrateur",
     "ADMIN_PASSWORD": "Mot de passe administrateur",
     "ADMIN_DETAILS": "Détails de l'administrateur",
     "ADMIN_PASSWORD_INCORRECT": "Mot de passe administrateur incorrect",
-    "SETTINGS": "Paramètres"
+    "SETTINGS": "Paramètres",
+    "TEAM_SETTINGS": "",
+    "CURRENT_PASSWORD": "",
+    "NEW_PASSWORD": "",
+    "CHANGE_TEAM_PASSWORD": "",
+    "CHANGE_ADMIN_PASSWORD": "",
+    "CONFIRM_ADMIN_PASSWORD": "",
+    "CONFIRM_NEW_PASSWORD": ""
   },
   "MEMBER": {
     "MEMBERS": "Membres",
     "MEMBER": "Membre",
-    "FIRST_NAME": "prénom",
-    "LAST_NAME": "Nom",
+    "MEMBERS_STATISTICS": "",
+    "MEMBERS_LIST": "",
     "MAIL": "Mail",
     "EDIT_MEMBER": "Modifier le membre",
     "CREATE_MEMBER": "Créer un membre",
     "ADD_MYSELF_AS_MEMBER": "M’ajouter en tant que membre",
-    "OUR_MEMBERS": "Nos membres"
+    "OUR_MEMBERS": "Nos membres",
+    "BY_DEFAULT_MEMBERS_ARE": "",
+    "ALL_PARTICIPATION": ""
+  },
+  "USER": {
+    "FIRST_NAME": "",
+    "LAST_NAME": "",
+    "EMAIL": ""
   },
   "REGISTER": {
     "REGISTER": "S‘enregistrer",
     "ADMIN_ALREADY_EXIST": "Vous êtes déjà enregistré en tant qu’administrateur. Veuillez entrer votre mot de passe administrateur pour créer une équipe",
     "EMAIL_NOT_RECEIVED": "Vous n’avez pas reçu de mail?",
     "SEND_MAIL_AGAIN": "Envoyer à nouveau le mail",
-    "NEED_TO_CONFIRM_EMAIL": "Veuillez d'abord confirmer votre courrier."
+    "NEED_TO_CONFIRM_EMAIL": "Veuillez d'abord confirmer votre courrier.",
+    "NEED_TO_REGISTER_EMAIL": "",
+    "REGISTER_NOW": ""
   },
   "LOGIN": {
     "LOGIN": "Identifiant",
     "PASSWORD": "Mot de passe",
-    "REGISTER": "S’enregistrer maintenant!"
+    "REGISTER": "S’enregistrer maintenant!",
+    "GO_TO_LOGIN": ""
   },
   "FOOTER": {
     "TERMS_CONDITIONS": "termes et conditions",
     "IMPRESSUM": "Impressum",
-    "COPY_RIGHT": "© 2018 Copyright teamcenter"
+    "SUPPORT_BY_DONATING": "",
+    "COPY_RIGHT": "© 2018 Copyright teamcenter GmbH"
   },
   "ABOUT": {
     "ABOUT": "A propos",
@@ -187,6 +280,10 @@
       "TEXT3": "Google Maps pour tous lesemplacements - Autres langues - Applications mobiles (Android et iOS)",
       "TEXT4": "Nous sommes très reconnaissants pour vos commentaires, surtout après la mise en œuvre de nouvelles fonctionnalités: rene@team.center"
     }
+  },
+  "CONTACT": {
+    "DROP_LINE": "",
+    "CONTACT": ""
   },
   "footer_buyACoffee": "Soutenez ce projet en achetant un café",
   "footer_LinksTitle": "Contenu",

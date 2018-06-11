@@ -1,7 +1,10 @@
 {
   "TEAM_CENTER": "team.center ",
-  "EMAIL": "Email",
+  "TEAM_CENTER_INFO1": "Vereinfacht dir die Organisation von Teamevents - Spielend einfach",
+  "TEAM_CENTER_INFO2": "team.center ist und bleibt kostenlos",
+  "WELCOME": "Willkommen",
   "DELETE": "Löschen",
+  "MORE": "Mehr",
   "CANCEL": "Abbrechen",
   "CONFIRM": "Bestätigen",
   "BACK": "Zurück",
@@ -9,22 +12,53 @@
   "YES": "Ja",
   "NO": "Nein",
   "LOG_OUT": "Abmelden",
-  "CONTACT": "Kontakt",
-  "IS_REQUIRED": "wird benötigt",
   "EDIT": "Bearbeitent",
-  "Delete": "Löschen",
-  "SAVE": "Speichern",
+  "GOING": "Ok", 
+  "NOT_GOING": "Nicht ok",
+  "MESSAGE": "Nachricht",
+  "FROM": "Von",
+  "TO": "An",
   "SEARCH_PLACEHOLDER": "Alle Spalten durchsuchen",
+  "SOCIAL_MEDIA": {
+    "SHARE": "Teilen",
+    "TWEET": "Tweet"
+  },
+  "FORM": {
+    "ENTER_VALID_EMAIL": "Bitte eine gültige eMail Adresse eingeben.",
+    "ENTER_VALID_PASSWORD": "Bitte ein gültiges Passwort eingeben.",
+    "END_SHOULD_BE_AFTER_START": "Endzeit muss nach Startzeit kommen",
+    "PASSWORD_MUST_INCLUDE": "Das Passwort muss mindestens 8 haben und aus Buchstaben und Zahlen bestehen.",
+    "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "Das Passwort muss gleich sein wie das neue Passwort.",
+    "MAX_SHOULD_BE_MORE_THAN_MIN": "Das Maximum muss grösser sein als das Minimum",
+    "SHOULD_BE_POSITIVE": "Nummer muss grösser 0 sein.",
+    "SAVE": "Speichern",
+    "SEND": "Senden",
+    "IS_REQUIRED": "Wird benötigt"
+  },
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Etwas ist schief gelaufen",
+    "BACKEND": {
+      "ERROR.UNAUTHORIZED" : "Du bist nicht berechtigt diese Ansicht zu sehen. Bitte melde dich zuerst an.",
+      "ERROR.MAIL.NOT.EXIST" : "Mail Adresse existiert nicht",
+      "ERROR.MAIL.CONFIRMED": "Die Mail Adresse ist bereits bestätigt",
+      "ERROR.NOT.EXISTING.TEAM.ADMIN": "Der Team Admin existiert bereits",
+      "ERROR.MAIL.NOT.CONFIRMED": "Bitte bestätige zuerst deine Mail Adresse",
+      "ERROR.MEMBER.NOT.FOUND": "Teammitglied existiert nicht",
+      "ERROR.MAX.PARTICIPANTS": "Teilnahme fehlgeschlagen, da dieser Event bereits voll ist."
+    },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Neues team kann nicht angelegt werden",
       "REGISTER_SUCCESS": "Vielen Dank für das Anlegen von deinem Team. Bitte prüfe nun deine Mails, um deinen Account zu aktivieren",
-      "EMAIL_SEND_AGAIN": "Mail nochmals gesendet"
+      "ACTIVATION_MAIL_RESEND__SUCCESS": "Aktivierungsmail wurde nochmals versendet",
+      "ACTIVATION_MAIL_RESEND__FAIL": "Aktivierungsmail konnt nicht nochmals versendet werden"
     },
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Benutzername oder Passwort falsch",
       "INCORRECT_ADMIN_PASSWRD": "Falsches Admin Passwort"
+    },
+    "CONTACT": {
+      "CONTACT_MESSAGE_SENT_SUCCESS": "Die Nachricht wurde erfolgreich gesendet",
+      "CONTACT_MESSAGE_SENT_FAIL": "Nachricht konnte nicht gesendet werden"
     },
     "EVENT": {
       "EVENT_DELETING_SUCCESS": "Event wurde erfolgreich gelöscht",
@@ -52,45 +86,78 @@
       "MEMBER_GETTING_FAIL": "Teammitglied konnte nicht geladen werden",
       "MEMBER_CHANGING_ACTIVATION_STATUS_FAIL": "Memberstatus konnte nicht geändert werden",
       "MEMBER_CONFIRM_DELETING_HEADER": "Teammitglied löschen",
-      "MEMBER_CONFIRM_DELETING_BODY": "Willst du dieses Teammitglied wirklich löschen?"
+      "MEMBER_CONFIRM_DELETING_BODY": "Willst du dieses Teammitglied wirklich löschen?",
+      "MEMBER_CONFIRM_ACTIVATE_HEADER": "Mitglied aktivieren",
+      "MEMBER_CONFIRM_ACTIVATE_BODY": "Willst du dieses Mitglied wirklich aktivieren?",
+      "MEMBER_CONFIRM_DEACTIVATE_HEADER": "Mitglied deaktivieren",
+      "MEMBER_CONFIRM_DEACTIVATE_BODY": "Willst du dieses Mitglied wirklich deaktivieren?"
+    },
+    "ADMIN": {
+      "ADMIN_PASSWORD_CHANGING_SUCCESS": "Das Admin Passwort wurde erfolgreich geändert",
+      "ADMIN_PASSWORD_CHANGING_FAIL": "Das Admin Passwort konnte nicht geändert werden"
+    },
+    "TEAM": {
+      "TEAM_NAME_CHANGING_SUCCESS": "Der Team Name wurde erfolgreich geändert",
+      "TEAM_NAME_CHANGING_FAIL": "Der Team Name konnte nicht geändert werden",
+      "DIRECT_LINK_CHANGING_SUCCESS": "Der Direktlink wurde erfolgreich gewechselt",
+      "DIRECT_LINK_CHANGING_FAIL": "Der Direktlinkt konnte nicht gewechselt werden",
+      "TEAM_PASSWORD_CHANGING_SUCCESS": "Das Team Passwort wurde erfolgreich geändert",
+      "TEAM_PASSWORD_CHANGING_FAIL": "Das Team Passwort konnte nicht geändert werden"
     }
   },
   "LANGUAGE": {
     "LANGUAGE": "Sprache",
     "en": "Englisch",
     "de": "Deutsch",
-    "fr": "Frensh"
+    "fr": "Französisch"
   },
   "HOME": {
     "GO": "Los!",
     "SLOGAN": "Dein Team Ding",
+    "SLOGAN_TEXT": "Wir haben uns zum obersten Ziel gemacht, die Organisation von Team Events, wie Trainings oder Helfereinsätze, so einfach wie möglich zu gestalten: Keinen Schnickschnack, nur die nötigsten Funktionen, welche du wirklich brauchst. Das alles mit einer kostenlosen, webbasierten und für alle Geräte optimierten Plattform, welche zu jeder Zeit von überall aus zugänglich ist. So kannst du 'Trainieren statt Koordinieren'",
     "ADV1": {
       "TITLE": "An- & Abmeldungen",
-      "TEXT": "Erstelle An- & Abmelde Events. Definiere zudem pro Event ein Minimum und ein Maximum für die Teilnehmer, oder lass es völlig offen."
+      "TEXT": "Erstelle An- & Abmelde Events. Definiere zudem pro Event ein Minimum und ein Maximum für die Anzahl Teilnehmer, oder lass es völlig offen."
     },
     "ADV2": {
-      "TITLE": "Helfereinsätze",
-      "TEXT": "Viele Vereine haben Mühe ihre zahlreichen Helfereinsätze zu koordinieren. Mit team.center wird es ein Kinderspiel. Die Mitglieder können sich online selber für einen Einsatz einschreiben."
+      "TITLE": "Helfereinsätze verwalten",
+      "TEXT": "Viele Vereine haben Mühe ihre zahlreichen Helfereinsätze zu koordinieren. Mit team.center wird es spielend einfach. Die Mitglieder können sich auf team.center selber ihre Helfereinsätze aussuchen."
     },
     "ADV3": {
       "TITLE": "Ein Passwort für alle",
-      "TEXT": "team.center macht es möglich für alle Teammitglieder das gleiche Passwort zu nutzen und bietet trotzdem persönliche Logins. Frage einfach deinen Teamkollegen, solltest du mal das Passwort vergessen, oder verwende den Direktlink."
+      "TEXT": "team.center macht es möglich für alle Mitglieder in einem Team das gleiche Passwort zu haben und bietet trotzdem persönliche Logins. Frage einfach deinen Teamkollegen, solltest du einmal das Passwort vergessen, oder verwende den Direktlink."
     },
     "ADV4": {
       "TITLE": "Sei Mitglied in mehreren Teams",
-      "TEXT": "In der Eventübersicht siehst du alle Events, bei denen du als Mitglied erfasst wurdest. So kannst du all deine Events an einem, zentralen Ort verwalten."
+      "TEXT": "In der Eventübersicht siehst du alle Events, bei denen du als Mitglied erfasst wurdest. So kannst du alle deine Events an einem, zentralen Ort verwalten."
     },
     "ADV5": {
-      "TITLE": "Aktiviere Erinnerungsmails",
-      "TEXT": "Beim Erstellen von einem Event kann der Admin automatische Erinnerungsmails aktivieren. Er kann dabei Erinnerungen für 1 Tag und 7 Tage vor dem Event auswählen."
+      "TITLE": "Benutze Erinnerungsmails",
+      "TEXT": "Beim Erstellen von einem Event kann der Admin automatische Erinnerungsmails aktivieren. Er kann dabei auswählen, ob und wie viele Tage vor dem Event jeweils ein Erinnerungsmail an die Teammitglieder versendet werden soll."
     },
     "ADV6": {
       "TITLE": "Teamübersicht und Statistik",
-      "TEXT": "Jedes Teammitglied hat volle Transparenz über die an- bzw- abgemeldeten Mitglieder. So erinneren sich die Teammitglieder beispielsweise völlig selbständig für bevorstehende Events, oder für das Auswählen von einem Helfereinsatz. team.center macht somit das Leben für alle Trainer viel einfacher."
+      "TEXT": "Jedes Teammitglied hat volle Transparenz über die an- bzw- abgemeldeten Mitglieder. So erinneren sich die Teammitglieder beispielsweise völlig selbständig für bevorstehende Events, oder für das fristgerechte Auswählen von einem Helfereinsatz. team.center macht  das Leben für alle Trainer einfacher."
     }
   },
+  "ACTIVATION": {
+    "EXPIRED_LINK": "Der Link ist abgelaufen",
+    "ALREADY_ACTIVATED": "Deine Mail Adresse wurde bereits aktiviert",
+    "ACTIVATION_SUCCESS":  "Deine eMail Adresse wurde erfolgreich aktiviert."
+  },
+  "PAGE_NOT_FOUND": {
+    "MESSAGE_404": "Uuups, diese Seite wurde nicht gefunden!",
+    "GO_TO_PREVIOUS_PAGE": "Kehre zur vorherigen Seite zurück"
+  },
+  "UNDER_MAINTENANCE": {
+    "DOWN_FOR_MAINTENANCE": "team.center ist zur Zeit wegen Wartungsarbeiten nicht erreichbar",
+    "BACK_WITH_IMPROVEMENTS": "Wir werden bald mit noch mehr Funktionen zurück sein",
+    "APPOLOGIZE": "Wir entschuldigen uns für die Unannehmlichkeiten und bedanken uns für deine Geduld.",
+    "THANKS": "Vielen Dank, dass du team.center verwendest",
+    "SORRY": "Wir entschuldigen uns."
+  },
   "USER_SWITCHING": {
-    "SWITCH_TO_ADMIN": "Wechsle zu Admin",
+    "SWITCH_TO_ADMIN": "Wechsle zum Admin",
     "SWITCHING_MSG": "Du bist als Teammember eingelogt. Damit du dich als Admin authentifizieren kannst, gib hier bitte ein gültiges Adminpasswort ein.",
     "SWITCH": "Wechsle"
   },
@@ -101,7 +168,7 @@
     "TYPE": "Typ",
     "DATE": "Datum",
     "TIME": "Zeit",
-    "STATUS": "Status",
+    "PARTICIPATION_STATUS": "Anmeldestatus",
     "CRITICAL_VALUE": "Kritischer Wert",
     "OUT": "Ab",
     "IN": "An",
@@ -110,16 +177,23 @@
     "EVENT_NAME": "Event Name",
     "CANCELATION_EVENT": "Abmelde-Event",
     "PARTICIPATION_EVENT": "Anmelde-Event",
+    "JOINING": "angemeldet",
+    "NOT_JOINING": "abgemeldet",
     "EVENT_DATE": "Event Datum",
     "START_TIME": "Startzeit",
     "END_TIME": "Endzeit",
-    "END_SHOULD_BE_AFTER_START": "Endzeit muss nach Startzeit sein",
     "LOCATION": "Lokation",
     "EVENT_TYPE": "Event für",
-    "MIN_MAX_PER_EVENT": "Min/Max Anmeldungen pro Event",
+    "MAX": "Max",
+    "MIN": "Min",
+    "ACTUAL": "Ist",
+    "MIN_MAX_PER_EVENT": "Min./Max. Teilnehmer pro Event",
+    "MIN_PER_EVENT": "Min. Teilnehmer pro Event",
+    "MAX_PER_EVENT": "Max. Teilnehmer pro Event",
     "COMMENT": "Kommentar",
     "CREATE_EVENT": "Event anlegen",
-    "EDIT_EVENT": "Event bearbeiten"
+    "EDIT_EVENT": "Event bearbeiten",
+    "THIS_EVENT": "bei diesem Event"
   },
   "TEAM": {
     "TEAMS": "Teams",
@@ -128,42 +202,61 @@
     "TEAM_NAME": "Team Name",
     "TEAM_PASSWORD": "Team Passwort",
     "TEAM_DETAILS": "Team Details",
-    "ROLES": "Rollen"
+    "ROLES": "Rollen",
+    "DIRECT_LINK": "Direktlink"
   },
   "ADMIN": {
     "ADMIN": "Admin",
     "ADMIN_PASSWORD": "Admin Passwort",
     "ADMIN_DETAILS": "Administrator Details",
     "ADMIN_PASSWORD_INCORRECT": "Ungültiges Adminpasswort",
-    "SETTINGS": "Settings"
+    "SETTINGS": "Einstellungen",
+    "TEAM_SETTINGS": "Team Einstellungen",
+    "CURRENT_PASSWORD": "Aktuelles Passwort",
+    "NEW_PASSWORD": "Neues Passwort",
+    "CHANGE_TEAM_PASSWORD": "Team Passwort ändern",
+    "CHANGE_ADMIN_PASSWORD": "Admin Passwort ändern",
+    "CONFIRM_ADMIN_PASSWORD": "Admin Passwort bestätigen",
+    "CONFIRM_NEW_PASSWORD": "Neues Passwort bestätigen"
   },
   "MEMBER": {
     "MEMBERS": "Members",
     "MEMBER": "Member",
-    "FIRST_NAME": "Vorname",
-    "LAST_NAME": "Nachname",
+    "MEMBERS_STATISTICS": "Member Statistik",
+    "MEMBERS_LIST": "Member Liste",
     "MAIL": "Mail",
     "EDIT_MEMBER": "Member bearbeiten",
     "CREATE_MEMBER": "Member anlegen",
     "ADD_MYSELF_AS_MEMBER": "Mich selber als Member anlegen",
-    "OUR_MEMBERS": "Unsere Member"
+    "OUR_MEMBERS": "Unsere Member",
+    "BY_DEFAULT_MEMBERS_ARE": "Standartmässig sind alle Member ",
+    "ALL_PARTICIPATION": "Alle Teilnahmen"
+  },
+  "USER": {
+    "FIRST_NAME": "Vorname",
+    "LAST_NAME": "Nachname",
+    "EMAIL": "Email"
   },
   "REGISTER": {
     "REGISTER": "Registrieren",
     "ADMIN_ALREADY_EXIST": "Du bist bereits als Admin registriert. Bitte gib hier dein Adminpasswort ein, um ein neues team zu erstellen.",
     "EMAIL_NOT_RECEIVED": "Kein Mail erhalten?",
     "SEND_MAIL_AGAIN": " Mail nochmals senden",
-    "NEED_TO_CONFIRM_EMAIL": "Bitte zuerst deine Mail-Adresse bestätigen"
+    "NEED_TO_CONFIRM_EMAIL": "Bitte zuerst deine Mail-Adresse bestätigen",
+    "NEED_TO_REGISTER_EMAIL": "Du bist noch nicht registriert",
+    "REGISTER_NOW": "Registriere dich jetzt!"
   },
   "LOGIN": {
     "LOGIN": "Login",
     "PASSWORD": "Passwort",
-    "REGISTER": "Jetzt registrieren!"
+    "REGISTER": "Jetzt registrieren!",
+    "GO_TO_LOGIN": "Zur Login Seite wechseln"
   },
   "FOOTER": {
     "TERMS_CONDITIONS": "AGBs",
     "IMPRESSUM": "Impressum",
-    "COPY_RIGHT": "© 2018 Copyright team.center"
+    "SUPPORT_BY_DONATING": "Unterstütze dieses Projekt indem du uns einen Caffee spendierst",
+    "COPY_RIGHT": "© 2018 Copyright team.center GmbH"
   },
   "ABOUT": {
     "ABOUT": "Über uns",
@@ -187,6 +280,10 @@
       "TEXT3": "Google maps ANbindung für das Auswählen von Lokationen - Weitere Sprachen - Mobile Apps (Android & iOS)",
       "TEXT4":  "Zudem sind wir froh um jedes Feedback, oder um Vorschläge für neue Funktionen. Einfach das Kontaktformular dazu verwenden."
     }
+  },
+  "CONTACT": {
+    "DROP_LINE": "Schreib uns eine Nachricht!",
+    "CONTACT": "Kontakt"
   },
   "footer_buyACoffee": "Unterstütze unser Projekt, indem du uns einen Kaffee spendierst",
   "footer_LinksTitle": "Inhalt",
