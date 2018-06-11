@@ -1,7 +1,7 @@
 {
   "TEAM_CENTER": "team.center",
   "TEAM_CENTER_INFO1": "helps you to organize team events - pure & simple",
-  "TEAM_CENTER_INFO2": "It's free and always will be",
+  "TEAM_CENTER_INFO2": "it's free and always will be",
   "WELCOME": "Welcome",
   "DELETE": "Delete",
   "MORE": "More",
@@ -20,8 +20,8 @@
   "TO": "To",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "SOCIAL_MEDIA": {
-    "SHARE": "SHARE",
-    "TWEET": "TWEET"
+    "SHARE": "Share",
+    "TWEET": "Tweet"
   },
   "FORM": {
     "ENTER_VALID_EMAIL": "Please enter a valid email address.",
@@ -32,7 +32,7 @@
     "MAX_SHOULD_BE_MORE_THAN_MIN": "Max should be more than min",
     "SHOULD_BE_POSITIVE": "shoule be a positive number",
     "SAVE": "Save",
-    "SEND": "SEND",
+    "SEND": "Send",
     "IS_REQUIRED": "is required"
   },
   "USER_MESSAGES": {
@@ -42,7 +42,7 @@
       "ERROR.MAIL.NOT.EXIST" : "Mail does not exist.",
       "ERROR.MAIL.CONFIRMED": "Mail already confirmed",
       "ERROR.NOT.EXISTING.TEAM.ADMIN": "Team admin does not exist",
-      "ERROR.MAIL.NOT.CONFIRMED": "You need to confirm your mail",
+      "ERROR.MAIL.NOT.CONFIRMED": "You need first to confirm your mail",
       "ERROR.MEMBER.NOT.FOUND": "Member does not exist",
       "ERROR.MAX.PARTICIPANTS": "Unable to participate. This event is already full."
     },
@@ -109,48 +109,48 @@
     "LANGUAGE": "Language",
     "en": "English",
     "de": "German",
-    "fr": "Frensh"
+    "fr": "French"
   },
   "HOME": {
     "GO": "Go!",
-    "SLOGAN": "Your Team Thing",
-    "SLOGAN_TEXT": "team.center is reduced to the minimum to organize all your team events like regularly trainings or unregularly events like helper jobs. Use your precious time to train and play instead of using it to organize.",
+    "SLOGAN": "your team thing",
+    "SLOGAN_TEXT": "We are strongly committed to make the organization of team events like trainings or helper jobs as simple as possible without any unnecessary features. This with a free web based and multi device optimized platform accessible anywhere anytime.",
     "ADV1": {
-      "TITLE": "Participations & Cancellations",
-      "TEXT": "Create Participation & Cancellation events. If you want you can also define per event a minimum and a maximum for the team members."
+      "TITLE": "commitments & Cancellations",
+      "TEXT": "Create participation or cancellation events and enter a maximum and/or a mininum of needed members if you want to control the range of people you need per event."
     },
     "ADV2": {
-      "TITLE": "Volunteer work Management",
-      "TEXT": "Many clubs have difficulties organizing the many Volunteer work. team.center makes it easy to manage them."
+      "TITLE": "manage your helper jobs",
+      "TEXT": "Many clubs have troubles organizing the many volunteer work. team.center makes it easy to manage them. The helping people can pick the jobs they want by themselfes."
     },
     "ADV3": {
-      "TITLE": "One password for all",
-      "TEXT": "team.center makes it possible to set the same password for all team members and still have personal logins. Just ask your teammate or use the direct link if you forget your password."
+      "TITLE": "one password for all",
+      "TEXT": "team.center makes it possible to set one team password for all its members and still provides personal logins. Just ask your team mate or use the direct link if you forget your password."
     },
     "ADV4": {
-      "TITLE": "Be a member of several teams",
-      "TEXT": "In the event overview you will see all the events in which you are included as a team member. You have all your team events displayed in one, central location"
+      "TITLE": "be a member of several teams",
+      "TEXT": "In the event overview you will see all the events in which you are included as a team member. You have all your team events displayed in one centralized place."
     },
     "ADV5": {
-      "TITLE": "Activate mail notifications",
-      "TEXT": "When creating an event, the admin can decide if the event should be created with automatic mail reminders. The admin can set reminders for 1 day and 7 days before the event starts."
+      "TITLE": "use mail notifications",
+      "TEXT": "While creating an event, the admin can decide if the event should be created with automatic mail reminders, indicating how many days before the event the reminder will be sent."
     },
     "ADV6": {
-      "TITLE": "Team overview and reporting",
-      "TEXT": "Each team member has full transparency about the number of registrations and cancellations of his team mates. For example, club members remember each other automatically for chosing a helper mission, or to cancel a training session. team.center makes life for all coaches much easier."
+      "TITLE": "team statistics & reporting",
+      "TEXT": "Each team member has fully transparency about the number participating or remaining members of his team mates. With this information for example club members will remember themselfes automacitally for picking a helper job or to cancle a training session."
     }
   },
   "ACTIVATION": {
     "EXPIRED_LINK": "The link has expired",
     "ALREADY_ACTIVATED": "You're mail has already been activated",
-    "ACTIVATION_SUCCESS":  "You're mail has been activated successfully"
+    "ACTIVATION_SUCCESS":  "Your mail has been activated successfully"
   },
   "PAGE_NOT_FOUND": {
     "MESSAGE_404": "Woops, the page you're looking for isn't there!",
     "GO_TO_PREVIOUS_PAGE": "Go to previous page"
   },
   "UNDER_MAINTENANCE": {
-    "DOWN_FOR_MAINTENANCE": "team.center is currently down for maintenance.",
+    "DOWN_FOR_MAINTENANCE": "team.center is currently down for maintenance",
     "BACK_WITH_IMPROVEMENTS": "We will be back soon with improvements.",
     "APPOLOGIZE": "We apologize for the inconvenience and appreciate your patience.",
     "THANKS": "Thank you for using team.center.",
@@ -179,8 +179,8 @@
     "EVENT_NAME": "Event name",
     "CANCELATION_EVENT": "Cancelation Event",
     "PARTICIPATION_EVENT": "Participation Event",
-    "JOINING": "Joining",
-    "NOT_JOINING": "Not joining",
+    "JOINING": "joining",
+    "NOT_JOINING": "not joining",
     "EVENT_DATE": "Event date",
     "START_TIME": "Start time",
     "END_TIME": "End time",
@@ -231,7 +231,7 @@
     "CREATE_MEMBER": "Create member",
     "ADD_MYSELF_AS_MEMBER": "Add myself as a member",
     "OUR_MEMBERS": "Our members",
-    "BY_DEFAULT_MEMBERS_ARE": " By default all members are:",
+    "BY_DEFAULT_MEMBERS_ARE": "By default all members are ",
     "ALL_PARTICIPATION": "All Participations"
   },
   "USER": {
@@ -258,7 +258,7 @@
     "TERMS_CONDITIONS": "Terms & Conditions",
     "IMPRESSUM": "Impressum",
     "SUPPORT_BY_DONATING": "Support this project with buying a coffee",
-    "COPY_RIGHT": "© 2018 Copyright team.center"
+    "COPY_RIGHT": "© 2018 Copyright team.center GmbH"
   },
   "ABOUT": {
     "ABOUT": "About",
