@@ -36,7 +36,6 @@ export class EventsListComponent implements OnInit {
     private eventsService: EventsService,
     private teamsService: TeamsService,
     public dialog: MatDialog,
-    private router: Router
   ) {
     this.userTeams = this.teamsService.userTeams;
     this.isTeamMember = this.teamsService.hasMemberRole(this.teamMemberId, this.selectedTeamId);

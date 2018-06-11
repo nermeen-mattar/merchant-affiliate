@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { TeamsService } from './teams.service';
 import { DecodedToken } from './../../auth/models/decoded-token.model';
+import { roles } from '../constants/roles.constants';
 @Injectable()
 export class UserService {
   /* User static properties (received from the backend) */
@@ -60,8 +61,9 @@ export class UserService {
    * @param {userType} string
    */
   set userType(userType: string) {
-    userType = userType ? userType : ''; // a preventive check to prevent toLowerCase for causing errors when user type is set to undefined
-    this.isAdmin.next(userType.toLowerCase() === 'admin');
+    userType = userType ? userType.toLowerCase() : '';
+    /* above line is a preventive check to prevent toLowerCase from causing errors when user type is set to undefined */
+    this.isAdmin.next(userType === roles.admin);
     this._userType = userType;
     if (userType) {
       localStorage.setItem('userType', userType);

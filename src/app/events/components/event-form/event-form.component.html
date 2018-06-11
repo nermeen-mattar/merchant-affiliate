@@ -59,7 +59,7 @@
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> shut_down</mat-icon>
               <mat-error *ngIf="eventGroup.controls['eventCriticalValues'].controls['min'].invalid"> {{'EVENT.MIN_PER_EVENT'| translate}} {{ 'FORM.SHOULD_BE_POSITIVE' | translate }}</mat-error>
             </mat-form-field>
-            <mat-form-field class="app-event-form__field">
+            <mat-form-field class="app-event-form__field" [ngClass]="{'app-event-form__hide-element': eventGroup.controls['eventCriticalValues'].controls['max'].disabled }">
               <input matInput placeholder="{{'EVENT.MAX_PER_EVENT'| translate}}" formControlName="max" type="number">
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> shut_down</mat-icon>
               <mat-error *ngIf="eventGroup.controls['eventCriticalValues'].controls['max'].invalid"> {{'EVENT.MAX_PER_EVENT'| translate}} {{ 'FORM.SHOULD_BE_POSITIVE' | translate }}</mat-error>
