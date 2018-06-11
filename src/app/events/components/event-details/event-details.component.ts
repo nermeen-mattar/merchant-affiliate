@@ -23,9 +23,9 @@ export class EventDetailsComponent implements OnInit {
   };
   eventDetails: TcEventDetails;
   constructor(private eventsService: EventsService, route: ActivatedRoute) {
-    this.eventsService.getEventDetails(route.snapshot.params['teamId']).subscribe(eventDetails => {
+    this.eventsService.getEventDetails(route.snapshot.params['teamId']).subscribe((eventDetails: TcEventDetails) => {
       this.eventDetails = eventDetails;
-      this.initEventDetailsDataSource(this.eventDetails.absent, this.eventDetails.presnet);
+      this.initEventDetailsDataSource(this.eventDetails.absent, this.eventDetails.present);
     });
   }
 
@@ -47,15 +47,15 @@ export class EventDetailsComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description filters the either the cancelation list or the participations list based on the passed parameter
+   * @description filters the either the cancelation list and the participations list based on the passed parameter
    * table based on the user's input
    * @param {string} filterValue
-   * @param {string} eventType
    */
-  applyFilterToEventDetails(filterValue: string, eventType: string) {
+  applyFilterToEventDetails(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.eventDetailsDatasource[eventType].filter = filterValue;
+    this.eventDetailsDatasource['absent'].filter = filterValue;
+    this.eventDetailsDatasource['present'].filter = filterValue;
   }
 
 }

@@ -21,21 +21,12 @@ export class AdminSettingsComponent implements OnInit {
   constructor(private fieldValidatorsService: FieldValidatorsService,
     private adminService: AdminService, private teamsService: TeamsService,
     private route: ActivatedRoute, private router: Router) {
-    this.updateTeamsTheUserIsAdminOf();
+    this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
     this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
     this.initSettingsForm();
   }
 
   ngOnInit() {}
-
-  /**
-   * @author Nermeen Mattar
-   * @description filters the teams list to get only the teams that the user is admin of and sets this value in the teamsTheUserIsAdminOf.
-   */
-  updateTeamsTheUserIsAdminOf() {
-    this.teamsTheUserIsAdminOf =
-     this.teamsService.userTeams.filter( team => this.teamsService.teamRoles.teamAdmins.indexOf(team.teamId) !== -1);
-  }
 
   /**
    * @author Nermeen Mattar
@@ -127,8 +118,7 @@ export class AdminSettingsComponent implements OnInit {
   saveTeamName() {
     if (this.teamNameControl.valid) {
       this.adminService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
-      this.updateTeamsTheUserIsAdminOf();
-    }
+      this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();    }
   }
 
   /**

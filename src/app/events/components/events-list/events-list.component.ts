@@ -39,8 +39,8 @@ export class EventsListComponent implements OnInit {
     private router: Router
   ) {
     this.userTeams = this.teamsService.userTeams;
-    this.isTeamMember = this.teamsService.hasMemberRole(this.teamMemberId, this.selectedTeamId);
-    this.isTeamAdmin = this.teamsService.hasAdminRole(this.teamMemberId, this.selectedTeamId);
+    this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
+    this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     this.selectedTeamId = this.teamsService.selectedTeamId;
     this.changeDisplayedColumnsPerRoleChange();
     this.updateEvents();
@@ -105,8 +105,8 @@ export class EventsListComponent implements OnInit {
    * includes the edit and delete actions and for member role will push toggeler column
    */
   changeDisplayedColumnsPerRoleChange() {
-    this.isTeamMember = this.teamsService.hasMemberRole(this.teamMemberId, this.selectedTeamId);
-    this.isTeamAdmin = this.teamsService.hasAdminRole(this.teamMemberId, this.selectedTeamId);
+    this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
+    this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     if (this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') === -1) {
       this.columnsToDisplay.push('admin-actions');
     } else if (!this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') !== -1) {

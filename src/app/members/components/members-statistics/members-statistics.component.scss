@@ -35,17 +35,20 @@
         font-weight: $tc-font-weight-6;
         font-size: $tc-font-size-h5;
       }
-      &__participation-cell{
+      &__participation{
         color:$tc-color-success;
       }
-      &__cancelation-cell {
+      &__cancelation {
         color:$tc-color-error;
       }
-      &__participation-cell, &__cancelation-cell {
+      &__participation, &__cancelation {
         max-width:100px;
+        &__number {
+          width: 100%;
+          text-align:center;
+        }
       }
       &__action-cell {
-        max-width:28px;
         cursor: pointer;
       }
       &__inactive-cell {

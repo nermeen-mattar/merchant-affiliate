@@ -1,5 +1,5 @@
 <div class="app-member-statistics-details">
-  <div class="app-member-statistics-details__back" routerLink="../../">
+  <div class="app-member-statistics-details__back" routerLink="/members/statistics">
     <mat-icon color="primary">chevron_left</mat-icon>
     {{'BACK'| translate}}
   </div>
@@ -51,7 +51,6 @@
             (
             <span *ngIf="row.minCriticalValue || row.minCriticalValue === 0">
               {{'EVENT.MIN' | translate}}: {{row.minCriticalValue}}
-              {{numberOfRecords < pageSize ? numberOfRecords : pageSize}}
             </span>
             <span *ngIf="(row.minCriticalValue || row.minCriticalValue === 0 ) && (row.maxCriticalValue || row.maxCriticalValue === 0 )"
               class="app-member-statistics-details__item__members__seperator"> , </span>

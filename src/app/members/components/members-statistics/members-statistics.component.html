@@ -22,7 +22,7 @@
     <div>
       <mat-form-field>
         <mat-select [(value)]="selectedTeamId" (selectionChange)="changeSelectedTeam()">
-          <mat-option *ngFor="let team of userTeams" [value]="team.teamId">
+          <mat-option *ngFor="let team of teamsTheUserIsAdminOf" [value]="team.teamId">
             {{ team.teamName }}
           </mat-option>
         </mat-select>
@@ -36,36 +36,46 @@
     <mat-table class="app-members-statistics__container__table" [dataSource]="membersStatisticsDataSource" matSort>
       <ng-container matColumnDef="member">
         <mat-header-cell class="app-members-statistics__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-          {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
+          <div class="app-text-truncate"> {{'MEMBER.MEMBER' | translate}} </div>
+        </mat-header-cell>
         <mat-cell class="app-members-statistics__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.activeFlag ? 'app-members-statistics__container__table__inactive-cell' : ''">
-          {{row.firstName}} {{row.lastName}} </mat-cell>
+          <div class="app-text-truncate">{{row.firstName}} {{row.lastName}} </div>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="email">
         <mat-header-cell class="app-members-statistics__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'USER.EMAIL' | translate}}
         </mat-header-cell>
         <mat-cell class="app-members-statistics__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.activeFlag ? 'app-members-statistics__container__table__inactive-cell' : ''">
-          {{row.email}}
+          <div class="app-text-truncate">{{row.email}}</div>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="participations">
-        <mat-header-cell class="app-members-statistics__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.PARTICIPATIONS' | translate}}
+        <mat-header-cell class="app-members-statistics__container__table__header-cell app-members-statistics__container__table__participation"
+          *matHeaderCellDef mat-sort-header>
+          <div class="app-text-truncate"> {{'EVENT.PARTICIPATIONS' | translate}} </div>
         </mat-header-cell>
-        <mat-cell class="app-members-statistics__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.activeFlag ? 'app-members-statistics__container__table__inactive-cell' : ''">
-          {{row.participations}}
+        <mat-cell class="app-members-statistics__container__table__content-cell app-members-statistics__container__table__participation"
+          *matCellDef="let row" [ngClass]="!row.activeFlag ? 'app-members-statistics__container__table__inactive-cell' : ''">
+          <div class="app-members-statistics__container__table__participation__number" routerLink="details/{{row.teamMemberId}}/participate">
+            {{row.participations}}
+            <mat-icon style="position:relative;top:6px" class="app-members-statistics__action" routerLink="details/{{row.teamMemberId}}/participate"
+              color="primary">info</mat-icon>
+          </div>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="cancelations">
-        <mat-header-cell class="app-members-statistics__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.CANCELATIONS' | translate}}
+        <mat-header-cell class="app-members-statistics__container__table__header-cell app-members-statistics__container__table__cancelation"
+          *matHeaderCellDef mat-sort-header>
+          <div class="app-text-truncate"> {{'EVENT.CANCELATIONS' | translate}}
+          </div>
         </mat-header-cell>
-        <mat-cell class="app-members-statistics__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.activeFlag ? 'app-members-statistics__container__table__inactive-cell' : ''">
-          {{row.cancelations}}
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="actions">
-        <mat-header-cell class="app-members-statistics__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
-        <mat-cell class="app-members-statistics__container__table__content-cell" *matCellDef="let row">
-          <mat-icon class="app-members-statistics__action" routerLink="details/{{row.teamMemberId}}" color="primary">info</mat-icon>
-          <!--  [queryParams]="{ memberId: row.teamMemberId, form: }"-->
+        <mat-cell class="app-members-statistics__container__table__content-cell app-members-statistics__container__table__cancelation"
+          *matCellDef="let row" [ngClass]="!row.activeFlag ? 'app-members-statistics__container__table__inactive-cell' : ''">
+          <div class="app-members-statistics__container__table__cancelation__number" routerLink="details/{{row.teamMemberId}}/cancel">
+            {{row.cancelations}}
+            <mat-icon style="position:relative;top:6px" class="app-members-statistics__action" routerLink="details/{{row.teamMemberId}}/cancel"
+              color="primary">info</mat-icon>
+          </div>
         </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

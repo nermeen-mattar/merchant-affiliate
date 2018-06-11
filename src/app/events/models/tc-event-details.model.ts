@@ -3,6 +3,6 @@ import { TcEvent } from './tc-event.model';
 
 export interface TcEventDetails extends TcEvent {
   absent: TcMember[];
-  presnet: TcMember[];
+  present: TcMember[];
 }
 
