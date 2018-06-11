@@ -13,7 +13,7 @@
   "NO": "Nein",
   "LOG_OUT": "Abmelden",
   "EDIT": "Bearbeitent",
-  "GOING": "Ok", 
+  "GOING": "Ok",
   "NOT_GOING": "Nicht ok",
   "MESSAGE": "Nachricht",
   "FROM": "Von",
@@ -261,24 +261,22 @@
   "ABOUT": {
     "ABOUT": "Über uns",
     "SECTION1": {
-      "TITLE": "Wer sind wir?",
-      "TEXT": "Hallo, wir sind team.center. Die erste Event management Software, welche du auch wirklich mögen wirst, da wir bewusst auf unnötigen Schnickschnak verzichten. Gerne erzählen wir noch etwas mehr von uns persönlich:"
+      "TITLE": "Über uns",
+      "TEXT1": "Mit Liebe und Leidenschaft aus Zürich - team.center ist ein privat finanziertes Webprojekt aus der Schweiz. team.center befindet sich zurzeit in Beta Status und wird für eine maximale Benutzerfreundlichkeit ständig weiterentwickelt, Tag für Tag. Wir haben uns zum obersten Ziel gemacht, die Organisation von Team-Events so einfach wie möglich zu gestalten: Keinen Schnickschnack, nur die nötigsten Funktionen, welche du wirklich brauchst. Das alles mit einer kostenlosen, webbasierten und für alle Geräte optimierten Plattform, welche zu jeder Zeit von überall aus zugänglich ist.",
+      "TEXT2": " - Es ist und bleibt kostenlos -",
+      "TEXT3": "Hinter team.center arbeitet ein kleines Team. Alle von uns sind engagiert in lokalen Sportvereinen als Spieler, Trainer und Vorstandsmitglieder und kennen daher die Bedürfnisse fürs Organisieren von Teamevents bestens.",
+      "TEXT4": "- Trainieren anstatt koordinieren - ",
+      "TEXT5": "Habt ihr euch schon immer nach einer speziellen Funktion gesehnt, welche euer Teammanagement erleichtert? Teilt mit uns eure weiterführenden Ideen und wir setzen sie um, wenn ein gemeinsames Bedürfnis besteht. Mit anderen Worten: Das team.center von morgen baut der Benutzer selber. Bitte gebt uns euer Feedback",
+      "TEXT6": "Wir haben den ersten Schritt gemacht und die ersten Massnahmen ergriffen, um euch die Organisation von Teams zu erleichtern. Wenn du unsere Idee magst und unsere Begeisterung teilst, dann unterstütze uns und spendiere uns einen Kaffee:",
+      "TEXT7": "Like und folge uns auf Facebook:"
     },
     "SECTION2": {
-      "TITLE": "Über Team.center",
-      "TEXT": "team.center ist ein privat finanziertes Webprojekt aus dem Herzen der Schweiz. Wir befinden aktuell in der Beta Version. Ihr dürft euch daher auf zahlreiche Verbesserungen und auf neuen Funktionen freuen. Zudem sind wir froh um jedes Feedback und um jede Kritik. Einfach das Kontaktformular dazu verwenden."
-    },
-    "SECTION3": {
-      "TITLE": "Wie kannst du uns unterstützen?",
-      "TEXT": "Du kannst uns mit unterstützen, in dem du uns einen Kaffee spendierst. Gerne darf es auch ein Kaffeekrug sein ;)",
-      "TEXT2": "Es würde uns zudem echt helfen, wenn du uns auf Facebook liken könntest. Dort werden wir dich auch laufend mit Updates rund um team.center versorgen können."
-    },
-    "SECTION4": {
-      "TITLE": "Was kommt als nächstes?",
-      "TEXT": "Excel (CSV) Upload Funktion für das Erstellen von mehreren Events und mehreren Teammitgliedern mit nur einem Klick.",
-      "TEXT2": "Event-Log Ansicht (wer hat sich wann ab- bzw. anmgemeldet) für alle Teammitgleider verfügbar machen.",
-      "TEXT3": "Google maps ANbindung für das Auswählen von Lokationen - Weitere Sprachen - Mobile Apps (Android & iOS)",
-      "TEXT4":  "Zudem sind wir froh um jedes Feedback, oder um Vorschläge für neue Funktionen. Einfach das Kontaktformular dazu verwenden."
+      "TITLE": "Wir bleiben am Ball, das kommt als nächstes",
+      "TEXT1": "An- und Abmeldungen mit Kommentaren versehen",
+      "TEXT2": "Mehrere Admins pro Team",
+      "TEXT3": "Google maps für Ortsangaben integrieren",
+      "TEXT4": "Weitere Sprachen",
+      "TEXT5": "Mobile App für Android & iOS"
     }
   },
   "CONTACT": {

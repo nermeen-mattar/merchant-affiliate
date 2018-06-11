@@ -15,7 +15,7 @@ export class FooterComponent implements OnInit {
   }
 
   openDonateWindow() {
-    window.open(externalUrls.donate, '_blank', 'top=0,left=0'); // ,height=500px,width=auto
+    window.open(externalUrls.donate, '_blank'); // ,height=500px,width=auto
   }
 
 }

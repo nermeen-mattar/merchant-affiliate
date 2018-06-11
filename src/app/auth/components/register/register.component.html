@@ -1,7 +1,8 @@
 <mat-card class="app-register">
   <mat-card-title class="text-center">{{ 'REGISTER.REGISTER' | translate }} </mat-card-title>
   <mat-card-content>
-    <div class="app-register__content" [ngClass]="{'app-register__element-hide': displaySpinner || displayMessageCard}">
+    <p>We will open the access in July 2018</p>
+    <!-- <div class="app-register__content" [ngClass]="{'app-register__element-hide': displaySpinner || displayMessageCard}">
       <mat-vertical-stepper linear="true" (selectionChange)="selectedStepChanged($event)">
         <mat-step label="{{ 'TEAM.TEAM_DETAILS' | translate }}" *ngIf="registerFirstStepForm" [stepControl]="registerFirstStepForm">
           <form novalidate [formGroup]="registerFirstStepForm" class="app-register__content__form">
@@ -13,7 +14,6 @@
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'TEAM.TEAM_PASSWORD' | translate }}" formControlName="teamPassword" type="password">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
-              <!-- display information message to elaborate password specifications -->
               <mat-icon *ngIf="registerFirstStepForm.controls['teamPassword'].dirty && registerFirstStepForm.controls['teamPassword'].invalid&&registerFirstStepForm.controls['teamPassword'].errors.validatePassword"
               class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
               matTooltipPosition="below">
@@ -117,6 +117,6 @@
       </div>
       <button mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
         routerLink="/auth/login">{{ 'OK' | translate }}</button>
-    </div>
+    </div> -->
   </mat-card-content>
 </mat-card>

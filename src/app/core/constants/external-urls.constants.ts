@@ -1,3 +1,4 @@
 export const externalUrls = {
-  donate: 'https://paypal.me/coffeeforteamcenter/4'
+  donate: 'https://paypal.me/teamdotcenter/3',
+  facebook: 'https://facebook.com'
 };

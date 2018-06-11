@@ -263,12 +263,22 @@
   "ABOUT": {
     "ABOUT": "About",
     "SECTION1": {
-      "TITLE": "Who are we?",
-      "TEXT": "Hi. We are team.center. The first events management software you will actually like, because we keep it simple. We’d love to tell you a bit about us."
+      "TITLE": "About",
+      "TEXT1": "With love and passion from Zurich - team.center is a privately sponsered web project out of Switzerland. team.center is currently in Beta status and we are constantly improving the user experiance - day by day. We are strongly committed to make the organization of team events as simple as possible without any unnecessary features. This with a free web based and multi device optimized platform accessible anywhere anytime.",
+      "TEXT2": "- It's free and always will be -",
+      "TEXT3": "Behind team.center works a small team, all of us involved in organizing team and sport events ourselfs as team managers and board members of local clubs. We understand your needs!",
+      "TEXT4": "- Use your precious time to train and play instead of using it to organize -",
+      "TEXT5": "Please let us know what kind of additional functionalities you require or have always dreamed of. We are going to make them happen if there is a common need. In other words: team.center of tomorrow will be evovling by the users and their needs - your needs. Please give us your feedback.",
+      "TEXT6": "We made the first step and took action to make teams be easly organized. If you like our idea or share our excitement, support us by buying us a coffee:",
+      "TEXT7": "Like and follow us on facebook:"
     },
     "SECTION2": {
-      "TITLE": "About Team.center",
-      "TEXT": "team.center is a private sponsered web project from Switzerland. We are currently in Beta status and therefore a lot of new features to improve the user experiance are ongoing. We are happy to receive many feedbacks from you out there. Please just use our contact form."
+      "TITLE": "Upcoming features",
+      "TEXT1": "add a comment to cancellations or participations",
+      "TEXT2": "allow multiple admins per team",
+      "TEXT3": "google maps for location entires",
+      "TEXT4": "additional languages",
+      "TEXT5": "mobile app für Android & iOS"
     },
     "SECTION3": {
       "TITLE": "How to support us?",
