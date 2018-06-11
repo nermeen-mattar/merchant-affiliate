@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
 import { TcClientSideTeamRoles } from './../../teams/models/tc-client-side-team-roles.model';
 import { TcServerSideTeamRoles } from '../../teams/models/tc-server-side-team-roles.model';
+import { roles } from '../constants/roles.constants';
 @Injectable({
   providedIn: 'root'
 })
@@ -92,7 +93,7 @@ export class TeamsService {
    */
   pushTeamRolesAndTeamsList(backendTeams: TcTeamInfo[], teamRoleName: string, teamRoles: TcClientSideTeamRoles, teamsList: TcTeamInfo[]) {
     teamRoles[teamRoleName] = [];
-    const normalizedTeamRole = teamRoleName === 'teamAdmins' ? 'admin' : 'member';
+    const normalizedTeamRole = teamRoleName === 'teamAdmins' ? roles.admin : roles.member;
     const backendTeamsLen = backendTeams.length;
     for (let teamIndex = 0; teamIndex < backendTeamsLen; teamIndex++) {
       const teamToUpdate: TcTeamInfo = teamsList.filter(team => team.teamId === backendTeams[teamIndex].teamId)[0];
@@ -146,13 +147,27 @@ export class TeamsService {
 
   /**
    * @author Nermeen Mattar
-   * @description updated the team name for the team with the passed teamId
+   * @description updates the team name for the team with the passed teamId
    * @param {number} teamId
    * @param {string} newTeamName
    */
   updateTeamName(teamId: number, newTeamName: string) {
     this.userTeams.filter(team => team.teamId === teamId)[0].teamName = newTeamName;
     localStorage.setItem('userTeams', JSON.stringify(this.userTeams));
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description adds a new team role (if not already exist) to the user roles for the team with the passed teamId
+   * @param {number} teamId
+   * @param {string} newTeamRole
+   */
+  addTeamRole(teamId: number, newTeamRole: string) {
+    const teamToModify =  this.userTeams.filter(team => team.teamId === teamId)[0];
+    if (newTeamRole && roles[newTeamRole] && teamToModify.roles.indexOf(newTeamRole) === -1 ) {
+      teamToModify.roles.push(newTeamRole);
+      localStorage.setItem('userTeams', JSON.stringify(this.userTeams));
+    }
   }
 
   /**

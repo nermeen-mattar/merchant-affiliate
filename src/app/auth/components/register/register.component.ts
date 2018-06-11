@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 import { AdminRegisterInfo } from './../../models/admin-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
 import { UserMessagesService } from '../../../core/services/user-messages.service';
+import { roles } from '../../../core/constants/roles.constants';
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
   teamName: string;
   registerFirstStepForm: FormGroup;
   registerSecondStepForm: FormGroup;
+  roles = roles; /* needed to declare a class property to make it available on the component html */
   constructor(private authService: AuthService, private adminService: AdminService,
     private registerService: RegisterService, activatedRoute: ActivatedRoute,
     private fieldValidatorsService: FieldValidatorsService, private userMessagesService: UserMessagesService) {
@@ -83,7 +85,7 @@ export class RegisterComponent implements OnInit {
       }, err => {
         this.displaySpinner = false;
         if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
-          this.userType = 'admin';
+          this.userType = roles.admin;
           this.disableFormControls(['firstName', 'lastName', 'adminConfirmPassword', 'adminNewPassword']);
           this.enableFormControls(['adminPassword']);
         } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
@@ -139,7 +141,7 @@ export class RegisterComponent implements OnInit {
       email: teamInfo.email,
       adminpassword: adminPassword
     }).subscribe(registerRes => {
-      if (this.userType === 'admin') {
+      if (this.userType === roles.admin) {
         this.adminLogin(teamInfo.email, adminPassword);
       } else {
         this.displayMessageCard = true;
@@ -188,7 +190,7 @@ export class RegisterComponent implements OnInit {
    */
   handleRegisterError(err) {
     /* 409 conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
-    if (this.userType === 'admin') {
+    if (this.userType === roles.admin) {
       /* this.userMessagesService.showUserMessage({}, 'fail'); */
     }
     /* will consider anything else as wrong password */

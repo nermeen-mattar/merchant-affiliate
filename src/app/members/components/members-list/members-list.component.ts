@@ -10,6 +10,7 @@ import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { UserService } from '../../../core/services/user.service';
 import { TcMember } from '../../models/tc-member.model';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { roles } from '../../../core/constants/roles.constants';
 
 @Component({
   selector: 'tc-members-list',
@@ -27,7 +28,7 @@ export class MembersListComponent implements OnInit {
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
   constructor(private membersService: MembersService, userService: UserService,  private teamsService: TeamsService,
     public dialog: MatDialog) {
-    this.displayAdminActions = userService.userType.toLowerCase() === 'admin';
+    this.displayAdminActions = userService.userType === roles.admin;
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
     }

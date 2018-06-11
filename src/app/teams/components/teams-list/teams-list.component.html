@@ -16,12 +16,12 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
           <mat-chip-list selectable="false">
-            <mat-chip *ngFor="let role of row.roles" [ngClass]="role==='admin'? 'app-teams__container__table__team-admin' : ''">
-              {{(role === 'admin' ? 'ADMIN.ADMIN' : 'MEMBER.MEMBER') | translate}}
+            <mat-chip *ngFor="let role of row.roles" [ngClass]="role=== roles.admin? 'app-teams__container__table__team-admin' : ''">
+              {{(role === roles.admin ? 'ADMIN.ADMIN' : 'MEMBER.MEMBER') | translate}}
             </mat-chip>
             <!--  add displayAdminActions to the ngIf if the user must be logged in as an admin -->
-            <mat-chip *ngIf="row.roles && row.roles.length === 1 && row.roles[0] === 'admin'" routerLink="/members/list/new">
-              {{ 'MEMBER.ADD_MYSELF_AS_MEMBER' | translate }}
+            <mat-chip *ngIf="row.roles && row.roles.length === 1 && row.roles[0] === roles.admin" (click)="addTeamAdminAsMember(row)">
+              {{ 'MEMBER.ADD_ME_AS_MEMBER' | translate }}
             </mat-chip>
           </mat-chip-list>
         </mat-cell>

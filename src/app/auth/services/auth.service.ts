@@ -1,3 +1,4 @@
+import { roles } from './../../core/constants/roles.constants';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
@@ -80,7 +81,7 @@ export class AuthService implements OnDestroy {
       })
       .pipe(map(
         res => {
-          if (res.isAuthorized.toLowerCase() === 'admin') {
+          if (res.isAuthorized.toLowerCase() === roles.admin) {
             this.onLoginRequestSuccess(res);
           } else {
             this.userMessagesService.showUserMessage({
