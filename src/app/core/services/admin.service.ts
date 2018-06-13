@@ -19,7 +19,7 @@ export class AdminService {
     return this.httpRequestService.httpPost('teamadmins/check', {
       email: email
     }, {
-      failDefault: 'NO_ERROR_MESSAGE'
+      fail: 'NO_ERROR_MESSAGE'
     });
   }
 

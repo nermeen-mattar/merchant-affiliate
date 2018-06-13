@@ -48,6 +48,7 @@
               </mat-error>
             </mat-form-field>
           </form>
+            <button mat-button matStepperNext mat-raised-button [disabled]="registerFirstStepForm.invalid" color="primary" class="app-register__content__button">{{ 'NEXT' | translate }}</button>
         </mat-step>
         <mat-step label="{{ 'ADMIN.ADMIN_DETAILS' | translate }}" *ngIf="registerSecondStepForm" [stepControl]="registerSecondStepForm">
           <form novalidate [formGroup]="registerSecondStepForm" class="app-register__content__form">
@@ -100,6 +101,7 @@
               {{'FORM.CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD' | translate}}
             </mat-error>
           </form>
+          <button mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{ 'BACK' | translate }}</button>
         </mat-step>
       </mat-vertical-stepper>
       <button *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"

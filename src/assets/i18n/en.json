@@ -8,6 +8,7 @@
   "CANCEL": "Cancel",
   "CONFIRM": "Confirm",
   "BACK": "Back",
+  "NEXT": "Next",
   "DETAILS": "Details",
   "YES": "Yes",
   "NO": "No",
@@ -19,6 +20,7 @@
   "FROM": "From",
   "TO": "To",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
+  "MULTI_TABLE_SEARCH_PLACEHOLDER": "Search through all columns in tables",
   "SOCIAL_MEDIA": {
     "SHARE": "Share",
     "TWEET": "Tweet"
