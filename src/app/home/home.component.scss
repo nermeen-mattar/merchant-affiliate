@@ -3,27 +3,31 @@
 .app-home {
   &__main {
     &__top,
+
     &__bottom {
       background-attachment: fixed;
       background-size: cover;
-      min-height: 564px;
+      min-height: 650px;
     }
     &__top {
-      background: url('../../assets/img/squash-793062.jpg') no-repeat center fixed;
-      display: flex;
+      background: url('../../assets/img/squash_light-min2.jpg') no-repeat center fixed;
+      background-size: auto;
       align-items: center;
       &__register {
         background-color:white;
         position: relative;
         width: 90%;
         height: 150px;
-        margin: 0 auto;
+        margin: 5px auto;
+        margin-top: 50px;
         max-width: 500px;
         padding: 10px 20px;
         box-sizing: border-box;
         opacity: 0.85;
         &__title {
           font-weight: 400;
+          align-items: center;
+          
         }
         &__main-input-field {
           margin-top: 2rem;
@@ -37,10 +41,61 @@
           color: white;
         }
       }
+      &__logo {
+        background: url('../../assets/img/core/tc_no_bg.png') no-repeat center;
+        background-size: contain;
+        width: 250px;
+        height: 45px;
+        position: relative;
+        margin: 0 auto;
+        padding-top: 100px;
+      }
+      &__text{
+        color: #323232;
+        text-shadow: 0em 0em 0.0em #323232;
+
+        text-align: center;
+      }
     }
+    @media only screen and (max-width: 720px) {
+      &__top{
+        background: url('../../assets/img/squash_light-min2.jpg') no-repeat center fixed;
+        background-size: 1500px auto;
+        background-position: center !important; 
+      }           
+    }
+
+    &__middle {
+      background-attachment: fixed;
+      background-size: cover;
+      min-height: 650px;
+      background: url('../../assets/img/viewsResponsive.jpg') no-repeat center fixed;
+      
+
+    
+    }
+    @media only screen and (max-width: 720px) {
+      &__middle{
+        background: url('../../assets/img/viewsResponsive.jpg') no-repeat center;
+        background-size: 450px auto;
+        min-height: 250px;
+        background-position: center !important; 
+      }
+    }
+    
     &__bottom {
       background: url('../../assets/img/basketball3.jpg') no-repeat center fixed;
     }
+
+    @media only screen and (max-width: 720px) {
+      &__bottom{
+        background: url('../../assets/img/basketball3.jpg') no-repeat center fixed;
+        background-size: 450px auto;
+        min-height: 250px;
+        background-position: center !important; 
+      }
+    }
+
   }
   &__info {
     background-color:white;
@@ -48,7 +103,7 @@
     &__title {
       text-align: center;
       font-weight: 400;
-      font-size: $biggest-font-size;
+      font-size: $tc-font-size-h2;
     }
     &__sections__container {
       justify-content: center; // space-around;
@@ -78,4 +133,7 @@
       }
     }
   }
+}
+p {
+  font-size: 1.3em;
 }

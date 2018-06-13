@@ -1,0 +1,73 @@
+<div class="app-member-statistics-details">
+  <div class="app-member-statistics-details__back" routerLink="/members/statistics">
+    <mat-icon color="primary">chevron_left</mat-icon>
+    {{'BACK'| translate}}
+  </div>
+  <h3 class="app-member-statistics-details__header app-member-statistics-details__label">{{'MEMBER.MEMBER' | translate}} {{'DETAILS' | translate}}
+  </h3>
+  <div class="app-member-statistics-details__container">
+    <p class="app-member-statistics-details__label app-member-statistics-details__container__basic-info">
+      {{"MEMBER.ALL_PARTICIPATION" | translate}} {{"FROM" | translate}}
+      <span class="app-member-statistics-details__date">{{dateRange.dateFrom | date:"MM/dd/yyyy hh:mm a" }} </span>
+      {{"TO" | translate}}
+      <span class="app-member-statistics-details__date">{{dateRange.dateTo | date:"MM/dd/yyyy hh:mm a" }}</span>
+    </p>
+    <div class="app-member-statistics-details__container__basic-info">
+      <span class="app-member-statistics-details__label"> {{"MEMBER.MEMBER" | translate}}:</span>
+      {{member}}</div>
+    <div class="app-member-statistics-details__container__basic-info">
+      <span class="app-member-statistics-details__label"> {{"USER.EMAIL" | translate }}: </span>{{email}}</div>
+    <div class="app-member-statistics-details__container__table">
+      <mat-table [dataSource]="memberStatisticsDetailsDatasource">
+        <ng-container matColumnDef="date">
+          <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label"
+            *matHeaderCellDef> {{'EVENT.DATE' | translate}} </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <span class="app-member-statistics-details__date"> {{row.date}}</span>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="eventName">
+          <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label"
+            *matHeaderCellDef> {{'EVENT.EVENT' | translate}} </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.eventName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="time">
+          <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label"
+            *matHeaderCellDef> {{'EVENT.TIME' | translate}} </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <span class="app-member-statistics-details__date"> {{row.startTime | stringNormalizer:timeFormat}} {{row.endTime | stringNormalizer:timeFormat}} </span>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell class="app-member-statistics-details__container__table__header-cell  app-member-statistics-details__label app-member-statistics-details__item__members"
+            *matHeaderCellDef mat-sort-header>
+            {{'EVENT.PARTICIPATION_STATUS' | translate}} </mat-header-cell>
+          <mat-cell class="app-member-statistics-details__container__table__content-cell app-member-statistics-details__item__members"
+            *matCellDef="let row">
+            <ng-template #success>
+              <mat-icon class="app-member-statistics-details__item__members__success">check_circle</mat-icon>
+            </ng-template>
+            <span class="app-member-statistics-details__item__members__actual"> {{row.numOfParticipations}} </span>
+            (
+            <span *ngIf="row.minCriticalValue || row.minCriticalValue === 0">
+              {{'EVENT.MIN' | translate}}: {{row.minCriticalValue}}
+            </span>
+            <span *ngIf="(row.minCriticalValue || row.minCriticalValue === 0 ) && (row.maxCriticalValue || row.maxCriticalValue === 0 )"
+              class="app-member-statistics-details__item__members__seperator"> , </span>
+            <span *ngIf="row.maxCriticalValue || row.maxCriticalValue === 0"> {{'EVENT.MAX' | translate}} : {{row.maxCriticalValue}}
+            </span> )
+            <mat-icon class="app-member-statistics-details__item__error" *ngIf="((row.minCriticalValue || row.minCriticalValue === 0 ) && row.minCriticalValue > row.numOfParticipations) ||
+                ((row.maxCriticalValue || row.maxCriticalValue === 0 ) && row.maxCriticalValue < row.numOfParticipations); else success">error</mat-icon>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+      <mat-paginator #paginator [length]="(numberOfRecords/pageSize < 1 && numberOfRecords/pageSize > 0) ? 1 : numberOfRecords/pageSize " (page)="getDataForSelectedPage($event)"
+        [pageSize]="pageSize">
+      </mat-paginator>
+    </div>
+  </div>
+  <mat-spinner class="app-member-statistics-details__container__spinner" *ngIf="!memberStatisticsDetailsDatasource"></mat-spinner>
+</div>

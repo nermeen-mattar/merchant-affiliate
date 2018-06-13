@@ -34,8 +34,9 @@
         font-size: $tc-font-size-h5;
       }
       &__header-cell, &__content-cell {
-        word-wrap: unset;
         text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
         &.mat-column-action {
           display: flex;
           align-items: center;
@@ -52,18 +53,14 @@
   }
 }
 
-
-body {
-  &.mobile-device {
-    :host {
-      .app-members {
-        &__header {
-          flex-direction: column;
-        }
-        &__filter {
-          width: 100%;
-        }
-      }
+@media only screen and (max-width: 768px) {
+  .app-members {
+    &__header {
+      flex-direction: column;
+    }
+    &__filter {
+      width: 100%;
     }
   }
 }
+

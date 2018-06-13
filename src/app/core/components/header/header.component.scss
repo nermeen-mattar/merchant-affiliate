@@ -19,11 +19,11 @@
     cursor: pointer;
     flex-direction: row;
     &__icon {
-      background: url('../../../../assets/img/core/logo.png') 50% 50% no-repeat;
+      background: url('../../../../assets/img/core/tc_white_no_bg_beta3.png') 50% 50% no-repeat;
       background-size: contain;
-      width: 20px;
+      width: 220px;
       margin-right: 10px;
-      height: 22px;
+      height: 45px;
     }
     &__text {
       font-family: 'Baloo Thambi', cursive; // replace with variable or class
@@ -36,20 +36,19 @@
       float: left;
       transition: background-color .3s;
       font-size: $tc-font-size-h5;
-      padding: 17px 15px;
+      padding: 6px 15px;
       cursor: pointer;
       &:hover,
       &.active {
         background-color: rgba(235, 235, 235, 0.8);
         color: $tc-color-gray-shade-6;
       }
-      &__language {
+      &__sub-menu {
         padding-right: 2rem;
       }
       &__arrow {
         position: absolute;
-        bottom: 20px;
-        right: 38px;
+        bottom: 12px;
       }
       &__icon {
         color: $primary-color;
@@ -60,14 +59,19 @@
     }
   }
   &__nav-toggler {
-    background-color:white;
+    background-color: white;
     border-radius: 0px 20px 20px 0px;
     position: absolute;
     left: 0px;
   }
 }
 
-@media only screen and (max-width: 879px) {
+.active {
+  background-color: rgba(235, 235, 235, 0.8);
+  color: $tc-color-gray-shade-6;
+}
+
+@media only screen and (max-width: 1019px) {
   .app-header {
     &__logo {
       justify-content: center;
@@ -78,10 +82,11 @@
   }
 }
 
-@media only screen and (min-width: 880px) {
+@media only screen and (min-width: 1020px) {
   .app-header {
     &__nav-toggler {
       display: none;
     }
   }
 }
+

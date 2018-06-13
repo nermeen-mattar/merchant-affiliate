@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { SharedModule } from './../shared/shared.module';
 import { LoginComponent } from './components/login/login.component';
 import { AuthComponent } from './auth.component';
 import { ResetComponent } from './components/reset/reset.component';
@@ -16,7 +17,7 @@ import { MaterialModule } from '../shared/material/material.module';
     AuthRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialModule,
+    SharedModule,
     TranslateModule
   ],
   declarations: [

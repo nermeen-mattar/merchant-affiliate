@@ -1,5 +1,53 @@
 @import "../../styles/toolkit/variables.scss";
 .app-about {
+  &__container {
+    &__donate {
+      width: 30%;
+      padding-bottom: 1rem;
+      display: inline-block;
+      min-width: 300px;
+      color: $primary-color;
+      text-align: center;
+      &__text {
+        margin: 1rem 0rem;
+        font-size: $tc-font-size-h5;
+      }
+      &__icon {
+        cursor: pointer;
+        color: $primary-color;
+        font-size: 30px;
+        background: white;
+        border-radius: 100%;
+        border: 4px solid $primary-color;
+        display: table-cell;
+        padding: 15px;
+        vertical-align: middle;
+      }
+    }
+    &__facebook {
+      width: 30%;
+      padding-bottom: 1rem;
+      display: inline-block;
+      min-width: 300px;
+      color: #3b5998;
+      text-align: center;
+      &__text {
+        margin: 1rem 0rem;
+        font-size: $tc-font-size-h5;
+      }
+      &__icon {
+        cursor: pointer;
+        color: #3b5998;
+        font-size: 30px;
+        background: white;
+        border-radius: 100%;
+        border: 4px solid #3b5998;
+        display: table-cell;
+        padding: 15px;
+        vertical-align: middle;
+      }
+    }
+  }
   &__section {
     padding: 6rem 1rem;
     text-align: center; // padding: 8rem 0;
@@ -38,7 +86,7 @@
       &__icon {
         color: $primary-color;
         padding: 0.5rem;
-        font-size: $biggest-font-size;
+        font-size: $tc-font-size-h2;
         text-align: center;
         font-weight: 400;
       }
@@ -75,4 +123,8 @@
     background: url('../../assets/img/team.jpg') no-repeat center fixed;
   }
   */
+}
+.app-about__section__content__text[_ngcontent-c10] {
+  padding: 1rem 0;
+  font-size: 120%;
 }

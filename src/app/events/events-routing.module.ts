@@ -5,6 +5,7 @@ import { EventFormComponent } from './components/event-form/event-form.component
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventsListComponent } from './components/events-list/events-list.component';
 import { EventsComponent } from './events.component';
+import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'list/details/:teamId',
         component: EventDetailsComponent
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent
       }
     ]
   }

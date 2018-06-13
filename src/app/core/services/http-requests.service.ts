@@ -6,11 +6,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatSnackBar } from '@angular/material';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/internal/Observable';
 
 import { UserMessages } from './../models/user-messages.model';
 import { environment } from './../../../environments/environment';
 import { UserMessagesService } from './user-messages.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class HttpRequestsService {
@@ -31,7 +32,8 @@ export class HttpRequestsService {
     this.requestHeader =  this.requestHeader.append('Authorization', `Bearer ${token}`);
     this.setHttpRequestOptions();
   }
-  deleteAuthorizationInRequestHeader() {
+
+  removeAuthorizationFromRequestHeader() {
     this.requestHeader =  this.requestHeader.delete('Authorization');
     this.setHttpRequestOptions();
   }
@@ -46,22 +48,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.get(this.baseUrl + requestUrl, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
-          res = res.data ? res.data : res;
-          obs.next(res);
-          obs.complete();
-        },
-        err => {
-          this.userMessagesService.showUserMessage(userMessages, 'fail');
-          obs.error(err);
-        });
-    });
-  }
-
-  public httpPost(requestUrl: string, requestParams ? : Object, userMessages ?: UserMessages): Observable < any > {
-    return Observable.create(obs => {
-      this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
-          this.userMessagesService.showUserMessage(userMessages, 'success');
-          res = res.data ? res.data : res;
+          res = res.data;
           obs.next(res);
           obs.complete();
         },
@@ -72,10 +59,25 @@ export class HttpRequestsService {
     });
   }
 
-  public httpPut(requestUrl: string, requestParams ? : Object, userMessages?: UserMessages): Observable < any > {
+  public httpPost(requestUrl: string, requestParams ?: Object, userMessages ?: UserMessages): Observable < any > {
+    return Observable.create(obs => {
+      this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
+          this.userMessagesService.showUserMessage(userMessages, 'success');
+          res = res.data? res.data : res;
+          obs.next(res);
+          obs.complete();
+        },
+        err => {
+          this.userMessagesService.showUserMessage(userMessages, 'fail', err);
+          obs.error(err);
+        });
+    });
+  }
+
+  public httpPut(requestUrl: string, requestParams ?: Object, userMessages?: UserMessages): Observable < any > {
     return Observable.create(obs => {
       this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
-          res = res.data ? res.data : res;
+          res = res.data;
           obs.next(res);
           this.userMessagesService.showUserMessage(userMessages, 'success');
           obs.complete();
@@ -90,7 +92,7 @@ export class HttpRequestsService {
   public httpDelete(requestUrl: string, userMessages?: UserMessages): Observable < any > {
     return Observable.create(obs => {
       this.http.delete(this.baseUrl + requestUrl, this.requestOptions).subscribe((res: any) => {
-          res = res.data ? res.data : res;
+          res = res.data;
           obs.next(res);
           this.userMessagesService.showUserMessage(userMessages, 'success');
           obs.complete();
@@ -128,7 +130,6 @@ export class HttpRequestsService {
         `body was: ${error.error}`);
     }
     // return an ErrorObservable with a user-facing error message
-    return new ErrorObservable(
-      'Something bad happened; please try again later.');
+    return new ErrorObservable<string>().pipe(tap(() => 'Something bad happened; please try again later.'));
   }
 }

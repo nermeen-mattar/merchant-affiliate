@@ -1,30 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { format } from 'date-fns';
 
+import { TeamsService } from './../../../core/services/teams.service';
 import { AdminService } from './../../../core/services/admin.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
-import { UserService } from '../../../core/services/user.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
-
 @Component({
   selector: 'tc-admin-settings',
   templateUrl: './admin-settings.component.html',
   styleUrls: ['./admin-settings.component.scss']
 })
 export class AdminSettingsComponent implements OnInit {
-  selectedTeam: TcTeamInfo;
   adminSettingsGroup: FormGroup;
   teamSettingsGroup: FormGroup;
   teamNameControl: FormControl;
-  userTeams: TcTeamInfo[];
-  eventId: string; /* is undefined (in the case of event creation) */
-  constructor(userService: UserService, private fieldValidatorsService: FieldValidatorsService,
-    private adminService: AdminService,
+  directLinkControl: FormControl;
+  selectedTeamInfo: TcTeamInfo;
+  teamsTheUserIsAdminOf: TcTeamInfo[];
+  constructor(private fieldValidatorsService: FieldValidatorsService,
+    private adminService: AdminService, private teamsService: TeamsService,
     private route: ActivatedRoute, private router: Router) {
-    this.userTeams = userService.getUserTeams();
-    this.selectedTeam = userService.getSelectedTeam();
+    this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
+    this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
     this.initSettingsForm();
   }
 
@@ -32,14 +30,21 @@ export class AdminSettingsComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
+   * @description gets the info for the current selected by its id
+   * @returns {TcTeamInfo}
+   */
+  getInfoForSelectedTeam(): TcTeamInfo {
+    return this.teamsTheUserIsAdminOf.filter(userTeam => userTeam.teamId ===  55)[0]; // this.idForTeamToEdit
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description calls the funcitons that create 1- the admin form 2- the team name form control 3- the team form.
    */
   initSettingsForm() {
-    // this.adminService.getSettings(this.eventId).subscribe(res => {
     this.createAdminSettingsForm();
-    this.createTeamNameFormControls();
+    this.createTeamNameAndDirectLinkFormControls();
     this.createTeamSettingsForm();
-    // });
   }
 
   /**
@@ -49,7 +54,9 @@ export class AdminSettingsComponent implements OnInit {
   createAdminSettingsForm() {
     this.adminSettingsGroup = new FormGroup({
       adminPassword: new FormControl('', [Validators.required]),
-      adminNewPassword: new FormControl('', [Validators.required]),
+      adminNewPassword: new FormControl('', [Validators.required,
+        this.fieldValidatorsService.getValidator('validatePassword')
+      ]),
       adminConfirmNewPassword: new FormControl('', [Validators.required])
     }, [this.fieldValidatorsService.getValidator('validateEqual', {
       field1: 'adminNewPassword',
@@ -59,10 +66,11 @@ export class AdminSettingsComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description creates the team name form control (a standalone form control).
+   * @description creates the team name and direct link form controls (standalone form controls).
    */
-  createTeamNameFormControls() {
+  createTeamNameAndDirectLinkFormControls() {
     this.teamNameControl = new FormControl('', [Validators.required]);
+    this.directLinkControl = new FormControl('');
   }
 
   /**
@@ -72,10 +80,14 @@ export class AdminSettingsComponent implements OnInit {
   createTeamSettingsForm() {
     this.teamSettingsGroup = new FormGroup({
       teamPassword: new FormControl('', [Validators.required]),
-      teamNewPassword: new FormControl('', [Validators.required]),
+      teamNewPassword: new FormControl('', [Validators.required,
+        this.fieldValidatorsService.getValidator('validatePassword')
+      ]),
       teamConfirmNewPassword: new FormControl('', [Validators.required]),
-      // directLink: new FormControl('', [Validators.required])
-    });
+    }, [this.fieldValidatorsService.getValidator('validateEqual', {
+      field1: 'teamNewPassword',
+      field2: 'teamConfirmNewPassword'
+    })]);
   }
   /**
    * @author Nermeen Mattar
@@ -96,7 +108,7 @@ export class AdminSettingsComponent implements OnInit {
     this.adminService.changeTeamPassword({
       teamPassword: this.teamSettingsGroup.value.teamPassword,
       teamNewPassword: this.teamSettingsGroup.value.teamNewPassword
-    });
+    }, this.selectedTeamInfo.teamId);
   }
 
   /**
@@ -105,7 +117,17 @@ export class AdminSettingsComponent implements OnInit {
    */
   saveTeamName() {
     if (this.teamNameControl.valid) {
-      this.adminService.changeTeamName(this.teamNameControl.value);
-    }
+      this.adminService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
+      this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();    }
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description gets a new direct link and displays it in the direct link form control
+   */
+  generateDirectLink() {
+    this.adminService.changeDirectLink(this.selectedTeamInfo.teamId).subscribe(res => {
+      this.directLinkControl.setValue(res.directlink);
+    });
   }
 }

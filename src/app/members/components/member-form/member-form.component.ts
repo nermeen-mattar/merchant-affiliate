@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { TeamsService } from './../../../core/services/teams.service';
 import { MembersService } from '../../services/members.service';
-import { UserService } from '../../../core/services/user.service';
 import { TcMember } from '../../models/tc-member.model';
 
 @Component({
@@ -15,9 +15,9 @@ export class MemberFormComponent implements OnInit {
   selectedTeamId: number;
   memberGroup: FormGroup;
   memberId: number; /* is undefined (in the case of member creation) */
-  constructor(private membersService: MembersService, userService: UserService,
+  constructor(private membersService: MembersService, teamsService: TeamsService,
     private route: ActivatedRoute, private router: Router) {
-    this.selectedTeamId = userService.getSelectedTeam().teamId;
+    this.selectedTeamId = teamsService.selectedTeamId;
     this.initFormEditingOrCreating();
   }
 
@@ -32,11 +32,13 @@ export class MemberFormComponent implements OnInit {
     const memberIdVariable = this.route.snapshot.params['memberId'];
     this.createMemberForm();
     if (memberIdVariable !== 'new') {
+      this.memberGroup.controls.email.disable();
       this.memberId = memberIdVariable;
       this.leavePageIfWrongId();
-      this.membersService.getMember(this.memberId).subscribe(res => {
-        this.updateMemberValues(res);
+      this.membersService.getMember(this.memberId).subscribe(memberInfo => {
+        this.updateMemberValues(memberInfo);
       });
+      this.memberGroup.controls.email.disable();
     }
   }
 
@@ -58,11 +60,11 @@ export class MemberFormComponent implements OnInit {
    * @description updates the member's form group with the received value.
    * @param {TcMember} memberValue
    */
-  updateMemberValues(memberValue: TcMember) {
+  updateMemberValues(memberInfo: TcMember) {
     this.memberGroup.patchValue({
-      firstName: memberValue.firstname,
-      lastName: memberValue.lastname,
-      email: memberValue.email
+      firstName: memberInfo.firstname,
+      lastName: memberInfo.lastname,
+      email: memberInfo.email
     });
   }
 

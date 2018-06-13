@@ -16,15 +16,29 @@ Run `ng serve` Navigate to `http://localhost:4200/`. The app will automatically 
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Builds
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-- For a production build add `-prod`
+- For a simple dev build to serve locally, do `ng build`
 
-- For a test build add  `--env=test`
+### DEV Environment Build
 
-- For a dev build don't add any flags
+```bash
+ng build -c devopt
+```
+
+### TEST Environment Build
+
+```bash
+ng build -c test
+```
+
+### PRODUCTION Environment Build
+
+```bash
+ng build -c production
+```
 
 ## Running unit tests
 
@@ -67,9 +81,13 @@ this will:
 
 3) copy the content from en.ts to the new language file then translate all the texts
 
-4) open src/app/core/constants/i18n.constants.ts file
+4) move through the other languages files search for "LANGUAGE" key
 
-5) add the new language code and name to the available languages
+5) Add there a property with the name of the new language code where the value is the name of the new language.
+
+6) open src/app/core/constants/i18n.constants.ts file
+
+7) add the new language code and name to the available languages
 
 ## Further help
 

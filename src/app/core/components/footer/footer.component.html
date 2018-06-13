@@ -1,11 +1,28 @@
 <div class="app-footer">
-  <mat-list color="primary" class="app-footer__menu">
-    <mat-list-item class="app-footer__menu__item"> {{"FOOTER.TERMS_CONDITIONS" | translate}} </mat-list-item>
-    <mat-list-item class="app-footer__menu__item" routerLink="/about"> {{"ABOUT.ABOUT" | translate}} </mat-list-item>
-    <mat-list-item class="app-footer__menu__item"> {{"FOOTER.IMPRESSUM" | translate}} </mat-list-item>
-    <!-- *** what is impressum a page -->
-    <mat-list-item class="app-footer__menu__item" routerLink="/contact"> {{"CONTACT.CONTACT" | translate}} </mat-list-item>
-  </mat-list>
+  <div class="app-footer__container">
+    <mat-list color="primary" class="app-footer__container__menu">
+      <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.TERMS_CONDITIONS" | translate}} </mat-list-item>
+      <mat-list-item class="app-footer__container__menu__item" routerLink="/about"> {{"ABOUT.ABOUT" | translate}} </mat-list-item>
+      <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.IMPRESSUM" | translate}} </mat-list-item>
+      <mat-list-item class="app-footer__container__menu__item" routerLink="/contact"> {{"CONTACT.CONTACT" | translate}} </mat-list-item>
+    </mat-list>
+    <div class="app-footer__container__donate">
+      <div class="app-footer__container__donate__text">{{"FOOTER.SUPPORT_BY_DONATING" | translate}}
+      </div>
+      <span>
+        <mat-icon (click)="openDonateWindow()" fontSet="fa" fontIcon="fa-coffee" class="app-footer__container__donate__icon"></mat-icon>
+      </span>
+    </div>
+    <div class="app-footer__container__social-media">
+      <button mat-raised-button class="app-footer__container__social-media__btn app-footer__container__social-media__facebook">
+        <mat-icon fontSet="fa" fontIcon="fa-facebook" class=" app-footer__container__social-media__btn__icon"></mat-icon>
+        {{"SOCIAL_MEDIA.SHARE" | translate}}</button>
+      <button mat-raised-button class="app-footer__container__social-media__btn app-footer__container__social-media__twitter">
+        <mat-icon fontSet="fa" fontIcon="fa-twitter" class=" app-footer__container__social-media__btn__icon"></mat-icon>
+        {{"SOCIAL_MEDIA.TWEET" | translate}}</button>
+    </div>
+  </div>
+
   <div class="app-footer__copyright">
     <span class="app-footer__copyright__text">
       {{"FOOTER.COPY_RIGHT" | translate}}

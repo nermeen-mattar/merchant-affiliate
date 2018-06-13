@@ -8,7 +8,7 @@ export class UserMessagesService {
 
   constructor(public snackBar: MatSnackBar, private translateService: TranslateService) {}
 
-  showUserMessage(userMessages: UserMessages, messageType, err?) {
+  showUserMessage(userMessages: UserMessages, messageType, err ? ) {
     if (messageType === 'fail') {
       if (userMessages && userMessages.fail === 'NO_ERROR_MESSAGE') {
         return; // do not display an error message
@@ -30,17 +30,22 @@ export class UserMessagesService {
   }
 
   getFailMessage(userMessages: UserMessages, err): UserMessages {
-    const userFailMessage = {fail: null};
+    const userFailMessage = {
+      fail: null
+    };
+    if (err && err.error && err.error.message) {
       const translationKey = 'BACKEND.'.concat(err.error.message.toUpperCase());
       this.translateService.get('USER_MESSAGES.'.concat(translationKey)).subscribe(
         translatedMessage => {
-         if (translatedMessage.indexOf(translationKey) ===  -1 ) {
-          userFailMessage.fail = translationKey;
-         } else {
-          userFailMessage.fail = userMessages.failDefault ?  userMessages.failDefault : 'SOMETHING_WENT_WRONG'; /* default message */
-         }
+          if (!translatedMessage.includes(translationKey)) {
+            userFailMessage.fail = translationKey;
+          }
         }
       );
+    }
+    if (!userFailMessage.fail) {
+      userFailMessage.fail = userMessages && userMessages.failDefault ? userMessages.failDefault : 'SOMETHING_WENT_WRONG';
+    }
     return userFailMessage;
   }
 }

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
@@ -11,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 import { AdminRegisterInfo } from './../../models/admin-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
 import { UserMessagesService } from '../../../core/services/user-messages.service';
+import { roles } from '../../../core/constants/roles.constants';
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
@@ -21,11 +23,16 @@ export class RegisterComponent implements OnInit {
   displaySpinner = false;
   emailActivationRequired = false;
   displayMessageCard = false;
+  teamName: string;
   registerFirstStepForm: FormGroup;
   registerSecondStepForm: FormGroup;
+  roles = roles; /* needed to declare a class property to make it available on the component html */
   constructor(private authService: AuthService, private adminService: AdminService,
-    private registerService: RegisterService,
-    private fieldValidatorsService: FieldValidatorsService, private userMessagesService: UserMessagesService) {}
+    private registerService: RegisterService, activatedRoute: ActivatedRoute,
+    private fieldValidatorsService: FieldValidatorsService, private userMessagesService: UserMessagesService) {
+    const queryParams = activatedRoute.snapshot.queryParams;
+    this.teamName = queryParams && queryParams['team-name'];
+  }
 
   ngOnInit() {
     this.createRegisterFirstStepForm();
@@ -38,11 +45,11 @@ export class RegisterComponent implements OnInit {
   }
   createRegisterFirstStepForm() {
     this.registerFirstStepForm = new FormGroup({
-      teamName: new FormControl('', [Validators.required]),
+      teamName: new FormControl(this.teamName || '', [Validators.required]),
       teamPassword: new FormControl('', [Validators.required,
         this.fieldValidatorsService.getValidator('validatePassword')
       ]),
-      email: new FormControl('', [Validators.required])
+      email: new FormControl('', [Validators.required, Validators.email])
     });
   }
 
@@ -78,7 +85,7 @@ export class RegisterComponent implements OnInit {
       }, err => {
         this.displaySpinner = false;
         if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
-          this.userType = 'admin';
+          this.userType = roles.admin;
           this.disableFormControls(['firstName', 'lastName', 'adminConfirmPassword', 'adminNewPassword']);
           this.enableFormControls(['adminPassword']);
         } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
@@ -134,13 +141,14 @@ export class RegisterComponent implements OnInit {
       email: teamInfo.email,
       adminpassword: adminPassword
     }).subscribe(registerRes => {
-      if (this.userType === 'admin') {
+      if (this.userType === roles.admin) {
         this.adminLogin(teamInfo.email, adminPassword);
       } else {
         this.displayMessageCard = true;
         this.displaySpinner = false;
       }
     }, err => {
+      this.displaySpinner = false;
       this.handleRegisterError(err);
     });
   }
@@ -182,10 +190,10 @@ export class RegisterComponent implements OnInit {
    */
   handleRegisterError(err) {
     /* 409 conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
-    if (this.userType === 'admin') {
+    if (this.userType === roles.admin) {
       /* this.userMessagesService.showUserMessage({}, 'fail'); */
     }
-     /* will consider anything else as wrong password */
+    /* will consider anything else as wrong password */
   }
 
   /**

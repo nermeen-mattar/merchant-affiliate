@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject } from 'rxjs';
 import { TcActivationStatusInfo } from './../models/tc-activation-status-info.model';
 import { UserMessages } from './../../core/models/user-messages.model';
 import { TcMember } from '../models/tc-member.model';
-import { UserService } from './../../core/services/user.service';
 import { HttpRequestsService } from './../../core/services/http-requests.service';
 
 @Injectable()
 export class MembersService {
 
-  constructor(private httpRequestService: HttpRequestsService, private userService: UserService) {}
+  constructor(private httpRequestService: HttpRequestsService) {}
 
   /**
    * @author Nermeen Mattar
@@ -37,7 +35,7 @@ export class MembersService {
     return this.httpRequestService.httpDelete(
       `teammembers/${memberId}`, {
         success: 'MEMBER.MEMBER_DELETING_SUCCESS',
-        fail: 'MEMBER.MEMBER_DELETING_FAIL'
+        failDefault: 'MEMBER.MEMBER_DELETING_FAIL'
       });
   }
 
@@ -53,7 +51,7 @@ export class MembersService {
     return this.httpRequestService.httpPut(
       `teammembers`, activationStatusInfo, {
         success: changeStatusSuccessMessage,
-        fail: 'MEMBER.MEMBER_CHANGING_ACTIVATION_STATUS_FAIL'
+        failDefault: 'MEMBER.MEMBER_CHANGING_ACTIVATION_STATUS_FAIL'
       });
   }
 
@@ -69,7 +67,7 @@ export class MembersService {
     return this.httpRequestService.httpGet(
       `teammembers/${memberId}`,
       {
-        fail: 'MEMBER.MEMBER_GETTING_FAIL'
+        failDefault: 'MEMBER.MEMBER_GETTING_FAIL'
       });
   }
 
@@ -84,7 +82,7 @@ export class MembersService {
     return this.httpRequestService.httpPost(
       'members', {teamId: teamId, ...member}, {
         success: 'MEMBER.MEMBER_CREATING_SUCCESS',
-        fail: 'MEMBER.MEMBER_CREATING_FAIL'
+        failDefault: 'MEMBER.MEMBER_CREATING_FAIL'
       });
   }
 
@@ -100,7 +98,7 @@ export class MembersService {
     return this.httpRequestService.httpPut(
       `members/${memberId}`, member, {
         success: 'MEMBER.MEMBER_UPDATING_SUCCESS',
-        fail: 'MEMBER.MEMBER_UPDATING_FAIL'
+        failDefault: 'MEMBER.MEMBER_UPDATING_FAIL'
       });
   }
 }
