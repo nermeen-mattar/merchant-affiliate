@@ -72,7 +72,7 @@ export class AdminService {
    * @param {teamId} number
    */
   changeDirectLink(teamId: number): Observable <any> {
-    return this.httpRequestService.httpPut('teassms/' + teamId + '/change_direct_link', {
+    return this.httpRequestService.httpPut('teams/' + teamId + '/change_direct_link', {
       failDefault: 'TEAM.DIRECT_LINK_CHANGING_FAIL'
     });
   }
