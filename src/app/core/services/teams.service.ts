@@ -188,7 +188,7 @@ export class TeamsService {
    */
   deleteTeam(teamId: number): Observable < any > {
     return this.httpRequestService.httpDelete(`teams/${teamId}`, {
-      success: 'TEAM.TEAM_DELETING_SUCCESS'
+      success: 'TEAM.TEAM_DELETING_SUCCESS',
       failDefault: 'TEAM.TEAM_DELETING_ERROR'
     }).pipe(map(res => {
       this.userTeams = this.userTeams.filter(userTeam => userTeam.teamId !== teamId);
