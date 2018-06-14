@@ -52,13 +52,18 @@
       padding-bottom: 1rem;
       min-width: 224px;
       &__btn {
-        display: block;
+        display: flex;
+        align-items: center;
         margin: 1rem auto;
         color: white;
         min-width: 140px;
         &__icon {
           margin-right: 10px;
           font-size: 1.3rem;
+          &::before {
+            position: relative;
+            top: 4px;
+          }
         }
       }
       &__facebook {
@@ -89,6 +94,23 @@
     }
   }
 }
+@media screen and (max-width: 520px) {
+  :host {
+    .app-footer {
+      &__container {
+        &__menu {
+          padding-top: 20px;
+          &__item {
+            ::ng-deep .mat-list-item-content {
+              justify-content: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 a:visited{
   color: white;
 }

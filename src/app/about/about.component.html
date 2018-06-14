@@ -24,20 +24,18 @@
         </p>
       </div>
 
-      <span>
-        <mat-icon (click)="openDonateWindow()" fontSet="fa" fontIcon="fa-coffee" class="app-about__container__donate__icon"></mat-icon>
-      </span>
+      <div class="app-about__section__content app-about__section__content--icon-wrap">
+        <mat-icon (click)="openDonateWindow()" fontSet="fa" fontIcon="fa-coffee" class="app-about__section__content--icon-wrap__icon app-about__section__content--icon-wrap__icon--donate"></mat-icon>
+      </div>
       <div class="app-about__section__content">
         <p class="app-about__section__content__text">
           {{'ABOUT.SECTION1.TEXT7' | translate}}
         </p>
       </div>
-      <span>
-        <mat-icon (click)="openFacebookWindow()" fontSet="fa" fontIcon="fa-facebook" class="app-about__container__facebook__icon"></mat-icon>
-      </span>
+      <div class="app-about__section__content app-about__section__content--icon-wrap">
+        <mat-icon (click)="openFacebookWindow()" fontSet="fa" fontIcon="fa-facebook" class="app-about__section__content--icon-wrap__icon app-about__section__content--icon-wrap__icon--facebook"></mat-icon>
+      </div>
     </div>
-    <!-- <div class="app-about__parralax" parallax>
-    </div> -->
   </div>
   <!-- may be uncommented <div class="app-about__main">
     <div class="app-about__main__bottom" parallax [config]="{initialValue: -200, ratio: .2}">
