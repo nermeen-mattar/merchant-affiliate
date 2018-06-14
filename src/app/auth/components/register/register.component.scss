@@ -42,6 +42,15 @@
         }
       }
     }
+    .stepper-action-btns {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      &--step-1 {
+        justify-content: flex-end;
+      }
+    }
   }
   &__element-hide {
     display:none;

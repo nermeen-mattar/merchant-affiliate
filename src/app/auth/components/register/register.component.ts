@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
   teamName: string;
   registerFirstStepForm: FormGroup;
   registerSecondStepForm: FormGroup;
+  currentStep = 1;
   roles = roles; /* needed to declare a class property to make it available on the component html */
   constructor(private authService: AuthService, private adminService: AdminService,
     private registerService: RegisterService, activatedRoute: ActivatedRoute,
@@ -42,6 +43,7 @@ export class RegisterComponent implements OnInit {
     if (changeInfo.previouslySelectedIndex === 0) {
       this.checkUserType(changeInfo.previouslySelectedStep.stepControl.value);
     }
+    this.currentStep = changeInfo.selectedIndex + 1;
   }
   createRegisterFirstStepForm() {
     this.registerFirstStepForm = new FormGroup({

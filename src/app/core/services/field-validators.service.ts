@@ -50,6 +50,9 @@ export class FieldValidatorsService {
     },
     validatePassword: (): ValidatorFn => {
       return (control: AbstractControl): { [key: string]: any } => {
+        if (!control.value) {
+          return { validatePassword: { invalid: false }};
+        }
         const hasOneNumOrMore = control.value.match(/[0-9]/);
         const hasOneAlphabetOrMore = control.value.match(/[a-z]|[A-Z]/);
         return hasOneNumOrMore && hasOneAlphabetOrMore && control.value.length >= 8 ?
