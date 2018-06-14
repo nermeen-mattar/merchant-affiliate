@@ -2,9 +2,9 @@
   <mat-card-title class="text-center">{{ 'REGISTER.REGISTER' | translate }} </mat-card-title>
   <mat-card-content>
     <div class="app-register__content" [ngClass]="{'app-register__element-hide': displaySpinner || displayMessageCard}">
-      <mat-vertical-stepper linear="true" (selectionChange)="selectedStepChanged($event)">
+      <mat-vertical-stepper #regStepper linear="true" (selectionChange)="selectedStepChanged($event)">
         <mat-step label="{{ 'TEAM.TEAM_DETAILS' | translate }}" *ngIf="registerFirstStepForm" [stepControl]="registerFirstStepForm">
-          <form novalidate [formGroup]="registerFirstStepForm" class="app-register__content__form">
+          <form novalidate (ngSubmit)="regStepper.next()" [formGroup]="registerFirstStepForm" class="app-register__content__form">
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" formControlName="teamName" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>supervisor_account</mat-icon>
@@ -15,9 +15,9 @@
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
               <!-- display information message to elaborate password specifications -->
               <mat-icon *ngIf="registerFirstStepForm.controls['teamPassword'].dirty && registerFirstStepForm.controls['teamPassword'].invalid&&registerFirstStepForm.controls['teamPassword'].errors.validatePassword"
-              class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
-              matTooltipPosition="below">
-              info </mat-icon>
+                class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
+                matTooltipPosition="below">
+                info </mat-icon>
               <mat-error *ngIf="registerFirstStepForm.controls['teamPassword'].invalid">
                 <span *ngIf="registerFirstStepForm.controls['teamPassword'].errors.required; else teamPasswordInvalid">
                   {{'TEAM.TEAM_PASSWORD' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
@@ -33,9 +33,9 @@
               <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" formControlName="email" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>email</mat-icon>
               <mat-icon *ngIf="registerFirstStepForm.controls['email'].dirty && registerFirstStepForm.controls['email'].invalid&&registerFirstStepForm.controls['email'].errors.email"
-              class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.EMAIL_VALID_FORMAT' | translate}}"
-              matTooltipPosition="below">
-              info </mat-icon>
+                class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.EMAIL_VALID_FORMAT' | translate}}"
+                matTooltipPosition="below">
+                info </mat-icon>
               <mat-error *ngIf="registerFirstStepForm.controls['email'].invalid">
                 <span *ngIf="registerFirstStepForm.controls['email'].errors.required; else invalidEmail">
                   {{'USER.EMAIL' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
@@ -47,11 +47,13 @@
                 </ng-template>
               </mat-error>
             </mat-form-field>
+            <div class="stepper-action-btns stepper-action-btns--step-1">
+              <button type="submit" mat-button matStepperNext mat-raised-button [disabled]="registerFirstStepForm.invalid" color="primary" class="app-register__content__button">{{ 'NEXT' | translate }}</button>
+            </div>
           </form>
-            <button mat-button matStepperNext mat-raised-button [disabled]="registerFirstStepForm.invalid" color="primary" class="app-register__content__button">{{ 'NEXT' | translate }}</button>
         </mat-step>
         <mat-step label="{{ 'ADMIN.ADMIN_DETAILS' | translate }}" *ngIf="registerSecondStepForm" [stepControl]="registerSecondStepForm">
-          <form novalidate [formGroup]="registerSecondStepForm" class="app-register__content__form">
+          <form novalidate *ngIf="currentStep === 2" (ngSubmit)="(!registerFirstStepForm.invalid && !registerSecondStepForm.invalid) && register(registerFirstStepForm.value, registerSecondStepForm.value);" [formGroup]="registerSecondStepForm" class="app-register__content__form">
             <div class="app-register__content__form__admin-exist" *ngIf="userType === roles.admin">
               {{ 'REGISTER.ADMIN_ALREADY_EXIST' | translate }}
             </div>
@@ -97,15 +99,17 @@
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
               <mat-error *ngIf="registerSecondStepForm.controls['adminConfirmPassword'].invalid"> {{ 'ADMIN.CONFIRM_ADMIN_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
-            <mat-error *ngIf="registerSecondStepForm.invalid && registerSecondStepForm.validateEqual" class="app-register__content__form__field__error">
+            <mat-error *ngIf="registerSecondStepForm.invalid && registerSecondStepForm['validateEqual']" class="app-register__content__form__field__error">
               {{'FORM.CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD' | translate}}
             </mat-error>
+            <div class="stepper-action-btns">
+                <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{ 'BACK' | translate }}</button>
+                <button type="submit" *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
+            (click)="register(registerFirstStepForm.value, registerSecondStepForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
+              </div>
           </form>
-          <button mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{ 'BACK' | translate }}</button>
         </mat-step>
       </mat-vertical-stepper>
-      <button *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
-        (click)="register(registerFirstStepForm.value, registerSecondStepForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
     </div>
     <mat-spinner class="app-register__spinner" [ngClass]="{'app-register__element-hide': !displaySpinner }"></mat-spinner>
     <div *ngIf="displayMessageCard && !displaySpinner">

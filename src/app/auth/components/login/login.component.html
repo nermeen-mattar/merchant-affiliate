@@ -23,7 +23,9 @@
         <mat-icon class="app-login__content__field__icon" matPrefix> lock</mat-icon>
         <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'REQUIRED' | translate }}</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" class="app-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
+      <div class="app-login__content__submit-btn-wrap">
+        <button mat-raised-button color="primary" class="app-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
+      </div>
     </form>
     <div *ngIf="displayMessage && !displaySpinner" class="app-login__content__user-message">
       <ng-container *ngIf="displayMessage === 'mailNotActivated'">

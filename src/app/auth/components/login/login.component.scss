@@ -19,6 +19,10 @@
         margin-right: 5px;
       }
     }
+    &__submit-btn-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
     &__button {
       margin-top: 2.2rem;
       color:white;
