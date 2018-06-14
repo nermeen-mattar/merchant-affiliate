@@ -104,7 +104,9 @@
       "DIRECT_LINK_CHANGING_SUCCESS": "The team direct link has been changed successfully",
       "DIRECT_LINK_CHANGING_FAIL": "Unable to change the team direct link",
       "TEAM_PASSWORD_CHANGING_SUCCESS": "The team password has been changed successfully",
-      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change the team password"
+      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change the team password",
+      "TEAM_CONFIRM_DELETING_HEADER": "Delete team",
+      "TEAM_CONFIRM_DELETING_BODY": "Do you really want to delete this team?"
     }
   },
   "LANGUAGE": {

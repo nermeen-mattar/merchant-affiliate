@@ -1,17 +1,21 @@
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 
 import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
 import { TcClientSideTeamRoles } from './../../teams/models/tc-client-side-team-roles.model';
 import { TcServerSideTeamRoles } from '../../teams/models/tc-server-side-team-roles.model';
 import { roles } from '../constants/roles.constants';
+import { HttpRequestsService } from './http-requests.service';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TeamsService {
   private _userTeams: TcTeamInfo[];
   private _selectedTeamId: number;
   private _teamRoles: TcClientSideTeamRoles;
-  constructor() {
+  constructor(private httpRequestService: HttpRequestsService) {
     this.selectedTeamId = JSON.parse(localStorage.getItem('selectedTeamId'));
     this.userTeams = JSON.parse(localStorage.getItem('userTeams'));
     this.teamRoles = JSON.parse(localStorage.getItem('teamRoles'));
@@ -114,7 +118,7 @@ export class TeamsService {
    * @description filters the teams list to get only the teams that the user is admin of and sets this value in the teamsTheUserIsAdminOf.
    */
   getTeamsTheUserIsAdminOf() {
-    return this.userTeams.filter( team => this.teamRoles.teamAdmins.indexOf(team.teamId) !== -1);
+    return this.userTeams.filter(team => this.teamRoles.teamAdmins.indexOf(team.teamId) !== -1);
   }
 
 
@@ -147,13 +151,21 @@ export class TeamsService {
 
   /**
    * @author Nermeen Mattar
-   * @description updates the team name for the team with the passed teamId
-   * @param {number} teamId
+   * @description attemps to update the team name for the team with the passed teamId using the httpPut function from httpRequestsSevrice.
+   * Upon successful request the team name for the modifier team will be changed in team roles.
    * @param {string} newTeamName
+   * @param {number} teamId
    */
-  updateTeamName(teamId: number, newTeamName: string) {
-    this.userTeams.filter(team => team.teamId === teamId)[0].teamName = newTeamName;
-    localStorage.setItem('userTeams', JSON.stringify(this.userTeams));
+  changeTeamName(newTeamName: string, teamId: number) {
+    this.httpRequestService.httpPut('teams/' + teamId + '/change_team_name', {
+      teamName: newTeamName
+    }, {
+      success: 'TEAM.TEAM_NAME_CHANGING_SUCCESS',
+      failDefault: 'TEAM.TEAM_NAME_CHANGING_FAIL'
+    }).subscribe(res => {
+      this.userTeams.filter(team => team.teamId === teamId)[0].teamName = newTeamName;
+      localStorage.setItem('userTeams', JSON.stringify(this.userTeams));
+    });
   }
 
   /**
@@ -163,8 +175,8 @@ export class TeamsService {
    * @param {string} newTeamRole
    */
   addTeamRole(teamId: number, newTeamRole: string) {
-    const teamToModify =  this.userTeams.filter(team => team.teamId === teamId)[0];
-    if (newTeamRole && roles[newTeamRole] && teamToModify.roles.indexOf(newTeamRole) === -1 ) {
+    const teamToModify = this.userTeams.filter(team => team.teamId === teamId)[0];
+    if (newTeamRole && roles[newTeamRole] && teamToModify.roles.indexOf(newTeamRole) === -1) {
       teamToModify.roles.push(newTeamRole);
       localStorage.setItem('userTeams', JSON.stringify(this.userTeams));
     }
@@ -175,8 +187,13 @@ export class TeamsService {
    * @description deletes the team with the passed teamId
    * @param {number} teamId
    */
-  deleteTeam(teamId: number) {
-    this.userTeams = this.userTeams.filter(userTeam => userTeam.teamId !== teamId);
+  deleteTeam(teamId: number): Observable < any > {
+    return this.httpRequestService.httpDelete(`teams/${teamId}`).pipe(map(() => {
+      this.userTeams = this.userTeams.filter(userTeam => userTeam.teamId !== teamId);
+      if (teamId === this.selectedTeamId && this.userTeams && this.userTeams.length) {
+        this.selectedTeamId = this.userTeams[0].teamId;
+      }
+    }));
   }
 
   /**

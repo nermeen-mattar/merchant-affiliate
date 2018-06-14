@@ -133,7 +133,7 @@
           <div class="app-events__container__accordion__expandable-event__expanded-content__actions">
             <div *ngIf="isTeamAdmin">
               <button [routerLink]="event.id" mat-raised-button color="primary" class="app-events__container__accordion__expandable-event__edit-button">{{ 'EDIT' | translate }}</button>
-              <button (click)="deleteEvent($event, event.id)" mat-raised-button class="app-events__container__accordion__expandable-event__delete-button">{{ 'DELETE' | translate }}</button>
+              <button (click)="deleteEvent(event.id)" mat-raised-button class="app-events__container__accordion__expandable-event__delete-button">{{ 'DELETE' | translate }}</button>
             </div>
             <button mat-raised-button routerLink="details/{{event.id}}">{{ 'DETAILS' | translate }}</button>
           </div>

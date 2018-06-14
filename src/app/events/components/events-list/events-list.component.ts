@@ -1,10 +1,8 @@
-import { TeamsService } from './../../../core/services/teams.service';
-import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatDialogRef, MatSlideToggle} from '@angular/material';
 
+import { TeamsService } from './../../../core/services/teams.service';
 import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
@@ -35,7 +33,7 @@ export class EventsListComponent implements OnInit {
   constructor(
     private eventsService: EventsService,
     private teamsService: TeamsService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {
     this.userTeams = this.teamsService.userTeams;
     this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
@@ -147,13 +145,13 @@ export class EventsListComponent implements OnInit {
     this.filterString = ''; // reset any string the user entered in the search input
     this.eventsDataSource.data = this.eventsDataSource.data; // to trigger the table to change its data.
   }
+
   /**
    * @author Nermeen Mattar
    * @description deletes the target event from the events list (only allowed for admin)
    * @param {string} eventId
    */
-
-  deleteEvent($event, eventId: string) {
+  deleteEvent(eventId: string) {
     this.openConfirmationDialog();
     this.confirmDialogRef.afterClosed().pipe(
       first()

@@ -117,8 +117,8 @@ export class AdminSettingsComponent implements OnInit {
    */
   saveTeamName() {
     if (this.teamNameControl.valid) {
-      this.adminService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
-      this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();    }
+      this.teamsService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
+    }
   }
 
   /**
