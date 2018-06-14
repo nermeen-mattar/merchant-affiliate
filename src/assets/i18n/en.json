@@ -99,12 +99,16 @@
       "ADMIN_PASSWORD_CHANGING_FAIL": "Unable to change admin password"
     },
     "TEAM": {
+      "TEAM_DELETING_SUCCESS": "The team has been deleted successfully",
+      "TEAM_DELETING_FAIL": "Unable to delete team",
       "TEAM_NAME_CHANGING_SUCCESS": "The team name has been changed successfully",
       "TEAM_NAME_CHANGING_FAIL": "Unable to change the team name",
       "DIRECT_LINK_CHANGING_SUCCESS": "The team direct link has been changed successfully",
       "DIRECT_LINK_CHANGING_FAIL": "Unable to change the team direct link",
       "TEAM_PASSWORD_CHANGING_SUCCESS": "The team password has been changed successfully",
-      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change the team password"
+      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change the team password",
+      "TEAM_CONFIRM_DELETING_HEADER": "Delete team",
+      "TEAM_CONFIRM_DELETING_BODY": "Do you really want to delete this team?"
     }
   },
   "LANGUAGE": {

@@ -37,24 +37,6 @@ export class AdminService {
 
   /**
    * @author Nermeen Mattar
-   * @description attemps to update the team name Using the httpPut function from httpRequestsSevrice. Upon successful request the team name
-   * For the modifier team will be changed in team roles.
-   * @param {string} newTeamName
-   * @param {number} teamId
-   */
-  changeTeamName(newTeamName: string, teamId: number) {
-    this.httpRequestService.httpPut('teams/' + teamId + '/change_team_name', {
-      teamName: newTeamName
-    }, {
-      success: 'TEAM.TEAM_NAME_CHANGING_SUCCESS',
-      failDefault: 'TEAM.TEAM_NAME_CHANGING_FAIL'
-    }).subscribe(res => {
-      this.teamsService.updateTeamName(teamId, newTeamName);
-    });
-  }
-
-  /**
-   * @author Nermeen Mattar
    * @description attemps to update the team password Using the httpPut function from httpRequestsSevrice.
    * @param {any} oldAndNewPasswords
    * @param {number} teamId

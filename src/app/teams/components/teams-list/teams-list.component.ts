@@ -1,11 +1,13 @@
-import { MatTableDataSource } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
+import { first } from 'rxjs/operators';
 
 import { MembersService } from './../../../members/services/members.service';
 import { UserService } from '../../../core/services/user.service';
 import { TcTeamInfo } from '../../models/tc-team-info.model';
 import { TeamsService } from '../../../core/services/teams.service';
 import { roles } from '../../../core/constants/roles.constants';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'tc-teams-list',
@@ -19,7 +21,9 @@ export class TeamsListComponent implements OnInit {
   displayAdminActions: boolean;
   filterString = '';
   roles = roles; /* needed to declare a class property to make it available on the component html */
-  constructor(private userService: UserService, private teamsService: TeamsService, private membersService: MembersService) {
+  confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
+  constructor(private userService: UserService, private teamsService: TeamsService, private membersService: MembersService,
+    public dialog: MatDialog) {
     this.displayAdminActions = this.userService.userType === roles.admin;
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
@@ -57,5 +61,25 @@ export class TeamsListComponent implements OnInit {
    * @param {number} memberId
    */
   deleteTeam(teamId: number) { // to be implemented once supported from the backend side
+    this.openConfirmationDialog();
+    this.confirmDialogRef.afterClosed().pipe(
+      first()
+    ).subscribe(confirmed => {
+      if (confirmed) {
+        this.teamsService.deleteTeam(teamId).subscribe(res => {
+          this.updateTeamsDataSource();
+        });
+      }
+    });
+  }
+
+  openConfirmationDialog(): void {
+    this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
+      autoFocus: true,
+      data: {
+        dialogTitle: 'USER_MESSAGES.TEAM.TEAM_CONFIRM_DELETING_HEADER',
+        dialogMessage: 'USER_MESSAGES.TEAM.TEAM_CONFIRM_DELETING_BODY'
+      }
+    });
   }
 }
