@@ -99,6 +99,8 @@
       "ADMIN_PASSWORD_CHANGING_FAIL": "Unable to change admin password"
     },
     "TEAM": {
+      "TEAM_DELETING_SUCCESS": "The team has been deleted successfully",
+      "TEAM_DELETING_FAIL": "Unable to delete team",
       "TEAM_NAME_CHANGING_SUCCESS": "The team name has been changed successfully",
       "TEAM_NAME_CHANGING_FAIL": "Unable to change the team name",
       "DIRECT_LINK_CHANGING_SUCCESS": "The team direct link has been changed successfully",

@@ -7,9 +7,8 @@ import { TcServerSideTeamRoles } from '../../teams/models/tc-server-side-team-ro
 import { roles } from '../constants/roles.constants';
 import { HttpRequestsService } from './http-requests.service';
 import { map } from 'rxjs/operators';
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 
 export class TeamsService {
   private _userTeams: TcTeamInfo[];
@@ -70,7 +69,7 @@ export class TeamsService {
    * @returns {boolean}
    */
   hasMemberRole(teamId: number): boolean {
-    return this.teamRoles.teamMembers.indexOf(teamId) !== -1;
+    return this.teamRoles.teamMembers.includes(teamId);
   }
 
   /**
@@ -80,7 +79,7 @@ export class TeamsService {
    * @returns {boolean}
    */
   hasAdminRole(teamId: number): boolean {
-    return this.teamRoles.teamAdmins.indexOf(teamId) !== -1;
+    return this.teamRoles.teamAdmins.includes(teamId);
   }
 
   /**
@@ -118,7 +117,7 @@ export class TeamsService {
    * @description filters the teams list to get only the teams that the user is admin of and sets this value in the teamsTheUserIsAdminOf.
    */
   getTeamsTheUserIsAdminOf() {
-    return this.userTeams.filter(team => this.teamRoles.teamAdmins.indexOf(team.teamId) !== -1);
+    return this.userTeams.filter(team => this.teamRoles.teamAdmins.includes(team.teamId));
   }
 
 
@@ -176,7 +175,7 @@ export class TeamsService {
    */
   addTeamRole(teamId: number, newTeamRole: string) {
     const teamToModify = this.userTeams.filter(team => team.teamId === teamId)[0];
-    if (newTeamRole && roles[newTeamRole] && teamToModify.roles.indexOf(newTeamRole) === -1) {
+    if (newTeamRole && roles[newTeamRole] && !teamToModify.roles.includes(newTeamRole)) {
       teamToModify.roles.push(newTeamRole);
       localStorage.setItem('userTeams', JSON.stringify(this.userTeams));
     }
@@ -188,11 +187,15 @@ export class TeamsService {
    * @param {number} teamId
    */
   deleteTeam(teamId: number): Observable < any > {
-    return this.httpRequestService.httpDelete(`teams/${teamId}`).pipe(map(() => {
+    return this.httpRequestService.httpDelete(`teams/${teamId}`, {
+      success: 'TEAM.TEAM_DELETING_SUCCESS'
+      failDefault: 'TEAM.TEAM_DELETING_ERROR'
+    }).pipe(map(res => {
       this.userTeams = this.userTeams.filter(userTeam => userTeam.teamId !== teamId);
       if (teamId === this.selectedTeamId && this.userTeams && this.userTeams.length) {
         this.selectedTeamId = this.userTeams[0].teamId;
       }
+      return res;
     }));
   }
 
