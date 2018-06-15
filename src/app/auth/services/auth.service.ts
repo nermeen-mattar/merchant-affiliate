@@ -1,10 +1,10 @@
-import { roles } from './../../core/constants/roles.constants';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { first, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
+import { roles } from './../../core/constants/roles.constants';
 import { LoginResponse } from './../models/login-response.model';
 import { UserMessagesService } from './../../core/services/user-messages.service';
 import { UserService } from './../../core/services/user.service';
