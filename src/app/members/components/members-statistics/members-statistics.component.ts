@@ -19,7 +19,6 @@ import { MembersStatisticsService } from '../../services/members-statistics.serv
 export class MembersStatisticsComponent implements OnInit {
   displayedColumns = ['member', 'email', 'participations', 'cancelations'];
   membersStatisticsDataSource: MatTableDataSource < any > ;
-  userTeams: TcTeamInfo[];
   selectedTeamId: number;
   teamMemberId: number;
   filterString: string;
@@ -30,11 +29,10 @@ export class MembersStatisticsComponent implements OnInit {
     this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
     this.selectedTeamId = this.teamsService.selectedTeamId;
     if (!this.teamsService.hasAdminRole(this.selectedTeamId)) {
-      this.selectedTeamId = this.teamsTheUserIsAdminOf[0].teamId;
+      this.selectedTeamId = this.teamsTheUserIsAdminOf.length && this.teamsTheUserIsAdminOf[0].teamId;
     }
     this.createDateRangeFormGroup();
     this.dateRangeFormGroup.valueChanges.subscribe(res => this.dateRangeChange());
-    this.userTeams = this.teamsService.userTeams;
     this.updateMembersStatistics();
   }
 

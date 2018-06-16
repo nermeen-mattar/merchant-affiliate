@@ -1,3 +1,4 @@
+import { TcClientSideTeamRoles } from './../../models/tc-client-side-team-roles.model';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
 import { first } from 'rxjs/operators';
@@ -21,10 +22,12 @@ export class TeamsListComponent implements OnInit {
   displayAdminActions: boolean;
   filterString = '';
   roles = roles; /* needed to declare a class property to make it available on the component html */
+  teamRoles: TcClientSideTeamRoles;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
   constructor(private userService: UserService, private teamsService: TeamsService, private membersService: MembersService,
     public dialog: MatDialog) {
     this.displayAdminActions = this.userService.userType === roles.admin;
+    this.teamRoles = this.teamsService.teamRoles;
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
     }
@@ -50,7 +53,7 @@ export class TeamsListComponent implements OnInit {
    */
   addTeamAdminAsMember(teamInfo: TcTeamInfo) {
     this.membersService.createMember(teamInfo.teamId, {email: this.userService.username, firstname: '', lastname: ''}).subscribe( res => {
-      this.teamsService.addTeamRole(teamInfo.teamId, roles.member);
+      this.teamsService.addMemberRole(teamInfo.teamId);
       this.updateTeamsDataSource();
     });
   }

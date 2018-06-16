@@ -2,11 +2,13 @@ import { first } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatDialogRef, MatSlideToggle} from '@angular/material';
 
+import { UserService } from './../../../core/services/user.service';
 import { TeamsService } from './../../../core/services/teams.service';
 import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { roles } from '../../../core/constants/roles.constants';
 @Component({
   selector: 'tc-events-list',
   templateUrl: './events-list.component.html',
@@ -14,13 +16,14 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 })
 
 export class EventsListComponent implements OnInit {
-  columnsToDisplay = ['toggeler', 'date', 'time', 'event', 'status', 'user-action',  'admin-actions'];
+  columnsToDisplay = ['toggeler', 'date', 'time', 'event', 'status', 'user-action'];
   eventsDataSource: MatTableDataSource < TcEvent > ;
   userTeams: TcTeamInfo[];
   selectedTeamId: number;
   teamMemberId: number;
   isPastEvents: boolean;
   filterString = '';
+  isLoggedInAsAdmin: boolean;
   isTeamAdmin: boolean;
   isTeamMember: boolean;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
@@ -33,14 +36,16 @@ export class EventsListComponent implements OnInit {
   constructor(
     private eventsService: EventsService,
     private teamsService: TeamsService,
+    userService: UserService,
     public dialog: MatDialog
   ) {
     this.userTeams = this.teamsService.userTeams;
     this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
     this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     this.selectedTeamId = this.teamsService.selectedTeamId;
-    this.changeDisplayedColumnsPerRoleChange();
-    this.updateEvents();
+      this.isLoggedInAsAdmin =  userService.userType === roles.admin;
+      this.changeColumnsToDisplay();
+      this.updateEvents();
   }
 
   ngOnInit() {}
@@ -91,24 +96,44 @@ export class EventsListComponent implements OnInit {
    * selected team, and updates the displayed events to displays the events that belongs to the selected team.
    */
   changeSelectedTeam() {
-    this.changeDisplayedColumnsPerRoleChange();
     this.teamsService.selectedTeamId = this.selectedTeamId;
+    this.changeColumnsToDisplay();
     this.updateEvents();
   }
 
   /**
    * @author Nermeen Mattar
-   * @description checks the user's roles and display the proper columns accordingaly. For admin role will push admin actions column which
-   * includes the edit and delete actions and for member role will push toggeler column
+   * @description this function is called during the initialization and each time the user changes the selected team.
+   * Admin actions will be displayed if the user is 1) logged in as admin 2) an admin of the currently selected team.
+   * Toggeler will be displayed if the user is 1) a member of the currently selected team.
    */
-  changeDisplayedColumnsPerRoleChange() {
-    this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
+  changeColumnsToDisplay() {
+    if (this.isLoggedInAsAdmin) {
+      this.pushAdminActionIfTeamAdmin();
+    }
+    this.pushToggelerIfTeamMember();
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description pushes admin actions column (which includes the edit and delete actions) if the user is an admin of the selected team and
+   * admin-actions columns is not already displayed
+   */
+  pushAdminActionIfTeamAdmin() {
     this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     if (this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') === -1) {
       this.columnsToDisplay.push('admin-actions');
     } else if (!this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') !== -1) {
       this.columnsToDisplay.pop();
     }
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description pushes the event toggeler action column if the user is a member of the selected team and toggeler is not already displayed
+   */
+  pushToggelerIfTeamMember() {
+    this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
     if (this.isTeamMember && this.columnsToDisplay.indexOf('toggeler') === -1) {
       this.columnsToDisplay.unshift('toggeler');
     } else if (!this.isTeamMember && this.columnsToDisplay.indexOf('toggeler') !== -1) {

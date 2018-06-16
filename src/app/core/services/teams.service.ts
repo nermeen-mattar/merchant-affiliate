@@ -68,8 +68,12 @@ export class TeamsService {
    * @param {number} teamId
    * @returns {boolean}
    */
-  hasMemberRole(teamId: number): boolean {
-    return this.teamRoles.teamMembers.includes(teamId);
+  hasMemberRole(teamId?: number): boolean {
+    if (teamId) {
+      return this.teamRoles.teamMembers.includes(teamId);
+    } else {
+      return Boolean(this.teamRoles.teamMembers.length);
+    }
   }
 
   /**
@@ -78,8 +82,12 @@ export class TeamsService {
    * @param {number} teamId
    * @returns {boolean}
    */
-  hasAdminRole(teamId: number): boolean {
-    return this.teamRoles.teamAdmins.includes(teamId);
+  hasAdminRole(teamId?: number): boolean {
+    if (teamId) {
+      return this.teamRoles.teamAdmins.includes(teamId);
+    } else {
+      return Boolean(this.teamRoles.teamAdmins.length);
+    }
   }
 
   /**
@@ -96,15 +104,15 @@ export class TeamsService {
    */
   pushTeamRolesAndTeamsList(backendTeams: TcTeamInfo[], teamRoleName: string, teamRoles: TcClientSideTeamRoles, teamsList: TcTeamInfo[]) {
     teamRoles[teamRoleName] = [];
-    const normalizedTeamRole = teamRoleName === 'teamAdmins' ? roles.admin : roles.member;
+    // const normalizedTeamRole = teamRoleName === 'teamAdmins' ? roles.admin : roles.member;
     const backendTeamsLen = backendTeams.length;
     for (let teamIndex = 0; teamIndex < backendTeamsLen; teamIndex++) {
       const teamToUpdate: TcTeamInfo = teamsList.filter(team => team.teamId === backendTeams[teamIndex].teamId)[0];
       if (teamToUpdate) {
-        teamToUpdate.roles.push(normalizedTeamRole);
+        // teamToUpdate.roles.push(normalizedTeamRole);
       } else {
         teamsList.push({
-          roles: [normalizedTeamRole],
+          // roles: [normalizedTeamRole],
           ...backendTeams[teamIndex]
         });
       }
@@ -171,13 +179,11 @@ export class TeamsService {
    * @author Nermeen Mattar
    * @description adds a new team role (if not already exist) to the user roles for the team with the passed teamId
    * @param {number} teamId
-   * @param {string} newTeamRole
    */
-  addTeamRole(teamId: number, newTeamRole: string) {
-    const teamToModify = this.userTeams.filter(team => team.teamId === teamId)[0];
-    if (newTeamRole && roles[newTeamRole] && !teamToModify.roles.includes(newTeamRole)) {
-      teamToModify.roles.push(newTeamRole);
-      localStorage.setItem('userTeams', JSON.stringify(this.userTeams));
+  addMemberRole(teamId: number) {
+    if (!this.teamRoles.teamMembers.includes(teamId)) {
+      this.teamRoles.teamMembers.push(teamId);
+      localStorage.setItem('teamRoles', JSON.stringify(this.teamRoles));
     }
   }
 

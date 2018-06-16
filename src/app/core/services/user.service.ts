@@ -11,9 +11,6 @@ export class UserService {
   /* User static properties (received from the backend) */
   private _username: string;
   private _userType: string;
-  /* user state properties */
-  private isAdmin: BehaviorSubject < boolean > = new BehaviorSubject(false);
-  $userAdmin: Observable < boolean > = this.isAdmin.asObservable();
 
   constructor(private teamsService: TeamsService) {
     this.setLoggedInUserInfo();
@@ -63,7 +60,6 @@ export class UserService {
   set userType(userType: string) {
     userType = userType ? userType.toLowerCase() : '';
     /* above line is a preventive check to prevent toLowerCase from causing errors when user type is set to undefined */
-    this.isAdmin.next(userType === roles.admin);
     this._userType = userType;
     if (userType) {
       localStorage.setItem('userType', userType);
