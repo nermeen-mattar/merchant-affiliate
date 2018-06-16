@@ -43,9 +43,9 @@ export class EventsListComponent implements OnInit {
     this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
     this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     this.selectedTeamId = this.teamsService.selectedTeamId;
-      this.isLoggedInAsAdmin =  userService.userType === roles.admin;
-      this.changeColumnsToDisplay();
-      this.updateEvents();
+    this.isLoggedInAsAdmin =  userService.userType === roles.admin;
+    this.changeColumnsToDisplay();
+    this.updateEvents();
   }
 
   ngOnInit() {}
