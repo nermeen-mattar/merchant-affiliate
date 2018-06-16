@@ -1,7 +1,7 @@
 export interface TcMember {
   id?: number; // no id when creating a new event
   firstname: string;
-  lastname: string;
+  lastname?: string;
   email?: string;
   flag?: number;
   name?: string;

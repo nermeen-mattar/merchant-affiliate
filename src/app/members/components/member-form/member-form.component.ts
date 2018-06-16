@@ -63,8 +63,8 @@ export class MemberFormComponent implements OnInit {
   updateMemberValues(memberInfo: TcMember) {
     this.memberGroup.patchValue({
       firstName: memberInfo.firstname,
-      lastName: memberInfo.lastname,
-      email: memberInfo.email
+      lastName: memberInfo.name,
+      email: memberInfo.member.mail
     });
   }
 
