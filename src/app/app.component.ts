@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { MatIconRegistry } from '@angular/material';
@@ -8,20 +8,23 @@ import { availableLanguages, defaultLanguage, sysOptions } from './core/constant
 import { UserService } from './core/services/user.service';
 import { AuthService } from './auth/services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
-
+import { TeamsService } from './core/services/teams.service';
+import { roles } from './core/constants/roles.constants';
 @Component({
   selector: 'tc-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   appLanguage: string;
   $isUserLoggedIn: Observable < boolean > ;
-  $isUserAdmin: Observable < boolean > ;
+  isUserAdmin: boolean;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
   selectedLanguageCode: string;
+  hasAdminRole: boolean;
   constructor(
+    teamsService: TeamsService,
     public translate: TranslateService,
     private authService: AuthService,
     private router: Router,
@@ -29,13 +32,17 @@ export class AppComponent implements OnInit {
     public matIconRegistry: MatIconRegistry
   ) {
     matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
-  }
-
-  ngOnInit() {
-    this.$isUserLoggedIn = this.authService.$userLoggedIn;
-    this.$isUserAdmin =  this.userService.$userAdmin;
-    this.initLanguageRelatedVariables();
     this.resetScrollOnRouteChange();
+    this.initLanguageRelatedVariables();
+    this.$isUserLoggedIn = this.authService.$userLoggedIn;
+    this.$isUserLoggedIn.subscribe(loggedIn => {
+      if (loggedIn) {
+        this.hasAdminRole = teamsService.hasAdminRole();
+        this.isUserAdmin = userService.userType === roles.admin;
+      } else {
+        this.resetData();
+      }
+    });
   }
 
   /**
@@ -57,7 +64,7 @@ export class AppComponent implements OnInit {
   /**
    * @author Nermeen Mattar
    * @description Scrolls to top on Route Change
-  */
+   */
   resetScrollOnRouteChange() {
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -95,5 +102,13 @@ export class AppComponent implements OnInit {
    */
   logout() {
     this.authService.logout();
+  }
+  /**
+   * @author Nermeen Mattar
+   * @description resets the class variables
+   */
+  resetData() {
+    this.hasAdminRole = null;
+    this.isUserAdmin = null;
   }
 }

@@ -1,7 +1,7 @@
 {
   "TEAM_CENTER": "team.center",
-  "TEAM_CENTER_INFO1": "helps you to organize team events - pure & simple",
-  "TEAM_CENTER_INFO2": "it's free and always will be",
+  "TEAM_CENTER_INFO1": "Helps you to organize team events - pure & simple",
+  "TEAM_CENTER_INFO2": "It's free and always will be",
   "WELCOME": "Welcome",
   "DELETE": "Delete",
   "MORE": "More",
@@ -36,6 +36,7 @@
     "SAVE": "Save",
     "SEND": "Send",
     "IS_REQUIRED": "is required"
+
   },
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
