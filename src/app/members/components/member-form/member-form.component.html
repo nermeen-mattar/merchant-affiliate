@@ -20,9 +20,9 @@
             <mat-error *ngIf="memberGroup.controls['lastName'].invalid"> {{'USER.LAST_NAME'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
           </mat-form-field>
           <mat-form-field class="app-member-form__field">
-            <input matInput placeholder="{{'EMAIL'| translate}}" formControlName="email" type="text">
+            <input matInput placeholder="{{'USER.EMAIL'| translate}}" formControlName="email" type="text">
             <mat-icon color="primary" class="app-member-form__field__icon" matPrefix> email</mat-icon>
-            <mat-error *ngIf="memberGroup.controls['email'] .invalid"> {{'EMAIL'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+            <mat-error *ngIf="memberGroup.controls['email'] .invalid"> {{'USER.EMAIL'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
           </mat-form-field>
           <button mat-raised-button color="primary" class="app-member-form__button" type="submit" [disabled]="!memberGroup.valid">{{ 'FORM.SAVE' | translate }}</button>
         </form>

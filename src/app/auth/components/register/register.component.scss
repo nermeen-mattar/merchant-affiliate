@@ -7,9 +7,6 @@
   max-width: 500px;
   margin: 120px auto;
   &__content {
-    &__hide {
-      display:none;
-    }
     &__form {
       margin-top: 2rem;
       &__field {
@@ -19,6 +16,10 @@
         &__icon {
           font-size: $tc-font-size-h3;
           margin-right: 5px;
+        }
+        &__error {
+          font-size: 75%;
+          font-weight: normal;
         }
       }
      &__admin-exist {
@@ -41,6 +42,18 @@
         }
       }
     }
+    .stepper-action-btns {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      &--step-1 {
+        justify-content: flex-end;
+      }
+    }
+  }
+  &__element-hide {
+    display:none;
   }
   &__spinner {
     margin: 50px auto;

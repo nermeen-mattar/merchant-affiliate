@@ -18,6 +18,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from '../auth/services/auth.service';
 import { TokenHandlerService } from '../auth/services/token-handler.service';
 import { AdminService } from './services/admin.service';
+import { RegisterService } from '../auth/services/register.service';
+import { TeamsService } from './services/teams.service';
+import { DateService } from './services/date.service';
 
 @NgModule({
   imports: [
@@ -26,25 +29,28 @@ import { AdminService } from './services/admin.service';
     SharedModule,
     RouterModule,
     HttpClientModule,
-    TranslateModule
+    TranslateModule,
   ],
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   providers: [
     UserService,
     AdminService,
+    RegisterService, /* check if it is better to place it in auth module */
     AuthService,
     AuthGuard,
     TokenHandlerService,
     UserMessagesService,
     HttpRequestsService,
-    FieldValidatorsService
+    FieldValidatorsService,
+    TeamsService,
+    DateService
   ]
 })
 export class CoreModule {

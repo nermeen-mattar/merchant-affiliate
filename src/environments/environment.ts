@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:  'http://dev.team.center/service/', // '/api/' not authorized
+  baseUrl:  'https://dev.team.center/service/', // '/api/' not authorized
   authConfig: {
     tokenExpiration: 0 // in days
   }

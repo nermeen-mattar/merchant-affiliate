@@ -2,7 +2,7 @@
 .app-about {
   &__section {
     padding: 6rem 1rem;
-    text-align: center; // padding: 8rem 0;
+    text-align: center;
     &:nth-child(even) {
       background-color: white;
     }
@@ -13,12 +13,45 @@
     }
     &__content{
       text-align:center;
-      // width:55%;
-      // min-width: 450px;
       max-width: 750px;
       margin: 0 auto;
       &__text {
         padding:1rem 0;
+      }
+      &--icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &__icon {
+          cursor: pointer;
+          font-size: 30px;
+          background: white;
+          border-radius: 100%;
+          display: table-cell;
+          padding: 15px;
+          vertical-align: middle;
+          width: 30px;
+          height: 30px;
+          transition: all ease 0.2s;
+          &--facebook {
+            color: $facebook;
+            border: 4px solid $facebook;
+            &:hover {
+              background: rgba($color: $facebook, $alpha: 1);
+              color: #fff;
+              border: 4px solid #fff;
+            }
+          }
+          &--donate {
+            color: $primary-color;
+            border: 4px solid $primary-color;
+            &:hover {
+              background: rgba($color: $primary-color, $alpha: 1);
+              color: #fff;
+              border: 4px solid #fff;
+            }
+          }
+        }
       }
     }
   }
@@ -38,7 +71,7 @@
       &__icon {
         color: $primary-color;
         padding: 0.5rem;
-        font-size: $biggest-font-size;
+        font-size: $tc-font-size-h2;
         text-align: center;
         font-weight: 400;
       }
@@ -75,4 +108,8 @@
     background: url('../../assets/img/team.jpg') no-repeat center fixed;
   }
   */
+}
+.app-about__section__content__text[_ngcontent-c10] {
+  padding: 1rem 0;
+  font-size: 120%;
 }

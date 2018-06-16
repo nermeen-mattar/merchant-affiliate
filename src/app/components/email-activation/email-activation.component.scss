@@ -1,0 +1,34 @@
+@import "../../../styles/toolkit/variables.scss";
+.app-mail-activation {
+  max-width: 700px;
+  min-width: 200px;
+  margin: 7rem auto;
+  min-height: 242px;
+  text-align: center;
+  &__title {
+    color: $tc-color-gray-shade-6;
+    text-align: center;
+    &__user-name {
+      color: $primary-color;
+      text-transform: capitalize;
+
+    }
+  }
+  &__message {
+    font-size: $tc-font-size-h4;
+    margin: 1rem 0;
+  }
+  &__success {
+    color: $tc-color-success;
+  }
+  &__fail {
+    color: $tc-color-failure;
+  }
+  &__button {
+    margin-top: 2.2rem;
+    color: white;
+  }
+  &__spinner {
+    margin: 50px auto;
+  }
+}

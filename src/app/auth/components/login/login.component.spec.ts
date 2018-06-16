@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { AuthServiceMock } from '../../../shared/mocks/services/auth.service.mock';
 import { AuthService } from '../../services/auth.service';
 import { LoginComponent } from './login.component';
+import { RegisterService } from '../../services/register.service';
+import { RegisterServiceMock } from '../../../shared/mocks/services/register.service.mock';
 
 
 describe('LoginComponent', () => {
@@ -26,6 +28,9 @@ describe('LoginComponent', () => {
         providers: [{
           provide: AuthService,
           useClass: AuthServiceMock
+        }, {
+          provide: RegisterService,
+          useClass: RegisterServiceMock
         }]
       }).compileComponents();
     })

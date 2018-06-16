@@ -1,34 +1,66 @@
-import { UserService } from './core/services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/internal/Observable';
+import { MatIconRegistry } from '@angular/material';
 
+import { AvailableLanguageInfo } from './core/models/available-language-info.model';
 import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
+import { UserService } from './core/services/user.service';
 import { AuthService } from './auth/services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
-
+import { TeamsService } from './core/services/teams.service';
+import { roles } from './core/constants/roles.constants';
 @Component({
   selector: 'tc-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   appLanguage: string;
   $isUserLoggedIn: Observable < boolean > ;
-  $isUserAdmin: Observable < boolean > ;
+  isUserAdmin: boolean;
   menuOpened = false;
-  constructor(private translate: TranslateService, private authService: AuthService, private router: Router,
-    private userService: UserService) {}
-
-  ngOnInit() {
+  appLanguages: AvailableLanguageInfo[];
+  selectedLanguageCode: string;
+  hasAdminRole: boolean;
+  constructor(
+    teamsService: TeamsService,
+    public translate: TranslateService,
+    private authService: AuthService,
+    private router: Router,
+    private userService: UserService,
+    public matIconRegistry: MatIconRegistry
+  ) {
+    matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+    this.resetScrollOnRouteChange();
+    this.initLanguageRelatedVariables();
     this.$isUserLoggedIn = this.authService.$userLoggedIn;
-    this.$isUserAdmin =  this.userService.$userAdmin;
-    const browserLanguage = this.translate.getBrowserLang() || defaultLanguage;
-    this.appLanguage = this.getSuitableLanguage(browserLanguage);
+    this.$isUserLoggedIn.subscribe(loggedIn => {
+      if (loggedIn) {
+        this.hasAdminRole = teamsService.hasAdminRole();
+        this.isUserAdmin = userService.userType === roles.admin;
+      } else {
+        this.resetData();
+      }
+    });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description sets the app languages property to a copy of the available languages. And gets the user preferable language for this
+   * the priorites in order are: 1- local storage 2- browser language 3- default language from the code.
+   */
+  initLanguageRelatedVariables() {
+    this.appLanguages = JSON.parse(JSON.stringify(availableLanguages)); // copying available languages object
+    this.selectedLanguageCode = localStorage.getItem('lang');
+    if (!this.selectedLanguageCode) {
+      this.selectedLanguageCode = this.translate.getBrowserLang() || defaultLanguage;
+    }
+    this.appLanguage = this.getSuitableLanguage(this.selectedLanguageCode);
     this.translate.use(this.appLanguage);
     sysOptions.systemLanguage = this.appLanguage;
-    this.resetScrollOnRouteChange();
   }
+
   /**
    * @author Nermeen Mattar
    * @description Scrolls to top on Route Change
@@ -50,7 +82,18 @@ export class AppComponent implements OnInit {
   getSuitableLanguage(language): string {
     language = language.substring(0, 2).toLowerCase();
 
-    return availableLanguages.some(lang => (lang.code === language)) ? language : defaultLanguage;
+    return this.appLanguages.some(lang => (lang.code === language)) ? language : defaultLanguage;
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description uses the translate service to update the language and updates the language in the local storage
+   * @param {string} langCode
+   */
+  languageSelected(langCode: string) {
+    this.selectedLanguageCode = langCode;
+    this.translate.use(langCode);
+    localStorage.setItem('lang', langCode);
   }
 
   /**
@@ -59,5 +102,13 @@ export class AppComponent implements OnInit {
    */
   logout() {
     this.authService.logout();
+  }
+  /**
+   * @author Nermeen Mattar
+   * @description resets the class variables
+   */
+  resetData() {
+    this.hasAdminRole = null;
+    this.isUserAdmin = null;
   }
 }

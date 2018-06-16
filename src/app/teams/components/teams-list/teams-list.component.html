@@ -16,19 +16,24 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
           <mat-chip-list selectable="false">
-            <mat-chip *ngFor="let role of row.roles" [ngClass]="role==='admin'? 'app-teams__container__table__team-admin' : ''">
-              {{(role === 'admin' ? 'ADMIN.ADMIN' : 'MEMBER.MEMBER') | translate}}
+            <mat-chip *ngIf="teamRoles.teamAdmins.includes(row.teamId)" class="app-teams__container__table__team-admin">
+              {{'ADMIN.ADMIN' | translate}}
             </mat-chip>
+            <mat-chip *ngIf="teamRoles.teamMembers.includes(row.teamId); else addMeAsMember">
+              {{'MEMBER.MEMBER' | translate}}
+            </mat-chip>
+            <ng-template #addMeAsMember>
+              <mat-chip (click)="addTeamAdminAsMember(row)">
+                {{ 'MEMBER.ADD_ME_AS_MEMBER' | translate }}
+              </mat-chip>
+            </ng-template>
             <!--  add displayAdminActions to the ngIf if the user must be logged in as an admin -->
-            <mat-chip *ngIf="row.roles && row.roles.length === 1 && row.roles[0] === 'admin'" routerLink="/members/list/new">
-              {{ 'MEMBER.ADD_MYSELF_AS_MEMBER' | translate }}
-            </mat-chip>
           </mat-chip-list>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="action" *ngIf="displayAdminActions">
-        <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
-        <mat-cell style="text-align: right;" *matCellDef="let row">
+        <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let row">
           <mat-icon class="app-teams__action" (click)="deleteTeam(row.teamId)" color="primary">delete</mat-icon>
         </mat-cell>
       </ng-container>

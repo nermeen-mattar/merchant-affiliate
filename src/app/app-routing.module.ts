@@ -4,6 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './core/guards/auth.guard';
 import { TeamsComponent } from './teams/teams.component';
+import { DirectLinksComponent } from './components/direct-links/direct-links.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { UnderMaintenanceComponent } from './shared/components/under-maintenance/under-maintenance.component';
+import { EmailActivationComponent } from './components/email-activation/email-activation.component';
 
 /* The default route is the team center module but if the user is not logged in auth gaurd will redirect the user to the home */
 const routes: Routes = [{
@@ -20,8 +24,11 @@ const routes: Routes = [{
     loadChildren: './about/about.module#AboutModule'
   },
   {
+    path: 'contact',
+    loadChildren: './contact/contact.module#ContactModule'
+  },
+  {
     path: 'auth',
-    canActivate: [AuthGuard],
     loadChildren: './auth/auth.module#AuthModule',
   },
   {
@@ -50,13 +57,20 @@ const routes: Routes = [{
     loadChildren: './admin-user/admin-user.module#AdminUserModule'
   },
   {
-    path: 'contact',
-    canActivate: [AuthGuard],
-    loadChildren: './contact/contact.module#ContactModule'
+    path: 'under-maintenance',
+    component: UnderMaintenanceComponent
+  },
+  {
+    path: 'activation',
+    component: EmailActivationComponent
+  },
+  {
+    path: 'team/:hash',
+    component: DirectLinksComponent
   },
   {
     path: '**',
-    redirectTo: 'events'
+    component: PageNotFoundComponent
   }
 ];
 

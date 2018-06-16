@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminUserComponent } from './admin-user.component';
 import { AdminSettingsComponent } from './components/admin-settings/admin-settings.component';
+import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
           path: 'settings',
           component: AdminSettingsComponent
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent
       }
     ]
   }

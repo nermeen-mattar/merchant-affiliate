@@ -3,19 +3,45 @@
     <div class="app-about__section">
       <h3 class="app-about__section__title"> {{'ABOUT.SECTION1.TITLE' | translate}}
       </h3>
-      <p class="app-about__section__content">
-        {{'ABOUT.SECTION1.TEXT' | translate}}
-      </p>
-    </div>
-    <div class="app-about__parralax" parallax>
+      <div class="app-about__section__content">
+        <p class="app-about__section__content__text">
+          {{'ABOUT.SECTION1.TEXT1' | translate}}
+        </p>
+        <p class="app-about__section__content__text">
+          {{'ABOUT.SECTION1.TEXT2' | translate}}
+        </p>
+        <p class="app-about__section__content__text">
+          {{'ABOUT.SECTION1.TEXT3' | translate}}
+        </p>
+        <p class="app-about__section__content__text">
+          {{'ABOUT.SECTION1.TEXT4' | translate}}
+        </p>
+        <p class="app-about__section__content__text">
+          {{'ABOUT.SECTION1.TEXT5' | translate}}
+        </p>
+        <p class="app-about__section__content__text">
+          {{'ABOUT.SECTION1.TEXT6' | translate}}
+        </p>
+      </div>
+
+      <div class="app-about__section__content app-about__section__content--icon-wrap">
+        <mat-icon (click)="openDonateWindow()" fontSet="fa" fontIcon="fa-coffee" class="app-about__section__content--icon-wrap__icon app-about__section__content--icon-wrap__icon--donate"></mat-icon>
+      </div>
+      <div class="app-about__section__content">
+        <p class="app-about__section__content__text">
+          {{'ABOUT.SECTION1.TEXT7' | translate}}
+        </p>
+      </div>
+      <div class="app-about__section__content app-about__section__content--icon-wrap">
+        <mat-icon (click)="openFacebookWindow()" fontSet="fa" fontIcon="fa-facebook" class="app-about__section__content--icon-wrap__icon app-about__section__content--icon-wrap__icon--facebook"></mat-icon>
+      </div>
     </div>
   </div>
   <!-- may be uncommented <div class="app-about__main">
     <div class="app-about__main__bottom" parallax [config]="{initialValue: -200, ratio: .2}">
     </div>
   </div> -->
-  <div class="app-about__team">
-    <!-- I am using unlocalized text in the team section becuase the text are dummy for now-->
+  <!-- <div class="app-about__team">
     <h1 class="app-about__team__heading">
       <mat-icon class="app-about__team__heading__icon">group</mat-icon>
       <span class="app-about__team__heading__text"> {{'MEMBER.OUR_MEMBERS' | translate}}
@@ -72,36 +98,40 @@
         </p>
       </div>
     </div>
-  </div>
-  <div>
-    <div class="app-about__section">
+  </div> -->
+
+    <!-- <div class="app-about__section">
       <h3 class="app-about__section__title">{{'ABOUT.SECTION2.TITLE' | translate}}</h3>
       <p class="app-about__section__content">
         {{'ABOUT.SECTION2.TEXT' | translate}}
       </p>
-    </div>
-    <div class="app-about__section">
+    </div> -->
+    <!-- <div class="app-about__section">
       <h3 class="app-about__section__title"> {{'ABOUT.SECTION3.TITLE' | translate}}</h3>
       <div class="app-about__section__content">
         {{'ABOUT.SECTION3.TEXT' | translate}}
-        <a href="https://paypal.me/coffeeforteamcenter/4" target="_blank">
+        <a href="https://paypal.me/teamdotcenter/3" target="_blank">
           <mat-icon class="app-about__team__heading__icon">coffee</mat-icon>
         </a>
         <div> {{'ABOUT.SECTION3.TEXT2' | translate}}</div>
       </div>
-    </div>
+    </div> -->
     <div class="app-about__section">
-      <h3 class="app-about__section__title"> {{'ABOUT.SECTION4.TITLE' | translate}}</h3>
+      <h3 class="app-about__section__title"> {{'ABOUT.SECTION2.TITLE' | translate}}</h3>
       <div class="app-about__section__content">
-        <div class="app-about__section__content__text">{{'ABOUT.SECTION4.TEXT' | translate}}</div>
+        <div class="app-about__section__content__text">{{'ABOUT.SECTION2.TEXT1' | translate}}</div>
         <mat-divider></mat-divider>
-        <div class="app-about__section__content__text">{{'ABOUT.SECTION4.TEXT2' | translate}}</div>
+        <div class="app-about__section__content__text">{{'ABOUT.SECTION2.TEXT2' | translate}}</div>
         <mat-divider></mat-divider>
-        <div class="app-about__section__content__text">{{'ABOUT.SECTION4.TEXT3' | translate}}</div>
+        <div class="app-about__section__content__text">{{'ABOUT.SECTION2.TEXT3' | translate}}</div>
+        <mat-divider></mat-divider>
+        <div class="app-about__section__content__text">{{'ABOUT.SECTION2.TEXT4' | translate}}</div>
+        <mat-divider></mat-divider>
+        <div class="app-about__section__content__text">{{'ABOUT.SECTION2.TEXT5' | translate}}</div>
       </div>
     </div>
-    <div class="app-about__section">
+    <!-- <div class="app-about__section">
       {{'ABOUT.SECTION4.TEXT4' | translate}}
-    </div>
-  </div>
+    </div> -->
+
 </div>

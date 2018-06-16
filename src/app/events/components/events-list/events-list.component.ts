@@ -1,15 +1,14 @@
 import { first } from 'rxjs/operators';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource, MatDialog, MatDialogRef, MatSlideToggle} from '@angular/material';
 
+import { UserService } from './../../../core/services/user.service';
+import { TeamsService } from './../../../core/services/teams.service';
 import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
-import { UserService } from '../../../core/services/user.service';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-
+import { roles } from '../../../core/constants/roles.constants';
 @Component({
   selector: 'tc-events-list',
   templateUrl: './events-list.component.html',
@@ -17,20 +16,36 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 })
 
 export class EventsListComponent implements OnInit {
-  displayedColumns = ['id', 'date', 'time', 'event', 'status', 'critical-value', 'actions'];
+  columnsToDisplay = ['toggeler', 'date', 'time', 'event', 'status', 'user-action'];
   eventsDataSource: MatTableDataSource < TcEvent > ;
   userTeams: TcTeamInfo[];
-  selectedTeam: TcTeamInfo;
+  selectedTeamId: number;
   teamMemberId: number;
   isPastEvents: boolean;
-  displayAdminActions: boolean;
   filterString = '';
+  isLoggedInAsAdmin: boolean;
+  isTeamAdmin: boolean;
+  isTeamMember: boolean;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
-  constructor(private eventsService: EventsService, private userService: UserService, public dialog: MatDialog) {
-    this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
-    this.userTeams = this.userService.getUserTeams();
-    this.selectedTeam = this.userService.getSelectedTeam();
-    this.updateEvents(this.isPastEvents);
+  timeFormat = {
+    subString: {
+      to: 5
+    }
+  };
+  activeEvent: TcEvent = null;
+  constructor(
+    private eventsService: EventsService,
+    private teamsService: TeamsService,
+    userService: UserService,
+    public dialog: MatDialog
+  ) {
+    this.userTeams = this.teamsService.userTeams;
+    this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
+    this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
+    this.selectedTeamId = this.teamsService.selectedTeamId;
+      this.isLoggedInAsAdmin =  userService.userType === roles.admin;
+      this.changeColumnsToDisplay();
+      this.updateEvents();
   }
 
   ngOnInit() {}
@@ -41,49 +56,88 @@ export class EventsListComponent implements OnInit {
    * received events to initEventsDataSource function which initializes the eventsDataSource for the events table
    * @param {boolean} isPast
    */
-  updateEvents(isPast: boolean) {
-    this.isPastEvents = isPast;
+  updateEvents() {
     this.eventsDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.eventsService.getEvents(this.selectedTeam.teamId, isPast).subscribe(({
+    this.eventsService.getEvents(this.selectedTeamId, this.isPastEvents).subscribe(({
       events = [],
       myTeamMemberId
     }) => {
       this.teamMemberId = myTeamMemberId;
-      this.addNumOfParticipationsToEvents(events);
+      this.eventsService.addNumOfParticipationsToEvents(events);
       this.updateEventsDataSource(events);
     });
   }
 
-  /**
-   * @author Nermeen Mattar
-   * @description When the user changes the selected team from the menu, it updates the selected team in user service with the newly
-   * selected team, and updates the displayed events to displays the events that belongs to the selected team.
-   */
-  changeSelectedTeam() {
-    this.userService.setSelectedTeam(this.selectedTeam);
-    this.updateEvents(false);
+  setActiveEvent(event: TcEvent) {
+    this.activeEvent = event;
   }
 
   /**
    * @author Nermeen Mattar
-   * @description calculates the number of participations for each event and add it to the event object
-   * @param {Event []} events
+   * @description Updates the displayed events to displays the past events.
    */
-  addNumOfParticipationsToEvents(events: TcEvent[]) {
-    let numOfParitications;
-    const eventsListLen = events.length;
-    for (let eventIndex = 0; eventIndex < eventsListLen; eventIndex++) {
-      numOfParitications = 0;
-      const eventParticipations = events[eventIndex].detailedParticipations;
-      if (eventParticipations) {
-        const eventParticipationsLen = eventParticipations.length;
-        for (let participationIndex = 0; participationIndex < eventParticipationsLen; participationIndex++) {
-          if (eventParticipations[participationIndex].action === 'participate') {
-            numOfParitications++;
-          }
-        }
-      }
-      events[eventIndex].numOfParticipations = numOfParitications;
+  displayPastEvents() {
+    this.isPastEvents = true;
+    this.updateEvents();
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description Updates the displayed events to displays the future events.
+   */
+  displayFutureEvents() {
+    this.isPastEvents = false;
+    this.updateEvents();
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description When the user changes the selected team from the menu, it updates the selected team in teamsService with the newly
+   * selected team, and updates the displayed events to displays the events that belongs to the selected team.
+   */
+  changeSelectedTeam() {
+    this.teamsService.selectedTeamId = this.selectedTeamId;
+    this.changeColumnsToDisplay();
+    this.updateEvents();
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description this function is called during the initialization and each time the user changes the selected team.
+   * Admin actions will be displayed if the user is 1) logged in as admin 2) an admin of the currently selected team.
+   * Toggeler will be displayed if the user is 1) a member of the currently selected team.
+   */
+  changeColumnsToDisplay() {
+    if (this.isLoggedInAsAdmin) {
+      this.pushAdminActionIfTeamAdmin();
+    }
+    this.pushToggelerIfTeamMember();
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description pushes admin actions column (which includes the edit and delete actions) if the user is an admin of the selected team and
+   * admin-actions columns is not already displayed
+   */
+  pushAdminActionIfTeamAdmin() {
+    this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
+    if (this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') === -1) {
+      this.columnsToDisplay.push('admin-actions');
+    } else if (!this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') !== -1) {
+      this.columnsToDisplay.pop();
+    }
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description pushes the event toggeler action column if the user is a member of the selected team and toggeler is not already displayed
+   */
+  pushToggelerIfTeamMember() {
+    this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
+    if (this.isTeamMember && this.columnsToDisplay.indexOf('toggeler') === -1) {
+      this.columnsToDisplay.unshift('toggeler');
+    } else if (!this.isTeamMember && this.columnsToDisplay.indexOf('toggeler') !== -1) {
+      this.columnsToDisplay.shift();
     }
   }
 
@@ -93,11 +147,19 @@ export class EventsListComponent implements OnInit {
    * @param {boolean} toggleValue
    * @param {string} eventId
    */
-  toogleParticipationInEvent(toggleValue: boolean, eventId: string) {
+  toggleParticipationInEvent(toggleValue: boolean, eventId: string, currToggle: MatSlideToggle) {
     this.eventsService.toggleEventParticipation(toggleValue, eventId, this.teamMemberId).subscribe(res => {
-      this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)].numOfParticipations += toggleValue ? 1 : -1;
+      const event = this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)];
+      event.numOfParticipations += toggleValue ? 1 : -1;
+      event.myParticipation.action =  toggleValue ? 'participate' : 'cancel';
       this.triggerTableToRefreshData();
+    }, err => {
+      currToggle.toggle();
     });
+  }
+
+  preventTriggeringAccordion($event) {
+    $event.stopPropagation();
   }
 
   getIndexOfTargetEvent(eventId: string) {
@@ -108,13 +170,13 @@ export class EventsListComponent implements OnInit {
     this.filterString = ''; // reset any string the user entered in the search input
     this.eventsDataSource.data = this.eventsDataSource.data; // to trigger the table to change its data.
   }
+
   /**
    * @author Nermeen Mattar
    * @description deletes the target event from the events list (only allowed for admin)
    * @param {string} eventId
    */
-
-  deleteEvent($event, eventId: string) {
+  deleteEvent(eventId: string) {
     this.openConfirmationDialog();
     this.confirmDialogRef.afterClosed().pipe(
       first()

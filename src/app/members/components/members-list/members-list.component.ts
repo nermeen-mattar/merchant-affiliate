@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/internal/Observable';
 import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
 import { DatePipe } from '@angular/common';
 import { first } from 'rxjs/operators';
 
+import { TeamsService } from './../../../core/services/teams.service';
 import { MembersService } from '../../services/members.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { UserService } from '../../../core/services/user.service';
 import { TcMember } from '../../models/tc-member.model';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { roles } from '../../../core/constants/roles.constants';
 
 @Component({
   selector: 'tc-members-list',
@@ -19,18 +21,19 @@ export class MembersListComponent implements OnInit {
   displayedColumns = ['member', 'mail'];
   membersDataSource: MatTableDataSource < TcMember > ;
   userTeams: TcTeamInfo[];
-  selectedTeam: TcTeamInfo;
+  selectedTeamId: number;
   teamMemberId: number;
   displayAdminActions: boolean;
   filterString = '';
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
-  constructor(private membersService: MembersService, private userService: UserService, public dialog: MatDialog) {
-    this.displayAdminActions = this.userService.getUserType().toLowerCase() === 'admin';
+  constructor(private membersService: MembersService, userService: UserService,  private teamsService: TeamsService,
+    public dialog: MatDialog) {
+    this.displayAdminActions = userService.userType === roles.admin;
     if (this.displayAdminActions) {
       this.displayedColumns.push('action');
     }
-    this.userTeams = this.userService.getUserTeams();
-    this.selectedTeam = this.userService.getSelectedTeam();
+    this.userTeams = this.teamsService.userTeams;
+    this.selectedTeamId = this.teamsService.selectedTeamId;
     this.updateMembers();
   }
 
@@ -43,8 +46,8 @@ export class MembersListComponent implements OnInit {
    */
   updateMembers() {
     this.membersDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.userService.setSelectedTeam(this.selectedTeam); // *** temp (to enhance)
-    this.membersService.getMembers(this.selectedTeam.teamId).subscribe((res) => { // {members= [], myTeamMemberId}
+    this.teamsService.selectedTeamId = this.selectedTeamId; // *** temp (to enhance)
+    this.membersService.getMembers(this.selectedTeamId).subscribe((res) => { // {members= [], myTeamMemberId}
       // this.teamMemberId = myTeamMemberId;
       this.updateMembersDataSource(res);
     });
@@ -112,7 +115,7 @@ export class MembersListComponent implements OnInit {
         this.membersService.changeMemberActivationStatus({
           flag: updatedFlag,
           /* backend expects number */
-          teamId: this.selectedTeam.teamId,
+          teamId: this.selectedTeamId,
           teamMemberId: member.id
         }).subscribe(res => {
           this.membersDataSource.data[this.getIndexOfTargetMember(member.id)].flag = updatedFlag;
@@ -129,7 +132,6 @@ export class MembersListComponent implements OnInit {
   updateMembersDataSource(members: TcMember[]) {
     this.filterString = ''; // reset any string the user entered in the search input
     this.membersDataSource = new MatTableDataSource(members); // Assign the data to the data source for the table to render
-    console.log('this.membersDataSource ', this.membersDataSource);
   }
 
   /**

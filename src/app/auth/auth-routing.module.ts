@@ -4,6 +4,8 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { ResetComponent } from './components/reset/reset.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
+import { AuthGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +19,8 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'reset',
@@ -26,6 +29,10 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent
       }
     ]
   }

@@ -15,6 +15,7 @@ $primary-text-color : #212121;
 $secondary-text-color: #757575;
 $divider-color : #BDBDBD;
 $dark-brown : #795548;
+$facebook: #3b5998;
 // Weight
 $tc-font-weight-1: 100;
 $tc-font-weight-2: 200;
@@ -30,10 +31,10 @@ $tc-font-size-base: 10px;
 $tc-font-size-body: 1.3rem;
 // Heading Size
 $tc-font-size-h1: 3.5rem;
-$tc-font-size-h2: 2.0rem;
+$tc-font-size-h2: 2.5rem;
 $tc-font-size-h3: 1.5rem;
 $tc-font-size-h4: 1.2rem;
-$tc-font-size-h5: 1.0rem;
+$tc-font-size-h5: 0.9rem;
 $tc-font-size-h6: 0.7rem;
 ////////////////////////////////////////////////////////////
 // Color ( Base, Font, Border, Alert )
@@ -125,6 +126,5 @@ $tc-z-index-level-8: 800;
 $tc-z-index-level-9: 900;
 $tc-z-index-level-10: 1000;
 // Styles added by nermeen (please adjust these in above sections)
-$primary-font-size: .95rem;
+
 $secondary-font-size: 0.8571rem;
-$biggest-font-size: 2.5rem;

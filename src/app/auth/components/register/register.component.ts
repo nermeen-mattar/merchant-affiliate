@@ -1,14 +1,18 @@
-
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatHorizontalStepper, MatVerticalStepper } from '@angular/material';
 
+import { RegisterService } from './../../services/register.service';
+import { FieldValidatorsService } from './../../../core/services/field-validators.service';
 import { HttpRequestsService } from '../../../core/services/http-requests.service';
 import { AdminService } from './../../../core/services/admin.service';
 import { AuthService } from '../../services/auth.service';
 import { AdminRegisterInfo } from './../../models/admin-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
 import { UserMessagesService } from '../../../core/services/user-messages.service';
+import { roles } from '../../../core/constants/roles.constants';
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
@@ -19,13 +23,49 @@ export class RegisterComponent implements OnInit {
   displaySpinner = false;
   emailActivationRequired = false;
   displayMessageCard = false;
-  constructor(private authService: AuthService, private adminService: AdminService, private userMessagesService: UserMessagesService) {}
+  teamName: string;
+  registerFirstStepForm: FormGroup;
+  registerSecondStepForm: FormGroup;
+  currentStep = 1;
+  roles = roles; /* needed to declare a class property to make it available on the component html */
+  constructor(private authService: AuthService, private adminService: AdminService,
+    private registerService: RegisterService, activatedRoute: ActivatedRoute,
+    private fieldValidatorsService: FieldValidatorsService, private userMessagesService: UserMessagesService) {
+    const queryParams = activatedRoute.snapshot.queryParams;
+    this.teamName = queryParams && queryParams['team-name'];
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.createRegisterFirstStepForm();
+    this.createRegisterSecondStepForm();
+  }
   selectedStepChanged(changeInfo: StepperSelectionEvent) {
     if (changeInfo.previouslySelectedIndex === 0) {
       this.checkUserType(changeInfo.previouslySelectedStep.stepControl.value);
     }
+    this.currentStep = changeInfo.selectedIndex + 1;
+  }
+  createRegisterFirstStepForm() {
+    this.registerFirstStepForm = new FormGroup({
+      teamName: new FormControl(this.teamName || '', [Validators.required]),
+      teamPassword: new FormControl('', [Validators.required,
+        this.fieldValidatorsService.getValidator('validatePassword')
+      ]),
+      email: new FormControl('', [Validators.required, Validators.email])
+    });
+  }
+
+  createRegisterSecondStepForm() {
+    this.registerSecondStepForm = new FormGroup({
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
+      adminPassword: new FormControl('', [Validators.required]),
+      adminNewPassword: new FormControl('', [Validators.required, this.fieldValidatorsService.getValidator('validatePassword')]),
+      adminConfirmPassword: new FormControl('', [Validators.required])
+    }, [this.fieldValidatorsService.getValidator('validateEqual', {
+      field1: 'adminNewPassword',
+      field2: 'adminConfirmPassword'
+    })]);
   }
 
   /**
@@ -42,22 +82,49 @@ export class RegisterComponent implements OnInit {
       res => { // user exist but not admin
         this.displaySpinner = false;
         this.userType = 'member';
+        this.disableFormControls(['firstName', 'lastName', 'adminPassword']);
+        this.enableFormControls(['adminNewPassword', 'adminConfirmPassword']);
       }, err => {
         this.displaySpinner = false;
         if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
-          this.userType = 'admin';
-
+          this.userType = roles.admin;
+          this.disableFormControls(['firstName', 'lastName', 'adminConfirmPassword', 'adminNewPassword']);
+          this.enableFormControls(['adminPassword']);
         } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
           this.userType = 'new';
-
+          this.disableFormControls(['adminPassword']);
+          this.enableFormControls(['firstName', 'lastName', 'adminNewPassword', 'adminConfirmPassword']);
         }
       });
   }
 
   /**
    * @author Nermeen Mattar
+   * @description disables the form controls with the received names
+   */
+  disableFormControls(formControlsNames: string[]) {
+    const formControlsLen = formControlsNames.length;
+    for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++) {
+      this.registerSecondStepForm.controls[formControlsNames[formControlIndex]].disable();
+    }
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description  enables the form controls with the received names
+   * @param {string[]} formControlsNames
+   */
+  enableFormControls(formControlsNames: string[]) {
+    const formControlsLen = formControlsNames.length;
+    for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++) {
+      this.registerSecondStepForm.controls[formControlsNames[formControlIndex]].enable();
+    }
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description calling the register function with different parameters depending on the case, as the new user is the only one who sends
-   * the first and last names. Once register is successful a registration success message will be displayed to the new user and the member 
+   * the first and last names. Once register is successful a registration success message will be displayed to the new user and the member
    * user while the admin user will get logged in using credentials received from.
    * @param {TeamRegisterInfo} teamInfo
    * @param {AdminRegisterInfo} adminInfo
@@ -68,24 +135,25 @@ export class RegisterComponent implements OnInit {
       firstname: adminInfo.firstName,
       lastname: adminInfo.lastName
     };
+    const adminPassword = adminInfo.adminPassword || adminInfo.adminNewPassword;
     this.authService.register({
       ...newUserInfo,
       teamname: teamInfo.teamName,
       teampassword: teamInfo.teamPassword,
       email: teamInfo.email,
-      adminpassword: adminInfo.adminPassword
+      adminpassword: adminPassword
     }).subscribe(registerRes => {
-      if (this.userType === 'admin') {
-        this.adminLogin(teamInfo.email, adminInfo.adminPassword);
+      if (this.userType === roles.admin) {
+        this.adminLogin(teamInfo.email, adminPassword);
       } else {
         this.displayMessageCard = true;
         this.displaySpinner = false;
       }
     }, err => {
-        this.handleRegisterError(err);
+      this.displaySpinner = false;
+      this.handleRegisterError(err);
     });
   }
-
 
   /**
    * @author Nermeen Mattar
@@ -99,59 +167,53 @@ export class RegisterComponent implements OnInit {
       username: adminEmail,
       password: adminPassword
     }).subscribe(loginRes => {
-      // if(loginRes.isAuthorized.toLowerCase() === 'admin') {
-        this.displaySpinner = false;
-      // }
+      this.displaySpinner = false;
     }, err => {
       this.handleLoginError(err);
     });
   }
 
+  /**
+   * @author Nermeen Mattar
+   * @description requests the backend to resend the activation mail to the email the user entered
+   */
   resendConfirmationEmail() {
     this.displaySpinner = true;
-    setTimeout(() => { // temporary to simulate backend request
+    this.registerService.resendActivationMail(this.registerFirstStepForm.controls.email.value).subscribe(res => {
       this.displaySpinner = false;
-      this.userMessagesService.showUserMessage({
-          success: 'REGISTER.EMAIL_SEND_AGAIN'
-        },
-        'success');
-    }, 2000);
+    }, err => {
+      this.displaySpinner = false;
+    });
   }
 
-
+  /**
+   * @author Nermeen Mattar
+   * @description handles the registration fail
+   */
   handleRegisterError(err) {
-      // this.registrationStepper.previous();  
-      /* conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
-      if (err.status === '409') { // or check if the backend returned certain msg
-        // this.registrationStepper.previous();
-  
-      } else if (this.userType === 'admin') {
-        this.userMessagesService.showUserMessage({
-          fail: 'REGISTER.EMAIL_SEND_AGAIN'
-        },
-        'fail');
-      } else { /* will consider anything else as wrong password since currently errors are not supported from the bakend side */
-        // SOMETHING_WENT_WRONG
-      }
+    /* 409 conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
+    if (this.userType === roles.admin) {
+      /* this.userMessagesService.showUserMessage({}, 'fail'); */
     }
-    
+    /* will consider anything else as wrong password */
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description handles the login fail
+   */
   handleLoginError(err) {
     this.displaySpinner = false;
-
-        /* conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
-    /*    if (err.status === '401') { // or check if the backend returned certain msg
-          this.userMessagesService.showUserMessage({
-            fail: 'LOGIN.INCORRECT_ADMIN_PASSWRD'
-          },
-          'fail');
-        } else */// if (err.error.message === 'email activation required') 
-        {
-          this.informUserToActivateEmail (); /* may move this to happen in the first step (checking step) */
-        }
+    if (err.error.message === 'error.mail.not.confirmed') {
+      this.informUserToActivateEmail(); /* better to move this to happen in the first step (checking).. need support from backend */
+    }
   }
-  
+
+  /**
+   * @author Nermeen Mattar
+   * @description displays a message to inform the user of the need to activate email. A resend activation mail link will be displayed too.
+   */
   informUserToActivateEmail() {
-    // this.registrationStepper.previous();
     this.emailActivationRequired = true;
     this.displayMessageCard = true;
   }
