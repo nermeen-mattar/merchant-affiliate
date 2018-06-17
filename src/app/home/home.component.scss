@@ -67,16 +67,16 @@
 
     &__middle {
       background-attachment: fixed;
-      background-size: cover;
+      background-size:cover !important;
       min-height: 650px;
-      background: url('../../assets/img/viewsResponsive.jpg') no-repeat center fixed;
-      
+      background: url('../../assets/img/View_Responsive_2300.jpg') no-repeat center fixed;
+      background-position-y: -150px !important;
 
     
     }
     @media only screen and (max-width: 720px) {
       &__middle{
-        background: url('../../assets/img/viewsResponsive.jpg') no-repeat center;
+        background: url('../../assets/img/View_Responsive_2300.jpg') no-repeat center;
         background-size: 450px auto;
         min-height: 250px;
         background-position: center !important; 

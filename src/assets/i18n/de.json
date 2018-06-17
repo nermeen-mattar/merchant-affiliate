@@ -8,6 +8,7 @@
   "CANCEL": "Abbrechen",
   "CONFIRM": "Bestätigen",
   "BACK": "Zurück",
+  "NEXT": "Weiter",
   "DETAILS": "Details",
   "YES": "Ja",
   "NO": "Nein",
@@ -19,6 +20,7 @@
   "FROM": "Von",
   "TO": "An",
   "SEARCH_PLACEHOLDER": "Alle Spalten durchsuchen",
+  "MULTI_TABLE_SEARCH_PLACEHOLDER": "Search through all columns in tables",
   "SOCIAL_MEDIA": {
     "SHARE": "Teilen",
     "TWEET": "Tweet"
@@ -97,12 +99,16 @@
       "ADMIN_PASSWORD_CHANGING_FAIL": "Das Admin Passwort konnte nicht geändert werden"
     },
     "TEAM": {
+      "TEAM_DELETING_SUCCESS": "Team wurde erfolgreich gelöscht",
+      "TEAM_DELETING_FAIL": "Team konnte nicht gelöscht werden",
       "TEAM_NAME_CHANGING_SUCCESS": "Der Team Name wurde erfolgreich geändert",
       "TEAM_NAME_CHANGING_FAIL": "Der Team Name konnte nicht geändert werden",
       "DIRECT_LINK_CHANGING_SUCCESS": "Der Direktlink wurde erfolgreich gewechselt",
       "DIRECT_LINK_CHANGING_FAIL": "Der Direktlinkt konnte nicht gewechselt werden",
       "TEAM_PASSWORD_CHANGING_SUCCESS": "Das Team Passwort wurde erfolgreich geändert",
-      "TEAM_PASSWORD_CHANGING_FAIL": "Das Team Passwort konnte nicht geändert werden"
+      "TEAM_PASSWORD_CHANGING_FAIL": "Das Team Passwort konnte nicht geändert werden",
+      "TEAM_CONFIRM_DELETING_HEADER": "Team löschen",
+      "TEAM_CONFIRM_DELETING_BODY": "Willst du dieses Team wirklich löschen?"
     }
   },
   "LANGUAGE": {
@@ -279,6 +285,18 @@
       "TEXT3": "Google maps für Ortsangaben integrieren",
       "TEXT4": "Weitere Sprachen",
       "TEXT5": "Mobile App für Android & iOS"
+    },
+    "SECTION3": {
+      "TITLE": "How to support us?",
+      "TEXT": "You can support our project with buing us a coffee or even more :)",
+      "TEXT2": "We would highly appreciate liking us on Facebook this way we can keep you members informed about our progress."
+    },
+    "SECTION4": {
+      "TITLE": "What is next?",
+      "TEXT": "Excel (CSV) Upload function to create multiple events and members per one click",
+      "TEXT2": "Ability for Admins to enable \"Event log\" view for the members",
+      "TEXT3": "Google maps for location entires - Other languages - Mobile Apps (Android & iOS)",
+      "TEXT4":  "We are grateful for feedbacks, or recommondations for new features. Please just use our contact form"
     }
   },
   "CONTACT": {
