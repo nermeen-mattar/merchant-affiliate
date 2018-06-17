@@ -104,8 +104,7 @@
             </mat-error>
             <div class="stepper-action-btns">
                 <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{ 'BACK' | translate }}</button>
-                <button type="submit" *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
-            (click)="register(registerFirstStepForm.value, registerSecondStepForm.value)">{{ 'REGISTER.REGISTER' | translate }}</button>
+                <button type="submit" *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid">{{ 'REGISTER.REGISTER' | translate }}</button>
               </div>
           </form>
         </mat-step>
