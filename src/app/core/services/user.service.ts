@@ -1,19 +1,24 @@
-
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import { LoginStatusService } from './../../auth/services/login-status.service';
 import { TeamsService } from './teams.service';
 import { DecodedToken } from './../../auth/models/decoded-token.model';
-import { roles } from '../constants/roles.constants';
+import { TokenHandlerService } from '../../auth/services/token-handler.service';
 @Injectable()
 export class UserService {
   /* User static properties (received from the backend) */
   private _username: string;
   private _userType: string;
 
-  constructor(private teamsService: TeamsService) {
+  constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, tokenHandler: TokenHandlerService) {
     this.setLoggedInUserInfo();
+    loginStatusService.$userLoggedIn.subscribe(loginInfo => {
+      if (loginInfo) {
+        this.setLoggedInUserInfo(tokenHandler.decodeToken(loginInfo.token)); // this.loginResponse,
+      } else {
+        this.resetData();
+      }
+    });
   }
 
   /**
@@ -75,7 +80,7 @@ export class UserService {
    * Side note: there are duplicated info between token and loginResponse. Had to decode the token as login response only do not have sub!
    * @param {DecodedToken} decodedToken
    */
-  setLoggedInUserInfo(decodedToken ? : DecodedToken) {
+  setLoggedInUserInfo(decodedToken ?: DecodedToken) {
     if (decodedToken) {
       this.userType = decodedToken.grantedRole;
       this.username = decodedToken.sub;
