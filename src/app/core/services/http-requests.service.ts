@@ -1,13 +1,11 @@
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Response, RequestOptions, Headers } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
-import { TranslateService } from '@ngx-translate/core';
-import { MatSnackBar } from '@angular/material';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 
+import { LoginStatusService } from './../../auth/services/login-status.service';
+import { LoginResponse } from './../../auth/models/login-response.model';
 import { UserMessages } from './../models/user-messages.model';
 import { environment } from './../../../environments/environment';
 import { UserMessagesService } from './user-messages.service';
@@ -19,13 +17,29 @@ export class HttpRequestsService {
   private requestOptions: {headers: HttpHeaders};
   private baseUrl: string;
 
-  constructor(private http: HttpClient, private router: Router, private userMessagesService: UserMessagesService) {
+  constructor(private http: HttpClient, private userMessagesService: UserMessagesService, private loginStatusService: LoginStatusService) {
     this.baseUrl = environment.baseUrl;
     this.requestHeader = new HttpHeaders({
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     });
-    // this.setHttpRequestOptions();
+    this.updateAuthorizationStates(JSON.parse(localStorage.getItem('loginResponse')));
+    this.loginStatusService.$userLoggedIn.subscribe( (loginInfo: LoginResponse) => {
+      this.updateAuthorizationStates(loginInfo);
+    });
+  }
+
+   /**
+   * @author Nermeen Mattar
+   * @description updates the authorization states based on the value of the login response. First, it it changes the request options in the
+   * http service so that any subsequent request will either include authorization property (authorized user) or not (unauthorized user)
+   */
+  updateAuthorizationStates(loginInfo?: LoginResponse) {
+    if (loginInfo) {
+      this.appendAuthorizationToRequestHeader(loginInfo.token);
+    } else {
+      this.removeAuthorizationFromRequestHeader();
+    }
   }
 
   appendAuthorizationToRequestHeader(token) {
@@ -53,6 +67,9 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
+          if (err.error.statusCode === 401) {
+            this.loginStatusService.isLoggedIn.next(false);
+          }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
@@ -68,6 +85,9 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
+          if (err.error.statusCode === 401) {
+            this.loginStatusService.isLoggedIn.next(false);
+          }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
@@ -83,6 +103,9 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
+          if (err.error.statusCode === 401) {
+            this.loginStatusService.isLoggedIn.next(false);
+          }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
@@ -100,6 +123,9 @@ export class HttpRequestsService {
         err => {
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
+          if (err.error.statusCode === 401) {
+            this.loginStatusService.isLoggedIn.next(false);
+          }
         });
     });
   }
