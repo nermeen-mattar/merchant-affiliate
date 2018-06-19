@@ -23,18 +23,18 @@ export class HttpRequestsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     });
-    this.updateAuthorizationStates(JSON.parse(localStorage.getItem('loginResponse')));
+    this.changeRequestHeaderAuthorization(JSON.parse(localStorage.getItem('loginResponse')));
     this.loginStatusService.$userLoggedIn.subscribe( (loginInfo: LoginResponse) => {
-      this.updateAuthorizationStates(loginInfo);
+      this.changeRequestHeaderAuthorization(loginInfo);
     });
   }
 
    /**
    * @author Nermeen Mattar
-   * @description updates the authorization states based on the value of the login response. First, it it changes the request options in the
-   * http service so that any subsequent request will either include authorization property (authorized user) or not (unauthorized user)
+   * @description It changes the request options in the http service so that any subsequent request will either include authorization
+   * property (authorized user) or not (unauthorized user) based on the value of the login response.
    */
-  updateAuthorizationStates(loginInfo?: LoginResponse) {
+  changeRequestHeaderAuthorization(loginInfo?: LoginResponse) {
     if (loginInfo) {
       this.appendAuthorizationToRequestHeader(loginInfo.token);
     } else {
