@@ -13,6 +13,9 @@
         width: 100%;
         line-height: 1.5; // was 2.125
         margin-top: 1rem;
+        &__icons-wrapper {
+          display:flex;
+        }
         &__icon {
           font-size: $tc-font-size-h3;
           margin-right: 5px;
