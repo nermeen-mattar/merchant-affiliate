@@ -41,7 +41,7 @@
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
     "BACKEND": {
-      "ERROR.UNAUTHORIZED" : "You are unauthorized. Please login to view this page.",
+      "ERROR.UNAUTHORIZED" : "You are unauthorized. Please login to view the page.",
       "ERROR.MAIL.NOT.EXIST" : "Mail does not exist.",
       "ERROR.MAIL.CONFIRMED": "Mail already confirmed",
       "ERROR.NOT.EXISTING.TEAM.ADMIN": "Team admin does not exist",

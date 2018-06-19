@@ -1,3 +1,4 @@
+import { LoginStatusService } from './../../auth/services/login-status.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
@@ -16,11 +17,11 @@ import { AuthService } from '../../auth/services/auth.service';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private router: Router,
-    private authService: AuthService) {}
+    private loginStatusService: LoginStatusService) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable < boolean > | Promise < boolean > | boolean {
-    if (this.authService.isAuthenticated()) { // when the user is logged in
+    if (this.loginStatusService.isAuthenticated()) { // when the user is logged in
       if (state.url.indexOf('auth') > -1 ) {
         if (this.router.routerState.snapshot.url === '') {
           this.router.navigateByUrl('events'); // when manually changing the route to a wrong route or to a non account based page.

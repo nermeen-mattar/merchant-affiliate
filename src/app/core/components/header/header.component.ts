@@ -4,10 +4,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { availableLanguages } from './../../constants/i18n.constants';
 import { UserService } from './../../services/user.service';
-import { AuthService } from '../../../auth/services/auth.service';
 import { AvailableLanguageInfo } from '../../models/available-language-info.model';
 import { TeamsService } from '../../services/teams.service';
 import { roles } from '../../constants/roles.constants';
+import { LoginStatusService } from '../../../auth/services/login-status.service';
 
 @Component({
   selector: 'tc-header',
@@ -23,10 +23,10 @@ export class HeaderComponent {
   hasAdminRole: boolean;
   @Output() menuClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public translate: TranslateService, private authService: AuthService, private userService: UserService,
+  constructor(public translate: TranslateService, private loginStatusService: LoginStatusService, private userService: UserService,
     teamService: TeamsService) {
       this.appLanguages = availableLanguages;
-    this.$isUserLoggedIn = this.authService.$userLoggedIn;
+    this.$isUserLoggedIn = this.loginStatusService.$userLoggedIn;
     this.$isUserLoggedIn.subscribe( loggedIn => {
       if (loggedIn) {
         this.hasAdminRole = teamService.hasAdminRole();
@@ -42,7 +42,7 @@ export class HeaderComponent {
    * @description logging out the logged in user
    */
   logout() {
-    this.authService.logout();
+    this.loginStatusService.isLoggedIn.next(false);
   }
 
   /**

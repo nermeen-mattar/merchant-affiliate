@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { format } from 'date-fns';
 
-import { AuthService } from './../../auth/services/auth.service';
 import { TcDateRange } from '../models/tc-date-range.model';
+import { LoginStatusService } from '../../auth/services/login-status.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DateService {
   private _selectedDateRange: TcDateRange;
-  constructor(authService: AuthService) {
-    authService.$userLoggedIn.subscribe(isUserLoggedIn => {
+  constructor(loginStatusService: LoginStatusService) {
+    loginStatusService.$userLoggedIn.subscribe(isUserLoggedIn => {
       if (!isUserLoggedIn) {
         this.resetData();
       }
