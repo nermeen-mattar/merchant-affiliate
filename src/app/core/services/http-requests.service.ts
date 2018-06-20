@@ -74,7 +74,6 @@ export class HttpRequestsService {
         err => {
           if (err.error.statusCode === 401) {
             this.loginStatusService.loginState.next({isAuthorized: false});
-            userMessages = {fail: 'NO_ERROR_MESSAGE'};
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -93,7 +92,6 @@ export class HttpRequestsService {
         err => {
           if (err.error.statusCode === 401) {
             this.loginStatusService.loginState.next({isAuthorized: false});
-            userMessages = {fail: 'NO_ERROR_MESSAGE'};
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -112,7 +110,6 @@ export class HttpRequestsService {
         err => {
           if (err.error.statusCode === 401) {
             this.loginStatusService.loginState.next({isAuthorized: false});
-            userMessages = {fail: 'NO_ERROR_MESSAGE'};
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -133,7 +130,6 @@ export class HttpRequestsService {
           obs.error(err);
           if (err.error.statusCode === 401) {
             this.loginStatusService.loginState.next({isAuthorized: false});
-            userMessages = {fail: 'NO_ERROR_MESSAGE'};
           }
         });
     });
