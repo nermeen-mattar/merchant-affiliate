@@ -1,17 +1,15 @@
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Response, RequestOptions, Headers } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
-import { TranslateService } from '@ngx-translate/core';
-import { MatSnackBar } from '@angular/material';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 
+import { LoginStatusService } from './../../auth/services/login-status.service';
 import { UserMessages } from './../models/user-messages.model';
 import { environment } from './../../../environments/environment';
 import { UserMessagesService } from './user-messages.service';
 import { tap } from 'rxjs/operators';
+import { LoginStatus } from '../models/login-status.model';
 
 @Injectable()
 export class HttpRequestsService {
@@ -19,16 +17,37 @@ export class HttpRequestsService {
   private requestOptions: {headers: HttpHeaders};
   private baseUrl: string;
 
-  constructor(private http: HttpClient, private router: Router, private userMessagesService: UserMessagesService) {
+  constructor(private http: HttpClient, private userMessagesService: UserMessagesService, private loginStatusService: LoginStatusService) {
     this.baseUrl = environment.baseUrl;
     this.requestHeader = new HttpHeaders({
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     });
-    // this.setHttpRequestOptions();
+    this.loginStatusService.$userLoginState.subscribe( (loginInfo: LoginStatus) => {
+      this.changeRequestHeaderAuthorization(loginInfo);
+    });
   }
 
-  appendAuthorizationToRequestHeader(token) {
+   /**
+   * @author Nermeen Mattar
+   * @description It changes the request options in the http service so that any subsequent request will either include authorization
+   * property (authorized user) or not (unauthorized user) based on the value of the login response.
+   * @param {LoginStatus} [loginInfo]
+   */
+  changeRequestHeaderAuthorization(loginInfo?: LoginStatus) {
+    if (!loginInfo.isAuthorized) {
+      this.removeAuthorizationFromRequestHeader();
+    } else if (loginInfo.loginResponse) {
+      this.appendAuthorizationToRequestHeader(loginInfo.loginResponse.token);
+    } else {
+      const loginResponse =  JSON.parse(localStorage.getItem('loginResponse'));
+      if (loginResponse) {
+        this.appendAuthorizationToRequestHeader(loginResponse.token);
+      }
+    }
+  }
+
+  appendAuthorizationToRequestHeader(token: string) {
     this.requestHeader =  this.requestHeader.append('Authorization', `Bearer ${token}`);
     this.setHttpRequestOptions();
   }
@@ -53,6 +72,10 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
+          if (err.error.statusCode === 401) {
+            this.loginStatusService.loginState.next({isAuthorized: false});
+            userMessages = {fail: 'NO_ERROR_MESSAGE'};
+          }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
@@ -68,6 +91,10 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
+          if (err.error.statusCode === 401) {
+            this.loginStatusService.loginState.next({isAuthorized: false});
+            userMessages = {fail: 'NO_ERROR_MESSAGE'};
+          }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
@@ -83,6 +110,10 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
+          if (err.error.statusCode === 401) {
+            this.loginStatusService.loginState.next({isAuthorized: false});
+            userMessages = {fail: 'NO_ERROR_MESSAGE'};
+          }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
@@ -100,6 +131,10 @@ export class HttpRequestsService {
         err => {
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
+          if (err.error.statusCode === 401) {
+            this.loginStatusService.loginState.next({isAuthorized: false});
+            userMessages = {fail: 'NO_ERROR_MESSAGE'};
+          }
         });
     });
   }

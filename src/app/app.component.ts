@@ -1,3 +1,4 @@
+import { LoginStatus } from './core/models/login-status.model';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -6,7 +7,7 @@ import { MatIconRegistry } from '@angular/material';
 import { AvailableLanguageInfo } from './core/models/available-language-info.model';
 import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
 import { UserService } from './core/services/user.service';
-import { AuthService } from './auth/services/auth.service';
+import { LoginStatusService } from './auth/services/login-status.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { TeamsService } from './core/services/teams.service';
 import { roles } from './core/constants/roles.constants';
@@ -17,7 +18,7 @@ import { roles } from './core/constants/roles.constants';
 })
 export class AppComponent {
   appLanguage: string;
-  $isUserLoggedIn: Observable < boolean > ;
+  $isUserLoggedIn: Observable < LoginStatus > ;
   isUserAdmin: boolean;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
@@ -26,17 +27,17 @@ export class AppComponent {
   constructor(
     teamsService: TeamsService,
     public translate: TranslateService,
-    private authService: AuthService,
+    private loginStatusService: LoginStatusService,
     private router: Router,
-    private userService: UserService,
+    userService: UserService,
     public matIconRegistry: MatIconRegistry
   ) {
     matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
     this.resetScrollOnRouteChange();
     this.initLanguageRelatedVariables();
-    this.$isUserLoggedIn = this.authService.$userLoggedIn;
+    this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
     this.$isUserLoggedIn.subscribe(loggedIn => {
-      if (loggedIn) {
+      if (loggedIn.isAuthorized) {
         this.hasAdminRole = teamsService.hasAdminRole();
         this.isUserAdmin = userService.userType === roles.admin;
       } else {
@@ -101,7 +102,7 @@ export class AppComponent {
    * @description Logs the user out of the system
    */
   logout() {
-    this.authService.logout();
+    this.loginStatusService.loginState.next({ isAuthorized: false});
   }
   /**
    * @author Nermeen Mattar

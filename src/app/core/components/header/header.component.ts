@@ -4,10 +4,11 @@ import { Observable } from 'rxjs/Observable';
 
 import { availableLanguages } from './../../constants/i18n.constants';
 import { UserService } from './../../services/user.service';
-import { AuthService } from '../../../auth/services/auth.service';
 import { AvailableLanguageInfo } from '../../models/available-language-info.model';
 import { TeamsService } from '../../services/teams.service';
 import { roles } from '../../constants/roles.constants';
+import { LoginStatusService } from '../../../auth/services/login-status.service';
+import { LoginStatus } from '../../models/login-status.model';
 
 @Component({
   selector: 'tc-header',
@@ -15,7 +16,7 @@ import { roles } from '../../constants/roles.constants';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  $isUserLoggedIn: Observable<boolean>;
+  $isUserLoggedIn: Observable<LoginStatus>;
   isUserAdmin: boolean;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
@@ -23,12 +24,12 @@ export class HeaderComponent {
   hasAdminRole: boolean;
   @Output() menuClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public translate: TranslateService, private authService: AuthService, private userService: UserService,
+  constructor(public translate: TranslateService, private loginStatusService: LoginStatusService, private userService: UserService,
     teamService: TeamsService) {
       this.appLanguages = availableLanguages;
-    this.$isUserLoggedIn = this.authService.$userLoggedIn;
+    this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
     this.$isUserLoggedIn.subscribe( loggedIn => {
-      if (loggedIn) {
+      if (loggedIn.isAuthorized) {
         this.hasAdminRole = teamService.hasAdminRole();
         this.isUserAdmin =  this.userService.userType === roles.admin;
       } else {
@@ -42,7 +43,7 @@ export class HeaderComponent {
    * @description logging out the logged in user
    */
   logout() {
-    this.authService.logout();
+    this.loginStatusService.loginState.next({isAuthorized: false});
   }
 
   /**

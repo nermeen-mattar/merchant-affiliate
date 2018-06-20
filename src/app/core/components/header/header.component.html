@@ -6,10 +6,10 @@
     <span class="app-header__logo__icon"></span>
   </div>
   <div class="app-header__menu">
-    <span class="app-header__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+    <span class="app-header__menu__item" routerLink="/events" *ngIf="($isUserLoggedIn | async).isAuthorized" routerLinkActive="active">
       <span> {{'EVENT.EVENTS' | translate}} </span>
     </span>
-    <span *ngIf="($isUserLoggedIn | async)">
+    <span *ngIf="($isUserLoggedIn | async).isAuthorized">
       <div *ngIf="hasAdminRole; else onlyMembersList" class="app-header__menu__item app-header__menu__item__sub-menu" mat-button
         [matMenuTriggerFor]="membersMenu">
         {{'MEMBER.MEMBERS' | translate}}
@@ -25,23 +25,23 @@
         </span>
       </ng-template>
     </span>
-    <span class="app-header__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async)" routerLinkActive="active">
+    <span class="app-header__menu__item" routerLink="/teams" *ngIf="($isUserLoggedIn | async).isAuthorized" routerLinkActive="active">
       <span> {{'TEAM.TEAMS' | translate}} </span>
     </span>
-    <span class="app-header__menu__item" routerLink="/member-user/switch-to-admin" *ngIf="($isUserLoggedIn | async) && !isUserAdmin && hasAdminRole"
+    <span class="app-header__menu__item" routerLink="/member-user/switch-to-admin" *ngIf="($isUserLoggedIn | async).isAuthorized && !isUserAdmin && hasAdminRole"
       routerLinkActive="active">
       <span> {{'ADMIN.ADMIN' | translate}} </span>
     </span>
     <span class="app-header__menu__item" routerLink="/auth/register" routerLinkActive="active">
       <span> {{'REGISTER.REGISTER' | translate}}</span>
     </span>
-    <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+    <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async).isAuthorized" routerLinkActive="active">
       <span> {{'LOGIN.LOGIN' | translate}}</span>
     </span>
     <span class="app-header__menu__item" routerLink="/about" routerLinkActive="active">
       <span> {{'ABOUT.ABOUT' | translate}} </span>
     </span>
-    <span class="app-header__menu__item" routerLink="/admin-user/settings" *ngIf="($isUserLoggedIn | async) &&  isUserAdmin">
+    <span class="app-header__menu__item" routerLink="/admin-user/settings" *ngIf="($isUserLoggedIn | async).isAuthorized &&  isUserAdmin">
       <span>{{'ADMIN.SETTINGS' | translate}}</span>
     </span>
     <span class="app-header__menu__item app-header__menu__item__sub-menu" mat-button [matMenuTriggerFor]="langMenu">
@@ -52,7 +52,7 @@
           mat-menu-item> {{ ('LANGUAGE.' + lang.code) | translate}} </button>
       </mat-menu>
     </span>
-    <span class="app-header__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async)">
+    <span class="app-header__menu__item" (click)="logout()" *ngIf="($isUserLoggedIn | async).isAuthorized">
       <span>{{'LOG_OUT' | translate}}</span>
     </span>
   </div>

@@ -1,11 +1,11 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatListModule, MatMenuModule, MatIconModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { LoginStatusService } from './../auth/services/login-status.service';
 import { UserMessagesService } from './services/user-messages.service';
 import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';
@@ -44,6 +44,7 @@ import { DateService } from './services/date.service';
     AdminService,
     RegisterService, /* check if it is better to place it in auth module */
     AuthService,
+    LoginStatusService,
     AuthGuard,
     TokenHandlerService,
     UserMessagesService,

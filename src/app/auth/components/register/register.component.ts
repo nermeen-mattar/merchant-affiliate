@@ -2,11 +2,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { MatHorizontalStepper, MatVerticalStepper } from '@angular/material';
 
 import { RegisterService } from './../../services/register.service';
 import { FieldValidatorsService } from './../../../core/services/field-validators.service';
-import { HttpRequestsService } from '../../../core/services/http-requests.service';
 import { AdminService } from './../../../core/services/admin.service';
 import { AuthService } from '../../services/auth.service';
 import { AdminRegisterInfo } from './../../models/admin-register-info.model';
@@ -27,6 +25,7 @@ export class RegisterComponent implements OnInit {
   registerFirstStepForm: FormGroup;
   registerSecondStepForm: FormGroup;
   currentStep = 1;
+  displayPassword: boolean;
   roles = roles; /* needed to declare a class property to make it available on the component html */
   constructor(private authService: AuthService, private adminService: AdminService,
     private registerService: RegisterService, activatedRoute: ActivatedRoute,
@@ -39,6 +38,11 @@ export class RegisterComponent implements OnInit {
     this.createRegisterFirstStepForm();
     this.createRegisterSecondStepForm();
   }
+
+  toggleDisplayPassword() {
+    this.displayPassword = !this.displayPassword;
+  }
+
   selectedStepChanged(changeInfo: StepperSelectionEvent) {
     if (changeInfo.previouslySelectedIndex === 0) {
       this.checkUserType(changeInfo.previouslySelectedStep.stepControl.value);
@@ -61,11 +65,13 @@ export class RegisterComponent implements OnInit {
       lastName: new FormControl('', [Validators.required]),
       adminPassword: new FormControl('', [Validators.required]),
       adminNewPassword: new FormControl('', [Validators.required, this.fieldValidatorsService.getValidator('validatePassword')]),
-      adminConfirmPassword: new FormControl('', [Validators.required])
-    }, [this.fieldValidatorsService.getValidator('validateEqual', {
+      // adminConfirmPassword: new FormControl('', [Validators.required])
+    },
+    /*[this.fieldValidatorsService.getValidator('validateEqual', {
       field1: 'adminNewPassword',
       field2: 'adminConfirmPassword'
-    })]);
+    })]*/
+  );
   }
 
   /**
@@ -82,18 +88,18 @@ export class RegisterComponent implements OnInit {
       res => { // user exist but not admin
         this.displaySpinner = false;
         this.userType = 'member';
-        this.disableFormControls(['firstName', 'lastName', 'adminPassword']);
-        this.enableFormControls(['adminNewPassword', 'adminConfirmPassword']);
+        this.disableFormControls(['firstName', 'lastName', '']);
+        this.enableFormControls(['adminNewPassword']); // adminConfirmPassword
       }, err => {
         this.displaySpinner = false;
         if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
           this.userType = roles.admin;
-          this.disableFormControls(['firstName', 'lastName', 'adminConfirmPassword', 'adminNewPassword']);
+          this.disableFormControls(['firstName', 'lastName', 'adminNewPassword']); // adminConfirmPassword
           this.enableFormControls(['adminPassword']);
         } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
           this.userType = 'new';
           this.disableFormControls(['adminPassword']);
-          this.enableFormControls(['firstName', 'lastName', 'adminNewPassword', 'adminConfirmPassword']);
+          this.enableFormControls(['firstName', 'lastName', 'adminNewPassword']); // adminConfirmPassword
         }
       });
   }
