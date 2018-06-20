@@ -43,7 +43,9 @@
     <div class="app-event-details__container">
       <!-- Participation Table -->
       <div class="app-event-details__container__table">
-        <h4 class="app-event-details__container__table__header app-event-details__label">{{'EVENT.PARTICIPATIONS' | translate}} </h4>
+        <h4 class="app-event-details__container__table__header app-event-details__label">{{'EVENT.PARTICIPATIONS' | translate}}
+            <span *ngIf="eventDetailsDatasource && eventDetailsDatasource.present"> ({{eventDetailsDatasource.present.data.length}})</span>
+        </h4>
         <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.present">
           <ng-container matColumnDef="name">
             <mat-header-cell class="app-event-details__container__table__header-cell app-event-details__label" *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
@@ -63,7 +65,9 @@
       <div class="app-event-details__container__space-seperator"></div>
       <!-- Cancelation Table -->
       <div class="app-event-details__container__table">
-        <h4 class="app-event-details__container__table__header app-event-details__label">{{'EVENT.CANCELATIONS' | translate}} </h4>
+        <h4 class="app-event-details__container__table__header app-event-details__label">{{'EVENT.CANCELATIONS' | translate}}
+            <span *ngIf="eventDetailsDatasource && eventDetailsDatasource.absent"> ({{eventDetailsDatasource.absent.data.length}})</span>
+        </h4>
         <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.absent">
           <ng-container matColumnDef="name">
             <mat-header-cell class="app-event-details__container__table__header-cell app-event-details__label" *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
