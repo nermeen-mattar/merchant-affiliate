@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { LoginStatusService } from './../../auth/services/login-status.service';
-import { LoginResponse } from './../../auth/models/login-response.model';
 import { UserMessages } from './../models/user-messages.model';
 import { environment } from './../../../environments/environment';
 import { UserMessagesService } from './user-messages.service';
 import { tap } from 'rxjs/operators';
+import { LoginStatus } from '../models/login-status.model';
 
 @Injectable()
 export class HttpRequestsService {
@@ -23,8 +23,7 @@ export class HttpRequestsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     });
-    this.changeRequestHeaderAuthorization(JSON.parse(localStorage.getItem('loginResponse')));
-    this.loginStatusService.$userLoggedIn.subscribe( (loginInfo: LoginResponse) => {
+    this.loginStatusService.$userLoginState.subscribe( (loginInfo: LoginStatus) => {
       this.changeRequestHeaderAuthorization(loginInfo);
     });
   }
@@ -33,16 +32,22 @@ export class HttpRequestsService {
    * @author Nermeen Mattar
    * @description It changes the request options in the http service so that any subsequent request will either include authorization
    * property (authorized user) or not (unauthorized user) based on the value of the login response.
+   * @param {LoginStatus} [loginInfo]
    */
-  changeRequestHeaderAuthorization(loginInfo?: LoginResponse) {
-    if (loginInfo) {
-      this.appendAuthorizationToRequestHeader(loginInfo.token);
-    } else {
+  changeRequestHeaderAuthorization(loginInfo?: LoginStatus) {
+    if (!loginInfo.isAuthorized) {
       this.removeAuthorizationFromRequestHeader();
+    } else if (loginInfo.loginResponse) {
+      this.appendAuthorizationToRequestHeader(loginInfo.loginResponse.token);
+    } else {
+      const loginResponse =  JSON.parse(localStorage.getItem('loginResponse'));
+      if (loginResponse) {
+        this.appendAuthorizationToRequestHeader(loginResponse.token);
+      }
     }
   }
 
-  appendAuthorizationToRequestHeader(token) {
+  appendAuthorizationToRequestHeader(token: string) {
     this.requestHeader =  this.requestHeader.append('Authorization', `Bearer ${token}`);
     this.setHttpRequestOptions();
   }
@@ -68,7 +73,8 @@ export class HttpRequestsService {
         },
         err => {
           if (err.error.statusCode === 401) {
-            this.loginStatusService.isLoggedIn.next(false);
+            this.loginStatusService.loginState.next({isAuthorized: false});
+            userMessages = {fail: 'NO_ERROR_MESSAGE'};
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -86,7 +92,8 @@ export class HttpRequestsService {
         },
         err => {
           if (err.error.statusCode === 401) {
-            this.loginStatusService.isLoggedIn.next(false);
+            this.loginStatusService.loginState.next({isAuthorized: false});
+            userMessages = {fail: 'NO_ERROR_MESSAGE'};
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -104,7 +111,8 @@ export class HttpRequestsService {
         },
         err => {
           if (err.error.statusCode === 401) {
-            this.loginStatusService.isLoggedIn.next(false);
+            this.loginStatusService.loginState.next({isAuthorized: false});
+            userMessages = {fail: 'NO_ERROR_MESSAGE'};
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -124,7 +132,8 @@ export class HttpRequestsService {
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
           if (err.error.statusCode === 401) {
-            this.loginStatusService.isLoggedIn.next(false);
+            this.loginStatusService.loginState.next({isAuthorized: false});
+            userMessages = {fail: 'NO_ERROR_MESSAGE'};
           }
         });
     });

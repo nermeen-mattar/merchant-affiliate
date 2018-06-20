@@ -38,7 +38,7 @@ export class AuthService {
       .pipe(map(
         res => {
           if (!res.message) { // this if statement is temp until the backend fixes the case of email not confirmed by returning an error
-            this.loginStatusService.isLoggedIn.next(res);
+            this.loginStatusService.loginState.next({isAuthorized: true, loginResponse: res});
           }
           return res;
         }));
@@ -62,7 +62,7 @@ export class AuthService {
         res => {
           if (!res.message) { // this if statement is temp until the backend fixes the case of email not confirmed by returning an error
             /* this.logout(); commented on 18 June as not needed */
-            this.loginStatusService.isLoggedIn.next(res);
+            this.loginStatusService.loginState.next({isAuthorized: true, loginResponse: res});
           }
           return res;
         }));
@@ -83,7 +83,7 @@ export class AuthService {
       .pipe(map(
         res => {
           if (res.isAuthorized.toLowerCase() === roles.admin) {
-            this.loginStatusService.isLoggedIn.next(res);
+            this.loginStatusService.loginState.next({isAuthorized: true, loginResponse: res});
           } else {
             this.userMessagesService.showUserMessage({
               fail: switchFailMsg

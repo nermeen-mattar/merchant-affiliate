@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { LoginStatusService } from './../../auth/services/login-status.service';
+import { LoginStatus } from './../models/login-status.model';
 import { TeamsService } from './teams.service';
 import { DecodedToken } from './../../auth/models/decoded-token.model';
 import { TokenHandlerService } from '../../auth/services/token-handler.service';
@@ -11,12 +12,13 @@ export class UserService {
   private _userType: string;
 
   constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, tokenHandler: TokenHandlerService) {
-    this.setLoggedInUserInfo();
-    loginStatusService.$userLoggedIn.subscribe(loginInfo => {
-      if (loginInfo) {
-        this.setLoggedInUserInfo(tokenHandler.decodeToken(loginInfo.token)); // this.loginResponse,
-      } else {
+    loginStatusService.$userLoginState.subscribe((loginInfo: LoginStatus) => {
+      if (!loginInfo.isAuthorized) {
         this.resetData();
+      } else if (loginInfo.loginResponse) {
+        this.setLoggedInUserInfo(tokenHandler.decodeToken(loginInfo.loginResponse.token));
+      } else {
+        this.setLoggedInUserInfo(); /* if isAuthorized and no loginResponse object (after refresh case) */
       }
     });
   }
