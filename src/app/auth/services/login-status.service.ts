@@ -5,13 +5,14 @@ import { BehaviorSubject } from 'rxjs';
 
 import { TokenHandlerService } from './token-handler.service';
 import { LoginResponse } from './../models/login-response.model';
+import { LoginStatus } from '../../core/models/login-status.model';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginStatusService {
-  isLoggedIn: BehaviorSubject < any > = new BehaviorSubject(false);
+  loginState: BehaviorSubject < LoginStatus > = new BehaviorSubject({isAuthorized: false});
   /* the event that informs listeners about the updates on the authorization state.*/
-  $userLoggedIn: Observable < any > = this.isLoggedIn.asObservable();
+  $userLoginState: Observable < any > = this.loginState.asObservable();
   loginResponse: LoginResponse;
   constructor(
     private tokenHandler: TokenHandlerService, private router: Router) {
@@ -25,8 +26,8 @@ export class LoginStatusService {
    * @description Emits an event to inform listenting components about the updated login status based on the value of the login response.
    */
   updateLoginStateFromTheLocalStorage() {
-    this.loginResponse = JSON.parse(localStorage.getItem('loginResponse')) || false;
-    this.isLoggedIn.next(this.loginResponse);
+    this.loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
+    this.loginState.next({isAuthorized: this.isAuthenticated()}); /* on refresh only send isAthorized without loginResponse object */
   }
 
 
@@ -36,14 +37,11 @@ export class LoginStatusService {
    * one which emitted the login state change (on refresh) then it returns without doing anything.
    */
   subscribeToLoginStateChanges() {
-    this.$userLoggedIn.subscribe(loginInfo => {
-      if (JSON.stringify(loginInfo) === JSON.stringify(this.loginResponse)) {
-        return;
-      }
-      if (loginInfo) {
-        this.onLoginRequestSuccess(loginInfo);
-      } else {
+    this.$userLoginState.subscribe(loginInfo => {
+      if (!loginInfo.isAuthorized) {
         this.logout();
+      } else if (loginInfo.loginResponse) {
+        this.onLoginRequestSuccess(loginInfo.loginResponse); // this.loginResponse,
       }
     });
   }
