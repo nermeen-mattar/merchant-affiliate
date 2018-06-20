@@ -5,11 +5,15 @@
   </div>
   <div class="app-events__header">
     <h3 class="app-events__header__title">
-      <span class="app-events__header__title__text">{{ (isPastEvents ? 'EVENT.PAST_EVENTS' : 'EVENT.EVENTS') | translate}}</span>
-      <mat-icon *ngIf="!isPastEvents" class="app-events__action" (click)="displayPastEvents()" color="primary">history</mat-icon>
-      <button mat-mini-fab *ngIf="isTeamAdmin" color="primary" class="app-events__action app-events__add" routerLink="new">
-        <mat-icon>add</mat-icon>
-      </button>
+      <span class="app-events__header__title__text">{{ (isPastEvents ? 'EVENT.PAST_EVENTS' : 'EVENT.EVENTS') | translate}}
+        <span *ngIf="eventsDataSource"> ({{eventsDataSource.data.length}})</span>
+      </span>
+      <ng-container *ngIf="!isPastEvents">
+        <mat-icon class="app-events__action" (click)="displayPastEvents()" color="primary">history</mat-icon>
+        <button mat-mini-fab *ngIf="isTeamAdmin" color="primary" class="app-events__action app-events__add" routerLink="new">
+          <mat-icon>add</mat-icon>
+        </button>
+      </ng-container>
     </h3>
     <div class="app-events__header__team-selector">
       <mat-form-field>
@@ -71,14 +75,16 @@
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="admin-actions">
-        <mat-header-cell class="app-events__container__table__header-cell app-events__container__table__admin-actions" *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-header-cell class="app-events__container__table__header-cell app-events__container__table__admin-actions" *matHeaderCellDef
+          mat-sort-header> </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell app-events__container__table__admin-actions" *matCellDef="let row">
           <mat-icon class="app-events__action" [routerLink]="row.id" color="primary">edit</mat-icon>
           <mat-icon class="app-events__action" (click)="deleteEvent($event, row.id)" color="primary">delete</mat-icon>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="user-action">
-        <mat-header-cell class="app-events__container__table__header-cell app-events__container__table__user-action" *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-header-cell class="app-events__container__table__header-cell app-events__container__table__user-action" *matHeaderCellDef
+          mat-sort-header> </mat-header-cell>
         <mat-cell class="app-events__container__table__content-cell  app-events__container__table__user-action" *matCellDef="let row">
           <mat-icon class="app-events__action" routerLink="details/{{row.id}}" color="primary">info_circle</mat-icon>
         </mat-cell>

@@ -45,9 +45,9 @@
           <mat-cell class="app-member-statistics-details__container__table__content-cell app-member-statistics-details__item__members"
             *matCellDef="let row">
             <ng-template #success>
-              <mat-icon class="app-member-statistics-details__item__members__success">check_circle</mat-icon>
+              <mat-icon class="app-member-statistics-details__item__success">check_circle</mat-icon>
             </ng-template>
-            <span class="app-member-statistics-details__item__members__actual"> {{row.numOfParticipations}} </span>
+            <span class="app-member-statistics-details__item__members__actual"> {{row.numberOfParticipations}} </span>
             (
             <span *ngIf="row.minCriticalValue || row.minCriticalValue === 0">
               {{'EVENT.MIN' | translate}}: {{row.minCriticalValue}}
@@ -56,8 +56,8 @@
               class="app-member-statistics-details__item__members__seperator"> , </span>
             <span *ngIf="row.maxCriticalValue || row.maxCriticalValue === 0"> {{'EVENT.MAX' | translate}} : {{row.maxCriticalValue}}
             </span> )
-            <mat-icon class="app-member-statistics-details__item__error" *ngIf="((row.minCriticalValue || row.minCriticalValue === 0 ) && row.minCriticalValue > row.numOfParticipations) ||
-                ((row.maxCriticalValue || row.maxCriticalValue === 0 ) && row.maxCriticalValue < row.numOfParticipations); else success">error</mat-icon>
+            <mat-icon class="app-member-statistics-details__item__error" *ngIf="((row.minCriticalValue || row.minCriticalValue === 0 ) && row.minCriticalValue > row.numberOfParticipations) ||
+                ((row.maxCriticalValue || row.maxCriticalValue === 0 ) && row.maxCriticalValue < row.numberOfParticipations); else success">error</mat-icon>
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
