@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs';
-import { UserMessages } from './../../core/models/user-messages.model';
+
 import { TcEvent } from '../models/tc-event.model';
 import { UserService } from './../../core/services/user.service';
 import { HttpRequestsService } from './../../core/services/http-requests.service';
+import { map } from 'rxjs/operators';
+import { differenceInMinutes } from 'date-fns';
 @Injectable()
 export class EventsService {
 
@@ -23,7 +24,19 @@ export class EventsService {
     return this.httpRequestService.httpPost(
       `events/${endPoint}/${teamId}`,
       this.userService.username
-    );
+    ).pipe(
+      map(data => {
+        if (isPast) {
+          return data;
+        }
+        const numOfEvents = data.events.length;
+        for (let eventIndex = 0; eventIndex < numOfEvents; eventIndex++) {
+          const currentEvent: TcEvent =  data.events[eventIndex];
+          /* can change the following to be differenceInSecond if we want to be more accurate. */
+          currentEvent.isPastEvent =  differenceInMinutes(new Date(currentEvent.date + ' ' + currentEvent.startTime), new Date()) < 0;
+        }
+        return data;
+      }));
   }
 
   /**

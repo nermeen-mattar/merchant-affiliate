@@ -9,6 +9,7 @@ import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { roles } from '../../../core/constants/roles.constants';
+
 @Component({
   selector: 'tc-events-list',
   templateUrl: './events-list.component.html',
@@ -66,36 +67,6 @@ export class EventsListComponent implements OnInit {
       this.eventsService.addNumOfParticipationsToEvents(events);
       this.updateEventsDataSource(events);
     });
-  }
-
-  /**
-   * @author Tobias Trusch
-   * @description Helper function. converts time "hh:mm:ss" to date object
-   */
-  toDateWithOutTimeZone(time) {
-    let tempTime = time.split(":");
-    let dt = new Date();
-    dt.setHours(tempTime[0]);
-    dt.setMinutes(tempTime[1]);
-    dt.setSeconds(tempTime[2]);
-    return dt;
-  }
-
-  /**
-   * @author Tobias Trusch
-   * @description Checks each event if it's already in the past. If so, disables the toggle button
-   * reason: we are displaying all events from today, regardles of time. until we fixed this on the backend, we shold disable on the frontend to manipulate past events,
-   */
-  isPastEvent(date, time){
-    let eventDate = new Date(date)
-    let eventTime = this.toDateWithOutTimeZone(time)
-    eventDate.setHours(eventTime.getHours())
-    eventDate.setMinutes(eventTime.getMinutes())
-    eventDate.setSeconds(eventTime.getSeconds())
-    if (new Date().getTime() > eventDate.getTime()){
-      return true
-    }
-    return false
   }
 
   setActiveEvent(event: TcEvent) {
