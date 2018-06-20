@@ -236,7 +236,7 @@
     "MAIL": "Mail",
     "EDIT_MEMBER": "Edit member",
     "CREATE_MEMBER": "Create member",
-    "ADD_MYSELF_AS_MEMBER": "Add myself as a member",
+    "ADD_ME_AS_MEMBER": "Add myself as a member",
     "OUR_MEMBERS": "Our members",
     "BY_DEFAULT_MEMBERS_ARE": "By default all members are ",
     "ALL_PARTICIPATION": "All Participations"
