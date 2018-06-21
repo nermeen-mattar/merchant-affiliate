@@ -57,7 +57,8 @@
     },
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
-      "INCORRECT_ADMIN_PASSWRD": "Wrong admin password"
+      "INCORRECT_ADMIN_PASSWRD": "Wrong admin password",
+      "INCORRECT_USERNAME_OR_DIRECT_LINK": "Wrong username or direct link"
     },
     "CONTACT": {
       "CONTACT_MESSAGE_SENT_SUCCESS": "The message has been sent successfully",

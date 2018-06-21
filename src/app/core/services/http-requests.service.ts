@@ -23,8 +23,8 @@ export class HttpRequestsService {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     });
-    this.loginStatusService.$userLoginState.subscribe( (loginInfo: LoginStatus) => {
-      this.changeRequestHeaderAuthorization(loginInfo);
+    this.loginStatusService.$userLoginState.subscribe( (loginStatus: LoginStatus) => {
+      this.changeRequestHeaderAuthorization(loginStatus);
     });
   }
 
@@ -32,13 +32,13 @@ export class HttpRequestsService {
    * @author Nermeen Mattar
    * @description It changes the request options in the http service so that any subsequent request will either include authorization
    * property (authorized user) or not (unauthorized user) based on the value of the login response.
-   * @param {LoginStatus} [loginInfo]
+   * @param {LoginStatus} [loginStatus]
    */
-  changeRequestHeaderAuthorization(loginInfo?: LoginStatus) {
-    if (!loginInfo.isAuthorized) {
+  changeRequestHeaderAuthorization(loginStatus?: LoginStatus) {
+    if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
       this.removeAuthorizationFromRequestHeader();
-    } else if (loginInfo.loginResponse) {
-      this.appendAuthorizationToRequestHeader(loginInfo.loginResponse.token);
+    } else if (loginStatus.loginResponse) {
+      this.appendAuthorizationToRequestHeader(loginStatus.loginResponse.token);
     } else {
       const loginResponse =  JSON.parse(localStorage.getItem('loginResponse'));
       if (loginResponse) {
@@ -73,7 +73,7 @@ export class HttpRequestsService {
         },
         err => {
           if (err.error.statusCode === 401) {
-            this.loginStatusService.loginState.next({isAuthorized: false});
+            this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -91,7 +91,7 @@ export class HttpRequestsService {
         },
         err => {
           if (err.error.statusCode === 401) {
-            this.loginStatusService.loginState.next({isAuthorized: false});
+            this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -109,7 +109,7 @@ export class HttpRequestsService {
         },
         err => {
           if (err.error.statusCode === 401) {
-            this.loginStatusService.loginState.next({isAuthorized: false});
+            this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -129,7 +129,7 @@ export class HttpRequestsService {
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
           if (err.error.statusCode === 401) {
-            this.loginStatusService.loginState.next({isAuthorized: false});
+            this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
           }
         });
     });

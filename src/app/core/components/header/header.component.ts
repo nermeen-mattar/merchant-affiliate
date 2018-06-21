@@ -43,7 +43,7 @@ export class HeaderComponent {
    * @description logging out the logged in user
    */
   logout() {
-    this.loginStatusService.loginState.next({isAuthorized: false});
+    this.loginStatusService.loginState.next({ isAuthorized: false, logoutResponse: true});
   }
 
   /**

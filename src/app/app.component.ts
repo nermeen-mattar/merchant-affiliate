@@ -102,7 +102,7 @@ export class AppComponent {
    * @description Logs the user out of the system
    */
   logout() {
-    this.loginStatusService.loginState.next({ isAuthorized: false});
+    this.loginStatusService.loginState.next({ isAuthorized: false, logoutResponse: true});
   }
   /**
    * @author Nermeen Mattar
