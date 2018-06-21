@@ -13,4 +13,5 @@ export interface TcEvent {
   startTime: string;
   endTime: string;
   date: string;
+  isPastEvent?: boolean;
 }
