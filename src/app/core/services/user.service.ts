@@ -12,11 +12,11 @@ export class UserService {
   private _userType: string;
 
   constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, tokenHandler: TokenHandlerService) {
-    loginStatusService.$userLoginState.subscribe((loginInfo: LoginStatus) => {
-      if (!loginInfo.isAuthorized) {
+    loginStatusService.$userLoginState.subscribe((loginStatus: LoginStatus) => {
+      if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
         this.resetData();
-      } else if (loginInfo.loginResponse) {
-        this.setLoggedInUserInfo(tokenHandler.decodeToken(loginInfo.loginResponse.token));
+      } else if (loginStatus.loginResponse) {
+        this.setLoggedInUserInfo(tokenHandler.decodeToken(loginStatus.loginResponse.token));
       } else {
         this.setLoggedInUserInfo(); /* if isAuthorized and no loginResponse object (after refresh case) */
       }

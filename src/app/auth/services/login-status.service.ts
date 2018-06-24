@@ -37,11 +37,11 @@ export class LoginStatusService {
    * one which emitted the login state change (on refresh) then it returns without doing anything.
    */
   subscribeToLoginStateChanges() {
-    this.$userLoginState.subscribe(loginInfo => {
-      if (!loginInfo.isAuthorized) {
+    this.$userLoginState.subscribe(loginStatus => {
+      if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
         this.logout();
-      } else if (loginInfo.loginResponse) {
-        this.onLoginRequestSuccess(loginInfo.loginResponse); // this.loginResponse,
+      } else if (loginStatus.loginResponse) {
+        this.onLoginRequestSuccess(loginStatus.loginResponse); // this.loginResponse,
       }
     });
   }

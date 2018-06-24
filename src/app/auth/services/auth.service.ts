@@ -56,7 +56,7 @@ export class AuthService {
         directlink: directLink,
         email: email
       }, {
-        failDefault: 'LOGIN.INCORRECT_USERNAME'
+        failDefault: 'LOGIN.INCORRECT_USERNAME_OR_DIRECT_LINK'
       })
       .pipe(map(
         res => {
