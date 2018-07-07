@@ -1,14 +1,22 @@
 @import "../../../../styles/toolkit/variables.scss";
+i.material-icons {
+  font-size: 2em;
+}
 .app-footer {
   width: 100%;
-  background-color: $primary-color; // fix color="primary"
+  background-color: #323232; // fix color="primary"
+  &__material-icons {
+    color:white;
+    font-size: 40px !important;
+    text-align: center;
+  }
   &__container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     &__menu {
       display: inline-block;
-      width: 30%;
+      width: 20%;
       padding-bottom: 1rem;
       min-width: 200px;
       font-weight: 400;
@@ -23,6 +31,19 @@
           color: $tc-color-gray-shade-6;
         }
       }
+      &__right {
+        float: right;
+        width: 20%;
+        margin-left:16%;
+        min-width: 300px;
+      }
+    }
+    &__title {
+      margin: 0.5rem 0rem;
+      font-size: 14px;
+      color: white;
+      font-weight: bold;
+
     }
     &__donate {
       width: 30%;
@@ -99,11 +120,16 @@
     .app-footer {
       &__container {
         &__menu {
+          min-width: 250px;
           padding-top: 20px;
           &__item {
             ::ng-deep .mat-list-item-content {
               justify-content: center;
             }
+          }
+          &__right {
+            float: right;
+            width: 20%;
           }
         }
       }
