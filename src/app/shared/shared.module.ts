@@ -15,7 +15,7 @@ import { StringNormalizerPipe } from './pipes/string-normalizer.pipe';
     TranslateModule
   ],
   declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent, StringNormalizerPipe],
-  entryComponents: [ConfirmDialogComponent],
+  entryComponents: [ConfirmDialogComponent], /* why !!! */
   exports: [
     MaterialModule,
     ConfirmDialogComponent,
