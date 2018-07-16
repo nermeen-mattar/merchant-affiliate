@@ -3,36 +3,53 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs';
 
-import { UserMessagesService } from './../../core/services/user-messages.service';
-import { UserService } from './../../core/services/user.service';
 import { TokenHandlerService } from './token-handler.service';
-import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { LoginResponse } from './../models/login-response.model';
-
+import { LoginStatus } from '../../core/models/login-status.model';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginStatusService {
-  isLoggedIn: BehaviorSubject < any > = new BehaviorSubject(false);
+  loginState: BehaviorSubject < LoginStatus > = new BehaviorSubject({isAuthorized: false});
   /* the event that informs listeners about the updates on the authorization state.*/
-  $userLoggedIn: Observable < any > = this.isLoggedIn.asObservable();
+  $userLoginState: Observable < any > = this.loginState.asObservable();
   loginResponse: LoginResponse;
   constructor(
-    private tokenHandler: TokenHandlerService, private router: Router ) {
+    private tokenHandler: TokenHandlerService, private router: Router) {
+    this.updateLoginStateFromTheLocalStorage();
+    this.subscribeToLoginStateChanges();
+  }
+
+
+  /**
+   * @author Nermeen Mattar
+   * @description Emits an event to inform listenting components about the updated login status based on the value of the login response.
+   */
+  updateLoginStateFromTheLocalStorage() {
     this.loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-    this.$userLoggedIn.subscribe( loginInfo => {
-      if (loginInfo) {
-        this.onLoginRequestSuccess(loginInfo);
-      } else {
+    this.loginState.next({isAuthorized: this.isAuthenticated()}); /* on refresh only send isAthorized without loginResponse object */
+  }
+
+
+  /**
+   * @author Nermeen Mattar
+   * @description It executes the on login success method or the logout method based on the received login info. But if this class is the
+   * one which emitted the login state change (on refresh) then it returns without doing anything.
+   */
+  subscribeToLoginStateChanges() {
+    this.$userLoginState.subscribe(loginStatus => {
+      if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
         this.logout();
+      } else if (loginStatus.loginResponse) {
+        this.onLoginRequestSuccess(loginStatus.loginResponse); // this.loginResponse,
       }
     });
   }
 
   /**
    * @author Nermeen Mattar
-   * @description upon successful user login/switch this function sets the login response class property and in the local storage. Sets the
-   *  user info in the user service. Updates all the authorization states. Navigates to the events page (default page for authorized users).
+   * @description upon successful user login/switch this function sets the login response class property and in the local storage.
+   * Navigates to the events page (default page for authorized users).
    * @param {any} loginResponse
    * @memberof AuthService
    */
@@ -44,8 +61,8 @@ export class LoginStatusService {
 
   /**
    * @author Nermeen Mattar
-   * @description logs out the user. Resets the login response class property and removing it from the local storage. Updates all the
-   * authorization states. Resets the user info in the user service. Navigates to the home page (default page for unauthorized users).
+   * @description logs out the user. Resets the login response class property and removes it from the local storage. Then navigates to the
+   * home page (default page for unauthorized users).
    */
   logout() {
     this.loginResponse = undefined;
@@ -69,4 +86,3 @@ export class LoginStatusService {
     return false;
   }
 }
-

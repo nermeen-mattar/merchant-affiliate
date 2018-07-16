@@ -8,6 +8,7 @@ import { AvailableLanguageInfo } from '../../models/available-language-info.mode
 import { TeamsService } from '../../services/teams.service';
 import { roles } from '../../constants/roles.constants';
 import { LoginStatusService } from '../../../auth/services/login-status.service';
+import { LoginStatus } from '../../models/login-status.model';
 
 @Component({
   selector: 'tc-header',
@@ -15,7 +16,7 @@ import { LoginStatusService } from '../../../auth/services/login-status.service'
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  $isUserLoggedIn: Observable<boolean>;
+  $isUserLoggedIn: Observable<LoginStatus>;
   isUserAdmin: boolean;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
@@ -26,9 +27,9 @@ export class HeaderComponent {
   constructor(public translate: TranslateService, private loginStatusService: LoginStatusService, private userService: UserService,
     teamService: TeamsService) {
       this.appLanguages = availableLanguages;
-    this.$isUserLoggedIn = this.loginStatusService.$userLoggedIn;
+    this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
     this.$isUserLoggedIn.subscribe( loggedIn => {
-      if (loggedIn) {
+      if (loggedIn.isAuthorized) {
         this.hasAdminRole = teamService.hasAdminRole();
         this.isUserAdmin =  this.userService.userType === roles.admin;
       } else {
@@ -42,7 +43,7 @@ export class HeaderComponent {
    * @description logging out the logged in user
    */
   logout() {
-    this.loginStatusService.isLoggedIn.next(false);
+    this.loginStatusService.loginState.next({ isAuthorized: false, logoutResponse: true});
   }
 
   /**

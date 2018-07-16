@@ -9,6 +9,7 @@ import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { roles } from '../../../core/constants/roles.constants';
+
 @Component({
   selector: 'tc-events-list',
   templateUrl: './events-list.component.html',

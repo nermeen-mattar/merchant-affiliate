@@ -9,7 +9,7 @@
         <input matInput placeholder="{{ 'LOGIN.PASSWORD' | translate }}" ngModel #userPassword="ngModel" name="userPassword" required
           type="password">
         <mat-icon class="app-admin-switching__field__icon" matPrefix> lock</mat-icon>
-        <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'REQUIRED' | translate }}</mat-error>
+        <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" class="app-admin-switching__button" [disabled]="memberSwitchingForm.invalid" (click)="switchToAdmin(userPassword.value)">{{ 'USER_SWITCHING.SWITCH' | translate }}</button>
     </form>
