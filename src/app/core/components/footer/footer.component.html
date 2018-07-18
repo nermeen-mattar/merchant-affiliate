@@ -1,30 +1,36 @@
 <div class="app-footer">
   <div class="app-footer__container">
     <mat-list color="primary" class="app-footer__container__menu">
-        <div class="app-footer__container__title">{{"FOOTER.TITLE_TEAM_CENTER" | translate}}
-        </div>
-      <mat-list-item class="app-footer__container__menu__item" routerLink="/about"> {{"ABOUT.ABOUT" | translate}} </mat-list-item>  
+      <div class="app-footer__container__title">{{"FOOTER.TITLE_TEAM_CENTER" | translate}}
+      </div>
+      <mat-list-item class="app-footer__container__menu__item" routerLink="/about"> {{"ABOUT.ABOUT" | translate}} </mat-list-item>
       <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.IMPRESSUM" | translate}} </mat-list-item>
       <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.TERMS_CONDITIONS" | translate}} </mat-list-item>
       <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.DATA_PRIVACY" | translate}} </mat-list-item>
     </mat-list>
     <mat-list color="primary" class="app-footer__container__menu">
-        <div class="app-footer__container__title">{{"FOOTER.TITLE_HELPS_YOU" | translate}}
-          </div>
-        <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.CONTACT" | translate}} </mat-list-item>
-        <mat-list-item class="app-footer__container__menu__item" routerLink="/about"> {{"FOOTER.FEATURES" | translate}} </mat-list-item>
-        <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.CREATE" | translate}} </mat-list-item>
-      </mat-list>
-      <mat-list color="primary" class="app-footer__container__menu">
-          <div class="app-footer__container__title">{{"FOOTER.TITLE_HELPS_US" | translate}}
-            </div>
-              <i class="large material-icons app-footer__material-icons">local_cafe</i>
-        </mat-list>
-        <mat-list color="primary" class="app-footer__container__menu__right">
-            <div class="app-footer__container__title">{{"FOOTER.TITLE_LANGUAGE" | translate}}
-              </div>
-            <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.TERMS_CONDITIONS" | translate}} </mat-list-item>
-        </mat-list>
+      <div class="app-footer__container__title">{{"FOOTER.TITLE_HELPS_YOU" | translate}}
+      </div>
+      <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.CONTACT" | translate}} </mat-list-item>
+      <mat-list-item class="app-footer__container__menu__item" routerLink="/about"> {{"FOOTER.FEATURES" | translate}} </mat-list-item>
+      <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.CREATE" | translate}} </mat-list-item>
+    </mat-list>
+
+    <div class="app-footer__container__donate">
+      <div class="app-footer__container__title">{{"FOOTER.SUPPORT_BY_DONATING" | translate}}
+      </div>
+      <span>
+        <div class="app-footer__container__donate__container">
+          <mat-icon (click)="openDonateWindow()" fontSet="fa" fontIcon="fa-coffee" class="app-footer__container__donate__icon"></mat-icon>
+        </div>
+      </span>
+    </div>
+
+    <mat-list color="primary" class="app-footer__container__menu__right">
+      <div class="app-footer__container__title">{{"FOOTER.TITLE_LANGUAGE" | translate}}
+      </div>
+      <mat-list-item class="app-footer__container__menu__item"> {{"LANGUAGE.en" | translate}} </mat-list-item>
+    </mat-list>
 
   </div>
 

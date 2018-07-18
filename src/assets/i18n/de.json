@@ -113,9 +113,9 @@
   },
   "LANGUAGE": {
     "LANGUAGE": "Sprache",
-    "en": "Englisch",
-    "de": "Deutsch",
-    "fr": "Französisch"
+    "en": "Englisch (en)",
+    "de": "Deutsch (de)",
+    "fr": "Französisch (fr)"
   },
   "HOME": {
     "GO": "Los!",

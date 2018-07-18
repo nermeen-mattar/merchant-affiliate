@@ -114,9 +114,9 @@
   },
   "LANGUAGE": {
     "LANGUAGE": "Language",
-    "en": "English",
-    "de": "German",
-    "fr": "French"
+    "en": "English (en)",
+    "de": "German (de)",
+    "fr": "French (fr)"
   },
   "HOME": {
     "GO": "Go!",
@@ -272,7 +272,7 @@
     "CREATE": "create your team",
     "TERMS_CONDITIONS": "Terms & Conditions",
     "IMPRESSUM": "Impressum",
-    "SUPPORT_BY_DONATING": "Support this project with buying a coffee",
+    "SUPPORT_BY_DONATING": "Donate a coffee",
     "COPY_RIGHT": "© 2018 Copyright team.center GmbH"
   },
   "ABOUT": {
