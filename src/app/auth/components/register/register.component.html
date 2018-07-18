@@ -11,25 +11,6 @@
               <mat-error *ngIf="registerFirstStepForm.controls['teamName'].invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'TEAM.TEAM_PASSWORD' | translate }}" formControlName="teamPassword" type="password">
-              <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
-              <!-- display information message to elaborate password specifications -->
-              <mat-icon *ngIf="registerFirstStepForm.controls['teamPassword'].dirty && registerFirstStepForm.controls['teamPassword'].invalid&&registerFirstStepForm.controls['teamPassword'].errors.validatePassword"
-                class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
-                matTooltipPosition="below">
-                info </mat-icon>
-              <mat-error *ngIf="registerFirstStepForm.controls['teamPassword'].invalid">
-                <span *ngIf="registerFirstStepForm.controls['teamPassword'].errors.required; else teamPasswordInvalid">
-                  {{'TEAM.TEAM_PASSWORD' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
-                </span>
-                <ng-template #teamPasswordInvalid>
-                  <span *ngIf="registerFirstStepForm.controls['teamPassword'].errors.validatePassword">
-                    {{'FORM.ENTER_VALID_PASSWORD' | translate}}
-                  </span>
-                </ng-template>
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" formControlName="email" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>email</mat-icon>
               <mat-icon *ngIf="registerFirstStepForm.controls['email'].dirty && registerFirstStepForm.controls['email'].invalid&&registerFirstStepForm.controls['email'].errors.email"
@@ -53,60 +34,34 @@
             </div>
           </form>
         </mat-step>
-        <mat-step label="{{ 'ADMIN.ADMIN_DETAILS' | translate }}" *ngIf="registerSecondStepForm" [stepControl]="registerSecondStepForm">
+        <mat-step label="{{ 'MEMBER.MEMBER_DETAILS' | translate }}" *ngIf="registerSecondStepForm" [stepControl]="registerSecondStepForm">
           <form novalidate *ngIf="currentStep === 2" (ngSubmit)="(!registerFirstStepForm.invalid && !registerSecondStepForm.invalid) && register(registerFirstStepForm.value, registerSecondStepForm.value);"
             [formGroup]="registerSecondStepForm" class="app-register__content__form">
-            <div class="app-register__content__form__admin-exist" *ngIf="userType === roles.admin">
-              {{ 'REGISTER.ADMIN_ALREADY_EXIST' | translate }}
-            </div>
-            <mat-form-field *ngIf="userType === 'new'" class="app-register__content__form__field">
+            <mat-form-field *ngIf="isNewUser" class="app-register__content__form__field">
               <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
               <mat-error *ngIf="registerSecondStepForm.controls['firstName'].invalid"> {{ 'USER.FIRST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
-            <mat-form-field *ngIf="userType === 'new'" class="app-register__content__form__field">
+            <mat-form-field *ngIf="isNewUser" class="app-register__content__form__field">
               <input matInput placeholder="{{ 'USER.LAST_NAME' | translate }}" formControlName="lastName" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
               <mat-error *ngIf="registerSecondStepForm.controls['lastName'].invalid"> {{ 'USER.LAST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
-            <mat-form-field *ngIf="userType === roles.admin; else newPassword" class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'ADMIN.ADMIN_PASSWORD' | translate }}" formControlName="adminPassword" type="password">
+            <mat-form-field class="app-register__content__form__field">
+              <input matInput placeholder="{{ 'MEMBER.PASSWORD' | translate }}" formControlName="password" type="password">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
-              <mat-error *ngIf="registerSecondStepForm.controls['adminPassword'].invalid">
-                {{ 'ADMIN.ADMIN_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
+              <mat-error *ngIf="registerSecondStepForm.controls['password'].invalid">
+                {{ 'MEMBER.PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
               </mat-error>
             </mat-form-field>
-            <ng-template #newPassword>
-              <mat-form-field class="app-register__content__form__field">
-                <input matInput placeholder="{{ 'ADMIN.ADMIN_PASSWORD' | translate }}" formControlName="adminNewPassword" [type]="displayPassword ? 'text' : 'password'">
-                <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
-               <div matSuffix class="app-register__content__form__field__icons-wrapper">
-                <mat-icon *ngIf="registerSecondStepForm.controls['adminNewPassword'].dirty && registerSecondStepForm.controls['adminNewPassword'].invalid&&registerSecondStepForm.controls['adminNewPassword'].errors.validatePassword"
-                class="app-register__content__form__field__icon"  matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
-                matTooltipPosition="below">
-                info </mat-icon>
-              <mat-icon (click)="toggleDisplayPassword()" fontSet="fa" fontIcon="fa-{{displayPassword ? 'eye-slash' : 'eye'}}" class="app-register__content__form__field__icon"></mat-icon>
-               </div>
-                <mat-error *ngIf="registerSecondStepForm.controls['adminNewPassword'].invalid">
-                  <span *ngIf="registerSecondStepForm.controls['adminNewPassword'].errors.required; else adminPasswordInvalid">
-                    {{ 'ADMIN.ADMIN_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
-                  </span>
-                  <ng-template #adminPasswordInvalid>
-                    <span *ngIf="registerSecondStepForm.controls['adminNewPassword'].errors.validatePassword">
-                      {{'FORM.ENTER_VALID_PASSWORD' | translate}}
-                    </span>
-                  </ng-template>
-                </mat-error>
-              </mat-form-field>
-            </ng-template>
-            <!-- <mat-form-field *ngIf="userType !== roles.admin" class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'ADMIN.CONFIRM_ADMIN_PASSWORD' | translate }}" formControlName="adminConfirmPassword" type="password">
-              <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
-              <mat-error *ngIf="registerSecondStepForm.controls['adminConfirmPassword'].invalid"> {{ 'ADMIN.CONFIRM_ADMIN_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
-            </mat-form-field>
-            <mat-error *ngIf="registerSecondStepForm.invalid && registerSecondStepForm['validateEqual']" class="app-register__content__form__field__error">
-              {{'FORM.CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD' | translate}}
-            </mat-error> -->
+            <mat-checkbox color="primary" class="app-register__content__form__field" formControlName="isTeamMember">
+              {{ 'TEAM_MEMBER.ALSO_A_TEAM_MEMBER' | translate }} </mat-checkbox>
+            <mat-checkbox color="primary" class="app-register__content__form__field app-register__content__form__field__terms-conditions"
+              formControlName="confirmTerms">
+              {{ 'CONFIRM_TERM_CONDITIONS' | translate }} </mat-checkbox>
+            <mat-error *ngIf="registerSecondStepForm.controls['confirmTerms'].dirty && !registerSecondStepForm.controls['confirmTerms'].value">
+              {{ 'CONFIRM_TERM_CONDITIONS' | translate }} {{'FORM.IS_REQUIRED' | translate}}
+            </mat-error>
             <div class="stepper-action-btns">
               <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{ 'BACK' | translate }}</button>
               <button type="submit" *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button"

@@ -12,6 +12,22 @@ export class MembersService {
 
   constructor(private httpRequestService: HttpRequestsService) {}
 
+
+
+  /**
+   * @author Nermeen Mattar
+   * @description Uses the httpRequestsSevrice to send a post request to the backend to check whether the received email belongs to an
+   * already existed member. Note that an object of type UserMessages is being sent with an empty fail property to disable defulat error.
+   * @param emailObj
+   */
+  isMemberExist(email: string): Observable < any > {
+    return this.httpRequestService.httpPost('member/check', {
+      email: email
+    }, {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
   /**
    * @author Nermeen Mattar
    * @description sends a get request to the server to get the list of members for a specific user and team

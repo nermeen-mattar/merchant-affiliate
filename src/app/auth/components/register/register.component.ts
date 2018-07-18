@@ -1,3 +1,4 @@
+import { MembersService } from './../../../members/services/members.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -7,7 +8,7 @@ import { RegisterService } from './../../services/register.service';
 import { FieldValidatorsService } from './../../../core/services/field-validators.service';
 import { AdminService } from './../../../core/services/admin.service';
 import { AuthService } from '../../services/auth.service';
-import { AdminRegisterInfo } from './../../models/admin-register-info.model';
+import { MemberRegisterInfo } from './../../models/member-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
 import { UserMessagesService } from '../../../core/services/user-messages.service';
 import { roles } from '../../../core/constants/roles.constants';
@@ -17,7 +18,7 @@ import { roles } from '../../../core/constants/roles.constants';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  userType = 'new'; /* possible values: 'admin' 'member' 'new'. Default value is 'new' */
+  isNewUser: boolean; /* possible values: 'admin' 'member' 'new'. Default value is 'new' */
   displaySpinner = false;
   emailActivationRequired = false;
   displayMessageCard = false;
@@ -27,9 +28,9 @@ export class RegisterComponent implements OnInit {
   currentStep = 1;
   displayPassword: boolean;
   roles = roles; /* needed to declare a class property to make it available on the component html */
-  constructor(private authService: AuthService, private adminService: AdminService,
-    private registerService: RegisterService, activatedRoute: ActivatedRoute,
-    private fieldValidatorsService: FieldValidatorsService, private userMessagesService: UserMessagesService) {
+  constructor(private authService: AuthService, private registerService: RegisterService, activatedRoute: ActivatedRoute, 
+    private membersService: MembersService, private fieldValidatorsService: FieldValidatorsService, 
+    private userMessagesService: UserMessagesService) {
     const queryParams = activatedRoute.snapshot.queryParams;
     this.teamName = queryParams && queryParams['team-name'];
   }
@@ -45,16 +46,13 @@ export class RegisterComponent implements OnInit {
 
   selectedStepChanged(changeInfo: StepperSelectionEvent) {
     if (changeInfo.previouslySelectedIndex === 0) {
-      this.checkUserType(changeInfo.previouslySelectedStep.stepControl.value);
+      this.checkIfNewUser(changeInfo.previouslySelectedStep.stepControl.value);
     }
     this.currentStep = changeInfo.selectedIndex + 1;
   }
   createRegisterFirstStepForm() {
     this.registerFirstStepForm = new FormGroup({
       teamName: new FormControl(this.teamName || '', [Validators.required]),
-      teamPassword: new FormControl('', [Validators.required,
-        this.fieldValidatorsService.getValidator('validatePassword')
-      ]),
       email: new FormControl('', [Validators.required, Validators.email])
     });
   }
@@ -63,15 +61,10 @@ export class RegisterComponent implements OnInit {
     this.registerSecondStepForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
-      adminPassword: new FormControl('', [Validators.required]),
-      adminNewPassword: new FormControl('', [Validators.required, this.fieldValidatorsService.getValidator('validatePassword')]),
-      // adminConfirmPassword: new FormControl('', [Validators.required])
-    },
-    /*[this.fieldValidatorsService.getValidator('validateEqual', {
-      field1: 'adminNewPassword',
-      field2: 'adminConfirmPassword'
-    })]*/
-  );
+      password: new FormControl('', [Validators.required, this.fieldValidatorsService.getValidator('validatePassword')]),
+      isTeamMember: new FormControl(false),
+      confirmTerms: new FormControl(false)
+    });
   }
 
   /**
@@ -82,25 +75,21 @@ export class RegisterComponent implements OnInit {
    * response.
    * @param firstStepValue
    */
-  checkUserType(firstStepValue: TeamRegisterInfo) { // add typing
+  checkIfNewUser(firstStepValue: TeamRegisterInfo) { // add typing
     this.displaySpinner = true;
-    this.adminService.isAdminExist(firstStepValue.email).subscribe(
-      res => { // user exist but not admin
+    this.membersService.isMemberExist(firstStepValue.email).subscribe(() => { // user exist
+      debugger;
         this.displaySpinner = false;
-        this.userType = 'member';
-        this.disableFormControls(['firstName', 'lastName', '']);
-        this.enableFormControls(['adminNewPassword']); // adminConfirmPassword
+        this.isNewUser = false;
+        this.disableFormControls(['firstName', 'lastName']);
       }, err => {
         this.displaySpinner = false;
-        if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
-          this.userType = roles.admin;
-          this.disableFormControls(['firstName', 'lastName', 'adminNewPassword']); // adminConfirmPassword
-          this.enableFormControls(['adminPassword']);
-        } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
-          this.userType = 'new';
-          this.disableFormControls(['adminPassword']);
-          this.enableFormControls(['firstName', 'lastName', 'adminNewPassword']); // adminConfirmPassword
-        }
+        // if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
+          // this.disableFormControls(['firstName', 'lastName']); // adminConfirmPassword
+        // } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
+          this.isNewUser = true;
+          this.enableFormControls(['firstName', 'lastName']); // adminConfirmPassword
+        // }
       });
   }
 
@@ -133,49 +122,32 @@ export class RegisterComponent implements OnInit {
    * the first and last names. Once register is successful a registration success message will be displayed to the new user and the member
    * user while the admin user will get logged in using credentials received from.
    * @param {TeamRegisterInfo} teamInfo
-   * @param {AdminRegisterInfo} adminInfo
+   * @param {MemberRegisterInfo} adminInfo
    */
-  register(teamInfo: TeamRegisterInfo, adminInfo: AdminRegisterInfo) {
+  register(teamInfo: TeamRegisterInfo, adminInfo: MemberRegisterInfo) {
+    if(!this.registerSecondStepForm.controls.confirmTerms.value) {
+      this.registerSecondStepForm.controls.confirmTerms.markAsDirty();
+      return false;
+    }
     this.displaySpinner = true;
-    const newUserInfo = this.userType !== 'new' ? {} : {
+    const newUserInfo = this.isNewUser ? {
       firstname: adminInfo.firstName,
       lastname: adminInfo.lastName
-    };
-    const adminPassword = adminInfo.adminPassword || adminInfo.adminNewPassword;
+    } : {};
+    const password = adminInfo.password;
     this.authService.register({
       ...newUserInfo,
       teamname: teamInfo.teamName,
-      teampassword: teamInfo.teamPassword,
       email: teamInfo.email,
-      adminpassword: adminPassword
+      password: password,
+      isTeamMember: adminInfo.isTeamMember,
+      confirmTerms: adminInfo.confirmTerms
     }).subscribe(registerRes => {
-      if (this.userType === roles.admin) {
-        this.adminLogin(teamInfo.email, adminPassword);
-      } else {
         this.displayMessageCard = true;
         this.displaySpinner = false;
-      }
     }, err => {
       this.displaySpinner = false;
       this.handleRegisterError(err);
-    });
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description this function uses the admin user and password to login if the password is a correct admin password.
-   * will appear again
-   * @param {string} adminEmail
-   * @param {string} adminPassword
-   */
-  adminLogin(adminEmail: string, adminPassword: string) {
-    this.authService.switchToAdmin({
-      username: adminEmail,
-      password: adminPassword
-    }).subscribe(loginRes => {
-      this.displaySpinner = false;
-    }, err => {
-      this.handleLoginError(err);
     });
   }
 
@@ -198,9 +170,9 @@ export class RegisterComponent implements OnInit {
    */
   handleRegisterError(err) {
     /* 409 conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
-    if (this.userType === roles.admin) {
+    // if (this.userType === roles.admin) {
       /* this.userMessagesService.showUserMessage({}, 'fail'); */
-    }
+    // }
     /* will consider anything else as wrong password */
   }
 

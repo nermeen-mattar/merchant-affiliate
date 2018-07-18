@@ -24,6 +24,9 @@
           font-size: 75%;
           font-weight: normal;
         }
+        &__terms-conditions {
+          text-decoration: underline;
+        }
       }
      &__admin-exist {
         color: $tc-color-success;
