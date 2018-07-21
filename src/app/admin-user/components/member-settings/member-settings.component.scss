@@ -4,13 +4,6 @@
   min-height: 300px;
   max-width: 700px;
   margin: 100px auto;
-  &__back {
-    color: $primary-color;
-    font-weight: $tc-font-weight-4;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
   &__card-title {
     color: $tc-color-gray-shade-6;
     text-align: center;
@@ -21,10 +14,6 @@
       text-align: left;
       margin-top: 3rem;
       /* no 3rem for second */
-    }
-    &__fields-wrapper {
-      // flex-wrap: wrap;
-      // display: flex;
     }
     &__field {
       width: 100%; // flex-grow: 1;
@@ -38,22 +27,24 @@
         font-weight: normal;
       }
     }
-  }
-  &__button {
-    margin-top: 2.2rem;
-    color: white;
-  }
-}
-
-@media only screen and (max-width: 720px) {
-  .app-event-form {
-    width: 95%;
-    &__admin-form,
-    &__team-form {
-      &__fields-wrapper {
-        display: block;
+    &__team {
+      display: flex;
+      align-items: center;
+      &__fields {
+        flex-grow: 1;
+      }
+      &__actions {
+        color: white;
+        position: relative;
+        top: 10px;
+        margin: 0 0.5rem;
       }
     }
   }
 }
 
+@media only screen and (max-width: 720px) {
+  .app-settings {
+    width: 95%;
+  }
+}

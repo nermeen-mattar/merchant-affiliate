@@ -3,7 +3,7 @@
     <mat-card-title class="app-settings__card-title">User settings</mat-card-title>
     <mat-card-content *ngIf="changePasswordGroup">
       <form novalidate (ngSubmit)="saveMemberBasicInfoSettings()" [formGroup]="memberBasicSettingsGroup">
-        <h4 class="app-settings__form__title"> 
+        <h4 class="app-settings__form__title">
           Basic Details
           <!-- {{'ADMIN.TEAM_SETTINGS' | translate}} -->
         </h4>
@@ -28,13 +28,11 @@
                 </mat-form-field> -->
 
 
-            <div class="app-settings__form__fields-wrapper ">
-              <mat-form-field class="app-settings__form__field">
-                <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" required type="text">
-                <mat-icon color="primary" class="app-settings__form__field__icon" matPrefix> person</mat-icon>
-                <mat-error *ngIf="memberBasicSettingsGroup.controls['firstName'].invalid"> {{ 'USER.FIRST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
-              </mat-form-field>
-            </div>
+            <mat-form-field class="app-settings__form__field">
+              <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" required type="text">
+              <mat-icon color="primary" class="app-settings__form__field__icon" matPrefix> person</mat-icon>
+              <mat-error *ngIf="memberBasicSettingsGroup.controls['firstName'].invalid"> {{ 'USER.FIRST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
+            </mat-form-field>
             <mat-form-field class="app-settings__form__field">
               <input matInput placeholder="{{'USER.LAST_NAME'| translate}}" formControlName="lastName" required type="text">
               <mat-icon color="primary" class="app-settings__form__field__icon" matPrefix> person</mat-icon>
@@ -126,23 +124,33 @@
           </mat-action-row>
         </mat-expansion-panel>
       </form>
-      <div>
-        <mat-form-field>
-          <mat-select [(value)]="selectedTeamInfo">
-            <mat-option *ngFor="let team of teamsTheUserIsAdminOf" [value]="team">
-              {{ team.teamName }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div style="display:flex;">
-        <mat-form-field class="app-settings__form__field">
-          <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" [value]="selectedTeamInfo.teamName" [formControl]="teamNameControl"
-            type="text">
-          <mat-error *ngIf="teamNameControl.invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
-        </mat-form-field>
-        <button (click)="saveTeamName();" style="color:white; position:relative; top:10px;" mat-mini-fab color="primary" class="app-home__main__top__register__action-btn">
-          <mat-icon>save</mat-icon>
+      <div class="app-settings__form__team">
+        <div class="app-settings__form__team__fields">
+          <ng-template #teamsList>
+            <mat-form-field class="app-settings__form__field">
+              <mat-select [(value)]="selectedTeamInfo">
+                <mat-option *ngFor="let team of teamsTheUserIsAdminOf" [value]="team">
+                  {{ team.teamName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-template>
+          <mat-form-field class="app-settings__form__field" *ngIf="isEditingTeamName; else teamsList">
+            <input autofocus matInput placeholder="{{ 'TEAM.NEW_TEAM_NAME' | translate }}" [value]="selectedTeamInfo.teamName" [formControl]="teamNameControl"
+              type="text">
+            <mat-error *ngIf="teamNameControl.invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
+          </mat-form-field>
+        </div>
+        <button [disabled]="isEditingTeamName && teamNameControl.invalid && teamNameControl.dirty" (click)="isEditingTeamName = !isEditingTeamName;"
+          mat-mini-fab color="primary" class="app-settings__form__team__actions">
+          <mat-icon *ngIf="isEditingTeamName; else editIcon" (click)="saveTeamName();">save</mat-icon>
+          <ng-template #editIcon>
+            <mat-icon>edit</mat-icon>
+          </ng-template>
+        </button>
+        <button *ngIf="isEditingTeamName" (click)="isEditingTeamName = false"
+          mat-mini-fab color="primary" class="app-settings__form__team__actions">
+          <mat-icon>cancel</mat-icon>
         </button>
       </div>
     </mat-card-content>

@@ -83,12 +83,6 @@ export class MemberSettingsComponent implements OnInit {
     this.teamNameControl = new FormControl('', [Validators.required]);
   }
 
-  teamNameChanged() {
-    this.isEditingTeamName = !this.isEditingTeamName;
-
-    this.teamNameField.nativeElement.focus()
-  }
-    
   /**
    * @author Nermeen Mattar
    * @description takes the user changes then calls the function to update the member settings.
@@ -116,11 +110,10 @@ export class MemberSettingsComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description checks if the value of the team name control is valid if valid it calls the function to update the team name.
+   * @description calls the function to update the team name.
    */
   saveTeamName() {
-    if (this.teamNameControl.valid) {
       this.teamsService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
-    }
+      this.teamNameControl.reset();
   }
 }
