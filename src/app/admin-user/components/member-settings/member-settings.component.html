@@ -1,0 +1,150 @@
+<div class="app-settings">
+  <mat-card>
+    <mat-card-title class="app-settings__card-title">User settings</mat-card-title>
+    <mat-card-content *ngIf="changePasswordGroup">
+      <form novalidate (ngSubmit)="saveMemberBasicInfoSettings()" [formGroup]="memberBasicSettingsGroup">
+        <h4 class="app-settings__form__title"> 
+          Basic Details
+          <!-- {{'ADMIN.TEAM_SETTINGS' | translate}} -->
+        </h4>
+        <mat-expansion-panel [expanded]="step === 0" hideToggle="true" style="margin:1rem 0">
+          <mat-expansion-panel-header style="text-align:center;">
+            <mat-panel-title>
+              {{'ADMIN.CHANGE_TEAM_PASSWORD' | translate}}
+            </mat-panel-title>
+            <!-- <mat-panel-description>
+                </mat-panel-description> -->
+          </mat-expansion-panel-header>
+          <div>
+            <!-- <mat-form-field class="app-settings__form__field">
+                  <input matInput type="text" placeholder="{{ 'ADMIN.NEW_PASSWORD' | translate }}" formControlName="firstName">
+                  <mat-error *ngIf="memberBasicSettingsGroup.controls['firstName'].invalid">
+                    {{ 'ADMIN.NEW_PASSWORD'| translate }} {{'FORM.IS_REQUIRED' | translate}}
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="app-settings__form__field">
+                  <input matInput type="text" placeholder="{{ 'ADMIN.CONFIRM_NEW_PASSWORD' | translate }}" formControlName="lastName">
+                  <mat-error *ngIf="memberBasicSettingsGroup.controls['lastName'].invalid"> {{ 'MEMBER.LAST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
+                </mat-form-field> -->
+
+
+            <div class="app-settings__form__fields-wrapper ">
+              <mat-form-field class="app-settings__form__field">
+                <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" required type="text">
+                <mat-icon color="primary" class="app-settings__form__field__icon" matPrefix> person</mat-icon>
+                <mat-error *ngIf="memberBasicSettingsGroup.controls['firstName'].invalid"> {{ 'USER.FIRST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field class="app-settings__form__field">
+              <input matInput placeholder="{{'USER.LAST_NAME'| translate}}" formControlName="lastName" required type="text">
+              <mat-icon color="primary" class="app-settings__form__field__icon" matPrefix> person</mat-icon>
+              <mat-error *ngIf="memberBasicSettingsGroup.controls['lastName'].invalid"> {{'USER.LAST_NAME'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="app-settings__form__field">
+              <input matInput placeholder="{{'USER.MOBILE_NUMBER'| translate}}" formControlName="mobileNumber" type="text">
+              <mat-icon color="primary" class="app-settings__form__field__icon" matPrefix> mobileNumber</mat-icon>
+              <mat-error *ngIf="memberBasicSettingsGroup.controls['mobileNumber'] .invalid"> {{'USER.MOBILE_NUMBER'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+            </mat-form-field>
+            <mat-checkbox color="primary" class="app-settings__form__field" formControlName="allowReminders">
+              {{ 'MEMBER.ALLOW_REMINDERS' | translate }} </mat-checkbox>
+          </div>
+          <!-- <button mat-raised-button color="primary" class="app-settings__form__button" type="submit" [disabled]="!memberBasicSettingsGroup.valid">{{ 'FORM.SAVE' | translate }}</button> -->
+          <mat-action-row>
+            <button type="submit" mat-button color="primary">{{'FORM.SAVE' | translate}}</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </form>
+
+      <form class="app-settings__form" novalidate (ngSubmit)="changeEmail()" [formGroup]="changeEmailGroup">
+        <h4 class="app-settings__form__title"> Admin settings</h4>
+        <mat-expansion-panel hideToggle="true" style="margin-top:1rem">
+          <mat-expansion-panel-header style="text-align:center;">
+            <mat-panel-title>
+              {{'ADMIN.CHANGE_ADMIN_EMAIL' | translate}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <mat-form-field class="app-settings__form__field">
+              <input matInput type="email" placeholder="{{ 'ADMIN.CURRENT_EMAIL' | translate }}" formControlName="email">
+              <mat-error *ngIf="changeEmailGroup.controls['email'].invalid"> {{ 'ADMIN.CURRENT_EMAIL' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
+            </mat-form-field>
+            <mat-form-field class="app-settings__form__field">
+              <input matInput type="email" placeholder="{{ 'ADMIN.NEW_EMAIL' | translate }}" formControlName="newEmail">
+              <mat-icon *ngIf="changeEmailGroup.controls['newEmail'].dirty && changeEmailGroup.controls['newEmail'].invalid&&changeEmailGroup.controls['newEmail'].errors.validateEmail"
+                class="app-settings__form__field__icon" matSuffix matTooltip="{{'FORM.EMAIL_MUST_INCLUDE' | translate}}" matTooltipPosition="below">
+                info </mat-icon>
+              <mat-error *ngIf="changeEmailGroup.controls['newEmail'].invalid">
+                <span *ngIf="changeEmailGroup.controls['newEmail'].errors.required; else emailInvalid">
+                  {{ 'ADMIN.NEW_EMAIL'| translate }} {{'FORM.IS_REQUIRED' | translate}}
+                </span>
+                <ng-template #emailInvalid>
+                  <span *ngIf="changeEmailGroup.controls['newEmail'].errors.validateEmail">
+                    {{'FORM.ENTER_VALID_EMAIL' | translate}}
+                  </span>
+                </ng-template>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <mat-action-row>
+            <button mat-button color="primary" type="submit">{{'FORM.SAVE' | translate}}</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </form>
+      <form class="app-settings__form" novalidate (ngSubmit)="changePassword()" [formGroup]="changePasswordGroup">
+        <h4 class="app-settings__form__title"> Admin settings</h4>
+        <mat-expansion-panel hideToggle="true" style="margin-top:1rem">
+          <mat-expansion-panel-header style="text-align:center;">
+            <mat-panel-title>
+              {{'ADMIN.CHANGE_ADMIN_PASSWORD' | translate}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <mat-form-field class="app-settings__form__field">
+              <input matInput type="password" placeholder="{{ 'ADMIN.CURRENT_PASSWORD' | translate }}" formControlName="password">
+              <mat-error *ngIf="changePasswordGroup.controls['password'].invalid"> {{ 'ADMIN.CURRENT_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
+            </mat-form-field>
+            <mat-form-field class="app-settings__form__field">
+              <input matInput type="password" placeholder="{{ 'ADMIN.NEW_PASSWORD' | translate }}" formControlName="newPassword">
+              <mat-icon *ngIf="changePasswordGroup.controls['newPassword'].dirty && changePasswordGroup.controls['newPassword'].invalid&&changePasswordGroup.controls['newPassword'].errors.validatePassword"
+                class="app-settings__form__field__icon" matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
+                matTooltipPosition="below">
+                info </mat-icon>
+              <mat-error *ngIf="changePasswordGroup.controls['newPassword'].invalid">
+                <span *ngIf="changePasswordGroup.controls['newPassword'].errors.required; else passwordInvalid">
+                  {{ 'ADMIN.NEW_PASSWORD'| translate }} {{'FORM.IS_REQUIRED' | translate}}
+                </span>
+                <ng-template #passwordInvalid>
+                  <span *ngIf="changePasswordGroup.controls['newPassword'].errors.validatePassword">
+                    {{'FORM.ENTER_VALID_PASSWORD' | translate}}
+                  </span>
+                </ng-template>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <mat-action-row>
+            <button mat-button color="primary" type="submit">{{'FORM.SAVE' | translate}}</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </form>
+      <div>
+        <mat-form-field>
+          <mat-select [(value)]="selectedTeamInfo">
+            <mat-option *ngFor="let team of teamsTheUserIsAdminOf" [value]="team">
+              {{ team.teamName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div style="display:flex;">
+        <mat-form-field class="app-settings__form__field">
+          <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" [value]="selectedTeamInfo.teamName" [formControl]="teamNameControl"
+            type="text">
+          <mat-error *ngIf="teamNameControl.invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
+        </mat-form-field>
+        <button (click)="saveTeamName();" style="color:white; position:relative; top:10px;" mat-mini-fab color="primary" class="app-home__main__top__register__action-btn">
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

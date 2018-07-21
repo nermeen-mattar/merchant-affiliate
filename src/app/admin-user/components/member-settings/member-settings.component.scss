@@ -11,12 +11,11 @@
     align-items: center;
     cursor: pointer;
   }
-  &__title {
+  &__card-title {
     color: $tc-color-gray-shade-6;
     text-align: center;
   }
-  &__admin-form,
-  &__team-form {
+  &__form {
     &__title {
       font-weight: 400;
       text-align: left;
