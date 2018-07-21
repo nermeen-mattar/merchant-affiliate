@@ -12,7 +12,6 @@ import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 })
 export class MemberSettingsComponent implements OnInit {
   memberBasicSettingsGroup: FormGroup;
-  changeEmailGroup: FormGroup;
   changePasswordGroup: FormGroup;
   teamNameControl: FormControl;
   selectedTeamInfo: TcTeamInfo;
@@ -43,7 +42,6 @@ export class MemberSettingsComponent implements OnInit {
    */
   initSettingsForm() {
     this.createBasicSettingsForm();
-    this.createChangeEmailForm();
     this.createChangePasswordForm();
     this.createTeamNameFromControl();
   }
@@ -58,13 +56,6 @@ export class MemberSettingsComponent implements OnInit {
       lastName: new FormControl('', [Validators.required]),
       mobileNumber: new FormControl(''),
       allowReminders: new FormControl(false, [Validators.required])
-    });
-  }
-
-  createChangeEmailForm() {
-    this.changeEmailGroup = new FormGroup({ 
-      email: new FormControl('', [Validators.required, Validators.email]),
-      newEmail: new FormControl('', [Validators.required, Validators.email])
     });
   }
 
@@ -83,12 +74,6 @@ export class MemberSettingsComponent implements OnInit {
     this.teamNameControl = new FormControl('', [Validators.required]);
   }
 
-  teamNameChanged() {
-    this.isEditingTeamName = !this.isEditingTeamName;
-
-    this.teamNameField.nativeElement.focus()
-  }
-    
   /**
    * @author Nermeen Mattar
    * @description takes the user changes then calls the function to update the member settings.
@@ -105,22 +90,13 @@ export class MemberSettingsComponent implements OnInit {
   changePassword() {
     this.membersService.changePassword(this.changePasswordGroup.value);
   }
-      
-  /**
-   * @author Nermeen Mattar
-   * @description sends the new password the user provided as an attempt to change the password
-   */
-  changeEmail() {
-    this.membersService.changeEmail(this.changePasswordGroup.value);
-  }
 
   /**
    * @author Nermeen Mattar
-   * @description checks if the value of the team name control is valid if valid it calls the function to update the team name.
+   * @description calls the function to update the team name.
    */
   saveTeamName() {
-    if (this.teamNameControl.valid) {
       this.teamsService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
-    }
+      this.teamNameControl.reset();
   }
 }
