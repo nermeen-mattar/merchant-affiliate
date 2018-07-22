@@ -1,6 +1,8 @@
 <div class="app-settings">
   <mat-card>
-    <mat-card-title class="app-settings__card-title">User settings</mat-card-title>
+    <mat-card-title class="app-settings__card-title">{{'USER.USER_SETTINGS' | translate}}
+      <h5> {{userEmail}}</h5>
+    </mat-card-title>
     <mat-card-content *ngIf="changePasswordGroup">
       <form novalidate (ngSubmit)="saveMemberBasicInfoSettings()" [formGroup]="memberBasicSettingsGroup">
         <mat-expansion-panel>

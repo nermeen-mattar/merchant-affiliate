@@ -245,6 +245,7 @@
     "ALSO_A_TEAM_MEMBER": "I'm also a member of this new team"
   },
   "USER": {
+    "USER_SETTINGS": "User Settings",
     "FIRST_NAME": "First name",
     "LAST_NAME": "Last name",
     "EMAIL": "Email",

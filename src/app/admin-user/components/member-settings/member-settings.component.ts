@@ -1,3 +1,4 @@
+import { UserService } from './../../../core/services/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -17,12 +18,14 @@ export class MemberSettingsComponent implements OnInit {
   selectedTeamInfo: TcTeamInfo;
   teamsTheUserIsAdminOf: TcTeamInfo[];
   isEditingTeamName: boolean;
+  userEmail: string;
   @ViewChild('teamNameField') teamNameField;
 
   constructor(private membersService: MembersService, private teamsService: TeamsService,
-    private fieldValidatorsService: FieldValidatorsService) {
+    private fieldValidatorsService: FieldValidatorsService, userService: UserService) {
     this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
     this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
+    this.userEmail = userService.username;
   }
 
   ngOnInit() {
