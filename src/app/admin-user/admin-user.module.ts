@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
 import { AdminUserRoutingModule } from './admin-user-routing.module';
 import { AdminUserComponent } from '../admin-user/admin-user.component';
-import { AdminSettingsComponent } from './components/admin-settings/admin-settings.component';
+import { MemberSettingsComponent } from './components/member-settings/member-settings.component';
 
 @NgModule({
   imports: [
@@ -17,6 +17,6 @@ import { AdminSettingsComponent } from './components/admin-settings/admin-settin
     FormsModule,
     SharedModule
   ],
-  declarations: [AdminUserComponent, AdminSettingsComponent]
+  declarations: [AdminUserComponent, MemberSettingsComponent]
 })
 export class AdminUserModule { }

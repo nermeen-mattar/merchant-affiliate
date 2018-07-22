@@ -1,8 +1,8 @@
-import { MembersService } from './../../../members/services/members.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { TeamsService } from './../../../core/services/teams.service';
+import { MembersService } from './../../../members/services/members.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 @Component({
@@ -19,13 +19,15 @@ export class MemberSettingsComponent implements OnInit {
   isEditingTeamName: boolean;
   @ViewChild('teamNameField') teamNameField;
 
-  constructor(private membersService: MembersService, private teamsService: TeamsService) {
+  constructor(private membersService: MembersService, private teamsService: TeamsService,
+    private fieldValidatorsService: FieldValidatorsService) {
     this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
     this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
-    this.initSettingsForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initSettingsForm();
+  }
 
   /**
    * @author Nermeen Mattar
@@ -33,7 +35,7 @@ export class MemberSettingsComponent implements OnInit {
    * @returns {TcTeamInfo}
    */
   getInfoForSelectedTeam(): TcTeamInfo {
-    return this.teamsTheUserIsAdminOf.filter(userTeam => userTeam.teamId ===  55)[0]; // this.idForTeamToEdit
+    return this.teamsTheUserIsAdminOf.filter(userTeam => userTeam.teamId === 55)[0]; // this.idForTeamToEdit
   }
 
   /**
@@ -53,14 +55,14 @@ export class MemberSettingsComponent implements OnInit {
   createBasicSettingsForm() {
     this.memberBasicSettingsGroup = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      mobileNumber: new FormControl(''),
-      allowReminders: new FormControl(false, [Validators.required])
+      lastName: new FormControl(''),
+      mobileNumber: new FormControl('', this.fieldValidatorsService.getValidator('number')),
+      allowReminders: new FormControl(true, [Validators.required])
     });
   }
 
   createChangePasswordForm() {
-    this.changePasswordGroup = new FormGroup({ 
+    this.changePasswordGroup = new FormGroup({
       password: new FormControl('', [Validators.required]),
       newPassword: new FormControl('', [Validators.required])
     });
@@ -68,21 +70,20 @@ export class MemberSettingsComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description creates the standalone from controls  which are team name and password form controls.
+   * @description creates  team name from controls.
    */
   createTeamNameFromControl() {
-    this.teamNameControl = new FormControl('', [Validators.required]);
+    this.teamNameControl = new FormControl(this.selectedTeamInfo.teamName, [Validators.required]);
   }
 
   /**
    * @author Nermeen Mattar
-   * @description takes the user changes then calls the function to update the member settings.
+   * @description deletes the logged in user account.
    */
-  saveMemberBasicInfoSettings() {
-    // this.membersService.updateMember(this.memberBasicSettingsGroup.value);
+  changeTeamNameControlValue() {
+    this.teamNameControl.setValue(this.selectedTeamInfo.teamName);
   }
 
-    
   /**
    * @author Nermeen Mattar
    * @description sends the new password the user provided as an attempt to change the password
@@ -96,7 +97,21 @@ export class MemberSettingsComponent implements OnInit {
    * @description calls the function to update the team name.
    */
   saveTeamName() {
-      this.teamsService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
-      this.teamNameControl.reset();
+    this.teamsService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
+    this.teamNameControl.reset();
   }
+
+
+  /**
+   * @author Nermeen Mattar
+   * @description takes the user changes then calls the function to update the member settings.
+   */
+  saveMemberBasicInfoSettings() {
+    // this.membersService.updateCurrentMember(this.memberBasicSettingsGroup.value);
+  }
+
+  deleteMyAccount() {
+
+  }
+
 }

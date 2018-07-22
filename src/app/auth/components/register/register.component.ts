@@ -6,7 +6,6 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 import { RegisterService } from './../../services/register.service';
 import { FieldValidatorsService } from './../../../core/services/field-validators.service';
-import { AdminService } from './../../../core/services/admin.service';
 import { AuthService } from '../../services/auth.service';
 import { MemberRegisterInfo } from './../../models/member-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
