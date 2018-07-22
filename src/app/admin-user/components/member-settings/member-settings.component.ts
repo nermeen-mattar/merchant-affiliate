@@ -58,7 +58,7 @@ export class MemberSettingsComponent implements OnInit {
   createBasicSettingsForm() {
     this.memberBasicSettingsGroup = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl(''),
+      lastName: new FormControl('', [Validators.required]),
       mobileNumber: new FormControl('', this.fieldValidatorsService.getValidator('number')),
       allowReminders: new FormControl(true, [Validators.required])
     });
