@@ -77,7 +77,7 @@ export class MemberFormComponent implements OnInit {
   save(memberValue) {
     const memberValueForBackend = this.getMemberInBackendStructure(memberValue);
     if (this.memberId) {
-      this.membersService.updateMember(this.memberId, this.selectedTeamId, memberValueForBackend).subscribe(res => {
+      this.membersService.updateMember(this.memberId, memberValueForBackend).subscribe(res => {
         this.navigateBack();
       });
     } else {

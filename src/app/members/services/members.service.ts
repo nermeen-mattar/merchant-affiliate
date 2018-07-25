@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs';
+
 import { TcActivationStatusInfo } from './../models/tc-activation-status-info.model';
-import { UserMessages } from './../../core/models/user-messages.model';
 import { TcMember } from '../models/tc-member.model';
 import { HttpRequestsService } from './../../core/services/http-requests.service';
 
@@ -106,15 +104,26 @@ export class MembersService {
    * @author Nermeen Mattar
    * @description sends a get request to the server to update the member with the received id
    * @param {number} memberId
-   * @param {number} teamId
    * @param {TcMember} member
    * @returns {Observable <any>}
    */
-  updateMember(memberId: number, teamId: number, member: TcMember): Observable < any > {
+  updateMember(memberId: number, member: TcMember): Observable < any > {
     return this.httpRequestService.httpPut(
       `members/${memberId}`, member, {
         success: 'MEMBER.MEMBER_UPDATING_SUCCESS',
         failDefault: 'MEMBER.MEMBER_UPDATING_FAIL'
       });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description attemps to update the member password Using the httpPut function from httpRequestsSevrice.
+   * @param {any} oldAndNewPasswords
+   */
+  changePassword(oldAndNewPasswords) {
+    this.httpRequestService.httpPut('members/change_password', oldAndNewPasswords, {
+      success: 'MEMBER.MEMBER_PASSWORD_CHANGING_SUCCESS',
+      failDefault: 'MEMBER.MEMBER_PASSWORD_CHANGING_FAIL'
+    }).subscribe(res => {});
   }
 }

@@ -59,6 +59,12 @@ export class FieldValidatorsService {
           null : { validatePassword: { invalid: true } };
       };
     },
+    number: (): ValidatorFn => {
+      return (control: AbstractControl): { [key: string]: any } => {
+        const controlValue = Number(control.value);
+        return !isNaN(controlValue) ? null : { number: { value: control.value } };
+      };
+    }
   };
   /**
    * @author Nermeen Mattar

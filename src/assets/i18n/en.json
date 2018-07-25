@@ -27,6 +27,7 @@
     "TWEET": "Tweet"
   },
   "FORM": {
+    "ENTER_VALID_NUMBER": "Please enter a valid number",
     "ENTER_VALID_EMAIL": "Please enter a valid email address.",
     "ENTER_VALID_PASSWORD": "Please enter a valid password.",
     "END_SHOULD_BE_AFTER_START": "End time should be after start time",
@@ -214,19 +215,12 @@
     "TEAM_NAME": "Team Name",
     "TEAM_DETAILS": "Team details",
     "ROLES": "Roles",
-    "DIRECT_LINK": "Direct link"
+    "SELECT_TEAM_TO_CHANGE_NAME": "Select a team to change its name"
   },
   "ADMIN": {
     "ADMIN": "Admin",
-    "ADMIN_PASSWORD_INCORRECT": "Admin password incorrect",
     "SETTINGS": "Settings",
-    "TEAM_SETTINGS": "Team settings",
-    "CURRENT_PASSWORD": "Current password",
-    "NEW_PASSWORD": "New password",
-    "CHANGE_TEAM_PASSWORD": "Change team password",
-    "CHANGE_ADMIN_PASSWORD": "Change admin password",
-    "CONFIRM_ADMIN_PASSWORD": "Confirm admin password",
-    "CONFIRM_NEW_PASSWORD": "Confirm new password"
+    "TEAM_SETTINGS": "Team settings"
   },
   "MEMBER": {
     "MEMBERS": "Members",
@@ -241,15 +235,23 @@
     "ADD_ME_AS_MEMBER": "Add myself as a member",
     "OUR_MEMBERS": "Our members",
     "BY_DEFAULT_MEMBERS_ARE": "By default all members are ",
-    "ALL_PARTICIPATION": "All Participations"
+    "ALL_PARTICIPATION": "All Participations",
+    "MEMBER_PASSWORD_INCORRECT": "Member password incorrect",
+    "CHANGE_PASSWORD": "Change Password",
+    "CHANGE_BASIC_DETAILS": "Change Basic Details",
+    "ALLOW_REMINDERS": "Allow Mail Reminders"
   },
   "TEAM_MEMBER": {
     "ALSO_A_TEAM_MEMBER": "I'm also a member of this new team"
   },
   "USER": {
+    "USER_SETTINGS": "User Settings",
     "FIRST_NAME": "First name",
     "LAST_NAME": "Last name",
-    "EMAIL": "Email"
+    "EMAIL": "Email",
+    "MOBILE_NUMBER": "Mobile Number",
+    "CURRENT_PASSWORD": "Current password",
+    "NEW_PASSWORD": "New password"
   },
   "REGISTER": {
     "REGISTER": "Register",

@@ -3,7 +3,6 @@
 .app-home {
   &__main {
     &__top,
-
     &__bottom {
       background-attachment: fixed;
       background-size: cover;
@@ -27,7 +26,6 @@
         &__title {
           font-weight: 400;
           align-items: center;
-          
         }
         &__main-input-field {
           margin-top: 2rem;
@@ -51,7 +49,7 @@
         padding-top: 100px;
       }
       &__text{
-        color: #323232;
+        color: $tc-color-gray-shade-8;
         text-shadow: 0em 0em 0.0em #323232;
 
         text-align: center;
