@@ -215,7 +215,8 @@
     "TEAM_NAME": "Team Name",
     "TEAM_DETAILS": "Team details",
     "ROLES": "Roles",
-    "SELECT_TEAM_TO_CHANGE_NAME": "Select a team to change its name"
+    "SELECT_TEAM_TO_CHANGE_NAME": "Select a team to change its name",
+    "NEW_TEAM_NAME": "New Team Name"
   },
   "ADMIN": {
     "ADMIN": "Admin",
@@ -246,12 +247,12 @@
   },
   "USER": {
     "USER_SETTINGS": "User Settings",
-    "FIRST_NAME": "First name",
-    "LAST_NAME": "Last name",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
     "EMAIL": "Email",
     "MOBILE_NUMBER": "Mobile Number",
-    "CURRENT_PASSWORD": "Current password",
-    "NEW_PASSWORD": "New password"
+    "CURRENT_PASSWORD": "Current Password",
+    "NEW_PASSWORD": "New Password"
   },
   "REGISTER": {
     "REGISTER": "Register",
