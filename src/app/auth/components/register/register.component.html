@@ -47,6 +47,9 @@
               <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
               <mat-error *ngIf="registerSecondStepForm.controls['lastName'].invalid"> {{ 'USER.LAST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
+            <p *ngIf="!isNewUser">
+              {{MEMBER_ALREADY_EXIST | translate}}
+            </p>
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'MEMBER.PASSWORD' | translate }}" formControlName="password" type="password">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>

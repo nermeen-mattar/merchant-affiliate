@@ -247,7 +247,7 @@
   },
   "REGISTER": {
     "REGISTER": "S’inscrire",
-    "ADMIN_ALREADY_EXIST": "Vous êtes déjà un administrateur inscrit. Veuillez entrer votre mot de passe administrateur pour créer une nouvelle équipe ",
+    "MEMBER_ALREADY_EXIST": "Vous êtes déjà un administrateur inscrit. Veuillez entrer votre mot de passe pour créer une nouvelle équipe ",
     "EMAIL_NOT_RECEIVED": "Vous n'avez pas reçu d'e-mail?",
     "SEND_MAIL_AGAIN": "Envoyer l’e-mail à nouveau",
     "NEED_TO_CONFIRM_EMAIL": "S'il vous plaît veuillez d’abord confirmer votre e-mial.",

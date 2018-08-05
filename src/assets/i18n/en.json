@@ -256,7 +256,7 @@
   },
   "REGISTER": {
     "REGISTER": "Register",
-    "ADMIN_ALREADY_EXIST": "You are already a registered admin. Please enter your admin password to create a new team",
+    "MEMBER_ALREADY_EXIST": "You are already a registered admin. Please enter your password to create this new team",
     "EMAIL_NOT_RECEIVED": "Haven't receive an email?",
     "SEND_MAIL_AGAIN": " Send mail again",
     "NEED_TO_CONFIRM_EMAIL": "Please confirm your mail first.",

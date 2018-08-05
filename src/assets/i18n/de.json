@@ -247,7 +247,7 @@
   },
   "REGISTER": {
     "REGISTER": "Registrieren",
-    "ADMIN_ALREADY_EXIST": "Du bist bereits als Admin registriert. Bitte gib hier dein Adminpasswort ein, um ein neues team zu erstellen.",
+    "MEMBER_ALREADY_EXIST": "Du bist bereits als Admin registriert. Bitte gib hier dein passwort ein, um ein neues team zu erstellen.",
     "EMAIL_NOT_RECEIVED": "Kein Mail erhalten?",
     "SEND_MAIL_AGAIN": " Mail nochmals senden",
     "NEED_TO_CONFIRM_EMAIL": "Bitte zuerst deine Mail-Adresse bestätigen",
