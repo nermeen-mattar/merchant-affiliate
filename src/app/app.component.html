@@ -29,11 +29,11 @@
         <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
         <span> {{'TEAM.TEAMS' | translate}} </span>
       </div>
-      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/member-user/switch-to-admin" *ngIf="($isUserLoggedIn| async).isAuthorized && !isUserAdmin && hasAdminRole"
+      <!-- <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/member-user/switch-to-admin" *ngIf="($isUserLoggedIn| async).isAuthorized && !isUserAdmin && hasAdminRole"
         routerLinkActive="active">
         <mat-icon class="app-container__sidenav__menu__item__icon">person_circle</mat-icon>
         <span> {{'ADMIN.ADMIN' | translate}} </span>
-      </div>
+      </div> -->
       <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/auth/register" routerLinkActive="active">
         <mat-icon class="app-container__sidenav__menu__item__icon">lock_open</mat-icon>
         <span> {{'REGISTER.REGISTER' | translate}}</span>
@@ -47,7 +47,7 @@
         <mat-icon class="app-container__sidenav__menu__item__icon">info_circle</mat-icon>
         <span> {{'ABOUT.ABOUT' | translate}} </span>
       </div>
-      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/admin-user/settings" *ngIf="($isUserLoggedIn| async).isAuthorized && isUserAdmin">
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/admin-user/settings" *ngIf="($isUserLoggedIn| async).isAuthorized && hasAdminRole">
         <mat-icon class="app-container__sidenav__menu__item__icon">settings</mat-icon>
         <span>{{'ADMIN.SETTINGS' | translate}}</span>
       </div>

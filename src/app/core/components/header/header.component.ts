@@ -17,7 +17,6 @@ import { LoginStatus } from '../../models/login-status.model';
 })
 export class HeaderComponent {
   $isUserLoggedIn: Observable<LoginStatus>;
-  isUserAdmin: boolean;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
   selectedLanguageCode: string;
@@ -31,7 +30,6 @@ export class HeaderComponent {
     this.$isUserLoggedIn.subscribe( loggedIn => {
       if (loggedIn.isAuthorized) {
         this.hasAdminRole = teamService.hasAdminRole();
-        this.isUserAdmin =  this.userService.userType === roles.admin;
       } else {
         this.resetData();
       }
@@ -72,6 +70,5 @@ export class HeaderComponent {
    */
   resetData() {
     this.hasAdminRole = null;
-    this.isUserAdmin = null;
   }
 }

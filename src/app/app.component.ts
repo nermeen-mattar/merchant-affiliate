@@ -19,7 +19,6 @@ import { roles } from './core/constants/roles.constants';
 export class AppComponent {
   appLanguage: string;
   $isUserLoggedIn: Observable < LoginStatus > ;
-  isUserAdmin: boolean;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
   selectedLanguageCode: string;
@@ -39,7 +38,6 @@ export class AppComponent {
     this.$isUserLoggedIn.subscribe(loggedIn => {
       if (loggedIn.isAuthorized) {
         this.hasAdminRole = teamsService.hasAdminRole();
-        this.isUserAdmin = userService.userType === roles.admin;
       } else {
         this.resetData();
       }
@@ -110,6 +108,5 @@ export class AppComponent {
    */
   resetData() {
     this.hasAdminRole = null;
-    this.isUserAdmin = null;
   }
 }
