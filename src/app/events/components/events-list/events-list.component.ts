@@ -24,7 +24,6 @@ export class EventsListComponent implements OnInit {
   teamMemberId: number;
   isPastEvents: boolean;
   filterString = '';
-  isLoggedInAsAdmin: boolean;
   isTeamAdmin: boolean;
   isTeamMember: boolean;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
@@ -44,7 +43,6 @@ export class EventsListComponent implements OnInit {
     this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
     this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     this.selectedTeamId = this.teamsService.selectedTeamId;
-    this.isLoggedInAsAdmin =  userService.userType === roles.admin;
     this.changeColumnsToDisplay();
     this.updateEvents();
   }
@@ -105,13 +103,11 @@ export class EventsListComponent implements OnInit {
   /**
    * @author Nermeen Mattar
    * @description this function is called during the initialization and each time the user changes the selected team.
-   * Admin actions will be displayed if the user is 1) logged in as admin 2) an admin of the currently selected team.
-   * Toggeler will be displayed if the user is 1) a member of the currently selected team.
+   * Admin actions will be displayed if the user is an admin of the currently selected team. Toggeler will be displayed if the user 
+   * is a member of the currently selected team.
    */
   changeColumnsToDisplay() {
-    if (this.isLoggedInAsAdmin) {
-      this.pushAdminActionIfTeamAdmin();
-    }
+    this.pushAdminActionIfTeamAdmin();
     this.pushToggelerIfTeamMember();
   }
 
