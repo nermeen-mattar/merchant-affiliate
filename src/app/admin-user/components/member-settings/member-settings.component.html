@@ -59,10 +59,10 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <mat-action-row class="app-settings__card__form__buttons-wrapper">
+            <div class="app-settings__card__form__buttons-wrapper">
               <button   mat-raised-button class="app-settings__card__form__button" color="primary" type="submit">{{'FORM.SAVE' | translate}}</button>
-              <button   mat-raised-button class="app-settings__card__form__button" color="warn" (click)="deleteMyAccount()"> Delete My Account </button>
-            </mat-action-row>
+              <button   mat-raised-button class="app-settings__card__form__button" color="warn"  type="button" (click)="deleteMyAccount()"> Delete My Account </button>
+            </div>
           </form>
         </mat-tab>
         <mat-tab label="{{'TEAM.TEAM' | translate}}">
