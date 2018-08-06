@@ -14,13 +14,11 @@ import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
 import { createTranslateLoader } from './core/loaders/translate-loader';
 import { EmailActivationComponent } from './components/email-activation/email-activation.component';
-import { DirectLinksComponent } from './components/direct-links/direct-links.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmailActivationComponent,
-    DirectLinksComponent
+    EmailActivationComponent
     ],
   imports: [
     BrowserModule,

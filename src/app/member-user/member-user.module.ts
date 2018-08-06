@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
 import { MemberUserRoutingModule } from './member-user-routing.module';
 import { MemberUserComponent } from './member-user.component';
-import { SwitchToAdminComponent } from './components/switch-to-admin/switch-to-admin.component';
 
 @NgModule({
   imports: [
@@ -16,6 +15,6 @@ import { SwitchToAdminComponent } from './components/switch-to-admin/switch-to-a
     FormsModule,
     SharedModule
   ],
-  declarations: [MemberUserComponent, SwitchToAdminComponent]
+  declarations: [MemberUserComponent]
 })
 export class MemberUserModule { }
