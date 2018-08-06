@@ -126,4 +126,15 @@ export class MembersService {
       failDefault: 'MEMBER.MEMBER_PASSWORD_CHANGING_FAIL'
     }).subscribe(res => {});
   }
+
+  /**
+   * @author Nermeen Mattar
+   * @description attemps to delete the account of the logged in user.
+   */
+  deleteMyAccount() {
+    this.httpRequestService.httpPut('members/delete_account', {
+      success: 'USER.USER_DELETING_SUCCESS',
+      failDefault: 'USER.USER_DELETING_FAIL'
+    }).subscribe(res => {});
+  }
 }

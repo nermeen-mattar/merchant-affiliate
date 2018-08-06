@@ -114,7 +114,7 @@ export class MemberSettingsComponent implements OnInit {
   }
 
   deleteMyAccount() {
-
+    this.membersService.deleteMyAccount();
   }
 
 }
