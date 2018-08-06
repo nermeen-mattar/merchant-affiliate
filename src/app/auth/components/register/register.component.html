@@ -48,7 +48,7 @@
               <mat-error *ngIf="registerSecondStepForm.controls['lastName'].invalid"> {{ 'USER.LAST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
             <p *ngIf="!isNewUser">
-              {{MEMBER_ALREADY_EXIST | translate}}
+              {{'REGISTER.MEMBER_ALREADY_EXIST' | translate}}
             </p>
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'MEMBER.PASSWORD' | translate }}" formControlName="password" type="password">
@@ -59,10 +59,10 @@
             </mat-form-field>
             <mat-checkbox color="primary" class="app-register__content__form__field" formControlName="isTeamMember">
               {{ 'TEAM_MEMBER.ALSO_A_TEAM_MEMBER' | translate }} </mat-checkbox>
-            <mat-checkbox color="primary" class="app-register__content__form__field app-register__content__form__field__terms-conditions"
+            <mat-checkbox  *ngIf="isNewUser"  color="primary" class="app-register__content__form__field app-register__content__form__field__terms-conditions"
               formControlName="confirmTerms">
               {{ 'CONFIRM_TERM_CONDITIONS' | translate }} </mat-checkbox>
-            <mat-error *ngIf="registerSecondStepForm.controls['confirmTerms'].dirty && !registerSecondStepForm.controls['confirmTerms'].value">
+            <mat-error *ngIf="isNewUser && registerSecondStepForm.controls['confirmTerms'].dirty && !registerSecondStepForm.controls['confirmTerms'].value">
               {{ 'CONFIRM_TERM_CONDITIONS' | translate }} {{'FORM.IS_REQUIRED' | translate}}
             </mat-error>
             <div class="stepper-action-btns">

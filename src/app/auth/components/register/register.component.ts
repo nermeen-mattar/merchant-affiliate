@@ -72,24 +72,40 @@ export class RegisterComponent implements OnInit {
    * not belong to any user. Second, the email might belong to a user who is not an admin. Third, the email might belong to an admin user.
    * For the first and the third cases the backend returns the result inside an error whereas for the second case the result is inside the
    * response.
-   * @param firstStepValue
+   * @param {TeamRegisterInfo} firstStepValue
    */
-  checkIfNewUser(firstStepValue: TeamRegisterInfo) { // add typing
+  checkIfNewUser(firstStepValue: TeamRegisterInfo) {
     this.displaySpinner = true;
-    this.membersService.isMemberExist(firstStepValue.email).subscribe(() => { // user exist
-      debugger;
-        this.displaySpinner = false;
-        this.isNewUser = false;
-        this.disableFormControls(['firstName', 'lastName']);
+    this.membersService.isMemberExist(firstStepValue.email).subscribe((checkResult) => {
+      this.displaySpinner = false;
+      this.changeNextStepBasedOnUserCheckResult(checkResult);
       }, err => {
+        this.changeNextStepBasedOnUserCheckResult(firstStepValue.teamName); /* temp will be removed once  backend supports this */
         this.displaySpinner = false;
-        // if (err.status === 409 || err.error.statusCode === 409) { // An admin user is already exist
-          // this.disableFormControls(['firstName', 'lastName']); // adminConfirmPassword
-        // } else if (err.status === 404 || err.error.statusCode === 404) { // No user Found
-          this.isNewUser = true;
-          this.enableFormControls(['firstName', 'lastName']); // adminConfirmPassword
-        // }
       });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description change the view based on the user check result. Cases: 1) New user: all of the fields will be displayed. 2) Confirmed member: 
+   * Only the password and isTeamMember fields should be displayed 3) Confirmed member: non of the fields should be displayed.
+   * @param {string} checkResult
+   */
+  changeNextStepBasedOnUserCheckResult(checkResult: string) {
+    switch(checkResult) {
+      case 'NOT_MEMBER': 
+      this.isNewUser = true;
+      this.enableFormControls(['firstName', 'lastName', 'confirmTerms']);
+      break;
+      case 'CONFIRMED_MEMBER': 
+      this.isNewUser = false;
+      this.disableFormControls(['firstName', 'lastName', 'confirmTerms']);
+      break;
+      case 'NOT_CONFIRMED_MEMBER':
+      this.registerSecondStepForm.disable();
+      this.informUserToActivateEmail();
+      break;
+    }
   }
 
   /**
