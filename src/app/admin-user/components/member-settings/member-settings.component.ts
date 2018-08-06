@@ -24,7 +24,9 @@ export class MemberSettingsComponent implements OnInit {
   constructor(private membersService: MembersService, private teamsService: TeamsService,
     private fieldValidatorsService: FieldValidatorsService, userService: UserService) {
     this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
-    this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
+    if(this.teamsTheUserIsAdminOf.length) {
+      this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
+    }
     this.userEmail = userService.username;
   }
 
@@ -48,7 +50,9 @@ export class MemberSettingsComponent implements OnInit {
   initSettingsForm() {
     this.createBasicSettingsForm();
     this.createChangePasswordForm();
-    this.createTeamNameFromControl();
+    if(this.teamsTheUserIsAdminOf.length) {
+      this.createTeamNameFromControl();
+    }
   }
 
   /**

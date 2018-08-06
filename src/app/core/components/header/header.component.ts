@@ -6,7 +6,6 @@ import { availableLanguages } from './../../constants/i18n.constants';
 import { UserService } from './../../services/user.service';
 import { AvailableLanguageInfo } from '../../models/available-language-info.model';
 import { TeamsService } from '../../services/teams.service';
-import { roles } from '../../constants/roles.constants';
 import { LoginStatusService } from '../../../auth/services/login-status.service';
 import { LoginStatus } from '../../models/login-status.model';
 

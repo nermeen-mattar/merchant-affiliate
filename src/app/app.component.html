@@ -42,7 +42,7 @@
         <mat-icon class="app-container__sidenav__menu__item__icon">info_circle</mat-icon>
         <span> {{'ABOUT.ABOUT' | translate}} </span>
       </div>
-      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/admin-user/settings" *ngIf="($isUserLoggedIn| async).isAuthorized && hasAdminRole">
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/admin-user/settings" *ngIf="($isUserLoggedIn| async).isAuthorized">
         <mat-icon class="app-container__sidenav__menu__item__icon">settings</mat-icon>
         <span>{{'USER.SETTINGS' | translate}}</span>
       </div>

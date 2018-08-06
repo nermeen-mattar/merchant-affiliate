@@ -28,7 +28,6 @@ export class AppComponent {
     public translate: TranslateService,
     private loginStatusService: LoginStatusService,
     private router: Router,
-    userService: UserService,
     public matIconRegistry: MatIconRegistry
   ) {
     matIconRegistry.registerFontClassAlias('fontawesome', 'fa');

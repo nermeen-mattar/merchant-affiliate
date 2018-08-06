@@ -65,7 +65,7 @@
             </div>
           </form>
         </mat-tab>
-        <mat-tab label="{{'TEAM.TEAM' | translate}}">
+        <mat-tab label="{{'TEAM.TEAM' | translate}}" *ngIf="teamsTheUserIsAdminOf.length">
           <div class="app-settings__card__form__team">
             <div class="app-settings__card__form__team__fields">
               <ng-template #teamsList>
