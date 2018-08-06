@@ -34,7 +34,7 @@
             </div>
           </form>
         </mat-step>
-        <mat-step label="{{ 'MEMBER.MEMBER_DETAILS' | translate }}" *ngIf="registerSecondStepForm" [stepControl]="registerSecondStepForm">
+        <mat-step label="{{ 'USER.USER_DETAILS' | translate }}" *ngIf="registerSecondStepForm" [stepControl]="registerSecondStepForm">
           <form novalidate *ngIf="currentStep === 2" (ngSubmit)="(!registerFirstStepForm.invalid && !registerSecondStepForm.invalid) && register(registerFirstStepForm.value, registerSecondStepForm.value);"
             [formGroup]="registerSecondStepForm" class="app-register__content__form">
             <mat-form-field *ngIf="isNewUser" class="app-register__content__form__field">

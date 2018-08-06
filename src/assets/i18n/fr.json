@@ -103,10 +103,6 @@
       "TEAM_DELETING_FAIL": "Impossible de supprimer l'équipe",
       "TEAM_NAME_CHANGING_SUCCESS": "Le nom de l'équipe a été modifié avec succès",
       "TEAM_NAME_CHANGING_FAIL": "Impossible de changer le nom de l'équipe",
-      "DIRECT_LINK_CHANGING_SUCCESS": "Le lien direct de l'équipe a été modifié avec succès",
-      "DIRECT_LINK_CHANGING_FAIL": "Impossible de changer le lien direct de l'équipe",
-      "TEAM_PASSWORD_CHANGING_SUCCESS": "Le mot de passe de l'équipe a été modifié avec succès",
-      "TEAM_PASSWORD_CHANGING_FAIL": "Impossible de changer le mot de passe de l'équipe",
       "TEAM_CONFIRM_DELETING_HEADER": "Supprimer l'équipe",
       "TEAM_CONFIRM_DELETING_BODY": "Voulez-vous vraiment supprimer cette équipe?"
     }
@@ -162,11 +158,6 @@
     "THANKS": "Merci d'utiliser team.center.",
     "SORRY": "Nous sommes désolé"
   },
-  "USER_SWITCHING": {
-    "SWITCH_TO_ADMIN": "Passer à l'administrateur",
-    "SWITCHING_MSG": "Vous êtes connecté en tant que membre de l'équipe. Pour vous authentifier en tant qu'administrateur d'équipe, entrez un mot de passe administrateur.",
-    "SWITCH": "Changer"
-  },
   "EVENT": {
     "EVENTS": "Événements",
     "PAST_EVENTS": "Événements passés",
@@ -215,17 +206,6 @@
   },
   "ADMIN": {
     "ADMIN": "Admin",
-    "ADMIN_PASSWORD": "Mot de Passe de l’administrateur",
-    "ADMIN_DETAILS": "Coordonnées de l’Administrateur",
-    "ADMIN_PASSWORD_INCORRECT": "Mot de Passe Administrateur incorrect",
-    "SETTINGS": "Paramètres",
-    "TEAM_SETTINGS": "Paramètres d’équipe",
-    "CURRENT_PASSWORD": "Mot de Passe actuel",
-    "NEW_PASSWORD": "Nouveau mot de passe",
-    "CHANGE_TEAM_PASSWORD": "Changer le mot de passe d’équipe",
-    "CHANGE_ADMIN_PASSWORD": "Changer le mot de passe administrateur",
-    "CONFIRM_ADMIN_PASSWORD": "Confirmer le mot de passe administrateur",
-    "CONFIRM_NEW_PASSWORD": "Confirmer le nouveau mot de passe"
   },
   "MEMBER": {
     "MEMBERS": "Membres",
@@ -241,9 +221,12 @@
     "ALL_PARTICIPATION": "Toutes les Participations"
   },
   "USER": {
+    "SETTINGS": "Paramètres",
     "FIRST_NAME": "Prénom",
     "LAST_NAME": "Nom",
-    "EMAIL": "Email"
+    "EMAIL": "Email",
+    "CURRENT_PASSWORD": "Mot de Passe actuel",
+    "NEW_PASSWORD": "Nouveau mot de passe"
   },
   "REGISTER": {
     "REGISTER": "S’inscrire",

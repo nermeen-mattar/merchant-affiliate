@@ -59,8 +59,7 @@
     },
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
-      "INCORRECT_ADMIN_PASSWRD": "Wrong admin password",
-      "INCORRECT_USERNAME_OR_DIRECT_LINK": "Wrong username or direct link"
+      "INCORRECT_ADMIN_PASSWRD": "Wrong admin password"
     },
     "CONTACT": {
       "CONTACT_MESSAGE_SENT_SUCCESS": "The message has been sent successfully",
@@ -96,8 +95,7 @@
       "MEMBER_CONFIRM_ACTIVATE_HEADER": "Activate member",
       "MEMBER_CONFIRM_ACTIVATE_BODY": "Do you really want to activate this member?",
       "MEMBER_CONFIRM_DEACTIVATE_HEADER": "Deactivate member",
-      "MEMBER_CONFIRM_DEACTIVATE_BODY": "Do you really want to deactivate this member?",
-      "MEMBER_DETAILS": "Mem"
+      "MEMBER_CONFIRM_DEACTIVATE_BODY": "Do you really want to deactivate this member?"
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfully",
@@ -108,10 +106,6 @@
       "TEAM_DELETING_FAIL": "Unable to delete team",
       "TEAM_NAME_CHANGING_SUCCESS": "The team name has been changed successfully",
       "TEAM_NAME_CHANGING_FAIL": "Unable to change the team name",
-      "DIRECT_LINK_CHANGING_SUCCESS": "The team direct link has been changed successfully",
-      "DIRECT_LINK_CHANGING_FAIL": "Unable to change the team direct link",
-      "TEAM_PASSWORD_CHANGING_SUCCESS": "The team password has been changed successfully",
-      "TEAM_PASSWORD_CHANGING_FAIL": "Unable to change the team password",
       "TEAM_CONFIRM_DELETING_HEADER": "Delete team",
       "TEAM_CONFIRM_DELETING_BODY": "Do you really want to delete this team?"
     }
@@ -167,11 +161,6 @@
     "THANKS": "Thank you for using team.center.",
     "SORRY": "We're Sorry"
   },
-  "USER_SWITCHING": {
-    "SWITCH_TO_ADMIN": "Switch to admin",
-    "SWITCHING_MSG": "You are logged in as a team member. To authenticate as a team admin, please enter a admin password.",
-    "SWITCH": "Switch"
-  },
   "EVENT": {
     "EVENTS": "Events",
     "PAST_EVENTS": "Past events",
@@ -209,6 +198,7 @@
     "THIS_EVENT": "this event"
   },
   "TEAM": {
+    "TEAM": "Team",
     "TEAMS": "Teams",
     "YOUR_TEAMS": "Your teams",
     "CREATE_YOUR_TEAM": "Create your team ",
@@ -220,14 +210,11 @@
     "CHANGE_TEAM_NAME": "Change Team Name"
   },
   "ADMIN": {
-    "ADMIN": "Admin",
-    "SETTINGS": "Settings",
-    "TEAM_SETTINGS": "Team settings"
+    "ADMIN": "Admin"
   },
   "MEMBER": {
     "MEMBERS": "Members",
     "MEMBER": "Member",
-    "MEMBER_DETAILS": "Member Details",
     "PASSWORD": "Password",
     "MEMBERS_STATISTICS": "Members Statistics",
     "MEMBERS_LIST": "Members List",
@@ -247,7 +234,9 @@
     "ALSO_A_TEAM_MEMBER": "I'm also a member of this new team"
   },
   "USER": {
-    "USER_SETTINGS": "User Settings",
+    "SETTINGS": "Settings",
+    "USER_DETAILS": "User Details",
+    "ACCOUNT": "Account",
     "FIRST_NAME": "First Name",
     "LAST_NAME": "Last Name",
     "EMAIL": "Email",
