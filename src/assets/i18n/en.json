@@ -216,7 +216,8 @@
     "TEAM_DETAILS": "Team details",
     "ROLES": "Roles",
     "SELECT_TEAM_TO_CHANGE_NAME": "Select a team to change its name",
-    "NEW_TEAM_NAME": "New Team Name"
+    "NEW_TEAM_NAME": "New Team Name",
+    "CHANGE_TEAM_NAME": "Change Team Name"
   },
   "ADMIN": {
     "ADMIN": "Admin",
@@ -256,9 +257,9 @@
   },
   "REGISTER": {
     "REGISTER": "Register",
-    "MEMBER_ALREADY_EXIST": "You are already a registered admin. Please enter your password to create this new team",
+    "MEMBER_ALREADY_EXIST": "You have already registered. Please enter your password to create this new team",
     "EMAIL_NOT_RECEIVED": "Haven't receive an email?",
-    "SEND_MAIL_AGAIN": " Send mail again",
+    "SEND_MAIL_AGAIN": "Resend activation mail",
     "NEED_TO_CONFIRM_EMAIL": "Please confirm your mail first.",
     "NEED_TO_REGISTER_EMAIL": "You are not registered yet.",
     "REGISTER_NOW": "Register now!"

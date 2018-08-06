@@ -11,6 +11,7 @@ import { MemberRegisterInfo } from './../../models/member-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
 import { UserMessagesService } from '../../../core/services/user-messages.service';
 import { roles } from '../../../core/constants/roles.constants';
+import { userCheckBackendResponse } from '../../../core/constants/user-check-backend-response.constats';
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
@@ -93,15 +94,15 @@ export class RegisterComponent implements OnInit {
    */
   changeNextStepBasedOnUserCheckResult(checkResult: string) {
     switch(checkResult) {
-      case 'NOT_MEMBER': 
+      case userCheckBackendResponse.newUser: 
       this.isNewUser = true;
       this.enableFormControls(['firstName', 'lastName', 'confirmTerms']);
       break;
-      case 'CONFIRMED_MEMBER': 
+      case userCheckBackendResponse.confirmedMember: 
       this.isNewUser = false;
       this.disableFormControls(['firstName', 'lastName', 'confirmTerms']);
       break;
-      case 'NOT_CONFIRMED_MEMBER':
+      case userCheckBackendResponse.nonConfirmedMember:
       this.registerSecondStepForm.disable();
       this.informUserToActivateEmail();
       break;
