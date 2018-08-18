@@ -19,7 +19,7 @@ export class MembersService {
    * @param emailObj
    */
   isMemberExist(email: string): Observable < any > {
-    return this.httpRequestService.httpPost('member/check', {
+    return this.httpRequestService.httpPost('members/check', {
       email: email
     }, {
       fail: 'NO_ERROR_MESSAGE'
@@ -120,11 +120,12 @@ export class MembersService {
    * @description attemps to update the member password Using the httpPut function from httpRequestsSevrice.
    * @param {any} oldAndNewPasswords
    */
-  changePassword(oldAndNewPasswords) {
-    this.httpRequestService.httpPut('members/change_password', oldAndNewPasswords, {
+  changePassword(oldAndNewPasswords):Observable <any> {
+    return this.httpRequestService.httpPut('members/change_password',oldAndNewPasswords, {
+      // {username:'nermeenmattar@hotmail.com' ,...
       success: 'MEMBER.MEMBER_PASSWORD_CHANGING_SUCCESS',
       failDefault: 'MEMBER.MEMBER_PASSWORD_CHANGING_FAIL'
-    }).subscribe(res => {});
+    });
   }
 
   /**

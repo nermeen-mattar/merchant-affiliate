@@ -1,7 +1,8 @@
-import { UserService } from './../../../core/services/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { UserService } from './../../../core/services/user.service';
+import { LoginStatusService } from './../../../auth/services/login-status.service';
 import { TeamsService } from './../../../core/services/teams.service';
 import { MembersService } from './../../../members/services/members.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
@@ -22,7 +23,7 @@ export class MemberSettingsComponent implements OnInit {
   @ViewChild('teamNameField') teamNameField;
 
   constructor(private membersService: MembersService, private teamsService: TeamsService,
-    private fieldValidatorsService: FieldValidatorsService, userService: UserService) {
+    private fieldValidatorsService: FieldValidatorsService, private userService: UserService, private loginStatusService: LoginStatusService) {
     this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
     if(this.teamsTheUserIsAdminOf.length) {
       this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
@@ -96,7 +97,9 @@ export class MemberSettingsComponent implements OnInit {
    * @description sends the new password the user provided as an attempt to change the password
    */
   changePassword() {
-    this.membersService.changePassword(this.changePasswordGroup.value);
+    this.membersService.changePassword(this.changePasswordGroup.value).subscribe( successfulyChanged => {
+      this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
+    });
   }
 
   /**
@@ -114,7 +117,7 @@ export class MemberSettingsComponent implements OnInit {
    * @description takes the user changes then calls the function to update the member settings.
    */
   saveMemberBasicInfoSettings() {
-    // this.membersService.updateCurrentMember(this.memberBasicSettingsGroup.value);
+    this.membersService.updateMember(this.userService.memberId, this.memberBasicSettingsGroup.value);
   }
 
   deleteMyAccount() {
