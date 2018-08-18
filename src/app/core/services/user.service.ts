@@ -10,13 +10,13 @@ export class UserService {
   /* User static properties (received from the backend) */
   private _username: string;
   private _userType: string;
-
+  private _memberId: number;
   constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, tokenHandler: TokenHandlerService) {
     loginStatusService.$userLoginState.subscribe((loginStatus: LoginStatus) => {
       if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
         this.resetData();
       } else if (loginStatus.loginResponse) {
-        this.setLoggedInUserInfo(tokenHandler.decodeToken(loginStatus.loginResponse.token));
+        this.setLoggedInUserInfo(loginStatus.loginResponse.member.id, tokenHandler.decodeToken(loginStatus.loginResponse.token));
       } else {
         this.setLoggedInUserInfo(); /* if isAuthorized and no loginResponse object (after refresh case) */
       }
@@ -75,6 +75,32 @@ export class UserService {
     }
   }
 
+
+  /**
+   * @author Nermeen Mattar
+   * @description returns the user id for the logged in user
+   * @readonly
+   * @type {number}
+   */
+  get memberId(): number {
+    return this._memberId;
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description sets the user id in a private variable then it either sets it in the localstorage or
+   * remove it from the localstorage
+   * @param {memberId} number
+   */
+  set memberId(memberId: number) {
+    this._memberId = memberId;
+    if (memberId) {
+      localStorage.setItem('memberId', JSON.stringify(memberId));
+    } else {
+      localStorage.removeItem('memberId');
+    }
+  }
+
   /**
    * @author Nermeen Mattar
    * @description sets the class properties (username, team roles, and user type ordinary/admin) either from the decoded token (immediately
@@ -82,12 +108,14 @@ export class UserService {
    * Side note: there are duplicated info between token and loginResponse. Had to decode the token as login response only do not have sub!
    * @param {DecodedToken} decodedToken
    */
-  setLoggedInUserInfo(decodedToken ?: DecodedToken) {
+  setLoggedInUserInfo(memberId?: number, decodedToken ?: DecodedToken) {
     if (decodedToken) {
+      this.memberId = memberId;
       this.userType = decodedToken.grantedRole;
       this.username = decodedToken.sub;
       this.teamsService.initTeamRolesAndTeamsList(decodedToken.teamRoles);
     } else {
+      this.memberId = JSON.parse(localStorage.getItem('memberId'));
       this.userType = localStorage.getItem('userType');
       this.username = localStorage.getItem('username');
     }
@@ -98,6 +126,7 @@ export class UserService {
    * @description resets the class variables
    */
   resetData() {
+    this.memberId = null;
     this.username = null;
     this.userType = null;
     this.teamsService.resetData();
