@@ -49,7 +49,8 @@
       "ERROR.NOT.EXISTING.TEAM.ADMIN": "Team admin does not exist",
       "ERROR.MAIL.NOT.CONFIRMED": "You need first to confirm your mail",
       "ERROR.MEMBER.NOT.FOUND": "Member does not exist",
-      "ERROR.MAX.PARTICIPANTS": "Unable to participate. This event is already full."
+      "ERROR.MAX.PARTICIPANTS": "Unable to participate. This event is already full.",
+      "ERROR.TEAM.ONLY.ONE.TEAM.ADMIN": "Unable to delete your account. You have team(s) which you are the only admin of."
     },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Unable to register a new team",
