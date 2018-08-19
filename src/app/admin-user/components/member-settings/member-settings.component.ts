@@ -30,14 +30,18 @@ export class MemberSettingsComponent implements OnInit {
     if(this.teamsTheUserIsAdminOf.length) {
       this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
     }
-
-
   }
 
   ngOnInit() {
     this.userEmail = this.userService.username;
-    this.membersService.getMember(this.userService.memberId).subscribe(memberInfo => {
-      this.currentMember = memberInfo;
+    // this.currentMember = {
+    //   firstName: this.userService.firstName,
+    //   lastName: this.userService.lastName,
+    //   mobile: this.userService.mobile
+    //   /* should allowReminders */
+    // }
+    this.membersService.getMember(this.userService.memberId).subscribe(currentMemberInfo => {
+      this.currentMember = currentMemberInfo;
       this.initSettingsForm();
     });
   }
@@ -71,9 +75,10 @@ export class MemberSettingsComponent implements OnInit {
     this.memberBasicSettingsGroup = new FormGroup({
       firstName: new FormControl(this.currentMember.firstName),
       lastName: new FormControl(this.currentMember.lastName),
-      mobileNumber: new FormControl(this.currentMember.mobile, this.fieldValidatorsService.getValidator('number')),
-      allowReminders: new FormControl(true, [Validators.required])
+      mobile: new FormControl(this.currentMember.mobile, this.fieldValidatorsService.getValidator('number')),
+      allowReminders: new FormControl(this.currentMember.allowReminders, [Validators.required])
     });
+    this.memberBasicSettingsGroup.markAsUntouched();
   }
 
   createChangePasswordForm() {
@@ -104,8 +109,11 @@ export class MemberSettingsComponent implements OnInit {
    * @description sends the new password the user provided as an attempt to change the password
    */
   changePassword() {
-    this.membersService.changePassword(this.changePasswordGroup.value).subscribe( successfulyChanged => {
-      this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
+    this.membersService.changePassword(this.changePasswordGroup.value).subscribe(successfulyChanged => {
+      this.loginStatusService.loginState.next({
+        isAuthorized: false,
+        logoutResponse: true
+      });
     });
   }
 
@@ -124,7 +132,27 @@ export class MemberSettingsComponent implements OnInit {
    * @description takes the user changes then calls the function to update the member settings.
    */
   saveMemberBasicInfoSettings() {
-    this.membersService.updateMember(this.userService.memberId, this.memberBasicSettingsGroup.value).subscribe(res => {});
+    if(this.memberBasicSettingsGroup.untouched) {
+      return;
+    }
+    const updatedMemberValue = this.memberBasicSettingsGroup.value;
+    Object.keys(updatedMemberValue).forEach(propertyName => {
+      this.deletePropertyValueIfNotTouched(propertyName, updatedMemberValue);
+    });
+    this.membersService.updateMember(this.userService.memberId, updatedMemberValue).subscribe(res => {
+      this.memberBasicSettingsGroup.markAsUntouched();
+      this.currentMember = { ...this.currentMember,
+        ...updatedMemberValue
+      };
+      Object.keys(updatedMemberValue).forEach(propertyName => {
+        this.userService[propertyName] = updatedMemberValue[propertyName];
+      })
+    });
+  }
+  deletePropertyValueIfNotTouched(propertyName, updatedMemberValue) {
+    if (this.memberBasicSettingsGroup.controls[propertyName].untouched) {
+      delete updatedMemberValue[propertyName];
+    }
   }
 
   deleteMyAccount() {

@@ -8,9 +8,6 @@ export class UserServiceMock {
     return 'ahsan';
   }
   set username(username: string) {}
-  get userType(): string {
-    return 'ADMIN';
-  }
 
   get teamRoles(): TcClientSideTeamRoles {
     return {

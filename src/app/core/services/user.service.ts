@@ -1,3 +1,5 @@
+import { TcServerSideTeamRoles } from './../../teams/models/tc-server-side-team-roles.model';
+import { TcMember } from './../../members/models/tc-member.model';
 import { Injectable } from '@angular/core';
 
 import { LoginStatusService } from './../../auth/services/login-status.service';
@@ -9,14 +11,17 @@ import { TokenHandlerService } from '../../auth/services/token-handler.service';
 export class UserService {
   /* User static properties (received from the backend) */
   private _username: string;
-  private _userType: string;
   private _memberId: number;
+  private _firstName: string;
+  private _lastName: string;
+  private _mobile: number;
+
   constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, tokenHandler: TokenHandlerService) {
     loginStatusService.$userLoginState.subscribe((loginStatus: LoginStatus) => {
       if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
         this.resetData();
       } else if (loginStatus.loginResponse) {
-        this.setLoggedInUserInfo(loginStatus.loginResponse.member.id, tokenHandler.decodeToken(loginStatus.loginResponse.token));
+        this.setLoggedInUserInfo(loginStatus.loginResponse.member, loginStatus.loginResponse.teamRoles);
       } else {
         this.setLoggedInUserInfo(); /* if isAuthorized and no loginResponse object (after refresh case) */
       }
@@ -50,31 +55,78 @@ export class UserService {
 
   /**
    * @author Nermeen Mattar
-   * @description returns the user type (ordinary user or admin) for the logged in user
+   * @description returns the username/email for the logged in user
    * @readonly
    * @type {string}
    */
-  get userType(): string {
-    return this._userType;
+  get firstName(): string {
+    return this._firstName;
   }
 
   /**
    * @author Nermeen Mattar
-   * @description sets the user type (ordinary user or admin) in a private variable then it either sets it in the localstorage or
-   * remove it from the localstorage
-   * @param {userType} string
+   * @description sets the firstName in a private variable then it either sets it in the localstorage or remove it from the
+   * localstorage
+   * @param {firstName} string
    */
-  set userType(userType: string) {
-    userType = userType ? userType.toLowerCase() : '';
-    /* above line is a preventive check to prevent toLowerCase from causing errors when user type is set to undefined */
-    this._userType = userType;
-    if (userType) {
-      localStorage.setItem('userType', userType);
+  set firstName(firstName: string) {
+    this._firstName= firstName;
+    if (firstName) {
+      localStorage.setItem('firstName', firstName);
     } else {
-      localStorage.removeItem('userType');
+      localStorage.removeItem('firstName');
     }
   }
 
+  /**
+   * @author Nermeen Mattar
+   * @description returns the username/email for the logged in user
+   * @readonly
+   * @type {string}
+   */
+  get lastName(): string {
+    return this._lastName;
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description sets the lastName in a private variable then it either sets it in the localstorage or remove it from the
+   * localstorage
+   * @param {lastName} string
+   */
+  set lastName(lastName: string) {
+    this._lastName= lastName;
+    if (lastName) {
+      localStorage.setItem('lastName', lastName);
+    } else {
+      localStorage.removeItem('lastName');
+    }
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description returns the mobile for the logged in user
+   * @readonly
+   * @type {number}
+   */
+  get mobile(): number {
+    return this._mobile;
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description sets the mobile in a private variable then it either sets it in the localstorage or remove it from the
+   * localstorage
+   * @param {mobile} number
+   */
+  set mobile(mobile: number) {
+    this._mobile= mobile;
+    if (mobile) {
+      localStorage.setItem('mobile', mobile.toString());
+    } else {
+      localStorage.removeItem('mobile');
+    }
+  }
 
   /**
    * @author Nermeen Mattar
@@ -95,7 +147,7 @@ export class UserService {
   set memberId(memberId: number) {
     this._memberId = memberId;
     if (memberId) {
-      localStorage.setItem('memberId', JSON.stringify(memberId));
+      localStorage.setItem('memberId', memberId.toString());
     } else {
       localStorage.removeItem('memberId');
     }
@@ -108,16 +160,20 @@ export class UserService {
    * Side note: there are duplicated info between token and loginResponse. Had to decode the token as login response only do not have sub!
    * @param {DecodedToken} decodedToken
    */
-  setLoggedInUserInfo(memberId?: number, decodedToken ?: DecodedToken) {
-    if (decodedToken) {
-      this.memberId = memberId;
-      this.userType = decodedToken.grantedRole;
-      this.username = decodedToken.sub;
-      this.teamsService.initTeamRolesAndTeamsList(decodedToken.teamRoles);
+  setLoggedInUserInfo(memberInfo?: TcMember, teamRolesInfo?: TcServerSideTeamRoles) {
+    if (memberInfo) {
+      this.memberId = memberInfo.id;
+      this.username = memberInfo.email;
+      this.firstName = memberInfo.firstName;
+      this.lastName = memberInfo.lastName;
+      this.mobile = memberInfo.mobile;
+      this.teamsService.initTeamRolesAndTeamsList(teamRolesInfo);
     } else {
-      this.memberId = JSON.parse(localStorage.getItem('memberId'));
-      this.userType = localStorage.getItem('userType');
+      this.memberId = Number(localStorage.getItem('memberId'));
       this.username = localStorage.getItem('username');
+      this.firstName = localStorage.getItem('firstName');
+      this.lastName = localStorage.getItem('lastName');
+      this.mobile = Number(localStorage.getItem('mobile'));
     }
   }
 
@@ -128,7 +184,9 @@ export class UserService {
   resetData() {
     this.memberId = null;
     this.username = null;
-    this.userType = null;
+    this.firstName = null;
+    this.lastName = null;
+    this.mobile = null;
     this.teamsService.resetData();
   }
 }

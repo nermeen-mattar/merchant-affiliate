@@ -23,7 +23,7 @@
       <ng-container matColumnDef="member">
         <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header>
           {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
-        <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.flag ? 'app-members__container__table__inactive-cell' : ''"> {{row.firstname}} {{row.name}} </mat-cell>
+        <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.flag ? 'app-members__container__table__inactive-cell' : ''"> {{row.member.firstName}} {{row.member.lastName}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="mail">
         <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'USER.EMAIL' | translate}}

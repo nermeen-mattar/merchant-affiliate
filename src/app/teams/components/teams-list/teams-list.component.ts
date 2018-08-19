@@ -52,7 +52,7 @@ export class TeamsListComponent implements OnInit {
    * @param {TcTeamInfo} teamInfo
    */
   addTeamAdminAsMember(teamInfo: TcTeamInfo) {
-    this.membersService.createMember(teamInfo.teamId, {email: this.userService.username, firstname: '', name: ''}).subscribe( res => {
+    this.membersService.createMember(teamInfo.teamId, {email: this.userService.username, firstName: '', lastName: ''}).subscribe( res => {
       this.teamsService.addMemberRole(teamInfo.teamId);
       this.updateTeamsDataSource();
     });
