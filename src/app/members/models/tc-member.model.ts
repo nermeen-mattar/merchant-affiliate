@@ -1,13 +1,16 @@
 export interface TcMember {
   id?: number; // no id when creating a new event
-  firstname: string;
-  lastname?: string;
+  firstName: string;
+  lastName?: string;
   email?: string;
+  mail?: string;
+  mobile?: number;
+  allowReminders?: boolean;
   flag?: number;
   name?: string;
   new?: boolean;
   member?: {
-    mail: string,
+    // mail: string,
     // sessionTeamPassword: string,
     id?: number,
     new: boolean
