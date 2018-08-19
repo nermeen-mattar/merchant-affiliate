@@ -14,6 +14,7 @@ export class UserService {
   private _memberId: number;
   private _firstName: string;
   private _lastName: string;
+  private _mobile: number;
 
   constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, tokenHandler: TokenHandlerService) {
     loginStatusService.$userLoginState.subscribe((loginStatus: LoginStatus) => {
@@ -104,6 +105,31 @@ export class UserService {
 
   /**
    * @author Nermeen Mattar
+   * @description returns the mobile for the logged in user
+   * @readonly
+   * @type {number}
+   */
+  get mobile(): number {
+    return this._mobile;
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description sets the mobile in a private variable then it either sets it in the localstorage or remove it from the
+   * localstorage
+   * @param {mobile} number
+   */
+  set mobile(mobile: number) {
+    this._mobile= mobile;
+    if (mobile) {
+      localStorage.setItem('mobile', mobile.toString());
+    } else {
+      localStorage.removeItem('mobile');
+    }
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description returns the user id for the logged in user
    * @readonly
    * @type {number}
@@ -121,7 +147,7 @@ export class UserService {
   set memberId(memberId: number) {
     this._memberId = memberId;
     if (memberId) {
-      localStorage.setItem('memberId', JSON.stringify(memberId));
+      localStorage.setItem('memberId', memberId.toString());
     } else {
       localStorage.removeItem('memberId');
     }
@@ -140,12 +166,14 @@ export class UserService {
       this.username = memberInfo.email;
       this.firstName = memberInfo.firstName;
       this.lastName = memberInfo.lastName;
+      this.mobile = memberInfo.mobile;
       this.teamsService.initTeamRolesAndTeamsList(teamRolesInfo);
     } else {
-      this.memberId = JSON.parse(localStorage.getItem('memberId'));
+      this.memberId = Number(localStorage.getItem('memberId'));
       this.username = localStorage.getItem('username');
       this.firstName = localStorage.getItem('firstName');
       this.lastName = localStorage.getItem('lastName');
+      this.mobile = Number(localStorage.getItem('mobile'));
     }
   }
 
@@ -158,6 +186,7 @@ export class UserService {
     this.username = null;
     this.firstName = null;
     this.lastName = null;
+    this.mobile = null;
     this.teamsService.resetData();
   }
 }

@@ -17,9 +17,9 @@
                 <mat-icon color="primary" class="app-settings__card__form__field__icon" matPrefix> person</mat-icon>
               </mat-form-field>
               <mat-form-field class="app-settings__card__form__field">
-                <input matInput placeholder="{{'USER.MOBILE_NUMBER'| translate}}" formControlName="mobileNumber" type="text">
+                <input matInput placeholder="{{'USER.MOBILE_NUMBER'| translate}}" formControlName="mobile" type="text">
                 <mat-icon color="primary" class="app-settings__card__form__field__icon" matPrefix> call</mat-icon>
-                <mat-error *ngIf="memberBasicSettingsGroup.controls['mobileNumber'].invalid"> {{'FORM.ENTER_VALID_NUMBER'| translate}}</mat-error>
+                <mat-error *ngIf="memberBasicSettingsGroup.controls['mobile'].invalid"> {{'FORM.ENTER_VALID_NUMBER'| translate}}</mat-error>
               </mat-form-field>
               <div class="app-settings__card__form__field">
                 <mat-checkbox color="primary" formControlName="allowReminders">

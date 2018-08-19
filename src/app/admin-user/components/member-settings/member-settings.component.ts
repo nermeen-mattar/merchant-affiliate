@@ -34,12 +34,16 @@ export class MemberSettingsComponent implements OnInit {
 
   ngOnInit() {
     this.userEmail = this.userService.username;
-    this.currentMember = {
-      firstName: this.userService.firstName,
-      lastName: this.userService.lastName
-      /* should add mobile and allowReminders */
-    }
-    this.initSettingsForm();
+    // this.currentMember = {
+    //   firstName: this.userService.firstName,
+    //   lastName: this.userService.lastName,
+    //   mobile: this.userService.mobile
+    //   /* should allowReminders */
+    // }
+    this.membersService.getMember(this.userService.memberId).subscribe(currentMemberInfo => {
+      this.currentMember = currentMemberInfo;
+      this.initSettingsForm();
+    });
   }
 
   /**
@@ -71,7 +75,7 @@ export class MemberSettingsComponent implements OnInit {
     this.memberBasicSettingsGroup = new FormGroup({
       firstName: new FormControl(this.currentMember.firstName),
       lastName: new FormControl(this.currentMember.lastName),
-      mobileNumber: new FormControl(this.currentMember.mobile, this.fieldValidatorsService.getValidator('number')),
+      mobile: new FormControl(this.currentMember.mobile, this.fieldValidatorsService.getValidator('number')),
       allowReminders: new FormControl(this.currentMember.allowReminders, [Validators.required])
     });
     this.memberBasicSettingsGroup.markAsUntouched();
