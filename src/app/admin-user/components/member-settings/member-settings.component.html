@@ -9,14 +9,12 @@
           <form novalidate (ngSubmit)="saveMemberBasicInfoSettings()" [formGroup]="memberBasicSettingsGroup">
             <div>
               <mat-form-field class="app-settings__card__form__field">
-                <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" required type="text">
+                <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" type="text">
                 <mat-icon color="primary" class="app-settings__card__form__field__icon" matPrefix> person</mat-icon>
-                <mat-error *ngIf="memberBasicSettingsGroup.controls['firstName'].invalid"> {{ 'USER.FIRST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
               </mat-form-field>
               <mat-form-field class="app-settings__card__form__field">
-                <input matInput placeholder="{{'USER.LAST_NAME'| translate}}" formControlName="lastName" required type="text">
+                <input matInput placeholder="{{'USER.LAST_NAME'| translate}}" formControlName="lastName" type="text">
                 <mat-icon color="primary" class="app-settings__card__form__field__icon" matPrefix> person</mat-icon>
-                <mat-error *ngIf="memberBasicSettingsGroup.controls['lastName'].invalid"> {{'USER.LAST_NAME'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
               </mat-form-field>
               <mat-form-field class="app-settings__card__form__field">
                 <input matInput placeholder="{{'USER.MOBILE_NUMBER'| translate}}" formControlName="mobileNumber" type="text">
