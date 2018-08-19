@@ -79,7 +79,7 @@ export class MembersService {
    */
   getMember(memberId: number): Observable < any > {
     return this.httpRequestService.httpGet(
-      `teammembers/${memberId}`,
+      `members/${memberId}`, // teammembers
       {
         failDefault: 'MEMBER.MEMBER_GETTING_FAIL'
       });
@@ -133,7 +133,7 @@ export class MembersService {
    * @description attemps to delete the account of the logged in user.
    */
   deleteMyAccount() {
-    this.httpRequestService.httpDelete('members/delete_account', {
+    this.httpRequestService.httpDelete('members', {
       success: 'USER.USER_DELETING_SUCCESS',
       failDefault: 'USER.USER_DELETING_FAIL'
     }).subscribe(res => {});
