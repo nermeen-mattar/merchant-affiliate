@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from './../../../core/services/user.service';
+import { TcMember } from './../../../members/models/tc-member.model';
 import { LoginStatusService } from './../../../auth/services/login-status.service';
 import { TeamsService } from './../../../core/services/teams.service';
 import { MembersService } from './../../../members/services/members.service';
@@ -20,6 +21,7 @@ export class MemberSettingsComponent implements OnInit {
   teamsTheUserIsAdminOf: TcTeamInfo[];
   isEditingTeamName: boolean;
   userEmail: string;
+  currentMember: TcMember;
   @ViewChild('teamNameField') teamNameField;
 
   constructor(private membersService: MembersService, private teamsService: TeamsService,
@@ -28,11 +30,16 @@ export class MemberSettingsComponent implements OnInit {
     if(this.teamsTheUserIsAdminOf.length) {
       this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
     }
-    this.userEmail = userService.username;
+
+
   }
 
   ngOnInit() {
-    this.initSettingsForm();
+    this.userEmail = this.userService.username;
+    this.membersService.getMember(this.userService.memberId).subscribe(memberInfo => {
+      this.currentMember = memberInfo;
+      this.initSettingsForm();
+    });
   }
 
   /**
@@ -62,9 +69,9 @@ export class MemberSettingsComponent implements OnInit {
    */
   createBasicSettingsForm() {
     this.memberBasicSettingsGroup = new FormGroup({
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      mobileNumber: new FormControl('', this.fieldValidatorsService.getValidator('number')),
+      firstName: new FormControl(this.currentMember.firstName),
+      lastName: new FormControl(this.currentMember.lastName),
+      mobileNumber: new FormControl(this.currentMember.mobile, this.fieldValidatorsService.getValidator('number')),
       allowReminders: new FormControl(true, [Validators.required])
     });
   }
@@ -117,7 +124,7 @@ export class MemberSettingsComponent implements OnInit {
    * @description takes the user changes then calls the function to update the member settings.
    */
   saveMemberBasicInfoSettings() {
-    this.membersService.updateMember(this.userService.memberId, this.memberBasicSettingsGroup.value);
+    this.membersService.updateMember(this.userService.memberId, this.memberBasicSettingsGroup.value).subscribe(res => {});
   }
 
   deleteMyAccount() {
