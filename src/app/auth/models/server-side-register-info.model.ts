@@ -1,8 +1,8 @@
 export interface ServerSideRegisterInfo {
-  teamname: string;
+  teamName: string;
   email: string;
-  firstname ? : string; /* first name and last name are not required for an existing user */
-  lastname ? : string;
+  firstName ? : string; /* first name and last name are not required for an existing user */
+  lastName ? : string;
   password: string;
   isTeamMember: boolean;
   confirmTerms: boolean;

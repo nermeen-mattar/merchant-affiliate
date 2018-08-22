@@ -51,19 +51,37 @@
               {{'REGISTER.MEMBER_ALREADY_EXIST' | translate}}
             </p>
             <mat-form-field class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'MEMBER.PASSWORD' | translate }}" formControlName="password" type="password">
+              <input matInput placeholder="{{ 'MEMBER.PASSWORD' | translate }}" formControlName="password" [type]="displayPassword ? 'text' : 'password'">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
+              <div matSuffix class="app-register__content__form__field__icons-wrapper">
+                <mat-icon *ngIf="registerSecondStepForm.controls['password'].dirty && registerSecondStepForm.controls['password'].invalid&&
+                registerSecondStepForm.controls['password'].errors.validatePassword" class="app-register__content__form__field__icon"
+                  matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}" matTooltipPosition="below">
+                  info </mat-icon>
+                <mat-icon (click)="displayPassword = !displayPassword" fontSet="fa" fontIcon="fa-{{displayPassword ? 'eye-slash' : 'eye'}}"
+                  class="app-register__content__form__field__icon"></mat-icon>
+              </div>
               <mat-error *ngIf="registerSecondStepForm.controls['password'].invalid">
-                {{ 'MEMBER.PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
+                <span *ngIf="registerSecondStepForm.controls['password'].errors.required; else passwordInvalid">
+                  {{ 'MEMBER.PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
+                </span>
+                <ng-template #passwordInvalid>
+                  <span *ngIf="registerSecondStepForm.controls['password'].errors.validatePassword">
+                    {{'FORM.ENTER_VALID_PASSWORD' | translate}}
+                  </span>
+                </ng-template>
               </mat-error>
             </mat-form-field>
-            <mat-checkbox color="primary" class="app-register__content__form__field" formControlName="isTeamMember">
-              {{ 'TEAM_MEMBER.ALSO_A_TEAM_MEMBER' | translate }} </mat-checkbox>
-            <mat-checkbox  *ngIf="isNewUser"  color="primary" class="app-register__content__form__field app-register__content__form__field__terms-conditions"
-              formControlName="confirmTerms">
-              {{ 'CONFIRM_TERM_CONDITIONS' | translate }} </mat-checkbox>
+            <div class="app-register__content__form__field">
+              <mat-checkbox color="primary" formControlName="isTeamMember">
+                {{ 'TEAM_MEMBER.ALSO_A_TEAM_MEMBER' | translate }} </mat-checkbox>
+            </div>
+            <div class="app-register__content__form__field">
+              <mat-checkbox *ngIf="isNewUser" color="primary" class="app-register__content__form__field__terms-conditions" formControlName="confirmTerms">
+                {{ 'CONFIRM_TERM_CONDITIONS' | translate }} </mat-checkbox>
+            </div>
             <mat-error *ngIf="isNewUser && registerSecondStepForm.controls['confirmTerms'].dirty && !registerSecondStepForm.controls['confirmTerms'].value">
-              {{ 'CONFIRM_TERM_CONDITIONS' | translate }} {{'FORM.IS_REQUIRED' | translate}}
+              {{ 'HAVE_TO_CONFIRM_TERM_CONDITIONS' | translate }}
             </mat-error>
             <div class="stepper-action-btns">
               <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{ 'BACK' | translate }}</button>
@@ -78,11 +96,18 @@
     <div *ngIf="displayMessageCard && !displaySpinner">
       <div *ngIf="!emailActivationRequired" class="app-register__content__form__register-success"> {{ 'USER_MESSAGES.REGISTER.REGISTER_SUCCESS' | translate }} </div>
       <div class="app-register__content__resend-mail">
-        <span *ngIf="emailActivationRequired; else emailNotReceived"> {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate}} </span>
-        <ng-template #emailNotReceived>
+        <span *ngIf="emailActivationRequired"> 
+          <!-- ; else emailNotReceived--> 
+          {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate | localizedTextModifier:'inject': registerFirstStepForm.controls.email.value}} 
+        </span> 
+        <div class="app-register__content__resend-mail ">
+          <!-- <ng-template #emailNotReceived> -->
           <span> {{'REGISTER.EMAIL_NOT_RECEIVED' | translate}} </span>
-        </ng-template>
-        <span (click)="resendConfirmationEmail()" class="app-register__content__resend-mail__link"> {{'REGISTER.SEND_MAIL_AGAIN' | translate}} </span>
+          <!-- </ng-template> -->
+          <span (click)="resendConfirmationEmail()" class="app-register__content__link"> {{'REGISTER.SEND_MAIL_AGAIN' | translate}} </span>
+          <!-- <button mat-raised-button color="primary" class="app-register__content__button" (click)="resendConfirmationEmail()"> {{'REGISTER.SEND_MAIL_AGAIN' | translate}}</button> -->
+
+        </div>
       </div>
       <button mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
         routerLink="/auth/login">{{ 'OK' | translate }}</button>

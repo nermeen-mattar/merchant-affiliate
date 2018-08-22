@@ -1,9 +1,9 @@
-import { MembersService } from './../../../members/services/members.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
+import { MembersService } from './../../../members/services/members.service';
 import { RegisterService } from './../../services/register.service';
 import { FieldValidatorsService } from './../../../core/services/field-validators.service';
 import { AuthService } from '../../services/auth.service';
@@ -147,13 +147,13 @@ export class RegisterComponent implements OnInit {
     }
     this.displaySpinner = true;
     const newUserInfo = this.isNewUser ? {
-      firstname: adminInfo.firstName,
-      lastname: adminInfo.lastName
+      firstName: adminInfo.firstName,
+      lastName: adminInfo.lastName
     } : {};
     const password = adminInfo.password;
     this.authService.register({
       ...newUserInfo,
-      teamname: teamInfo.teamName,
+      teamName: teamInfo.teamName,
       email: teamInfo.email,
       password: password,
       isTeamMember: adminInfo.isTeamMember,
@@ -163,7 +163,6 @@ export class RegisterComponent implements OnInit {
         this.displaySpinner = false;
     }, err => {
       this.displaySpinner = false;
-      this.handleRegisterError(err);
     });
   }
 
@@ -178,18 +177,6 @@ export class RegisterComponent implements OnInit {
     }, err => {
       this.displaySpinner = false;
     });
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description handles the registration fail
-   */
-  handleRegisterError(err) {
-    /* 409 conflict the user already registered but email not confirmed, q: what if the user is an admin but conflict in the team name */
-    // if (this.userType === roles.admin) {
-      /* this.userMessagesService.showUserMessage({}, 'fail'); */
-    // }
-    /* will consider anything else as wrong password */
   }
 
   /**

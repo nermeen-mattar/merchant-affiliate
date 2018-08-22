@@ -40,12 +40,12 @@
     }
     &__resend-mail {
       margin:  2rem 0;
-      &__link {
-        color: $tc-color-base-bright-shade-2;
-        &:hover {
-          text-decoration: underline;
-          cursor: pointer;
-        }
+    }
+    &__link {
+      color: $tc-color-base-bright-shade-2;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
     .stepper-action-btns {

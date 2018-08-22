@@ -18,7 +18,7 @@ export class AuthService {
    * @param {ServerSideRegisterInfo} registrationInfo
    */
   register(registrationInfo: ServerSideRegisterInfo): Observable < any > {
-    return this.httpRequestsService.httpPost('auth/register', registrationInfo, {
+    return this.httpRequestsService.httpPost('register', registrationInfo, {
       fail: 'REGISTER.UNABLE_TO_REGISTER'
     });
   }
