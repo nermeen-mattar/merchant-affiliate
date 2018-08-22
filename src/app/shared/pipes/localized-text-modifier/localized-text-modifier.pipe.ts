@@ -12,9 +12,6 @@ export class LocalizedTextModifierPipe implements PipeTransform {
         newValue = value.replace('$$', data[0]);
         break;
       }
-      // case 'replace': {
-      //   newValue = value.replace(data[0], data[1]);
-      // }
     }
     return newValue;
   }
