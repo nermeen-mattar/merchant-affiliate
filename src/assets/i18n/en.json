@@ -20,6 +20,7 @@
   "FROM": "From",
   "TO": "To",
   "CONFIRM_TERM_CONDITIONS": "I confirm the term and conditions",
+  "HAVE_TO_CONFIRM_TERM_CONDITIONS": "You must accept the terms and conditions in order to perform this action",
   "SEARCH_PLACEHOLDER": "Search through all columns in the table",
   "MULTI_TABLE_SEARCH_PLACEHOLDER": "Search through all columns in tables",
   "SOCIAL_MEDIA": {
@@ -38,7 +39,6 @@
     "SAVE": "Save",
     "SEND": "Send",
     "IS_REQUIRED": "is required"
-
   },
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
@@ -250,7 +250,7 @@
     "MEMBER_ALREADY_EXIST": "You have already registered. Please enter your password to create this new team",
     "EMAIL_NOT_RECEIVED": "Haven't receive an email?",
     "SEND_MAIL_AGAIN": "Resend activation mail",
-    "NEED_TO_CONFIRM_EMAIL": "Please confirm your mail first.",
+    "NEED_TO_CONFIRM_EMAIL": "You already have a pending user confirmation request. To create a new Team with this mail address please confirm first your mail $$ with the link in the activation mail we have already sent to you.",
     "NEED_TO_REGISTER_EMAIL": "You are not registered yet.",
     "REGISTER_NOW": "Register now!"
   },
