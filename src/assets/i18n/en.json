@@ -96,7 +96,9 @@
       "MEMBER_CONFIRM_ACTIVATE_HEADER": "Activate member",
       "MEMBER_CONFIRM_ACTIVATE_BODY": "Do you really want to activate this member?",
       "MEMBER_CONFIRM_DEACTIVATE_HEADER": "Deactivate member",
-      "MEMBER_CONFIRM_DEACTIVATE_BODY": "Do you really want to deactivate this member?"
+      "MEMBER_CONFIRM_DEACTIVATE_BODY": "Do you really want to deactivate this member?",
+      "MEMBER_PASSWORD_CHANGING_SUCCESS": "The password has been changed successfully",
+      "MEMBER_PASSWORD_CHANGING_ERROR": "Unable to change the password"
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfully",

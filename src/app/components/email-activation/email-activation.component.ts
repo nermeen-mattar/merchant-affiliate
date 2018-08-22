@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { MailActivationState } from '../../models/mail-activation-state.model';
+import { TcMember } from '../../members/models/tc-member.model';
 
 @Component({
   selector: 'tc-email-activation',
@@ -10,17 +11,12 @@ import { MailActivationState } from '../../models/mail-activation-state.model';
   styleUrls: ['./email-activation.component.scss']
 })
 export class EmailActivationComponent implements OnInit {
-  displaySpinner: boolean;
+  displaySpinner = true;
   displayPageNotFound: boolean;
   mailState: number = MailActivationState.SUCCESS;
-  userInfo: {
-    firstname: string,
-    lastname: string,
-    email: string
-  };
+  userInfo: TcMember;
   mailActivationState = MailActivationState;
   constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService) {
-    this.displaySpinner = true;
     const queryParams = activatedRoute.snapshot.queryParams;
     if (queryParams && queryParams['h']) {
       httpRequestsService.httpPost('activation', {
@@ -34,6 +30,7 @@ export class EmailActivationComponent implements OnInit {
           this.mailState = MailActivationState.SUCCESS;
         }, err => {
           this.displaySpinner = false;
+          debugger;
           if (err.error.message === 'error.mail.confirmed') {
             this.mailState = MailActivationState.ALREADY_ACTIVATED;
           } else {

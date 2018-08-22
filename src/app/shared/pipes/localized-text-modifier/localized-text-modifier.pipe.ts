@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class LocalizedTextModifierPipe implements PipeTransform {
 
   transform(value: string, changeType: string, ...data): any {
-    debugger;
     let newValue: string;
     switch (changeType) {
       case 'inject': {
