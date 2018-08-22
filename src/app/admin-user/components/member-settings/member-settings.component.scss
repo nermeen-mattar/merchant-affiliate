@@ -11,6 +11,9 @@
     }
     &__form {
       margin: 0.5rem 0;
+      &__not-ready {
+        opacity: 0.5;
+      }
       &__buttons-wrapper {
         display: flex;
         justify-content: space-between;

@@ -6,7 +6,7 @@
     <mat-card-content *ngIf="changePasswordGroup">
       <mat-tab-group>
         <mat-tab label="{{'USER.USER_DETAILS' | translate}}">
-          <form novalidate (ngSubmit)="saveMemberBasicInfoSettings()" [formGroup]="memberBasicSettingsGroup">
+          <form [ngClass]="{'app-settings__card__form__not-ready': !currentMember}"  novalidate (ngSubmit)="saveMemberBasicInfoSettings()" [formGroup]="memberBasicSettingsGroup">
             <div>
               <mat-form-field class="app-settings__card__form__field">
                 <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" type="text">
@@ -31,6 +31,8 @@
               <button mat-raised-button class="app-settings__card__form__button" color="primary" type="submit">{{'FORM.SAVE' | translate}}</button>
             </mat-action-row>
           </form>
+          <mat-spinner *ngIf="!currentMember" class="overlayed-spinner"></mat-spinner>
+
         </mat-tab>
         <mat-tab label="{{'USER.ACCOUNT' | translate}}">
           <form class="app-settings__card__form" novalidate (ngSubmit)="changePassword()" [formGroup]="changePasswordGroup">

@@ -20,6 +20,12 @@ tc-root {
   padding: 3rem; /* was 5rem*/
 }
 
+.overlayed-spinner{
+  position: absolute!important;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
+
 @media only screen and (max-width: 879px) {
   .business-page {
     padding: 0.5rem;

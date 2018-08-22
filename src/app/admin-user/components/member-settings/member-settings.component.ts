@@ -30,6 +30,7 @@ export class MemberSettingsComponent implements OnInit {
     if(this.teamsTheUserIsAdminOf.length) {
       this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
     }
+    this.initSettingsForm();
   }
 
   ngOnInit() {
@@ -42,7 +43,8 @@ export class MemberSettingsComponent implements OnInit {
     // }
     this.membersService.getMember(this.userService.memberId).subscribe(currentMemberInfo => {
       this.currentMember = currentMemberInfo;
-      this.initSettingsForm();
+      this.memberBasicSettingsGroup.patchValue(this.currentMember);
+      this.memberBasicSettingsGroup.markAsUntouched();
     });
   }
 
@@ -73,12 +75,11 @@ export class MemberSettingsComponent implements OnInit {
    */
   createBasicSettingsForm() {
     this.memberBasicSettingsGroup = new FormGroup({
-      firstName: new FormControl(this.currentMember.firstName),
-      lastName: new FormControl(this.currentMember.lastName),
-      mobile: new FormControl(this.currentMember.mobile, this.fieldValidatorsService.getValidator('number')),
-      allowReminders: new FormControl(this.currentMember.allowReminders, [Validators.required])
+      firstName: new FormControl(null),
+      lastName: new FormControl(null),
+      mobile: new FormControl(null, this.fieldValidatorsService.getValidator('number')),
+      allowReminders: new FormControl(null, [Validators.required])
     });
-    this.memberBasicSettingsGroup.markAsUntouched();
   }
 
   createChangePasswordForm() {
