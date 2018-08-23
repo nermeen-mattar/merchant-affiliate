@@ -75,9 +75,6 @@
       background-size:cover !important;
       min-height: 650px;
       background: url('../../assets/img/View_Responsive_2300.jpg') no-repeat center fixed;
-  
-
-    
     }
     @media only screen and (max-width: 720px) {
       &__middle{
@@ -100,7 +97,6 @@
         background-position: center !important; 
       }
     }
-
   }
   &__info {
     background-color: $tc-color-gray-tint-1;
@@ -113,7 +109,6 @@
     &__sections__container {
       justify-content: center; // space-around;
       display: flex;
-      flex-wrap: wrap;
       flex-flow: row wrap;
     }
     &__section {
@@ -128,7 +123,10 @@
         font-size: $tc-font-size-h3;
         font-weight: 400;
         margin-bottom: 0.6em;
-
+      }
+      &__text {
+        font-size: $tc-font-size-h4;
+        // weird bug same value 1.3rem but did not work $tc-font-size-body;
       }
       &__logo {
         background: url('../../assets/img/core/tc_orange.png') no-repeat center;
@@ -145,14 +143,6 @@
           color: $primary-color;
           }
       }
-        
-
     }
   }
-}
-
-
-
-p {
-  font-size: 1.3em;
 }
