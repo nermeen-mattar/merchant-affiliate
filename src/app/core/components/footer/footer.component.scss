@@ -14,7 +14,7 @@
       min-width: 200px;
       font-weight: 400;
       &__item {
-        color: $home-section-bg-color;
+        color: $tc-color-gray-tint-1;
         border-radius: 14px;
         font-size: $tc-font-size-h5;
         cursor: pointer;
@@ -23,7 +23,7 @@
           padding: 0 0px;
         }
         &:hover {
-          background-color: $home-section-bg-color;
+          background-color: $tc-color-gray-tint-1;
           color: $tc-color-gray-shade-6;
         }
       }
@@ -45,7 +45,7 @@
     &__title {
       margin: 0.5rem 0rem;
       font-size: 14px;
-      color: $home-section-bg-color;
+      color: $tc-color-gray-tint-1;
       font-weight: bold;
     }
     @media screen and (max-width: 520px) {
@@ -58,7 +58,7 @@
       padding-bottom: 1rem;
       display: inline-block;
       min-width: 200px;
-      color: $home-section-bg-color;
+      color: $tc-color-gray-tint-1;
       &__text {
         margin: 1rem 0rem;
         font-size: $tc-font-size-h5;
@@ -72,7 +72,7 @@
           cursor: pointer;
           font-size: 30px; //background: rgba(0, 0, 0, 0.4);
           border-radius: 100%;
-          border: 4px solid $home-section-bg-color;
+          border: 4px solid $tc-color-gray-tint-1;
           box-shadow: 0 1px 10px rgba(0, 0, 0, 0.46);
           display: table-cell;
           padding: 15px;
@@ -105,7 +105,7 @@
         display: flex;
         align-items: center;
         margin: 1rem auto;
-        color: $home-section-bg-color;
+        color: $tc-color-gray-tint-1;
         min-width: 140px;
         &__icon {
           margin-right: 10px;
@@ -126,7 +126,7 @@
   }
   &__copyright {
     padding: 1rem 1rem;
-    color: $home-section-bg-color;
+    color: $tc-color-gray-tint-1;
     background-color: rgba(51, 51, 51, 0.08);
     &__text {
       padding: 0 16px;
