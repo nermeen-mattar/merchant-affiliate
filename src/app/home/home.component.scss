@@ -26,6 +26,7 @@
         &__title {
           font-weight: 400;
           align-items: center;
+
         }
         &__main-input-field {
           margin-top: 2rem;
@@ -40,7 +41,7 @@
         }
       }
       &__logo {
-        background: url('../../assets/img/core/tc_no_bg.png') no-repeat center;
+        background: url('../../assets/img/core/tc_orange_font_flat_NoBG.png') no-repeat center;
         background-size: contain;
         width: 250px;
         height: 45px;
@@ -48,9 +49,15 @@
         margin: 0 auto;
         padding-top: 100px;
       }
+      @media only screen and (max-width: 720px) {
+        &__logo {
+          background-image:none;
+           padding-top: 20px;
+        }
+      }
       &__text{
-        color: $tc-color-gray-shade-8;
-        text-shadow: 0em 0em 0.0em #323232;
+        color: $footer-primary-color;
+        text-shadow: 0em 0em 0.0em $footer-primary-color;
 
         text-align: center;
       }
@@ -68,9 +75,6 @@
       background-size:cover !important;
       min-height: 650px;
       background: url('../../assets/img/View_Responsive_2300.jpg') no-repeat center fixed;
-      background-position-y: -150px !important;
-
-    
     }
     @media only screen and (max-width: 720px) {
       &__middle{
@@ -87,16 +91,15 @@
 
     @media only screen and (max-width: 720px) {
       &__bottom{
-        background: url('../../assets/img/basketball3.jpg') no-repeat center fixed;
+        background: url('../../assets/img/basketball3.jpg') no-repeat center;
         background-size: 450px auto;
         min-height: 250px;
         background-position: center !important; 
       }
     }
-
   }
   &__info {
-    background-color:white;
+    background-color: $tc-color-gray-tint-1;
     padding: 2.2rem 0;
     &__title {
       text-align: center;
@@ -106,14 +109,12 @@
     &__sections__container {
       justify-content: center; // space-around;
       display: flex;
-      flex-wrap: wrap;
       flex-flow: row wrap;
     }
     &__section {
-      // remove if space-around
       text-align:center;
-      padding: 2%;
       width: 25%;
+      padding:1%;
       min-width: 250px; // supporting small devices
       &__header {
         width: 50%;
@@ -122,16 +123,25 @@
         font-weight: 400;
         margin-bottom: 0.6em;
       }
+      &__text {
+        font-size: $tc-font-size-h4;
+        // weird bug same value 1.3rem but did not work $tc-font-size-body;
+      }
+      &__logo {
+        background: url('../../assets/img/core/tc_orange.png') no-repeat center;
+        background-size: contain;
+        height: 60px;
+        width: 60px;
+        margin: 0 auto;
+        padding-top: 20px;        
+      }
       &__icon {
         .mat-icon {
           font-size: $tc-font-size-h1;
           margin-right: 2rem;
-          color: $dark-brown;
-        }
+          color: $primary-color;
+          }
       }
     }
   }
-}
-p {
-  font-size: 1.3em;
 }

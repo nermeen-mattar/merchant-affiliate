@@ -1,26 +1,35 @@
 <div class="app-footer">
   <div class="app-footer__container">
     <mat-list color="primary" class="app-footer__container__menu">
-      <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.TERMS_CONDITIONS" | translate}} </mat-list-item>
+      <div class="app-footer__container__title">{{"TEAM_CENTER" | translate}}
+      </div>
       <mat-list-item class="app-footer__container__menu__item" routerLink="/about"> {{"ABOUT.ABOUT" | translate}} </mat-list-item>
       <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.IMPRESSUM" | translate}} </mat-list-item>
-      <mat-list-item class="app-footer__container__menu__item" routerLink="/contact"> {{"CONTACT.CONTACT" | translate}} </mat-list-item>
+      <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.TERMS_CONDITIONS" | translate}} </mat-list-item>
+      <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.DATA_PRIVACY" | translate}} </mat-list-item>
     </mat-list>
-    <div class="app-footer__container__donate">
-      <div class="app-footer__container__donate__text">{{"FOOTER.SUPPORT_BY_DONATING" | translate}}
+    <mat-list color="primary" class="app-footer__container__menu">
+      <div class="app-footer__container__title">{{"FOOTER.TITLE_HELPS_YOU" | translate}}
       </div>
-      <span>
-        <mat-icon (click)="openDonateWindow()" fontSet="fa" fontIcon="fa-coffee" class="app-footer__container__donate__icon"></mat-icon>
-      </span>
+      <mat-list-item class="app-footer__container__menu__item"> {{"CONTACT.CONTACT" | translate}} </mat-list-item>
+      <mat-list-item class="app-footer__container__menu__item" routerLink="/about"> {{"FOOTER.FEATURES" | translate}} </mat-list-item>
+      <mat-list-item class="app-footer__container__menu__item"> {{"TEAM.CREATE_YOUR_TEAM" | translate}} </mat-list-item>
+    </mat-list>
+
+    <div class="app-footer__container__donate">
+      <div class="app-footer__container__title">{{"FOOTER.SUPPORT_BY_DONATING" | translate}}
+      </div>
+        <div class="app-footer__container__donate__action">
+          <mat-icon (click)="openDonateWindow()" fontSet="fa" fontIcon="fa-coffee" class="app-footer__container__donate__action__icon"></mat-icon>
+        </div>
     </div>
-    <div class="app-footer__container__social-media">
-      <button mat-raised-button class="app-footer__container__social-media__btn app-footer__container__social-media__facebook">
-        <mat-icon fontSet="fa" fontIcon="fa-facebook" class=" app-footer__container__social-media__btn__icon"></mat-icon>
-        {{"SOCIAL_MEDIA.SHARE" | translate}}</button>
-      <button mat-raised-button class="app-footer__container__social-media__btn app-footer__container__social-media__twitter">
-        <mat-icon fontSet="fa" fontIcon="fa-twitter" class=" app-footer__container__social-media__btn__icon"></mat-icon>
-        {{"SOCIAL_MEDIA.TWEET" | translate}}</button>
-    </div>
+
+    <mat-list color="primary" class="app-footer__container__menu__right">
+      <div class="app-footer__container__title">{{"FOOTER.TITLE_LANGUAGE" | translate}}
+      </div>
+      <mat-list-item class="app-footer__container__menu__item"> {{"LANGUAGE.en" | translate}} </mat-list-item>
+    </mat-list>
+
   </div>
 
   <div class="app-footer__copyright">

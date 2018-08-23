@@ -126,8 +126,8 @@
       "TEXT": "Viele Vereine haben Mühe ihre zahlreichen Helfereinsätze zu koordinieren. Mit team.center wird es spielend einfach. Die Mitglieder können sich auf team.center selber ihre Helfereinsätze aussuchen."
     },
     "ADV3": {
-      "TITLE": "Ein Passwort für alle",
-      "TEXT": "team.center macht es möglich für alle Mitglieder in einem Team das gleiche Passwort zu haben und bietet trotzdem persönliche Logins. Frage einfach deinen Teamkollegen, solltest du einmal das Passwort vergessen, oder verwende den Direktlink."
+      "TITLE": "Nur ein Klick",
+      "TEXT": "Wie so oft ist die Zeit knapp. Mit team.center kannst du dich mit nur einem Klick an- bzw. abmelden. Generell haben wir beim Design darauf geachtet, dass jede Aktion mit möglichst wenig Klicks ereichbar ist."
     },
     "ADV4": {
       "TITLE": "Sei Mitglied in mehreren Teams",
@@ -139,7 +139,7 @@
     },
     "ADV6": {
       "TITLE": "Teamübersicht und Statistik",
-      "TEXT": "Jedes Teammitglied hat volle Transparenz über die an- bzw- abgemeldeten Mitglieder. So erinneren sich die Teammitglieder beispielsweise völlig selbständig für bevorstehende Events, oder für das fristgerechte Auswählen von einem Helfereinsatz. team.center macht  das Leben für alle Trainer einfacher."
+      "TEXT": "Jedes Teammitglied hat volle Transparenz über die an- bzw- abgemeldeten Mitglieder. So erinneren sich die Teammitglieder beispielsweise völlig selbständig für bevorstehende Events, oder für das fristgerechte Auswählen von einem Helfereinsatz."
     }
   },
   "ACTIVATION": {
@@ -242,6 +242,14 @@
     "GO_TO_LOGIN": "Zur Login Seite wechseln"
   },
   "FOOTER": {
+    "TITLE_TEAM_CENTER": "team.center",
+    "TITLE_HELPS_YOU": "Das hilft dir",
+    "TITLE_HELPS_US": "Das hilft uns",
+    "TITLE_LANGUAGE": "Sprache",
+    "DATA_PRIVACY": "Datenschutz",
+    "CONTACT": "Kontakt",
+    "FEATURES": "Features",
+    "CREATE": "Erstelle dein Team",
     "TERMS_CONDITIONS": "AGBs",
     "IMPRESSUM": "Impressum",
     "SUPPORT_BY_DONATING": "Unterstütze dieses Projekt indem du uns einen Caffee spendierst",

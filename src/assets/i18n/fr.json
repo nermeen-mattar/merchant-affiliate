@@ -109,9 +109,9 @@
   },
   "LANGUAGE": {
     "LANGUAGE": "Langue",
-    "en": "Anglais",
-    "de": "Allemand",
-    "fr": "Français"
+    "en": "Anglais (en)",
+    "de": "Allemand (de)",
+    "fr": "Français (fr)"
   },
   "HOME": {
     "GO": "Aller!",
@@ -126,8 +126,8 @@
       "TEXT": "Beaucoup de clubs ont du mal à organiser le travail bénévole. team.center le rend facile à gérer. Les personnes aidantes peuvent choisir les taches qu'elles veulent par eux-mêmes."
     },
     "ADV3": {
-      "TITLE": "one password for all",
-      "TEXT": "Team. Center permet de définir un mot de passe d'équipe pour tous ses membres et fournit également des identifiants personnels. Il suffit de demander à votre coéquipier ou d'utiliser le lien direct si vous oubliez votre mot de passe."
+      "TITLE": "un seul clic",
+      "TEXT": "Comme souvent, le temps est rare. Avec team.center, vous pouvez rejoindre ou cancler un événement en un seul clic. Nous avons conçu team.center en mettant l'accent sur la réduction des clics."
     },
     "ADV4": {
       "TITLE": "être membre de plusieurs équipes",
@@ -244,6 +244,14 @@
     "GO_TO_LOGIN": "Aller à la page de connexion"
   },
   "FOOTER": {
+    "TITLE_TEAM_CENTER": "team.center",
+    "TITLE_HELPS_YOU": "this helps you",
+    "TITLE_HELPS_US": "this helps us",
+    "TITLE_LANGUAGE": "language",
+    "DATA_PRIVACY": "data privacy",
+    "CONTACT": "contact",
+    "FEATURES": "features",
+    "CREATE": "create your team",
     "TERMS_CONDITIONS": "Conditions générales",
     "IMPRESSUM": "Impressum",
     "SUPPORT_BY_DONATING": "Soutenez ce projet en achetant un café",

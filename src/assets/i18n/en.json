@@ -115,9 +115,9 @@
   },
   "LANGUAGE": {
     "LANGUAGE": "Language",
-    "en": "English",
-    "de": "German",
-    "fr": "French"
+    "en": "English (en)",
+    "de": "German (de)",
+    "fr": "French (fr)"
   },
   "HOME": {
     "GO": "Go!",
@@ -132,8 +132,8 @@
       "TEXT": "Many clubs have troubles organizing the many volunteer work. team.center makes it easy to manage them. The helping people can pick the jobs they want by themselfes."
     },
     "ADV3": {
-      "TITLE": "one password for all",
-      "TEXT": "team.center makes it possible to set one team password for all its members and still provides personal logins. Just ask your team mate or use the direct link if you forget your password."
+      "TITLE": "one click",
+      "TEXT": "As so often the time is rare. With team.center you can join or cancle an event with only one click. We designed team.center with a strong focus of minimazing clicks."
     },
     "ADV4": {
       "TITLE": "be a member of several teams",
@@ -263,9 +263,15 @@
     "GO_TO_LOGIN": "Go to Login Page"
   },
   "FOOTER": {
+    "TITLE_TEAM_CENTER": "team.center",
+    "TITLE_HELPS_YOU": "this helps you",
+    "TITLE_HELPS_US": "this helps us",
+    "TITLE_LANGUAGE": "language",
+    "DATA_PRIVACY": "data privacy",
+    "FEATURES": "features",
     "TERMS_CONDITIONS": "Terms & Conditions",
     "IMPRESSUM": "Impressum",
-    "SUPPORT_BY_DONATING": "Support this project with buying a coffee",
+    "SUPPORT_BY_DONATING": "Donate a coffee",
     "COPY_RIGHT": "© 2018 Copyright team.center GmbH"
   },
   "ABOUT": {
