@@ -97,13 +97,13 @@ i.material-icons {
           border: 4px solid $primary-color;
         }
       }
-        &__container {
+        &__action {
           padding: 0 0px;
           width:40px;
           padding-top: 16px;
         }
         @media screen and (max-width: 520px) {
-          &__container {
+          &__action {
             width: 67px;
             margin: auto;
           }
