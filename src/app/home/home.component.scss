@@ -128,7 +128,10 @@
         font-size: $tc-font-size-h3;
         font-weight: 400;
         margin-bottom: 0.6em;
-
+      }
+      &__text {
+        font-size: $tc-font-size-h4;
+        // weird bug same value 1.3rem but did not work $tc-font-size-body;
       }
       &__logo {
         background: url('../../assets/img/core/tc_orange.png') no-repeat center;
@@ -150,7 +153,6 @@
     }
   }
 }
-
 
 
 p {
