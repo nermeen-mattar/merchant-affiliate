@@ -19,23 +19,20 @@
         font-size: $tc-font-size-h5;
         cursor: pointer;
         max-width: 250px;
-        &__cafe {
-          padding: 0 0px;
-        }
         &:hover {
           background-color: $tc-color-gray-tint-1;
           color: $tc-color-gray-shade-6;
         }
       }
       &__right {
-        float: right;
+        // float: right;
         width: 20%;
         margin-left: 16%;
         min-width: 300px;
       }
       @media screen and (max-width: 520px) {
         &__right {
-          float: right;
+          // float: right;
           margin-left: 0%;
           min-width: 0px;
           width: 40%;
@@ -167,7 +164,7 @@
             }
           }
           &__right {
-            float: right;
+            // float: right;
             width: 40%;
           }
         }
