@@ -1,22 +1,8 @@
-@import "../../../../styles/toolkit/variables.scss";
-i.material-icons {
-  font-size: 2em;
-
-}
-@media screen and (max-width: 520px) {
-  i.material-icons {
-     text-align: center;
-     width: 250px;
-  }   
-}
+  @import "../../../../styles/toolkit/variables.scss";
 
 .app-footer {
   width: 100%;
   background-color: $footer-primary-color;
-  &__material-icons {
-    color:$home-section-bg-color;
-    font-size: 80px !important;
-  }
   &__container {
     display: flex;
     flex-wrap: wrap;
@@ -34,7 +20,7 @@ i.material-icons {
         cursor: pointer;
         max-width: 250px;
         &__cafe {
-          padding: 0 0px;  
+          padding: 0 0px;
         }
         &:hover {
           background-color: $home-section-bg-color;
@@ -44,7 +30,7 @@ i.material-icons {
       &__right {
         float: right;
         width: 20%;
-        margin-left:16%;
+        margin-left: 16%;
         min-width: 300px;
       }
       @media screen and (max-width: 520px) {
@@ -62,13 +48,11 @@ i.material-icons {
       color: $home-section-bg-color;
       font-weight: bold;
     }
-
     @media screen and (max-width: 520px) {
       &__title {
         text-align: center;
-      }    
+      }
     }
-
     &__donate {
       width: 20%;
       padding-bottom: 1rem;
@@ -80,39 +64,37 @@ i.material-icons {
         font-size: $tc-font-size-h5;
         padding: 0 16px;
       }
-      &__icon {
-        cursor: pointer;
-        font-size: 30px;
-        //background: rgba(0, 0, 0, 0.4);
-        border-radius: 100%;
-        border: 4px solid $home-section-bg-color;
-        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.46);
-        display: table-cell;
-        padding: 15px;
- 
-        vertical-align: middle;
-        &:hover{
-           transition: all 550ms cubic-bezier(.45,1,.32,1);
-          color: $primary-color;
-          border: 4px solid $primary-color;
-        }
-      }
-        &__action {
-          padding: 0 0px;
-          width:40px;
-          padding-top: 16px;
-        }
-        @media screen and (max-width: 520px) {
-          &__action {
-            width: 67px;
-            margin: auto;
+      &__action {
+        padding: 0 0px;
+        width: 40px;
+        padding-top: 16px;
+        &__icon {
+          cursor: pointer;
+          font-size: 30px; //background: rgba(0, 0, 0, 0.4);
+          border-radius: 100%;
+          border: 4px solid $home-section-bg-color;
+          box-shadow: 0 1px 10px rgba(0, 0, 0, 0.46);
+          display: table-cell;
+          padding: 15px;
+          vertical-align: middle;
+          &:hover {
+            transition: all 550ms cubic-bezier(.45, 1, .32, 1);
+            color: $primary-color;
+            border: 4px solid $primary-color;
           }
         }
+      }
+      @media screen and (max-width: 520px) {
+        &__action {
+          width: 67px;
+          margin: auto;
+        }
+      }
     }
     @media screen and (max-width: 520px) {
       &__donate {
         min-width: 250px;
-        text-align: center; 
+        text-align: center;
       }
     }
     &__social-media {
@@ -144,7 +126,7 @@ i.material-icons {
   }
   &__copyright {
     padding: 1rem 1rem;
-    color:$home-section-bg-color;
+    color: $home-section-bg-color;
     background-color: rgba(51, 51, 51, 0.08);
     &__text {
       padding: 0 16px;
@@ -156,10 +138,10 @@ i.material-icons {
   ::ng-deep {
     .mat-list-item {
       max-height: 30px;
-      &:hover{
+      &:hover {
         border-radius: 0px;
         cursor: pointer;
-        transition: all 550ms cubic-bezier(.45,1,.32,1);
+        transition: all 550ms cubic-bezier(.45, 1, .32, 1);
         background-color: unset;
         color: $primary-color;
         max-width: 150px;
@@ -171,6 +153,7 @@ i.material-icons {
     }
   }
 }
+
 @media screen and (max-width: 520px) {
   :host {
     .app-footer {
@@ -193,6 +176,6 @@ i.material-icons {
   }
 }
 
-a:visited{
+a:visited {
   color: white;
 }
