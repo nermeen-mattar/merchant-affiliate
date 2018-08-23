@@ -3,6 +3,7 @@
 .app-container {
   // height: 100%;
   &__sidenav {
+    position: fixed; /* to keep the sidenav fixed while scrolling vertically */
     color: $tc-color-gray-shade-6;
     &__menu {
       width: 210px;
