@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-title class="app-mail-activation__title">
       {{'WELCOME' | translate}}
-      <span *ngIf="userInfo" class="app-mail-activation__title__user-name"> {{userInfo.firstname}} {{userInfo.lastname}}</span>
+      <span *ngIf="userInfo" class="app-mail-activation__title__user-name"> {{userInfo.firstName}} {{userInfo.lastName}}</span>
     </mat-card-title>
     <mat-card-content *ngIf="!displaySpinner; else spinner">
       <div *ngIf="mailState !== mailActivationState.ACTIVATION_LINK_EXPIRED; else expiredLink">

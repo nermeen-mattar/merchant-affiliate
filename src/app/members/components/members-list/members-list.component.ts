@@ -23,13 +23,13 @@ export class MembersListComponent implements OnInit {
   userTeams: TcTeamInfo[];
   selectedTeamId: number;
   teamMemberId: number;
-  displayAdminActions: boolean;
+  hasAdminRole: boolean;
   filterString = '';
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
-  constructor(private membersService: MembersService, userService: UserService,  private teamsService: TeamsService,
+  constructor(private membersService: MembersService, private teamsService: TeamsService,
     public dialog: MatDialog) {
-    this.displayAdminActions = userService.userType === roles.admin;
-    if (this.displayAdminActions) {
+    this.hasAdminRole = this.teamsService.hasAdminRole();
+    if (this.hasAdminRole) {
       this.displayedColumns.push('action');
     }
     this.userTeams = this.teamsService.userTeams;

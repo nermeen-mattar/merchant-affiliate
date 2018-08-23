@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MembersService } from './services/members.service';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersComponent } from './members.component';
 import { MembersRoutingModule } from './members-routing.module';
@@ -21,7 +20,6 @@ import { MemberStatisticsDetailsComponent } from './components/member-statistics
     ReactiveFormsModule,
     SharedModule
   ],
-  providers: [MembersService],
   declarations: [MembersListComponent, MembersComponent, MemberFormComponent, MembersStatisticsComponent, MemberStatisticsDetailsComponent]
 })
 export class MembersModule { }

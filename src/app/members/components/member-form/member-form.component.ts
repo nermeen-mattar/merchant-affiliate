@@ -62,9 +62,9 @@ export class MemberFormComponent implements OnInit {
    */
   updateMemberValues(memberInfo: TcMember) {
     this.memberGroup.patchValue({
-      firstName: memberInfo.firstname,
-      lastName: memberInfo.name,
-      email: memberInfo.member.mail
+      firstName: memberInfo.firstName,
+      lastName: memberInfo.lastName,
+      email: memberInfo.mail
     });
   }
 
@@ -77,7 +77,7 @@ export class MemberFormComponent implements OnInit {
   save(memberValue) {
     const memberValueForBackend = this.getMemberInBackendStructure(memberValue);
     if (this.memberId) {
-      this.membersService.updateMember(this.memberId, this.selectedTeamId, memberValueForBackend).subscribe(res => {
+      this.membersService.updateMember(this.memberId, memberValueForBackend).subscribe(res => {
         this.navigateBack();
       });
     } else {
@@ -94,8 +94,8 @@ export class MemberFormComponent implements OnInit {
    */
   getMemberInBackendStructure(memberValue): TcMember {
     const memberValueCopy: TcMember = {
-      firstname: memberValue.firstName,
-      lastname: memberValue.lastName,
+      firstName: memberValue.firstName,
+      lastName: memberValue.lastName,
       email: memberValue.email
     };
     return memberValueCopy;

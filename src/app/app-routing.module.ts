@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './core/guards/auth.guard';
 import { TeamsComponent } from './teams/teams.component';
-import { DirectLinksComponent } from './components/direct-links/direct-links.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { UnderMaintenanceComponent } from './shared/components/under-maintenance/under-maintenance.component';
 import { EmailActivationComponent } from './components/email-activation/email-activation.component';
@@ -63,10 +62,6 @@ const routes: Routes = [{
   {
     path: 'activation',
     component: EmailActivationComponent
-  },
-  {
-    path: 'team/:hash',
-    component: DirectLinksComponent
   },
   {
     path: '**',

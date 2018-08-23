@@ -1,3 +1,4 @@
+import { LoginStatus } from './core/models/login-status.model';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -17,8 +18,7 @@ import { roles } from './core/constants/roles.constants';
 })
 export class AppComponent {
   appLanguage: string;
-  $isUserLoggedIn: Observable < boolean > ;
-  isUserAdmin: boolean;
+  $isUserLoggedIn: Observable < LoginStatus > ;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
   selectedLanguageCode: string;
@@ -28,17 +28,15 @@ export class AppComponent {
     public translate: TranslateService,
     private loginStatusService: LoginStatusService,
     private router: Router,
-    userService: UserService,
     public matIconRegistry: MatIconRegistry
   ) {
     matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
     this.resetScrollOnRouteChange();
     this.initLanguageRelatedVariables();
-    this.$isUserLoggedIn = this.loginStatusService.$userLoggedIn;
+    this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
     this.$isUserLoggedIn.subscribe(loggedIn => {
-      if (loggedIn) {
+      if (loggedIn.isAuthorized) {
         this.hasAdminRole = teamsService.hasAdminRole();
-        this.isUserAdmin = userService.userType === roles.admin;
       } else {
         this.resetData();
       }
@@ -101,7 +99,7 @@ export class AppComponent {
    * @description Logs the user out of the system
    */
   logout() {
-    this.loginStatusService.isLoggedIn.next(false);
+    this.loginStatusService.loginState.next({ isAuthorized: false, logoutResponse: true});
   }
   /**
    * @author Nermeen Mattar
@@ -109,6 +107,5 @@ export class AppComponent {
    */
   resetData() {
     this.hasAdminRole = null;
-    this.isUserAdmin = null;
   }
 }

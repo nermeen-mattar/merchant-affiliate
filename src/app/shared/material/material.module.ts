@@ -24,7 +24,9 @@ import {
   MatDialogModule,
   MatStepperModule,
   MatExpansionModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatCheckboxModule,
+  MatTabsModule
 } from '@angular/material';
 
 
@@ -57,7 +59,9 @@ import {
     MatDialogModule,
     MatStepperModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCheckboxModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule {}

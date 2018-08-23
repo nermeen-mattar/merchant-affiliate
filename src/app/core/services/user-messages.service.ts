@@ -40,6 +40,12 @@ export class UserMessagesService {
           if (!translatedMessage.includes(translationKey)) {
             userFailMessage.fail = translationKey;
           }
+          /* else if check status code (use constants and requests class)
+            ex else if(reqeuestsClass.unauthorized(err)) {
+              // 403 and 401 same handling
+
+            }
+          */
         }
       );
     }

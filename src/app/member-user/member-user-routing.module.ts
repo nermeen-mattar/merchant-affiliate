@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MemberUserComponent } from './member-user.component';
-import { SwitchToAdminComponent } from './components/switch-to-admin/switch-to-admin.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -14,10 +13,6 @@ const routes: Routes = [
           path: '',
           pathMatch: 'full',
           redirectTo: 'switch-to-admin'
-      },
-      {
-          path: 'switch-to-admin',
-          component: SwitchToAdminComponent
       },
       {
         path: '**',

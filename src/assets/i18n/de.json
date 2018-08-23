@@ -103,10 +103,6 @@
       "TEAM_DELETING_FAIL": "Team konnte nicht gelöscht werden",
       "TEAM_NAME_CHANGING_SUCCESS": "Der Team Name wurde erfolgreich geändert",
       "TEAM_NAME_CHANGING_FAIL": "Der Team Name konnte nicht geändert werden",
-      "DIRECT_LINK_CHANGING_SUCCESS": "Der Direktlink wurde erfolgreich gewechselt",
-      "DIRECT_LINK_CHANGING_FAIL": "Der Direktlinkt konnte nicht gewechselt werden",
-      "TEAM_PASSWORD_CHANGING_SUCCESS": "Das Team Passwort wurde erfolgreich geändert",
-      "TEAM_PASSWORD_CHANGING_FAIL": "Das Team Passwort konnte nicht geändert werden",
       "TEAM_CONFIRM_DELETING_HEADER": "Team löschen",
       "TEAM_CONFIRM_DELETING_BODY": "Willst du dieses Team wirklich löschen?"
     }
@@ -162,11 +158,6 @@
     "THANKS": "Vielen Dank, dass du team.center verwendest",
     "SORRY": "Wir entschuldigen uns."
   },
-  "USER_SWITCHING": {
-    "SWITCH_TO_ADMIN": "Wechsle zum Admin",
-    "SWITCHING_MSG": "Du bist als Teammember eingelogt. Damit du dich als Admin authentifizieren kannst, gib hier bitte ein gültiges Adminpasswort ein.",
-    "SWITCH": "Wechsle"
-  },
   "EVENT": {
     "EVENTS": "Events",
     "PAST_EVENTS": "Vergangene Events",
@@ -208,24 +199,11 @@
     "YOUR_TEAMS": "Deine Teams",
     "CREATE_YOUR_TEAM": "Erstelle dein Team ",
     "TEAM_NAME": "Team Name",
-    "TEAM_PASSWORD": "Team Passwort",
     "TEAM_DETAILS": "Team Details",
-    "ROLES": "Rollen",
-    "DIRECT_LINK": "Direktlink"
+    "ROLES": "Rollen"
   },
   "ADMIN": {
-    "ADMIN": "Admin",
-    "ADMIN_PASSWORD": "Admin Passwort",
-    "ADMIN_DETAILS": "Administrator Details",
-    "ADMIN_PASSWORD_INCORRECT": "Ungültiges Adminpasswort",
-    "SETTINGS": "Einstellungen",
-    "TEAM_SETTINGS": "Team Einstellungen",
-    "CURRENT_PASSWORD": "Aktuelles Passwort",
-    "NEW_PASSWORD": "Neues Passwort",
-    "CHANGE_TEAM_PASSWORD": "Team Passwort ändern",
-    "CHANGE_ADMIN_PASSWORD": "Admin Passwort ändern",
-    "CONFIRM_ADMIN_PASSWORD": "Admin Passwort bestätigen",
-    "CONFIRM_NEW_PASSWORD": "Neues Passwort bestätigen"
+    "ADMIN": "Admin"
   },
   "MEMBER": {
     "MEMBERS": "Members",
@@ -243,11 +221,14 @@
   "USER": {
     "FIRST_NAME": "Vorname",
     "LAST_NAME": "Nachname",
-    "EMAIL": "Email"
+    "EMAIL": "Email",
+    "SETTINGS": "Einstellungen",
+    "CURRENT_PASSWORD": "Aktuelles Passwort",
+    "NEW_PASSWORD": "Neues Passwort"
   },
   "REGISTER": {
     "REGISTER": "Registrieren",
-    "ADMIN_ALREADY_EXIST": "Du bist bereits als Admin registriert. Bitte gib hier dein Adminpasswort ein, um ein neues team zu erstellen.",
+    "MEMBER_ALREADY_EXIST": "Du bist bereits als Admin registriert. Bitte gib hier dein passwort ein, um ein neues team zu erstellen.",
     "EMAIL_NOT_RECEIVED": "Kein Mail erhalten?",
     "SEND_MAIL_AGAIN": " Mail nochmals senden",
     "NEED_TO_CONFIRM_EMAIL": "Bitte zuerst deine Mail-Adresse bestätigen",

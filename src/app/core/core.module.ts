@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { MembersService } from './../members/services/members.service';
 import { LoginStatusService } from './../auth/services/login-status.service';
 import { UserMessagesService } from './services/user-messages.service';
 import { HeaderComponent } from './components/header/header.component';
@@ -17,7 +18,6 @@ import { FieldValidatorsService } from './services/field-validators.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from '../auth/services/auth.service';
 import { TokenHandlerService } from '../auth/services/token-handler.service';
-import { AdminService } from './services/admin.service';
 import { RegisterService } from '../auth/services/register.service';
 import { TeamsService } from './services/teams.service';
 import { DateService } from './services/date.service';
@@ -41,7 +41,7 @@ import { DateService } from './services/date.service';
   ],
   providers: [
     UserService,
-    AdminService,
+    MembersService,
     RegisterService, /* check if it is better to place it in auth module */
     AuthService,
     LoginStatusService,

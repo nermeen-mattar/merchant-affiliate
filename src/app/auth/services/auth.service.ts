@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 
-import { roles } from './../../core/constants/roles.constants';
 import { LoginStatusService } from './login-status.service';
-import { UserMessagesService } from './../../core/services/user-messages.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { ServerSideLoginInfo } from '../models/server-side-login-info.mdel';
 import { ServerSideRegisterInfo } from '../models/server-side-register-info.model';
@@ -12,7 +10,6 @@ import { ServerSideRegisterInfo } from '../models/server-side-register-info.mode
 export class AuthService {
   constructor(
     private httpRequestsService: HttpRequestsService,
-    private userMessagesService: UserMessagesService,
     private loginStatusService: LoginStatusService
   ) {}
 
@@ -38,59 +35,9 @@ export class AuthService {
       .pipe(map(
         res => {
           if (!res.message) { // this if statement is temp until the backend fixes the case of email not confirmed by returning an error
-            this.loginStatusService.isLoggedIn.next(res);
+            this.loginStatusService.loginState.next({isAuthorized: true, loginResponse: res});
           }
           return res;
         }));
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description a team login function using the email and the teamirect link
-   * @param {string} directLink
-   * @param {string} email
-   * @returns {Observable <any>}
-   */
-  loginUsingDirectLink(directLink: string, email: string): Observable < any > {
-    return this.httpRequestsService.httpPost('login/directlink', {
-        directlink: directLink,
-        email: email
-      }, {
-        failDefault: 'LOGIN.INCORRECT_USERNAME'
-      })
-      .pipe(map(
-        res => {
-          if (!res.message) { // this if statement is temp until the backend fixes the case of email not confirmed by returning an error
-            /* this.logout(); commented on 18 June as not needed */
-            this.loginStatusService.isLoggedIn.next(res);
-          }
-          return res;
-        }));
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description sends a post request to the server holding admin credentials to switch from the member view to the admin view, the backend
-   * will either respond with an error in case the password is wrong. Or respond with a result if the password is either a member or an
-   * admin password
-   * @param {ServerSideLoginInfo} userCredentials
-   */
-  switchToAdmin(userCredentials: ServerSideLoginInfo): Observable < any > {
-    const switchFailMsg = 'LOGIN.INCORRECT_ADMIN_PASSWRD';
-    return this.httpRequestsService.httpPost('login', userCredentials, {
-        failDefault: switchFailMsg
-      })
-      .pipe(map(
-        res => {
-          if (res.isAuthorized.toLowerCase() === roles.admin) {
-            this.loginStatusService.isLoggedIn.next(res);
-          } else {
-            this.userMessagesService.showUserMessage({
-              fail: switchFailMsg
-            }, 'fail');
-          }
-          return res;
-        }
-      ));
   }
 }

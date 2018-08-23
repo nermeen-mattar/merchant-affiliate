@@ -3,7 +3,6 @@
 .app-home {
   &__main {
     &__top,
-
     &__bottom {
       background-attachment: fixed;
       background-size: cover;
@@ -27,8 +26,7 @@
         &__title {
           font-weight: 400;
           align-items: center;
-          
-          
+
         }
         &__main-input-field {
           margin-top: 2rem;

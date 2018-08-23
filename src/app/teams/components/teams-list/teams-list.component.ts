@@ -19,16 +19,16 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 export class TeamsListComponent implements OnInit {
   displayedColumns = ['teamName', 'roles'];
   teamsDataSource: MatTableDataSource < TcTeamInfo > ;
-  displayAdminActions: boolean;
+  hasAdminRole: boolean;
   filterString = '';
   roles = roles; /* needed to declare a class property to make it available on the component html */
   teamRoles: TcClientSideTeamRoles;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
   constructor(private userService: UserService, private teamsService: TeamsService, private membersService: MembersService,
     public dialog: MatDialog) {
-    this.displayAdminActions = this.userService.userType === roles.admin;
     this.teamRoles = this.teamsService.teamRoles;
-    if (this.displayAdminActions) {
+    this.hasAdminRole = this.teamsService.hasAdminRole();
+    if (this.hasAdminRole) {
       this.displayedColumns.push('action');
     }
     this.updateTeamsDataSource();
@@ -52,7 +52,7 @@ export class TeamsListComponent implements OnInit {
    * @param {TcTeamInfo} teamInfo
    */
   addTeamAdminAsMember(teamInfo: TcTeamInfo) {
-    this.membersService.createMember(teamInfo.teamId, {email: this.userService.username, firstname: '', name: ''}).subscribe( res => {
+    this.membersService.createMember(teamInfo.teamId, {email: this.userService.username, firstName: '', lastName: ''}).subscribe( res => {
       this.teamsService.addMemberRole(teamInfo.teamId);
       this.updateTeamsDataSource();
     });

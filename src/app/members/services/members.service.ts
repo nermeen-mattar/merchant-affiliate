@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs';
+
 import { TcActivationStatusInfo } from './../models/tc-activation-status-info.model';
-import { UserMessages } from './../../core/models/user-messages.model';
 import { TcMember } from '../models/tc-member.model';
 import { HttpRequestsService } from './../../core/services/http-requests.service';
 
@@ -11,6 +9,22 @@ import { HttpRequestsService } from './../../core/services/http-requests.service
 export class MembersService {
 
   constructor(private httpRequestService: HttpRequestsService) {}
+
+
+
+  /**
+   * @author Nermeen Mattar
+   * @description Uses the httpRequestsSevrice to send a post request to the backend to check whether the received email belongs to an
+   * already existed member. Note that an object of type UserMessages is being sent with an empty fail property to disable defulat error.
+   * @param emailObj
+   */
+  isMemberExist(email: string): Observable < any > {
+    return this.httpRequestService.httpPost('members/check', {
+      email: email
+    }, {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
 
   /**
    * @author Nermeen Mattar
@@ -65,7 +79,7 @@ export class MembersService {
    */
   getMember(memberId: number): Observable < any > {
     return this.httpRequestService.httpGet(
-      `teammembers/${memberId}`,
+      `members/${memberId}`, // teammembers
       {
         failDefault: 'MEMBER.MEMBER_GETTING_FAIL'
       });
@@ -90,15 +104,38 @@ export class MembersService {
    * @author Nermeen Mattar
    * @description sends a get request to the server to update the member with the received id
    * @param {number} memberId
-   * @param {number} teamId
    * @param {TcMember} member
    * @returns {Observable <any>}
    */
-  updateMember(memberId: number, teamId: number, member: TcMember): Observable < any > {
+  updateMember(memberId: number, member: TcMember): Observable < any > {
     return this.httpRequestService.httpPut(
       `members/${memberId}`, member, {
         success: 'MEMBER.MEMBER_UPDATING_SUCCESS',
         failDefault: 'MEMBER.MEMBER_UPDATING_FAIL'
       });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description attemps to update the member password Using the httpPut function from httpRequestsSevrice.
+   * @param {any} oldAndNewPasswords
+   */
+  changePassword(oldAndNewPasswords):Observable <any> {
+    return this.httpRequestService.httpPut('members/change_password',oldAndNewPasswords, {
+      // {username:'nermeenmattar@hotmail.com' ,...
+      success: 'MEMBER.MEMBER_PASSWORD_CHANGING_SUCCESS',
+      failDefault: 'MEMBER.MEMBER_PASSWORD_CHANGING_FAIL'
+    });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description attemps to delete the account of the logged in user.
+   */
+  deleteMyAccount() {
+    this.httpRequestService.httpDelete('members', {
+      success: 'USER.USER_DELETING_SUCCESS',
+      failDefault: 'USER.USER_DELETING_FAIL'
+    }).subscribe(res => {});
   }
 }

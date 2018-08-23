@@ -9,7 +9,7 @@ import { LoginStatusService } from '../../auth/services/login-status.service';
 export class DateService {
   private _selectedDateRange: TcDateRange;
   constructor(loginStatusService: LoginStatusService) {
-    loginStatusService.$userLoggedIn.subscribe(isUserLoggedIn => {
+    loginStatusService.$userLoginState.subscribe(isUserLoggedIn => {
       if (!isUserLoggedIn) {
         this.resetData();
       }
