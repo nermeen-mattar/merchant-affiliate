@@ -8,6 +8,7 @@
   }
   &__card {
     // min-height: 456px;
+    color: $tc-color-gray-shade-6;
     &__card-title {
       color: $tc-color-gray-shade-7;
       text-align: center;
@@ -27,9 +28,8 @@
       }
       &__title {
         font-weight: 400;
-        text-align: left;
-        margin-top: 3rem;
-        /* no 3rem for second */
+        font-weight: $tc-font-weight-6;
+        font-size: $tc-font-size-h5;
       }
       &__field {
         width: 100%; // flex-grow: 1;

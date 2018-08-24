@@ -38,7 +38,8 @@
     "SHOULD_BE_POSITIVE": "shoule be a positive number",
     "SAVE": "Save",
     "SEND": "Send",
-    "IS_REQUIRED": "is required"
+    "IS_REQUIRED": "is required",
+    "SELECT_ALL": "Select All"
   },
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
@@ -98,7 +99,7 @@
       "MEMBER_CONFIRM_DEACTIVATE_HEADER": "Deactivate member",
       "MEMBER_CONFIRM_DEACTIVATE_BODY": "Do you really want to deactivate this member?",
       "MEMBER_PASSWORD_CHANGING_SUCCESS": "The password has been changed successfully",
-      "MEMBER_PASSWORD_CHANGING_ERROR": "Unable to change the password"
+      "MEMBER_PASSWORD_CHANGING_FAIL": "Unable to change the password"
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfully",
@@ -231,7 +232,9 @@
     "MEMBER_PASSWORD_INCORRECT": "Member password incorrect",
     "CHANGE_PASSWORD": "Change Password",
     "CHANGE_BASIC_DETAILS": "Change Basic Details",
-    "ALLOW_REMINDERS": "Allow Mail Reminders"
+    "DELETE_MY_ACCOUNT": "Delete My Account",
+    "MAIL_REMINDERS": "Allow Mail Reminders",
+    "ALLOW_MAIL_REMINDERS_FOR": "Allow Mail Reminders For:"
   },
   "TEAM_MEMBER": {
     "ALSO_A_TEAM_MEMBER": "I'm also a member of this new team"

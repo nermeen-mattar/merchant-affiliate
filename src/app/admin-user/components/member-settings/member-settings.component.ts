@@ -16,13 +16,14 @@ import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 export class MemberSettingsComponent implements OnInit {
   memberBasicSettingsGroup: FormGroup;
   changePasswordGroup: FormGroup;
+  remindersForm: FormGroup;
   teamNameControl: FormControl;
-  selectedTeamInfo: TcTeamInfo;
   allTeams: TcTeamInfo[];
   teamsTheUserIsAdminOf: TcTeamInfo[];
   isEditingTeamName: boolean;
   userEmail: string;
   currentMember: TcMember;
+  isSelectAll = false;
   @ViewChild('adminTeamsSelect') adminTeamsSelect;
 
   constructor(private membersService: MembersService, private teamsService: TeamsService,
@@ -38,12 +39,16 @@ export class MemberSettingsComponent implements OnInit {
     //   firstName: this.userService.firstName,
     //   lastName: this.userService.lastName,
     //   mobile: this.userService.mobile
-    //   /* should allowReminders */
     // }
     this.membersService.getMember(this.userService.memberId).subscribe(currentMemberInfo => {
       this.currentMember = currentMemberInfo;
       this.memberBasicSettingsGroup.patchValue(this.currentMember);
       this.memberBasicSettingsGroup.markAsUntouched();
+    });
+
+    this.membersService.getReminders().subscribe(remindersInfo => {
+      this.remindersForm.patchValue(remindersInfo);
+      this.remindersForm.markAsUntouched();
     });
   }
 
@@ -66,6 +71,7 @@ export class MemberSettingsComponent implements OnInit {
     if(this.teamsTheUserIsAdminOf.length) {
       this.createTeamNameFromControl();
     }
+    this.createRemindersForm();
   }
 
   /**
@@ -77,7 +83,6 @@ export class MemberSettingsComponent implements OnInit {
       firstName: new FormControl(null),
       lastName: new FormControl(null),
       mobile: new FormControl(null, this.fieldValidatorsService.getValidator('number')),
-      allowReminders: new FormControl(null, [Validators.required])
     });
   }
 
@@ -94,6 +99,20 @@ export class MemberSettingsComponent implements OnInit {
    */
   createTeamNameFromControl() {
     this.teamNameControl = new FormControl(null, [Validators.required]);
+  }
+
+  createRemindersForm(){
+    this.remindersForm = new FormGroup({});
+    this.allTeams.forEach(team => {
+      this.remindersForm.addControl(team.teamId.toString(), new FormControl(null)); // should replace null with a value  
+    })
+  } 
+
+  selectAllReminders(selectAllValue){
+    debugger
+    if(selectAllValue) {
+      this.isSelectAll = true;
+    }
   }
 
   /**
@@ -141,6 +160,11 @@ export class MemberSettingsComponent implements OnInit {
       })
     });
   }
+  
+  saveRemindersInfo() {
+    this.membersService.setReminders(this.remindersForm.value);
+  }
+
   deletePropertyValueIfNotTouched(propertyName, updatedMemberValue) {
     if (this.memberBasicSettingsGroup.controls[propertyName].untouched) {
       delete updatedMemberValue[propertyName];

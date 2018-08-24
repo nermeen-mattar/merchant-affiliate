@@ -128,6 +128,28 @@ export class MembersService {
     });
   }
 
+
+  /**
+   * @author Nermeen Mattar
+   * @description sets the teams' reminders for logged in user
+   * @param {any} teamsReminders
+   */
+  setReminders(teamsReminders){
+    return this.httpRequestService.httpPut('members/reminders', teamsReminders,  {
+      fail: 'NO_ERROR_MESSAGE'
+    }).subscribe(res => res);
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description gets the list of teams' reminders for logged in user
+   */
+  getReminders():Observable <any> {
+    return this.httpRequestService.httpGet('members/reminders', {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
   /**
    * @author Nermeen Mattar
    * @description attemps to delete the account of the logged in user.
