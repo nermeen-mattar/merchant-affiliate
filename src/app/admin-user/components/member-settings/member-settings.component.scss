@@ -3,6 +3,9 @@
   width: 80%;
   max-width: 700px;
   margin: 100px auto;
+  &__element-hide{
+    display:none;
+  }
   &__card {
     // min-height: 456px;
     &__card-title {

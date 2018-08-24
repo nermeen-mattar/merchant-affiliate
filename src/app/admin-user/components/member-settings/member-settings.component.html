@@ -71,17 +71,16 @@
         <mat-tab label="{{'TEAM.TEAM' | translate}}" *ngIf="teamsTheUserIsAdminOf.length">
           <div class="app-settings__card__form__team">
             <div class="app-settings__card__form__team__fields">
-              <ng-template #teamsList>
-                <mat-form-field class="app-settings__card__form__field">
-                  <mat-select [(value)]="selectedTeamInfo" placeholder="{{ 'TEAM.SELECT_TEAM_TO_CHANGE_NAME' | translate}}" (selectionChange)="changeTeamNameControlValue()">
+                <mat-form-field class="app-settings__card__form__field" [ngClass]="{'app-settings__element-hide': isEditingTeamName}">
+                  <mat-select #adminTeamsSelect [value]="teamsTheUserIsAdminOf[0]" placeholder="{{ 'TEAM.SELECT_TEAM_TO_CHANGE_NAME' | translate}}">
+                    <!-- (selectionChange)="changeTeamNameControlValue()"-->
                     <mat-option *ngFor="let team of teamsTheUserIsAdminOf" [value]="team">
                       {{ team.teamName }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-              </ng-template>
-              <mat-form-field class="app-settings__card__form__field" *ngIf="isEditingTeamName; else teamsList">
-                <input autofocus matInput placeholder="{{ 'TEAM.NEW_TEAM_NAME' | translate }}" [value]="selectedTeamInfo.teamName" [formControl]="teamNameControl"
+              <mat-form-field class="app-settings__card__form__field" *ngIf="isEditingTeamName">
+                <input autofocus matInput placeholder="{{ 'TEAM.NEW_TEAM_NAME' | translate }}" [value]="adminTeamsSelect.value.teamName" [formControl]="teamNameControl"
                   type="text">
                 <mat-error *ngIf="teamNameControl.invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
               </mat-form-field>
@@ -98,6 +97,7 @@
             </button>
           </div>
         </mat-tab>
+
       </mat-tab-group>
     </mat-card-content>
 

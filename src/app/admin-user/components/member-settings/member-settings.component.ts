@@ -18,18 +18,17 @@ export class MemberSettingsComponent implements OnInit {
   changePasswordGroup: FormGroup;
   teamNameControl: FormControl;
   selectedTeamInfo: TcTeamInfo;
+  allTeams: TcTeamInfo[];
   teamsTheUserIsAdminOf: TcTeamInfo[];
   isEditingTeamName: boolean;
   userEmail: string;
   currentMember: TcMember;
-  @ViewChild('teamNameField') teamNameField;
+  @ViewChild('adminTeamsSelect') adminTeamsSelect;
 
   constructor(private membersService: MembersService, private teamsService: TeamsService,
     private fieldValidatorsService: FieldValidatorsService, private userService: UserService, private loginStatusService: LoginStatusService) {
+      this.allTeams = this.teamsService.userTeams;
     this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
-    if(this.teamsTheUserIsAdminOf.length) {
-      this.selectedTeamInfo = this.teamsTheUserIsAdminOf[0];
-    }
     this.initSettingsForm();
   }
 
@@ -91,18 +90,10 @@ export class MemberSettingsComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description creates  team name from controls.
+   * @description creates  team name from control.
    */
   createTeamNameFromControl() {
-    this.teamNameControl = new FormControl(this.selectedTeamInfo.teamName, [Validators.required]);
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description deletes the logged in user account.
-   */
-  changeTeamNameControlValue() {
-    this.teamNameControl.setValue(this.selectedTeamInfo.teamName);
+    this.teamNameControl = new FormControl(null, [Validators.required]);
   }
 
   /**
@@ -123,10 +114,10 @@ export class MemberSettingsComponent implements OnInit {
    * @description calls the function to update the team name.
    */
   saveTeamName() {
-    this.teamsService.changeTeamName(this.teamNameControl.value, this.selectedTeamInfo.teamId);
+    this.teamsService.changeTeamName(this.teamNameControl.value, this.adminTeamsSelect.value.teamId);
     this.teamNameControl.reset();
   }
-
+ 
 
   /**
    * @author Nermeen Mattar
