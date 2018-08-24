@@ -109,7 +109,6 @@ export class MemberSettingsComponent implements OnInit {
   } 
 
   selectAllReminders(selectAllValue){
-    debugger
     if(selectAllValue) {
       this.isSelectAll = true;
     }
