@@ -1,5 +1,5 @@
 <mat-card class="app-login">
-  <mat-card-title class="text-center">{{ 'LOGIN.LOGIN' | translate }} </mat-card-title>
+  <mat-card-title class="app-login__title">{{ 'LOGIN.LOGIN' | translate }} </mat-card-title>
   <mat-card-content>
     <form novalidate #loginForm="ngForm" class="app-login__content" (ngSubmit)="login(loginForm.value)" [ngClass]="{'app-login__element-hide': displaySpinner}">
       <mat-form-field class="app-login__content__field">
@@ -23,18 +23,16 @@
         <mat-icon class="app-login__content__field__icon" matPrefix> lock</mat-icon>
         <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
-      <!-- <div class="app-login__content__submit-btn-wrap"> -->
-        <button mat-raised-button color="primary" class="app-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
-      </div>
-      <p>{{'LOGIN.FORGOT_PASSWORD'| translate}}</p>
+      <button mat-raised-button color="primary" class="app-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
+      <p routerLink="../reset" class="app-login__content__link app-login__content__forgot-password">{{'LOGIN.FORGOT_PASSWORD'| translate}}</p>
     </form>
     <div *ngIf="displayMessage && !displaySpinner" class="app-login__content__user-message">
       <ng-container *ngIf="displayMessage === 'mailNotActivated'">
-        <span> {{  'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate}} </span>
+        <span> {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate}} </span>
         <span (click)="resendConfirmationEmail()" class="app-login__content__link"> {{'REGISTER.SEND_MAIL_AGAIN' | translate}} </span>
       </ng-container>
       <ng-container *ngIf="displayMessage === 'mailNotExist'">
-        <span> {{  'REGISTER.NEED_TO_REGISTER_EMAIL' | translate}} </span>
+        <span> {{ 'REGISTER.NEED_TO_REGISTER_EMAIL' | translate}} </span>
         <span routerLink="/auth/register" class="app-login__content__link"> {{'REGISTER.REGISTER_NOW' | translate}} </span>
       </ng-container>
     </div>

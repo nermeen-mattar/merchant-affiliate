@@ -1,5 +1,5 @@
 <mat-card class="app-register">
-  <mat-card-title class="text-center">{{ 'REGISTER.REGISTER' | translate }} </mat-card-title>
+  <mat-card-title class="app-register__title">{{ 'REGISTER.REGISTER' | translate }} </mat-card-title>
   <mat-card-content>
     <div class="app-register__content" [ngClass]="{'app-register__element-hide': displaySpinner || displayMessageCard}">
       <mat-vertical-stepper #regStepper linear="true" (selectionChange)="selectedStepChanged($event)">

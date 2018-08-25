@@ -6,6 +6,9 @@
   min-height:  152px; // 200; // 242px;
   max-width: 500px;
   margin: 120px auto;
+  &__title {
+    text-align: center;
+  }
   &__content {
     &__form {
       margin-top: 2rem;
