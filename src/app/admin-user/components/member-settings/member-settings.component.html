@@ -89,15 +89,15 @@
             </button>
           </div>
         </mat-tab>
-        <mat-tab label="{{'MEMBER.MAIL_REMINDERS' | translate}}" *ngIf="allTeams.length">
+        <mat-tab label="{{'MEMBER.REMINDERS' | translate}}" *ngIf="allTeams.length">
           <!-- <div class="app-settings__card__form__team__fields"> -->
           <form class="app-settings__card__form" novalidate (ngSubmit)="saveRemindersInfo()" [formGroup]="remindersForm">
             <label class="app-settings__card__form__title">{{ 'MEMBER.ALLOW_MAIL_REMINDERS_FOR' | translate }}</label>
             <div class="app-settings__card__form__field" *ngFor="let team of allTeams">
-              <mat-checkbox [checked]="isSelectAll" color="primary" [formControlName]="team.teamId">{{team.teamName}}</mat-checkbox>
+              <mat-checkbox (change)="isSelectAllReminders = $event.checked && isSelectAllReminders" color="primary" [formControlName]="team.teamId">{{team.teamName}}</mat-checkbox>
             </div>
-            <div class="app-settings__card__form__field">
-              <mat-checkbox (change)="selectAllReminders($event.checked)" color="primary">{{"FORM.SELECT_ALL" | translate}}</mat-checkbox>
+            <div *ngIf="allTeams.length > 1" class="app-settings__card__form__field app-settings__card__top-spacing" style="margin-top:2rem">
+              <mat-checkbox  [checked]="isSelectAllReminders" (change)="selectAllReminders($event.checked)" color="primary">{{"FORM.SELECT_ALL" | translate}}</mat-checkbox>
             </div>
             <button mat-raised-button class="app-settings__card__form__button" color="primary" type="submit">{{'FORM.SAVE' | translate}}</button>
             <!-- </div> -->

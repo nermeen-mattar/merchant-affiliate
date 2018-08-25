@@ -23,7 +23,7 @@ export class MemberSettingsComponent implements OnInit {
   isEditingTeamName: boolean;
   userEmail: string;
   currentMember: TcMember;
-  isSelectAll = false;
+  isSelectAllReminders = false;
   @ViewChild('adminTeamsSelect') adminTeamsSelect;
 
   constructor(private membersService: MembersService, private teamsService: TeamsService,
@@ -109,8 +109,13 @@ export class MemberSettingsComponent implements OnInit {
   } 
 
   selectAllReminders(selectAllValue){
+    this.isSelectAllReminders = selectAllValue;
     if(selectAllValue) {
-      this.isSelectAll = true;
+      const newValue = this.remindersForm.value;
+      Object.keys(newValue).forEach(formControlName => {
+        newValue[formControlName] = true;
+      });
+      this.remindersForm.setValue(newValue);
     }
   }
 

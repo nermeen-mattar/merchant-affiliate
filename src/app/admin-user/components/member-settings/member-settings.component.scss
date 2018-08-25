@@ -9,6 +9,9 @@
   &__card {
     // min-height: 456px;
     color: $tc-color-gray-shade-6;
+    &__top-spacing {
+      margin-top: 2rem;
+    }
     &__card-title {
       color: $tc-color-gray-shade-7;
       text-align: center;
