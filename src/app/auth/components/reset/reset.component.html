@@ -1,3 +1,25 @@
-<p>
-  reset works!
-</p>
+<mat-card class="app-reset">
+    <mat-card-title class="text-center">{{ 'RESET_PASSWORD.RESET_PASSWORD' | translate }} </mat-card-title>
+    <mat-card-content>
+      <form novalidate #resetForm="ngForm" class="app-reset__content" (ngSubmit)="resetPassword(resetForm.value)" [ngClass]="{'app-reset__element-hide': displaySpinner}">
+        <mat-form-field class="app-reset__content__field">
+          <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" ngModel #userEmail="ngModel" name="userEmail" required email
+            type="text">
+          <mat-icon class="app-reset__content__field__icon" matPrefix>email</mat-icon>
+          <mat-error *ngIf="userEmail.invalid">
+            <span *ngIf="userEmail.errors.required; else emailError">
+              {{'USER.EMAIL' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
+            </span>
+            <ng-template #emailError>
+              <span *ngIf="userEmail.errors.email">
+                {{'FORM.ENTER_VALID_EMAIL' | translate}}
+              </span>
+            </ng-template>
+          </mat-error>
+        </mat-form-field>
+          <button mat-raised-button color="primary" class="app-reset__content__button" [disabled]="resetForm.invalid" type="submit">{{ 'RESET_PASSWORD.FIND_ACCOUNT' | translate }}</button>
+      </form>
+    </mat-card-content>
+    <mat-spinner class="app-reset__spinner" [ngClass]="{'app-reset__element-hide': !displaySpinner }"></mat-spinner>
+  </mat-card>
+  

@@ -40,4 +40,14 @@ export class AuthService {
           return res;
         }));
   }
+  /**
+   * @author Nermeen Mattar
+   * @description sends a post request to the server to reset the password for the passed email.
+   * @param {string} email
+   */
+  resetPassword(email: string): Observable < any > {
+    return this.httpRequestsService.httpPost('request_reset_password', email,{
+      fail: 'RESET_PASSWORD.EMAIL_NOT_EXIST'
+    } );
+  }
 }

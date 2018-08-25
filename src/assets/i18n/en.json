@@ -63,6 +63,9 @@
       "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
       "INCORRECT_ADMIN_PASSWRD": "Wrong admin password"
     },
+    "RESET_PASSWORD": {
+      "EMAIL_NOT_EXIST": "We couldn't find an account associated with the provided email"
+    },
     "CONTACT": {
       "CONTACT_MESSAGE_SENT_SUCCESS": "The message has been sent successfully",
       "CONTACT_MESSAGE_SENT_FAIL": "Unable to send message"
@@ -265,6 +268,10 @@
     "REGISTER": "Register Now!",
     "GO_TO_LOGIN": "Go to Login Page",
     "FORGOT_PASSWORD": "Forgot Password?"
+  },
+  "RESET_PASSWORD": {
+    "RESET_PASSWORD": "Reset Password",
+    "FIND_ACCOUNT": "Send Reset Password Link"
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
