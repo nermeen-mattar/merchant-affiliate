@@ -263,7 +263,8 @@
     "LOGIN": "Login",
     "PASSWORD": "Password",
     "REGISTER": "Register Now!",
-    "GO_TO_LOGIN": "Go to Login Page"
+    "GO_TO_LOGIN": "Go to Login Page",
+    "FORGOT_PASSWORD": "Forgot Password"
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
