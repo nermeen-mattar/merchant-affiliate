@@ -7,7 +7,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./reset.component.scss']
 })
 export class ResetComponent implements OnInit {
-  displaySpinner
+  displaySpinner;
+  displayMessageCard;
   constructor( private authService: AuthService) {}
   ngOnInit() {}
 
@@ -19,10 +20,11 @@ export class ResetComponent implements OnInit {
   resetPassword(email: string) {
     this.displaySpinner = true;
     this.authService.resetPassword(email).subscribe(res => {
-      if (res.statusCode) { // temp until the backend fixes the case of email not confirmed by returning an error
-        this.displaySpinner = false;
-      }
+      this.displayMessageCard = true;
+      this.displaySpinner = false;
     }, err => {
+      this.displayMessageCard = true;
+
       this.displaySpinner = false;
     });
   }

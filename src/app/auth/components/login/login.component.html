@@ -1,5 +1,5 @@
 <mat-card class="app-login">
-  <mat-card-title class="text-center">{{ 'LOGIN.LOGIN' | translate }} </mat-card-title>
+  <mat-card-title class="app-login__title">{{ 'LOGIN.LOGIN' | translate }} </mat-card-title>
   <mat-card-content>
     <form novalidate #loginForm="ngForm" class="app-login__content" (ngSubmit)="login(loginForm.value)" [ngClass]="{'app-login__element-hide': displaySpinner}">
       <mat-form-field class="app-login__content__field">

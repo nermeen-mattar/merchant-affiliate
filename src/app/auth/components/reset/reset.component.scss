@@ -6,10 +6,23 @@
   max-width: 500px;
   min-height: 180px;
   margin: 120px auto;
+  font-size: 1rem;
   &__element-hide {
     display:none;
   }
+  &__title {
+    text-align: center;
+  }
   &__content {
+    &__message {
+      text-align:center;
+      &__bold{
+        font-weight: $tc-font-weight-5;
+      }
+      &__vertical-spacing{
+        margin: 1.4rem 0;
+      }
+    }
     &__field {
       width: 100%;
       line-height: 1.5;
@@ -22,6 +35,13 @@
     &__button {
       margin-top: 2.2rem;
       color:white;
+    }
+    &__link {
+      color: $tc-color-base-bright-shade-2;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   }
   &__spinner {
