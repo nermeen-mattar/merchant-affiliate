@@ -119,9 +119,9 @@
   },
   "LANGUAGE": {
     "LANGUAGE": "Language",
-    "en": "English (en)",
-    "de": "German (de)",
-    "fr": "French (fr)"
+    "en": "English",
+    "de": "German",
+    "fr": "French"
   },
   "HOME": {
     "GO": "Go!",

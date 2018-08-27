@@ -109,9 +109,9 @@
   },
   "LANGUAGE": {
     "LANGUAGE": "Langue",
-    "en": "Anglais (en)",
-    "de": "Allemand (de)",
-    "fr": "Français (fr)"
+    "en": "Anglais",
+    "de": "Allemand",
+    "fr": "Français"
   },
   "HOME": {
     "GO": "Aller!",
