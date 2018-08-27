@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './components/login/login.component';
-import { ResetComponent } from './components/reset/reset.component';
+import { ResetComponent } from './components/request-reset-password/request-reset-password.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 import { AuthGuard } from '../core/guards/auth.guard';
@@ -23,7 +23,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'reset',
+        path: 'request-reset-password',
         component: ResetComponent
       },
       {
