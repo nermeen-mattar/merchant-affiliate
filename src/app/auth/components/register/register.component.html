@@ -51,7 +51,7 @@
               {{'REGISTER.MEMBER_ALREADY_EXIST' | translate}}
             </p>
             <mat-form-field class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'MEMBER.PASSWORD' | translate }}" formControlName="password" [type]="displayPassword ? 'text' : 'password'">
+              <input matInput placeholder="{{ 'USER.PASSWORD' | translate }}" formControlName="password" [type]="displayPassword ? 'text' : 'password'">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
               <div matSuffix class="app-register__content__form__field__icons-wrapper">
                 <mat-icon *ngIf="registerSecondStepForm.controls['password'].dirty && registerSecondStepForm.controls['password'].invalid&&
@@ -63,7 +63,7 @@
               </div>
               <mat-error *ngIf="registerSecondStepForm.controls['password'].invalid">
                 <span *ngIf="registerSecondStepForm.controls['password'].errors.required; else passwordInvalid">
-                  {{ 'MEMBER.PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
+                  {{ 'USER.PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
                 </span>
                 <ng-template #passwordInvalid>
                   <span *ngIf="registerSecondStepForm.controls['password'].errors.validatePassword">

@@ -222,20 +222,14 @@
   "MEMBER": {
     "MEMBERS": "Members",
     "MEMBER": "Member",
-    "PASSWORD": "Password",
-    "NEW_PASSWORD": "New Password",
     "MEMBERS_STATISTICS": "Members Statistics",
     "MEMBERS_LIST": "Members List",
-    "MAIL": "Mail",
     "EDIT_MEMBER": "Edit member",
     "CREATE_MEMBER": "Create member",
     "ADD_ME_AS_MEMBER": "Add myself as a member",
     "OUR_MEMBERS": "Our members",
     "BY_DEFAULT_MEMBERS_ARE": "By default all members are ",
     "ALL_PARTICIPATION": "All Participations",
-    "MEMBER_PASSWORD_INCORRECT": "Member password incorrect",
-    "CHANGE_PASSWORD": "Change Password",
-    "CHANGE_BASIC_DETAILS": "Change Basic Details",
     "DELETE_MY_ACCOUNT": "Delete My Account",
     "REMINDERS": "Reminders",
     "ALLOW_MAIL_REMINDERS_FOR": "Allow Mail Reminders For:"
@@ -251,6 +245,7 @@
     "LAST_NAME": "Last Name",
     "EMAIL": "Email",
     "MOBILE_NUMBER": "Mobile Number",
+    "PASSWORD": "Password",
     "CURRENT_PASSWORD": "Current Password",
     "NEW_PASSWORD": "New Password"
   },
