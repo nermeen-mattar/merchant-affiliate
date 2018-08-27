@@ -10,7 +10,7 @@ import { MatIconModule, MatIconRegistry } from '@angular/material';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
-
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AppComponent } from './app.component';
 import { createTranslateLoader } from './core/loaders/translate-loader';
 import { EmailActivationComponent } from './components/email-activation/email-activation.component';
@@ -18,7 +18,8 @@ import { EmailActivationComponent } from './components/email-activation/email-ac
 @NgModule({
   declarations: [
     AppComponent,
-    EmailActivationComponent
+    EmailActivationComponent,
+    ResetPasswordComponent
     ],
   imports: [
     BrowserModule,

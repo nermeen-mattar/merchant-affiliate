@@ -42,12 +42,22 @@ export class AuthService {
   }
   /**
    * @author Nermeen Mattar
-   * @description sends a post request to the server to reset the password for the passed email.
+   * @description requests a reset password mail for passed email.
    * @param {string} email
    */
-  resetPassword(email: string): Observable < any > {
+  requestResetPassword(email: string): Observable < any > {
     return this.httpRequestsService.httpPost('request_reset_password', email,{
       fail: 'RESET_PASSWORD.EMAIL_NOT_EXIST'
     } );
+  }
+  /**
+   * @author Nermeen Mattar
+   * @description sends a post request to the server to reset the password for the passed email.
+   * @param {string} newPassword
+   * @param {string } hash
+   */
+  resetPassword(newPassword: string, hash: string): Observable < any > {
+    return this.httpRequestsService.httpPost('request_reset_password', {newPassword: newPassword, 
+    hash: hash});
   }
 }

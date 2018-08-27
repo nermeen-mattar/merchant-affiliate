@@ -3,8 +3,8 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'tc-reset',
-  templateUrl: './reset.component.html',
-  styleUrls: ['./reset.component.scss']
+  templateUrl: './request-reset-password.component.html',
+  styleUrls: ['./request-reset-password.component.scss']
 })
 export class ResetComponent implements OnInit {
   displaySpinner;
@@ -14,12 +14,12 @@ export class ResetComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description sends a request to reset password for the entered email.
+   * @description rquests to reset password for the entered email.
    * @param {string} email
    */
-  resetPassword(email: string) {
+  requestResetPassword(email: string) {
     this.displaySpinner = true;
-    this.authService.resetPassword(email).subscribe(res => {
+    this.authService.requestResetPassword(email).subscribe(res => {
       this.displayMessageCard = true;
       this.displaySpinner = false;
     }, err => {

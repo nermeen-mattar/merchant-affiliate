@@ -24,7 +24,7 @@
         <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" class="app-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
-      <p routerLink="../reset" class="app-login__content__link app-login__content__forgot-password">{{'LOGIN.FORGOT_PASSWORD'| translate}}</p>
+      <p routerLink="../request_reset_password" class="app-login__content__link app-login__content__forgot-password">{{'LOGIN.FORGOT_PASSWORD'| translate}}</p>
     </form>
     <div *ngIf="displayMessage && !displaySpinner" class="app-login__content__user-message">
       <ng-container *ngIf="displayMessage === 'mailNotActivated'">
