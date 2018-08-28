@@ -57,7 +57,7 @@ export class AuthService {
    * @param {string } hash
    */
   resetPassword(newPassword: string, hash: string): Observable < any > {
-    return this.httpRequestsService.httpPost('request_reset_password', {newPassword: newPassword, 
+    return this.httpRequestsService.httpPost('reset_password', {newPassword: newPassword, 
     hash: hash});
   }
 }

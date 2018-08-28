@@ -14,7 +14,7 @@ import { TcMember } from '../../members/models/tc-member.model';
 export class ResetPasswordComponent implements OnInit {
   displaySpinner;
   displayPageNotFound: boolean;
-  // displayMessageCard;
+  displayErrorMessage;
   hash: string;
   constructor(activatedRoute: ActivatedRoute, private authService: AuthService) {
     const queryParams = activatedRoute.snapshot.queryParams;
@@ -34,10 +34,11 @@ export class ResetPasswordComponent implements OnInit {
   resetPassword(password: string) {
     this.displaySpinner = true;
     this.authService.resetPassword(password, this.hash).subscribe(res => {
-      // this.displayMessageCard = true;
+      // this.displayErrorMessage = true;
       this.displaySpinner = false;
     }, err => {
-      // this.displayMessageCard = true;
+      // this.displayErrorMessage = true;
+      this.displayPageNotFound = true;
       this.displaySpinner = false;
     });
   }
