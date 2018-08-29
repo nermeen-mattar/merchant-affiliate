@@ -1,6 +1,6 @@
 import { AuthService } from './../../auth/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { MailActivationState } from '../../models/mail-activation-state.model';
@@ -16,7 +16,7 @@ export class ResetPasswordComponent implements OnInit {
   displayPageNotFound: boolean;
   displayErrorMessage;
   hash: string;
-  constructor(activatedRoute: ActivatedRoute, private authService: AuthService) {
+  constructor(activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
     const queryParams = activatedRoute.snapshot.queryParams;
     this.hash = queryParams && queryParams['h']
     if (!this.hash) {
@@ -35,11 +35,13 @@ export class ResetPasswordComponent implements OnInit {
     this.displaySpinner = true;
     this.authService.resetPassword(password, this.hash).subscribe(res => {
       // this.displayErrorMessage = true;
+      this.router.navigateByUrl('auth/login');
       this.displaySpinner = false;
     }, err => {
       // this.displayErrorMessage = true;
       this.displayPageNotFound = true;
       this.displaySpinner = false;
+
     });
   }
 }
