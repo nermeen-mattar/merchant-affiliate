@@ -22,6 +22,16 @@ export class FieldValidatorsService {
           null : { validatePositive: { value: control.value } };
       };
     },
+    minlength: (minAllowedLength: number): ValidatorFn => {
+      return (control: AbstractControl): { [key: string]: any } => {
+        return !control.value || control.value.length >= minAllowedLength ?
+          null : {
+            minlength: {
+              value: control.value,
+            }
+          };
+      };
+    },
     validateSecondGreaterThanFirst: (specs): ValidatorFn => {
       return (group: FormGroup): {
         [key: string]: any
@@ -64,7 +74,13 @@ export class FieldValidatorsService {
         const controlValue = Number(control.value);
         return !isNaN(controlValue) ? null : { number: { value: control.value } };
       };
-    }
+    },
+    isTruthy: (): ValidatorFn => {
+      return (control: AbstractControl): { [key: string]: any } => {
+        const controlValue = Number(control.value);
+        return controlValue ? null : { isTruthy: { value: control.value } };
+      };
+    }, 
   };
   /**
    * @author Nermeen Mattar
