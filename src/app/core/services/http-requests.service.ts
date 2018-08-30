@@ -90,9 +90,9 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
-          // if (err.error.statusCode === 401) {
-          //   this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
-          // }
+          if (err.error.statusCode === 401) {
+            this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
+          }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
