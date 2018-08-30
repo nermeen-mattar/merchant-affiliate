@@ -50,7 +50,8 @@
     },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Impossible d'enregistrer une nouvelle équipe",
-      "REGISTER_SUCCESS": "Merci d'avoir créé votre équipe. Veuillez vérifier votre e-mail pour activer votre compte.",
+      "TEAM_CREATING_SUCCESS": "Merci d'avoir créé votre équipe",
+      "PLEASE_ACTIVATE": "Veuillez vérifier votre e-mail pour activer votre compte.",
       "ACTIVATION_MAIL_RESEND__SUCCESS": "Le mail d'activation a été renvoyé avec succès",
       "ACTIVATION_MAIL_RESEND__FAIL": "Impossible de renvoyer le courrier d'activation"
     },

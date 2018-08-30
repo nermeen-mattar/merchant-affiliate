@@ -50,7 +50,8 @@
     },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Neues team kann nicht angelegt werden",
-      "REGISTER_SUCCESS": "Vielen Dank für das Anlegen von deinem Team. Bitte prüfe nun deine Mails, um deinen Account zu aktivieren",
+      "TEAM_CREATING_SUCCESS": "Vielen Dank für das Anlegen von deinem Team",
+      "PLEASE_ACTIVATE": "Bitte prüfe nun deine Mails, um deinen Account zu aktivieren",
       "ACTIVATION_MAIL_RESEND__SUCCESS": "Aktivierungsmail wurde nochmals versendet",
       "ACTIVATION_MAIL_RESEND__FAIL": "Aktivierungsmail konnt nicht nochmals versendet werden"
     },

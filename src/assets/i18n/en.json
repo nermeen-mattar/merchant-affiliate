@@ -28,6 +28,7 @@
     "TWEET": "Tweet"
   },
   "FORM": {
+    "MIN_LENGTH": "should have have at least $$ characters",
     "ENTER_VALID_NUMBER": "Please enter a valid number",
     "ENTER_VALID_EMAIL": "Please enter a valid email address.",
     "ENTER_VALID_PASSWORD": "Please enter a valid password.",
@@ -55,7 +56,8 @@
     },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Unable to register a new team",
-      "REGISTER_SUCCESS": "Thank you for creating your team. Please check your mail to activate your account.",
+      "TEAM_CREATING_SUCCESS": "Your team has been created successfully",
+      "PLEASE_ACTIVATE": "Please check your mail to activate your account.",
       "ACTIVATION_MAIL_RESEND__SUCCESS": "Activation mail re-sent successfully",
       "ACTIVATION_MAIL_RESEND__FAIL": "Unable to Re-send activatin mail"
     },
