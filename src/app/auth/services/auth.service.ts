@@ -19,7 +19,8 @@ export class AuthService {
    */
   register(registrationInfo: ServerSideRegisterInfo): Observable < any > {
     return this.httpRequestsService.httpPost('register', registrationInfo, {
-      fail: 'REGISTER.UNABLE_TO_REGISTER'
+      fail: 'REGISTER.UNABLE_TO_REGISTER',
+      success: 'REGISTER.TEAM_CREATING_SUCCESS'
     });
   }
 
