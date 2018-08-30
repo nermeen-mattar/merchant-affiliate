@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
   }
   createRegisterFirstStepForm() {
     this.registerFirstStepForm = new FormGroup({
-      teamName: new FormControl(this.teamName || '', [Validators.required]),
+      teamName: new FormControl(this.teamName || '', [Validators.required, Validators.minLength(4) ]),
       email: new FormControl('', [Validators.required, Validators.email])
     });
   }
@@ -141,7 +141,7 @@ export class RegisterComponent implements OnInit {
    * @param {MemberRegisterInfo} adminInfo
    */
   register(teamInfo: TeamRegisterInfo, adminInfo: MemberRegisterInfo) {
-    if(!this.registerSecondStepForm.controls.confirmTerms.value) {
+    if(this.isNewUser && !this.registerSecondStepForm.controls.confirmTerms.value) {
       this.registerSecondStepForm.controls.confirmTerms.markAsDirty();
       return false;
     }

@@ -8,7 +8,16 @@
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" formControlName="teamName" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>supervisor_account</mat-icon>
-              <mat-error *ngIf="registerFirstStepForm.controls['teamName'].invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+              <mat-error *ngIf="registerFirstStepForm.controls['teamName'].invalid">
+                <span *ngIf="registerFirstStepForm.controls['teamName'].errors.required; else invalidTeamName">
+                  {{'TEAM.TEAM_NAME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
+                </span>
+                <ng-template #invalidTeamName>
+                  <span *ngIf="registerFirstStepForm.controls['teamName'].errors.minlength">
+                    {{'TEAM.TEAM_NAME' | translate}} {{ ('FORM.MIN_LENGTH' | translate) | localizedTextModifier:'inject':registerFirstStepForm.controls['teamName'].errors.minlength.requiredLength}}
+                  </span>
+                </ng-template>
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" formControlName="email" type="text">
@@ -81,7 +90,7 @@
                 {{ 'CONFIRM_TERM_CONDITIONS' | translate }} </mat-checkbox>
             </div>
             <mat-error *ngIf="isNewUser && registerSecondStepForm.controls['confirmTerms'].dirty && !registerSecondStepForm.controls['confirmTerms'].value">
-              {{ 'HAVE_TO_CONFIRM_TERM_CONDITIONS' | translate }}
+                {{ 'HAVE_TO_CONFIRM_TERM_CONDITIONS' | translate }}
             </mat-error>
             <div class="stepper-action-btns">
               <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{ 'BACK' | translate }}</button>
@@ -94,12 +103,12 @@
     </div>
     <mat-spinner class="app-register__spinner" [ngClass]="{'app-register__element-hide': !displaySpinner }"></mat-spinner>
     <div *ngIf="displayMessageCard && !displaySpinner">
-      <div *ngIf="!emailActivationRequired" class="app-register__content__form__register-success"> {{ 'USER_MESSAGES.REGISTER.REGISTER_SUCCESS' | translate }} </div>
+      <div *ngIf="!emailActivationRequired" class="app-register__content__form__register-success"> {{ 'USER_MESSAGES.REGISTER.TEAM_CREATING_SUCCESS' | translate }}. {{ 'USER_MESSAGES.REGISTER.PLEASE_ACTIVATE' | translate }} </div>
       <div class="app-register__content__resend-mail">
-        <span *ngIf="emailActivationRequired"> 
-          <!-- ; else emailNotReceived--> 
-          {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate | localizedTextModifier:'inject': registerFirstStepForm.controls.email.value}} 
-        </span> 
+        <span *ngIf="emailActivationRequired">
+          <!-- ; else emailNotReceived-->
+          {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate | localizedTextModifier:'inject': registerFirstStepForm.controls.email.value}}
+        </span>
         <div class="app-register__content__resend-mail ">
           <!-- <ng-template #emailNotReceived> -->
           <span> {{'REGISTER.EMAIL_NOT_RECEIVED' | translate}} </span>
