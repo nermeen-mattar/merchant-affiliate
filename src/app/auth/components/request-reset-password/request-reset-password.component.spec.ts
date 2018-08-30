@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RequestResetPasswordComponent } from './request-reset-password.component';
 
-import { RequestResetPasswordComponent } from './reset.component';
 
 describe('RequestResetPasswordComponent', () => {
   let component: RequestResetPasswordComponent;

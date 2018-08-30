@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'tc-reset',
+  selector: 'tc-request-reset',
   templateUrl: './request-reset-password.component.html',
   styleUrls: ['./request-reset-password.component.scss']
 })
-export class ResetComponent implements OnInit {
+export class RequestResetPasswordComponent implements OnInit {
   displaySpinner;
   displayMessageCard;
   constructor( private authService: AuthService) {}

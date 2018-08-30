@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './components/login/login.component';
-import { ResetComponent } from './components/request-reset-password/request-reset-password.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 import { AuthGuard } from '../core/guards/auth.guard';
+import { RequestResetPasswordComponent } from './components/request-reset-password/request-reset-password.component';
 
 const routes: Routes = [
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'request-reset-password',
-        component: ResetComponent
+        component: RequestResetPasswordComponent
       },
       {
         path: 'register',
