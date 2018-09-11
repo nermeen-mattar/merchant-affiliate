@@ -122,7 +122,7 @@ export class MembersService {
    * @returns {Observable <any>}
    */
   activateMember(memberAtivationInfo) : Observable < any > {
-    return this.httpRequestService.httpPut('activation/member', memberAtivationInfo);
+    return this.httpRequestService.httpPost('activation/member', memberAtivationInfo);
   }
 
   /**

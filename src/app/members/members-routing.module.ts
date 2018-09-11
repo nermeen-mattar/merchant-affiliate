@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MembersStatisticsComponent } from './components/members-statistics/members-statistics.component';
-import { MemberActivationFormComponent } from './components/member-activation-form/member-activation-form.component';
 import { AddMemberFormComponent } from './components/add-member-form/add-member-form.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersComponent } from './members.component';
@@ -33,10 +32,6 @@ const routes: Routes = [{
     {
       path: 'list/add-member',
       component: AddMemberFormComponent
-    },
-    {
-      path: 'activating-member',
-      component: MemberActivationFormComponent
     },
     {
       path: '**',

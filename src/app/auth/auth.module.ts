@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { SharedModule } from './../shared/shared.module';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthComponent } from './auth.component';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -23,7 +22,6 @@ import { RequestResetPasswordComponent } from './components/request-reset-passwo
   declarations: [
     LoginComponent,
     AuthComponent,
-    ResetPasswordComponent,
     RequestResetPasswordComponent,
     RegisterComponent
   ]

@@ -32,27 +32,7 @@
               <input matInput type="password" placeholder="{{ 'USER.CURRENT_PASSWORD' | translate }}" formControlName="password">
               <mat-error *ngIf="changePasswordGroup.controls['password'].invalid"> {{ 'USER.CURRENT_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
             </mat-form-field>
-            <mat-form-field class="app-settings__card__form__field">
-              <input matInput [type]="displayPassword ? 'text' : 'password'" placeholder="{{ 'USER.NEW_PASSWORD' | translate }}" formControlName="newPassword">
-              <div matSuffix class="app-register__content__form__field__icons-wrapper">
-                <mat-icon *ngIf="changePasswordGroup.controls['newPassword'].dirty && changePasswordGroup.controls['newPassword'].invalid&&changePasswordGroup.controls['newPassword'].errors.validatePassword"
-                  class="app-settings__card__form__field__icon" matSuffix matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}"
-                  matTooltipPosition="below">
-                  info </mat-icon>
-                <mat-icon (click)="displayPassword = !displayPassword" fontSet="fa" fontIcon="fa-{{displayPassword ? 'eye-slash' : 'eye'}}"
-                  class="app-register__content__form__field__icon"></mat-icon>
-              </div>
-              <mat-error *ngIf="changePasswordGroup.controls['newPassword'].invalid">
-                <span *ngIf="changePasswordGroup.controls['newPassword'].errors.required; else passwordInvalid">
-                  {{ 'USER.NEW_PASSWORD'| translate }} {{'FORM.IS_REQUIRED' | translate}}
-                </span>
-                <ng-template #passwordInvalid>
-                  <span *ngIf="changePasswordGroup.controls['newPassword'].errors.validatePassword">
-                    {{'FORM.ENTER_VALID_PASSWORD' | translate}}
-                  </span>
-                </ng-template>
-              </mat-error>
-            </mat-form-field>
+            <tc-password [passwordControl]="changePasswordGroup.controls['newPassword']"></tc-password>
             <div class="app-settings__card__form__buttons-wrapper">
               <button mat-raised-button class="app-settings__card__form__button" color="primary" type="submit">{{'FORM.SAVE' | translate}}</button>
               <button mat-raised-button class="app-settings__card__form__button" color="warn" type="button" (click)="deleteMyAccount()">

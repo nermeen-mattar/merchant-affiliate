@@ -1,10 +1,6 @@
 import { AuthService } from './../../auth/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-
-import { HttpRequestsService } from '../../core/services/http-requests.service';
-import { MailActivationState } from '../../models/mail-activation-state.model';
-import { TcMember } from '../../members/models/tc-member.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'tc-reset-password',

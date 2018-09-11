@@ -10,7 +10,6 @@ import { AddMemberFormComponent } from './components/add-member-form/add-member-
 import { SharedModule } from '../shared/shared.module';
 import { MembersStatisticsComponent } from './components/members-statistics/members-statistics.component';
 import { MemberStatisticsDetailsComponent } from './components/member-statistics-details/member-statistics-details.component';
-import { MemberActivationFormComponent } from './components/member-activation-form/member-activation-form.component';
 
 @NgModule({
   imports: [
@@ -21,7 +20,7 @@ import { MemberActivationFormComponent } from './components/member-activation-fo
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [MembersListComponent, MembersComponent, AddMemberFormComponent, MemberActivationFormComponent, MembersStatisticsComponent, MemberStatisticsDetailsComponent]
+  declarations: [MembersListComponent, MembersComponent, AddMemberFormComponent, MembersStatisticsComponent, MemberStatisticsDetailsComponent]
 })
 export class MembersModule { }
 

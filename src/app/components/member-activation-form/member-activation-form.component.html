@@ -1,24 +1,30 @@
-<div class="app-member-form">
+<div class="app-member-activation-form" *ngIf="!displayPageNotFound; else pageNotFound">
   <mat-card>
-    <mat-card-title class="app-member-form__title">{{ 'USER.UPDATE_YOUR_INFO' |translate }} </mat-card-title>
+    <mat-card-title class="app-member-activation-form__title">{{ 'USER.UPDATE_YOUR_INFO' |translate }} </mat-card-title>
     <mat-card-content *ngIf="memberActivationGroup">
       <form novalidate [formGroup]="memberActivationGroup" (ngSubmit)="sendMemberInfo(memberActivationGroup.value)"
         novalidate>
-        <mat-form-field class="app-member-form__field">
+        <mat-form-field class="app-member-activation-form__field">
           <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" required type="text">
-          <mat-icon color="primary" class="app-member-form__field__icon" matPrefix> person</mat-icon>
+          <mat-icon color="primary" class="app-member-activation-form__field__icon" matPrefix> person</mat-icon>
           <mat-error *ngIf="memberActivationGroup.controls['firstName'].invalid"> {{ 'USER.FIRST_NAME' | translate }}
             {{'FORM.IS_REQUIRED' | translate}} </mat-error>
         </mat-form-field>
-        <mat-form-field class="app-member-form__field">
+        <mat-form-field class="app-member-activation-form__field">
           <input matInput placeholder="{{'USER.LAST_NAME'| translate}}" formControlName="lastName" required type="text">
-          <mat-icon color="primary" class="app-member-form__field__icon" matPrefix> person</mat-icon>
+          <mat-icon color="primary" class="app-member-activation-form__field__icon" matPrefix> person</mat-icon>
           <mat-error *ngIf="memberActivationGroup.controls['lastName'].invalid"> {{'USER.LAST_NAME'| translate}} {{
             'FORM.IS_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" class="app-member-form__button" type="submit" [disabled]="!memberActivationGroup.valid">{{
+        <tc-new-password [passwordControl]="memberActivationGroup.controls['password']"></tc-new-password>
+        <button mat-raised-button color="primary" class="app-member-activation-form__button" type="submit" [disabled]="!memberActivationGroup.valid">{{
           'FORM.UPDATE' | translate }}</button>
       </form>
     </mat-card-content>
   </mat-card>
 </div>
+
+<ng-template #pageNotFound>
+    <tc-page-not-found> </tc-page-not-found>
+  </ng-template>
+  

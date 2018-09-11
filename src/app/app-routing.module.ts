@@ -5,7 +5,8 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { UnderMaintenanceComponent } from './shared/components/under-maintenance/under-maintenance.component';
 import { EmailActivationComponent } from './components/email-activation/email-activation.component';
-// import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { MemberActivationFormComponent } from './components/member-activation-form/member-activation-form.component';
 
 /* The default route is the team center module but if the user is not logged in auth gaurd will redirect the user to the home */
 const routes: Routes = [{
@@ -58,14 +59,20 @@ const routes: Routes = [{
     path: 'under-maintenance',
     component: UnderMaintenanceComponent
   },
+  /* the route for the three following component should be followed by ?h=the-hash-value 
+  else the page not found component will be displayed */
   {
     path: 'activation',
     component: EmailActivationComponent
   },
-  // {
-  //   path: 'reset-password',
-  //   component: ResetPasswordComponent
-  // },
+  {
+    path: 'invitation',
+    component: MemberActivationFormComponent
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent
+  },
   {
     path: '**',
     component: PageNotFoundComponent

@@ -5,7 +5,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 import { AuthGuard } from '../core/guards/auth.guard';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { RequestResetPasswordComponent } from './components/request-reset-password/request-reset-password.component';
 
 const routes: Routes = [
@@ -26,10 +25,6 @@ const routes: Routes = [
       {
         path: 'request-reset-password',
         component: RequestResetPasswordComponent
-      },
-      {
-        path: 'reset-password',
-        component: ResetPasswordComponent
       },
       {
         path: 'register',
