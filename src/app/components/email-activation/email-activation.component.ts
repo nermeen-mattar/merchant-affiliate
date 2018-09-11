@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { HttpRequestsService } from '../../core/services/http-requests.service';
-import { MailActivationState } from '../../models/mail-activation-state.model';
 import { TcMember } from '../../members/models/tc-member.model';
+import { State } from '../../models/state';
 
 @Component({
   selector: 'tc-email-activation',
@@ -13,9 +13,9 @@ import { TcMember } from '../../members/models/tc-member.model';
 export class EmailActivationComponent implements OnInit {
   displaySpinner = true;
   displayPageNotFound: boolean;
-  mailState: number = MailActivationState.SUCCESS;
+  mailState: number = State.SUCCESS;
   userInfo: TcMember;
-  mailActivationState = MailActivationState;
+  State = State;
   constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService) {
     const queryParams = activatedRoute.snapshot.queryParams;
     if (queryParams && queryParams['h']) {
@@ -27,14 +27,14 @@ export class EmailActivationComponent implements OnInit {
         res => {
           this.displaySpinner = false;
           this.userInfo = res;
-          this.mailState = MailActivationState.SUCCESS;
+          this.mailState = State.SUCCESS;
         }, err => {
           this.displaySpinner = false;
           debugger;
           if (err.error.message === 'error.mail.confirmed') {
-            this.mailState = MailActivationState.ALREADY_ACTIVATED;
+            this.mailState = State.OTHER;
           } else {
-            this.mailState = MailActivationState.ACTIVATION_LINK_EXPIRED;
+            this.mailState = State.ERROR;
           }
         });
     } else {

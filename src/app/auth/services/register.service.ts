@@ -18,4 +18,9 @@ export class RegisterService {
     { success: 'REGISTER.ACTIVATION_MAIL_RESEND__SUCCESS'}); // {fail: 'NO_ERROR_MESSAGE'}
   }
 
+  sendMemberInvitation() {
+    // https://dev.team.center/invitation?h=BnbWFpbC5jb207NDU2OzI3NQ==dGVhbS0jQlYGVyMze30isLjtoYXNoEZ1IXY0RXYt5WZl1mcl52OwIDN
+
+  }
+
 }

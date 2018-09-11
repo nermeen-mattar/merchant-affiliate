@@ -14,7 +14,8 @@
                 </span>
                 <ng-template #invalidTeamName>
                   <span *ngIf="registerFirstStepForm.controls['teamName'].errors.minlength">
-                    {{'TEAM.TEAM_NAME' | translate}} {{ ('FORM.MIN_LENGTH' | translate) | localizedTextModifier:'inject':registerFirstStepForm.controls['teamName'].errors.minlength.requiredLength}}
+                    {{'TEAM.TEAM_NAME' | translate}} {{ ('FORM.MIN_LENGTH' | translate) |
+                    localizedTextModifier:'inject':registerFirstStepForm.controls['teamName'].errors.minlength.requiredLength}}
                   </span>
                 </ng-template>
               </mat-error>
@@ -38,8 +39,8 @@
               </mat-error>
             </mat-form-field>
             <div class="stepper-action-btns stepper-action-btns--step-1">
-              <button type="submit" mat-button matStepperNext mat-raised-button [disabled]="registerFirstStepForm.invalid" color="primary"
-                class="app-register__content__button">{{ 'NEXT' | translate }}</button>
+              <button type="submit" mat-button matStepperNext mat-raised-button [disabled]="registerFirstStepForm.invalid"
+                color="primary" class="app-register__content__button">{{ 'NEXT' | translate }}</button>
             </div>
           </form>
         </mat-step>
@@ -49,53 +50,37 @@
             <mat-form-field *ngIf="isNewUser" class="app-register__content__form__field">
               <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
-              <mat-error *ngIf="registerSecondStepForm.controls['firstName'].invalid"> {{ 'USER.FIRST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
+              <mat-error *ngIf="registerSecondStepForm.controls['firstName'].invalid"> {{ 'USER.FIRST_NAME' | translate
+                }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
             <mat-form-field *ngIf="isNewUser" class="app-register__content__form__field">
               <input matInput placeholder="{{ 'USER.LAST_NAME' | translate }}" formControlName="lastName" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
-              <mat-error *ngIf="registerSecondStepForm.controls['lastName'].invalid"> {{ 'USER.LAST_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
+              <mat-error *ngIf="registerSecondStepForm.controls['lastName'].invalid"> {{ 'USER.LAST_NAME' | translate
+                }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
             <p *ngIf="!isNewUser">
               {{'REGISTER.MEMBER_ALREADY_EXIST' | translate}}
             </p>
-            <mat-form-field class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'USER.PASSWORD' | translate }}" formControlName="password" [type]="displayPassword ? 'text' : 'password'">
-              <mat-icon class="app-register__content__form__field__icon" matPrefix>lock</mat-icon>
-              <div matSuffix class="app-register__content__form__field__icons-wrapper">
-                <mat-icon *ngIf="registerSecondStepForm.controls['password'].dirty && registerSecondStepForm.controls['password'].invalid&&
-                registerSecondStepForm.controls['password'].errors.validatePassword" class="app-register__content__form__field__icon"
-                  matTooltip="{{'FORM.PASSWORD_MUST_INCLUDE' | translate}}" matTooltipPosition="below">
-                  info </mat-icon>
-                <mat-icon (click)="displayPassword = !displayPassword" fontSet="fa" fontIcon="fa-{{displayPassword ? 'eye-slash' : 'eye'}}"
-                  class="app-register__content__form__field__icon"></mat-icon>
-              </div>
-              <mat-error *ngIf="registerSecondStepForm.controls['password'].invalid">
-                <span *ngIf="registerSecondStepForm.controls['password'].errors.required; else passwordInvalid">
-                  {{ 'USER.PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}}
-                </span>
-                <ng-template #passwordInvalid>
-                  <span *ngIf="registerSecondStepForm.controls['password'].errors.validatePassword">
-                    {{'FORM.ENTER_VALID_PASSWORD' | translate}}
-                  </span>
-                </ng-template>
-              </mat-error>
-            </mat-form-field>
+            <tc-new-password [passwordControl]="registerSecondStepForm.controls['password']"></tc-new-password>
             <div class="app-register__content__form__field">
               <mat-checkbox color="primary" formControlName="isTeamMember">
                 {{ 'TEAM_MEMBER.ALSO_A_TEAM_MEMBER' | translate }} </mat-checkbox>
             </div>
             <div class="app-register__content__form__field">
-              <mat-checkbox *ngIf="isNewUser" color="primary" class="app-register__content__form__field__terms-conditions" formControlName="confirmTerms">
+              <mat-checkbox *ngIf="isNewUser" color="primary" class="app-register__content__form__field__terms-conditions"
+                formControlName="confirmTerms">
                 {{ 'CONFIRM_TERM_CONDITIONS' | translate }} </mat-checkbox>
             </div>
             <mat-error *ngIf="isNewUser && registerSecondStepForm.controls['confirmTerms'].dirty && !registerSecondStepForm.controls['confirmTerms'].value">
-                {{ 'HAVE_TO_CONFIRM_TERM_CONDITIONS' | translate }}
+              {{ 'HAVE_TO_CONFIRM_TERM_CONDITIONS' | translate }}
             </mat-error>
             <div class="stepper-action-btns">
-              <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{ 'BACK' | translate }}</button>
+              <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{
+                'BACK' | translate }}</button>
               <button type="submit" *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button"
-                [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid">{{ 'REGISTER.REGISTER' | translate }}</button>
+                [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid">{{ 'REGISTER.REGISTER' |
+                translate }}</button>
             </div>
           </form>
         </mat-step>
@@ -103,19 +88,18 @@
     </div>
     <mat-spinner class="app-register__spinner" [ngClass]="{'app-register__element-hide': !displaySpinner }"></mat-spinner>
     <div *ngIf="displayMessageCard && !displaySpinner">
-      <div *ngIf="!emailActivationRequired" class="app-register__content__form__register-success"> {{ 'USER_MESSAGES.REGISTER.TEAM_CREATING_SUCCESS' | translate }}. {{ 'USER_MESSAGES.REGISTER.PLEASE_ACTIVATE' | translate }} </div>
+      <div *ngIf="!emailActivationRequired" class="app-register__content__form__register-success"> {{
+        'USER_MESSAGES.REGISTER.TEAM_CREATING_SUCCESS' | translate }}. {{ 'USER_MESSAGES.REGISTER.PLEASE_ACTIVATE' |
+        translate }} </div>
       <div class="app-register__content__resend-mail">
         <span *ngIf="emailActivationRequired">
-          <!-- ; else emailNotReceived-->
-          {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate | localizedTextModifier:'inject': registerFirstStepForm.controls.email.value}}
+          {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate | localizedTextModifier:'inject':
+          registerFirstStepForm.controls.email.value}}
         </span>
         <div class="app-register__content__resend-mail ">
-          <!-- <ng-template #emailNotReceived> -->
           <span> {{'REGISTER.EMAIL_NOT_RECEIVED' | translate}} </span>
-          <!-- </ng-template> -->
-          <span (click)="resendConfirmationEmail()" class="app-register__content__link"> {{'REGISTER.SEND_MAIL_AGAIN' | translate}} </span>
-          <!-- <button mat-raised-button color="primary" class="app-register__content__button" (click)="resendConfirmationEmail()"> {{'REGISTER.SEND_MAIL_AGAIN' | translate}}</button> -->
-
+          <span (click)="resendConfirmationEmail()" class="app-register__content__link"> {{'REGISTER.SEND_MAIL_AGAIN' |
+            translate}} </span>
         </div>
       </div>
       <button mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"

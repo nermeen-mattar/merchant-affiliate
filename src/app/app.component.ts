@@ -6,11 +6,9 @@ import { MatIconRegistry } from '@angular/material';
 
 import { AvailableLanguageInfo } from './core/models/available-language-info.model';
 import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
-import { UserService } from './core/services/user.service';
 import { LoginStatusService } from './auth/services/login-status.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { TeamsService } from './core/services/teams.service';
-import { roles } from './core/constants/roles.constants';
 @Component({
   selector: 'tc-root',
   templateUrl: './app.component.html',

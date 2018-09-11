@@ -1,10 +1,9 @@
-import { AuthService } from './../../auth/services/auth.service';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { HttpRequestsService } from '../../core/services/http-requests.service';
-import { MailActivationState } from '../../models/mail-activation-state.model';
-import { TcMember } from '../../members/models/tc-member.model';
+import { AuthService } from './../../auth/services/auth.service';
+import { FieldValidatorsService } from './../../core/services/field-validators.service';
 
 @Component({
   selector: 'tc-reset-password',
@@ -16,24 +15,35 @@ export class ResetPasswordComponent implements OnInit {
   displayPageNotFound: boolean;
   displayErrorMessage;
   hash: string;
-  constructor(activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
+  resetPasswordForm: FormGroup;
+  constructor(activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router,
+  private fieldValidatorsService: FieldValidatorsService) {
     const queryParams = activatedRoute.snapshot.queryParams;
     this.hash = queryParams && queryParams['h']
     if (!this.hash) {
       this.displayPageNotFound = true;
+    } else {
+      // send a check request to check the hash
+      this.createResetPasswordForm();
     }
   }
 
   ngOnInit() {}
 
+  createResetPasswordForm() {
+
+    this.resetPasswordForm = new FormGroup({
+       password: new FormControl('', [Validators.required, this.fieldValidatorsService.getValidator('validatePassword')])
+    });
+  }
+
     /**
    * @author Nermeen Mattar
    * @description change the user password to the passed password.
-   * @param {string} password
    */
-  resetPassword(password: string) {
+  resetPassword(resetFormValue) {
     this.displaySpinner = true;
-    this.authService.resetPassword(password, this.hash).subscribe(res => {
+    this.authService.resetPassword(resetFormValue.password, this.hash).subscribe(res => {
       // this.displayErrorMessage = true;
       this.router.navigateByUrl('auth/login');
       this.displaySpinner = false;

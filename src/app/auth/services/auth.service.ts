@@ -36,7 +36,10 @@ export class AuthService {
       .pipe(map(
         res => {
           if (!res.message) { // this if statement is temp until the backend fixes the case of email not confirmed by returning an error
-            this.loginStatusService.loginState.next({isAuthorized: true, loginResponse: res});
+            this.loginStatusService.loginState.next({
+              isAuthorized: true,
+              loginResponse: res
+            });
           }
           return res;
         }));
@@ -47,9 +50,9 @@ export class AuthService {
    * @param {string} email
    */
   requestResetPassword(email: string): Observable < any > {
-    return this.httpRequestsService.httpPost('request_reset_password', email,{
+    return this.httpRequestsService.httpPost('request_reset_password', email, {
       fail: 'RESET_PASSWORD.EMAIL_NOT_EXIST'
-    } );
+    });
   }
   /**
    * @author Nermeen Mattar
@@ -58,7 +61,24 @@ export class AuthService {
    * @param {string } hash
    */
   resetPassword(newPassword: string, hash: string): Observable < any > {
-    return this.httpRequestsService.httpPost('reset_password', {newPassword: newPassword, 
-    hash: hash}, {fail: 'MEMBER_PASSWORD_CHANGING_SUCCESS', success: 'MEMBER_PASSWORD_CHANGING_SUCCESS'});
+    return this.httpRequestsService.httpPost('recovery/reset-password', {
+      password: newPassword,
+      hash: hash
+    }, {
+      fail: 'MEMBER_PASSWORD_CHANGING_FAIL',
+      success: 'MEMBER_PASSWORD_CHANGING_SUCCESS'
+    });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description sends a post request to the server to check if the reset password hash is valid.
+   * @param {string} newPassword
+   * @param {string } hash
+   */
+  checkResetPasswordLink(hash: string): Observable < any > {
+    return this.httpRequestsService.httpPost('recovery/reset-password/check', hash, {
+      fail: 'NO_ERROR_MESSAGE'
+    });
   }
 }

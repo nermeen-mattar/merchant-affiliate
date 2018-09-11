@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersComponent } from './members.component';
 import { MembersRoutingModule } from './members-routing.module';
-import { MemberFormComponent } from './components/member-form/member-form.component';
+import { AddMemberFormComponent } from './components/add-member-form/add-member-form.component';
 import { SharedModule } from '../shared/shared.module';
 import { MembersStatisticsComponent } from './components/members-statistics/members-statistics.component';
 import { MemberStatisticsDetailsComponent } from './components/member-statistics-details/member-statistics-details.component';
@@ -20,7 +20,7 @@ import { MemberStatisticsDetailsComponent } from './components/member-statistics
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [MembersListComponent, MembersComponent, MemberFormComponent, MembersStatisticsComponent, MemberStatisticsDetailsComponent]
+  declarations: [MembersListComponent, MembersComponent, AddMemberFormComponent, MembersStatisticsComponent, MemberStatisticsDetailsComponent]
 })
 export class MembersModule { }
 
