@@ -26,7 +26,6 @@ export class RegisterComponent implements OnInit {
   registerFirstStepForm: FormGroup;
   registerSecondStepForm: FormGroup;
   currentStep = 1;
-  displayPassword: boolean;
   roles = roles; /* needed to declare a class property to make it available on the component html */
   constructor(private authService: AuthService, private registerService: RegisterService, activatedRoute: ActivatedRoute, 
     private membersService: MembersService, private fieldValidatorsService: FieldValidatorsService, 
@@ -38,10 +37,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.createRegisterFirstStepForm();
     this.createRegisterSecondStepForm();
-  }
-
-  toggleDisplayPassword() {
-    this.displayPassword = !this.displayPassword;
   }
 
   selectedStepChanged(changeInfo: StepperSelectionEvent) {
