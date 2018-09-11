@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MembersStatisticsComponent } from './components/members-statistics/members-statistics.component';
-import { MemberFormComponent } from './components/member-form/member-form.component';
+import { MemberActivationFormComponent } from './components/member-activation-form/member-activation-form.component';
+import { AddMemberFormComponent } from './components/add-member-form/add-member-form.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MembersComponent } from './members.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
@@ -27,11 +28,15 @@ const routes: Routes = [{
     {
       path: 'statistics/details/:memberId/:action-type',
       component: MemberStatisticsDetailsComponent
-    }
+    },
     /* The member form component will be used for creating and form editing, creation if the path was /new, edit otherwise */
-    , {
-      path: 'list/:memberId',
-      component: MemberFormComponent
+    {
+      path: 'list/add-member',
+      component: AddMemberFormComponent
+    },
+    {
+      path: 'activating-member',
+      component: MemberActivationFormComponent
     },
     {
       path: '**',

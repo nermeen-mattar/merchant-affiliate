@@ -7,10 +7,8 @@ import { first } from 'rxjs/operators';
 import { TeamsService } from './../../../core/services/teams.service';
 import { MembersService } from '../../services/members.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
-import { UserService } from '../../../core/services/user.service';
 import { TcMember } from '../../models/tc-member.model';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { roles } from '../../../core/constants/roles.constants';
 
 @Component({
   selector: 'tc-members-list',

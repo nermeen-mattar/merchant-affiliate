@@ -2,7 +2,7 @@
   <div class="app-members__header">
     <h3 class="app-members__header__title">
       {{ 'MEMBER.MEMBERS' | translate}} <span *ngIf="membersDataSource"> ({{membersDataSource.data.length}})</span>
-      <button mat-mini-fab *ngIf="hasAdminRole" color="primary" class="app-members__action app-members__add" routerLink="new">
+      <button mat-mini-fab *ngIf="hasAdminRole" color="primary" class="app-members__action app-members__add" routerLink="add-member">
     + </button>
     </h3>
     <div>
@@ -36,7 +36,6 @@
         <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
         <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row">
           <mat-icon class="app-members__action" (click)="changeMemberActivationStatus(row)" color="primary">{{row.flag ? "pause_circle_outline" : "play_circle_outline"}}</mat-icon>
-          <mat-icon class="app-members__action" [routerLink]="row.id" color="primary">edit</mat-icon>
           <mat-icon class="app-members__action" (click)="deleteMember(row.id)" color="primary">delete</mat-icon>
         </mat-cell>
       </ng-container>
