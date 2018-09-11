@@ -62,10 +62,10 @@ const routes: Routes = [{
     path: 'activation',
     component: EmailActivationComponent
   },
-  {
-    path: 'reset-password',
-    component: ResetPasswordComponent
-  },
+  // {
+  //   path: 'reset-password',
+  //   component: ResetPasswordComponent
+  // },
   {
     path: '**',
     component: PageNotFoundComponent
