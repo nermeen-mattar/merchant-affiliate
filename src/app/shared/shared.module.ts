@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { UnderMaintenanceComponent } from './components/under-maintenance/under-maintenance.component';
 import { StringNormalizerPipe } from './pipes/string-normalizer/string-normalizer.pipe';
 import { LocalizedTextModifierPipe } from './pipes/localized-text-modifier/localized-text-modifier.pipe';
+import { PasswordComponent } from './components/password/password.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { LocalizedTextModifierPipe } from './pipes/localized-text-modifier/local
     MaterialModule,
     TranslateModule
   ],
-  declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent, StringNormalizerPipe, LocalizedTextModifierPipe],
+  declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent, StringNormalizerPipe, LocalizedTextModifierPipe, PasswordComponent],
   entryComponents: [ConfirmDialogComponent], /* why !!! */
   exports: [
     MaterialModule,
@@ -23,7 +24,8 @@ import { LocalizedTextModifierPipe } from './pipes/localized-text-modifier/local
     PageNotFoundComponent,
     UnderMaintenanceComponent,
     LocalizedTextModifierPipe,
-    StringNormalizerPipe
+    StringNormalizerPipe,
+    PasswordComponent
   ]
 })
 export class SharedModule { }
