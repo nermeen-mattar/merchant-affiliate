@@ -117,6 +117,16 @@ export class MembersService {
 
   /**
    * @author Nermeen Mattar
+   * @description sends the member's firstname, last name, password, and activation hash to the server 
+   * to activate the member in the first login
+   * @returns {Observable <any>}
+   */
+  activateMember(memberAtivationInfo) : Observable < any > {
+    return this.httpRequestService.httpPut('activation/member', memberAtivationInfo);
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description attemps to update the member password Using the httpPut function from httpRequestsSevrice.
    * @param {any} oldAndNewPasswords
    */

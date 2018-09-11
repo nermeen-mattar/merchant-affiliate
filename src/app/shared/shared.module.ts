@@ -8,8 +8,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UnderMaintenanceComponent } from './components/under-maintenance/under-maintenance.component';
 import { StringNormalizerPipe } from './pipes/string-normalizer/string-normalizer.pipe';
+import { NewPasswordComponent } from './components/new-password/new-password.component';
 import { LocalizedTextModifierPipe } from './pipes/localized-text-modifier/localized-text-modifier.pipe';
-import { PasswordComponent } from './components/password/password.component';
 
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ import { PasswordComponent } from './components/password/password.component';
     TranslateModule,
     ReactiveFormsModule
   ],
-  declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent, StringNormalizerPipe, LocalizedTextModifierPipe, PasswordComponent],
+  declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent, StringNormalizerPipe, LocalizedTextModifierPipe, NewPasswordComponent ],
   entryComponents: [ConfirmDialogComponent], /* why !!! */
   exports: [
     MaterialModule,
@@ -27,7 +27,7 @@ import { PasswordComponent } from './components/password/password.component';
     UnderMaintenanceComponent,
     LocalizedTextModifierPipe,
     StringNormalizerPipe,
-    PasswordComponent
+    NewPasswordComponent
   ]
 })
 export class SharedModule { }
