@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NewPasswordComponent implements OnInit {
   @Input('passwordControl') passwordControl;
+  @Input('fieldLabel') fieldLabel = 'USER.PASSWORD';
+
   constructor() { }
 
   ngOnInit() {

@@ -62,10 +62,10 @@ export class AuthService {
    */
   resetPassword(newPassword: string, hash: string): Observable < any > {
     return this.httpRequestsService.httpPost('recovery/reset-password', {
-      newPassword: newPassword,
+      password: newPassword,
       hash: hash
     }, {
-      fail: 'MEMBER_PASSWORD_CHANGING_SUCCESS',
+      fail: 'MEMBER_PASSWORD_CHANGING_FAIL',
       success: 'MEMBER_PASSWORD_CHANGING_SUCCESS'
     });
   }

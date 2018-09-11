@@ -29,10 +29,11 @@
         <mat-tab label="{{'USER.ACCOUNT' | translate}}">
           <form class="app-settings__card__form" novalidate (ngSubmit)="changePassword()" [formGroup]="changePasswordGroup">
             <mat-form-field class="app-settings__card__form__field">
+                <mat-icon class="app-new-password__content__form__field__icon" matPrefix>lock</mat-icon>
               <input matInput type="password" placeholder="{{ 'USER.CURRENT_PASSWORD' | translate }}" formControlName="password">
               <mat-error *ngIf="changePasswordGroup.controls['password'].invalid"> {{ 'USER.CURRENT_PASSWORD' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
             </mat-form-field>
-            <tc-password [passwordControl]="changePasswordGroup.controls['newPassword']"></tc-password>
+            <tc-new-password [passwordControl]="changePasswordGroup.controls['newPassword']" [fieldLabel]="'USER.NEW_PASSWORD'"></tc-new-password>
             <div class="app-settings__card__form__buttons-wrapper">
               <button mat-raised-button class="app-settings__card__form__button" color="primary" type="submit">{{'FORM.SAVE' | translate}}</button>
               <button mat-raised-button class="app-settings__card__form__button" color="warn" type="button" (click)="deleteMyAccount()">

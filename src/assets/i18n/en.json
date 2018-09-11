@@ -91,8 +91,8 @@
     "MEMBER": {
       "MEMBER_DELETING_SUCCESS": "The member has been deleted successfully",
       "MEMBER_DELETING_FAIL": "Unable to delete member",
-      "MEMBER_CREATING_SUCCESS": "The member has been created successfully",
-      "MEMBER_CREATING_FAIL": "Unable to create member",
+      "MEMBER_CREATING_SUCCESS": "The member has been added successfully",
+      "MEMBER_CREATING_FAIL": "Unable to add member",
       "MEMBER_UPDATING_SUCCESS": "The member has been updated successfully",
       "MEMBER_UPDATING_FAIL": "Unable to update member",
       "MEMBER_ACTIVATE_SUCCESS": "The member has been activated successfully",
