@@ -5,7 +5,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { UnderMaintenanceComponent } from './shared/components/under-maintenance/under-maintenance.component';
 import { EmailActivationComponent } from './components/email-activation/email-activation.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+// import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 /* The default route is the team center module but if the user is not logged in auth gaurd will redirect the user to the home */
 const routes: Routes = [{

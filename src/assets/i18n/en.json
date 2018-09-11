@@ -39,6 +39,8 @@
     "SHOULD_BE_POSITIVE": "shoule be a positive number",
     "SAVE": "Save",
     "SEND": "Send",
+    "ADD": "Add",
+    "UPDATE": "Update",
     "IS_REQUIRED": "is required",
     "SELECT_ALL": "Select All"
   },
@@ -228,6 +230,7 @@
     "MEMBERS_LIST": "Members List",
     "EDIT_MEMBER": "Edit member",
     "CREATE_MEMBER": "Create member",
+    "ADD_MEMBER_TO_TEAM": "Add Member to your Team",
     "ADD_ME_AS_MEMBER": "Add myself as a member",
     "OUR_MEMBERS": "Our members",
     "BY_DEFAULT_MEMBERS_ARE": "By default all members are ",
@@ -249,7 +252,8 @@
     "MOBILE_NUMBER": "Mobile Number",
     "PASSWORD": "Password",
     "CURRENT_PASSWORD": "Current Password",
-    "NEW_PASSWORD": "New Password"
+    "NEW_PASSWORD": "New Password",
+    "UPDATE_YOUR_INFO": "Update your Info"
   },
   "REGISTER": {
     "REGISTER": "Register",

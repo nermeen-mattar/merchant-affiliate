@@ -1,5 +1,6 @@
 import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from './material/material.module';
@@ -14,7 +15,8 @@ import { PasswordComponent } from './components/password/password.component';
   imports: [
     CommonModule,
     MaterialModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule
   ],
   declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent, StringNormalizerPipe, LocalizedTextModifierPipe, PasswordComponent],
   entryComponents: [ConfirmDialogComponent], /* why !!! */
