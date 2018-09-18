@@ -59,7 +59,7 @@ const routes: Routes = [{
     path: 'under-maintenance',
     component: UnderMaintenanceComponent
   },
-  /* the route for the three following component should be followed by ?h=the-hash-value 
+  /* the route for the three following component should be followed by ?h=the-hash-value
   else the page not found component will be displayed */
   {
     path: 'activation',
