@@ -27,6 +27,7 @@ export class ResetPasswordComponent implements OnInit {
     if (!this.hash) {
       this.displayPageNotFound = true;
     } else {
+      // TODO: check why getting 401
       httpRequestsService.httpPost('recovery/reset-password/check', {
         hash: queryParams['h']
       }, {
