@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthService } from './../../auth/services/auth.service';
 import { FieldValidatorsService } from './../../core/services/field-validators.service';
+import { HttpRequestsService } from '../../core/services/http-requests.service';
+import { State } from '../../models/state';
 
 @Component({
   selector: 'tc-reset-password',
@@ -11,20 +13,37 @@ import { FieldValidatorsService } from './../../core/services/field-validators.s
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
-  displaySpinner;
+  displaySpinner = true;
   displayPageNotFound: boolean;
   displayErrorMessage;
   hash: string;
   resetPasswordForm: FormGroup;
+  checkResetState = State.SUCCESS;
+  userInfo;
   constructor(activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router,
-  private fieldValidatorsService: FieldValidatorsService) {
+  private fieldValidatorsService: FieldValidatorsService, httpRequestsService: HttpRequestsService) {
     const queryParams = activatedRoute.snapshot.queryParams;
     this.hash = queryParams && queryParams['h']
     if (!this.hash) {
       this.displayPageNotFound = true;
     } else {
-      // send a check request to check the hash
-      this.createResetPasswordForm();
+      httpRequestsService.httpPost('recovery/reset-password/check', {
+        hash: queryParams['h']
+      }, {
+        fail: 'NO_ERROR_MESSAGE'
+      }).subscribe(
+        res => {
+          this.displaySpinner = false;
+          this.userInfo = res;
+          this.checkResetState = State.SUCCESS;
+          console.log('res', res)
+          // send a check request to check the hash
+          this.createResetPasswordForm();
+        }, err => {
+          this.displaySpinner = false;
+          console.log('err', err)
+        });
+
     }
   }
 
@@ -37,7 +56,7 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-    /**
+  /**
    * @author Nermeen Mattar
    * @description change the user password to the passed password.
    */
