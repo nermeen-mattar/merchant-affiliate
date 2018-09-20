@@ -19,7 +19,7 @@ export class ResetPasswordComponent implements OnInit {
   hash: string;
   resetPasswordForm: FormGroup;
   checkResetState = State.SUCCESS;
-  userInfo;
+  mail;
   constructor(activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router,
   private fieldValidatorsService: FieldValidatorsService, httpRequestsService: HttpRequestsService) {
     const queryParams = activatedRoute.snapshot.queryParams;
@@ -35,9 +35,9 @@ export class ResetPasswordComponent implements OnInit {
       }).subscribe(
         res => {
           this.displaySpinner = false;
-          this.userInfo = res;
           this.checkResetState = State.SUCCESS;
-          console.log('res', res)
+          this.mail = res.mail
+          console.log('this.mail', this.mail)
           // send a check request to check the hash
           this.createResetPasswordForm();
         }, err => {
@@ -63,7 +63,7 @@ export class ResetPasswordComponent implements OnInit {
    */
   resetPassword(resetFormValue) {
     this.displaySpinner = true;
-    this.authService.resetPassword(resetFormValue.password, this.hash).subscribe(res => {
+    this.authService.resetPassword(resetFormValue.password, this.hash, this.mail).subscribe(res => {
       // this.displayErrorMessage = true;
       this.router.navigateByUrl('auth/login');
       this.displaySpinner = false;
