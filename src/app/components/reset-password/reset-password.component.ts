@@ -20,6 +20,7 @@ export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;
   checkResetState = State.SUCCESS;
   mail;
+  State = State;
   constructor(activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router,
   private fieldValidatorsService: FieldValidatorsService, httpRequestsService: HttpRequestsService) {
     const queryParams = activatedRoute.snapshot.queryParams;
@@ -27,7 +28,6 @@ export class ResetPasswordComponent implements OnInit {
     if (!this.hash) {
       this.displayPageNotFound = true;
     } else {
-      // TODO: check why getting 401
       httpRequestsService.httpPost('recovery/reset-password/check', {
         hash: queryParams['h']
       }, {
@@ -37,12 +37,11 @@ export class ResetPasswordComponent implements OnInit {
           this.displaySpinner = false;
           this.checkResetState = State.SUCCESS;
           this.mail = res.mail
-          console.log('this.mail', this.mail)
           // send a check request to check the hash
           this.createResetPasswordForm();
         }, err => {
           this.displaySpinner = false;
-          console.log('err', err)
+          this.checkResetState = State.ERROR;
         });
 
     }

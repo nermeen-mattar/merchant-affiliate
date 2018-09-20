@@ -275,7 +275,8 @@
     "RESET_PASSWORD": "Reset Password",
     "SEND_RESET_PASSWORD_LINK": "Send Reset Password Link",
     "RESET_PASSWORD_LINK_SENT": "We sent a recovery link to your email address:",
-    "SEND_MAIL_AGAIN": "Resend reset password mail"
+    "SEND_MAIL_AGAIN": "Resend reset password mail",
+    "EXPIRED_LINK_OR_INVALID": "This link is invalid or expired"
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
