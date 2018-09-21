@@ -30,7 +30,6 @@ export class EmailActivationComponent implements OnInit {
           this.mailState = State.SUCCESS;
         }, err => {
           this.displaySpinner = false;
-          debugger;
           if (err.error.message === 'error.mail.confirmed') {
             this.mailState = State.OTHER;
           } else {

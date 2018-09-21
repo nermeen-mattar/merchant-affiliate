@@ -50,7 +50,7 @@ export class AuthService {
    * @param {string} email
    */
   requestResetPassword(email: string): Observable < any > {
-    return this.httpRequestsService.httpPost('request_reset_password', email, {
+    return this.httpRequestsService.httpPost('recovery/reset-password', email, {
       fail: 'RESET_PASSWORD.EMAIL_NOT_EXIST'
     });
   }
@@ -59,11 +59,13 @@ export class AuthService {
    * @description sends a post request to the server to reset the password for the passed email.
    * @param {string} newPassword
    * @param {string } hash
+   * @param {string } mail
    */
-  resetPassword(newPassword: string, hash: string): Observable < any > {
-    return this.httpRequestsService.httpPost('recovery/reset-password', {
+  resetPassword(newPassword: string, hash: string, email: string): Observable < any > {
+    return this.httpRequestsService.httpPost('recovery/setpassword', {
       password: newPassword,
-      hash: hash
+      hash: hash,
+      email: email
     }, {
       fail: 'MEMBER_PASSWORD_CHANGING_FAIL',
       success: 'MEMBER_PASSWORD_CHANGING_SUCCESS'
