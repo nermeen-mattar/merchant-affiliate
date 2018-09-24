@@ -6,7 +6,7 @@ export interface TcMember {
   mail?: string;
   mobile?: number;
   allowReminders?: boolean;
-  flag?: number;
+  active?: number;
   name?: string;
   new?: boolean;
   member?: {

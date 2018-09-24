@@ -96,7 +96,7 @@ export class MembersListComponent implements OnInit {
    * @param {TcMember} member
    */
   changeMemberActivationStatus(member: TcMember) {
-    const updatedFlag: number = member.flag ? 0 : 1;
+    const updatedFlag: number = member.active ? 0 : 1;
     const ativationMessages = {
       dialogTitle: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_ACTIVATE_HEADER',
       dialogMessage: 'USER_MESSAGES.MEMBER.MEMBER_CONFIRM_ACTIVATE_BODY'
@@ -116,7 +116,7 @@ export class MembersListComponent implements OnInit {
           teamId: this.selectedTeamId,
           teamMemberId: member.id
         }).subscribe(res => {
-          this.membersDataSource.data[this.getIndexOfTargetMember(member.id)].flag = updatedFlag;
+          this.membersDataSource.data[this.getIndexOfTargetMember(member.id)].active = updatedFlag;
         });
       }
     });
