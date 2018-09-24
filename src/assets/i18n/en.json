@@ -159,7 +159,10 @@
   "ACTIVATION": {
     "EXPIRED_LINK": "The link has expired",
     "ALREADY_ACTIVATED": "You're mail has already been activated",
-    "ACTIVATION_SUCCESS":  "Your mail has been activated successfully"
+    "ACTIVATION_SUCCESS":  "Your mail has been activated successfully",
+    "INVITATION_TITLE": "Team invitation",
+    "INVITATION_ACCEPTED": "Team invitation has been accepted",
+    "INVITATION_ERROR": "This link is invalid or expired"
   },
   "PAGE_NOT_FOUND": {
     "MESSAGE_404": "Woops, the page you're looking for isn't there!",

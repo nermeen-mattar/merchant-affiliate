@@ -66,6 +66,10 @@ const routes: Routes = [{
     component: EmailActivationComponent
   },
   {
+    path: 'setuppassword',
+    component: MemberActivationFormComponent
+  },
+  {
     path: 'invitation',
     component: MemberActivationFormComponent
   },

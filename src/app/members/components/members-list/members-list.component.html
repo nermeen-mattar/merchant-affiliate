@@ -20,22 +20,23 @@
   </mat-form-field>
   <div class="app-members__container">
     <mat-table class="app-members__container__table" [dataSource]="membersDataSource" matSort>
-      <ng-container matColumnDef="member">
+      <ng-container acceptInvitation matColumnDef="member">
         <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header>
           {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
-        <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.flag ? 'app-members__container__table__inactive-cell' : ''"> {{row.member.firstName}} {{row.member.lastName}} </mat-cell>
+        <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.active ? 'app-members__container__table__inactive-cell' : ''"> {{row.member.firstName}} {{row.member.lastName}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="mail">
         <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'USER.EMAIL' | translate}}
         </mat-header-cell>
-        <mat-cell  *matCellDef="let row" [ngClass]="!row.flag ? 'app-members__container__table__inactive-cell' : ''">
+        <mat-cell  *matCellDef="let row" [ngClass]="!row.active ? 'app-members__container__table__inactive-cell' : ''">
           <span class="app-members__container__table__content-cell">{{row.member.mail}} </span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="action" *ngIf="hasAdminRole">
         <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
         <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row">
-          <mat-icon class="app-members__action" (click)="changeMemberActivationStatus(row)" color="primary">{{row.flag ? "pause_circle_outline" : "play_circle_outline"}}</mat-icon>
+          <p *ngIf="!row.acceptInvitation">TODO: resend invitation button</p>
+          <mat-icon *ngIf="row.acceptInvitation" class="app-members__action" (click)="changeMemberActivationStatus(row)" color="primary">{{row.active ? "pause_circle_outline" : "play_circle_outline"}}</mat-icon>
           <mat-icon class="app-members__action" (click)="deleteMember(row.id)" color="primary">delete</mat-icon>
         </mat-cell>
       </ng-container>

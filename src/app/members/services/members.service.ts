@@ -117,12 +117,31 @@ export class MembersService {
 
   /**
    * @author Nermeen Mattar
-   * @description sends the member's firstname, last name, password, and activation hash to the server 
+   * @description sends the member's firstname, last name, password, and activation hash to the server
    * to activate the member in the first login
    * @returns {Observable <any>}
    */
   activateMember(memberAtivationInfo) : Observable < any > {
     return this.httpRequestService.httpPost('activation/member', memberAtivationInfo);
+  }
+
+  /**
+   * @author Tobias Trusch
+   * @description sends the activation hash to the server
+   * to add this member to the inviter team
+   * @returns {Observable <any>}
+   */
+  acceptInvitation(memberAtivationInfo) : Observable < any > {
+    return this.httpRequestService.httpPost('activation/accept-invitation', memberAtivationInfo);
+  }
+
+  /**
+   * @author Tobias Trusch
+   * @description Checks if a user needs to set password (first login) or needs to only accept the invitation
+   * @returns {Observable <any>}
+   */
+  activateCheckMember(memberAtivationInfo) : Observable < any > {
+    return this.httpRequestService.httpPost('activation/check', memberAtivationInfo);
   }
 
   /**
