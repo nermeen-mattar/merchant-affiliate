@@ -111,7 +111,7 @@ export class TeamsService {
     this._userTeams = userTeams;
     if (userTeams) {
       localStorage.setItem('userTeams', JSON.stringify(userTeams));
-      if (!this.selectedTeamId) {
+      if (!this.selectedTeamId && this._userTeams[0]) {
         this.selectedTeamId = this._userTeams[0].teamId; // sets an initial value to the select input
       }
     } else {
@@ -193,7 +193,11 @@ export class TeamsService {
     if (teamId) {
       return this.teamRoles.teamAdmins.includes(teamId);
     } else {
-      return Boolean(this.teamRoles.teamAdmins.length);
+      if (this.teamRoles.teamAdmins){
+        return Boolean(this.teamRoles.teamAdmins.length)
+      } else {
+        return false
+      }
     }
   }
 
