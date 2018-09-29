@@ -121,6 +121,9 @@
       "TEAM_CONFIRM_DELETING_BODY": "Do you really want to delete this team?"
     }
   },
+  "ERRORS": {
+    "NO_TEAMS_FOR_USER": "Sorry, there is no data for you. Maybe you are disabled for a team or have an open invitation in your mailbox."
+  },
   "LANGUAGE": {
     "LANGUAGE": "Language",
     "en": "English",

@@ -24,15 +24,24 @@ export class MembersListComponent implements OnInit {
   hasAdminRole: boolean;
   filterString = '';
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
+  spinner: boolean;
+  isTeamAdmin: boolean;
+  isTeamMember: boolean;
   constructor(private membersService: MembersService, private teamsService: TeamsService,
     public dialog: MatDialog) {
+    this.spinner = true
     this.hasAdminRole = this.teamsService.hasAdminRole();
     if (this.hasAdminRole) {
       this.displayedColumns.push('action');
     }
     this.userTeams = this.teamsService.userTeams;
     this.selectedTeamId = this.teamsService.selectedTeamId;
-    this.updateMembers();
+    this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
+    this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
+    if (this.isTeamMember || this.isTeamAdmin){
+      this.updateMembers();
+    }
+    this.spinner = false;
   }
 
   ngOnInit() {}

@@ -44,7 +44,7 @@ export class EventsListComponent implements OnInit {
     this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
     this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     this.selectedTeamId = this.teamsService.selectedTeamId;
-    if (this.teamsService.hasAdminRole() || this.teamsService.hasMemberRole()){
+    if (this.isTeamMember || this.isTeamAdmin){
       this.changeColumnsToDisplay();
       this.updateEvents();
     }

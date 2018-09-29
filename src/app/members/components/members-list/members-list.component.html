@@ -1,49 +1,52 @@
 <div class="app-members">
-  <div class="app-members__header">
-    <h3 class="app-members__header__title">
-      {{ 'MEMBER.MEMBERS' | translate}} <span *ngIf="membersDataSource"> ({{membersDataSource.data.length}})</span>
-      <button mat-mini-fab *ngIf="hasAdminRole" color="primary" class="app-members__action app-members__add" routerLink="add-member">
-    + </button>
-    </h3>
-    <div>
-      <mat-form-field>
-        <mat-select [(value)]="selectedTeamId" (selectionChange)="updateMembers()">
-          <mat-option *ngFor="let team of userTeams" [value]="team.teamId">
-            {{ team.teamName }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+  <div *ngIf="!isTeamMember && !isTeamAdmin; else hasTeams">{{'ERRORS.NO_TEAMS_FOR_USER' | translate}}</div>
+  <ng-template #hasTeams>
+    <div class="app-members__header">
+      <h3 class="app-members__header__title">
+        {{ 'MEMBER.MEMBERS' | translate}} <span *ngIf="membersDataSource"> ({{membersDataSource.data.length}})</span>
+        <button mat-mini-fab *ngIf="hasAdminRole" color="primary" class="app-members__action app-members__add" routerLink="add-member">
+      + </button>
+      </h3>
+      <div>
+        <mat-form-field>
+          <mat-select [(value)]="selectedTeamId" (selectionChange)="updateMembers()">
+            <mat-option *ngFor="let team of userTeams" [value]="team.teamId">
+              {{ team.teamName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
-  </div>
-  <mat-form-field class="app-members__filter">
-    <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterString" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}">
-  </mat-form-field>
-  <div class="app-members__container">
-    <mat-table class="app-members__container__table" [dataSource]="membersDataSource" matSort>
-      <ng-container acceptInvitation matColumnDef="member">
-        <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-          {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
-        <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.active ? 'app-members__container__table__inactive-cell' : ''"> {{row.member.firstName}} {{row.member.lastName}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="mail">
-        <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'USER.EMAIL' | translate}}
-        </mat-header-cell>
-        <mat-cell  *matCellDef="let row" [ngClass]="!row.active ? 'app-members__container__table__inactive-cell' : ''">
-          <span class="app-members__container__table__content-cell">{{row.member.mail}} </span>
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="action" *ngIf="hasAdminRole">
-        <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
-        <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row">
-          <p *ngIf="!row.acceptInvitation">TODO: resend invitation button</p>
-          <mat-icon *ngIf="row.acceptInvitation" class="app-members__action" (click)="changeMemberActivationStatus(row)" color="primary">{{row.active ? "pause_circle_outline" : "play_circle_outline"}}</mat-icon>
-          <mat-icon class="app-members__action" (click)="deleteMember(row.id)" color="primary">delete</mat-icon>
-        </mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;">
-      </mat-row>
-    </mat-table>
-    <mat-spinner class="app-members__container__spinner" *ngIf="!membersDataSource"></mat-spinner>
-  </div>
+    <mat-form-field class="app-members__filter">
+      <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterString" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}">
+    </mat-form-field>
+    <div class="app-members__container">
+      <mat-table class="app-members__container__table" [dataSource]="membersDataSource" matSort>
+        <ng-container acceptInvitation matColumnDef="member">
+          <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header>
+            {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
+          <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row" [ngClass]="!row.active ? 'app-members__container__table__inactive-cell' : ''"> {{row.member.firstName}} {{row.member.lastName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="mail">
+          <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'USER.EMAIL' | translate}}
+          </mat-header-cell>
+          <mat-cell  *matCellDef="let row" [ngClass]="!row.active ? 'app-members__container__table__inactive-cell' : ''">
+            <span class="app-members__container__table__content-cell">{{row.member.mail}} </span>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action" *ngIf="hasAdminRole">
+          <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row">
+            <p *ngIf="!row.acceptInvitation">TODO: resend invitation button</p>
+            <mat-icon *ngIf="row.acceptInvitation" class="app-members__action" (click)="changeMemberActivationStatus(row)" color="primary">{{row.active ? "pause_circle_outline" : "play_circle_outline"}}</mat-icon>
+            <mat-icon class="app-members__action" (click)="deleteMember(row.id)" color="primary">delete</mat-icon>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+      <mat-spinner class="app-members__container__spinner" *ngIf="!membersDataSource"></mat-spinner>
+    </div>
+  </ng-template>
 </div>
