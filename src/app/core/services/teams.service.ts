@@ -195,9 +195,8 @@ export class TeamsService {
     } else {
       if (this.teamRoles.teamAdmins){
         return Boolean(this.teamRoles.teamAdmins.length)
-      } else {
-        return false
       }
+      return false
     }
   }
 
