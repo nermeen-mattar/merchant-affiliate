@@ -81,7 +81,7 @@
             mat-sort-header> </mat-header-cell>
           <mat-cell class="app-events__container__table__content-cell app-events__container__table__admin-actions" *matCellDef="let row">
             <mat-icon class="app-events__action" [routerLink]="row.id" color="primary">edit</mat-icon>
-            <mat-icon class="app-events__action" (click)="deleteEvent($event, row.id)" color="primary">delete</mat-icon>
+            <mat-icon class="app-events__action" (click)="deleteEvent(row.id)" color="primary">delete</mat-icon>
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="user-action">
