@@ -124,6 +124,15 @@ export class MembersListComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
+   * @description sends a request to resend the invitation link to the member with the passed id.
+   * @param  {string} memberMail
+   */
+  resedInvitationLink(memberMail: string) {
+    this.membersService.resendInvitation(memberMail).subscribe(res => res);
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description creates a new object of type material table data source and passes to it the members data to be displayed on the table
    * @param {TcMember[]} members
    */

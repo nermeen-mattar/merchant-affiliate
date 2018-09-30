@@ -60,8 +60,8 @@
       "UNABLE_TO_REGISTER": "Unable to register a new team",
       "TEAM_CREATING_SUCCESS": "Your team has been created successfully",
       "PLEASE_ACTIVATE": "Please check your mail to activate your account.",
-      "ACTIVATION_MAIL_RESEND__SUCCESS": "Activation mail re-sent successfully",
-      "ACTIVATION_MAIL_RESEND__FAIL": "Unable to Re-send activatin mail"
+      "ACTIVATION_MAIL_RESEND_SUCCESS": "Activation mail re-sent successfully",
+      "ACTIVATION_MAIL_RESEND_FAIL": "Unable to Re-send activatin mail"
     },
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Wrong username or password",
@@ -106,7 +106,9 @@
       "MEMBER_CONFIRM_DEACTIVATE_HEADER": "Deactivate member",
       "MEMBER_CONFIRM_DEACTIVATE_BODY": "Do you really want to deactivate this member?",
       "MEMBER_PASSWORD_CHANGING_SUCCESS": "The password has been changed successfully",
-      "MEMBER_PASSWORD_CHANGING_FAIL": "Unable to change the password"
+      "MEMBER_PASSWORD_CHANGING_FAIL": "Unable to change the password",
+      "MEMBER_INVITATION_RESEND_SUCCESS": "Invitation mail re-sent successfully",
+      "MEMBER_INVITATION_RESEND_FAIL": "Unable to Re-send invitation mail"   
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfully",
@@ -240,7 +242,8 @@
     "ALL_PARTICIPATION": "All Participations",
     "DELETE_MY_ACCOUNT": "Delete My Account",
     "REMINDERS": "Reminders",
-    "ALLOW_MAIL_REMINDERS_FOR": "Allow Mail Reminders For:"
+    "ALLOW_MAIL_REMINDERS_FOR": "Allow Mail Reminders For:",
+    "SEND_MAIL_AGAIN": "Resend invitation mail" 
   },
   "TEAM_MEMBER": {
     "ALSO_A_TEAM_MEMBER": "I'm also a member of this new team"
