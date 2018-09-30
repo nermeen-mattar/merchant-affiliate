@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AboutComponent } from '../about/about.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
+import { AboutComponent } from './components/about/about.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'terms-and-conditions',
+    component: TermsAndConditionsComponent
   },
   {
     path: '**',
@@ -19,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AboutRoutingModule { }
+export class TeamCenterInfoRoutingModule { }
