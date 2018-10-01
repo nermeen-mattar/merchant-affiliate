@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { externalUrls } from '../core/constants/external-urls.constants';
+
+import { externalUrls } from '../../../core/constants/external-urls.constants';
 
 @Component({
   selector: 'tc-about',
