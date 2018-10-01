@@ -33,7 +33,7 @@
   <mat-card *ngIf="mode == 'invitation'">
     <mat-card-content>
       <mat-card-title class="app-member-activation-form__title">{{ 'ACTIVATION.INVITATION_TITLE' | translate}}</mat-card-title>
-      <mat-card-content *ngIf="invitationState === State.SUCCESS;">{{ 'ACTIVATION.INVITATION_TITLE' |translate }}</mat-card-content>
+      <mat-card-content *ngIf="invitationState === State.SUCCESS;">{{ 'ACTIVATION.INVITATION_ACCEPTED' |translate }}</mat-card-content>
       <mat-card-content *ngIf="invitationState === State.ERROR;">{{ 'ACTIVATION.INVITATION_ERROR' |translate }}</mat-card-content>
       <button routerLink="/auth/login" mat-raised-button color="primary" class="app-mail-activation__button">{{'LOGIN.GO_TO_LOGIN' | translate}}</button>
     </mat-card-content>
