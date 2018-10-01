@@ -61,9 +61,9 @@
       </div>
     </div>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="app-container__content">
     <tc-header (menuClicked)="sidenav.toggle()"></tc-header>
-    <div class="app-container__main-content">
+    <div class="app-container__content__main">
       <router-outlet></router-outlet>
     </div>
     <tc-footer></tc-footer>
