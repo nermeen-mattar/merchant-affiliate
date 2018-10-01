@@ -4,12 +4,12 @@
       <mat-list color="primary" class="app-footer__container__menu">
         <div class="app-footer__container__title">{{"TEAM_CENTER" | translate}}
         </div>
-        <mat-list-item class="app-footer__container__menu__item" routerLink="/about"> {{"ABOUT.ABOUT" | translate}}
+        <mat-list-item class="app-footer__container__menu__item" routerLink="/team-center/about"> {{"ABOUT.ABOUT" | translate}}
         </mat-list-item>
         <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.IMPRESSUM" | translate}} </mat-list-item>
-        <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.TERMS_CONDITIONS" | translate}}
+        <mat-list-item class="app-footer__container__menu__item" routerLink="/team-center/terms-and-conditions"> {{"FOOTER.TERMS_CONDITIONS" | translate}}
         </mat-list-item>
-        <mat-list-item class="app-footer__container__menu__item"> {{"FOOTER.DATA_PRIVACY" | translate}} </mat-list-item>
+        <mat-list-item class="app-footer__container__menu__item" routerLink="/team-center/data-privacy"> {{"FOOTER.DATA_PRIVACY" | translate}} </mat-list-item>
       </mat-list>
     </div>
 
@@ -21,12 +21,11 @@
       </div>
     </div>
     <div>
-
       <mat-list color="primary" class="app-footer__container__menu">
-        <mat-list-item class="app-footer__container__menu__item"> {{"CONTACT.CONTACT" | translate}} </mat-list-item>
-        <mat-list-item class="app-footer__container__menu__item" routerLink="/about"> {{"FOOTER.FEATURES" | translate}}
+        <mat-list-item class="app-footer__container__menu__item" routerLink="/contact"> {{"CONTACT.CONTACT" | translate}} </mat-list-item>
+        <mat-list-item class="app-footer__container__menu__item" routerLink="/team-center/about"> {{"FOOTER.FEATURES" | translate}}
         </mat-list-item>
-        <mat-list-item class="app-footer__container__menu__item"> {{"TEAM.CREATE_YOUR_TEAM" | translate}}
+        <mat-list-item class="app-footer__container__menu__item" routerLink="/auth/register"> {{"TEAM.CREATE_YOUR_TEAM" | translate}}
         </mat-list-item>
       </mat-list>
 
