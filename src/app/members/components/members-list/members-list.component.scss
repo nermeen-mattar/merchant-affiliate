@@ -29,6 +29,9 @@
     overflow-x: auto;
     &__table {
       overflow-x: auto;
+      &__actions-wrapper {
+        max-width:72px;
+      }
       &__header-cell {
         font-weight: $tc-font-weight-6;
         font-size: $tc-font-size-h5;
@@ -40,11 +43,14 @@
         &.mat-column-action {
           display: flex;
           align-items: center;
-           justify-content: space-evenly;
+           justify-content: flex-end;
         }
       }
       &__inactive-cell {
         text-decoration: line-through;
+      }
+      &__unaccepted-invitation-cell {
+        color: $tc-color-gray-shade-5;
       }
     }
     &__spinner {
@@ -63,4 +69,3 @@
     }
   }
 }
-

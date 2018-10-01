@@ -135,6 +135,14 @@ export class MembersService {
     return this.httpRequestService.httpPost('activation/accept-invitation', memberAtivationInfo);
   }
 
+  resendInvitation(memberMail: string) {
+    return this.httpRequestService.httpPost('activation/resent ', {email: memberMail} , {
+      // {username:'nermeenmattar@hotmail.com' ,...
+      success: 'MEMBER.MEMBER_INVITATION_RESEND_SUCCESS',
+      failDefault: 'MEMBER.MEMBER_INVITATION_RESEND_FAIL'
+    });
+  }
+
   /**
    * @author Tobias Trusch
    * @description Checks if a user needs to set password (first login) or needs to only accept the invitation
