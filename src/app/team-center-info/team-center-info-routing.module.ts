@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 import { AboutComponent } from './components/about/about.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { DataPrivacyComponent } from './components/data-privacy/data-privacy.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'terms-and-conditions',
     component: TermsAndConditionsComponent
+  },
+  {
+    path: 'data-privacy',
+    component: DataPrivacyComponent
   },
   {
     path: '**',
