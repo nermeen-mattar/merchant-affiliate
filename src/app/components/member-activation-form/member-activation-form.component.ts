@@ -71,6 +71,9 @@ export class MemberActivationFormComponent implements OnInit {
   checkHash() {
     this.membersService.activateCheckMember({hash: this.memberActivationHash}).subscribe(
       res => {
+        if (res.status && res.status === 'INVITATION'){
+          this.router.navigate(['/invitation'], { queryParams: { h: this.memberActivationHash }});
+        }
         this.displaySpinner = false;
         this.createMemberForm();
       }, err => {

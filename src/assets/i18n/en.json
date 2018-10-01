@@ -123,6 +123,9 @@
       "TEAM_CONFIRM_DELETING_BODY": "Do you really want to delete this team?"
     }
   },
+  "ERRORS": {
+    "NO_TEAMS_FOR_USER": "Sorry, there is no data for you. Maybe you are disabled for a team or have an open invitation in your mailbox."
+  },
   "LANGUAGE": {
     "LANGUAGE": "Language",
     "en": "English",
@@ -327,6 +330,41 @@
       "TEXT2": "Ability for Admins to enable \"Event log\" view for the members",
       "TEXT3": "Google maps for location entires - Other languages - Mobile Apps (Android & iOS)",
       "TEXT4":  "We are grateful for feedbacks, or recommondations for new features. Please just use our contact form"
+    }
+  },
+  "TERMS_AND_CONDITIONS": {
+    "TERMS_AND_CONDITIONS": "Terms and Conditions",
+    "SECTION1": {
+      "TITLE": "Scope",
+      "TEXT1": "team.center was created through a private project and is currently in full possession of the team.center GmbH Spranglenstrasse 48, in 8303 Bassersdorf. The legal form of the team.center GmbH can change at any time. In this case, the terms and conditions will be adjusted immediately. In general, team.center GmbH and its shareholders (hereinafter referred to simply as team.center) reserve the right to change the terms and conditions at any time without prior notice. A current version of the English GTC is always available under",
+      "LINK": "http://www.team.center/en/agb",      
+      "TEXT2": "If individual points or provisions of these terms and conditions become invalid, the validity of the remaining terms remains valid. All copyrights remain with team.center. Violations of these copyrights and/or the terms and conditions may lead to a complete exclusion of the team.center services."
+    },
+    "SECTION2": {
+      "TITLE": "Services & Liability",
+      "TEXT1": "team.center in no way guarantees that the services are uninterrupted, timely, error-free or secure. Also, it cannot be guaranteed that all requirements are covered. Furthermore, there can be no guarantee that results or advertisements of the team.center services will always be correct and meet all expectations. team.center is not liable for damages (indirect or direct) caused by the use of faulty services, technical faults or incorrect results. Also, team.center is not liable for any damages during a meeting or interactions organized with the services of team.center."
+    },
+    "SECTION3": {
+      "TITLE": "Privacy & use of the services",
+      "TEXT1": "The team.center data is hosted on cloud servers in Frankfurt (Germany).",
+      "TEXT2": "For continuous improvement, team.center is analyzing the use of team.center with Google Analytics, which is offered by Google, Inc. (hereafter \"Google\") located in the United States. The analysis is done anonymously and aggregated, which means that there is no assignment to individual users by team.center. The transmission of the corresponding data, including personal data, including IP addresses, is encrypted. Details of Google Analytics can be found in the relevant privacy policy of Google. The user explicitly agrees with the data processing taking place in the USA.",
+      "TEXT3": "Amazon and Google are committed to ensuring an appropriate level of data protection comparable to Swiss data protection law through EU standard contractual clauses.",
+      "TEXT4": "You agree to abide by the terms of these terms and conditions.",
+      "TEXT5": "For the creation of the admin account, a registration for a user account is required. You must truthfully complete and keep up-to-date the required information when registering. You are responsible for the security of your personal passwords. All passwords are stored encrypted in the database with us, so we have no insight or knowledge of these passwords. Accounts may not be created automatically and may not be created for other people.",
+      "TEXT6": "For some functions, you can use your own name (e.g. name of team or player) or enter your own texts. team.center reserves the right to check these names and, if necessary, to modify or delete them should the texts intentionally or unintentionally infringe other trademark rights, or be offensive or racist.",
+      "TEXT7": "We do not sell data to third parties. Only for in-house market research analysis data may be passed to third parties for investigation under strict contract terms and secrecy obligations.",
+      "TEXT8": "You agree not to reproduce, copy, sell, trade or distribute the services of team.center for any purpose. Intentionally disturb or attack.",
+      "TEXT9": "team.center has the right to add new functions at any time, to modify or remove existing functions, or to discontinue services temporarily or permanently. These changes are automatically subject to these terms. By continuing to use the Services after such changes, you are tacitly agreeing to the changes."
+    },
+    "SECTION4": {
+      "TITLE": "Costs, Prices & Advertising",
+      "TEXT1": "You agree that team.center may advertise at its sole discretion. This advertisement must not be blocked by the user. The advertising can be individually controlled or tailor-made based on the data entered in team.center.",
+      "TEXT2": "team.center can at any time offer paid premium accounts with all advertisements removed.",
+      "TEXT3": "The use of team.center is free of charge up to a certain extent of use. However, team.center reserves the right to offer existing or new features for a fee (e.g. in the form of premium accounts). The basic idea that team.center will always remain free of charge in a usable form is provided for."
+    },
+    "SECTION5": {
+      "TITLE": "Applicable Law and Jurisdiction",
+      "TEXT1": "The provisions of Swiss law apply, even if team.center is used abroad. The place of jurisdiction is Zurich Switzerland."
     }
   },
   "CONTACT": {

@@ -19,8 +19,8 @@ const routes: Routes = [{
     loadChildren: './home/home.module#HomeModule'
   },
   {
-    path: 'about',
-    loadChildren: './about/about.module#AboutModule'
+    path: 'team-center',
+    loadChildren: './team-center-info/team-center-info.module#TeamCenterInfoModule'
   },
   {
     path: 'contact',
