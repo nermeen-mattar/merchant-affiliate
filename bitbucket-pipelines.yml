@@ -1,0 +1,13 @@
+image: node:10.11.0
+pipelines:
+  default:
+    - step:
+        script:
+          - npm install
+  branches:
+    master:
+    develop:
+      - step:
+        script:
+          - echo "angular linter"
+          - ng lint team-center
