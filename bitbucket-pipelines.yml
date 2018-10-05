@@ -8,12 +8,18 @@ pipelines:
     master:
       - step:
           script:
+            - echo "npm install"
             - npm install
+      - step:
+          script:
             - echo "angular linter"
-            - ng lint team-center
+            - npm lint
     develop:
       - step:
           script:
+            - echo "npm install"
             - npm install
+      - step:
+          script:
             - echo "angular linter"
-            - ng lint team-center
+            - npm lint
