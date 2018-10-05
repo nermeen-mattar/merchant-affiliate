@@ -6,6 +6,10 @@ pipelines:
           - npm install
   branches:
     master:
+      - step:
+        script:
+          - echo "angular linter"
+          - ng lint team-center
     develop:
       - step:
         script:
