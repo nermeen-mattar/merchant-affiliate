@@ -20,6 +20,14 @@ export class LoginStatusService {
     this.subscribeToLoginStateChanges();
   }
 
+  /**
+   * @author Nermeen Mattar
+   * @description Returns the state of the current user whether logged in or not
+   * @returns {LoginStatus}
+   */
+  getCurrentUserLoginState() {
+    return this.loginState.getValue();
+  }
 
   /**
    * @author Nermeen Mattar
