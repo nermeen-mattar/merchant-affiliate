@@ -10,8 +10,6 @@ pipelines:
           script:
             - echo "npm install"
             - npm install
-      - step:
-          script:
             - echo "angular linter"
             - npm lint
     develop:
@@ -19,7 +17,5 @@ pipelines:
           script:
             - echo "npm install"
             - npm install
-      - step:
-          script:
             - echo "angular linter"
             - npm lint
