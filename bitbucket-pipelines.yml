@@ -7,11 +7,11 @@ pipelines:
   branches:
     master:
       - step:
-        script:
-          - echo "angular linter"
-          - ng lint team-center
+          script:
+            - echo "angular linter"
+            - ng lint team-center
     develop:
       - step:
-        script:
-          - echo "angular linter"
-          - ng lint team-center
+          script:
+            - echo "angular linter"
+            - ng lint team-center
