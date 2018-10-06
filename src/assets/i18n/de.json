@@ -215,7 +215,7 @@
     "EDIT_MEMBER": "Member bearbeiten",
     "CREATE_MEMBER": "Member anlegen",
     "ADD_MYSELF_AS_MEMBER": "Mich selber als Member anlegen",
-    "OUR_MEMBERS": "Unsere Member",
+    "FOUNDERS": "Gründer",
     "BY_DEFAULT_MEMBERS_ARE": "Standartmässig sind alle Member ",
     "ALL_PARTICIPATION": "Alle Teilnahmen"
   },
@@ -244,16 +244,14 @@
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
-    "TITLE_HELPS_YOU": "Das hilft dir",
     "TITLE_HELPS_US": "Das hilft uns",
-    "SOCIAL_MEDIA": "Social media",
     "DATA_PRIVACY": "Datenschutz",
     "CONTACT": "Kontakt",
     "FEATURES": "Features",
     "CREATE": "Erstelle dein Team",
     "TERMS_CONDITIONS": "AGBs",
     "IMPRESSUM": "Impressum",
-    "SUPPORT_BY_DONATING": "Unterstütze dieses Projekt indem du uns einen Caffee spendierst",
+    "SUPPORT_BY_DONATING": "Spende ein \"Kafi\"",
     "COPY_RIGHT": "© 2018 Copyright team.center GmbH"
   },
   "ABOUT": {

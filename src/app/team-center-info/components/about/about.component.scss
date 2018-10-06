@@ -1,7 +1,11 @@
 @import "../../../../styles/toolkit/variables.scss";
+a {
+  color: $primary-color;
+  text-decoration: none;
+}
 .app-about {
   &__section {
-    padding: 6rem 1rem;
+    padding: 2rem 1rem;
     text-align: center;
     &:nth-child(even) {
       background-color: white;
@@ -83,7 +87,6 @@
     }
     &__member {
       text-align: center; // remove if space-around
-      padding: 2%;
       width: 25%;
       min-width: 250px; // supporting small devices
       &__header {
@@ -93,10 +96,24 @@
       }
       &__img {
         margin: 0 auto;
-        height: 200px;
-        width: 200px;
+        height: 150px;
+        width: 150px;
         border-radius: 50%;
         background-color: $tc-color-gray-shade-3;
+        &__rene {
+          background: url('../../../../assets/img/team/rene.png') no-repeat center;
+          border-radius: 100%;
+          height: 150px;
+          width: 150px;
+          margin: 0 auto;
+        }
+        &__tobi {
+          background: url('../../../../assets/img/team/tobi.png') no-repeat center;
+          border-radius: 100%;
+          height: 150px;
+          width: 150px;
+          margin: 0 auto;
+        }
       }
     }
   }
@@ -109,7 +126,15 @@
   }
   */
 }
+
+
+
 .app-about__section__content__text[_ngcontent-c10] {
   padding: 1rem 0;
+  font-size: 120%;
+}
+
+.app-about__team__member > .app-about__section__content__text[_ngcontent-c10] {
+  padding: 0;
   font-size: 120%;
 }

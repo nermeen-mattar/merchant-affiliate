@@ -240,7 +240,7 @@
     "CREATE_MEMBER": "Create member",
     "ADD_MEMBER_TO_TEAM": "Add Member to your Team",
     "ADD_ME_AS_MEMBER": "Add myself as a member",
-    "OUR_MEMBERS": "Our members",
+    "FOUNDERS": "Founders",
     "BY_DEFAULT_MEMBERS_ARE": "By default all members are ",
     "ALL_PARTICIPATION": "All Participations",
     "DELETE_MY_ACCOUNT": "Delete My Account",
@@ -289,9 +289,7 @@
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
-    "TITLE_HELPS_YOU": "this helps you",
     "TITLE_HELPS_US": "this helps us",
-    "SOCIAL_MEDIA": "Social media",
     "DATA_PRIVACY": "data privacy",
     "FEATURES": "features",
     "TERMS_CONDITIONS": "Terms & Conditions",
