@@ -14,8 +14,4 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
-  openDonateWindow() {
-    window.open(externalUrls.donate, '_blank'); // ,height=500px,width=auto
-  }
-
 }
