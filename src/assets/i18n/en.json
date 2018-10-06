@@ -108,7 +108,7 @@
       "MEMBER_PASSWORD_CHANGING_SUCCESS": "The password has been changed successfully",
       "MEMBER_PASSWORD_CHANGING_FAIL": "Unable to change the password",
       "MEMBER_INVITATION_RESEND_SUCCESS": "Invitation mail re-sent successfully",
-      "MEMBER_INVITATION_RESEND_FAIL": "Unable to Re-send invitation mail"   
+      "MEMBER_INVITATION_RESEND_FAIL": "Unable to Re-send invitation mail"
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfully",
@@ -246,7 +246,7 @@
     "DELETE_MY_ACCOUNT": "Delete My Account",
     "REMINDERS": "Reminders",
     "ALLOW_MAIL_REMINDERS_FOR": "Allow Mail Reminders For:",
-    "SEND_MAIL_AGAIN": "Resend invitation mail" 
+    "SEND_MAIL_AGAIN": "Resend invitation mail"
   },
   "TEAM_MEMBER": {
     "ALSO_A_TEAM_MEMBER": "I'm also a member of this new team"
@@ -291,7 +291,7 @@
     "TITLE_TEAM_CENTER": "team.center",
     "TITLE_HELPS_YOU": "this helps you",
     "TITLE_HELPS_US": "this helps us",
-    "TITLE_LANGUAGE": "language",
+    "SOCIAL_MEDIA": "Social media",
     "DATA_PRIVACY": "data privacy",
     "FEATURES": "features",
     "TERMS_CONDITIONS": "Terms & Conditions",
@@ -337,7 +337,7 @@
     "SECTION1": {
       "TITLE": "Scope",
       "TEXT1": "team.center was created through a private project and is currently in full possession of the team.center GmbH Spranglenstrasse 48, in 8303 Bassersdorf. The legal form of the team.center GmbH can change at any time. In this case, the terms and conditions will be adjusted immediately. In general, team.center GmbH and its shareholders (hereinafter referred to simply as team.center) reserve the right to change the terms and conditions at any time without prior notice. A current version of the English GTC is always available under",
-      "LINK": "http://www.team.center/en/agb",      
+      "LINK": "http://www.team.center/en/agb",
       "TEXT2": "If individual points or provisions of these terms and conditions become invalid, the validity of the remaining terms remains valid. All copyrights remain with team.center. Violations of these copyrights and/or the terms and conditions may lead to a complete exclusion of the team.center services."
     },
     "SECTION2": {

@@ -8,10 +8,6 @@ export const availableLanguages: AvailableLanguageInfo[] = [
   {
     code: 'de',
     name: 'German'
-  },
-  {
-    code: 'fr',
-    name: 'Frensh'
   }
 ];
 
