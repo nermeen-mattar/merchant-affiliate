@@ -117,6 +117,18 @@ export class MembersService {
 
   /**
    * @author Nermeen Mattar
+   * @description Upon changing the language for a logged in user a request is sent to update member language
+   * @param {string} langCode
+   */
+  updateMemberLanguage(langCode: string) {
+    this.httpRequestService.httpPut(
+      `members/language`, {lang: langCode}, {
+        fail: 'NO_ERROR_MESSAGE'
+      }).subscribe(res => res);
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description sends the member's firstname, last name, password, and activation hash to the server
    * to activate the member in the first login
    * @returns {Observable <any>}

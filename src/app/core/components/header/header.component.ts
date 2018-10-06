@@ -1,3 +1,4 @@
+import { MembersService } from './../../../members/services/members.service';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
@@ -22,7 +23,8 @@ export class HeaderComponent {
   hasAdminRole: boolean;
   @Output() menuClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public translate: TranslateService, private loginStatusService: LoginStatusService, private userService: UserService,
+  constructor(public translate: TranslateService, private loginStatusService: LoginStatusService,
+    private membersService: MembersService,
     teamService: TeamsService) {
       this.appLanguages = availableLanguages;
     this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
@@ -51,6 +53,9 @@ export class HeaderComponent {
   languageSelected(langCode: string) {
     this.selectedLanguageCode = langCode;
     this.translate.use(langCode);
+    if (this.loginStatusService.getCurrentUserLoginState().isAuthorized) {
+      this.membersService.updateMemberLanguage(langCode);
+    }
     localStorage.setItem('lang', langCode);
   }
 
@@ -59,7 +64,7 @@ export class HeaderComponent {
    * @description informs the parent component (app component) that the sidebar menu (small devices menu) is clicked and should be opened.
    * @param {Event} $event
    */
-  onMenuClick($event: Event) {
+  onMenuClick() {
     this.menuClicked.emit();
   }
 
