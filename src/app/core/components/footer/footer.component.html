@@ -16,9 +16,15 @@
     <div class="app-footer__container__donate">
       <div class="app-footer__container__title">{{"FOOTER.SUPPORT_BY_DONATING" | translate}}
       </div>
-      <div class="app-footer__container__donate__action">
-        <mat-icon (click)="openDonateWindow()" fontSet="fa" fontIcon="fa-coffee" class="app-footer__container__donate__action__icon"></mat-icon>
-      </div>
+      <form ngNoForm action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="N5SNHVXG46C78">
+        <div class="app-footer__container__donate__action">
+          <button type="submit">
+            <mat-icon fontSet="fa" fontIcon="fa-coffee" class="app-footer__container__donate__action__icon"></mat-icon>
+          </button>
+        </div>
+      </form>
     </div>
     <div>
       <mat-list color="primary" class="app-footer__container__menu">
@@ -41,9 +47,20 @@
     </div>
   </div>
 
+
   <div class="app-footer__copyright">
     <span class="app-footer__copyright__text">
       {{"FOOTER.COPY_RIGHT" | translate}}
     </span>
   </div>
+
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="2EWSJKRHC7K72">
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
+    <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+  </form>
 </div>
+
+
+

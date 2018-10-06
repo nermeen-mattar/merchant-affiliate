@@ -14,10 +14,6 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
   }
 
-  openDonateWindow() {
-    window.open(externalUrls.donate, '_blank'); // ,height=500px,width=auto
-  }
-
   openFacebookWindow() {
     window.open(externalUrls.facebook, '_blank'); // ,height=500px,width=auto
   }
