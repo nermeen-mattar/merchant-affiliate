@@ -38,19 +38,21 @@ export class HttpRequestsService {
     if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
       this.removeAuthorizationFromRequestHeader();
     } else {
-      const loginResponse =  JSON.parse(localStorage.getItem('loginResponse'));
-      this.appendAuthorizationToRequestHeader(loginResponse && loginResponse.token);
+      const token =  JSON.parse(localStorage.getItem('token'));
+      this.appendAuthorizationToRequestHeader(token);
       }
   }
 
   appendAuthorizationToRequestHeader(token: string) {
     if (token) {
+      localStorage.setItem('token', JSON.stringify(token));
       this.requestHeader =  this.requestHeader.set('Authorization', `Bearer ${token}`);
       this.setHttpRequestOptions();
     }
   }
 
   removeAuthorizationFromRequestHeader() {
+    localStorage.removeItem('token');
     this.requestHeader =  this.requestHeader.delete('Authorization');
     this.setHttpRequestOptions();
   }
@@ -72,7 +74,7 @@ export class HttpRequestsService {
         },
         err => {
           if (err.error.statusCode === 401) {
-            this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
+            this.loginStatusService.logout();
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -91,7 +93,7 @@ export class HttpRequestsService {
         },
         err => {
           if (err.error.statusCode === 401) {
-            this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
+            this.loginStatusService.logout();
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -110,7 +112,7 @@ export class HttpRequestsService {
         },
         err => {
           if (err.error.statusCode === 401) {
-            this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
+            this.loginStatusService.logout();
           }
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
@@ -131,7 +133,7 @@ export class HttpRequestsService {
           this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
           if (err.error.statusCode === 401) {
-            this.loginStatusService.loginState.next({isAuthorized: false, logoutResponse: true});
+            this.loginStatusService.logout();
           }
         });
     });
