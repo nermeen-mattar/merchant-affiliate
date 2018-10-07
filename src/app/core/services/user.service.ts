@@ -1,5 +1,3 @@
-import { TcServerSideTeamRoles } from './../../teams/models/tc-server-side-team-roles.model';
-import { TcMember } from './../../members/models/tc-member.model';
 import { Injectable } from '@angular/core';
 
 import { LoginStatusService } from './../../auth/services/login-status.service';
@@ -20,12 +18,15 @@ export class UserService {
     loginStatusService.$userLoginState.subscribe((loginStatus: LoginStatus) => {
       if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
         this.resetData();
-      } else if (loginStatus.loginResponse) {
-        this.setLoggedInUserInfo(loginStatus.loginResponse.member, loginStatus.loginResponse.teamRoles);
-      } else {
-        this.setLoggedInUserInfo(); /* if isAuthorized and no loginResponse object (after refresh case) */
       }
+      //  else if (loginStatus.loginResponse) {
+      //   this.setLoggedInUserInfo(loginStatus.loginResponse.member, loginStatus.loginResponse.teamRoles);
+      // } 
+      // else {
+      //   this.setLoggedInUserInfo(); /* if isAuthorized and no loginResponse object (after refresh case) */
+      // }
     });
+    this.setLoggedInUserInfo(); // on refresh
   }
 
   /**
@@ -70,7 +71,7 @@ export class UserService {
    * @param {firstName} string
    */
   set firstName(firstName: string) {
-    this._firstName= firstName;
+    this._firstName = firstName;
     if (firstName) {
       localStorage.setItem('firstName', firstName);
     } else {
@@ -160,14 +161,14 @@ export class UserService {
    * Side note: there are duplicated info between token and loginResponse. Had to decode the token as login response only do not have sub!
    * @param {DecodedToken} decodedToken
    */
-  setLoggedInUserInfo(memberInfo?: TcMember, teamRolesInfo?: TcServerSideTeamRoles) {
-    if (memberInfo) {
-      this.memberId = memberInfo.id;
-      this.username = memberInfo.email;
-      this.firstName = memberInfo.firstName;
-      this.lastName = memberInfo.lastName;
-      this.mobile = memberInfo.mobile;
-      this.teamsService.initTeamRolesAndTeamsList(teamRolesInfo);
+  setLoggedInUserInfo(decodedToken?: DecodedToken) { // memberInfo?: TcMember, teamRolesInfo?: TcServerSideTeamRoles
+    if (decodedToken) {
+      this.memberId = decodedToken.memberId; // was       this.memberId = memberInfo.id;
+      this.username = decodedToken.sub;
+      this.firstName = decodedToken.firstName;
+      this.lastName = decodedToken.lastName;
+      this.mobile = decodedToken.mobile;
+      this.teamsService.initTeamRolesAndTeamsList(decodedToken.teamRoles);
     } else {
       this.memberId = Number(localStorage.getItem('memberId'));
       this.username = localStorage.getItem('username');
