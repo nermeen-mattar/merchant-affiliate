@@ -65,7 +65,7 @@ export class MembersListComponent implements OnInit {
    * @desc Makes the specified user an admin using the member id
    */
   makeAdmin(user) {
-    this.membersService.makeAdmin(user.id, user.team.id).subscribe(res => {
+    this.membersService.makeAdmin(user.member.id, user.team.id).subscribe(res => {
       const index  = this.getIndexOfTargetMember(user.id);
       this.membersDataSource.data[index]['isAdmin'] = true;
       this.triggerTableToRefreshData();
@@ -148,8 +148,8 @@ export class MembersListComponent implements OnInit {
    * @description sends a request to resend the invitation link to the member with the passed id.
    * @param  {string} memberMail
    */
-  resedInvitationLink(memberMail: string) {
-    this.membersService.resendInvitation(memberMail).subscribe(res => res);
+  resedInvitationLink(teamMemberId: number) {
+    this.membersService.resendInvitation(teamMemberId).subscribe(res => res);
   }
 
   /**

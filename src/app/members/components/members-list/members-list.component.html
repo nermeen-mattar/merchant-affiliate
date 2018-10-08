@@ -40,7 +40,7 @@
         <ng-container matColumnDef="action" *ngIf="hasAdminRole">
           <mat-header-cell class="app-members__container__table__header-cell app-members__container__table__actions-wrapper" *matHeaderCellDef mat-sort-header> </mat-header-cell>
           <mat-cell class="app-members__container__table__content-cell  app-members__container__table__actions-wrapper" *matCellDef="let row">
-            <mat-icon *ngIf="!row.acceptInvitation" class="app-members__action" (click)="resedInvitationLink(row.member.mail)" color="primary"
+            <mat-icon *ngIf="!row.acceptInvitation" class="app-members__action" (click)="resedInvitationLink(row.id)" color="primary"
             matSuffix matTooltip="{{'MEMBER.SEND_MAIL_AGAIN' | translate}}"
             matTooltipPosition="below"
             >mail</mat-icon>
