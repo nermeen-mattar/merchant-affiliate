@@ -3,14 +3,13 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs';
 
-import { LoginStatus } from '../../core/models/login-status.model';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginStatusService {
-  private loginState: BehaviorSubject < LoginStatus > = new BehaviorSubject({isAuthorized: false});
+  private isLoggedIn: BehaviorSubject < boolean > = new BehaviorSubject(false);
   /* the event that informs listeners about the updates on the authorization state.*/
-  $userLoginState: Observable < any > = this.loginState.asObservable();
+  $userLoginState: Observable < any > = this.isLoggedIn.asObservable();
   constructor(private router: Router) {
     this.updateLoginStateFromTheLocalStorage();
   }
@@ -18,10 +17,10 @@ export class LoginStatusService {
   /**
    * @author Nermeen Mattar
    * @description Returns the login state of the current user whether logged in or not
-   * @returns {LoginStatus}
+   * @returns {boolean}
    */
   getCurrentUserLoginState() {
-    return this.loginState.getValue();
+    return this.isLoggedIn.getValue();
   }
 
   /**
@@ -29,7 +28,7 @@ export class LoginStatusService {
    * @description Emits an event to inform listenting components about the updated login status based on the value of the login response.
    */
   updateLoginStateFromTheLocalStorage() {
-    this.loginState.next({isAuthorized: Boolean(localStorage.getItem('token'))}); /* on refresh only send isAthorized without token object */
+    this.isLoggedIn.next(Boolean(localStorage.getItem('token'))); /* on refresh only send isAthorized without token object */
   }
 
   /**
@@ -39,7 +38,7 @@ export class LoginStatusService {
    */
   onLoginRequestSuccess() {
     this.router.navigateByUrl('events');
-    this.loginState.next({isAuthorized: true});
+    this.isLoggedIn.next(true);
   }
 
   /**
@@ -48,7 +47,7 @@ export class LoginStatusService {
    */
   logout() {
     this.router.navigateByUrl('home');
-    this.loginState.next({ isAuthorized: false, logoutResponse: true});
+    this.isLoggedIn.next(false);
   }
 
   /**
@@ -57,6 +56,6 @@ export class LoginStatusService {
    * @returns {boolean}
    */
   isAuthenticated(): boolean {
-    return this.loginState.getValue().isAuthorized;
+    return this.isLoggedIn.getValue();
   }
 }

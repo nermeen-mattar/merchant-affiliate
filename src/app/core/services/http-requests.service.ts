@@ -10,7 +10,6 @@ import { LoginStatusService } from './../../auth/services/login-status.service';
 import { UserMessages } from './../models/user-messages.model';
 import { environment } from './../../../environments/environment';
 import { UserMessagesService } from './user-messages.service';
-import { LoginStatus } from '../models/login-status.model';
 
 @Injectable()
 export class HttpRequestsService {
@@ -27,7 +26,10 @@ export class HttpRequestsService {
       'Content-Type': 'application/json',
     });
     this.removeTokenOnLogout();
-    this.updateTokenIfNeeded(localStorage.getItem('token'));
+    const token = localStorage.getItem('token');
+    if(token) {
+      this.appendAuthorizationToRequestHeader(token);
+    }
   }
 
    /**
@@ -36,8 +38,8 @@ export class HttpRequestsService {
    * authorization property (unauthorized user)
    */
   removeTokenOnLogout() {
-    this.loginStatusService.$userLoginState.subscribe( (loginStatus: LoginStatus) => {
-      if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
+    this.loginStatusService.$userLoginState.subscribe( isLoggedIn => {
+      if (!isLoggedIn) {
         this.removeAuthorizationFromRequestHeader();
       }
     });
@@ -50,7 +52,6 @@ export class HttpRequestsService {
       this.appendAuthorizationToRequestHeader(token);
     }
   }
-
 
   appendAuthorizationToRequestHeader(token: string) {
     this.requestHeader =  this.requestHeader.set('Authorization', `Bearer ${token}`);

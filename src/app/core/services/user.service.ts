@@ -1,8 +1,7 @@
-import { HttpRequestsService } from './http-requests.service';
 import { Injectable } from '@angular/core';
 
+import { HttpRequestsService } from './http-requests.service';
 import { LoginStatusService } from './../../auth/services/login-status.service';
-import { LoginStatus } from './../models/login-status.model';
 import { TeamsService } from './teams.service';
 import { DecodedToken } from './../../auth/models/decoded-token.model';
 import { TokenHandlerService } from '../../auth/services/token-handler.service';
@@ -17,16 +16,15 @@ export class UserService {
 
   constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, httpRequestsService: HttpRequestsService,
     tokenHandlerService: TokenHandlerService) {
-    loginStatusService.$userLoginState.subscribe((loginStatus: LoginStatus) => {
-      if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
+    loginStatusService.$userLoginState.subscribe(isLoggedIn => {
+      if (!isLoggedIn) {
         this.resetData();
       }
     });
     httpRequestsService.$token.subscribe( token => {
+      // executed 1) upon login 2) upon token change 
       this.updateLoggedInUserInfo(tokenHandlerService.decodeToken(token));
     });
-
-    this.updateLoggedInUserInfo(); // on refresh
   }
 
   /**
@@ -161,7 +159,7 @@ export class UserService {
    * @param {DecodedToken} decodedToken
    */
   updateLoggedInUserInfo(decodedToken?: DecodedToken) {
-
+    debugger;
     if (decodedToken) {
       this.memberId = decodedToken.memberId;
       this.username = decodedToken.sub;
