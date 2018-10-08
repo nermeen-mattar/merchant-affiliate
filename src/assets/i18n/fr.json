@@ -217,7 +217,7 @@
     "EDIT_MEMBER": "Modifier un membre",
     "CREATE_MEMBER": "Créer un membre",
     "ADD_MYSELF_AS_MEMBER": "M’ajouter en tant que membre ",
-    "OUR_MEMBERS": "Nos membres",
+    "FOUNDERS": "Fondateur",
     "BY_DEFAULT_MEMBERS_ARE": "Par défaut, tous les membres sont",
     "ALL_PARTICIPATION": "Toutes les Participations"
   },
@@ -246,7 +246,6 @@
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
-    "TITLE_HELPS_YOU": "this helps you",
     "TITLE_HELPS_US": "this helps us",
     "TITLE_LANGUAGE": "language",
     "DATA_PRIVACY": "data privacy",

@@ -2,7 +2,7 @@
 @import "../styles/toolkit/variables.scss";
 
 .app-container {
-  flex: 1;
+  height: 100%;
 
   &__sidenav {
     position: fixed;

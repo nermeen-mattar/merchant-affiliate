@@ -215,7 +215,7 @@
     "EDIT_MEMBER": "Member bearbeiten",
     "CREATE_MEMBER": "Member anlegen",
     "ADD_MYSELF_AS_MEMBER": "Mich selber als Member anlegen",
-    "OUR_MEMBERS": "Unsere Member",
+    "FOUNDERS": "Gründer",
     "BY_DEFAULT_MEMBERS_ARE": "Standartmässig sind alle Member ",
     "ALL_PARTICIPATION": "Alle Teilnahmen"
   },
@@ -244,28 +244,26 @@
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
-    "TITLE_HELPS_YOU": "Das hilft dir",
     "TITLE_HELPS_US": "Das hilft uns",
-    "TITLE_LANGUAGE": "Sprache",
     "DATA_PRIVACY": "Datenschutz",
     "CONTACT": "Kontakt",
     "FEATURES": "Features",
     "CREATE": "Erstelle dein Team",
     "TERMS_CONDITIONS": "AGBs",
     "IMPRESSUM": "Impressum",
-    "SUPPORT_BY_DONATING": "Unterstütze dieses Projekt indem du uns einen Caffee spendierst",
+    "SUPPORT_BY_DONATING": "Spende ein \"Kafi\"",
     "COPY_RIGHT": "© 2018 Copyright team.center GmbH"
   },
   "ABOUT": {
     "ABOUT": "Über uns",
     "SECTION1": {
       "TITLE": "Über uns",
-      "TEXT1": "Mit Liebe und Leidenschaft aus Zürich - team.center ist ein privat finanziertes Webprojekt aus der Schweiz. team.center befindet sich zurzeit in Beta Status und wird für eine maximale Benutzerfreundlichkeit ständig weiterentwickelt, Tag für Tag. Wir haben uns zum obersten Ziel gemacht, die Organisation von Team-Events so einfach wie möglich zu gestalten: Keinen Schnickschnack, nur die nötigsten Funktionen, welche du wirklich brauchst. Das alles mit einer kostenlosen, webbasierten und für alle Geräte optimierten Plattform, welche zu jeder Zeit von überall aus zugänglich ist.",
+      "TEXT1": "Durch traineramtliche Erfahrungen in einem Unihockey Verein stammt die motivation für dieses Projekt. Wir sind selber in Vereinen tätig und sehen wie mühsam es sein kann, wenn z.B. ein Training wegen Spielermangels abesagt werden muss. Deshalb haben uns zum obersten Ziel gemacht, die Organisation von Team-Events so einfach wie möglich zu gestalten: Keinen Schnickschnack, nur die nötigsten Funktionen, welche du wirklich brauchst. Das alles mit einer kostenlosen Plattform, welche zu jeder Zeit von überall aus zugänglich ist. team.center befindet sich zur Zeit noch in der Beta Phase und wir sind daran die Platform laufend stabiler und Benutzerfreundliche zu gestalten.",
       "TEXT2": " - Es ist und bleibt kostenlos -",
-      "TEXT3": "Hinter team.center arbeitet ein kleines Team. Alle von uns sind engagiert in lokalen Sportvereinen als Spieler, Trainer und Vorstandsmitglieder und kennen daher die Bedürfnisse fürs Organisieren von Teamevents bestens.",
+      "TEXT3": "Hinter team.center arbeitet ein kleines Team welches diese Platform ständig weiterentwickelt. Wir sind selber engagiert in lokalen Sportvereinen als Spieler, Trainer und Vorstandsmitglieder und kennen daher die Bedürfnisse fürs Organisieren von Teamevents bestens.",
       "TEXT4": "- Trainieren anstatt koordinieren - ",
-      "TEXT5": "Habt ihr euch schon immer nach einer speziellen Funktion gesehnt, welche euer Teammanagement erleichtert? Teilt mit uns eure weiterführenden Ideen und wir setzen sie um, wenn ein gemeinsames Bedürfnis besteht. Mit anderen Worten: Das team.center von morgen baut der Benutzer selber. Bitte gebt uns euer Feedback",
-      "TEXT6": "Wir haben den ersten Schritt gemacht und die ersten Massnahmen ergriffen, um euch die Organisation von Teams zu erleichtern. Wenn du unsere Idee magst und unsere Begeisterung teilst, dann unterstütze uns und spendiere uns einen Kaffee:",
+      "TEXT5": "Wir sind überzeugt viele Sport- und auch andere Vereine können mit dieser Lösung viel Zeit und Nerven sparen - man sieht auf einen Blick wer sich an- oder abgemeldet hat. Habt ihr euch schon immer nach einer speziellen Funktion gesehnt, welche euer Teammanagement erleichtert? Teilt mit uns eure weiterführenden Ideen mit und wir setzen sie um, wenn das Bedürfnis gross genug ist.",
+      "TEXT6": "Wir haben den ersten Schritt gemacht und die ersten Massnahmen ergriffen, um euch die Organisation von Teams zu erleichtern. Wenn du unsere Idee magst und unsere Begeisterung teilst, dann kannst du etwas in unsere Kaffeekasse werfen:",
       "TEXT7": "Like und folge uns auf Facebook:"
     },
     "SECTION2": {
