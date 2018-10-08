@@ -148,8 +148,8 @@ export class MembersListComponent implements OnInit {
    * @description sends a request to resend the invitation link to the member with the passed id.
    * @param  {string} memberMail
    */
-  resedInvitationLink(memberMail: string) {
-    this.membersService.resendInvitation(memberMail).subscribe(res => res);
+  resedInvitationLink(teamMemberId: number) {
+    this.membersService.resendInvitation(teamMemberId).subscribe(res => res);
   }
 
   /**
