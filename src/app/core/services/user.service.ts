@@ -1,9 +1,7 @@
-import { TcServerSideTeamRoles } from './../../teams/models/tc-server-side-team-roles.model';
-import { TcMember } from './../../members/models/tc-member.model';
 import { Injectable } from '@angular/core';
 
+import { HttpRequestsService } from './http-requests.service';
 import { LoginStatusService } from './../../auth/services/login-status.service';
-import { LoginStatus } from './../models/login-status.model';
 import { TeamsService } from './teams.service';
 import { DecodedToken } from './../../auth/models/decoded-token.model';
 import { TokenHandlerService } from '../../auth/services/token-handler.service';
@@ -16,15 +14,17 @@ export class UserService {
   private _lastName: string;
   private _mobile: number;
 
-  constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, tokenHandler: TokenHandlerService) {
-    loginStatusService.$userLoginState.subscribe((loginStatus: LoginStatus) => {
-      if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
+  constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, httpRequestsService: HttpRequestsService,
+    tokenHandlerService: TokenHandlerService) {
+    loginStatusService.$userLoginState.subscribe(isLoggedIn => {
+      if (!isLoggedIn) {
+        // resets user info upon loging out
         this.resetData();
-      } else if (loginStatus.loginResponse) {
-        this.setLoggedInUserInfo(loginStatus.loginResponse.member, loginStatus.loginResponse.teamRoles);
-      } else {
-        this.setLoggedInUserInfo(); /* if isAuthorized and no loginResponse object (after refresh case) */
       }
+    });
+    httpRequestsService.$token.subscribe( token => {
+      // executed 1) upon login 2) upon token change 3) when refreshing and the user is logged in
+      this.updateLoggedInUserInfo(tokenHandlerService.decodeToken(token));
     });
   }
 
@@ -70,7 +70,7 @@ export class UserService {
    * @param {firstName} string
    */
   set firstName(firstName: string) {
-    this._firstName= firstName;
+    this._firstName = firstName;
     if (firstName) {
       localStorage.setItem('firstName', firstName);
     } else {
@@ -155,19 +155,18 @@ export class UserService {
 
   /**
    * @author Nermeen Mattar
-   * @description sets the class properties (username, team roles, and user type ordinary/admin) either from the decoded token (immediately
-   * after logging in) or from the localStorage (in case a logged in user refreshed the page)
-   * Side note: there are duplicated info between token and loginResponse. Had to decode the token as login response only do not have sub!
+   * @description sets the class properties either from the decoded token (in case of logging in or updating the token) or from the localStorage
+   * (in case a logged in user has reloaded the page)
    * @param {DecodedToken} decodedToken
    */
-  setLoggedInUserInfo(memberInfo?: TcMember, teamRolesInfo?: TcServerSideTeamRoles) {
-    if (memberInfo) {
-      this.memberId = memberInfo.id;
-      this.username = memberInfo.email;
-      this.firstName = memberInfo.firstName;
-      this.lastName = memberInfo.lastName;
-      this.mobile = memberInfo.mobile;
-      this.teamsService.initTeamRolesAndTeamsList(teamRolesInfo);
+  updateLoggedInUserInfo(decodedToken?: DecodedToken) {
+    if (decodedToken) {
+      this.memberId = decodedToken.memberId;
+      this.username = decodedToken.sub;
+      this.firstName = decodedToken.firstName;
+      this.lastName = decodedToken.lastName;
+      this.mobile = decodedToken.mobile;
+      this.teamsService.initTeamRolesAndTeamsList(decodedToken.teamRoles);
     } else {
       this.memberId = Number(localStorage.getItem('memberId'));
       this.username = localStorage.getItem('username');

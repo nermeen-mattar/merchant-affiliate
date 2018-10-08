@@ -37,10 +37,8 @@ export class AuthService {
       .pipe(map(
         res => {
           if (!res.message) { // this if statement is temp until the backend fixes the case of email not confirmed by returning an error
-            this.loginStatusService.loginState.next({
-              isAuthorized: true,
-              loginResponse: res
-            });
+            this.loginStatusService.onLoginRequestSuccess();
+            // previously we store res (loginResponse) but now token is enough and is stored by httpRequestsService
           }
           return res;
         }));

@@ -3,30 +3,24 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject } from 'rxjs';
 
-import { TokenHandlerService } from './token-handler.service';
-import { LoginResponse } from './../models/login-response.model';
-import { LoginStatus } from '../../core/models/login-status.model';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginStatusService {
-  loginState: BehaviorSubject < LoginStatus > = new BehaviorSubject({isAuthorized: false});
+  private isLoggedIn: BehaviorSubject < boolean > = new BehaviorSubject(false);
   /* the event that informs listeners about the updates on the authorization state.*/
-  $userLoginState: Observable < any > = this.loginState.asObservable();
-  loginResponse: LoginResponse;
-  constructor(
-    private tokenHandler: TokenHandlerService, private router: Router) {
+  $userLoginState: Observable < any > = this.isLoggedIn.asObservable();
+  constructor(private router: Router) {
     this.updateLoginStateFromTheLocalStorage();
-    this.subscribeToLoginStateChanges();
   }
 
   /**
    * @author Nermeen Mattar
-   * @description Returns the state of the current user whether logged in or not
-   * @returns {LoginStatus}
+   * @description Returns the login state of the current user whether logged in or not
+   * @returns {boolean}
    */
   getCurrentUserLoginState() {
-    return this.loginState.getValue();
+    return this.isLoggedIn.getValue();
   }
 
   /**
@@ -34,63 +28,34 @@ export class LoginStatusService {
    * @description Emits an event to inform listenting components about the updated login status based on the value of the login response.
    */
   updateLoginStateFromTheLocalStorage() {
-    this.loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-    this.loginState.next({isAuthorized: this.isAuthenticated()}); /* on refresh only send isAthorized without loginResponse object */
-  }
-
-
-  /**
-   * @author Nermeen Mattar
-   * @description It executes the on login success method or the logout method based on the received login info. But if this class is the
-   * one which emitted the login state change (on refresh) then it returns without doing anything.
-   */
-  subscribeToLoginStateChanges() {
-    this.$userLoginState.subscribe(loginStatus => {
-      if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
-        this.logout();
-      } else if (loginStatus.loginResponse) {
-        this.onLoginRequestSuccess(loginStatus.loginResponse); // this.loginResponse,
-      }
-    });
+    this.isLoggedIn.next(Boolean(localStorage.getItem('token'))); /* on refresh only send isAthorized without token object */
   }
 
   /**
    * @author Nermeen Mattar
-   * @description upon successful user login/switch this function sets the login response class property and in the local storage.
-   * Navigates to the events page (default page for authorized users).
-   * @param {any} loginResponse
+   * @description upon successful user login/switch this function navigates to the events page (default page for authorized users) then emitting the new login status for other components/services
    * @memberof AuthService
    */
-  onLoginRequestSuccess(loginResponse) {
-    this.loginResponse = loginResponse; // may use map to only store needed info
-    localStorage.setItem('loginResponse', JSON.stringify(this.loginResponse));
+  onLoginRequestSuccess() {
     this.router.navigateByUrl('events');
+    this.isLoggedIn.next(true);
   }
 
   /**
    * @author Nermeen Mattar
-   * @description logs out the user. Resets the login response class property and removes it from the local storage. Then navigates to the
-   * home page (default page for unauthorized users).
+   * @description logs out the user by navigating to home page (default page for unauthorized users) then emitting the new login status for other components/services
    */
   logout() {
-    this.loginResponse = undefined;
-    localStorage.removeItem('loginResponse');
     this.router.navigateByUrl('home');
+    this.isLoggedIn.next(false);
   }
 
   /**
    * @author Nermeen Mattar
-   * checks if the user is authenticated based on first, the existance of login response which indicates that the user is signed in
-   * second, the token in the login response is not expired yet
+   * checks if the user is authenticated
    * @returns {boolean}
    */
   isAuthenticated(): boolean {
-    if (this.loginResponse && this.loginResponse.token) {
-      this.tokenHandler.isTokenValid(this.loginResponse.token);
-      return true;
-      /*  hiding checking if token is expired until discussing the requirements
-     return this.tokenHandler.isTokenValid(this.loginResponse.token); */
-    }
-    return false;
+    return this.isLoggedIn.getValue();
   }
 }

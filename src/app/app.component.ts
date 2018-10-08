@@ -17,7 +17,7 @@ import { TeamsService } from './core/services/teams.service';
 })
 export class AppComponent {
   appLanguage: string;
-  $isUserLoggedIn: Observable < LoginStatus > ;
+  $isUserLoggedIn: Observable < boolean > ;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
   selectedLanguageCode: string;
@@ -34,8 +34,8 @@ export class AppComponent {
     this.resetScrollOnRouteChange();
     this.initLanguageRelatedVariables();
     this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
-    this.$isUserLoggedIn.subscribe(loggedIn => {
-      if (loggedIn.isAuthorized) {
+    this.$isUserLoggedIn.subscribe(isLoggedIn => {
+      if (isLoggedIn) {
         this.hasAdminRole = teamsService.hasAdminRole();
       } else {
         this.resetData();
@@ -101,7 +101,7 @@ export class AppComponent {
   languageSelected(langCode: string) {
     this.selectedLanguageCode = langCode;
     this.translate.use(langCode);
-    if (this.loginStatusService.getCurrentUserLoginState().isAuthorized) {
+    if (this.loginStatusService.getCurrentUserLoginState()) {
       this.membersService.updateMemberLanguage(langCode);
     }
     localStorage.setItem('lang', langCode);
@@ -112,7 +112,7 @@ export class AppComponent {
    * @description Logs the user out of the system
    */
   logout() {
-    this.loginStatusService.loginState.next({ isAuthorized: false, logoutResponse: true});
+    this.loginStatusService.logout();
   }
   /**
    * @author Nermeen Mattar

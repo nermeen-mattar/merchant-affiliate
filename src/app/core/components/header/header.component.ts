@@ -4,11 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/Observable';
 
 import { availableLanguages } from './../../constants/i18n.constants';
-import { UserService } from './../../services/user.service';
 import { AvailableLanguageInfo } from '../../models/available-language-info.model';
 import { TeamsService } from '../../services/teams.service';
 import { LoginStatusService } from '../../../auth/services/login-status.service';
-import { LoginStatus } from '../../models/login-status.model';
 
 @Component({
   selector: 'tc-header',
@@ -16,7 +14,7 @@ import { LoginStatus } from '../../models/login-status.model';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  $isUserLoggedIn: Observable<LoginStatus>;
+  $isUserLoggedIn: Observable<boolean>;
   menuOpened = false;
   appLanguages: AvailableLanguageInfo[];
   selectedLanguageCode: string;
@@ -28,8 +26,8 @@ export class HeaderComponent {
     teamService: TeamsService) {
       this.appLanguages = availableLanguages;
     this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
-    this.$isUserLoggedIn.subscribe( loggedIn => {
-      if (loggedIn.isAuthorized) {
+    this.$isUserLoggedIn.subscribe( isLoggedIn => {
+      if (isLoggedIn) {
         this.hasAdminRole = teamService.hasAdminRole();
       } else {
         this.resetData();
@@ -42,7 +40,7 @@ export class HeaderComponent {
    * @description logging out the logged in user
    */
   logout() {
-    this.loginStatusService.loginState.next({ isAuthorized: false, logoutResponse: true});
+    this.loginStatusService.logout();
   }
 
   /**
@@ -53,7 +51,7 @@ export class HeaderComponent {
   languageSelected(langCode: string) {
     this.selectedLanguageCode = langCode;
     this.translate.use(langCode);
-    if (this.loginStatusService.getCurrentUserLoginState().isAuthorized) {
+    if (this.loginStatusService.getCurrentUserLoginState()) {
       this.membersService.updateMemberLanguage(langCode);
     }
     localStorage.setItem('lang', langCode);
