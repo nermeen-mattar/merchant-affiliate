@@ -155,8 +155,8 @@ export class UserService {
 
   /**
    * @author Nermeen Mattar
-   * @description sets the class properties (username, team roles, and user type ordinary/admin) either from the decoded token (immediately
-   * after logging in) or from the localStorage (in case a logged in user refreshed the page)
+   * @description sets the class properties either from the decoded token (in case of logging in or updating the token) or from the localStorage
+   * (in case a logged in user has reloaded the page)
    * @param {DecodedToken} decodedToken
    */
   updateLoggedInUserInfo(decodedToken?: DecodedToken) {
