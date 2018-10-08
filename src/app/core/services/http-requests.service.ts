@@ -74,7 +74,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.get(this.baseUrl + requestUrl, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
-          this.updateTokenIfNeeded(res.token);
+          this.updateTokenIfNeeded(res.jwt);
           res = res.data;
           obs.next(res);
           obs.complete();
@@ -93,7 +93,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
-          this.updateTokenIfNeeded(res.token);
+          this.updateTokenIfNeeded(res.jwt);
           res = res.data? res.data : res;
           obs.next(res);
           obs.complete();
@@ -112,7 +112,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
         this.userMessagesService.showUserMessage(userMessages, 'success');
-        this.updateTokenIfNeeded(res.token);
+        this.updateTokenIfNeeded(res.jwt);
         res = res.data;
         obs.next(res);
           obs.complete();
@@ -131,7 +131,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.delete(this.baseUrl + requestUrl, this.requestOptions).subscribe((res: any) => {
         this.userMessagesService.showUserMessage(userMessages, 'success');
-        this.updateTokenIfNeeded(res.token);
+        this.updateTokenIfNeeded(res.jwt);
           res = res.data;
           obs.next(res);
           obs.complete();
