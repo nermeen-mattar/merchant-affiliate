@@ -8,7 +8,7 @@ import { LoginStatus } from '../../core/models/login-status.model';
   providedIn: 'root'
 })
 export class LoginStatusService {
-  loginState: BehaviorSubject < LoginStatus > = new BehaviorSubject({isAuthorized: false});
+  private loginState: BehaviorSubject < LoginStatus > = new BehaviorSubject({isAuthorized: false});
   /* the event that informs listeners about the updates on the authorization state.*/
   $userLoginState: Observable < any > = this.loginState.asObservable();
   constructor(private router: Router) {
