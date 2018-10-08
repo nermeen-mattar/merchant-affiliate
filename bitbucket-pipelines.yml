@@ -1,0 +1,21 @@
+image: node:10.11.0
+pipelines:
+  default:
+    - step:
+        script:
+          - npm install
+  branches:
+    master:
+      - step:
+          script:
+            - echo "npm install"
+            - npm install
+            - echo "angular linter"
+            - npm lint
+    develop:
+      - step:
+          script:
+            - echo "npm install"
+            - npm install
+            - echo "angular linter"
+            - npm lint

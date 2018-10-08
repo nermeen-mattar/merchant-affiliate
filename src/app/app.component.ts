@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { MatIconRegistry } from '@angular/material';
 
+import { MembersService } from './members/services/members.service';
 import { AvailableLanguageInfo } from './core/models/available-language-info.model';
 import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
 import { LoginStatusService } from './auth/services/login-status.service';
@@ -25,6 +26,7 @@ export class AppComponent {
     teamsService: TeamsService,
     public translate: TranslateService,
     private loginStatusService: LoginStatusService,
+    private membersService: MembersService,
     private router: Router,
     public matIconRegistry: MatIconRegistry
   ) {
@@ -99,6 +101,9 @@ export class AppComponent {
   languageSelected(langCode: string) {
     this.selectedLanguageCode = langCode;
     this.translate.use(langCode);
+    if (this.loginStatusService.getCurrentUserLoginState().isAuthorized) {
+      this.membersService.updateMemberLanguage(langCode);
+    }
     localStorage.setItem('lang', langCode);
   }
 

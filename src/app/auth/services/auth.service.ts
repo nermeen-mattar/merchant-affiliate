@@ -6,6 +6,7 @@ import { LoginStatusService } from './login-status.service';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { ServerSideLoginInfo } from '../models/server-side-login-info.mdel';
 import { ServerSideRegisterInfo } from '../models/server-side-register-info.model';
+import { sysOptions } from '../../core/constants/i18n.constants';
 @Injectable()
 export class AuthService {
   constructor(
@@ -18,7 +19,7 @@ export class AuthService {
    * @param {ServerSideRegisterInfo} registrationInfo
    */
   register(registrationInfo: ServerSideRegisterInfo): Observable < any > {
-    return this.httpRequestsService.httpPost('register', registrationInfo, {
+    return this.httpRequestsService.httpPost('register', {...registrationInfo, lang: sysOptions.systemLanguage}, {
       fail: 'REGISTER.UNABLE_TO_REGISTER',
       success: 'REGISTER.TEAM_CREATING_SUCCESS'
     });
