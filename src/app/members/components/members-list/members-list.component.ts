@@ -65,7 +65,7 @@ export class MembersListComponent implements OnInit {
    * @desc Makes the specified user an admin using the member id
    */
   makeAdmin(user) {
-    this.membersService.makeAdmin(user.id, user.team.id).subscribe(res => {
+    this.membersService.makeAdmin(user.member.id, user.team.id).subscribe(res => {
       const index  = this.getIndexOfTargetMember(user.id);
       this.membersDataSource.data[index]['isAdmin'] = true;
       this.triggerTableToRefreshData();
