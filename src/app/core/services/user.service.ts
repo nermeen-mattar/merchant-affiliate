@@ -18,12 +18,11 @@ export class UserService {
     tokenHandlerService: TokenHandlerService) {
     loginStatusService.$userLoginState.subscribe(isLoggedIn => {
       if (!isLoggedIn) {
-        // resets user info upon loging out
         this.resetData();
       }
     });
     httpRequestsService.$token.subscribe( token => {
-      // executed 1) upon login 2) upon token change 3) when refreshing and the user is logged in
+      // executed 1) upon login 2) upon token change 
       this.updateLoggedInUserInfo(tokenHandlerService.decodeToken(token));
     });
   }
@@ -160,6 +159,7 @@ export class UserService {
    * @param {DecodedToken} decodedToken
    */
   updateLoggedInUserInfo(decodedToken?: DecodedToken) {
+    debugger;
     if (decodedToken) {
       this.memberId = decodedToken.memberId;
       this.username = decodedToken.sub;
