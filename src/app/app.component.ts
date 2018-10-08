@@ -1,4 +1,3 @@
-import { LoginStatus } from './core/models/login-status.model';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/internal/Observable';
