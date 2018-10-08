@@ -93,7 +93,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
-          this.updateTokenIfNeeded(res.jwt);
+          this.updateTokenIfNeeded(res.jwt || res.token);
           res = res.data? res.data : res;
           obs.next(res);
           obs.complete();
