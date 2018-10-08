@@ -125,10 +125,7 @@ export class MemberSettingsComponent implements OnInit {
    */
   changePassword() {
     this.membersService.changePassword(this.changePasswordGroup.value).subscribe(successfulyChanged => {
-      this.loginStatusService.loginState.next({
-        isAuthorized: false,
-        logoutResponse: true
-      });
+      this.loginStatusService.logout();
     });
   }
 
