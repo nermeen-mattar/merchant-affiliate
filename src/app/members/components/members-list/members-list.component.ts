@@ -60,6 +60,18 @@ export class MembersListComponent implements OnInit {
     });
   }
 
+  /**
+   * @author Ahsan Ayaz
+   * @desc Makes the specified user an admin using the member id
+   */
+  makeAdmin(user) {
+    this.membersService.makeAdmin(user.id, user.team.id).subscribe(res => {
+      const index  = this.getIndexOfTargetMember(user.id);
+      this.membersDataSource.data[index]['isAdmin'] = true;
+      this.triggerTableToRefreshData();
+    });
+  }
+
   getIndexOfTargetMember(memberId: number) {
     return this.membersDataSource.data.findIndex(member => member.id === memberId);
   }

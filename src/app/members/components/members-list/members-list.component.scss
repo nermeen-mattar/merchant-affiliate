@@ -5,6 +5,16 @@
   margin: 0 auto;
   &__action {
     cursor: pointer;
+    &--admin-icon {
+      width: 24px;
+      height: 24px;
+      background: url('../../../../assets/img/icons/admin_icon.png');
+      background-size: contain;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
   }
   &__add {
     color: white;
