@@ -121,7 +121,7 @@ export class MembersService {
    * @param {string} langCode
    */
   updateMemberLanguage(langCode: string) {
-    this.httpRequestService.httpPut(
+    this.httpRequestService.httpPost(
       `members/language`, {lang: langCode}, {
         fail: 'NO_ERROR_MESSAGE'
       }).subscribe(res => res);
