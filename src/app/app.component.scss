@@ -47,7 +47,6 @@
   &__content {
     display: flex;
     flex-direction: column;
-    min-height: 600px;
     &__main {
       color: $tc-color-gray-shade-6;
       margin-top: $header-bar-height; // min-height: 100%; replaced with the following line to fix no (or small) content
