@@ -1,3 +1,4 @@
+import { HttpRequestsService } from './http-requests.service';
 import { Injectable } from '@angular/core';
 
 import { LoginStatusService } from './../../auth/services/login-status.service';
@@ -14,19 +15,18 @@ export class UserService {
   private _lastName: string;
   private _mobile: number;
 
-  constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, tokenHandler: TokenHandlerService) {
+  constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, httpRequestsService: HttpRequestsService,
+    tokenHandlerService: TokenHandlerService) {
     loginStatusService.$userLoginState.subscribe((loginStatus: LoginStatus) => {
       if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
         this.resetData();
       }
-      //  else if (loginStatus.loginResponse) {
-      //   this.setLoggedInUserInfo(loginStatus.loginResponse.member, loginStatus.loginResponse.teamRoles);
-      // } 
-      // else {
-      //   this.setLoggedInUserInfo(); /* if isAuthorized and no loginResponse object (after refresh case) */
-      // }
     });
-    this.setLoggedInUserInfo(); // on refresh
+    httpRequestsService.$token.subscribe( token => {
+      this.updateLoggedInUserInfo(tokenHandlerService.decodeToken(token));
+    });
+
+    this.updateLoggedInUserInfo(); // on refresh
   }
 
   /**
@@ -158,12 +158,12 @@ export class UserService {
    * @author Nermeen Mattar
    * @description sets the class properties (username, team roles, and user type ordinary/admin) either from the decoded token (immediately
    * after logging in) or from the localStorage (in case a logged in user refreshed the page)
-   * Side note: there are duplicated info between token and loginResponse. Had to decode the token as login response only do not have sub!
    * @param {DecodedToken} decodedToken
    */
-  setLoggedInUserInfo(decodedToken?: DecodedToken) { // memberInfo?: TcMember, teamRolesInfo?: TcServerSideTeamRoles
+  updateLoggedInUserInfo(decodedToken?: DecodedToken) {
+
     if (decodedToken) {
-      this.memberId = decodedToken.memberId; // was       this.memberId = memberInfo.id;
+      this.memberId = decodedToken.memberId;
       this.username = decodedToken.sub;
       this.firstName = decodedToken.firstName;
       this.lastName = decodedToken.lastName;

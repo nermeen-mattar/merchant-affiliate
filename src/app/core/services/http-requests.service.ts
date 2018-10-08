@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { LoginStatusService } from './../../auth/services/login-status.service';
 import { UserMessages } from './../models/user-messages.model';
 import { environment } from './../../../environments/environment';
 import { UserMessagesService } from './user-messages.service';
-import { tap } from 'rxjs/operators';
 import { LoginStatus } from '../models/login-status.model';
 
 @Injectable()
@@ -16,39 +17,44 @@ export class HttpRequestsService {
   private requestHeader: HttpHeaders;
   private requestOptions: {headers: HttpHeaders};
   private baseUrl: string;
-
+  private token: BehaviorSubject < string > = new BehaviorSubject('');
+  /* the event that informs listeners about the token updates */
+  $token: Observable < string > = this.token.asObservable();
   constructor(private http: HttpClient, private userMessagesService: UserMessagesService, private loginStatusService: LoginStatusService) {
     this.baseUrl = environment.baseUrl;
     this.requestHeader = new HttpHeaders({
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     });
-    this.loginStatusService.$userLoginState.subscribe( (loginStatus: LoginStatus) => {
-      this.changeRequestHeaderAuthorization(loginStatus);
-    });
+    this.removeTokenOnLogout();
+    this.updateTokenIfNeeded(localStorage.getItem('token'));
   }
 
    /**
    * @author Nermeen Mattar
-   * @description It changes the request options in the http service so that any subsequent request will either include authorization
-   * property (authorized user) or not (unauthorized user) based on the value of the login response.
-   * @param {LoginStatus} [loginStatus]
+   * @description It listens to login state to remove the token when the user logs out so that any subsequent request will not include
+   * authorization property (unauthorized user)
    */
-  changeRequestHeaderAuthorization(loginStatus?: LoginStatus) {
-    if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
-      this.removeAuthorizationFromRequestHeader();
-    } else {
-      const token =  JSON.parse(localStorage.getItem('token'));
-      this.appendAuthorizationToRequestHeader(token);
+  removeTokenOnLogout() {
+    this.loginStatusService.$userLoginState.subscribe( (loginStatus: LoginStatus) => {
+      if (!loginStatus.isAuthorized && loginStatus.logoutResponse) {
+        this.removeAuthorizationFromRequestHeader();
       }
+    });
   }
 
-  appendAuthorizationToRequestHeader(token: string) {
+  updateTokenIfNeeded(token?: string) {
     if (token) {
-      localStorage.setItem('token', JSON.stringify(token));
-      this.requestHeader =  this.requestHeader.set('Authorization', `Bearer ${token}`);
-      this.setHttpRequestOptions();
+      localStorage.setItem('token',token);
+      this.token.next(token);
+      this.appendAuthorizationToRequestHeader(token);
     }
+  }
+
+
+  appendAuthorizationToRequestHeader(token: string) {
+    this.requestHeader =  this.requestHeader.set('Authorization', `Bearer ${token}`);
+    this.setHttpRequestOptions();
   }
 
   removeAuthorizationFromRequestHeader() {
@@ -67,7 +73,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.get(this.baseUrl + requestUrl, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
-          this.appendAuthorizationToRequestHeader(res.token);
+          this.updateTokenIfNeeded(res.token);
           res = res.data;
           obs.next(res);
           obs.complete();
@@ -86,7 +92,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
-          this.appendAuthorizationToRequestHeader(res.token);
+          this.updateTokenIfNeeded(res.token);
           res = res.data? res.data : res;
           obs.next(res);
           obs.complete();
@@ -105,7 +111,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.put(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
         this.userMessagesService.showUserMessage(userMessages, 'success');
-        this.appendAuthorizationToRequestHeader(res.token);
+        this.updateTokenIfNeeded(res.token);
         res = res.data;
         obs.next(res);
           obs.complete();
@@ -124,7 +130,7 @@ export class HttpRequestsService {
     return Observable.create(obs => {
       this.http.delete(this.baseUrl + requestUrl, this.requestOptions).subscribe((res: any) => {
         this.userMessagesService.showUserMessage(userMessages, 'success');
-        this.appendAuthorizationToRequestHeader(res.token);
+        this.updateTokenIfNeeded(res.token);
           res = res.data;
           obs.next(res);
           obs.complete();
