@@ -54,6 +54,24 @@ export class MembersService {
   }
 
   /**
+   * @author Ahsan Ayaz
+   * @desc Converts a member into an admin using memberId and TeamId
+   * @param {number} memberId the member id of the user
+   * @param {number} teamId the team ID member is a part of
+   */
+  makeAdmin(memberId: number, teamId: number): Observable< any >  {
+    return this.httpRequestService.httpPost(
+      'teamadmins', {
+        memberId,
+        teamId
+      }, {
+        success: 'MEMBER.MEMBER_MAKE_ADMIN_SUCCESS',
+        fail: 'MEMBER.MEMBER_MAKE_ADMIN_FAILURE'
+      }
+    );
+  }
+
+  /**
    * @author Nermeen Mattar
    * @description
    * @param {TcActivationStatusInfo} statusInfo

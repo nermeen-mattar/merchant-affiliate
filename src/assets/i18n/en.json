@@ -89,6 +89,8 @@
       "EVENT_CHANGING_PARTICIPATION_FAIL": "Error changing Participation"
     },
     "MEMBER": {
+      "MEMBER_MAKE_ADMIN_SUCCESS": "The member is now an admin",
+      "MEMBER_MAKE_ADMIN_FAILURE": "Could not make member an admin",
       "MEMBER_DELETING_SUCCESS": "The member has been deleted successfully",
       "MEMBER_DELETING_FAIL": "Unable to delete member",
       "MEMBER_CREATING_SUCCESS": "The member has been added successfully",
@@ -232,6 +234,8 @@
     "ADMIN": "Admin"
   },
   "MEMBER": {
+    "DELETE_MEMBER": "Delete Member",
+    "MAKE_ADMIN": "Make Admin",
     "MEMBERS": "Members",
     "MEMBER": "Member",
     "MEMBERS_STATISTICS": "Members Statistics",

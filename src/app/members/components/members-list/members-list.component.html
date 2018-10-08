@@ -25,14 +25,14 @@
         <ng-container acceptInvitation matColumnDef="member">
           <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header>
             {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
-          <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row" 
-          [ngClass]="{'app-members__container__table__inactive-cell': !row.active, 'app-members__container__table__unaccepted-invitation-cell': !row.acceptInvitation}"> 
+          <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row"
+          [ngClass]="{'app-members__container__table__inactive-cell': !row.active, 'app-members__container__table__unaccepted-invitation-cell': !row.acceptInvitation}">
           {{row.member.firstName}} {{row.member.lastName}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="mail">
           <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'USER.EMAIL' | translate}}
           </mat-header-cell>
-          <mat-cell  *matCellDef="let row" 
+          <mat-cell  *matCellDef="let row"
           [ngClass]="{'app-members__container__table__inactive-cell': !row.active, 'app-members__container__table__unaccepted-invitation-cell': !row.acceptInvitation}">
             <span class="app-members__container__table__content-cell">{{row.member.mail}} </span>
           </mat-cell>
@@ -44,8 +44,14 @@
             matSuffix matTooltip="{{'MEMBER.SEND_MAIL_AGAIN' | translate}}"
             matTooltipPosition="below"
             >mail</mat-icon>
-            <mat-icon *ngIf="row.acceptInvitation" class="app-members__action" (click)="changeMemberActivationStatus(row)" color="primary">{{row.active ? "pause_circle_outline" : "play_circle_outline"}}</mat-icon>
-            <mat-icon class="app-members__action" (click)="deleteMember(row.id)" color="primary">delete</mat-icon>
+            <mat-icon class="app-members__action" (click)="changeMemberActivationStatus(row)" color="primary" *ngIf="row.acceptInvitation" >
+              {{row.active ? "pause_circle_outline" : "play_circle_outline"}}
+            </mat-icon>
+            <mat-icon matTooltip="{{'MEMBER.DELETE_MEMBER' | translate}}" class="app-members__action" (click)="deleteMember(row.id)" color="primary">
+              delete
+            </mat-icon>
+            <div matTooltip="{{'MEMBER.MAKE_ADMIN' | translate}}" class="app-members__action--admin-icon" (click)="makeAdmin(row)" color="primary" *ngIf="!row.isAdmin">
+            </div>
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

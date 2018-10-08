@@ -78,6 +78,8 @@
       "EVENT_CHANGING_PARTICIPATION_FAIL": "Fehler bei Eventstatusänderung"
     },
     "MEMBER": {
+      "MEMBER_MAKE_ADMIN_SUCCESS": "Das mitglied ist jetzt ein administrator",
+      "MEMBER_MAKE_ADMIN_FAILURE": "Konnte mitglied nicht zu einem administrator machen",
       "MEMBER_DELETING_SUCCESS": "Teammitglied wurde erfolgreich entfernt",
       "MEMBER_DELETING_FAIL": "Fehler beim Löschen des Teammitgliedes",
       "MEMBER_CREATING_SUCCESS": "Teammitglied wurde erfolgreich angelegt",
@@ -207,6 +209,8 @@
     "ADMIN": "Admin"
   },
   "MEMBER": {
+    "DELETE_MEMBER": "Mitglied löschen",
+    "MAKE_ADMIN": "Machen Admin",
     "MEMBERS": "Members",
     "MEMBER": "Member",
     "MEMBERS_STATISTICS": "Member Statistik",
@@ -217,7 +221,8 @@
     "ADD_MYSELF_AS_MEMBER": "Mich selber als Member anlegen",
     "FOUNDERS": "Gründer",
     "BY_DEFAULT_MEMBERS_ARE": "Standartmässig sind alle Member ",
-    "ALL_PARTICIPATION": "Alle Teilnahmen"
+    "ALL_PARTICIPATION": "Alle Teilnahmen",
+    "SEND_MAIL_AGAIN": "Einladungsmail erneut senden"
   },
   "USER": {
     "FIRST_NAME": "Vorname",
