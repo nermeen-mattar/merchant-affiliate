@@ -19,7 +19,7 @@ export class AuthService {
    * @param {ServerSideRegisterInfo} registrationInfo
    */
   register(registrationInfo: ServerSideRegisterInfo): Observable < any > {
-    return this.httpRequestsService.httpPost('register', {...registrationInfo, lang: sysOptions.systemLanguage}, {
+    return this.httpRequestsService.httpPost('register', {...registrationInfo, lang: localStorage.getItem('lang')}, {
       fail: 'REGISTER.UNABLE_TO_REGISTER',
       success: 'REGISTER.TEAM_CREATING_SUCCESS'
     });
