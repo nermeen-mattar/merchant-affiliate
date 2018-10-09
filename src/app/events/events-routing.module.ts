@@ -22,17 +22,17 @@ const routes: Routes = [
         component: EventsListComponent
       },
       {
-        path: 'list/:eventId',
-        component: EventFormComponent
-      },
-      {
         path: 'list/details/:teamId',
         component: EventDetailsComponent
       },
       {
+        path: ':eventId',
+        component: EventFormComponent
+      },
+      {
         path: '**',
         component: PageNotFoundComponent
-      }
+      },
     ]
   }
 ];

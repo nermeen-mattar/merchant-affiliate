@@ -170,6 +170,23 @@ export class TeamsService {
   }
 
   /**
+   * @author Ahsan Ayaz
+   * @desc Sends the add team server call and creates a team
+   * @param teamName - the name of the team to be created
+   */
+  addTeam(teamName: string) {
+    this.httpRequestService.httpPost('teams', {
+      teamName
+    }, {
+      success: 'TEAM.TEAM_CREATED_SUCCESS',
+      failDefault: 'TEAM.TEAM_CREATED_FAILURE'
+    }).subscribe(res => {
+      this.userTeams.unshift(res.team);
+      localStorage.setItem('userTeams', JSON.stringify(this.userTeams));
+    });
+  }
+
+  /**
    * @author Nermeen Mattar
    * @description check wether the user with the passed id has a member role
    * @param {number} teamId

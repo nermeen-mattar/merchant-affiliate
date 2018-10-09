@@ -11,6 +11,11 @@
     color: $tc-color-gray-shade-6;
     font-weight: $tc-font-weight-4;
   }
+  &__add {
+    color: white;
+    margin-left: 1rem;
+    font-size: $tc-font-size-h3;
+  }
   &__container {
     overflow-x: auto;
     &__table {

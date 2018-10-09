@@ -107,7 +107,9 @@
       "TEAM_NAME_CHANGING_SUCCESS": "Der Team Name wurde erfolgreich geändert",
       "TEAM_NAME_CHANGING_FAIL": "Der Team Name konnte nicht geändert werden",
       "TEAM_CONFIRM_DELETING_HEADER": "Team löschen",
-      "TEAM_CONFIRM_DELETING_BODY": "Willst du dieses Team wirklich löschen?"
+      "TEAM_CONFIRM_DELETING_BODY": "Willst du dieses Team wirklich löschen?",
+      "TEAM_CREATED_SUCCESS": "Team erfolgreich erstellt",
+      "TEAM_CREATED_FAILURE": "Team could not be created"
     }
   },
   "LANGUAGE": {
@@ -201,9 +203,10 @@
     "TEAMS": "Teams",
     "YOUR_TEAMS": "Deine Teams",
     "CREATE_YOUR_TEAM": "Erstelle dein Team ",
-    "TEAM_NAME": "Team Name",
+    "TEAM_NAME": "Teamname",
     "TEAM_DETAILS": "Team Details",
-    "ROLES": "Rollen"
+    "ROLES": "Rollen",
+    "CREATE_TEAM": "Team erstellen"
   },
   "ADMIN": {
     "ADMIN": "Admin"

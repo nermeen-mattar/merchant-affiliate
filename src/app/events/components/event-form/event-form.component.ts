@@ -30,12 +30,12 @@ export class EventFormComponent implements OnInit {
   /**
    * @author Nermeen Mattar
    * @description checks the eventId param passed in the route to know if the user is trying to create a new event or edit an existing event
-   * if the eventId param not equal to 'new', a request is sent to get the event with that Id.
+   * if the eventId param not equal to 'create', a request is sent to get the event with that Id.
    */
   initFormEditingOrCreating() {
     this.displaySpinner = true;
     const eventIdVariable = this.route.snapshot.params['eventId'];
-    if (eventIdVariable !== 'new') {
+    if (eventIdVariable !== 'create') {
       this.eventId = eventIdVariable;
       this.leavePageIfWrongId();
       this.eventsService.getEvent(this.eventId).subscribe(res => {

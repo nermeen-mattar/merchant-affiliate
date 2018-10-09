@@ -1,0 +1,25 @@
+<div class="add-team-form">
+  <mat-card>
+    <div class="add-team-form__back" routerLink="../">
+      <mat-icon color="primary">chevron_left</mat-icon>
+      {{'BACK'| translate}}
+    </div>
+    <mat-card-title class="add-team-form__title">
+      {{ ( manageMode === manageModes.ADD ? 'TEAM.CREATE_TEAM' : 'TEAM.EDIT_TEAM')  | translate }}
+    </mat-card-title>
+    <mat-card-content *ngIf="manageTeamForm">
+      <form novalidate [formGroup]="manageTeamForm" (ngSubmit)="manageFormSubmit(manageTeamForm.value)" novalidate>
+        <mat-form-field class="add-team-form__field">
+          <input matInput placeholder="{{'TEAM.TEAM_NAME'| translate}}" formControlName="teamName" type="text">
+          <mat-icon color="primary" class="add-team-form__field__icon" matPrefix>supervisor_account</mat-icon>
+          <mat-error *ngIf="manageTeamForm.get('teamName').invalid">
+            {{'TEAM.TEAM_NAME'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="add-team-form__submit" type="submit" [disabled]="!manageTeamForm.valid">
+          {{ ( manageMode === manageModes.ADD ? 'FORM.ADD' : 'FORM.SAVE')  | translate }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
