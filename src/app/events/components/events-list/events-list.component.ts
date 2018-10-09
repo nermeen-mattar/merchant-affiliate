@@ -36,7 +36,6 @@ export class EventsListComponent implements OnInit {
   constructor(
     private eventsService: EventsService,
     private teamsService: TeamsService,
-    userService: UserService,
     public dialog: MatDialog
   ) {
     this.spinner = true
