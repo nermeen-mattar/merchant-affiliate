@@ -29,7 +29,7 @@ export class MembersListComponent implements OnInit {
   isTeamMember: boolean;
   constructor(private membersService: MembersService, private teamsService: TeamsService,
     public dialog: MatDialog) {
-    this.spinner = true
+    this.spinner = true;
     this.hasAdminRole = this.teamsService.hasAdminRole();
     if (this.hasAdminRole) {
       this.displayedColumns.push('action');
@@ -38,7 +38,7 @@ export class MembersListComponent implements OnInit {
     this.selectedTeamId = this.teamsService.selectedTeamId;
     this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
     this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
-    if (this.isTeamMember || this.isTeamAdmin){
+    if (this.isTeamMember || this.isTeamAdmin) {
       this.updateMembers();
     }
     this.spinner = false;

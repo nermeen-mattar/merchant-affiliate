@@ -28,7 +28,7 @@
     <span class="app-header__menu__item" routerLink="/teams" *ngIf="$isUserLoggedIn | async" routerLinkActive="active">
       <span> {{'TEAM.TEAMS' | translate}} </span>
     </span>
-    <span class="app-header__menu__item" routerLink="/auth/register" routerLinkActive="active">
+    <span class="app-header__menu__item" routerLink="/auth/register" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'REGISTER.REGISTER' | translate}}</span>
     </span>
     <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">

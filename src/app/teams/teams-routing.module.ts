@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TeamsListComponent } from './components/teams-list/teams-list.component';
 import { TeamsComponent } from './teams.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
+import { ManageTeamComponent } from './manage-team/manage-team.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,6 +17,10 @@ const routes: Routes = [{
     {
       path: 'list',
       component: TeamsListComponent
+    },
+    {
+      path: 'create',
+      component: ManageTeamComponent
     },
     {
       path: '**',
