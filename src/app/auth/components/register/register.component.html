@@ -69,7 +69,7 @@
             </div>
             <div  *ngIf="isNewUser" class="app-register__content__form__field">
               <mat-checkbox color="primary" formControlName="confirmTerms"> </mat-checkbox>
-              <span  class="app-register__content__form__field__terms-conditions"routerLink="/team-center/terms-and-conditions">{{ 'CONFIRM_TERM_CONDITIONS' | translate }}</span>
+              <span class="app-register__content__form__field__terms-conditions" routerLink="/team-center/terms-and-conditions">{{ 'CONFIRM_TERM_CONDITIONS' | translate }}</span>
             </div>
             <mat-error *ngIf="isNewUser && registerSecondStepForm.controls['confirmTerms'].dirty && !registerSecondStepForm.controls['confirmTerms'].value">
               {{ 'HAVE_TO_CONFIRM_TERM_CONDITIONS' | translate }}
