@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { AuthService } from '../../auth/services/auth.service';
 import { FieldValidatorsService } from '../../core/services/field-validators.service';
 import { MembersService } from '../../members/services/members.service';
@@ -89,6 +88,7 @@ export class MemberActivationFormComponent implements OnInit {
    * @param {any} memberValue
    */
   sendMemberInfo(memberValue) {
+    memberValue.lang = 'de'
     this.displaySpinner = true;
     this.membersService.activateMember({hash: this.memberActivationHash, ...memberValue}).subscribe(
       res => {
