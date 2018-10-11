@@ -93,6 +93,7 @@
   &__copyright {
     color: $tc-color-gray-tint-1;
     background-color: rgba(51, 51, 51, 0.08);
+    padding-bottom: 20px;
   }
 }
 
@@ -176,9 +177,9 @@ ul {
     list-style: none;
 }
 .footer-social-icons {
-    width: 350px;
     display:block;
     margin: 0 auto;
+    padding-bottom: 10px;
 }
 .social-icon {
     color: #fff;
