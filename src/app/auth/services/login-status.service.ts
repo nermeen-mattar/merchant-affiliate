@@ -33,7 +33,8 @@ export class LoginStatusService {
 
   /**
    * @author Nermeen Mattar
-   * @description upon successful user login/switch this function navigates to the events page (default page for authorized users) then emitting the new login status for other components/services
+   * @description upon successful user login/switch this function navigates to the events page
+   * (default page for authorized users) then emitting the new login status for other components/services
    * @memberof AuthService
    */
   onLoginRequestSuccess() {
@@ -43,7 +44,8 @@ export class LoginStatusService {
 
   /**
    * @author Nermeen Mattar
-   * @description logs out the user by navigating to home page (default page for unauthorized users) then emitting the new login status for other components/services
+   * @description logs out the user by navigating to home page
+   * (default page for unauthorized users) then emitting the new login status for other components/services
    */
   logout() {
     this.router.navigateByUrl('home');

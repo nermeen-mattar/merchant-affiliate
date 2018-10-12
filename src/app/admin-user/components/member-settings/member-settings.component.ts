@@ -26,8 +26,13 @@ export class MemberSettingsComponent implements OnInit {
   isSelectAllReminders = false;
   @ViewChild('adminTeamsSelect') adminTeamsSelect;
 
-  constructor(private membersService: MembersService, private teamsService: TeamsService,
-    private fieldValidatorsService: FieldValidatorsService, private userService: UserService, private loginStatusService: LoginStatusService) {
+  constructor(
+    private membersService: MembersService,
+    private teamsService: TeamsService,
+    private fieldValidatorsService: FieldValidatorsService,
+    private userService: UserService,
+    private loginStatusService: LoginStatusService
+    ) {
       this.allTeams = this.teamsService.userTeams;
     this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
     this.initSettingsForm();
@@ -68,7 +73,7 @@ export class MemberSettingsComponent implements OnInit {
   initSettingsForm() {
     this.createBasicSettingsForm();
     this.createChangePasswordForm();
-    if(this.teamsTheUserIsAdminOf.length) {
+    if (this.teamsTheUserIsAdminOf.length) {
       this.createTeamNameFromControl();
     }
     this.createRemindersForm();
@@ -101,16 +106,16 @@ export class MemberSettingsComponent implements OnInit {
     this.teamNameControl = new FormControl(null, [Validators.required]);
   }
 
-  createRemindersForm(){
+  createRemindersForm() {
     this.remindersForm = new FormGroup({});
     this.allTeams.forEach(team => {
-      this.remindersForm.addControl(team.teamId.toString(), new FormControl(null)); // should replace null with a value  
-    })
-  } 
+      this.remindersForm.addControl(team.teamId.toString(), new FormControl(null)); // should replace null with a value
+    });
+  }
 
-  selectAllReminders(selectAllValue){
+  selectAllReminders(selectAllValue) {
     this.isSelectAllReminders = selectAllValue;
-    if(selectAllValue) {
+    if (selectAllValue) {
       const newValue = this.remindersForm.value;
       Object.keys(newValue).forEach(formControlName => {
         newValue[formControlName] = true;
@@ -137,14 +142,14 @@ export class MemberSettingsComponent implements OnInit {
     this.teamsService.changeTeamName(this.teamNameControl.value, this.adminTeamsSelect.value.teamId);
     this.teamNameControl.reset();
   }
- 
+
 
   /**
    * @author Nermeen Mattar
    * @description takes the user changes then calls the function to update the member settings.
    */
   saveMemberBasicInfoSettings() {
-    if(this.memberBasicSettingsGroup.untouched) {
+    if (this.memberBasicSettingsGroup.untouched) {
       return;
     }
     const updatedMemberValue = this.memberBasicSettingsGroup.value;
@@ -158,10 +163,10 @@ export class MemberSettingsComponent implements OnInit {
       };
       Object.keys(updatedMemberValue).forEach(propertyName => {
         this.userService[propertyName] = updatedMemberValue[propertyName];
-      })
+      });
     });
   }
-  
+
   saveRemindersInfo() {
     this.membersService.setReminders(this.remindersForm.value);
   }

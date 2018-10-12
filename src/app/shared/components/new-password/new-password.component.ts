@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./new-password.component.scss']
 })
 export class NewPasswordComponent implements OnInit {
-  @Input('passwordControl') passwordControl;
-  @Input('fieldLabel') fieldLabel = 'USER.PASSWORD';
+  @Input() passwordControl;
+  @Input() fieldLabel = 'USER.PASSWORD';
   displayPassword: boolean;
   constructor() { }
 

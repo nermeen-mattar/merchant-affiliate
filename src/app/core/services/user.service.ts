@@ -95,7 +95,7 @@ export class UserService {
    * @param {lastName} string
    */
   set lastName(lastName: string) {
-    this._lastName= lastName;
+    this._lastName = lastName;
     if (lastName) {
       localStorage.setItem('lastName', lastName);
     } else {
@@ -120,7 +120,7 @@ export class UserService {
    * @param {mobile} number
    */
   set mobile(mobile: number) {
-    this._mobile= mobile;
+    this._mobile = mobile;
     if (mobile) {
       localStorage.setItem('mobile', mobile.toString());
     } else {
@@ -155,7 +155,8 @@ export class UserService {
 
   /**
    * @author Nermeen Mattar
-   * @description sets the class properties either from the decoded token (in case of logging in or updating the token) or from the localStorage
+   * @description sets the class properties either from the decoded token
+   * (in case of logging in or updating the token) or from the localStorage
    * (in case a logged in user has reloaded the page)
    * @param {DecodedToken} decodedToken
    */

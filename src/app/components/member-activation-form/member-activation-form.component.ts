@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { AuthService } from '../../auth/services/auth.service';
 import { FieldValidatorsService } from '../../core/services/field-validators.service';
 import { MembersService } from '../../members/services/members.service';
-import { subscribeOn } from 'rxjs/operators';
 import { State } from '../../models/state';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'tc-activation-member-form',
@@ -23,18 +22,23 @@ export class MemberActivationFormComponent implements OnInit {
   mode: string;
   invitationState;
   State = State;
-  constructor(private membersService: MembersService, activatedRoute: ActivatedRoute,
-    private fieldValidatorsService: FieldValidatorsService, private authService: AuthService, private router: Router) {
+  constructor(
+    private membersService: MembersService,
+    activatedRoute: ActivatedRoute,
+    private fieldValidatorsService: FieldValidatorsService,
+    private authService: AuthService,
+    private router: Router,
+    private translate: TranslateService
+    ) {
       this.displaySpinner = true;
       const queryParams = activatedRoute.snapshot.queryParams;
       this.memberActivationHash = queryParams && queryParams['h'];
-      if (this.router.url.includes('setuppassword') && this.memberActivationHash){
-        this.mode = 'setuppassword'
+      if (this.router.url.includes('setuppassword') && this.memberActivationHash) {
+        this.mode = 'setuppassword';
         this.checkHash();
         // need to send a check request to check the hash and receive the user info.
-      }
-      else if (this.router.url.includes('invitation') && this.memberActivationHash){
-        this.mode = 'invitation'
+      } else if (this.router.url.includes('invitation') && this.memberActivationHash) {
+        this.mode = 'invitation';
         this.membersService.acceptInvitation({hash: this.memberActivationHash}).subscribe(
           res => {
             this.invitationState = State.SUCCESS;
@@ -43,8 +47,7 @@ export class MemberActivationFormComponent implements OnInit {
             this.invitationState = State.ERROR;
           }
         );
-      }
-      else {
+      } else {
         this.displayPageNotFound = true;
       }
   }
@@ -71,7 +74,7 @@ export class MemberActivationFormComponent implements OnInit {
   checkHash() {
     this.membersService.activateCheckMember({hash: this.memberActivationHash}).subscribe(
       res => {
-        if (res.status && res.status === 'INVITATION'){
+        if (res.status && res.status === 'INVITATION') {
           this.router.navigate(['/invitation'], { queryParams: { h: this.memberActivationHash }});
         }
         this.displaySpinner = false;
@@ -89,16 +92,19 @@ export class MemberActivationFormComponent implements OnInit {
    * @param {any} memberValue
    */
   sendMemberInfo(memberValue) {
+    memberValue.lang = this.translate.currentLang;
     this.displaySpinner = true;
     this.membersService.activateMember({hash: this.memberActivationHash, ...memberValue}).subscribe(
       res => {
-        this.authService.login({username: res.email, password: memberValue.password}).subscribe(
-          res=> {
+        this.authService.login({username: res.email, password: memberValue.password})
+        .subscribe( () => {
             this.displaySpinner = false;
           },
-          err=>{this.displaySpinner = false;}
+          () => {
+            this.displaySpinner = false;
+          }
         );
-      }, err => {
+      }, () => {
         this.displaySpinner = false;
         this.displayError = true;
       }

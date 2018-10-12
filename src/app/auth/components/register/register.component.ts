@@ -9,7 +9,6 @@ import { FieldValidatorsService } from './../../../core/services/field-validator
 import { AuthService } from '../../services/auth.service';
 import { MemberRegisterInfo } from './../../models/member-register-info.model';
 import { TeamRegisterInfo } from './../../models/team-register-info.model';
-import { UserMessagesService } from '../../../core/services/user-messages.service';
 import { roles } from '../../../core/constants/roles.constants';
 import { userCheckBackendResponse } from '../../../core/constants/user-check-backend-response.constats';
 @Component({
@@ -27,9 +26,13 @@ export class RegisterComponent implements OnInit {
   registerSecondStepForm: FormGroup;
   currentStep = 1;
   roles = roles; /* needed to declare a class property to make it available on the component html */
-  constructor(private authService: AuthService, private registerService: RegisterService, activatedRoute: ActivatedRoute, 
-    private membersService: MembersService, private fieldValidatorsService: FieldValidatorsService, 
-    private userMessagesService: UserMessagesService) {
+  constructor(
+    private authService: AuthService,
+    private registerService: RegisterService,
+    activatedRoute: ActivatedRoute,
+    private membersService: MembersService,
+    private fieldValidatorsService: FieldValidatorsService
+    ) {
     const queryParams = activatedRoute.snapshot.queryParams;
     this.teamName = queryParams && queryParams['team-name'];
   }
@@ -83,24 +86,25 @@ export class RegisterComponent implements OnInit {
 
   /**
    * @author Nermeen Mattar
-   * @description change the view based on the user check result. Cases: 1) New user: all of the fields will be displayed. 2) Confirmed member: 
+   * @description change the view based on the user check result.
+   * Cases: 1) New user: all of the fields will be displayed. 2) Confirmed member:
    * Only the password and isTeamMember fields should be displayed 3) Confirmed member: non of the fields should be displayed.
    * @param {string} checkResult
    */
   changeNextStepBasedOnUserCheckResult(checkResult: string) {
-    switch(checkResult) {
-      case userCheckBackendResponse.newUser: 
-      this.isNewUser = true;
-      this.enableFormControls(['firstName', 'lastName', 'confirmTerms']);
-      break;
-      case userCheckBackendResponse.confirmedMember: 
-      this.isNewUser = false;
-      this.disableFormControls(['firstName', 'lastName', 'confirmTerms']);
-      break;
+    switch (checkResult) {
+      case userCheckBackendResponse.newUser:
+        this.isNewUser = true;
+        this.enableFormControls(['firstName', 'lastName', 'confirmTerms']);
+        break;
+      case userCheckBackendResponse.confirmedMember:
+        this.isNewUser = false;
+        this.disableFormControls(['firstName', 'lastName', 'confirmTerms']);
+        break;
       case userCheckBackendResponse.nonConfirmedMember:
-      this.registerSecondStepForm.disable();
-      this.informUserToActivateEmail();
-      break;
+        this.registerSecondStepForm.disable();
+        this.informUserToActivateEmail();
+        break;
     }
   }
 
@@ -136,7 +140,7 @@ export class RegisterComponent implements OnInit {
    * @param {MemberRegisterInfo} adminInfo
    */
   register(teamInfo: TeamRegisterInfo, adminInfo: MemberRegisterInfo) {
-    if(this.isNewUser && !this.registerSecondStepForm.controls.confirmTerms.value) {
+    if (this.isNewUser && !this.registerSecondStepForm.controls.confirmTerms.value) {
       this.registerSecondStepForm.controls.confirmTerms.markAsDirty();
       return false;
     }

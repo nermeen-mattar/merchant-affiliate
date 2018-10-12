@@ -3,4 +3,3 @@ export const userCheckBackendResponse = {
     confirmedMember: 'EXISTING_MEMBER',
     nonConfirmedMember: 'NOT_CONFIRMED'
   };
-  

@@ -192,7 +192,7 @@ export class TeamsService {
    * @param {number} teamId
    * @returns {boolean}
    */
-  hasMemberRole(teamId ? : number): boolean {
+  hasMemberRole(teamId ?: number): boolean {
     if (teamId) {
       return this.teamRoles.teamMembers.includes(teamId);
     } else {
@@ -206,14 +206,14 @@ export class TeamsService {
    * @param {number} teamId
    * @returns {boolean}
    */
-  hasAdminRole(teamId ? : number): boolean {
+  hasAdminRole(teamId ?: number): boolean {
     if (teamId) {
       return this.teamRoles.teamAdmins.includes(teamId);
     } else {
-      if (this.teamRoles.teamAdmins){
-        return Boolean(this.teamRoles.teamAdmins.length)
+      if (this.teamRoles.teamAdmins) {
+        return Boolean(this.teamRoles.teamAdmins.length);
       }
-      return false
+      return false;
     }
   }
 
