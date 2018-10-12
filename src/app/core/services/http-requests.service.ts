@@ -27,7 +27,7 @@ export class HttpRequestsService {
     });
     this.removeTokenOnLogout();
     const token = localStorage.getItem('token');
-    if(token) {
+    if (token) {
       this.appendAuthorizationToRequestHeader(token);
     }
   }
@@ -47,7 +47,7 @@ export class HttpRequestsService {
 
   updateTokenIfNeeded(token?: string) {
     if (token) {
-      localStorage.setItem('token',token);
+      localStorage.setItem('token', token);
       this.token.next(token);
       this.appendAuthorizationToRequestHeader(token);
     }
@@ -94,7 +94,7 @@ export class HttpRequestsService {
       this.http.post(this.baseUrl + requestUrl, requestParams, this.requestOptions).subscribe((res: any) => {
           this.userMessagesService.showUserMessage(userMessages, 'success');
           this.updateTokenIfNeeded(res.jwt || res.token);
-          res = res.data? res.data : res;
+          res = res.data ? res.data : res;
           obs.next(res);
           obs.complete();
         },

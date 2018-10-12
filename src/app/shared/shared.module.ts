@@ -18,8 +18,15 @@ import { LocalizedTextModifierPipe } from './pipes/localized-text-modifier/local
     TranslateModule,
     ReactiveFormsModule
   ],
-  declarations: [ConfirmDialogComponent, PageNotFoundComponent, UnderMaintenanceComponent, StringNormalizerPipe, LocalizedTextModifierPipe, NewPasswordComponent ],
-  entryComponents: [ConfirmDialogComponent], /* why !!! */
+  declarations: [
+    ConfirmDialogComponent,
+    PageNotFoundComponent,
+    UnderMaintenanceComponent,
+    StringNormalizerPipe,
+    LocalizedTextModifierPipe,
+    NewPasswordComponent
+  ],
+  entryComponents: [ConfirmDialogComponent],
   exports: [
     MaterialModule,
     ConfirmDialogComponent,

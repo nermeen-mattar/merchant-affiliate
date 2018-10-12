@@ -20,7 +20,13 @@ import { MemberStatisticsDetailsComponent } from './components/member-statistics
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [MembersListComponent, MembersComponent, AddMemberFormComponent, MembersStatisticsComponent, MemberStatisticsDetailsComponent]
+  declarations: [
+    MembersListComponent,
+    MembersComponent,
+    AddMemberFormComponent,
+    MembersStatisticsComponent,
+    MemberStatisticsDetailsComponent
+  ]
 })
 export class MembersModule { }
 

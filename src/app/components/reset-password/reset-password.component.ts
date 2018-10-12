@@ -24,7 +24,7 @@ export class ResetPasswordComponent implements OnInit {
   constructor(activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router,
   private fieldValidatorsService: FieldValidatorsService, httpRequestsService: HttpRequestsService) {
     const queryParams = activatedRoute.snapshot.queryParams;
-    this.hash = queryParams && queryParams['h']
+    this.hash = queryParams && queryParams['h'];
     if (!this.hash) {
       this.displayPageNotFound = true;
     } else {
@@ -36,7 +36,7 @@ export class ResetPasswordComponent implements OnInit {
         res => {
           this.displaySpinner = false;
           this.checkResetState = State.SUCCESS;
-          this.mail = res.mail
+          this.mail = res.mail;
           // send a check request to check the hash
           this.createResetPasswordForm();
         }, err => {

@@ -151,7 +151,7 @@ export class MembersService {
    * to activate the member in the first login
    * @returns {Observable <any>}
    */
-  activateMember(memberAtivationInfo) : Observable < any > {
+  activateMember(memberAtivationInfo): Observable < any > {
     return this.httpRequestService.httpPost('activation/member', memberAtivationInfo);
   }
 
@@ -161,12 +161,12 @@ export class MembersService {
    * to add this member to the inviter team
    * @returns {Observable <any>}
    */
-  acceptInvitation(memberAtivationInfo) : Observable < any > {
+  acceptInvitation(memberAtivationInfo): Observable < any > {
     return this.httpRequestService.httpPost('activation/accept-invitation', memberAtivationInfo);
   }
 
   resendInvitation(teamMemberId: number) {
-    return this.httpRequestService.httpGet('teammembers/'+ teamMemberId + '/resent-invitation', {
+    return this.httpRequestService.httpGet('teammembers/' + teamMemberId + '/resent-invitation', {
       success: 'MEMBER.MEMBER_INVITATION_RESEND_SUCCESS',
       failDefault: 'MEMBER.MEMBER_INVITATION_RESEND_FAIL'
     });
@@ -177,7 +177,7 @@ export class MembersService {
    * @description Checks if a user needs to set password (first login) or needs to only accept the invitation
    * @returns {Observable <any>}
    */
-  activateCheckMember(memberAtivationInfo) : Observable < any > {
+  activateCheckMember(memberAtivationInfo): Observable < any > {
     return this.httpRequestService.httpPost('activation/check', memberAtivationInfo);
   }
 
@@ -186,8 +186,8 @@ export class MembersService {
    * @description attemps to update the member password Using the httpPut function from httpRequestsSevrice.
    * @param {any} oldAndNewPasswords
    */
-  changePassword(oldAndNewPasswords):Observable <any> {
-    return this.httpRequestService.httpPut('members/change_password',oldAndNewPasswords, {
+  changePassword(oldAndNewPasswords): Observable <any> {
+    return this.httpRequestService.httpPut('members/change_password', oldAndNewPasswords, {
       // {username:'nermeenmattar@hotmail.com' ,...
       success: 'MEMBER.MEMBER_PASSWORD_CHANGING_SUCCESS',
       failDefault: 'MEMBER.MEMBER_PASSWORD_CHANGING_FAIL'
@@ -200,7 +200,7 @@ export class MembersService {
    * @description sets the teams' reminders for logged in user
    * @param {any} teamsReminders
    */
-  setReminders(teamsReminders){
+  setReminders(teamsReminders) {
     return this.httpRequestService.httpPut('members/reminders', teamsReminders,  {
       fail: 'NO_ERROR_MESSAGE'
     }).subscribe(res => res);
@@ -210,7 +210,7 @@ export class MembersService {
    * @author Nermeen Mattar
    * @description gets the list of teams' reminders for logged in user
    */
-  getReminders():Observable <any> {
+  getReminders(): Observable <any> {
     return this.httpRequestService.httpGet('members/reminders', {
       fail: 'NO_ERROR_MESSAGE'
     });

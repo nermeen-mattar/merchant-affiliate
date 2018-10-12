@@ -38,12 +38,12 @@ export class EventsListComponent implements OnInit {
     private teamsService: TeamsService,
     public dialog: MatDialog
   ) {
-    this.spinner = true
+    this.spinner = true;
     this.userTeams = this.teamsService.userTeams;
     this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
     this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     this.selectedTeamId = this.teamsService.selectedTeamId;
-    if (this.isTeamMember || this.isTeamAdmin){
+    if (this.isTeamMember || this.isTeamAdmin) {
       this.changeColumnsToDisplay();
       this.updateEvents();
     }
