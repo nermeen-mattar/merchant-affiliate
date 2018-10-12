@@ -7,11 +7,13 @@ import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { ServerSideLoginInfo } from '../models/server-side-login-info.mdel';
 import { ServerSideRegisterInfo } from '../models/server-side-register-info.model';
 import { sysOptions } from '../../core/constants/i18n.constants';
+import { TranslateService } from '../../../../node_modules/@ngx-translate/core';
 @Injectable()
 export class AuthService {
   constructor(
     private httpRequestsService: HttpRequestsService,
-    private loginStatusService: LoginStatusService
+    private loginStatusService: LoginStatusService,
+    private translate: TranslateService
   ) {}
 
   /**
@@ -19,7 +21,7 @@ export class AuthService {
    * @param {ServerSideRegisterInfo} registrationInfo
    */
   register(registrationInfo: ServerSideRegisterInfo): Observable < any > {
-    return this.httpRequestsService.httpPost('register', {...registrationInfo, lang: localStorage.getItem('lang')}, {
+    return this.httpRequestsService.httpPost('register', {...registrationInfo, lang: this.translate.currentLang}, {
       fail: 'REGISTER.UNABLE_TO_REGISTER',
       success: 'REGISTER.TEAM_CREATING_SUCCESS'
     });
