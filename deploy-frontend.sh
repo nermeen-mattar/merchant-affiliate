@@ -104,15 +104,15 @@ BUILD_OUTPUT="build.output"
 echo "Starting build and save output in ${BUILD_OUTPUT}"
 if [ "${PROFILE}" == "prod" ]
 then
-	echo "ng build -c production > ${BUILD_OUTPUT}"
+	echo "ng build -c production --aot --output-hashing=all > ${BUILD_OUTPUT}"
 	ng build -c production > ${BUILD_OUTPUT}
 elif [ "${PROFILE}" == "dev" ]
 then
-	echo "ng build -c devopt > ${BUILD_OUTPUT}"
+	echo "ng build -c devopt --aot --output-hashing=all > ${BUILD_OUTPUT}"
 	ng build -c devopt > ${BUILD_OUTPUT}
 elif [ "${PROFILE}" == "test" ]
 then
-	echo "ng build -c ${PROFILE} > ${BUILD_OUTPUT}"
+	echo "ng build -c ${PROFILE} --aot --output-hashing=all > ${BUILD_OUTPUT}"
 	ng build -c ${PROFILE} > ${BUILD_OUTPUT}
 fi
 

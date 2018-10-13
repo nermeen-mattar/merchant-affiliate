@@ -34,9 +34,9 @@
     <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'LOGIN.LOGIN' | translate}}</span>
     </span>
-    <span class="app-header__menu__item" routerLink="/team-center/about" routerLinkActive="active">
+    <!-- <span class="app-header__menu__item" routerLink="/team-center/about" routerLinkActive="active">
       <span> {{'ABOUT.ABOUT' | translate}} </span>
-    </span>
+    </span> -->
     <span class="app-header__menu__item" routerLink="/admin-user/settings" *ngIf="$isUserLoggedIn | async">
       <span>{{'USER.SETTINGS' | translate}}</span>
     </span>

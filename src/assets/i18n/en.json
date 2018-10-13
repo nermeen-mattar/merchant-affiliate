@@ -29,9 +29,9 @@
   },
   "FORM": {
     "MIN_LENGTH": "should have have at least $$ characters",
-    "ENTER_VALID_NUMBER": "Please enter a valid number",
-    "ENTER_VALID_EMAIL": "Please enter a valid email address.",
-    "ENTER_VALID_PASSWORD": "Please enter a valid password.",
+    "ENTER_VALID_NUMBER": "Please enter number",
+    "ENTER_VALID_EMAIL": "Please enter a valid email address",
+    "ENTER_VALID_PASSWORD": "Min 8 characters, an alphabetic character, and a numeric character",
     "END_SHOULD_BE_AFTER_START": "End time should be after start time",
     "PASSWORD_MUST_INCLUDE": "Password must include a minimum of 8 characters, an alphabetic character, and a numeric character.",
     "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "Confirm new password should be equal to new passsword ",
@@ -47,8 +47,8 @@
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong",
     "BACKEND": {
-      "ERROR.UNAUTHORIZED" : "Session not valid anymore. You have been logged out.",
-      "ERROR.MAIL.NOT.EXIST" : "Mail does not exist.",
+      "ERROR.UNAUTHORIZED": "Session not valid anymore. You have been logged out.",
+      "ERROR.MAIL.NOT.EXIST": "Mail does not exist.",
       "ERROR.MAIL.CONFIRMED": "Mail already confirmed",
       "ERROR.NOT.EXISTING.TEAM.ADMIN": "Team admin does not exist",
       "ERROR.MAIL.NOT.CONFIRMED": "You need first to confirm your mail",
@@ -168,7 +168,7 @@
   "ACTIVATION": {
     "EXPIRED_LINK": "The link has expired",
     "ALREADY_ACTIVATED": "You're mail has already been activated",
-    "ACTIVATION_SUCCESS":  "Your mail has been activated successfully",
+    "ACTIVATION_SUCCESS": "Your mail has been activated successfully",
     "INVITATION_TITLE": "Team invitation",
     "INVITATION_ACCEPTED": "Team invitation has been accepted",
     "INVITATION_ERROR": "This link is invalid or expired"
@@ -224,7 +224,7 @@
     "TEAM": "Team",
     "TEAMS": "Teams",
     "YOUR_TEAMS": "Your teams",
-    "CREATE_YOUR_TEAM": "Create your team ",
+    "CREATE_YOUR_TEAM": "Create your team",
     "TEAM_NAME": "Team Name",
     "TEAM_DETAILS": "Team details",
     "ROLES": "Roles",
@@ -250,7 +250,7 @@
     "FOUNDERS": "Founders",
     "BY_DEFAULT_MEMBERS_ARE": "By default all members are ",
     "ALL_PARTICIPATION": "All Participations",
-    "DELETE_MY_ACCOUNT": "Delete My Account",
+    "DELETE_MY_ACCOUNT": "Delete my account",
     "REMINDERS": "Reminders",
     "ALLOW_MAIL_REMINDERS_FOR": "Allow Mail Reminders For:",
     "SEND_MAIL_AGAIN": "Resend invitation mail"
@@ -269,7 +269,9 @@
     "PASSWORD": "Password",
     "CURRENT_PASSWORD": "Current Password",
     "NEW_PASSWORD": "New Password",
-    "UPDATE_YOUR_INFO": "Update your Info"
+    "UPDATE_YOUR_INFO": "Update your Info",
+    "CONFIRM_DELETING_ACCOUNT_HEADER": "Delete my account",
+    "CONFIRM_DELETING_ACCOUNT_BODY": "Do you really want to delete your account?"
   },
   "REGISTER": {
     "REGISTER": "Register",
@@ -296,9 +298,8 @@
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
-    "TITLE_HELPS_US": "this helps us",
-    "DATA_PRIVACY": "data privacy",
-    "FEATURES": "features",
+    "DATA_PRIVACY": "Data privacy",
+    "FEATURES": "Features",
     "TERMS_CONDITIONS": "Terms & Conditions",
     "IMPRESSUM": "Impressum",
     "SUPPORT_BY_DONATING": "Donate a coffee",
@@ -334,7 +335,7 @@
       "TEXT": "Excel (CSV) Upload function to create multiple events and members per one click",
       "TEXT2": "Ability for Admins to enable \"Event log\" view for the members",
       "TEXT3": "Google maps for location entires - Other languages - Mobile Apps (Android & iOS)",
-      "TEXT4":  "We are grateful for feedbacks, or recommondations for new features. Please just use our contact form"
+      "TEXT4": "We are grateful for feedbacks, or recommondations for new features. Please just use our contact form"
     }
   },
   "TERMS_AND_CONDITIONS": {
@@ -375,5 +376,87 @@
   "CONTACT": {
     "DROP_LINE": "Drop us a Line!",
     "CONTACT": "Contact"
+  },
+  "DATA_PRIVACY": {
+    "DATA_PRIVACY": "Data Privacy",
+    "SECTION1": {
+      "TITLE": "Introduction",
+      "TEXT1": "We at team.center take the subject of data protection very seriously. The following sections describe which personal data we store in detail and what happens with it. First of all, we would like to emphasize that every registered user has the possibility at any time and completely independently to delete all his personal data in the profile settings irrevocably. In addition, we fully comply with European and Swiss data protection laws. "
+    },
+    "SECTION2": {
+      "TITLE": "Data storage - If you want to create a team yourself",
+      "TEXT1": "Wenn du ein Team anlegen möchtest, wirst du von team.center aufgefordert, folgende Informationen zu erfassen:",
+      "TEXT2": "eMail Address",
+      "TEXT3": "Desired team name",
+      "TEXT4": "First name",
+      "TEXT5": "Surname",
+      "TEXT6": "Password",
+      "TEXT7": "Your password will be stored encrypted, so that it is neither possible for us nor for others to see your password."
+    },
+    "SECTION3": {
+      "TITLE": "Data storage - If you are registered as a team member",
+      "TEXT1": "If you are registered as a team member, only your e-mail address will be saved for the time being. You will receive a mail asking you to activate your account by completing the following profile data:",
+      "TEXT2": "First name",
+      "TEXT3": "Surname",
+      "TEXT4": "Mobile phone number(optional)",
+      "TEXT5": "Password",
+      "TEXT6": "The password will be stored encrypted in our database. Once set either you or we can read the initial password."
+    },
+    "SECTION4": {
+      "TITLE": "Data storage - Other impersonal data",
+      "TEXT1": "The admin will activate events, which are provided with impersonal information such as date, time, location, etc. These impersonal event data are also stored by team.center."
+    },
+    "SECTION5": {
+      "TITLE": "Data storage - Personal Interactions",
+      "TEXT1": "Every team member can log in or out of events on team.center. These interactions are stored by team.center. As soon as a profile is deleted, team.center ensures that no more conclusions can be drawn about who had subscribed or unsubscribed to this deleted profile. However, team.center reserves the right to have the actual information that has ever taken place stored anonymously."
+    },
+    "SECTION6": {
+      "TITLE": "Data storage - Technical data",
+      "TEXT1": "In order to continuously improve team.center, we store IP addresses and the associated geo-information (country, city, etc.), but do not assign this information to profiles. Information about the behaviour on team.center is also stored in anonymous form."
+    },
+    "SECTION7": {
+      "TITLE": "What happens to the data?",
+      "TEXT1": "team.center never shares personal information such as email addresses or names with third parties. The data stored by team.center serves primarily to maximize the positive user experience on team.center for all participants. The admin can set whether an event should be equipped with reminder emails. In this case, the mail address you have saved will be used for these mail notifications. But every user has the possibility to deactivate all mail notifications in the settings. We also use the data for internal analysis purposes in order to continuously improve team.center. We reserve the right to make anonymous data available to third parties for further analysis purposes, which also serve the further development of team.center. The data can also be used to present personalized content. We may use your email address to contact you personally about a support incident or to send newsletters."
+    },
+    "SECTION8": {
+      "TITLE": "Third party companies, hosters and other partners",
+      "TEXT1": "All companies that receive or host our data in any anonymous form are subject to strict confidentiality obligations. The following are examples of existing partners:"
+    },
+    "SECTION9": {
+      "TITLE": "Google Analytics Suite",
+      "TEXT1": "We use Google Analytics, a web analysis service of Google LLC (\"Google\"), on the basis of our legitimate interests (i.e. interest in the analysis, optimisation and economic operation of our online offering within the meaning of Art. 6 Para. 1 lit. f. of the German Data Protection Act). DSGVO) Google Analytics, a web analysis service of Google LLC (Google). Google uses cookies. The information generated by the cookie about the use of the online offer by the user is usually transferred to a Google server in the USA and stored there.",
+      "TEXT2": "Google is certified under the Privacy Shield Agreement and thus offers a guarantee of compliance with European data protection law ",
+      "LINK1": "(https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active).",
+      "TEXT3": "Google will use this information on our behalf in order to evaluate the use of our online offer by users, to compile reports on the activities within this online offer and to provide us with further services associated with the use of this online offer and the Internet use. Pseudonymous user profiles of the users can be created from the processed data.",
+      "TEXT4": "We use Google Analytics only with activated IP anonymisation. This means that the IP address of the user is shortened by Google within member states of the European Union or in other contracting states of the Agreement on the European Economic Area. Only in exceptional cases is the full IP address transmitted to a Google server in the USA and shortened there.",
+      "TEXT5": "The IP address transmitted by the user's browser is not merged with other Google data. Users may refuse the use of cookies by selecting the appropriate settings on their browser, however please note that if the cookies are not installed on your computer, you may not be able to use the full functionality of this website and you may refuse the use of cookies by selecting the appropriate settings on your browser, however please note that if you do this you may not be able to use the full functionality of this website.:",
+      "LINK2": "http://tools.google.com/dlpage/gaoptout?hl=de.",
+      "TEXT6": "Further information on the use of data by Google, setting and objection options can be found in Google's data protection declaration ",
+      "LINK3": "(https://policies.google.com/technologies/ads) ",
+      "TEXT7": "and in the settings for the display of advertising by Google ",
+      "LINK4": "(https://adssettings.google.com/authenticated).",
+      "TEXT8": "The personal data of the users will be deleted or anonymized after 14 months.",
+      "TEXT9": "Created with Datenschutz-Generator.de by RA Dr. Thomas Schwenke"
+    },
+    "SECTION10": {
+      "TITLE": "Facebook and Google advertising (Adwords)",
+      "TEXT1": "You have probably seen an advertisement for team.center on Facebook or Google. In order to optimize your advertising experience (i.e. not displaying ads after you have purchased a premium account), we tell Google and Facebook whether you have purchased the premium and thus an ad-free version of team.center. The information is passed on anonymously. Google and Facebook are certified as part of the Privacy Shield Agreement and thus offer a guarantee of compliance with European data protection law."
+    },
+    "SECTION11": {
+      "TITLE": "Cookies",
+      "TEXT1": "In summary, team.center uses its own cookies and cookies from third parties to analyze the use of our services, to personalize the surfing experience and to present you with interesting information (creation of user profiles). By using team.center, you consent to the use of such cookies. We also use cookies for account information so that users can remain logged in even when the browser is closed or when switching between different pages. Cookies are also used to display personalized content (e.g. advertising) on team.center, or to store parameters such as language settings for the next visit to team.center. Cookies can be viewed in the respective browsers at any time and deleted if necessary. Please use the help function of your browser to find out more. "
+    },
+    "SECTION12": {
+      "TITLE": "How can I delete and/or view my personal data?",
+      "TEXT1": "You can delete your account including all profile data at any time in your profile settings. As soon as a profile is deleted, team.center ensures that no conclusions can be drawn as to who has subscribed or unsubscribed to this deleted profile. However, team.center reserves the right to store anonymously the actual information that has ever taken place in order to register or unsubscribe.",
+      "TEXT2": "You can at any time request an excerpt from all the data we have stored about you at support@team.center Please note that we have a maximum response time of 30 working days."
+    },
+    "SECTION13": {
+      "TITLE": "Use for children",
+      "TEXT1": "team.center is not suitable for children under the age of 13. However, parents may register team.center on behalf of their child in order to register or deregister for events for their child. Children from 13 to 16 years may only use team.center with the consent of their parents. As soon as an account is created with team.center, the user automatically agrees to this privacy policy."
+    },
+    "SECTION14": {
+      "TEXT1": "Please also refer to our General Terms and Conditions."
+    }
   }
 }

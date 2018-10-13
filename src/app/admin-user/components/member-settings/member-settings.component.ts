@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
 import { UserService } from './../../../core/services/user.service';
 import { TcMember } from './../../../members/models/tc-member.model';
 import { LoginStatusService } from './../../../auth/services/login-status.service';
@@ -8,12 +8,16 @@ import { TeamsService } from './../../../core/services/teams.service';
 import { MembersService } from './../../../members/services/members.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
+import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { first } from 'rxjs/operators';
+
 @Component({
   selector: 'tc-member-settings',
   templateUrl: './member-settings.component.html',
   styleUrls: ['./member-settings.component.scss']
 })
 export class MemberSettingsComponent implements OnInit {
+  confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
   memberBasicSettingsGroup: FormGroup;
   changePasswordGroup: FormGroup;
   remindersForm: FormGroup;
@@ -31,9 +35,10 @@ export class MemberSettingsComponent implements OnInit {
     private teamsService: TeamsService,
     private fieldValidatorsService: FieldValidatorsService,
     private userService: UserService,
-    private loginStatusService: LoginStatusService
-    ) {
-      this.allTeams = this.teamsService.userTeams;
+    private loginStatusService: LoginStatusService,
+    public dialog: MatDialog
+  ) {
+    this.allTeams = this.teamsService.userTeams;
     this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
     this.initSettingsForm();
   }
@@ -158,7 +163,8 @@ export class MemberSettingsComponent implements OnInit {
     });
     this.membersService.updateMember(this.userService.memberId, updatedMemberValue).subscribe(res => {
       this.memberBasicSettingsGroup.markAsUntouched();
-      this.currentMember = { ...this.currentMember,
+      this.currentMember = {
+        ...this.currentMember,
         ...updatedMemberValue
       };
       Object.keys(updatedMemberValue).forEach(propertyName => {
@@ -177,8 +183,24 @@ export class MemberSettingsComponent implements OnInit {
     }
   }
 
-  deleteMyAccount() {
-    this.membersService.deleteMyAccount();
+  openConfirmationDialog(dialogData): void {
+    this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
+      autoFocus: true,
+      data: dialogData
+    });
   }
 
+  deleteMyAccount() {
+    this.openConfirmationDialog({
+      dialogTitle: 'USER.CONFIRM_DELETING_ACCOUNT_HEADER',
+      dialogMessage: 'USER.CONFIRM_DELETING_ACCOUNT_BODY'
+    });
+    this.confirmDialogRef.afterClosed().pipe(
+      first()
+    ).subscribe(confirmed => {
+      if (confirmed) {
+        this.membersService.deleteMyAccount().subscribe(res => { });
+      }
+    });
+  }
 }
