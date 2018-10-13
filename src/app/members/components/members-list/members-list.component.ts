@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
-import { DatePipe } from '@angular/common';
 import { first } from 'rxjs/operators';
 
 import { TeamsService } from './../../../core/services/teams.service';
@@ -16,7 +14,9 @@ import { ConfirmDialogComponent } from './../../../shared/components/confirm-dia
   styleUrls: ['./members-list.component.scss']
 })
 export class MembersListComponent implements OnInit {
-  displayedColumns = ['member', 'mail'];
+  memberColumns = ['member', 'mail'];
+  adminColumns = ['member', 'mail', 'action'];
+  displayedColumns: string[];
   membersDataSource: MatTableDataSource < TcMember > ;
   userTeams: TcTeamInfo[];
   selectedTeamId: number;
@@ -30,10 +30,6 @@ export class MembersListComponent implements OnInit {
   constructor(private membersService: MembersService, private teamsService: TeamsService,
     public dialog: MatDialog) {
     this.spinner = true;
-    this.hasAdminRole = this.teamsService.hasAdminRole();
-    if (this.hasAdminRole) {
-      this.displayedColumns.push('action');
-    }
     this.userTeams = this.teamsService.userTeams;
     this.selectedTeamId = this.teamsService.selectedTeamId;
     this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
@@ -53,11 +49,25 @@ export class MembersListComponent implements OnInit {
    */
   updateMembers() {
     this.membersDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.teamsService.selectedTeamId = this.selectedTeamId; // *** temp (to enhance)
+    this.teamsService.selectedTeamId = this.selectedTeamId; // temp (to enhance)
+    this.hideOrDisplayAdminActions();
     this.membersService.getMembers(this.selectedTeamId).subscribe((res) => { // {members= [], myTeamMemberId}
       // this.teamMemberId = myTeamMemberId;
       this.updateMembersDataSource(res);
     });
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @desc checks if the user is an admin of the currently selected team and changes the displayed columns accordingly
+   */
+  hideOrDisplayAdminActions() {
+    this.hasAdminRole = this.teamsService.hasAdminRole(this.selectedTeamId);
+    if (this.hasAdminRole) {
+      this.displayedColumns = this.adminColumns;
+    } else {
+      this.displayedColumns = this.memberColumns;
+    }
   }
 
   /**
