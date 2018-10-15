@@ -19,8 +19,6 @@
   "MESSAGE": "Nachricht",
   "FROM": "Von",
   "TO": "An",
-  "CONFIRM_TERM_CONDITIONS": "Ich akzeptiere die AGBs",
-  "HAVE_TO_CONFIRM_TERM_CONDITIONS": "Die AGBs müssen akzeptiert werden",
   "SEARCH_PLACEHOLDER": "Alle Spalten durchsuchen",
   "MULTI_TABLE_SEARCH_PLACEHOLDER": "Search through all columns in tables",
   "SOCIAL_MEDIA": {
@@ -28,33 +26,27 @@
     "TWEET": "Tweet"
   },
   "FORM": {
-    "MIN_LENGTH": "muss mindestens $$ Zeichen haben",
-    "ENTER_VALID_NUMBER": "Bitte eine Zahl eingeben",
-    "ENTER_VALID_EMAIL": "Bitte geben Sie ein Passwort ein",
-    "ENTER_VALID_PASSWORD": "Min. 8 Zeichen, ein alphabetisches und ein numerisches",
+    "ENTER_VALID_EMAIL": "Bitte eine gültige eMail Adresse eingeben.",
+    "ENTER_VALID_PASSWORD": "Bitte ein gültiges Passwort eingeben.",
     "END_SHOULD_BE_AFTER_START": "Endzeit muss nach Startzeit kommen",
-    "PASSWORD_MUST_INCLUDE": "Das Passwort muss mindestens 8 haben und aus Buchstaben und Zahlen bestehen",
-    "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "Das Passwort muss gleich sein wie das neue Passwort",
+    "PASSWORD_MUST_INCLUDE": "Das Passwort muss mindestens 8 haben und aus Buchstaben und Zahlen bestehen.",
+    "CONFIRM_PASSWORD_SHOULD_BE_EQUAL_TO_PASSWORD": "Das Passwort muss gleich sein wie das neue Passwort.",
     "MAX_SHOULD_BE_MORE_THAN_MIN": "Das Maximum muss grösser sein als das Minimum",
-    "SHOULD_BE_POSITIVE": "Nummer muss grösser 0 sein",
+    "SHOULD_BE_POSITIVE": "Nummer muss grösser 0 sein.",
     "SAVE": "Speichern",
     "SEND": "Senden",
-    "ADD": "Hinzufügen",
-    "UPDATE": "Aktualisieren",
-    "IS_REQUIRED": "wird benötigt",
-    "SELECT_ALL": "Alle auswählena"
+    "IS_REQUIRED": "Wird benötigt"
   },
   "USER_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Etwas ist schief gelaufen",
     "BACKEND": {
-      "ERROR.UNAUTHORIZED": "Du bist nicht berechtigt diese Ansicht zu sehen. Bitte melde dich zuerst an.",
-      "ERROR.MAIL.NOT.EXIST": "Mail Adresse existiert nicht",
+      "ERROR.UNAUTHORIZED" : "Du bist nicht berechtigt diese Ansicht zu sehen. Bitte melde dich zuerst an.",
+      "ERROR.MAIL.NOT.EXIST" : "Mail Adresse existiert nicht",
       "ERROR.MAIL.CONFIRMED": "Die Mail Adresse ist bereits bestätigt",
       "ERROR.NOT.EXISTING.TEAM.ADMIN": "Der Team Admin existiert bereits",
       "ERROR.MAIL.NOT.CONFIRMED": "Bitte bestätige zuerst deine Mail Adresse",
       "ERROR.MEMBER.NOT.FOUND": "Teammitglied existiert nicht",
-      "ERROR.MAX.PARTICIPANTS": "Teilnahme fehlgeschlagen, da dieser Event bereits voll ist",
-      "ERROR.TEAM.ONLY.ONE.TEAM.ADMIN": "Account kann nicht gelöscht werden. Du hast mindestens ein Team wobei du einziger Admin bist"
+      "ERROR.MAX.PARTICIPANTS": "Teilnahme fehlgeschlagen, da dieser Event bereits voll ist."
     },
     "REGISTER": {
       "UNABLE_TO_REGISTER": "Neues team kann nicht angelegt werden",
@@ -66,9 +58,6 @@
     "LOGIN": {
       "INCORRECT_USERNAME_OR_PASSWORD": "Benutzername oder Passwort falsch",
       "INCORRECT_ADMIN_PASSWRD": "Falsches Admin Passwort"
-    },
-    "RESET_PASSWORD": {
-      "EMAIL_NOT_EXIST": "Wir konnten kein Account finden der zu dieser Mail gehört"
     },
     "CONTACT": {
       "CONTACT_MESSAGE_SENT_SUCCESS": "Die Nachricht wurde erfolgreich gesendet",
@@ -106,11 +95,7 @@
       "MEMBER_CONFIRM_ACTIVATE_HEADER": "Mitglied aktivieren",
       "MEMBER_CONFIRM_ACTIVATE_BODY": "Willst du dieses Mitglied wirklich aktivieren?",
       "MEMBER_CONFIRM_DEACTIVATE_HEADER": "Mitglied deaktivieren",
-      "MEMBER_CONFIRM_DEACTIVATE_BODY": "Willst du dieses Mitglied wirklich deaktivieren?",
-      "MEMBER_PASSWORD_CHANGING_SUCCESS": "Das Passwort wurde erfolgreich geändert",
-      "MEMBER_PASSWORD_CHANGING_FAIL": "Pässwort Änderung fehlgeschlagen",
-      "MEMBER_INVITATION_RESEND_SUCCESS": "Einladungsmail erneut gesendet",
-      "MEMBER_INVITATION_RESEND_FAIL": "Einladungsmail erneut senden fehlgeschlagen"
+      "MEMBER_CONFIRM_DEACTIVATE_BODY": "Willst du dieses Mitglied wirklich deaktivieren?"
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "Das Admin Passwort wurde erfolgreich geändert",
@@ -126,9 +111,6 @@
       "TEAM_CREATED_SUCCESS": "Team erfolgreich erstellt",
       "TEAM_CREATED_FAILURE": "Team could not be created"
     }
-  },
-  "ERRORS": {
-    "NO_TEAMS_FOR_USER": "Sorry, keine Daten vorhanden. Vielleicht bist du für ein Team deaktiviert oder du hast noch eine Einladung in deiner Mailbox."
   },
   "LANGUAGE": {
     "LANGUAGE": "Sprache",
@@ -168,10 +150,7 @@
   "ACTIVATION": {
     "EXPIRED_LINK": "Der Link ist abgelaufen",
     "ALREADY_ACTIVATED": "Deine Mail Adresse wurde bereits aktiviert",
-    "ACTIVATION_SUCCESS": "Deine eMail Adresse wurde erfolgreich aktiviert",
-    "INVITATION_TITLE": "Team Einladung",
-    "INVITATION_ACCEPTED": "Team Einladung wurde akzeptiert",
-    "INVITATION_ERROR": "Dieser Link ist ungültig oder abgelaufen"
+    "ACTIVATION_SUCCESS":  "Deine eMail Adresse wurde erfolgreich aktiviert."
   },
   "PAGE_NOT_FOUND": {
     "MESSAGE_404": "Uuups, diese Seite wurde nicht gefunden!",
@@ -221,16 +200,12 @@
     "THIS_EVENT": "bei diesem Event"
   },
   "TEAM": {
-    "TEAM": "Team",
     "TEAMS": "Teams",
     "YOUR_TEAMS": "Deine Teams",
-    "CREATE_YOUR_TEAM": "Erstelle dein Team",
+    "CREATE_YOUR_TEAM": "Erstelle dein Team ",
     "TEAM_NAME": "Teamname",
     "TEAM_DETAILS": "Team Details",
     "ROLES": "Rollen",
-    "SELECT_TEAM_TO_CHANGE_NAME": "Team auswählen um Name zu",
-    "NEW_TEAM_NAME": "Neuer Team Name",
-    "CHANGE_TEAM_NAME": "Team Name ändern",
     "CREATE_TEAM": "Team erstellen"
   },
   "ADMIN": {
@@ -243,41 +218,28 @@
     "MEMBER": "Member",
     "MEMBERS_STATISTICS": "Member Statistik",
     "MEMBERS_LIST": "Member Liste",
+    "MAIL": "Mail",
     "EDIT_MEMBER": "Member bearbeiten",
     "CREATE_MEMBER": "Member anlegen",
-    "ADD_MEMBER_TO_TEAM": "Member zu Team hinzufügen",
-    "ADD_ME_AS_MEMBER": "Füge mich als Member zum Team",
+    "ADD_MYSELF_AS_MEMBER": "Mich selber als Member anlegen",
     "FOUNDERS": "Gründer",
-    "BY_DEFAULT_MEMBERS_ARE": "Standartmässig sind alle Member",
+    "BY_DEFAULT_MEMBERS_ARE": "Standartmässig sind alle Member ",
     "ALL_PARTICIPATION": "Alle Teilnahmen",
-    "DELETE_MY_ACCOUNT": "Mein Account löschen",
-    "REMINDERS": "Erinnerungen",
-    "ALLOW_MAIL_REMINDERS_FOR": "Erlaube Mail Erinnerungen für:",
     "SEND_MAIL_AGAIN": "Einladungsmail erneut senden"
   },
-  "TEAM_MEMBER": {
-    "ALSO_A_TEAM_MEMBER": "Ich bin auch Member dieses neuen Teams"
-  },
   "USER": {
-    "SETTINGS": "Einstellungen",
-    "USER_DETAILS": "Benutzer Details",
-    "ACCOUNT": "Account",
     "FIRST_NAME": "Vorname",
     "LAST_NAME": "Nachname",
     "EMAIL": "Email",
-    "MOBILE_NUMBER": "Mobile Nummer",
-    "PASSWORD": "Passwort",
+    "SETTINGS": "Einstellungen",
     "CURRENT_PASSWORD": "Aktuelles Passwort",
-    "NEW_PASSWORD": "Neues Passwort",
-    "UPDATE_YOUR_INFO": "Aktualisiere deine Infos",
-    "CONFIRM_DELETING_ACCOUNT_HEADER": "Account Löschen",
-    "CONFIRM_DELETING_ACCOUNT_BODY": "Willst du wirklich deinen Account löschen?"
+    "NEW_PASSWORD": "Neues Passwort"
   },
   "REGISTER": {
     "REGISTER": "Registrieren",
     "MEMBER_ALREADY_EXIST": "Du bist bereits als Admin registriert. Bitte gib hier dein passwort ein, um ein neues team zu erstellen.",
     "EMAIL_NOT_RECEIVED": "Kein Mail erhalten?",
-    "SEND_MAIL_AGAIN": "Mail nochmals senden",
+    "SEND_MAIL_AGAIN": " Mail nochmals senden",
     "NEED_TO_CONFIRM_EMAIL": "Bitte zuerst deine Mail-Adresse bestätigen",
     "NEED_TO_REGISTER_EMAIL": "Du bist noch nicht registriert",
     "REGISTER_NOW": "Registriere dich jetzt!"
@@ -286,42 +248,37 @@
     "LOGIN": "Login",
     "PASSWORD": "Passwort",
     "REGISTER": "Jetzt registrieren!",
-    "GO_TO_LOGIN": "Zur Login Seite wechseln",
-    "FORGOT_PASSWORD": "Passwort vergessen?"
-  },
-  "RESET_PASSWORD": {
-    "RESET_PASSWORD": "Passwort zurücksetzen",
-    "SEND_RESET_PASSWORD_LINK": "Sende Link um Passwort zurückzusetzen",
-    "RESET_PASSWORD_LINK_SENT": "Wir haben ein wiederherstellungs Link zu deiner Mail gesendet:",
-    "SEND_MAIL_AGAIN": "Passwort zurücksetzen Mail erneut senden",
-    "EXPIRED_LINK_OR_INVALID": "Dieser Link ist ungültig oder abgelaufen"
+    "GO_TO_LOGIN": "Zur Login Seite wechseln"
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
+    "TITLE_HELPS_US": "Das hilft uns",
     "DATA_PRIVACY": "Datenschutz",
-    "FEATURES": "features",
+    "CONTACT": "Kontakt",
+    "FEATURES": "Features",
+    "CREATE": "Erstelle dein Team",
     "TERMS_CONDITIONS": "AGBs",
     "IMPRESSUM": "Impressum",
-    "SUPPORT_BY_DONATING": "Spende einen Kaffee",
+    "SUPPORT_BY_DONATING": "Spende ein \"Kafi\"",
     "COPY_RIGHT": "© 2018 Copyright team.center GmbH"
   },
   "ABOUT": {
-    "ABOUT": "About",
+    "ABOUT": "Über uns",
     "SECTION1": {
       "TITLE": "Über uns",
-      "TEXT1": "Durch traineramtliche Erfahrungen in einem Unihockey Verein stammt die motivation für dieses Projekt. Wir sind selber in Vereinen tätig und sehen wie mühsam es sein kann, wenn z.B. ein Training wegen Spielermangels abesagt werden muss. Deshalb haben uns zum obersten Ziel gemacht, die Organisation von Team-Events so einfach wie möglich zu gestalten: Keinen Schnickschnack, nur die nötigsten Funktionen, welche du wirklich brauchst. Das alles mit einer kostenlosen Plattform, welche zu jeder Zeit von überall aus zugänglich ist. team.center befindet sich zur Zeit noch in der Beta Phase und wir sind daran die Platform laufend stabiler und Benutzerfreundliche zu gestalten.",
+      "TEXT1": "Trainieren statt koordinieren: Aus unseren persönlichen Erfahrungen als Spieler, Trainer, Funktionär und Vorstandsmitglied in einem Unihockeyverein haben wir immer wieder festgestellt, wie kompliziert und herausfordernd der Trainingsalltag sein kann, wenn An- und Abmeldungen in letzter Sekunde über die verschiedensten Kanäle eintreffen.  Mit team.center wollen wir deinem Verein helfen, sodass die Planung und Organisation von Trainings ganz einfach wird. Unsere Devise lautet: Keinen Schnickschnack, nur die nötigsten Funktionen, welche du wirklich brauchst. Das alles auf einer kostenlosen Plattform, welche zu jeder Zeit und von überall aus zugänglich ist. Zurzeit befindet sich team.center noch in der Beta Phase - wir sind daran die Plattform kontinuierlich zu verbessern, um sie schlussendlich stabiler und benutzerfreundlicher zu gestalten.",
       "TEXT2": " - Es ist und bleibt kostenlos -",
-      "TEXT3": "Hinter team.center arbeitet ein kleines Team welches diese Platform ständig weiterentwickelt. Wir sind selber engagiert in lokalen Sportvereinen als Spieler, Trainer und Vorstandsmitglieder und kennen daher die Bedürfnisse fürs Organisieren von Teamevents bestens.",
+      "TEXT3": "Hinter team.center arbeitet ein kleines Team, welches diese Plattform ständig weiterentwickelt. Wir sind selber in lokalen Sportvereinen als Spieler, Trainer und Vorstandsmitglieder engagiert und kennen daher die Bedürfnisse fürs Organisieren von Team-Events bestens.",
       "TEXT4": "- Trainieren anstatt koordinieren - ",
-      "TEXT5": "Wir sind überzeugt viele Sport- und auch andere Vereine können mit dieser Lösung viel Zeit und Nerven sparen - man sieht auf einen Blick wer sich an- oder abgemeldet hat. Habt ihr euch schon immer nach einer speziellen Funktion gesehnt, welche euer Teammanagement erleichtert? Teilt mit uns eure weiterführenden Ideen mit und wir setzen sie um, wenn das Bedürfnis gross genug ist.",
+      "TEXT5": "Wir sind überzeugt, viele Sport- und andere Vereine können mit dieser Lösung viel Zeit und Nerven sparen, denn man sieht auf einen Blick, wer sich an- oder abgemeldet hat. Habt ihr euch schon immer nach einer speziellen Funktion gesehnt, welche euer Teammanagement erleichtert? Teilt uns eure weiterführenden Ideen mit und wir setzen sie um, wenn das Bedürfnis gross genug ist.",
       "TEXT6": "Wir haben den ersten Schritt gemacht und die ersten Massnahmen ergriffen, um euch die Organisation von Teams zu erleichtern. Wenn du unsere Idee magst und unsere Begeisterung teilst, dann kannst du etwas in unsere Kaffeekasse werfen:",
       "TEXT7": "Like und folge uns auf Facebook:"
     },
     "SECTION2": {
       "TITLE": "Wir bleiben am Ball, das kommt als nächstes",
       "TEXT1": "An- und Abmeldungen mit Kommentaren versehen",
-      "TEXT2": "Mehrere Admins pro Team",
-      "TEXT3": "Google maps für Ortsangaben integrieren",
+      "TEXT2": "Erinnerungsmails",
+      "TEXT3": "Wiederkehrende Events",
       "TEXT4": "Weitere Sprachen",
       "TEXT5": "Mobile App für Android & iOS"
     },
@@ -331,132 +288,136 @@
       "TEXT2": "We would highly appreciate liking us on Facebook this way we can keep you members informed about our progress."
     },
     "SECTION4": {
-      "TITLE": "Was kommt als nächstes?",
-      "TEXT": "Excel (CSV) upload Funktion um mehrere Mitglieder mit einem Klick zu erstellen",
-      "TEXT2": "\"Event log\" für Team Admins",
-      "TEXT3": "Google maps für Orte - Weitere Sprachen - Mobile Apps (Android & iOS)",
-      "TEXT4": "We are grateful for feedbacks, or recommondations for new features. Please just use our contact form"
-    }
-  },
-  "TERMS_AND_CONDITIONS": {
-    "TERMS_AND_CONDITIONS": "Terms and Conditions",
-    "SECTION1": {
-      "TITLE": "Scope",
-      "TEXT1": "team.center ist durch ein privates Projekt entstanden und befindet sich zur Zeit vollumfänglich im Besitz der team.center GmbH Spranglenstrasse 48, 8303 Bassersdorf. Die Rechtsform der team.center GmbH kann sich zu jeder Zeit ändern. In diesem Fall werden die AGBs unverzüglich angepasst. Generell behalten sich die team.center GmbH und deren Anteilseigner (nachfolgend einfach team.center genannt) das Recht vor, die AGBs jeder Zeit und ohne Vorankündigung zu ändern. Eine aktuelle Version der deutschen AGBs ist stets unter",
-      "LINK": "http://www.team.center/team-center/terms-and-conditions",
-      "TEXT2": "einsehbar. Sollten einzelne Punkte oder Bestimmungen dieser AGB ungültig werden, bleibt die Gültigkeit der übrigen Bestimmungen hingegen weiterhin geltend.  Sämtliche Urheberrechte bleiben vollumfänglich bei team.center. Verstösse gegen diese Urheberrechte oder gegen die AGBs können für die betroffene Person zu einer kompletten Sperrung der team.center Dienste führen."
-    },
-    "SECTION2": {
-      "TITLE": "Leistungen & Haftung",
-      "TEXT1": "team.center garantiert in keiner Weise, dass die Dienste ununterbrochen, zeitgerecht, fehlerfrei oder sicher zur Verfügung stehen. Auch kann nicht garantiert werden, dass sämtliche Anforderungen abgedeckt sind. Weiter kann auch nicht garantiert werden, dass Resultate oder Anzeigen der team.center Diensten stets korrekt sind und allen Erwartungen entsprechen. team.center haftet nicht für Schäden (indirekt oder direkt), welche durch die Nutzung von fehlerhaften Diensten, technischen Störungen, oder falschen Resultaten entstehen. Auch haftet team.center nicht für jegliche Art von Schäden während einem Treffen oder Interaktionen, welche mit den Diensten von team.center organisiert wurden."
-    },
-    "SECTION3": {
-      "TITLE": "Datenschutz & Nutzung der Dienste",
-      "TEXT1": "Die Daten von team.center werden auf Cloud-Servern in Frankfurt am Main (Deutschland) gehostet.",
-      "TEXT2": "Für kontinuierliche Verbesserungen analysiert team.center die Nutzung von team.center mit Google Analytics, einem Angebot der Google, Inc. (nachfolgend «Google») in den USA. Die Analyse erfolgt anonym und aggregiert, das heisst es erfolgt durch team.center keine Zuordnung zu einzelnen Nutzern. Die Übertragung der entsprechenden Daten einschliesslich Personendaten, unter anderem auch von IP-Adressen, erfolgt verschlüsselt. Einzelheiten zu Google Analytics finden sich in den entsprechenden Datenschutzbestimmungen von Google. Der Nutzer erklärt sich mit der Datenbearbeitung in den USA ausdrücklich einverstanden.",
-      "TEXT3": "Amazon und Google haben sich im Rahmen von EU-Standardvertragsklauseln verpflichtet, ein angemessenes Datenschutzniveau zu gewährleisten, das mit dem schweizerischen Datenschutzrecht vergleichbar ist.",
-      "TEXT4": "Sie erklären sich einverstanden die Bestimmungen dieser AGBs einzuhalten.",
-      "TEXT5": "Für die Erstellung vom Admin Account wird eine Registrierung für ein Benutzerkonto vorausgesetzt. Sie müssen die verlangten Informationen bei der Registrierung wahrheitsgemäss ausfüllen und aktuell halten. Sie sind für die Sicherheit Ihrer persönlichen Passwörter selber verantwortlich. Sämtliche Passwörter werden bei uns verschlüsselt in der Datenbank abgelegt, wodurch wir keine Einsicht oder Kenntnis dieser Passwörter haben. Konten dürfen nicht automatisiert erstellt werden und dürfen nicht für andere Personen angelegt werden.",
-      "TEXT6": "Bei einigen Funktionen können eigenen Namen (z.B. Name vom Team, oder Spieler) verwenden, oder eigene Texte eingeben. team.center behält sich das Recht vor diese Namen zu prüfen und ggf. abzuändern bzw. zu löschen, sollten die Texte absichtlich oder unabsichtlich andere Markenrechte verletzen, oder anstössig bzw. rassistisch formuliert sein.",
-      "TEXT7": "Wir verkaufen keine Daten an Dritte. Einzig für Analysen für firmeninterne Marktforschung können Daten für die Untersuchung, unter strengen Vertragsbedingungen und Geheimhaltepflichten, an Dritte übergeben werden.",
-      "TEXT8": "Sie erklären sich einverstanden, die Dienste von team.center zu keinem Zweck zu reproduzieren, zu kopieren, zu verkaufen, zu handeln oder selber zu vertreiben. Absichtlich zu stören oder anzugreifen.",
-      "TEXT9": "team.center hat das Recht jederzeit neue Funktionen hinzuzufügen, bestehende Funktionen abzuändern oder zu entfernen, oder Dienste vorübergehend oder dauerhaft einzustellen. Diese Änderungen unterliegen automatisch diesen Bestimmungen. Durch Ihre weitere Nutzung der Dienste nach solchen Änderungen erklären Sie sich stillschweigend mit den Änderungen einverstanden."
-    },
-    "SECTION4": {
-      "TITLE": "Kosten, Preise & Werbung",
-      "TEXT1": "Sie erklären sich damit einverstanden, dass team.center nach eigenem Ermessen Werbung aufschalten darf. Diese Werbung darf vom Benutzer nicht blockiert werden. Die Werbung kann anhand der in team.center eingegebenen Daten individuell gesteuert bzw. massgeschneidert sein.",
-      "TEXT2": "team.center kann jederzeit kostenpflichtige Premium Accounts anbieten, bei denen sämtliche Werbeanzeigen entfernt sind.",
-      "TEXT3": "Die Benutzung von team.center ist bis zu einem bestimmten Nutzungsumfang kostenfrei. team.center behält sich aber das Recht vor, existierende oder neue Funktionen kostenpflichtig anzubieten (z.B. in Form von Premium Accounts). Die Grundidee, dass team.center allerdings in einer brauchbaren Form stets kostenlos bleiben wird, ist vorgesehen."
-    },
-    "SECTION5": {
-      "TITLE": "Anwendbares Recht und Gerichtsstand",
-      "TEXT1": "Es gelten die Bestimmungen des schweizerischen Rechtes, auch wenn team.center im Ausland benutz wird. Der Gerichtsstand ist Zürich Schweiz."
+      "TITLE": "What is next?",
+      "TEXT": "Excel (CSV) Upload function to create multiple events and members per one click",
+      "TEXT2": "Ability for Admins to enable \"Event log\" view for the members",
+      "TEXT3": "Google maps for location entires - Other languages - Mobile Apps (Android & iOS)",
+      "TEXT4":  "We are grateful for feedbacks, or recommondations for new features. Please just use our contact form"
     }
   },
   "CONTACT": {
-    "DROP_LINE": "Wir freuen uns auf dein Feedback",
+    "DROP_LINE": "Schreib uns eine Nachricht!",
     "CONTACT": "Kontakt"
   },
-  "DATA_PRIVACY": {
-    "DATA_PRIVACY": "Datenschutz",
-    "SECTION1": {
-      "TITLE": "Einleitung",
-      "TEXT1": "Wir bei team.center nehmen das Thema Datenschutz sehr ernst. Die folgenden Abschnitte beschreiben welche persönlichen Daten wir im Detail speichern und was damit geschieht. Vorweg möchten wir hervorheben, dass jeder registrierte Benutzer zu jeder Zeit und völlig selbständig die Möglichkeit hat, alle seine persönlichen Daten in den Profileinstellungen unwiderrufbar zu löschen. Zudem halten wir vollumfänglich an europäische und schweizerische Datenschutzgesetze. "
-    },
-    "SECTION2": {
-      "TITLE": "Datenspeicherung - Wenn du selber ein Team erfassen möchtest",
-      "TEXT1": "Wenn du ein Team anlegen möchtest, wirst du von team.center aufgefordert, folgende Informationen zu erfassen:",
-      "TEXT2": "eMail Adresse",
-      "TEXT3": "Gewünschter Teamname",
-      "TEXT4": "Vorname",
-      "TEXT5": "Nachname",
-      "TEXT6": "Passwort",
-      "TEXT7": "Dein Passwort wird dabei bei uns verschlüsselt gespeichert, so dass es weder von uns, noch für andere möglich ist, dein Passwort einzusehen."
-    },
-    "SECTION3": {
-      "TITLE": "Datenspeicherung - Wenn du als Teammitglied erfasst wirst",
-      "TEXT1": "Wenn du als Teammitglied erfasst wirst, wird vorerst nur deine Mail Adresse gespeichert. Du selber bekommst ein Mail mit der Aufforderung, deinen Account zu aktivieren, indem du die folgenden Profildaten vervollständigst:",
-      "TEXT2": "Vorname",
-      "TEXT3": "Nachname",
-      "TEXT4": "Handynummer (optional)",
-      "TEXT5": "Passwort",
-      "TEXT6": "Dein Passwort wird dabei bei uns verschlüsselt gespeichert, so dass es weder von uns, noch für andere möglich ist, dein Passwort einzusehen."
-    },
-    "SECTION4": {
-      "TITLE": "Datenspeicherung - Weitere unpersönliche Daten",
-      "TEXT1": "Vom Admin werden Events aufgeschaltet, welche mit unpersönlichen Angaben wie Datum, Zeit, Ort etc. versehen sind. Diese unpersönlichen Event Daten werden von team.center ebenfalls gespeichert."
-    },
-    "SECTION5": {
-      "TITLE": "Datenspeicherung - Persönliche Interaktionen",
-      "TEXT1": "Jedes Teammitglied kann sich auf team.center zu Events an- bzw. abmelden. Diese Interaktionen werden von team.center gespeichert. Sobald ein Profil gelöscht wird, stellt team.center sicher, dass keinerlei Rückschlüsse mehr darauf gezogen werden können, wer die zu diesem gelöschten Profil gehörenden An- bzw. Abmeldung getätigt hatte. Allerdings behält sich team.center das Recht vor, die eigentliche Information, dass jemals eine An- bzw. Abmeldung stattgefunden hat, anonymisiert gespeichert zu lassen."
-    },
-    "SECTION6": {
-      "TITLE": "Datenspeicherung - Technische Daten",
-      "TEXT1": "Um team.center kontinuierlich zu verbessern speichern wir IP-Adressen und die damit verbunden Geo-Informationen (Land, Stadt etc.), schlüsseln diese Informationen aber nicht den Profilen zu. Ebenfalls in anonymisierter Form speichern wird Informationen über das Verhalten auf team.center. "
-    },
-    "SECTION7": {
-      "TITLE": "Was geschieht mit den Daten?",
-      "TEXT1": "team.center gibt niemals personifizierte Daten wie eMail Adressen oder Namen an Drittfirmen weiter. Die Daten, welche von team.center gespeichert werden, dienen in erster Linie dazu, das positive Benutzererlebnis auf team.center für alle Beteiligten zu maximieren. Der Admin kann einstellen, ob ein Event mit Erinnerungsmails ausgestattet werden soll. In diesem Fall wird die von dir gespeicherte Mail Adresse für diese Mail Benachrichtigungen verwendet. Jeder Benutzer hat  in den Einstellungen aber die Möglichkeit, sämtliche Mail Benachrichtigungen zu deaktivieren. Zudem verwenden wir die Daten für interne Analysezwecken, um team.center kontinuierlich zu verbessern. Wir halten uns das Recht vor Daten in anonymisierter Form an Drittfirmen für weitere Analysezwecken zur Verfügung zu stellen, welche ebenfalls der Weiterentwicklung von team.center dienen. Die Daten können ebenfalls dafür verwenden werden, um personalisierte Inhalte darzustellen. Es kann sein, dass wir die eMail Adressen verwenden, um dich im Supportfall persönlich zu kontaktieren, oder Newsletter zu versenden."
-    },
-    "SECTION8": {
-      "TITLE": "Drittfirmen, Hoster und weitere Partner",
-      "TEXT1": "Alle Firmen, welche unsere Daten in irgend einer anonymisierter Form erhalten oder hosten, unterliegen strengen Geheimhaltungspflichten. Folgend die Beispiele über bereits bestehende Partner:"
-    },
-    "SECTION9": {
-      "TITLE": "Google Analytics Suite",
-      "TEXT1": "Wir setzen auf Grundlage unserer berechtigten Interessen (d.h. Interesse an der Analyse, Optimierung und wirtschaftlichem Betrieb unseres Onlineangebotes im Sinne des Art. 6 Abs. 1 lit. f. DSGVO) Google Analytics, einen Webanalysedienst der Google LLC (\"Google\") ein. Google verwendet Cookies. Die durch das Cookie erzeugten Informationen über Benutzung des Onlineangebotes durch die Nutzer werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.",
-      "TEXT2": "Google ist unter dem Privacy-Shield-Abkommen zertifiziert und bietet hierdurch eine Garantie, das europäische Datenschutzrecht einzuhalten",
-      "LINK1": "https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active",
-      "TEXT3": "Google wird diese Informationen in unserem Auftrag benutzen, um die Nutzung unseres Onlineangebotes durch die Nutzer auszuwerten, um Reports über die Aktivitäten innerhalb dieses Onlineangebotes zusammenzustellen und um weitere, mit der Nutzung dieses Onlineangebotes und der Internetnutzung verbundene Dienstleistungen, uns gegenüber zu erbringen. Dabei können aus den verarbeiteten Daten pseudonyme Nutzungsprofile der Nutzer erstellt werden.",
-      "TEXT4": "Wir setzen Google Analytics nur mit aktivierter IP-Anonymisierung ein. Das bedeutet, die IP-Adresse der Nutzer wird von Google innerhalb von Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten des Abkommens über den Europäischen Wirtschaftsraum gekürzt. Nur in Ausnahmefällen wird die volle IP-Adresse an einen Server von Google in den USA übertragen und dort gekürzt.",
-      "TEXT5": "Die von dem Browser des Nutzers übermittelte IP-Adresse wird nicht mit anderen Daten von Google zusammengeführt. Die Nutzer können die Speicherung der Cookies durch eine entsprechende Einstellung ihrer Browser-Software verhindern; die Nutzer können darüber hinaus die Erfassung der durch das Cookie erzeugten und auf ihre Nutzung des Onlineangebotes bezogenen Daten an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem sie das unter folgendem Link verfügbare Browser-Plugin herunterladen und installieren:",
-      "LINK2": "http://tools.google.com/dlpage/gaoptout?hl=de.",
-      "TEXT6": "Weitere Informationen zur Datennutzung durch Google, Einstellungs- und Widerspruchsmöglichkeiten, erfahren Sie in der Datenschutzerklärung von Google ",
-      "LINK3": "(https://policies.google.com/technologies/ads) ",
-      "TEXT7": "sowie in den Einstellungen für die Darstellung von Werbeeinblendungen durch Google ",
-      "LINK4": "(https://adssettings.google.com/authenticated).",
-      "TEXT8": "Die personenbezogenen Daten der Nutzer werden nach 14 Monaten gelöscht oder anonymisiert.",
-      "TEXT9": "Erstellt mit Datenschutz-Generator.de von RA Dr. Thomas Schwenke"
-    },
-    "SECTION10": {
-      "TITLE": "Facebook und Google Werbung (Ads)",
-      "TEXT1": "Sie haben wahrscheinlich eine Werbung für team.center auf Facebook oder Google gesehen. Um Ihre Werbeerfahrung zu optimieren (d.h. Anzeigen nach dem Erwerb eines Premium-Accounts nicht mehr anzuzeigen) teilen wir Google und Facebook die Informationen mit, ob Sie die Premium und somit eine werbefreie Version von team.center erworben haben. Die Informationen werden anonymisiert weitergegeben. Google und Facebook sind im Rahmen des Privacy Shield Agreements zertifiziert und bieten damit eine Garantie zur Einhaltung des europäischen Datenschutzrechts."
-    },
-    "SECTION11": {
-      "TITLE": "Cookies",
-      "TEXT1": "Zusammengefasst verwendet team.center eigene Cookies und Cookies von Dritten um die Nutzung unseres Angebotes zu analysieren, das Surferlebnis zur personalisieren und dir interessante Informationen zu präsentieren (Erstellung von Nutzungsprofilen). Durch die Nutzung von team.center, stimmst du der Verwendung solcher Cookies zu. Zudem nutzen wir Cookies für die Account-Informationen, damit Benutzer eingeloggt bleiben können, auch wenn der Browser geschlossen wird, oder zwischen verschiedenen Seiten gewechselt wird. Cookies werden auch dafür verwendet, um personifizierte Inhalte (z.B. Werbung) auf team.center anzuzeigen, oder Parameter wie Spracheinstellungen für den nächsten Besuch auf team.center gespeichert zu lassen. Cookies können in den jeweiligen Browsern zu jeder Zeit eingesehen und bei Bedarf gelöscht werden. Bitte informiere dich dazu in der Hilfe-Funktion von deinem Browser."
-    },
-    "SECTION12": {
-      "TITLE": "Wie kann ich meine persönlichen Daten löschen und/oder einsehen?",
-      "TEXT1": "Du kannst deinen Account inkl. sämtliche Profildaten zu jeder Zeit in deinen Profileinstellungen löschen. Sobald ein Profil gelöscht wird, stellt team.center sicher, dass keinerlei Rückschlüsse mehr darauf gezogen werden können, wer die zu diesem gelöschten Profil gehörenden An- bzw. Abmeldung getätigt hatte. Allerdings behält sich team.center das Recht vor, die eigentliche Information, dass jemals eine An- bzw. Abmeldung stattgefunden hat, anonymisiert gespeichert zu lassen.",
-      "TEXT2": "Du kannst unter support@team.center zu jeder Zeit einen Auszug von sämtlichen Daten einverlangen, welche wir über dich gespeichert haben. Bitte beachte, dass wir hier eine Reaktionszeit von maximal 30 Arbeitstagen vorgesehen haben."
-    },
-    "SECTION13": {
-      "TITLE": "Nutzung für Kinder",
-      "TEXT1": "team.center ist für Kinder unter 13 Jahren nicht geeignet. Eltern dürfen team.center jedoch im Namen von ihrem Kind registrieren, um An- bzw. Abmeldungen bei Events für Ihr Kind zu tätigen. Kinder ab 13 bis 16 Jahren dürfen team.center nur mit der Einwilligung der Eltern verwenden. Sobald ein Account bei team.center angelegt wird, stimmt der Nutzer dieser Datenschutzbestimmung automatisch zu."
-    },
-    "SECTION14": {
-      "TEXT1": "Bitte beachte auch unsere Allgemeinen Geschäftsbedingungen."
-    }
-  }
+  "footer_buyACoffee": "Unterstütze unser Projekt, indem du uns einen Kaffee spendierst",
+  "footer_LinksTitle": "Inhalt",
+  "footer_text1": "Du kannst Zeilen und SPalten hier verwenden, um deinen Footer zu organisieren.",
+  "footer_title": "Inhalt Fusszeile",
+  "footer_MoreLinks": "Weitere Links",
+  "menu_Download": "Downloads",
+  "menu_MobileLogin": "Login",
+  "menu_MobileLogOut": "Abmelden",
+  "menu_MobileDownload": "Downloads",
+  "settings": "Einstellungen",
+  "directLink": " Direktlink",
+  "directLinkRequired": " Direktlink benötigt",
+  "passwordMatchError": "Passwörter stimmen nicht",
+  "repeat": "Wiederholen",
+  "new": "Neu",
+  "old": "Alt",
+  "agb_title": "Allgemeine Geschäftsbedingungen",
+  "agb_p1": "Organisiere dein Team.",
+  "agb_p2": "Wir befinden aktuell in der Beta Version. Ihr dürft euch daher auf zahlreiche Verbesserungen und auf neuen Funktionen freuen. Zudem sind wir froh um jedes Feedback und um jede Kritik. Einfach das Kontaktformular dazu verwenden.",
+  "userAdmin_password": "Passwort",
+  "userAdmin_passwordRequired": "Passwort wird benötigt",
+  "userAdmin_buttonLogin": "Login",
+  "userAdmin_pwForgot": "Adminpasswort vergessen?",
+  "userCreateEvent_back": "Zurück",
+  "userCreateEvent_eventNameRequired": "Event Name wird benötigt",
+  "userCreateEvent_startTimeRequired": "Startzeit wird benötigt",
+  "userCreateEvent_endTimeRequired": "Endzeit wird benötigt",
+  "userCreateEvent_locationRequired": "DIe Lokation wird benötigt",
+  "userCreateEvent_Max": "Teilnehmen (standartmässig sind die Members abgemeldet)",
+  "userCreateEvent_Min": "Abmelden (standartmässig sind die Members angemeldet)",
+  "userCreateEvent_Comment": "Kommentar",
+  "userCreateEvent_buttonCreate": "Event anlegen",
+  "userEvents_EventTitle": "Events",
+  "userEvents_Out": "Ab",
+  "userEvents_In": "An",
+  "userEvents_EventType": "Typ",
+  "userEvents_EventDate": "Datum",
+  "userEvents_EventTime": "Zeit",
+  "userEvents_EventName": "Event",
+  "userEvents_EventStatus": "Status",
+  "userEvents_EventAction": "Aktion",
+  "userEvents_MouseOver_Parti": "Teilnehmen (standartmässig sind die Members abgemeldet)",
+  "userEvents_MouseOver_Cancel": "Abmelden (standartmässig sind die Members angemeldet)",
+  "userEvents_EventDeleteTitle": "Event löschen",
+  "userEvents_EventReally": "Willst du diesen Event wirklich löschen?",
+  "userEvents_EventDelete": "Löschen",
+  "userEvents_EventDeleteCancel": "Abbrechen",
+  "userEvents_CancelLastParticipTitle": "Letzte Abmeldung",
+  "userEvents_CancelLastParticipText": "Deine Abmeldung wird vermutlich den ganzen Event absagen, da das Minimum dann unterschritten wird. Willst du das wirklich?",
+  "userEvents_MouseOver_Check": "Event ist voll",
+  "userEvents_MouseOver_Canc": "Maximum überschritten",
+  "userEventsPast_Out": "Ab",
+  "userEventsPast_In": "An",
+  "userEventsPast_EventType": "Typ",
+  "userEventsPast_EventDate": "Datum",
+  "userEventsPast_EventTime": "Zeit",
+  "userEventsPast_EventName": "Event",
+  "userEventsPast_EventStatus": "Status",
+  "userEventsPast_EventAction": "Aktion",
+  "userEventsPast_MouseOver_Parti": "Teilnehmen (standartmässig sind die Members abgemeldet)",
+  "userEventsPast_MouseOver_Cancel": "Abmelden (standartmässig sind die Members angemeldet)",
+  "userEventsPast_EventDeleteTitle": "Event löschen",
+  "userEventsPast_EventReally": "Willst du diesen Event wirklich löschen?",
+  "userEventsPast_EventDelete": "Löschen",
+  "userEventsPast_EventDeleteCancel": "Abbrechen",
+  "events_ts_cancelCompleted": "Abmeldung bestätigt",
+  "userEventsDetails_back": "Zurück",
+  "userEventsDetails_EventDetail": "Event Detail:",
+  "userEventsDetails_status": "Status:",
+  "userEventsDetails_TypeLabel": "Typ:",
+  "userEventsDetails_TypeCancellation": "Abmelde-Event",
+  "userEventsDetails_TypeParticipation": "Anmelde-Event",
+  "userEventsDetails_Date": "Datum:",
+  "userEventsDetails_Time": "Zeit:",
+  "userEventsDetails_Min": "Min Teilnehmer:",
+  "userEventsDetails_Max": "Max Teilnehmer:",
+  "userEventsDetails_location": "Lokation:",
+  "userEventsDetails_comment": "Kommentar:",
+  "userEventsDetails_present": "Angemeldet:",
+  "userEventsDetails_absent": "Abgemeldet:",
+  "userMembers_MembersTitle": "Members",
+  "userMembers_firstName": "Vorname",
+  "userMembers_lastName": "Nachname",
+  "userMembers_Position": "Position",
+  "userMembers_Mail": "Mail",
+  "userMembers_Action": "Aktion",
+  "userMembers_DeleteMember": "Member löschen",
+  "userMembers_reallyDeleteMember": "Söll dieses Teamitglied wirklich gelöscht werden?",
+  "userMembers_DeleteLabel": "Löschen",
+  "userMembers_DeleteCancel": "Abbrechen",
+  "userMembers_DeactivateMember": "Member deaktivieren",
+  "userMembers_reallyDeactivateMember": "Willst du dieses Teammitglied wirklich deaktivieren? Künftige An- und abmeldungen werden dabei gelöscht.",
+  "userMembers_DeactivateLabel": "Deaktivieren",
+  "userMembers_DeactivateCancel": "Abbrechen",
+  "userMembersCreate_back": "Zurück",
+  "userMembersCreate_firstName": "Vorname",
+  "userMembersCreate_firstNameRequired": "Vorname wird benötigt",
+  "userMembersCreate_lastName": "Nachname",
+  "userMembersCreate_lastNameRequired": "Nachname wird benötigt",
+  "userMembersCreate_email": "Email",
+  "userMembersCreate_emailRequired": "Email wird benötigt",
+  "userMembersCreate_phoneRequired": "Handynummer wird benötigt",
+  "userMembersCreate_buttonCreate": "Erstellen",
+  "userMembersEdit_firstName": "Vorname",
+  "userMembersEdit_firstNameRequired": "Vorname wird benötigt",
+  "userMembersEdit_lastName": "Nachname",
+  "userMembersEdit_lastNameRequired": "Nachname wird benötigt",
+  "userMembersEdit_email": "Email",
+  "userMembersEdit_emailRequired": "Email wird benötigt",
+  "userMembersEdit_buttonCreate": "Erstellenb",
+  "userMembersCreate_buttonCreateAndNew": "Erstellen und neu",
+  "navBarUser_TeamTitle": "Team: ",
+  "navBarUser_TeamLabel": "Team:",
+  "teams_TeamsTitle": "Deine Teams",
+  "teams_TeamLabel": "Team",
+  "teams_TeamRole": "Rolle",
+  "teams_TeamAdmin": "Admin",
+  "teams_TeamMember": "Member",
+  "register_ts_AlertDisabledRegisterButton": "Diese Funktion ist noch nicht verfügbar.",
+  "create_member_ts_AlertUserCreated": "Benutzer erfolgreich erstellt",
+  "create_member_ts_AlertUserAlreadyExists": "Benutzer existiert bereits."
 }
