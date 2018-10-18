@@ -309,7 +309,7 @@
     "ABOUT": "About",
     "SECTION1": {
       "TITLE": "About",
-      "TEXT1": "The motivation for this Project comes from own coaching experiences in a floorball club. We are active in sport clubs ourselves and see how difficult it can be when for example a training must be canceled because of a lack of players. That's why we have made it to our ultimate goadl to make the organization of team events as easy as possible: No bells and shistles, only the most necessary functions that you really need are in the focus. This defines this free platform. At the moment it's in a beta phase where we continuously improve the stability and user friendlyness.",
+      "TEXT1": "The motivation for this Project comes from own coaching experiences in a floorball club. We are active in sport clubs ourselves and see how difficult it can be when for example a training must be canceled because of a lack of players. That's why we have made it to our ultimate goal to make the organization of team events as easy as possible: No bells and shistles, only the most necessary functions that you really need are in the focus. This defines this free platform. At the moment it's in a beta phase where we continuously improve the stability and user friendlyness.",
       "TEXT2": "- It's free and always will be -",
       "TEXT3": "Behind team.center works a small team which constantly envolves this platform. We are involved in organizing team and sport events ourselfs as team managers and board members of local clubs. We understand your needs to have a good team organisation",
       "TEXT4": "- Use your time to train and instead of organize -",
@@ -320,22 +320,10 @@
     "SECTION2": {
       "TITLE": "Upcoming features",
       "TEXT1": "add a comment to cancellations or participations",
-      "TEXT2": "allow multiple admins per team",
-      "TEXT3": "google maps for location entires",
+      "TEXT2": "reminder mails",
+      "TEXT3": "recurring events",
       "TEXT4": "additional languages",
       "TEXT5": "mobile app für Android & iOS"
-    },
-    "SECTION3": {
-      "TITLE": "How to support us?",
-      "TEXT": "You can support our project with buing us a coffee or even more :)",
-      "TEXT2": "We would highly appreciate liking us on Facebook this way we can keep you members informed about our progress."
-    },
-    "SECTION4": {
-      "TITLE": "What is next?",
-      "TEXT": "Excel (CSV) Upload function to create multiple events and members per one click",
-      "TEXT2": "Ability for Admins to enable \"Event log\" view for the members",
-      "TEXT3": "Google maps for location entires - Other languages - Mobile Apps (Android & iOS)",
-      "TEXT4": "We are grateful for feedbacks, or recommondations for new features. Please just use our contact form"
     }
   },
   "TERMS_AND_CONDITIONS": {

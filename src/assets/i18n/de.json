@@ -89,8 +89,8 @@
       "EVENT_CHANGING_PARTICIPATION_FAIL": "Fehler bei Eventstatusänderung"
     },
     "MEMBER": {
-      "MEMBER_MAKE_ADMIN_SUCCESS": "Das mitglied ist jetzt ein administrator",
-      "MEMBER_MAKE_ADMIN_FAILURE": "Konnte mitglied nicht zu einem administrator machen",
+      "MEMBER_MAKE_ADMIN_SUCCESS": "Das Mitglied ist jetzt ein administrator",
+      "MEMBER_MAKE_ADMIN_FAILURE": "Konnte Mitglied nicht zu einem administrator machen",
       "MEMBER_DELETING_SUCCESS": "Teammitglied wurde erfolgreich entfernt",
       "MEMBER_DELETING_FAIL": "Fehler beim Löschen des Teammitgliedes",
       "MEMBER_CREATING_SUCCESS": "Teammitglied wurde erfolgreich angelegt",
@@ -142,7 +142,7 @@
     "SLOGAN_TEXT": "Wir haben uns zum obersten Ziel gemacht, die Organisation von Team Events, wie Trainings oder Helfereinsätze, so einfach wie möglich zu gestalten: Keinen Schnickschnack, nur die nötigsten Funktionen, welche du wirklich brauchst. Das alles mit einer kostenlosen, webbasierten und für alle Geräte optimierten Plattform, welche zu jeder Zeit von überall aus zugänglich ist. So kannst du 'Trainieren statt Koordinieren'",
     "ADV1": {
       "TITLE": "An- & Abmeldungen",
-      "TEXT": "Erstelle An- & Abmelde Events. Definiere zudem pro Event ein Minimum und ein Maximum für die Anzahl Teilnehmer, oder lass es völlig offen."
+      "TEXT": "Erstelle An- & Abmelde Events. Definiere zudem pro Event ein Minimum und ein Maximum für die Anzahl Teilnehmer oder lass es völlig offen."
     },
     "ADV2": {
       "TITLE": "Helfereinsätze verwalten",
@@ -150,7 +150,7 @@
     },
     "ADV3": {
       "TITLE": "Nur ein Klick",
-      "TEXT": "Wie so oft ist die Zeit knapp. Mit team.center kannst du dich mit nur einem Klick an- bzw. abmelden. Generell haben wir beim Design darauf geachtet, dass jede Aktion mit möglichst wenig Klicks ereichbar ist."
+      "TEXT": "Wie so oft ist die Zeit knapp. Mit team.center kannst du dich mit nur einem Klick an- bzw. abmelden. Generell haben wir beim Design darauf geachtet, dass jede Aktion mit möglichst wenig Klicks erreichbar ist."
     },
     "ADV4": {
       "TITLE": "Sei Mitglied in mehreren Teams",
@@ -162,7 +162,7 @@
     },
     "ADV6": {
       "TITLE": "Teamübersicht und Statistik",
-      "TEXT": "Jedes Teammitglied hat volle Transparenz über die an- bzw- abgemeldeten Mitglieder. So erinneren sich die Teammitglieder beispielsweise völlig selbständig für bevorstehende Events, oder für das fristgerechte Auswählen von einem Helfereinsatz."
+      "TEXT": "Jedes Teammitglied hat volle Transparenz über die an- bzw- abgemeldeten Mitglieder. So erinneren sich die Teammitglieder beispielsweise völlig selbständig für bevorstehende Events oder für das fristgerechte Auswählen von einem Helfereinsatz."
     }
   },
   "ACTIVATION": {
@@ -306,36 +306,24 @@
     "COPY_RIGHT": "© 2018 Copyright team.center GmbH"
   },
   "ABOUT": {
-    "ABOUT": "About",
+    "ABOUT": "Über uns",
     "SECTION1": {
       "TITLE": "Über uns",
-      "TEXT1": "Durch traineramtliche Erfahrungen in einem Unihockey Verein stammt die motivation für dieses Projekt. Wir sind selber in Vereinen tätig und sehen wie mühsam es sein kann, wenn z.B. ein Training wegen Spielermangels abesagt werden muss. Deshalb haben uns zum obersten Ziel gemacht, die Organisation von Team-Events so einfach wie möglich zu gestalten: Keinen Schnickschnack, nur die nötigsten Funktionen, welche du wirklich brauchst. Das alles mit einer kostenlosen Plattform, welche zu jeder Zeit von überall aus zugänglich ist. team.center befindet sich zur Zeit noch in der Beta Phase und wir sind daran die Platform laufend stabiler und Benutzerfreundliche zu gestalten.",
+      "TEXT1": "Trainieren statt koordinieren: Aus unseren persönlichen Erfahrungen als Spieler, Trainer, Funktionär und Vorstandsmitglied in einem Unihockeyverein haben wir immer wieder festgestellt, wie kompliziert und herausfordernd der Trainingsalltag sein kann, wenn An- und Abmeldungen in letzter Sekunde über die verschiedensten Kanäle eintreffen.  Mit team.center wollen wir deinem Verein helfen, sodass die Planung und Organisation von Trainings ganz einfach wird. Unsere Devise lautet: Keinen Schnickschnack, nur die nötigsten Funktionen, welche du wirklich brauchst. Das alles auf einer kostenlosen Plattform, welche zu jeder Zeit und von überall aus zugänglich ist. Zurzeit befindet sich team.center noch in der Beta Phase - wir sind daran die Plattform kontinuierlich zu verbessern, um sie schlussendlich stabiler und benutzerfreundlicher zu gestalten.",
       "TEXT2": " - Es ist und bleibt kostenlos -",
-      "TEXT3": "Hinter team.center arbeitet ein kleines Team welches diese Platform ständig weiterentwickelt. Wir sind selber engagiert in lokalen Sportvereinen als Spieler, Trainer und Vorstandsmitglieder und kennen daher die Bedürfnisse fürs Organisieren von Teamevents bestens.",
+      "TEXT3": "Hinter team.center arbeitet ein kleines Team, welches diese Plattform ständig weiterentwickelt. Wir sind selber in lokalen Sportvereinen als Spieler, Trainer und Vorstandsmitglieder engagiert und kennen daher die Bedürfnisse fürs Organisieren von Team-Events bestens.",
       "TEXT4": "- Trainieren anstatt koordinieren - ",
-      "TEXT5": "Wir sind überzeugt viele Sport- und auch andere Vereine können mit dieser Lösung viel Zeit und Nerven sparen - man sieht auf einen Blick wer sich an- oder abgemeldet hat. Habt ihr euch schon immer nach einer speziellen Funktion gesehnt, welche euer Teammanagement erleichtert? Teilt mit uns eure weiterführenden Ideen mit und wir setzen sie um, wenn das Bedürfnis gross genug ist.",
+      "TEXT5": "Wir sind überzeugt, viele Sport- und andere Vereine können mit dieser Lösung viel Zeit und Nerven sparen, denn man sieht auf einen Blick, wer sich an- oder abgemeldet hat. Habt ihr euch schon immer nach einer speziellen Funktion gesehnt, welche euer Teammanagement erleichtert? Teilt uns eure weiterführenden Ideen mit und wir setzen sie um, wenn das Bedürfnis gross genug ist.",
       "TEXT6": "Wir haben den ersten Schritt gemacht und die ersten Massnahmen ergriffen, um euch die Organisation von Teams zu erleichtern. Wenn du unsere Idee magst und unsere Begeisterung teilst, dann kannst du etwas in unsere Kaffeekasse werfen:",
       "TEXT7": "Like und folge uns auf Facebook:"
     },
     "SECTION2": {
       "TITLE": "Wir bleiben am Ball, das kommt als nächstes",
       "TEXT1": "An- und Abmeldungen mit Kommentaren versehen",
-      "TEXT2": "Mehrere Admins pro Team",
-      "TEXT3": "Google maps für Ortsangaben integrieren",
+      "TEXT2": "Erinnerungsmails",
+      "TEXT3": "Wiederkehrende Events",
       "TEXT4": "Weitere Sprachen",
       "TEXT5": "Mobile App für Android & iOS"
-    },
-    "SECTION3": {
-      "TITLE": "How to support us?",
-      "TEXT": "You can support our project with buing us a coffee or even more :)",
-      "TEXT2": "We would highly appreciate liking us on Facebook this way we can keep you members informed about our progress."
-    },
-    "SECTION4": {
-      "TITLE": "Was kommt als nächstes?",
-      "TEXT": "Excel (CSV) upload Funktion um mehrere Mitglieder mit einem Klick zu erstellen",
-      "TEXT2": "\"Event log\" für Team Admins",
-      "TEXT3": "Google maps für Orte - Weitere Sprachen - Mobile Apps (Android & iOS)",
-      "TEXT4": "We are grateful for feedbacks, or recommondations for new features. Please just use our contact form"
     }
   },
   "TERMS_AND_CONDITIONS": {
