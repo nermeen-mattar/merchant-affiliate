@@ -1,0 +1,21 @@
+<div class="app-add-member-form">
+  <mat-card>
+    <div class="app-add-member-form__back" routerLink="../">
+      <mat-icon color="primary">chevron_left</mat-icon>
+      {{'BACK'| translate}}
+    </div>
+    <mat-card-title class="app-add-member-form__title">{{'MEMBER.ADD_MEMBER_TO_TEAM' | translate }} </mat-card-title>
+    <mat-card-content *ngIf="addMemberGroup">
+      <form novalidate [formGroup]="addMemberGroup" (ngSubmit)="addMemberToTeam(addMemberGroup.value)" novalidate>
+        <mat-form-field class="app-add-member-form__field">
+          <input matInput placeholder="{{'USER.EMAIL'| translate}}" formControlName="email" type="text">
+          <mat-icon color="primary" class="app-add-member-form__field__icon" matPrefix> email</mat-icon>
+          <mat-error *ngIf="addMemberGroup.controls['email'] .invalid"> {{'USER.EMAIL'| translate}} {{ 'FORM.IS_REQUIRED'
+            | translate }}</mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="app-add-member-form__button" type="submit" [disabled]="!addMemberGroup.valid">{{
+          'FORM.ADD' | translate }}</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

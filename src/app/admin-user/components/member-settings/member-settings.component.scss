@@ -1,0 +1,70 @@
+@import "../../../../styles/toolkit/variables.scss";
+.app-settings {
+  width: 80%;
+  max-width: 700px;
+  margin: 100px auto;
+  &__element-hide{
+    display:none;
+  }
+  &__card {
+    // min-height: 456px;
+    color: $tc-color-gray-shade-6;
+    &__top-spacing {
+      margin-top: 2rem;
+    }
+    &__card-title {
+      color: $tc-color-gray-shade-7;
+      text-align: center;
+    }
+    &__form {
+      margin: 0.5rem 0;
+      &__not-ready {
+        opacity: 0.5;
+      }
+      &__buttons-wrapper {
+        display: flex;
+        justify-content: space-between;
+      }
+      &__button {
+        margin: 0.5rem 0;
+        color: white;
+      }
+      &__title {
+        font-weight: 400;
+        font-weight: $tc-font-weight-6;
+        font-size: $tc-font-size-h5;
+      }
+      &__field {
+        width: 100%; // flex-grow: 1;
+        line-height: 1.5; // margin: 1rem;
+        margin-top: 1rem;
+        &__icon {
+          margin-right: 5px;
+        }
+        &__error {
+          font-size: 75%;
+          font-weight: normal;
+        }
+      }
+      &__team {
+        display: flex;
+        align-items: center;
+        &__fields {
+          flex-grow: 1;
+        }
+        &__actions {
+          color: white;
+          position: relative;
+          top: 10px;
+          margin: 0 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .app-settings {
+    width: 95%;
+  }
+}

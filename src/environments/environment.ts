@@ -4,5 +4,12 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl:  'https://dev.team.center/service/', // '/api/' not authorized
+  authConfig: {
+    tokenExpiration: 0 // in days
+  }
 };
+
+
+

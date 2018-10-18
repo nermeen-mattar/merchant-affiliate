@@ -1,0 +1,65 @@
+@import "../../../../styles/toolkit/variables.scss";
+.app-event-form {
+  width: 80%;
+  max-width: 700px;
+  margin: 0px auto;
+  &__back {
+    color: $primary-color;
+    font-weight: $tc-font-weight-4;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  &__title {
+    color: $tc-color-gray-shade-6;
+    text-align: center;
+  }
+  &__fields-wrapper {
+    // flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+  }
+  &__field {
+    width: 100%; // flex-grow: 1;
+    line-height: 1.5;
+    margin: 0.5rem;
+    &__icon {
+      margin-right: 5px;
+    }
+    &__small {
+      width: 120px;
+    }
+    &__label {
+      color: $tc-color-gray-shade-6;
+    }
+    &__error {
+      font-size: 75%;
+      position: absolute;
+      bottom: 4px;
+      left: calc(50% - 90px); /* 90px is half the width of the error message */
+      font-weight: normal;
+    }
+  }
+  &__nested-form-group {
+    position: relative;
+  }
+  &__button {
+    margin-top: 2.2rem;
+    color: white;
+  }
+  &__spinner {
+    margin: 50px auto;
+  }
+  &__hide-element {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .app-event-form {
+    width: 95%;
+    &__fields-wrapper {
+      display: block;
+    }
+  }
+}

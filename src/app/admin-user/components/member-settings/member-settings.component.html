@@ -1,0 +1,99 @@
+<div class="app-settings">
+  <mat-card class="app-settings__card">
+    <mat-card-title class="app-settings__card__card-title">{{'USER.SETTINGS' | translate}}
+      <h5> {{userEmail}} </h5>
+    </mat-card-title>
+    <mat-card-content *ngIf="changePasswordGroup">
+      <mat-tab-group>
+        <mat-tab label="{{'USER.USER_DETAILS' | translate}}">
+          <form [ngClass]="{'app-settings__card__form__not-ready': !currentMember}" novalidate (ngSubmit)="saveMemberBasicInfoSettings()"
+            [formGroup]="memberBasicSettingsGroup">
+            <mat-form-field class="app-settings__card__form__field">
+              <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" type="text">
+              <mat-icon color="primary" class="app-settings__card__form__field__icon" matPrefix> person</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="app-settings__card__form__field">
+              <input matInput placeholder="{{'USER.LAST_NAME'| translate}}" formControlName="lastName" type="text">
+              <mat-icon color="primary" class="app-settings__card__form__field__icon" matPrefix> person</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="app-settings__card__form__field">
+              <input matInput placeholder="{{'USER.MOBILE_NUMBER'| translate}}" formControlName="mobile" type="text">
+              <mat-icon color="primary" class="app-settings__card__form__field__icon" matPrefix> call</mat-icon>
+              <mat-error *ngIf="memberBasicSettingsGroup.controls['mobile'].invalid"> {{'FORM.ENTER_VALID_NUMBER'|
+                translate}}</mat-error>
+            </mat-form-field>
+            <!-- <button mat-raised-button color="primary" class="app-settings__card__form__button" type="submit" [disabled]="!memberBasicSettingsGroup.valid">{{ 'FORM.SAVE' | translate }}</button> -->
+            <button mat-raised-button class="app-settings__card__form__button" color="primary" type="submit">{{'FORM.SAVE'
+              | translate}}</button>
+          </form>
+          <mat-spinner *ngIf="!currentMember" class="overlayed-spinner"></mat-spinner>
+        </mat-tab>
+        <mat-tab label="{{'USER.ACCOUNT' | translate}}">
+          <form class="app-settings__card__form" novalidate (ngSubmit)="changePassword()" [formGroup]="changePasswordGroup">
+            <mat-form-field class="app-settings__card__form__field">
+              <mat-icon class="app-new-password__content__form__field__icon" matPrefix>lock</mat-icon>
+              <input matInput type="password" placeholder="{{ 'USER.CURRENT_PASSWORD' | translate }}" formControlName="password">
+              <mat-error *ngIf="changePasswordGroup.controls['password'].invalid"> {{ 'USER.CURRENT_PASSWORD' |
+                translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
+            </mat-form-field>
+            <tc-new-password [passwordControl]="changePasswordGroup.controls['newPassword']" [fieldLabel]="'USER.NEW_PASSWORD'"></tc-new-password>
+            <div class="app-settings__card__form__buttons-wrapper">
+              <button mat-raised-button class="app-settings__card__form__button" color="warn" type="button" (click)="deleteMyAccount()">
+                {{'MEMBER.DELETE_MY_ACCOUNT' | translate}}</button>
+              <button mat-raised-button class="app-settings__card__form__button" color="primary" type="submit">{{'FORM.SAVE'
+                | translate}}</button>
+            </div>
+          </form>
+        </mat-tab>
+        <mat-tab label="{{'TEAM.TEAMS' | translate}}" *ngIf="teamsTheUserIsAdminOf.length">
+          <div class="app-settings__card__form__team">
+            <div class="app-settings__card__form__team__fields">
+              <mat-form-field class="app-settings__card__form__field" [ngClass]="{'app-settings__element-hide': isEditingTeamName}">
+                <mat-select #adminTeamsSelect [value]="teamsTheUserIsAdminOf[0]" placeholder="{{ 'TEAM.SELECT_TEAM_TO_CHANGE_NAME' | translate}}">
+                  <!-- (selectionChange)="changeTeamNameControlValue()"-->
+                  <mat-option *ngFor="let team of teamsTheUserIsAdminOf" [value]="team">
+                    {{ team.teamName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="app-settings__card__form__field" *ngIf="isEditingTeamName">
+                <input autofocus matInput placeholder="{{ 'TEAM.NEW_TEAM_NAME' | translate }}" [value]="adminTeamsSelect.value.teamName"
+                  [formControl]="teamNameControl" type="text">
+                <mat-error *ngIf="teamNameControl.invalid"> {{ 'TEAM.TEAM_NAME' | translate }} {{'FORM.IS_REQUIRED' |
+                  translate}} </mat-error>
+              </mat-form-field>
+            </div>
+            <button [disabled]="isEditingTeamName && teamNameControl.invalid && teamNameControl.dirty" (click)="isEditingTeamName = !isEditingTeamName;"
+              mat-mini-fab color="primary" class="app-settings__card__form__team__actions">
+              <mat-icon *ngIf="isEditingTeamName; else editIcon" (click)="saveTeamName();">save</mat-icon>
+              <ng-template #editIcon>
+                <mat-icon>edit</mat-icon>
+              </ng-template>
+            </button>
+            <button *ngIf="isEditingTeamName" (click)="isEditingTeamName = false" mat-mini-fab color="primary" class="app-settings__card__form__team__actions">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+        </mat-tab>
+        <!-- TODO: re-enable after go-live -->
+        <!-- <mat-tab label="{{'MEMBER.REMINDERS' | translate}}" *ngIf="allTeams.length">
+          <form class="app-settings__card__form" novalidate (ngSubmit)="saveRemindersInfo()" [formGroup]="remindersForm">
+            <label class="app-settings__card__form__title">{{ 'MEMBER.ALLOW_MAIL_REMINDERS_FOR' | translate }}</label>
+            <div class="app-settings__card__form__field" *ngFor="let team of allTeams">
+              <mat-checkbox (change)="isSelectAllReminders = $event.checked && isSelectAllReminders" color="primary"
+                [formControlName]="team.teamId">{{team.teamName}}</mat-checkbox>
+            </div>
+            <div *ngIf="allTeams.length > 1" class="app-settings__card__form__field app-settings__card__top-spacing"
+              style="margin-top:2rem">
+              <mat-checkbox [checked]="isSelectAllReminders" (change)="selectAllReminders($event.checked)" color="primary">{{"FORM.SELECT_ALL"
+                | translate}}</mat-checkbox>
+            </div>
+            <button mat-raised-button class="app-settings__card__form__button" color="primary" type="submit">{{'FORM.SAVE'
+              | translate}}</button>
+          </form>
+        </mat-tab> -->
+      </mat-tab-group>
+    </mat-card-content>
+
+  </mat-card>
+</div>

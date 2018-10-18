@@ -1,0 +1,274 @@
+@import "../../../../styles/toolkit/variables.scss";
+
+.app-footer {
+  // width: 100%;
+  background-color: $footer-primary-color;
+  padding: 0px 2rem;
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    &__menu {
+      display: inline-block;
+      padding-bottom: 1rem;
+      font-weight: 400;
+      &__item {
+        text-align:center;
+
+        color: $tc-color-gray-tint-1;
+        border-radius: 14px;
+        font-size: $tc-font-size-h5;
+        cursor: pointer;
+        max-width: 250px;
+        &:hover {
+          background-color: $tc-color-gray-tint-1;
+          color: $tc-color-gray-shade-6;
+        }
+      }
+    }
+    &__title {
+      margin: 0.5rem 0rem;
+      font-size: 14px;
+      color: $tc-color-gray-tint-1;
+      font-weight: bold;
+    }
+    &__donate {
+      padding-bottom: 1rem;
+      display: inline-block;
+      color: $tc-color-gray-tint-1;
+      &__text {
+        margin: 1rem 0rem;
+        font-size: $tc-font-size-h5;
+        padding: 0 16px;
+      }
+      &__action {
+        padding: 0 0px;
+        width: 71px;
+        margin: auto;
+        padding-top: 16px;
+        &__icon {
+          cursor: pointer;
+          font-size: 30px; //background: rgba(0, 0, 0, 0.4);
+          border-radius: 100%;
+          border: 4px solid $tc-color-gray-tint-1;
+          box-shadow: 0 1px 10px rgba(0, 0, 0, 0.46);
+          display: table-cell;
+          padding: 15px;
+          vertical-align: middle;
+          &:hover {
+            transition: all 550ms cubic-bezier(.45, 1, .32, 1);
+            color: $primary-color;
+            border: 4px solid $primary-color;
+          }
+        }
+      }
+    }
+    &__social-media {
+      width: 30%;
+      padding-bottom: 1rem;
+      min-width: 224px;
+      &__btn {
+        display: flex;
+        align-items: center;
+        margin: 1rem auto;
+        color: $tc-color-gray-tint-1;
+        min-width: 140px;
+        &__icon {
+          margin-right: 10px;
+          font-size: 1.3rem;
+          &::before {
+            position: relative;
+            top: 4px;
+          }
+        }
+      }
+      &__facebook {
+        background-color: #4267b2;
+      }
+      &__twitter {
+        background-color: #1da1f2;
+      }
+    }
+  }
+  &__copyright {
+    color: $tc-color-gray-tint-1;
+    background-color: rgba(51, 51, 51, 0.08);
+    padding-bottom: 20px;
+  }
+}
+
+:host {
+  ::ng-deep {
+    .mat-list-item {
+      max-height: 30px;
+      &:hover {
+        border-radius: 0px;
+        cursor: pointer;
+        transition: all 550ms cubic-bezier(.45, 1, .32, 1);
+        background-color: unset;
+        color: $primary-color;
+        max-width: 150px;
+      }
+      &-content {
+        max-height: 30px;
+        padding: 0 0px !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 520px) {
+    :host {
+    .app-footer {
+      &__container {
+        display:block;
+        text-align: center;
+        &__menu {
+          &__item {
+            ::ng-deep .mat-list-item-content {
+              justify-content: center;
+            }
+          }
+        }
+      }
+      &__copyright {
+        text-align: center;
+      }
+    }
+  }
+}
+
+a:visited {
+  color: white;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
+body {
+    font-family: 'Lato', sans-serif;
+    color: #FFF;
+    background: #322f30;
+    -webkit-font-smoothing: antialiased;
+}
+a {
+    text-decoration: none;
+    color: #fff;
+}
+p > a:hover{
+    color: #d9d9d9;
+    text-decoration:  underline;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin:  1% 0 1% 0;
+}
+._12 {
+    font-size: 1.2em;
+}
+._14 {
+    font-size: 1.4em;
+}
+ul {
+    padding:0;
+    list-style: none;
+}
+.footer-social-icons {
+    display:block;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+.social-icon {
+    color: #fff;
+}
+ul.social-icons {
+    margin-top: 10px;
+}
+.social-icons li {
+    vertical-align: top;
+    display: inline;
+    height: 100px;
+}
+.social-icons a {
+    color: #fff;
+    text-decoration: none;
+}
+.fa-facebook {
+    padding:10px 14px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition: .5s;
+    background-color: #686566;
+    margin-right: 3px;
+}
+.fa-facebook:hover {
+    background-color: #3d5b99;
+}
+.fa-twitter {
+    padding:10px 12px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition: .5s;
+    background-color: #686566;
+    margin-right: 3px;
+}
+.fa-twitter:hover {
+    background-color: #00aced;
+}
+.fa-rss {
+    padding:10px 14px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition: .5s;
+    background-color: #322f30;
+    margin-right: 3px;
+}
+.fa-rss:hover {
+    background-color: #eb8231;
+}
+.fa-youtube {
+    padding:10px 14px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition: .5s;
+    background-color: #686566;
+    margin-right: 3px;
+}
+.fa-youtube:hover {
+    background-color: #e64a41;
+}
+.fa-linkedin {
+    padding:10px 14px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition: .5s;
+    background-color: #322f30;
+}
+.fa-linkedin:hover {
+    background-color: #0073a4;
+}
+.fa-google-plus {
+    padding:10px 9px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition: .5s;
+    background-color: #322f30;
+}
+.fa-google-plus:hover {
+    background-color: #e25714;
+}

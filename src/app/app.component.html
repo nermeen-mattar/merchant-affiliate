@@ -1,21 +1,72 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
-<router-outlet></router-outlet>
+<mat-sidenav-container class="app-container" tcDeviceClasses>
+  <mat-sidenav class="app-container__sidenav" #sidenav mode="over" [opened]="menuOpened">
+    <div class="app-container__sidenav__menu">
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/events" *ngIf="($isUserLoggedIn| async)"
+        routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">event</mat-icon>
+        <span> {{'EVENT.EVENTS' | translate}} </span>
+      </div>
+      <ng-container *ngIf="($isUserLoggedIn | async)">
+        <div *ngIf="hasAdminRole; else onlyMembersList" class="app-container__sidenav__menu__item app-container__sidenav__menu__item__sub-menu"
+          [matMenuTriggerFor]="membersMenu">
+          <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
+          {{'MEMBER.MEMBERS' | translate}}
+          <mat-icon class="app-container__sidenav__menu__item__arrow">keyboard_arrow_down</mat-icon>
+          <mat-menu #membersMenu="matMenu" overlapTrigger="false" xPosition="after" yPosition="below">
+            <button (click)="sidenav.close()" routerLink="/members/list" routerLinkActive="active" mat-menu-item> {{
+              'MEMBER.MEMBERS_LIST' | translate}} </button>
+            <button (click)="sidenav.close()" routerLink="/members/statistics" routerLinkActive="active" mat-menu-item>
+              {{ 'MEMBER.MEMBERS_STATISTICS'| translate}} </button>
+          </mat-menu>
+        </div>
+        <ng-template #onlyMembersList>
+          <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/members/list"
+            routerLinkActive="active">
+            <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
+            <span> {{ 'MEMBER.MEMBERS_LIST' | translate}} </span>
+          </div>
+        </ng-template>
+      </ng-container>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/teams" *ngIf="($isUserLoggedIn| async)"
+        routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">people</mat-icon>
+        <span> {{'TEAM.TEAMS' | translate}} </span>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/auth/register" *ngIf="!($isUserLoggedIn| async)"
+        routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">lock_open</mat-icon>
+        <span> {{'REGISTER.REGISTER' | translate}}</span>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/auth/login" *ngIf="!($isUserLoggedIn| async)"
+        routerLinkActive="active">
+        <mat-icon class="app-container__sidenav__menu__item__icon">lock_open</mat-icon>
+        <span> {{'LOGIN.LOGIN' | translate}}</span>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/admin-user/settings" *ngIf="($isUserLoggedIn| async)">
+        <mat-icon class="app-container__sidenav__menu__item__icon">settings</mat-icon>
+        <span>{{'USER.SETTINGS' | translate}}</span>
+      </div>
+      <div class="app-container__sidenav__menu__item app-container__sidenav__menu__item__sub-menu" mat-button
+        [matMenuTriggerFor]="langMenu">
+        <mat-icon class="app-container__sidenav__menu__item__icon">language</mat-icon>
+        {{'LANGUAGE.LANGUAGE' | translate}}
+        <mat-icon class="app-container__sidenav__menu__item__arrow">keyboard_arrow_down</mat-icon>
+        <mat-menu #langMenu="matMenu" overlapTrigger="false" xPosition="after">
+          <button [ngClass]="{'active': selectedLanguageCode === lang.code}" (click)="languageSelected(lang.code)"
+            *ngFor="let lang of appLanguages" mat-menu-item> {{ ('LANGUAGE.' + lang.code) | translate}} </button>
+        </mat-menu>
+      </div>
+      <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" (click)="logout()" *ngIf="($isUserLoggedIn| async)">
+        <mat-icon class="app-container__sidenav__menu__item__icon">lock_outline</mat-icon>
+        <span>{{'LOG_OUT' | translate}}</span>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content class="app-container__content">
+    <tc-header (menuClicked)="sidenav.toggle()"></tc-header>
+    <div class="app-container__content__main">
+      <router-outlet></router-outlet>
+    </div>
+    <tc-footer></tc-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

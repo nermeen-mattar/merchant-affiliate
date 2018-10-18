@@ -1,0 +1,41 @@
+<mat-card class="app-login">
+  <mat-card-title class="app-login__title">{{ 'LOGIN.LOGIN' | translate }} </mat-card-title>
+  <mat-card-content>
+    <form novalidate #loginForm="ngForm" class="app-login__content" (ngSubmit)="login(loginForm.value)" [ngClass]="{'app-login__element-hide': displaySpinner}">
+      <mat-form-field class="app-login__content__field">
+        <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" ngModel #userEmail="ngModel" name="userEmail" required email
+          type="text">
+        <mat-icon class="app-login__content__field__icon" matPrefix>email</mat-icon>
+        <mat-error *ngIf="userEmail.invalid">
+          <span *ngIf="userEmail.errors.required; else emailError">
+            {{'USER.EMAIL' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
+          </span>
+          <ng-template #emailError>
+            <span *ngIf="userEmail.errors.email">
+              {{'FORM.ENTER_VALID_EMAIL' | translate}}
+            </span>
+          </ng-template>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="app-login__content__field">
+        <input matInput placeholder="{{ 'LOGIN.PASSWORD' | translate }}" ngModel #userPassword="ngModel" name="userPassword" required
+          type="password">
+        <mat-icon class="app-login__content__field__icon" matPrefix> lock</mat-icon>
+        <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="app-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
+      <p routerLink="../request-reset-password" class="app-login__content__link app-login__content__forgot-password">{{'LOGIN.FORGOT_PASSWORD'| translate}}</p>
+    </form>
+    <div *ngIf="displayMessage && !displaySpinner" class="app-login__content__user-message">
+      <ng-container *ngIf="displayMessage === 'mailNotActivated'">
+        <span> {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate}} </span>
+        <span (click)="resendConfirmationEmail()" class="app-login__content__link"> {{'REGISTER.SEND_MAIL_AGAIN' | translate}} </span>
+      </ng-container>
+      <ng-container *ngIf="displayMessage === 'mailNotExist'">
+        <span> {{ 'REGISTER.NEED_TO_REGISTER_EMAIL' | translate}} </span>
+        <span routerLink="/auth/register" class="app-login__content__link"> {{'REGISTER.REGISTER_NOW' | translate}} </span>
+      </ng-container>
+    </div>
+  </mat-card-content>
+  <mat-spinner class="app-login__spinner" [ngClass]="{'app-login__element-hide': !displaySpinner }"></mat-spinner>
+</mat-card>

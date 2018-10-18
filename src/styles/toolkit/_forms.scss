@@ -1,0 +1,18 @@
+/* Overwriting some of angular material design for input prefix */
+
+::ng-deep .mat-form-field-prefix {
+    position: relative !important;
+    top: 6px !important;
+}
+
+mat-form-field.mat-focused {
+    .mat-form-field-prefix {
+        color: $primary-color-dark;
+    }
+}
+
+mat-form-field.ng-invalid.ng-touched {
+    .mat-form-field-prefix mat-icon {
+        color: red;
+    }
+}

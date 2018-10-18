@@ -1,0 +1,92 @@
+@import "../../../../styles/toolkit/variables.scss";
+@import "../../../../styles/toolkit/elements.scss";
+.app-header {
+  color: white;
+  width: 100%;
+  z-index: 2;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: $header-bar-height;
+  overflow: visible;
+  background-color: $primary-color;
+  padding: 0px 40px;
+  box-sizing: border-box;
+  top: 0px;
+  position: fixed;
+  &__logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-direction: row;
+    &__icon {
+      background: url('../../../../assets/img/core/tc_white_no_bg_beta3.png') 50% 50% no-repeat;
+      background-size: contain;
+      width: 220px;
+      margin-right: 10px;
+      height: 45px;
+    }
+    &__text {
+      font-family: 'Baloo Thambi', cursive; // replace with variable or class
+      font-size: $tc-font-size-h2;
+    }
+  }
+  &__menu {
+    margin-left: auto;
+    &__item {
+      float: left;
+      transition: background-color .3s;
+      font-size: $tc-font-size-h5;
+      padding: 7px 15px;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        background-color: rgba(235, 235, 235, 0.8);
+        color: $tc-color-gray-shade-6;
+      }
+      &__sub-menu {
+        padding-right: 2rem;
+      }
+      &__arrow {
+        position: absolute;
+        bottom: 12px;
+      }
+      &__icon {
+        color: $primary-color;
+        position: relative;
+        top: 6px;
+        margin-right: 16px;
+      }
+    }
+  }
+  &__nav-toggler {
+    background-color: white;
+    border-radius: 0px 20px 20px 0px;
+    position: absolute;
+    left: 0px;
+  }
+}
+
+.active {
+  background-color: rgba(235, 235, 235, 0.8);
+  color: $tc-color-gray-shade-6;
+}
+
+@media only screen and (max-width: 1019px) {
+  .app-header {
+    &__logo {
+      justify-content: center;
+    }
+    &__menu {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (min-width: 1020px) {
+  .app-header {
+    &__nav-toggler {
+      display: none;
+    }
+  }
+}
+

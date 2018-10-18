@@ -1,0 +1,72 @@
+@import "../../../../styles/toolkit/variables.scss";
+.app-register {
+  color: $tc-color-gray-shade-6;
+  width: 80%;
+  min-width: 200px;
+  min-height:  152px; // 200; // 242px;
+  max-width: 500px;
+  margin: 120px auto;
+  &__title {
+    text-align: center;
+  }
+  &__content {
+    &__form {
+      margin-top: 2rem;
+      &__field {
+        width: 100%;
+        line-height: 1.5; // was 2.125
+        margin-top: 1rem;
+        &__icon {
+          font-size: $tc-font-size-h3;
+          margin-right: 5px;
+        }
+        &__error {
+          font-size: 75%;
+          font-weight: normal;
+        }
+        &__terms-conditions {
+          text-decoration: underline;
+          margin-left: 8px;
+          cursor: pointer;
+        }
+      }
+     &__admin-exist {
+        color: $tc-color-success;
+      }
+      &__register-success {
+        padding-top: 2rem;
+      }
+    }
+    &__button {
+      color: white;
+    }
+    &__resend-mail {
+      margin:  2rem 0;
+    }
+    &__link {
+      color: $tc-color-base-bright-shade-2;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+    .stepper-action-btns {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      &--step-1 {
+        justify-content: flex-end;
+      }
+    }
+  }
+  &__element-hide {
+    display:none;
+  }
+  &__spinner {
+    margin: 50px auto;
+    &__hide {
+      display:none;
+    }
+  }
+}

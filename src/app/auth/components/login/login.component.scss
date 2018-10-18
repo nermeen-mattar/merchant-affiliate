@@ -1,0 +1,46 @@
+@import "../../../../styles/toolkit/variables.scss";
+.app-login {
+  color: $tc-color-gray-shade-6;
+  width: 80%;
+  min-width: 200px;
+  max-width: 500px;
+  min-height: 242px;
+  margin: 120px auto;
+  &__element-hide {
+    display:none;
+  }
+  &__title {
+    text-align: center;
+  }
+  &__content {
+    &__forgot-password {
+      margin-top: 1rem;
+    }
+    &__field {
+      width: 100%;
+      line-height: 1.5;
+      margin-top: 1rem;
+      &__icon {
+        font-size: $tc-font-size-h3;
+        margin-right: 5px;
+      }
+    }
+    &__button {
+      margin-top: 2.2rem;
+      color:white;
+    }
+    &__user-message {
+      margin:  2rem 0;
+    }
+    &__link {
+      color: $tc-color-base-bright-shade-2;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+  &__spinner {
+    margin: 50px auto;
+  }
+}

@@ -1,0 +1,47 @@
+<div class="app-teams">
+  <h3 class="app-teams__title">
+    {{ 'TEAM.YOUR_TEAMS' | translate}} ({{teamsDataSource && teamsDataSource.data.length}})
+    <button mat-mini-fab color="primary" class="app-teams__action-btn app-teams__add" routerLink="/teams/create">
+      +
+    </button>
+  </h3>
+  <div class="app-teams__container">
+    <mat-table class="app-teams__container__table" [dataSource]="teamsDataSource" matSort>
+      <ng-container matColumnDef="teamName">
+        <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header>
+          {{'TEAM.TEAM_NAME' | translate}} </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.teamName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="roles">
+        <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'TEAM.ROLES' | translate}}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-chip-list selectable="false">
+            <mat-chip *ngIf="teamRoles.teamAdmins.includes(row.teamId)" class="app-teams__container__table__team-admin">
+              {{'ADMIN.ADMIN' | translate}}
+            </mat-chip>
+            <mat-chip *ngIf="teamRoles.teamMembers.includes(row.teamId); else addMeAsMember">
+              {{'MEMBER.MEMBER' | translate}}
+            </mat-chip>
+            <ng-template #addMeAsMember>
+              <mat-chip (click)="addTeamAdminAsMember(row)">
+                {{ 'MEMBER.ADD_ME_AS_MEMBER' | translate }}
+              </mat-chip>
+            </ng-template>
+            <!--  add displayAdminActions to the ngIf if the user must be logged in as an admin -->
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action" *ngIf="hasAdminRole">
+        <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-icon class="app-teams__action" (click)="deleteTeam(row.teamId)" color="primary">delete</mat-icon>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+    <mat-spinner class="app-teams__container__spinner" *ngIf="!teamsDataSource"></mat-spinner>
+  </div>
+</div>
