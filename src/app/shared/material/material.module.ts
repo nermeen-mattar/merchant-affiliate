@@ -26,9 +26,16 @@ import {
   MatExpansionModule,
   MatTooltipModule,
   MatCheckboxModule,
-  MatTabsModule
+  MatTabsModule,
+  DateAdapter,
+  NativeDateAdapter
 } from '@angular/material';
 
+export class MyDateAdapter extends NativeDateAdapter {
+  getFirstDayOfWeek(): number {
+    return 1;
+  }
+}
 
 @NgModule({
   imports: [
@@ -62,6 +69,7 @@ import {
     MatTooltipModule,
     MatCheckboxModule,
     MatTabsModule
-  ]
+  ],
+  providers: [ {provide: DateAdapter, useClass: MyDateAdapter}]
 })
 export class MaterialModule {}
