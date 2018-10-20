@@ -73,6 +73,27 @@ export class MembersService {
 
   /**
    * @author Nermeen Mattar
+   * @desc an admin changes a member pariticipations
+   * @param {boolean} isParticipated
+   * @param {number} memberId the member id of the user
+   * @param {number} eventId the event id
+  */
+  changeMemberParticipation(isParticipated: boolean, eventId: number, memberId: number): Observable< any >  {
+    const participationText = isParticipated ? 'participate' : 'cancel';
+    const toggleSuccessMessage = isParticipated ? 'MEMBER.MEMBER_MOVED_TO_PARTICIPATION' : 'MEMBER.MEMBER_MOVED_TO_CANCELATION';
+    return this.httpRequestService.httpPost(
+      'teammembers/' + memberId + '/particips', {
+        eventId: eventId,
+        participationText: participationText,
+      }, {
+        success: toggleSuccessMessage,
+        fail: 'EVENT.EVENT_CHANGING_PARTICIPATION_FAIL'
+      }
+    );
+  }
+
+  /**
+   * @author Nermeen Mattar
    * @description
    * @param {TcActivationStatusInfo} statusInfo
    * @returns

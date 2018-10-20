@@ -22,9 +22,9 @@
 
         <div class="app-event-details__basic-info__section__item">
           <span class="app-event-details__label">{{"FROM" | translate}}: </span>
-          <span class="app-events-details__date">{{eventDetails.startTime | stringNormalizer:timeFormat}} </span>
+          <span class="app-event-details__date">{{eventDetails.startTime | stringNormalizer:timeFormat}} </span>
           <span class="app-event-details__label">{{"TO" | translate}}: </span>
-          <span class="app-events-details__date">{{eventDetails.endTime | stringNormalizer:timeFormat}}</span>
+          <span class="app-event-details__date">{{eventDetails.endTime | stringNormalizer:timeFormat}}</span>
         </div>
       </div>
       <div class="app-event-details__basic-info__section">
@@ -51,6 +51,18 @@
             ({{eventDetailsDatasource.present.data.length}})</span>
         </h4>
         <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.present">
+          <ng-container matColumnDef="toggeler">
+            <mat-header-cell class="app-event-details__container__table__header-cell" *matHeaderCellDef mat-sort-header>
+              {{'EVENT.OUT' | translate}}
+              <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
+            </mat-header-cell>
+            <mat-cell class="app-event-details__container__table__content-cell" *matCellDef="let row">
+              <mat-slide-toggle color="primary" #participationToggeler (change)="toggleMemberParticipation($event.checked, row, participationToggeler)"
+                checked="true">
+              </mat-slide-toggle>
+            </mat-cell>
+          </ng-container>
+
           <ng-container matColumnDef="name">
             <mat-header-cell class="app-event-details__container__table__header-cell app-event-details__label"
               *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
@@ -77,6 +89,17 @@
             ({{eventDetailsDatasource.absent.data.length}})</span>
         </h4>
         <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.absent">
+          <ng-container matColumnDef="toggeler">
+            <mat-header-cell class="app-event-details__container__table__header-cell" *matHeaderCellDef mat-sort-header>
+              {{'EVENT.OUT' | translate}}
+              <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
+            </mat-header-cell>
+            <mat-cell class="app-event-details__container__table__content-cell" *matCellDef="let row">
+              <mat-slide-toggle color="primary" #participationToggeler (change)="toggleMemberParticipation($event.checked, row, participationToggeler)"
+                checked="false">
+              </mat-slide-toggle>
+            </mat-cell>
+          </ng-container>
           <ng-container matColumnDef="name">
             <mat-header-cell class="app-event-details__container__table__header-cell app-event-details__label"
               *matHeaderCellDef> {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
@@ -97,3 +120,8 @@
     </div>
     <mat-spinner class="app-event-details__container__spinner" *ngIf="!eventDetailsDatasource"></mat-spinner>
   </div>
+
+
+
+
+  <!-- [disabled]="isPastEvents || row.isPastEvent || (row.myParticipation && row.myParticipation.action === 'cancel' && (row.maxCriticalValue || row.maxCriticalValue == 0)&& row.numOfParticipations >= row.maxCriticalValue)" -->
