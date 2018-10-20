@@ -145,9 +145,9 @@ export class EventsListComponent implements OnInit {
    * @author Nermeen Mattar
    * @description toggles user participaion in the target event
    * @param {boolean} toggleValue
-   * @param {string} eventId
+   * @param {number} eventId
    */
-  toggleParticipationInEvent(toggleValue: boolean, eventId: string, currToggle: MatSlideToggle) {
+  toggleParticipationInEvent(toggleValue: boolean, eventId: number, currToggle: MatSlideToggle) {
     this.eventsService.toggleEventParticipation(toggleValue, eventId, this.teamMemberId).subscribe(res => {
       const event = this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)];
       event.numOfParticipations += toggleValue ? 1 : -1;
@@ -162,7 +162,7 @@ export class EventsListComponent implements OnInit {
     $event.stopPropagation();
   }
 
-  getIndexOfTargetEvent(eventId: string) {
+  getIndexOfTargetEvent(eventId: number) {
     return this.eventsDataSource.data.findIndex(event => event.id === eventId);
   }
 
@@ -174,9 +174,9 @@ export class EventsListComponent implements OnInit {
   /**
    * @author Nermeen Mattar
    * @description deletes the target event from the events list (only allowed for admin)
-   * @param {string} eventId
+   * @param {number} eventId
    */
-  deleteEvent(eventId: string) {
+  deleteEvent(eventId: number) {
     this.openConfirmationDialog();
     this.confirmDialogRef.afterClosed().pipe(
       first()

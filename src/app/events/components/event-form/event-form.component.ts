@@ -18,7 +18,7 @@ export class EventFormComponent implements OnInit {
   selectedTeamId: number;
   eventGroup: FormGroup;
   displaySpinner = false;
-  eventId: string; /* is undefined (in the case of event creation) */
+  eventId: number; /* is undefined (in the case of event creation) */
   constructor(private eventsService: EventsService, teamsService: TeamsService, private fieldValidatorsService: FieldValidatorsService,
     private route: ActivatedRoute, private router: Router) {
       this.selectedTeamId = teamsService.selectedTeamId;
@@ -51,7 +51,7 @@ export class EventFormComponent implements OnInit {
    * @description navigates back if the id passed in the route does not include numbers (wrong id)
    */
   leavePageIfWrongId() {
-    if (this.eventId && this.eventId.match(/[1-9]/g) === null) {
+    if (this.eventId && String(this.eventId).match(/[1-9]/g) === null) {
       this.navigateBack();
     }
   }
