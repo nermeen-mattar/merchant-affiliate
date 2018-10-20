@@ -16,13 +16,13 @@ export class EventsServiceMock {
         present: []
       });
   }
-  getEvent(eventId: string): Observable < any > {
+  getEvent(eventId: number): Observable < any > {
     return of({});
   }
   createEvent(teamId: number, event: Event ): Observable < any > { // Event [] there are other info!
     return of({});
   }
-  updateEvent(eventId: string, teamId: number, event: Event ): Observable < any > {
+  updateEvent(eventId: number, teamId: number, event: Event ): Observable < any > {
     return of({});
   }
 }

@@ -110,7 +110,9 @@
       "MEMBER_PASSWORD_CHANGING_SUCCESS": "The password has been changed successfully",
       "MEMBER_PASSWORD_CHANGING_FAIL": "Unable to change the password",
       "MEMBER_INVITATION_RESEND_SUCCESS": "Invitation mail re-sent successfully",
-      "MEMBER_INVITATION_RESEND_FAIL": "Unable to Re-send invitation mail"
+      "MEMBER_INVITATION_RESEND_FAIL": "Unable to Re-send invitation mail",
+      "MEMBER_MOVED_TO_PARTICIPATION": "The member has been moved to participations",
+      "MEMBER_MOVED_TO_CANCELATION": "The member has been moved to cancelations"
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "The admin password has been changed successfully",

@@ -1,5 +1,5 @@
 export interface TcEvent {
-  id?: string; // no id when creating a new event
+  id?: number; // no id when creating a new event
   type: number;
   eventName: string;
   status?: string; // needed in events list requests, but not in event form requests
