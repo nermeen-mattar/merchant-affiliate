@@ -148,7 +148,8 @@ export class EventsListComponent implements OnInit {
    * @param {number} eventId
    */
   toggleParticipationInEvent(toggleValue: boolean, eventId: number, currToggle: MatSlideToggle) {
-    this.eventsService.toggleEventParticipation(toggleValue, eventId, this.teamMemberId).subscribe(res => {
+    const toggleSuccessMessage = toggleValue ? 'EVENT.EVENT_PARTICIPATION_CONFIRMED' : 'EVENT.EVENT_CANCELATION_CONFIRMED';
+    this.eventsService.toggleEventParticipation(toggleValue, eventId, this.teamMemberId, toggleSuccessMessage).subscribe(res => {
       const event = this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)];
       event.numOfParticipations += toggleValue ? 1 : -1;
       event.myParticipation.action =  toggleValue ? 'participate' : 'cancel';

@@ -81,7 +81,8 @@ export class EventDetailsComponent implements OnInit {
    * @param {MatSlideToggle} currToggle
    */
   toggleMemberParticipation(toggleValue: boolean, toggledMember: TcMember, currToggle: MatSlideToggle) {
-    this.membersService.changeMemberParticipation(toggleValue, this.eventId , toggledMember.id).subscribe(() => {
+    const toggleSuccessMessage = toggleValue ? 'MEMBER.MEMBER_MOVED_TO_PARTICIPATION' : 'MEMBER.MEMBER_MOVED_TO_CANCELATION';
+    this.eventsService.toggleEventParticipation(toggleValue, this.eventId , toggledMember.id, toggleSuccessMessage).subscribe(() => {
       const {toggleType, toggleInverseType} = toggleValue ?
       {toggleType: participation.absent, toggleInverseType: participation.present} :
       {toggleType:  participation.present, toggleInverseType: participation.absent};
