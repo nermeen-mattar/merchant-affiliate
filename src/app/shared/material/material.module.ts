@@ -28,14 +28,34 @@ import {
   MatCheckboxModule,
   MatTabsModule,
   DateAdapter,
-  NativeDateAdapter
+  NativeDateAdapter, 
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE
 } from '@angular/material';
 
 export class MyDateAdapter extends NativeDateAdapter {
   getFirstDayOfWeek(): number {
     return 1;
   }
+  getDayOfWeekNames(): string[] {
+    return ['M', 'D', 'M', 'D', 'F', 'S', 'S'];
+  }
+  getMonthNames(): string[] {
+    return ['JAN', 'FEB', 'MÄR', 'APR', 'KANN', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'DEZ'];
+  }
 }
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 
 @NgModule({
   imports: [
@@ -70,6 +90,11 @@ export class MyDateAdapter extends NativeDateAdapter {
     MatCheckboxModule,
     MatTabsModule
   ],
-  providers: [ {provide: DateAdapter, useClass: MyDateAdapter}]
+  providers: [ {provide: DateAdapter, useClass: MyDateAdapter}, 
+    // {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+    {provide: MAT_DATE_LOCALE, useValue: 'ar-SA'},
+
+
+  ]
 })
 export class MaterialModule {}
