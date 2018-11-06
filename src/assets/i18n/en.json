@@ -271,12 +271,12 @@
     "PASSWORD": "Password",
     "CURRENT_PASSWORD": "Current Password",
     "NEW_PASSWORD": "New Password",
-    "UPDATE_YOUR_INFO": "Update your Info",
+    "UPDATE_YOUR_INFO": "Here we go - enter your name and set your own password first",
     "CONFIRM_DELETING_ACCOUNT_HEADER": "Delete my account",
     "CONFIRM_DELETING_ACCOUNT_BODY": "Do you really want to delete your account?"
   },
   "REGISTER": {
-    "REGISTER": "Register",
+    "REGISTER": "Create team",
     "MEMBER_ALREADY_EXIST": "You have already registered. Please enter your password to create this new team",
     "EMAIL_NOT_RECEIVED": "Haven't receive an email?",
     "SEND_MAIL_AGAIN": "Resend activation mail",

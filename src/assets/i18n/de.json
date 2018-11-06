@@ -13,7 +13,7 @@
   "YES": "Ja",
   "NO": "Nein",
   "LOG_OUT": "Abmelden",
-  "EDIT": "Bearbeitent",
+  "EDIT": "Bearbeiten",
   "GOING": "Ok",
   "NOT_GOING": "Nicht ok",
   "MESSAGE": "Nachricht",
@@ -110,7 +110,9 @@
       "MEMBER_PASSWORD_CHANGING_SUCCESS": "Das Passwort wurde erfolgreich geändert",
       "MEMBER_PASSWORD_CHANGING_FAIL": "Pässwort Änderung fehlgeschlagen",
       "MEMBER_INVITATION_RESEND_SUCCESS": "Einladungsmail erneut gesendet",
-      "MEMBER_INVITATION_RESEND_FAIL": "Einladungsmail erneut senden fehlgeschlagen"
+      "MEMBER_INVITATION_RESEND_FAIL": "Einladungsmail erneut senden fehlgeschlagen",
+      "MEMBER_MOVED_TO_PARTICIPATION": "Das Teammitglied ist nun angemeldet",
+      "MEMBER_MOVED_TO_CANCELATION": "Das Teammitglied ist nun abgemeldet"
     },
     "ADMIN": {
       "ADMIN_PASSWORD_CHANGING_SUCCESS": "Das Admin Passwort wurde erfolgreich geändert",
@@ -124,7 +126,7 @@
       "TEAM_CONFIRM_DELETING_HEADER": "Team löschen",
       "TEAM_CONFIRM_DELETING_BODY": "Willst du dieses Team wirklich löschen?",
       "TEAM_CREATED_SUCCESS": "Team erfolgreich erstellt",
-      "TEAM_CREATED_FAILURE": "Team could not be created"
+      "TEAM_CREATED_FAILURE": "Das Team konnte nicht erstellt werden"
     }
   },
   "ERRORS": {
@@ -269,12 +271,12 @@
     "PASSWORD": "Passwort",
     "CURRENT_PASSWORD": "Aktuelles Passwort",
     "NEW_PASSWORD": "Neues Passwort",
-    "UPDATE_YOUR_INFO": "Aktualisiere deine Infos",
+    "UPDATE_YOUR_INFO": "Gleich geht's los - Gib hier zuerst noch deinen Namen ein und setze dein eigenes Passwort",
     "CONFIRM_DELETING_ACCOUNT_HEADER": "Account Löschen",
     "CONFIRM_DELETING_ACCOUNT_BODY": "Willst du wirklich deinen Account löschen?"
   },
   "REGISTER": {
-    "REGISTER": "Registrieren",
+    "REGISTER": "Team erstellen",
     "MEMBER_ALREADY_EXIST": "Du bist bereits als Admin registriert. Bitte gib hier dein passwort ein, um ein neues team zu erstellen.",
     "EMAIL_NOT_RECEIVED": "Kein Mail erhalten?",
     "SEND_MAIL_AGAIN": "Mail nochmals senden",
