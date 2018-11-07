@@ -86,7 +86,8 @@
       "EVENT_CONFIRM_DELETING_BODY": "Do you really want to delete this event?",
       "EVENT_PARTICIPATION_CONFIRMED": "Participation confirmed",
       "EVENT_CANCELATION_CONFIRMED": "Cancelation confirmed",
-      "EVENT_CHANGING_PARTICIPATION_FAIL": "Error changing Participation"
+      "EVENT_CHANGING_PARTICIPATION_FAIL": "Error changing Participation",
+      "EVENT_SHOULD_BE_IN_FUTURE": "The event date and time should be in the future"
     },
     "MEMBER": {
       "MEMBER_MAKE_ADMIN_SUCCESS": "The member is now an admin",
