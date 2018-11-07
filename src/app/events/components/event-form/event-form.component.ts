@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { format } from 'date-fns';
 
 import { TeamsService } from './../../../core/services/teams.service';
@@ -19,12 +19,10 @@ export class EventFormComponent implements OnInit {
   eventGroup: FormGroup;
   displaySpinner = false;
   eventId: number; /* is undefined (in the case of event creation) */
-  today: Date;
   constructor(private eventsService: EventsService, teamsService: TeamsService, private fieldValidatorsService: FieldValidatorsService,
     private route: ActivatedRoute, private router: Router) {
       this.selectedTeamId = teamsService.selectedTeamId;
       this.initFormEditingOrCreating();
-      this.today = new Date();
   }
 
   ngOnInit() {}
@@ -67,13 +65,11 @@ export class EventFormComponent implements OnInit {
   createEventForm(eventValue?: TcEvent ) {
     this.eventGroup = new FormGroup({
       eventName: new FormControl(eventValue ? eventValue.eventName : '', [Validators.required]),
+      date: new FormControl(eventValue ? eventValue.date : '', [Validators.required]),
       eventTiming:  new FormGroup({
         startTime: new FormControl(eventValue ? eventValue.startTime : '', [Validators.required]),
-        endTime: new FormControl(eventValue ? eventValue.endTime : '', [Validators.required]),
-        date: new FormControl(eventValue ? eventValue.date : '', [Validators.required])
-      }, 
-      [ this.fieldValidatorsService.getValidator('validateSecondGreaterThanFirst', {field1: 'startTime', field2: 'endTime'}),  
-      this.validateTimeInFuture()]),
+        endTime: new FormControl(eventValue ? eventValue.endTime : '', [Validators.required])
+      }, this.fieldValidatorsService.getValidator('validateSecondGreaterThanFirst', {field1: 'startTime', field2: 'endTime'})),
       location: new FormControl(eventValue ? eventValue.location : '', [Validators.required]),
       type: new FormControl(eventValue ? JSON.stringify(eventValue.type) : '0', [Validators.required]),
       eventCriticalValues:  new FormGroup({
@@ -88,22 +84,7 @@ export class EventFormComponent implements OnInit {
     });
     this.onEventTypeChange();
     this.displaySpinner = false;
-  }
 
-  /**
-   * @author Nermeen Mattar
-   * @description returns a validator that check if the combination of the selected event date along with time are in the future.
-   * @returns {ValidatorFn}
-   */
-  validateTimeInFuture(): ValidatorFn {
-    return (group: FormGroup): { [key: string]: any } => {
-        const eventDate = new Date(group.controls.date.value);
-        const hours = group.controls.startTime.value.replace(/:.+/g, '')
-        const minutes = group.controls.startTime.value.replace(/.+:/g, '')
-        eventDate.setHours(hours);
-        eventDate.setMinutes(minutes);
-         return this.eventsService.isPast(eventDate) ? { validateTimeInFuture: 'error' } : null;
-    };
   }
 
   /**
@@ -152,7 +133,7 @@ export class EventFormComponent implements OnInit {
   getEventInBackendStructure(eventValue): TcEvent {
     const eventValueCopy: TcEvent = {
       eventName: eventValue.eventName,
-      date: format(eventValue.eventTiming.date, 'YYYY-MM-DD'),
+      date: format(eventValue.date, 'YYYY-MM-DD'),
       startTime: eventValue.eventTiming.startTime,
       endTime: eventValue.eventTiming.endTime,
       minCriticalValue: eventValue.eventCriticalValues.min,
