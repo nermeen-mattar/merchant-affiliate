@@ -12,8 +12,8 @@
             <input matInput placeholder="{{ 'EVENT.EVENT_NAME' | translate }}" formControlName="eventName" required type="text">
             <mat-error *ngIf="eventGroup.controls['eventName'].invalid"> {{ 'EVENT.EVENT_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
           </mat-form-field>
-          <mat-form-field class="app-event-form__field">
-            <input matInput [matDatepicker]="picker" placeholder="{{ 'EVENT.EVENT_DATE' | translate }}" formControlName="date" required>
+          <mat-form-field formGroupName="eventTiming"  class="app-event-form__field">
+            <input matInput  [min]="today" [matDatepicker]="picker" placeholder="{{ 'EVENT.EVENT_DATE' | translate }}" formControlName="date" required>
             <mat-icon color="primary" class="app-event-form__field__icon" matPrefix>date</mat-icon>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -33,8 +33,13 @@
             </mat-form-field>
           </div>
           <!-- <mat-error *ngIf="eventTimingGroup.invalid && eventId || (eventTimingGroup.controls['endTime'].dirty &&  eventTimingGroup.controls['startTime'].dirty)"> -->
-          <mat-error class="app-event-form__field__error" *ngIf="eventGroup.controls['eventTiming'].invalid && (!eventGroup.controls['eventTiming'].controls['endTime'].invalid &&  !eventGroup.controls['eventTiming'].controls['startTime'].invalid)">
-            {{'FORM.END_SHOULD_BE_AFTER_START' | translate}}
+          <mat-error class="app-event-form__field__error" *ngIf="eventGroup.controls['eventTiming'].invalid">
+            <ng-container *ngIf="eventGroup.controls['eventTiming'].errors.validateSecondGreaterThanFirst">
+              {{'FORM.END_SHOULD_BE_AFTER_START' | translate}}
+            </ng-container>
+            <ng-container *ngIf="eventGroup.controls['eventTiming'].errors.validateTimeInFuture">
+              {{'USER_MESSAGES.EVENT.EVENT_SHOULD_BE_IN_FUTURE' | translate}}
+            </ng-container>
           </mat-error>
         </div>
         <mat-form-field class="app-event-form__field">

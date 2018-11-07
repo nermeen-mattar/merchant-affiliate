@@ -33,10 +33,21 @@ export class EventsService {
         for (let eventIndex = 0; eventIndex < numOfEvents; eventIndex++) {
           const currentEvent: TcEvent =  data.events[eventIndex];
           /* can change the following to be differenceInSecond if we want to be more accurate. */
-          currentEvent.isPastEvent =  differenceInMinutes(new Date(currentEvent.date + ' ' + currentEvent.startTime), new Date()) < 0;
+          currentEvent.isPastEvent =  this.isPast(new Date(currentEvent.date + ' ' + currentEvent.startTime));
         }
         return data;
       }));
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description checks if the passed date is in the past by comparing it to current date and time
+   * @param {Date} targetDate
+   * @returns {boolean}
+   */
+  
+  isPast(targetDate: Date): boolean {
+    return differenceInMinutes(new Date(targetDate), new Date()) < 0;
   }
 
   /**
