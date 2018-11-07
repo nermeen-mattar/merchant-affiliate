@@ -51,7 +51,7 @@ export class HeaderComponent {
   languageSelected(langCode: string) {
     this.selectedLanguageCode = langCode;
     this.translate.use(langCode);
-    if (this.loginStatusService.getCurrentUserLoginState()) {
+    if (this.loginStatusService.isAuthenticated()) {
       this.membersService.updateMemberLanguage(langCode);
     }
     localStorage.setItem('lang', langCode);
