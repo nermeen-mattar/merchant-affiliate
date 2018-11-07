@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { first } from 'rxjs/operators';
+
 import { UserService } from './../../../core/services/user.service';
 import { TcMember } from './../../../members/models/tc-member.model';
 import { LoginStatusService } from './../../../auth/services/login-status.service';
@@ -9,7 +11,6 @@ import { MembersService } from './../../../members/services/members.service';
 import { FieldValidatorsService } from '../../../core/services/field-validators.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'tc-member-settings',

@@ -33,12 +33,11 @@ export class AppComponent {
     this.resetScrollOnRouteChange();
     this.initLanguageRelatedVariables();
     this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
-    this.$isUserLoggedIn.subscribe(isLoggedIn => {
-      if (isLoggedIn) {
-        this.hasAdminRole = teamsService.hasAdminRole();
-      } else {
-        this.resetData();
-      }
+    this.$isUserLoggedIn.subscribe(isLoggedIn => { if (!isLoggedIn) { this.resetData(); } });
+      teamsService.$teamRoles.subscribe(teamRoles => {
+        if(teamRoles) {
+          this.hasAdminRole = teamsService.hasAdminRole();
+        }
     });
     this.sendRouterEventsToGoogleAnalytics();
   }
