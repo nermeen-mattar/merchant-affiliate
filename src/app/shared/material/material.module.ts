@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
   MatToolbarModule,
   MatIconModule,
@@ -29,32 +30,10 @@ import {
   MatTabsModule,
   DateAdapter,
   NativeDateAdapter, 
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE
+  // MAT_DATE_FORMATS,
+  // MAT_DATE_LOCALE
 } from '@angular/material';
-
-export class MyDateAdapter extends NativeDateAdapter {
-  getFirstDayOfWeek(): number {
-    return 1;
-  }
-  getDayOfWeekNames(): string[] {
-    return ['M', 'D', 'M', 'D', 'F', 'S', 'S'];
-  }
-  getMonthNames(): string[] {
-    return ['JAN', 'FEB', 'MÄR', 'APR', 'KANN', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'DEZ'];
-  }
-}
-export const MY_DATE_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
+import { TcDateAdapter } from '../classes/tc-date-adapter';
 
 
 @NgModule({
@@ -90,7 +69,8 @@ export const MY_DATE_FORMATS = {
     MatCheckboxModule,
     MatTabsModule
   ],
-  providers: [ {provide: DateAdapter, useClass: MyDateAdapter}, 
+  providers: [ 
+    {provide: DateAdapter, useClass: TcDateAdapter}, 
     // {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
     // {provide: MAT_DATE_LOCALE, useValue: 'ar-SA'},
 
