@@ -43,7 +43,7 @@
         <ng-container matColumnDef="date">
           <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header>
             {{'EVENT.DATE' | translate}} </mat-header-cell>
-          <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.date}} </mat-cell>
+          <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.date |  date:"yyyy.MM.dd"}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="time">
           <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.TIME' | translate}} </mat-header-cell>
@@ -106,7 +106,7 @@
               <span class="app-events__container__accordion__expandable-event__title__event-name"> {{event.eventName}} </span>
             </mat-panel-title>
             <mat-panel-description>
-              <span>{{event.date}}</span>
+              <span> {{event.date | date:"yyyy.MM.dd"}}</span>
               <mat-icon class="app-events__event__error" *ngIf="((event.minCriticalValue || event.minCriticalValue === 0) && event.minCriticalValue > event.numOfParticipations) ||
               ((event.maxCriticalValue || event.maxCriticalValue === 0 ) && event.maxCriticalValue < event.numOfParticipations); else success">error</mat-icon>
               <ng-template #success>

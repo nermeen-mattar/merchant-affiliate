@@ -92,7 +92,7 @@ export const MY_DATE_FORMATS = {
   ],
   providers: [ {provide: DateAdapter, useClass: MyDateAdapter}, 
     // {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
-    {provide: MAT_DATE_LOCALE, useValue: 'ar-SA'},
+    // {provide: MAT_DATE_LOCALE, useValue: 'ar-SA'},
 
 
   ]
