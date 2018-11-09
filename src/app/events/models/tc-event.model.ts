@@ -14,5 +14,6 @@ export interface TcEvent {
   endTime: string;
   date: string;
   isPastEvent?: boolean;
-  minWithMax?: string;
+  hasMinCriticalValue?: boolean;
+  hasMaxCriticalValue?: boolean;
 }

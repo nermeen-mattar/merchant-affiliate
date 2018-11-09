@@ -40,9 +40,9 @@ export class EventsService {
       }));
   }
 
-  addHasMinAndHasMaxCriticalValues(event) {
-    event.hasMinCriticalValue = event.minCriticalValue || event.minCriticalValue === 0;
-    event.hasMaxCriticalValue = event.maxCriticalValue || event.maxCriticalValue === 0;
+  addHasMinAndHasMaxCriticalValues(event: TcEvent) {
+    event.hasMinCriticalValue = Boolean(event.minCriticalValue || event.minCriticalValue === 0);
+    event.hasMaxCriticalValue = Boolean(event.maxCriticalValue || event.maxCriticalValue === 0);
   }
   /**
    * @author Nermeen Mattar
