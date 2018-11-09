@@ -6,6 +6,7 @@
   position: relative;
   &__label {
     font-weight: $tc-font-weight-6;
+    color: $tc-color-gray-shade-6;
   }
   &__back {
     position: absolute;
@@ -20,13 +21,15 @@
   &__basic-info {
     display:flex;
     flex-wrap: wrap;
-    margin: 0.8rem 0rem;
+    margin: 1rem 0rem;
     &__section {
-      display: flex;
-      flex-wrap: wrap;
+      width: 178px;
+      margin-right: 0.8rem;
+      margin-top: 1rem;
       &__item {
-        margin-right: 0.8rem;
-        margin-top: 0.3rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }

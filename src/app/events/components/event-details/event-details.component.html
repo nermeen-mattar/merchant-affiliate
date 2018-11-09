@@ -8,26 +8,29 @@
   </h3>
   <div>
     <div *ngIf="eventDetails" class="app-event-details__basic-info">
-      <div class="app-event-details__basic-info__section">
+      <mat-card class="app-event-details__basic-info__section">
         <div class="app-event-details__basic-info__section__item">
-          <span class="app-event-details__label"> {{"EVENT.EVENT" | translate }}: </span>{{eventDetails.eventName}}</div>
-        <div class="app-event-details__basic-info__section__item">
+          <span class="app-event-details__label"> {{"EVENT.EVENT" | translate }}: </span>{{eventDetails.eventName}} </div>
+        </mat-card>
+        <mat-card class="app-event-details__basic-info__section">
+          <div class="app-event-details__basic-info__section__item">
           <span class="app-event-details__label"> {{"EVENT.TYPE" | translate }}:
           </span>{{(eventDetails.type === 1 ? "EVENT.PARTICIPATION" : "EVENT.CANCELATION") | translate}}</div>
-      </div>
-      <div class="app-event-details__basic-info__section">
+          </mat-card>
+      <mat-card class="app-event-details__basic-info__section">
         <div class="app-event-details__basic-info__section__item">
           <span class="app-event-details__label"> {{"EVENT.DATE" | translate}}:</span>
           {{eventDetails.date | date:"MM/dd/yyyy hh:mm a" }}</div>
-
+        </mat-card>
+        <mat-card class="app-event-details__basic-info__section">
         <div class="app-event-details__basic-info__section__item">
           <span class="app-event-details__label">{{"FROM" | translate}}: </span>
           <span class="app-event-details__date">{{eventDetails.startTime | stringNormalizer:timeFormat}} </span>
           <span class="app-event-details__label">{{"TO" | translate}}: </span>
           <span class="app-event-details__date">{{eventDetails.endTime | stringNormalizer:timeFormat}}</span>
         </div>
-      </div>
-      <div class="app-event-details__basic-info__section">
+      </mat-card>
+      <mat-card class="app-event-details__basic-info__section">
         <div class="app-event-details__basic-info__section__item">
           <span *ngIf="eventDetails.maxCriticalValue || eventDetails.maxCriticalValue === 0" class="app-event-details__label">
             {{"EVENT.MAX" | translate}}:</span>
@@ -35,9 +38,11 @@
           <span *ngIf="eventDetails.minCriticalValue || eventDetails.minCriticalValue === 0" class="app-event-details__label">{{"EVENT.MIN"
             | translate}}:</span>
           {{eventDetails.minCriticalValue}}</div>
+        </mat-card>
+        <mat-card class="app-event-details__basic-info__section">
         <div class="app-event-details__basic-info__section__item" *ngIf="eventDetails.comment">
           <span class="app-event-details__label"> {{"EVENT.COMMENT" | translate }}: </span>{{eventDetails.comment}}</div>
-      </div>
+        </mat-card>
     </div>
     <mat-form-field class="app-event-details__filter">
       <input matInput (keyup)="applyFilterToEventDetails($event.target.value)" placeholder="{{'MULTI_TABLE_SEARCH_PLACEHOLDER' | translate}}">
