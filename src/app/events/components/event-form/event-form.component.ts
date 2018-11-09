@@ -161,6 +161,9 @@ export class EventFormComponent implements OnInit {
       location: eventValue.location,
       comment: eventValue.comment
     };
+    if(eventValueCopy.type === TcEventTypeValues.CANCELATION) {
+      eventValueCopy.maxCriticalValue = null;
+    }
     return eventValueCopy;
   }
 
