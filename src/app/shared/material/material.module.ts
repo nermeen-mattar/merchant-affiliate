@@ -29,12 +29,9 @@ import {
   MatCheckboxModule,
   MatTabsModule,
   DateAdapter,
-  NativeDateAdapter, 
-  // MAT_DATE_FORMATS,
-  // MAT_DATE_LOCALE
+  MAT_DATE_FORMATS
 } from '@angular/material';
-import { TcDateAdapter } from '../classes/tc-date-adapter';
-
+import { TcDateAdapter, MY_DATE_FORMATS } from '../classes/tc-date-adapter';
 
 @NgModule({
   imports: [
@@ -71,10 +68,7 @@ import { TcDateAdapter } from '../classes/tc-date-adapter';
   ],
   providers: [ 
     {provide: DateAdapter, useClass: TcDateAdapter}, 
-    // {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
-    // {provide: MAT_DATE_LOCALE, useValue: 'ar-SA'},
-
-
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
   ]
 })
 export class MaterialModule {}
