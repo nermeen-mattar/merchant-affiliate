@@ -21,7 +21,7 @@ export class UserMessagesService {
       this.translateService.get('USER_MESSAGES.'.concat(userMessages[messageType])).subscribe(
         translatedMessage => {
           this.snackBar.open(translatedMessage, '', {
-            duration: 2000,
+            duration: 4000,
             panelClass: messageType === 'success' ? 'bg-success' : 'bg-error'
           });
         }
