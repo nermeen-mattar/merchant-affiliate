@@ -1,26 +1,57 @@
 import { NativeDateAdapter } from '@angular/material';
+
+import { languageToMonths } from './../../core/constants/i18n.constants';
 import { languageToDays } from '../../core/constants/i18n.constants';
 export class TcDateAdapter extends NativeDateAdapter {
 
+  /**
+   * @author Nermeen Mattar
+   * @description making monday appear as the first day in the week in the calendar 
+   * @returns {number}
+   */
   getFirstDayOfWeek(): number {
     return 1;
   }
+
+  /**
+   * @author Nermeen Mattar
+   * @description attempts to get the days of week on the selected language if exists in i18n constants, if not it calls the super class to get the
+   * default week names (English is the default)
+   * @returns {string[]}
+   */
   getDayOfWeekNames(): string[] {
-    const selectedLang = localStorage.getItem('lang');
-    const temp = Object.keys(languageToDays).find(langCode => selectedLang === langCode);
-    if(temp) {
-      return languageToDays[temp];
-    } else {
-      return super.getDayOfWeekNames('short');
-    }
+    const languagePreference = this.getLanguagePreferenceIfExist(languageToDays);
+    return languagePreference ? languageToDays[languagePreference] : super.getDayOfWeekNames('short');
   }
+
+  /**
+   * @author Nermeen Mattar
+   * @description attempts to get the months on the selected language if exists in i18n constants, if not it calls the super class to get the
+   * default months' names (English is the default)
+   * @returns {string[]}
+   */
   getMonthNames(): string[] {
-    if(localStorage.getItem('lang') === 'de') {
-      return ['JAN', 'FEB', 'MÄR', 'APR', 'KANN', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'DEZ'];
-    } else {
-      return super.getMonthNames('short');
-    }
+    const languagePreference = this.getLanguagePreferenceIfExist(languageToMonths);
+    return languagePreference ? languageToDays[languagePreference] : super.getDayOfWeekNames('short');
   }
+
+  /**
+   * @author Nermeen Mattar
+   * @description shared function that attempts to get the language preference for the selected language (if exists in the passed language data object)
+   * @returns {string}
+   */
+  getLanguagePreferenceIfExist(languageDateObj): string {
+    const selectedLang = localStorage.getItem('lang');
+    return Object.keys(languageDateObj).find(langCode => selectedLang === langCode);
+  }
+
+  /**
+   * @author Nermeen Mattar
+   * @description formats the displayed date (only for inputs) to follow the required format yyyy.mm.dd
+   * @param {Date} date
+   * @param {Object} displayFormat
+   * @returns {string}
+   */
   format(date: Date, displayFormat: Object): string {
     if (displayFormat == "input") {
       let day = date.getDate();
