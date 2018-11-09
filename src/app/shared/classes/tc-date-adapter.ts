@@ -32,7 +32,7 @@ export class TcDateAdapter extends NativeDateAdapter {
    */
   getMonthNames(): string[] {
     const languagePreference = this.getLanguagePreferenceIfExist(languageToMonthsNames);
-    return languagePreference ? languageToDaysNames[languagePreference] : super.getDayOfWeekNames('short');
+    return languagePreference ? languageToMonthsNames[languagePreference] : super.getMonthNames('short');
   }
 
   /**
@@ -59,7 +59,7 @@ export class TcDateAdapter extends NativeDateAdapter {
       let year = date.getFullYear();
       return year + '.' + this._to2digit(month) + '.' + this._to2digit(day);
     } else {
-      return date.toDateString();
+      return date.toDateString().replace(/^.{3} /, '');
     }
   }
 
@@ -79,12 +79,3 @@ export const MY_DATE_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-// export const MY_DATE_FORMATS = {
-//   display: {
-//     // dateInput: { month: 'short', year: 'numeric', day: 'numeric' },
-//     dateInput: 'input',
-//     monthYearLabel: {year: 'numeric', month: 'short'},
-//     dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
-//     monthYearA11yLabel: {year: 'numeric', month: 'long'},
-//   }
-// };
