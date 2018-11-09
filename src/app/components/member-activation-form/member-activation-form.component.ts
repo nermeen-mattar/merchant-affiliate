@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { LoginStatusService } from './../../auth/services/login-status.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { FieldValidatorsService } from '../../core/services/field-validators.service';
 import { MembersService } from '../../members/services/members.service';
 import { State } from '../../models/state';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tc-activation-member-form',
@@ -18,6 +21,7 @@ export class MemberActivationFormComponent implements OnInit {
   memberActivationGroup: FormGroup;
   memberActivationHash: string;
   displayPageNotFound: boolean;
+  $isUserLoggedIn: Observable < boolean > ;
   // mode: either "invitation" or "setuppassword"
   mode: string;
   invitationState;
@@ -28,9 +32,11 @@ export class MemberActivationFormComponent implements OnInit {
     private fieldValidatorsService: FieldValidatorsService,
     private authService: AuthService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private loginStatusService: LoginStatusService
     ) {
       this.displaySpinner = true;
+      this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
       const queryParams = activatedRoute.snapshot.queryParams;
       this.memberActivationHash = queryParams && queryParams['h'];
       if (this.router.url.includes('setuppassword') && this.memberActivationHash) {

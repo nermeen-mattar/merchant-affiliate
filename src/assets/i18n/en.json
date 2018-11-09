@@ -234,7 +234,8 @@
     "SELECT_TEAM_TO_CHANGE_NAME": "Select a team to change its name",
     "NEW_TEAM_NAME": "New Team Name",
     "CHANGE_TEAM_NAME": "Change Team Name",
-    "CREATE_TEAM": "Create Team"
+    "CREATE_TEAM": "Create Team",
+    "GO_TO_TEAMS": "Go to Teams"
   },
   "ADMIN": {
     "ADMIN": "Admin"
@@ -289,7 +290,7 @@
     "LOGIN": "Login",
     "PASSWORD": "Password",
     "REGISTER": "Register Now!",
-    "GO_TO_LOGIN": "Go to Login Page",
+    "GO_TO_LOGIN": "Go to Login",
     "FORGOT_PASSWORD": "Forgot Password?"
   },
   "RESET_PASSWORD": {
