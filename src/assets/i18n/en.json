@@ -301,7 +301,6 @@
   },
   "FOOTER": {
     "TITLE_TEAM_CENTER": "team.center",
-    "DATA_PRIVACY": "Data privacy",
     "FEATURES": "Features",
     "TERMS_CONDITIONS": "Terms & Conditions",
     "IMPRESSUM": "Impressum",
@@ -366,7 +365,24 @@
   },
   "CONTACT": {
     "DROP_LINE": "Drop us a Line!",
-    "CONTACT": "Contact"
+    "CONTACT_US": "Contact Us"
+
+  },
+  "LEGAL_NOTICE": {
+    "LEGAL_NOTICE": "Legal Notice",
+    "SECTION1": {
+      "TITLE": "Company Details",
+      "TEXT1": "team.center GmbH",
+      "TEXT2": "c/o René Graf",
+      "TEXT3": "Spranglenstrasse 48",
+      "TEXT4": "8303 Bassersdorf",
+      "TEXT5": "Switzerland",
+      "TEXT6": "The company is registered in the commercial register in Zurich, Switzerland (CHE‑179.326.761)"
+    },
+    "SECTION2": {
+      "TITLE": "Represented by",
+      "TEXT1": "Tobias Trusch and René Graf"
+    }
   },
   "DATA_PRIVACY": {
     "DATA_PRIVACY": "Data Privacy",

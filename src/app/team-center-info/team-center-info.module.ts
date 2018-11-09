@@ -8,6 +8,7 @@ import { AboutComponent } from './components/about/about.component';
 import { TeamCenterInfoRoutingModule } from './team-center-info-routing.module';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { DataPrivacyComponent } from './components/data-privacy/data-privacy.component';
+import { LegalNoticeComponent } from './components/legal-notice/legal-notice.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { DataPrivacyComponent } from './components/data-privacy/data-privacy.com
     TranslateModule.forChild(),
     ParallaxModule
   ],
-  declarations: [AboutComponent, TermsAndConditionsComponent, DataPrivacyComponent]
+  declarations: [AboutComponent, TermsAndConditionsComponent, DataPrivacyComponent, LegalNoticeComponent]
 })
 export class TeamCenterInfoModule { }
