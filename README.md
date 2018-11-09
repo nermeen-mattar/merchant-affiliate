@@ -89,6 +89,8 @@ this will:
 
 7) add the new language code and name to the available languages
 
+8) fill other preferences as needed. example fill languageToMonthsNames to change months names in date picker upon language change (default is English).
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
