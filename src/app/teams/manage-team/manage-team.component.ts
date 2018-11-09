@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TeamsService } from '../../core/services/teams.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 const MANAGE_MODES = {
   ADD: 'ADD',
@@ -18,7 +19,7 @@ export class ManageTeamComponent implements OnInit {
   manageTeamForm: FormGroup = new FormGroup({
     teamName: new FormControl('', [Validators.required])
   });
-  constructor(private teamsService: TeamsService) {
+  constructor(private teamsService: TeamsService, private route: ActivatedRoute, private router: Router) {
 
   }
 
@@ -31,8 +32,15 @@ export class ManageTeamComponent implements OnInit {
    */
   manageFormSubmit(formValue: { teamName: string }) {
     if (this.manageMode === this.manageModes.ADD) {
-      this.teamsService.addTeam(formValue.teamName);
+      this.teamsService.addTeam(formValue.teamName).subscribe( () => {
+        this.navigateBack();
+      })
     }
   }
 
+  navigateBack() {
+    this.router.navigate(['../'], {
+      relativeTo: this.route
+    });
+  }
 }
