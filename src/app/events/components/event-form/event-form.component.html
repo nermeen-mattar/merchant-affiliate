@@ -33,14 +33,16 @@
             </mat-form-field>
           </div>
           <!-- <mat-error *ngIf="eventTimingGroup.invalid && eventId || (eventTimingGroup.controls['endTime'].dirty &&  eventTimingGroup.controls['startTime'].dirty)"> -->
-          <mat-error class="app-event-form__field__error" *ngIf="eventGroup.controls['eventTiming'].invalid">
-            <ng-container *ngIf="eventGroup.controls['eventTiming'].errors.validateSecondGreaterThanFirst">
-              {{'FORM.END_SHOULD_BE_AFTER_START' | translate}}
-            </ng-container>
-            <ng-container *ngIf="eventGroup.controls['eventTiming'].errors.validateTimeInFuture">
-              {{'USER_MESSAGES.EVENT.EVENT_SHOULD_BE_IN_FUTURE' | translate}}
-            </ng-container>
-          </mat-error>
+          <ng-container *ngIf="eventGroup.controls['eventTiming'].errors">
+            <mat-error class="app-event-form__field__error app-event-form__field__error__end-before-first" *ngIf="eventGroup.controls['eventTiming'].errors.validateSecondGreaterThanFirst; else validateInFuture">
+                    {{'FORM.END_SHOULD_BE_AFTER_START' | translate}}         
+              </mat-error>   
+              <ng-template #validateInFuture> 
+                <mat-error  class="app-event-form__field__error app-event-form__field__error__in-past" *ngIf="eventGroup.controls['eventTiming'].errors.validateTimeInFuture">
+                    {{'USER_MESSAGES.EVENT.EVENT_SHOULD_BE_IN_FUTURE' | translate}}
+                  </mat-error>    
+              </ng-template>   
+          </ng-container>
         </div>
         <mat-form-field class="app-event-form__field">
           <input matInput placeholder="{{'EVENT.LOCATION'| translate}}" formControlName="location" required type="text">

@@ -12,7 +12,7 @@
         </span>
         <ng-container *ngIf="!isPastEvents">
           <mat-icon class="app-events__action" (click)="displayPastEvents()" color="primary">history</mat-icon>
-          <button mat-mini-fab *ngIf="isTeamAdmin" color="primary" class="app-events__action app-events__add" routerLink="/events/create">
+          <button mat-mini-fab *ngIf="isTeamAdmin" color="primary" class="app-events__action app-events__add" routerLink="../create">
             +
           </button>
         </ng-container>
@@ -80,7 +80,7 @@
           <mat-header-cell class="app-events__container__table__header-cell app-events__container__table__admin-actions" *matHeaderCellDef
             mat-sort-header> </mat-header-cell>
           <mat-cell class="app-events__container__table__content-cell app-events__container__table__admin-actions" *matCellDef="let row">
-            <mat-icon class="app-events__action" routerLink="/events/{{row.id}}" color="primary">edit</mat-icon>
+            <mat-icon class="app-events__action" routerLink="../{{row.id}}" color="primary">edit</mat-icon>
             <mat-icon class="app-events__action" (click)="deleteEvent(row.id)" color="primary">delete</mat-icon>
           </mat-cell>
         </ng-container>
@@ -140,7 +140,7 @@
             <mat-divider class="app-events__container__accordion__expandable-event__divider"></mat-divider>
             <div class="app-events__container__accordion__expandable-event__expanded-content__actions">
               <div *ngIf="isTeamAdmin">
-                <button [routerLink]="event.id" mat-raised-button color="primary" class="app-events__container__accordion__expandable-event__edit-button">{{ 'EDIT' | translate }}</button>
+                <button [routerLink]="'../' + event.id" mat-raised-button color="primary" class="app-events__container__accordion__expandable-event__edit-button">{{ 'EDIT' | translate }}</button>
                 <button (click)="deleteEvent(event.id)" mat-raised-button class="app-events__container__accordion__expandable-event__delete-button">{{ 'DELETE' | translate }}</button>
               </div>
               <button mat-raised-button routerLink="details/{{event.id}}">{{ 'DETAILS' | translate }}</button>
