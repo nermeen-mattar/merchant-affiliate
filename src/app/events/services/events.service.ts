@@ -34,11 +34,16 @@ export class EventsService {
           const currentEvent: TcEvent =  data.events[eventIndex];
           /* can change the following to be differenceInSecond if we want to be more accurate. */
           currentEvent.isPastEvent =  this.isPast(new Date(currentEvent.date + ' ' + currentEvent.startTime));
+          this.addHasMinAndHasMaxCriticalValues(currentEvent);
         }
         return data;
       }));
   }
 
+  addHasMinAndHasMaxCriticalValues(event) {
+    event.hasMinCriticalValue = event.minCriticalValue || event.minCriticalValue === 0;
+    event.hasMaxCriticalValue = event.maxCriticalValue || event.maxCriticalValue === 0;
+  }
   /**
    * @author Nermeen Mattar
    * @description checks if the passed date is in the past by comparing it to current date and time
@@ -58,7 +63,11 @@ export class EventsService {
    */
   getEventDetails(eventId: number): Observable < any > {
     return this.httpRequestService.httpGet(
-      `eventstate/${eventId}`);
+      `eventstate/${eventId}`).pipe(map((event) => {
+        this.addHasMinAndHasMaxCriticalValues(event);
+        return event;
+      }));
+
   }
 
   /**
