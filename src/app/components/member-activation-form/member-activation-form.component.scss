@@ -1,8 +1,11 @@
 @import "../../../styles/toolkit/variables.scss";
 .app-member-activation-form {
-  max-width: 700px;
+  width: 80%;
+  max-width: 500px;
   min-width: 200px;
-  margin: 0px auto;
+  margin: 7rem auto;
+  min-height: 242px;
+  text-align: center;
   &__title {
     color: $tc-color-gray-shade-6;
     text-align: center;
