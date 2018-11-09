@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
   MatToolbarModule,
   MatIconModule,
@@ -28,14 +29,9 @@ import {
   MatCheckboxModule,
   MatTabsModule,
   DateAdapter,
-  NativeDateAdapter
+  MAT_DATE_FORMATS
 } from '@angular/material';
-
-export class MyDateAdapter extends NativeDateAdapter {
-  getFirstDayOfWeek(): number {
-    return 1;
-  }
-}
+import { TcDateAdapter, MY_DATE_FORMATS } from '../classes/tc-date-adapter';
 
 @NgModule({
   imports: [
@@ -70,6 +66,9 @@ export class MyDateAdapter extends NativeDateAdapter {
     MatCheckboxModule,
     MatTabsModule
   ],
-  providers: [ {provide: DateAdapter, useClass: MyDateAdapter}]
+  providers: [ 
+    {provide: DateAdapter, useClass: TcDateAdapter}, 
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS}
+  ]
 })
 export class MaterialModule {}
