@@ -34,10 +34,10 @@ export class AppComponent {
     this.initLanguageRelatedVariables();
     this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
     this.$isUserLoggedIn.subscribe(isLoggedIn => { if (!isLoggedIn) { this.resetData(); } });
-      teamsService.$teamRoles.subscribe(teamRoles => {
-        if(teamRoles) {
-          this.hasAdminRole = teamsService.hasAdminRole();
-        }
+    teamsService.$teamRoles.subscribe(teamRoles => {
+      if(teamRoles) {
+        this.hasAdminRole = teamsService.hasAdminRole();
+      }
     });
     this.sendRouterEventsToGoogleAnalytics();
   }
