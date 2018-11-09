@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { LegalNoticeComponent } from './components/legal-notice/legal-notice.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 import { AboutComponent } from './components/about/about.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'data-privacy',
     component: DataPrivacyComponent
+  },
+  {
+    path: 'legal-notice',
+    component: LegalNoticeComponent
   },
   {
     path: '**',
