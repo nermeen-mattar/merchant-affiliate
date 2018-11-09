@@ -1,7 +1,7 @@
 import { NativeDateAdapter } from '@angular/material';
 
-import { languageToMonths } from './../../core/constants/i18n.constants';
-import { languageToDays } from '../../core/constants/i18n.constants';
+import { languageToMonthsNames } from './../../core/constants/i18n.constants';
+import { languageToDaysNames } from '../../core/constants/i18n.constants';
 export class TcDateAdapter extends NativeDateAdapter {
 
   /**
@@ -20,8 +20,8 @@ export class TcDateAdapter extends NativeDateAdapter {
    * @returns {string[]}
    */
   getDayOfWeekNames(): string[] {
-    const languagePreference = this.getLanguagePreferenceIfExist(languageToDays);
-    return languagePreference ? languageToDays[languagePreference] : super.getDayOfWeekNames('short');
+    const languagePreference = this.getLanguagePreferenceIfExist(languageToDaysNames);
+    return languagePreference ? languageToDaysNames[languagePreference] : super.getDayOfWeekNames('short');
   }
 
   /**
@@ -31,8 +31,8 @@ export class TcDateAdapter extends NativeDateAdapter {
    * @returns {string[]}
    */
   getMonthNames(): string[] {
-    const languagePreference = this.getLanguagePreferenceIfExist(languageToMonths);
-    return languagePreference ? languageToDays[languagePreference] : super.getDayOfWeekNames('short');
+    const languagePreference = this.getLanguagePreferenceIfExist(languageToMonthsNames);
+    return languagePreference ? languageToDaysNames[languagePreference] : super.getDayOfWeekNames('short');
   }
 
   /**
