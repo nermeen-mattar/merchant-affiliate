@@ -16,10 +16,10 @@ export class LoginStatusService {
 
   /**
    * @author Nermeen Mattar
-   * @description Returns the login state of the current user whether logged in or not
+   * @description checks if the user is authenticated returns the login state of the current user whether logged in or not
    * @returns {boolean}
    */
-  getCurrentUserLoginState() {
+  isAuthenticated() {
     return this.isLoggedIn.getValue();
   }
 
@@ -52,12 +52,4 @@ export class LoginStatusService {
     this.isLoggedIn.next(false);
   }
 
-  /**
-   * @author Nermeen Mattar
-   * checks if the user is authenticated
-   * @returns {boolean}
-   */
-  isAuthenticated(): boolean {
-    return this.isLoggedIn.getValue();
-  }
 }

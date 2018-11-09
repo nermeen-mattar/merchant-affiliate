@@ -2,6 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 import { TcTeamInfo } from './../../teams/models/tc-team-info.model';
 import { TcClientSideTeamRoles } from './../../teams/models/tc-client-side-team-roles.model';
@@ -12,7 +13,8 @@ import { HttpRequestsService } from './http-requests.service';
 export class TeamsService {
   private _userTeams: TcTeamInfo[];
   private _selectedTeamId: number;
-  private _teamRoles: TcClientSideTeamRoles;
+  private _teamRoles: BehaviorSubject < TcClientSideTeamRoles > = new BehaviorSubject(null);
+  $teamRoles: Observable < TcClientSideTeamRoles > = this._teamRoles.asObservable();
   constructor(private httpRequestService: HttpRequestsService) {
     this.selectedTeamId = JSON.parse(localStorage.getItem('selectedTeamId'));
     this.userTeams = JSON.parse(localStorage.getItem('userTeams'));
@@ -75,7 +77,7 @@ export class TeamsService {
    * @type {TcClientSideTeamRoles}
    */
   get teamRoles(): TcClientSideTeamRoles {
-    return this._teamRoles;
+    return this._teamRoles.getValue();
   }
 
   /**
@@ -85,8 +87,8 @@ export class TeamsService {
    * @param {teamRoles} TcClientSideTeamRoles
    */
   set teamRoles(teamRoles: TcClientSideTeamRoles) {
-    this._teamRoles = teamRoles;
-    if (this.teamRoles) {
+    this._teamRoles.next(teamRoles);
+    if (teamRoles) {
       localStorage.setItem('teamRoles', JSON.stringify(teamRoles));
     } else {
       localStorage.removeItem('teamRoles');

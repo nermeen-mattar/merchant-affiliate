@@ -23,14 +23,13 @@ export class HeaderComponent {
 
   constructor(public translate: TranslateService, private loginStatusService: LoginStatusService,
     private membersService: MembersService,
-    teamService: TeamsService) {
+    teamsService: TeamsService) {
       this.appLanguages = availableLanguages;
     this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
-    this.$isUserLoggedIn.subscribe( isLoggedIn => {
-      if (isLoggedIn) {
-        this.hasAdminRole = teamService.hasAdminRole();
-      } else {
-        this.resetData();
+    this.$isUserLoggedIn.subscribe( isLoggedIn => { if (!isLoggedIn) { this.resetData(); } });
+    teamsService.$teamRoles.subscribe(teamRoles => {
+      if(teamRoles) {
+        this.hasAdminRole = teamsService.hasAdminRole();
       }
     });
   }
@@ -51,7 +50,7 @@ export class HeaderComponent {
   languageSelected(langCode: string) {
     this.selectedLanguageCode = langCode;
     this.translate.use(langCode);
-    if (this.loginStatusService.getCurrentUserLoginState()) {
+    if (this.loginStatusService.isAuthenticated()) {
       this.membersService.updateMemberLanguage(langCode);
     }
     localStorage.setItem('lang', langCode);

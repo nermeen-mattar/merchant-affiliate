@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { MatIconRegistry } from '@angular/material';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { MembersService } from './members/services/members.service';
 import { AvailableLanguageInfo } from './core/models/available-language-info.model';
 import { availableLanguages, defaultLanguage, sysOptions } from './core/constants/i18n.constants';
 import { LoginStatusService } from './auth/services/login-status.service';
-import { Router, NavigationEnd } from '@angular/router';
 import { TeamsService } from './core/services/teams.service';
 @Component({
   selector: 'tc-root',
@@ -33,11 +33,10 @@ export class AppComponent {
     this.resetScrollOnRouteChange();
     this.initLanguageRelatedVariables();
     this.$isUserLoggedIn = this.loginStatusService.$userLoginState;
-    this.$isUserLoggedIn.subscribe(isLoggedIn => {
-      if (isLoggedIn) {
+    this.$isUserLoggedIn.subscribe(isLoggedIn => { if (!isLoggedIn) { this.resetData(); } });
+    teamsService.$teamRoles.subscribe(teamRoles => {
+      if(teamRoles) {
         this.hasAdminRole = teamsService.hasAdminRole();
-      } else {
-        this.resetData();
       }
     });
     this.sendRouterEventsToGoogleAnalytics();
@@ -100,7 +99,7 @@ export class AppComponent {
   languageSelected(langCode: string) {
     this.selectedLanguageCode = langCode;
     this.translate.use(langCode);
-    if (this.loginStatusService.getCurrentUserLoginState()) {
+    if (this.loginStatusService.isAuthenticated()) {
       this.membersService.updateMemberLanguage(langCode);
     }
     localStorage.setItem('lang', langCode);
