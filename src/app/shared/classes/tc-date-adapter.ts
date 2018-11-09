@@ -1,12 +1,15 @@
 import { NativeDateAdapter } from '@angular/material';
+import { languageToDays } from '../../core/constants/i18n.constants';
 export class TcDateAdapter extends NativeDateAdapter {
 
   getFirstDayOfWeek(): number {
     return 1;
   }
   getDayOfWeekNames(): string[] {
-    if(localStorage.getItem('lang') === 'de') {
-      return [ 'Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'];
+    const selectedLang = localStorage.getItem('lang');
+    const temp = Object.keys(languageToDays).find(langCode => selectedLang === langCode);
+    if(temp) {
+      return languageToDays[temp];
     } else {
       return super.getDayOfWeekNames('short');
     }
