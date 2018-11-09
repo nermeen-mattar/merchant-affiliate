@@ -97,12 +97,15 @@ export class EventFormComponent implements OnInit {
    */
   validateTimeInFuture(): ValidatorFn {
     return (group: FormGroup): { [key: string]: any } => {
-        const eventDate = new Date(group.controls.date.value);
-        const hours = group.controls.startTime.value.replace(/:.+/g, '')
-        const minutes = group.controls.startTime.value.replace(/.+:/g, '')
-        eventDate.setHours(hours);
-        eventDate.setMinutes(minutes);
-         return this.eventsService.isPast(eventDate) ? { validateTimeInFuture: 'error' } : null;
+      if(!group.controls.date.value || !group.controls.startTime.value) {
+        return null;
+      }
+      const eventDate = new Date(group.controls.date.value);
+      const hours = group.controls.startTime.value.slice(0,2);
+      const minutes = group.controls.startTime.value.slice(3,5);
+      eventDate.setHours(hours);
+      eventDate.setMinutes(minutes);
+      return this.eventsService.isPast(eventDate) ? { validateTimeInFuture: 'error' } : null;
     };
   }
 
