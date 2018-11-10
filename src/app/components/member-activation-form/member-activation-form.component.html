@@ -35,7 +35,12 @@
       <mat-card-title class="app-member-activation-form__title">{{ 'ACTIVATION.INVITATION_TITLE' | translate}}</mat-card-title>
       <mat-card-content *ngIf="invitationState === State.SUCCESS;">{{ 'ACTIVATION.INVITATION_ACCEPTED' |translate }}</mat-card-content>
       <mat-card-content *ngIf="invitationState === State.ERROR;">{{ 'ACTIVATION.INVITATION_ERROR' |translate }}</mat-card-content>
-      <button routerLink="/auth/login" mat-raised-button color="primary" class="app-mail-activation__button">{{'LOGIN.GO_TO_LOGIN' | translate}}</button>
+      <ng-container *ngIf="($isUserLoggedIn| async); else goToLogin">
+        <button  routerLink="/teams" mat-raised-button color="primary" class="app-member-activation-form__button">{{'TEAM.GO_TO_TEAMS' | translate}}</button>
+      </ng-container>
+      <ng-template #goToLogin >
+          <button  routerLink="/auth/login" mat-raised-button color="primary" class="app-member-activation-form__button">{{'LOGIN.GO_TO_LOGIN' | translate}}</button>
+      </ng-template>
     </mat-card-content>
   </mat-card>
 
