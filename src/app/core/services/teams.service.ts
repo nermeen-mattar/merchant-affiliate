@@ -176,16 +176,16 @@ export class TeamsService {
    * @desc Sends the add team server call and creates a team
    * @param teamName - the name of the team to be created
    */
-  addTeam(teamName: string) {
-    this.httpRequestService.httpPost('teams', {
+  addTeam(teamName: string): Observable <any> {
+    return this.httpRequestService.httpPost('teams', {
       teamName
     }, {
       success: 'TEAM.TEAM_CREATED_SUCCESS',
       failDefault: 'TEAM.TEAM_CREATED_FAILURE'
-    }).subscribe(res => {
-      this.userTeams.unshift(res.team);
+    }).pipe(map(team => {
+      this.userTeams.unshift({teamName: team.name, teamId: team.id});
       localStorage.setItem('userTeams', JSON.stringify(this.userTeams));
-    });
+     }));
   }
 
   /**
