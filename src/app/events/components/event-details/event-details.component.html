@@ -30,12 +30,12 @@
           <span class="app-event-details__date">{{eventDetails.endTime | stringNormalizer:timeFormat}}</span>
         </div>
       </mat-card>
-      <mat-card class="app-event-details__basic-info__section">
+      <mat-card class="app-event-details__basic-info__section" *ngIf="eventDetails.hasMaxCriticalValue || eventDetails.hasMinCriticalValue">
         <div class="app-event-details__basic-info__section__item">
-          <span *ngIf="eventDetails.maxCriticalValue || eventDetails.maxCriticalValue === 0" class="app-event-details__label">
+          <span *ngIf="eventDetails.hasMaxCriticalValue" class="app-event-details__label">
             {{"EVENT.MAX" | translate}}:</span>
           {{eventDetails.maxCriticalValue}}
-          <span *ngIf="eventDetails.minCriticalValue || eventDetails.minCriticalValue === 0" class="app-event-details__label">{{"EVENT.MIN"
+          <span *ngIf="eventDetails.hasMinCriticalValue" class="app-event-details__label">{{"EVENT.MIN"
             | translate}}:</span>
           {{eventDetails.minCriticalValue}}</div>
         </mat-card>
