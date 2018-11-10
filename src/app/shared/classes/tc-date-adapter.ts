@@ -15,8 +15,8 @@ export class TcDateAdapter extends NativeDateAdapter {
 
   /**
    * @author Nermeen Mattar
-   * @description attempts to get the days of week on the selected language if exists in i18n constants, if not it calls the super class to get the
-   * default week names (English is the default)
+   * @description attempts to get the days of week on the selected language if exists in i18n constants, if not it calls the super 
+   * class to get the default week names (English is the default)
    * @returns {string[]}
    */
   getDayOfWeekNames(): string[] {
@@ -26,8 +26,8 @@ export class TcDateAdapter extends NativeDateAdapter {
 
   /**
    * @author Nermeen Mattar
-   * @description attempts to get the months on the selected language if exists in i18n constants, if not it calls the super class to get the
-   * default months' names (English is the default)
+   * @description attempts to get the months on the selected language if exists in i18n constants, if not it calls the super
+   * class to get the default months' names (English is the default)
    * @returns {string[]}
    */
   getMonthNames(): string[] {
@@ -37,7 +37,8 @@ export class TcDateAdapter extends NativeDateAdapter {
 
   /**
    * @author Nermeen Mattar
-   * @description shared function that attempts to get the language preference for the selected language (if exists in the passed language data object)
+   * @description shared function that attempts to get the language preference for the selected language (if exists in the
+   * passed language data object)
    * @returns {string}
    */
   getLanguagePreferenceIfExist(languageDateObj): string {
