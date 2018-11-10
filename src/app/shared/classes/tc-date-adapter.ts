@@ -53,11 +53,11 @@ export class TcDateAdapter extends NativeDateAdapter {
    * @returns {string}
    */
   format(date: Date, displayFormat: Object): string {
-    if (displayFormat == "input") {
-      let day = date.getDate();
-      let month = date.getMonth() + 1;
-      let year = date.getFullYear();
-      return year + '.' + this._to2digit(month) + '.' + this._to2digit(day);
+    if (displayFormat === 'input') {
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      return  this._to2digit(day) + '.' + this._to2digit(month) + '.' +  year;
     } else {
       return date.toDateString().replace(/^.{3} /, '');
     }
