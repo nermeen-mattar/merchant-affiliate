@@ -1,5 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
+import { NbThemeService } from '@nebular/theme';
+
 import { AnalyticsService } from './@core/utils/analytics.service';
 
 @Component({
@@ -8,10 +10,12 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private analytics: AnalyticsService) {
+  constructor(private analytics: AnalyticsService, themeService: NbThemeService) {
+    themeService.changeTheme('default');
   }
 
   ngOnInit() {
+    
     this.analytics.trackPageViews();
   }
 }
