@@ -88,40 +88,40 @@ export class DashboardComponent implements OnDestroy {
   // following are for demo just replace them with real data from the SDK
   tableSettings = {
     columns: {
-      id: {
-        title: 'ID'
+      dealName: {
+        title: 'Deal Name'
       },
       name: {
-        title: 'Full Name'
+        title: 'Customer Name'
       },
-      username: {
-        title: 'User Name'
+      number: {
+        title: 'Customer Number'
       },
-      email: {
-        title: 'Email'
+      itemName: {
+        title: 'Item Name'
       }
     }
   };
 
   tableData = [
     {
-      id: 1,
+      dealName: 1,
       name: 'Leanne Graham',
-      username: 'Bret',
-      email: 'Sincere@april.biz'
+      number: '079723761',
+      itemName: 'Sincer'
     },
     {
-      id: 2,
+      dealName: 2,
       name: 'Ervin Howell',
-      username: 'Antonette',
-      email: 'Shanna@melissa.tv'
+      number: '07972313761',
+      itemName: 'Shanna'
     },
         
     {
-      id: 11,
+      dealName: 11,
       name: 'Nicholas DuBuque',
-      username: 'Nicholas.Stanton',
-      email: 'Rey.Padberg@rosamond.biz'
+      number: '0797233761',
+      itemName: 'Rey.Padber'
     }
   ];
 
