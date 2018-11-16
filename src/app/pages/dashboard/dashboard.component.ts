@@ -84,4 +84,45 @@ export class DashboardComponent implements OnDestroy {
   ngOnDestroy() {
     this.alive = false;
   }
+
+  // following are for demo just replace them with real data from the SDK
+  tableSettings = {
+    columns: {
+      id: {
+        title: 'ID'
+      },
+      name: {
+        title: 'Full Name'
+      },
+      username: {
+        title: 'User Name'
+      },
+      email: {
+        title: 'Email'
+      }
+    }
+  };
+
+  tableData = [
+    {
+      id: 1,
+      name: 'Leanne Graham',
+      username: 'Bret',
+      email: 'Sincere@april.biz'
+    },
+    {
+      id: 2,
+      name: 'Ervin Howell',
+      username: 'Antonette',
+      email: 'Shanna@melissa.tv'
+    },
+        
+    {
+      id: 11,
+      name: 'Nicholas DuBuque',
+      username: 'Nicholas.Stanton',
+      email: 'Rey.Padberg@rosamond.biz'
+    }
+  ];
+
 }

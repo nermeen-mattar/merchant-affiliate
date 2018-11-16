@@ -18,6 +18,7 @@ import {
   NbPopoverModule,
   NbContextMenuModule,
 } from '@nebular/theme';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { NbSecurityModule } from '@nebular/security';
 
@@ -59,6 +60,7 @@ const NB_MODULES = [
   NbContextMenuModule,
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
+  Ng2SmartTableModule
 ];
 
 const COMPONENTS = [
