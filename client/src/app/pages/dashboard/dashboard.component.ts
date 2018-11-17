@@ -1,6 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators/takeWhile' ;
+import { takeWhile } from 'rxjs/operators/takeWhile';
 
 interface CardSettings {
   title: string;
@@ -13,35 +13,35 @@ interface CardSettings {
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnDestroy {
-
   private alive = true;
   // example of busienss info (apparently we do have the type :D)
-  businessInfo = 
-    {
-      'id': "3f522ee8-7e69-4d78-aeb5-5278aaf21558",
-      "name": "Burger",
-      "type": 'F&B',
-      'country': 'JO',
-      'currency': 'JOD',
-      'phone': '797405021',
-      'address': 'Amman, Amman,Jordan',
-      'image': {
-        '256': 'https://posrocket-production.s3.amazonaws.com:443/3f522ee87e694d78aeb55278aaf21558/6cf8aee0e66a4f40b91539668e67f613-256.png'
+  businessInfo = {
+    id: '3f522ee8-7e69-4d78-aeb5-5278aaf21558',
+    name: 'Burger',
+    type: 'F&B',
+    country: 'JO',
+    currency: 'JOD',
+    phone: '797405021',
+    address: 'Amman, Amman,Jordan',
+    image: {
+      '256':
+        'https://posrocket-production.s3.amazonaws.com:443/3f522ee87e694d78aeb55278aaf21558/6cf8aee0e66a4f40b91539668e67f613-256.png',
+    },
+    social: {
+      id: '5072b345-696d-49c6-9def-e62981be1cde',
+      facebook: null,
+      instagram: null,
+      snapchat: null,
+      twitter: null,
+    },
+    images: {
+      receipt_logo: {
+        '256':
+          'https://posrocket-production.s3.amazonaws.com:443/3f522ee87e694d78aeb55278aaf21558/6cf8aee0e66a4f40b91539668e67f613-256.png',
       },
-      'social': {
-        'id': '5072b345-696d-49c6-9def-e62981be1cde',
-        'facebook': null,
-        'instagram': null,
-        'snapchat': null,
-        'twitter': null
-      },
-      'images': {
-        'receipt_logo': {
-          '256': 'https://posrocket-production.s3.amazonaws.com:443/3f522ee87e694d78aeb55278aaf21558/6cf8aee0e66a4f40b91539668e67f613-256.png'
-        }
-      }
-    };
-    
+    },
+  };
+
   lightCard: CardSettings = {
     title: 'Light',
     iconClass: 'nb-lightbulb',
@@ -100,11 +100,12 @@ export class DashboardComponent implements OnDestroy {
   };
 
   constructor(private themeService: NbThemeService) {
-    this.themeService.getJsTheme()
+    this.themeService
+      .getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.statusCards = this.statusCardsByThemes[theme.name];
-    });
+      });
   }
 
   ngOnDestroy() {
@@ -115,18 +116,18 @@ export class DashboardComponent implements OnDestroy {
   tableSettings = {
     columns: {
       dealName: {
-        title: 'Deal Name'
+        title: 'Deal Name',
       },
       name: {
-        title: 'Customer Name'
+        title: 'Customer Name',
       },
       number: {
-        title: 'Customer Number'
+        title: 'Customer Number',
       },
       itemName: {
-        title: 'Item Name'
-      }
-    }
+        title: 'Item Name',
+      },
+    },
   };
 
   tableData = [
@@ -134,21 +135,20 @@ export class DashboardComponent implements OnDestroy {
       dealName: 1,
       name: 'Leanne Graham',
       number: '079723761',
-      itemName: 'Sincer'
+      itemName: 'Sincer',
     },
     {
       dealName: 2,
       name: 'Ervin Howell',
       number: '07972313761',
-      itemName: 'Shanna'
+      itemName: 'Shanna',
     },
-        
+
     {
       dealName: 11,
       name: 'Nicholas DuBuque',
       number: '0797233761',
-      itemName: 'Rey.Padber'
-    }
+      itemName: 'Rey.Padber',
+    },
   ];
-
 }
