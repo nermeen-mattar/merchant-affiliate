@@ -34,5 +34,9 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "business": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

@@ -7,18 +7,37 @@
       <nb-tabset>
         <nb-tab tabTitle="My Giveaways" badgeText="99+" badgeStatus="danger">
           <p>List of my <strong>Giveaways</strong>.</p>
-          <ng2-smart-table [settings]="tableSettings" [source]="tableData"></ng2-smart-table>
+          <ng2-smart-table
+            [settings]="tableSettings"
+            [source]="tableData"
+          ></ng2-smart-table>
         </nb-tab>
-        <nb-tab tabTitle="Received Giveaways" badgeText="12" badgePosition="bottom right" badgeStatus="warning">
-          <p> List of my Received <strong>Giveaways</strong>.</p>
+        <nb-tab
+          tabTitle="Received Giveaways"
+          badgeText="12"
+          badgePosition="bottom right"
+          badgeStatus="warning"
+        >
+          <p>List of my Received <strong>Giveaways</strong>.</p>
         </nb-tab>
-        <nb-tab tabTitle="Look for Deals" badgeText="new" badgePosition="top right" badgeStatus="success">
+        <nb-tab
+          tabTitle="Look for Deals"
+          badgeText="new"
+          badgePosition="top right"
+          badgeStatus="success"
+        >
           <p>Open <strong>Deals</strong>.</p>
-           <!-- will display cards that shows the business info (including business logo-->
+          <!--
+            will display cards that shows the business info (including business logo
+          -->
         </nb-tab>
-        <nb-tab tabTitle="My Requests" badgeText="new" badgePosition="top right" badgeStatus="success">
-            <p>List of my <strong>Requests</strong>.</p>
-            
+        <nb-tab
+          tabTitle="My Requests"
+          badgeText="new"
+          badgePosition="top right"
+          badgeStatus="success"
+        >
+          <p>List of my <strong>Requests</strong>.</p>
         </nb-tab>
       </nb-tabset>
     </nb-card-body>
