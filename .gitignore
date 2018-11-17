@@ -8,7 +8,7 @@
 build.output
 
 # dependencies
-/node_modules
+node_modules
 
 # IDEs and editors
 /.idea
@@ -43,3 +43,22 @@ testem.log
 .DS_Store
 Thumbs.db
 A
+
+# server folder
+*.csv
+*.dat
+*.iml
+*.log
+*.out
+*.pid
+*.seed
+*.sublime-*
+*.swo
+*.swp
+*.tgz
+*.xml
+.DS_Store
+.idea
+.project
+.strong-pm
+coverage
