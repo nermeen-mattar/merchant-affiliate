@@ -38,5 +38,9 @@
   "business": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "deal": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
