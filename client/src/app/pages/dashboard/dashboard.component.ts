@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators/takeWhile';
+import { DealApi } from '../../../sdk';
 
 interface CardSettings {
   title: string;
@@ -13,6 +14,7 @@ interface CardSettings {
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnDestroy, OnInit {
+  public tableData = [];
   private alive = true;
 
   lightCard: CardSettings = {
@@ -72,7 +74,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
     ],
   };
 
-  constructor(private themeService: NbThemeService) {
+  constructor(private themeService: NbThemeService, private dealApi: DealApi) {
     this.themeService
       .getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -81,7 +83,11 @@ export class DashboardComponent implements OnDestroy, OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dealApi.find().subscribe(data => {
+      this.tableData = data;
+    });
+  }
 
   ngOnDestroy() {
     this.alive = false;
@@ -89,41 +95,47 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
   // following are for demo just replace them with real data from the SDK
   tableSettings = {
+    editable: false,
+    actions: {
+      edit: false,
+      delete: false,
+    },
+    hideSubHeader: false,
     columns: {
       dealName: {
         title: 'Deal Name',
       },
-      name: {
-        title: 'Customer Name',
+      description: {
+        title: 'Deal Description',
       },
-      number: {
-        title: 'Customer Number',
+      limit: {
+        title: 'Deal Limit',
       },
-      itemName: {
-        title: 'Item Name',
-      },
+      // itemName: {
+      //   title: 'Item Name',
+      // },
     },
   };
 
-  tableData = [
-    {
-      dealName: 1,
-      name: 'Leanne Graham',
-      number: '079723761',
-      itemName: 'Sincer',
-    },
-    {
-      dealName: 2,
-      name: 'Ervin Howell',
-      number: '07972313761',
-      itemName: 'Shanna',
-    },
+  // tableData = [
+  //   {
+  //     dealName: 1,
+  //     name: 'Leanne Graham',
+  //     number: '079723761',
+  //     itemName: 'Sincer',
+  //   },
+  //   {
+  //     dealName: 2,
+  //     name: 'Ervin Howell',
+  //     number: '07972313761',
+  //     itemName: 'Shanna',
+  //   },
 
-    {
-      dealName: 11,
-      name: 'Nicholas DuBuque',
-      number: '0797233761',
-      itemName: 'Rey.Padber',
-    },
-  ];
+  //   {
+  //     dealName: 11,
+  //     name: 'Nicholas DuBuque',
+  //     number: '0797233761',
+  //     itemName: 'Rey.Padber',
+  //   },
+  // ];
 }
