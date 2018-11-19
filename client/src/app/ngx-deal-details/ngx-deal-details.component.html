@@ -1,3 +1,21 @@
-<p>
-  ngx-deal-details works!
-</p>
+<nb-card class="col-12">
+  <h4 class="mt-5">Deal Details Info</h4>
+  <nb-card-body *ngIf="dealInfo">
+    <h5>Deal Name</h5>
+    <p>
+      <strong>{{ dealInfo.name }}</strong>
+    </p>
+    <br />
+    <br />
+    <h5>Deal Description</h5>
+    <p>
+      <strong>{{ dealInfo.description }}</strong>
+    </p>
+    <br />
+    <br />
+    <h5>Deal limit</h5>
+    <p>
+      <strong>{{ dealLimit }}</strong>
+    </p>
+  </nb-card-body>
+</nb-card>
