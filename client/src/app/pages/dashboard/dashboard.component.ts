@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 
@@ -12,7 +12,7 @@ interface CardSettings {
   selector: 'ngx-dashboard',
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnDestroy, OnInit {
   private alive = true;
 
   lightCard: CardSettings = {
@@ -80,6 +80,8 @@ export class DashboardComponent implements OnDestroy {
         this.statusCards = this.statusCardsByThemes[theme.name];
       });
   }
+
+  ngOnInit(): void {}
 
   ngOnDestroy() {
     this.alive = false;

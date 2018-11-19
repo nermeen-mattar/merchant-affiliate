@@ -1,0 +1,45 @@
+<nb-card>
+  <form #newDealForm="ngForm" (ngSubmit)="submit(newDealForm.value)">
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      fieldSize="medium"
+      ngModel
+      #name="ngModel"
+      name="name"
+      placeholder="Deal name"
+    />
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      fieldSize="medium"
+      ngModel
+      #description="ngModel"
+      name="description"
+      placeholder="Deal description"
+    />
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      fieldSize="medium"
+      ngModel
+      #limit="ngModel"
+      name="limit"
+      placeholder="Limit"
+    />
+
+    <!--
+      <nb-select multiple placeholder="Multiple Select">
+        <nb-option value="1">Option 1</nb-option>
+        <nb-option value="2">Option 2</nb-option>
+        <nb-option value="3">Option 3</nb-option>
+        <nb-option value="4">Option 4</nb-option>
+      </nb-select>
+    -->
+
+    <button nbButton type="submit" status="success">Create</button>
+  </form>
+</nb-card>

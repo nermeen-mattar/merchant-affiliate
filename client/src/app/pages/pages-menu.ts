@@ -8,6 +8,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'New Deal',
+    icon: 'nb-plus',
+    link: '/pages/new-deal',
+    home: true,
+  },
+  {
     title: 'FEATURES',
     group: true,
   },

@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
+import { NewDealComponent } from './new-deal/new-deal.component';
+// Services
+import { DealApi } from '../../sdk';
 
-const PAGES_COMPONENTS = [
-  PagesComponent,
-];
+const PAGES_COMPONENTS = [PagesComponent, NewDealComponent];
 
 @NgModule({
   imports: [
@@ -16,10 +18,12 @@ const PAGES_COMPONENTS = [
     ThemeModule,
     DashboardModule,
     MiscellaneousModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // NbSelectModule
+    // NbButtonModule,
   ],
-  declarations: [
-    ...PAGES_COMPONENTS,
-  ],
+  providers: [DealApi],
+  declarations: [...PAGES_COMPONENTS],
 })
-export class PagesModule {
-}
+export class PagesModule {}

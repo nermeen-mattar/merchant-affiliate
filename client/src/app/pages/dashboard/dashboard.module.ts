@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
 
@@ -11,15 +10,10 @@ interface CardSettings {
 }
 
 @NgModule({
-  imports: [
-    ThemeModule,
-  ],
-  declarations: [
-    DashboardComponent,
-  ],
+  imports: [ThemeModule],
+  declarations: [DashboardComponent],
 })
 export class DashboardModule {
-
   lightCard: CardSettings = {
     title: 'Light',
     iconClass: 'nb-lightbulb',
@@ -40,6 +34,4 @@ export class DashboardModule {
     iconClass: 'nb-coffee-maker',
     type: 'warning',
   };
-
-  stat
 }
