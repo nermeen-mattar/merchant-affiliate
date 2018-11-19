@@ -10,6 +10,7 @@
           <ng2-smart-table
             [settings]="tableSettings"
             [source]="tableData"
+            (userRowSelect)="goDealPage($event)"
           ></ng2-smart-table>
         </nb-tab>
         <nb-tab

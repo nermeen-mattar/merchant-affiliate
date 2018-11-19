@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewDealComponent } from './new-deal/new-deal.component';
+import { NgxDealDetailsComponent } from '../ngx-deal-details/ngx-deal-details.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'new-deal',
         component: NewDealComponent,
+      },
+      {
+        path: 'deal/:id',
+        component: NgxDealDetailsComponent,
       },
     ],
   },

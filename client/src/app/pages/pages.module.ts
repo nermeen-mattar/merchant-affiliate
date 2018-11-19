@@ -7,10 +7,15 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { NewDealComponent } from './new-deal/new-deal.component';
+import { NgxDealDetailsComponent } from '../ngx-deal-details/ngx-deal-details.component';
 // Services
 import { DealApi } from '../../sdk';
 
-const PAGES_COMPONENTS = [PagesComponent, NewDealComponent];
+const PAGES_COMPONENTS = [
+  PagesComponent,
+  NewDealComponent,
+  NgxDealDetailsComponent,
+];
 
 @NgModule({
   imports: [

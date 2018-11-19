@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 import { DealApi } from '../../../sdk';
@@ -74,7 +75,11 @@ export class DashboardComponent implements OnDestroy, OnInit {
     ],
   };
 
-  constructor(private themeService: NbThemeService, private dealApi: DealApi) {
+  constructor(
+    private themeService: NbThemeService,
+    private dealApi: DealApi,
+    private router: Router,
+  ) {
     this.themeService
       .getJsTheme()
       .pipe(takeWhile(() => this.alive))
@@ -87,6 +92,11 @@ export class DashboardComponent implements OnDestroy, OnInit {
     this.dealApi.find().subscribe(data => {
       this.tableData = data;
     });
+  }
+
+  goDealPage(event) {
+    const dealId = event.data.id;
+    this.router.navigate([`/pages/deal/${dealId}`]);
   }
 
   ngOnDestroy() {
