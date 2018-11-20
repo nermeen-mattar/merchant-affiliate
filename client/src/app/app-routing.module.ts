@@ -12,7 +12,11 @@ import { MemberActivationFormComponent } from './components/member-activation-fo
 const routes: Routes = [{
     path: '',
     pathMatch: 'full',
-    redirectTo: 'auth'
+    redirectTo: 'home'
+  },
+  {
+    path: 'home',
+    loadChildren: './home/home.module#HomeModule'
   },
   {
     path: 'contact',

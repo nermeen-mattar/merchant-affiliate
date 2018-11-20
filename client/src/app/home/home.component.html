@@ -1,101 +1,63 @@
 <div class="app-home">
   <div class="app-home__main">
-    <div class="app-home__main__top" parallax>
-      <div class="app-home__main__top__logo">
-      </div>
-      <div class="app-home__main__top__text">
+    <div class="app-home__main__top"  parallax [config]="{initialValue: -100, ratio: .1}">>
+  
+      <!-- <div class="app-home__main__top__text">
         <h2>{{'MERCHANT_AFFILIATE_INFO1' | translate}}</h2>
-      </div>
-      <div class="app-home__main__top__text">
+      </div> -->
+      <!-- <div class="app-home__main__top__text">
           <h3>{{'MERCHANT_AFFILIATE_INFO2' | translate}}</h3>
+      </div> -->
+      <div class="app-home__main">
+          <div class="app-home__main__top__register">
+    
+              <h3 class="app-home__main__top__register__title"> Login to Start Collaborating! </h3>
+          
+              <button mat-mini-fab color="primary" class="app-home__main__top__register__action-btn" (click)="navigateToRegisterPage(teamName.value)">
+                  <a   style="text-decoration: none;" href="http://launchpad.rocketinfra.com/oauth/authorize/?response_type=code&client_id=LDMoVlUYyi8OXZBX2964hO4CwWscswl1pvvxHlW0&redirect_uri=http://localhost:5000/activation" >{{ 'LOGIN.LOGIN' | translate }}</a>
+              </button>
+            </div>
       </div>
 
-      <div class="app-home__main__top__register">
-
-        <h3 class="app-home__main__top__register__title"> {{ 'TEAM.CREATE_YOUR_TEAM' | translate }} </h3>
-        <mat-form-field class="app-home__main__top__register__main-input-field">
-          <span matPrefix>
-            <mat-icon>supervisor_account</mat-icon> &nbsp;
-          </span>
-          <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" ngModel name="teamName" #teamName="ngModel" required type="text">
-          <mat-error *ngIf="teamName.invalid">
-            {{'TEAM.TEAM_NAME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
-          </mat-error>
-        </mat-form-field>
-        <button mat-mini-fab color="primary" class="app-home__main__top__register__action-btn" (click)="navigateToRegisterPage(teamName.value)">{{ 'HOME.GO' | translate }}
-        </button>
-      </div>
     </div>
   </div>
+
+
+
   <div class="app-home__info">
     <div class="app-home__info__sections__container">
+   
+
       <div class="app-home__info__section">
         <div class="app-home__info__section__icon">
-          <mat-icon>power_settings_new</mat-icon>
+            <img class="app-mail-activation__wrapper__img" width="50" alt="dropped coffee" src="../../assets/img/collaborate.png">
         </div>
-        <h2 class="app-home__info__section__header">{{'HOME.ADV1.TITLE' | translate}}</h2>
-        <p class="app-home__info__section__text">{{'HOME.ADV1.TEXT' | translate}}</p>
-      </div>
-      <div class="app-home__info__section">
-        <div class="app-home__info__section__icon">
-          <mat-icon>group</mat-icon>
-        </div>
-
-        <h2 class="app-home__info__section__header"> {{'HOME.ADV2.TITLE' | translate}}</h2>
-
-        <p class="app-home__info__section__text">{{'HOME.ADV2.TEXT' | translate}}</p>
-      </div>
-      <div class="app-home__info__section">
-        <div class="app-home__info__section__icon">
-          <mat-icon>touch_app</mat-icon>
-        </div>
-
-        <h2 class="app-home__info__section__header">{{'HOME.ADV3.TITLE' | translate}}</h2>
+        <h2 class="app-home__info__section__header">Collaborate </h2>
         <p class="app-home__info__section__text">{{'HOME.ADV3.TEXT' | translate}}</p>
       </div>
+
+
       <div class="app-home__info__section">
-        <div class="app-home__info__section__icon">
-          <mat-icon>group_work</mat-icon>
+
+          <div class="app-home__info__section__icon">
+              <img class="app-mail-activation__wrapper__img" width="50" alt="dropped coffee" src="../../assets/img/gift.png">
+          </div>
+  
+          <h2 class="app-home__info__section__header"> Share Gifts</h2>
+          <p class="app-home__info__section__text">{{'HOME.ADV6.TEXT' | translate}}</p>
         </div>
 
-        <h2 class="app-home__info__section__header"> {{'HOME.ADV4.TITLE' | translate}}</h2>
+      <div class="app-home__info__section">
+        <div class="app-home__info__section__icon">
+            <img class="app-mail-activation__wrapper__img" width="50" alt="dropped coffee" src="../../assets/img/customer.png">
+        </div>
+
+        <h2 class="app-home__info__section__header"> Share Customers</h2>
         <p class="app-home__info__section__text">{{'HOME.ADV4.TEXT' | translate}}</p>
       </div>
-      <div class="app-home__info__section">
-        <div class="app-home__info__section__icon ">
-          <mat-icon>add_alert</mat-icon>
-        </div>
 
-        <h2 class="app-home__info__section__header"> {{'HOME.ADV5.TITLE' | translate}} </h2>
-        <p class="app-home__info__section__text">{{'HOME.ADV5.TEXT' | translate}}</p>
-      </div>
-      <div class="app-home__info__section">
+    </div>
+  </div>
 
-        <div class="app-home__info__section__icon">
-          <mat-icon>insert_chart</mat-icon>
-        </div>
 
-        <h2 class="app-home__info__section__header"> {{'HOME.ADV6.TITLE' | translate}} </h2>
-        <p class="app-home__info__section__text">{{'HOME.ADV6.TEXT' | translate}}</p>
-      </div>
-    </div>
-  </div>
-  <div class="app-home__main">
-    <div class="app-home__main__middle" parallax [config]="{initialValue: -100, ratio: .1}">
-    </div>
-  </div>
-  <div class="app-home__info">
-    <h1 class="app-home__info__title">{{'HOME.SLOGAN' | translate}}</h1>
-    <div class="app-home__info__sections__container">
-      <div class="app-home__info__section">
-        <p class="app-home__info__section__text">{{'HOME.SLOGAN_TEXT' | translate}}</p>
-        <div class="app-home__info__section__logo">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="app-home__main">
-    <div class="app-home__main__bottom" parallax [config]="{initialValue: -300, ratio: .1}">
-    </div>
-  </div>
 </div>

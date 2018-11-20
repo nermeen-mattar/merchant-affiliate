@@ -9,16 +9,16 @@
       min-height: 650px;
     }
     &__top {
-      background: url('../../assets/img/squash_light-min2.jpg') no-repeat center fixed;
+      background: url('../../assets/img/app-marketplace.png') no-repeat center fixed;
       background-size: auto;
       align-items: center;
       &__register {
-        background-color:white;
+        background-color:black;
         position: relative;
-        width: 90%;
-        height: 150px;
+        // width: 0%;
+        height: 50px;
         margin: 5px auto;
-        margin-top: 50px;
+        margin-top: 456px;
         max-width: 500px;
         padding: 10px 20px;
         box-sizing: border-box;
@@ -26,6 +26,7 @@
         &__title {
           font-weight: 400;
           align-items: center;
+          color: white;
 
         }
         &__main-input-field {
@@ -37,7 +38,8 @@
           top: 0;
           bottom: 0;
           margin: auto;
-          color: white;
+          background-color:white;
+          color: black;
         }
       }
       &__logo {
