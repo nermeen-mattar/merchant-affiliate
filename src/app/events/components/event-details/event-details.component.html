@@ -3,23 +3,23 @@
     <mat-icon color="primary">chevron_left</mat-icon>
     {{'BACK'| translate}}
   </div>
-  <h3 class="app-event-details__header app-event-details__label">{{'EVENT.EVENT' | translate}} {{'DETAILS' |
+  <h3 class="app-event-details__header app-event-details__label">{{'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY' | translate}} {{'DETAILS' |
     translate}}
   </h3>
   <div>
     <div *ngIf="eventDetails" class="app-event-details__basic-info">
       <mat-card class="app-event-details__basic-info__section">
         <div class="app-event-details__basic-info__section__item">
-          <span class="app-event-details__label"> {{"EVENT.EVENT" | translate }}: </span>{{eventDetails.eventName}} </div>
+          <span class="app-event-details__label"> {{"RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY" | translate }}: </span>{{eventDetails.eventName}} </div>
         </mat-card>
         <mat-card class="app-event-details__basic-info__section">
           <div class="app-event-details__basic-info__section__item">
-          <span class="app-event-details__label"> {{"EVENT.TYPE" | translate }}:
-          </span>{{(eventDetails.type === 1 ? "EVENT.PARTICIPATION" : "EVENT.CANCELATION") | translate}}</div>
+          <span class="app-event-details__label"> {{"RECEIVED_GIVEAWAY.TYPE" | translate }}:
+          </span>{{(eventDetails.type === 1 ? "RECEIVED_GIVEAWAY.PARTICIPATION" : "RECEIVED_GIVEAWAY.CANCELATION") | translate}}</div>
           </mat-card>
       <mat-card class="app-event-details__basic-info__section">
         <div class="app-event-details__basic-info__section__item">
-          <span class="app-event-details__label"> {{"EVENT.DATE" | translate}}:</span>
+          <span class="app-event-details__label"> {{"RECEIVED_GIVEAWAY.DATE" | translate}}:</span>
           {{eventDetails.date | date:"MM/dd/yyyy hh:mm a" }}</div>
         </mat-card>
         <mat-card class="app-event-details__basic-info__section">
@@ -33,15 +33,15 @@
       <mat-card class="app-event-details__basic-info__section" *ngIf="eventDetails.hasMaxCriticalValue || eventDetails.hasMinCriticalValue">
         <div class="app-event-details__basic-info__section__item">
           <span *ngIf="eventDetails.hasMaxCriticalValue" class="app-event-details__label">
-            {{"EVENT.MAX" | translate}}:</span>
+            {{"RECEIVED_GIVEAWAY.MAX" | translate}}:</span>
           {{eventDetails.maxCriticalValue}}
-          <span *ngIf="eventDetails.hasMinCriticalValue" class="app-event-details__label">{{"EVENT.MIN"
+          <span *ngIf="eventDetails.hasMinCriticalValue" class="app-event-details__label">{{"RECEIVED_GIVEAWAY.MIN"
             | translate}}:</span>
           {{eventDetails.minCriticalValue}}</div>
         </mat-card>
         <mat-card class="app-event-details__basic-info__section">
         <div class="app-event-details__basic-info__section__item" *ngIf="eventDetails.comment">
-          <span class="app-event-details__label"> {{"EVENT.COMMENT" | translate }}: </span>{{eventDetails.comment}}</div>
+          <span class="app-event-details__label"> {{"RECEIVED_GIVEAWAY.COMMENT" | translate }}: </span>{{eventDetails.comment}}</div>
         </mat-card>
     </div>
     <mat-form-field class="app-event-details__filter">
@@ -50,7 +50,7 @@
     <div class="app-event-details__container">
       <!-- Participation Table -->
       <div class="app-event-details__container__table">
-        <h4 class="app-event-details__container__table__header app-event-details__label">{{'EVENT.PARTICIPATIONS' |
+        <h4 class="app-event-details__container__table__header app-event-details__label">{{'RECEIVED_GIVEAWAY.PARTICIPATIONS' |
           translate}}
           <span *ngIf="eventDetailsDatasource && eventDetailsDatasource.present">
             ({{eventDetailsDatasource.present.data.length}})</span>
@@ -58,8 +58,8 @@
         <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.present">
           <ng-container matColumnDef="toggeler">
             <mat-header-cell class="app-event-details__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-              {{'EVENT.OUT' | translate}}
-              <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
+              {{'RECEIVED_GIVEAWAY.OUT' | translate}}
+              <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'RECEIVED_GIVEAWAY.IN' | translate}}
             </mat-header-cell>
             <mat-cell class="app-event-details__container__table__content-cell" *matCellDef="let row">
               <mat-slide-toggle color="primary" #participationToggeler (change)="toggleMemberParticipation($event.checked, row, participationToggeler)"
@@ -88,7 +88,7 @@
       <div class="app-event-details__container__space-seperator"></div>
       <!-- Cancelation Table -->
       <div class="app-event-details__container__table">
-        <h4 class="app-event-details__container__table__header app-event-details__label">{{'EVENT.CANCELATIONS' |
+        <h4 class="app-event-details__container__table__header app-event-details__label">{{'RECEIVED_GIVEAWAY.CANCELATIONS' |
           translate}}
           <span *ngIf="eventDetailsDatasource && eventDetailsDatasource.absent">
             ({{eventDetailsDatasource.absent.data.length}})</span>
@@ -96,8 +96,8 @@
         <mat-table [dataSource]="eventDetailsDatasource && eventDetailsDatasource.absent">
           <ng-container matColumnDef="toggeler">
             <mat-header-cell class="app-event-details__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-              {{'EVENT.OUT' | translate}}
-              <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
+              {{'RECEIVED_GIVEAWAY.OUT' | translate}}
+              <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'RECEIVED_GIVEAWAY.IN' | translate}}
             </mat-header-cell>
             <mat-cell class="app-event-details__container__table__content-cell" *matCellDef="let row">
               <mat-slide-toggle color="primary" #participationToggeler (change)="toggleMemberParticipation($event.checked, row, participationToggeler)"

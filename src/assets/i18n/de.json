@@ -1,7 +1,7 @@
 {
-  "TEAM_CENTER": "team.center ",
-  "TEAM_CENTER_INFO1": "Für deine Organisation von Teamevents - spielend leicht",
-  "TEAM_CENTER_INFO2": "team.center ist und bleibt kostenlos",
+  "MERCHANT_AFFILIATE": "team.center ",
+  "MERCHANT_AFFILIATE_INFO1": "Für deine Organisation von Teamevents - spielend leicht",
+  "MERCHANT_AFFILIATE_INFO2": "team.center ist und bleibt kostenlos",
   "WELCOME": "Willkommen",
   "DELETE": "Löschen",
   "MORE": "Mehr",
@@ -74,19 +74,19 @@
       "CONTACT_MESSAGE_SENT_SUCCESS": "Die Nachricht wurde erfolgreich gesendet",
       "CONTACT_MESSAGE_SENT_FAIL": "Nachricht konnte nicht gesendet werden"
     },
-    "EVENT": {
-      "EVENT_DELETING_SUCCESS": "Event wurde erfolgreich gelöscht",
-      "EVENT_DELETING_FAIL": "Event kann nicht gelöscht werden",
-      "EVENT_CREATING_SUCCESS": "Event wurde erfolgreich angelegt",
-      "EVENT_CREATING_FAIL": "Event kann nicht angelegt werden",
-      "EVENT_UPDATING_SUCCESS": "Event wurde erfolgreich bearbeitet",
-      "EVENT_UPDATING_FAIL": "Event konnte nicht bearbeitet werden",
-      "EVENT_GETTING_FAIL": "Event konnte nicht geladen werden",
-      "EVENT_CONFIRM_DELETING_HEADER": "Event löschen",
-      "EVENT_CONFIRM_DELETING_BODY": "Willst du diesen Event wirklich löschen?",
-      "EVENT_PARTICIPATION_CONFIRMED": "Teilnahme bestätigt",
-      "EVENT_CANCELATION_CONFIRMED": "Absage bestätigt",
-      "EVENT_CHANGING_PARTICIPATION_FAIL": "Fehler bei Eventstatusänderung"
+    "RECEIVED_GIVEAWAY": {
+      "RECEIVED_GIVEAWAY_DELETING_SUCCESS": "Event wurde erfolgreich gelöscht",
+      "RECEIVED_GIVEAWAY_DELETING_FAIL": "Event kann nicht gelöscht werden",
+      "RECEIVED_GIVEAWAY_CREATING_SUCCESS": "Event wurde erfolgreich angelegt",
+      "RECEIVED_GIVEAWAY_CREATING_FAIL": "Event kann nicht angelegt werden",
+      "RECEIVED_GIVEAWAY_UPDATING_SUCCESS": "Event wurde erfolgreich bearbeitet",
+      "RECEIVED_GIVEAWAY_UPDATING_FAIL": "Event konnte nicht bearbeitet werden",
+      "RECEIVED_GIVEAWAY_GETTING_FAIL": "Event konnte nicht geladen werden",
+      "RECEIVED_GIVEAWAY_CONFIRM_DELETING_HEADER": "Event löschen",
+      "RECEIVED_GIVEAWAY_CONFIRM_DELETING_BODY": "Willst du diesen Event wirklich löschen?",
+      "RECEIVED_GIVEAWAY_PARTICIPATION_CONFIRMED": "Teilnahme bestätigt",
+      "RECEIVED_GIVEAWAY_CANCELATION_CONFIRMED": "Absage bestätigt",
+      "RECEIVED_GIVEAWAY_CHANGING_PARTICIPATION_FAIL": "Fehler bei Eventstatusänderung"
     },
     "MEMBER": {
       "MEMBER_MAKE_ADMIN_SUCCESS": "Das Mitglied ist jetzt ein administrator",
@@ -186,10 +186,10 @@
     "THANKS": "Vielen Dank, dass du team.center verwendest",
     "SORRY": "Wir entschuldigen uns."
   },
-  "EVENT": {
-    "EVENTS": "Events",
-    "PAST_EVENTS": "Vergangene Events",
-    "EVENT": "Event",
+  "RECEIVED_GIVEAWAY": {
+    "RECEIVED_GIVEAWAYS": "Events",
+    "PAST_RECEIVED_GIVEAWAYS": "Vergangene Events",
+    "RECEIVED_GIVEAWAY": "Event",
     "TYPE": "Typ",
     "DATE": "Datum",
     "TIME": "Zeit",
@@ -201,26 +201,26 @@
     "PARTICIPATIONS": "Anmeldungen",
     "CANCELATION": "Anmeldung",
     "PARTICIPATION": "Abmeldung",
-    "EVENT_NAME": "Event Name",
-    "CANCELATION_EVENT": "Abmelde-Event",
-    "PARTICIPATION_EVENT": "Anmelde-Event",
+    "RECEIVED_GIVEAWAY_NAME": "Event Name",
+    "CANCELATION_RECEIVED_GIVEAWAY": "Abmelde-Event",
+    "PARTICIPATION_RECEIVED_GIVEAWAY": "Anmelde-Event",
     "JOINING": "angemeldet",
     "NOT_JOINING": "abgemeldet",
-    "EVENT_DATE": "Event Datum",
+    "RECEIVED_GIVEAWAY_DATE": "Event Datum",
     "START_TIME": "Startzeit",
     "END_TIME": "Endzeit",
     "LOCATION": "Lokation",
-    "EVENT_TYPE": "Event für",
+    "RECEIVED_GIVEAWAY_TYPE": "Event für",
     "MAX": "Max",
     "MIN": "Min",
     "ACTUAL": "Ist",
-    "MIN_MAX_PER_EVENT": "Min./Max. Teilnehmer pro Event",
-    "MIN_PER_EVENT": "Min. Teilnehmer pro Event",
-    "MAX_PER_EVENT": "Max. Teilnehmer pro Event",
+    "MIN_MAX_PER_RECEIVED_GIVEAWAY": "Min./Max. Teilnehmer pro Event",
+    "MIN_PER_RECEIVED_GIVEAWAY": "Min. Teilnehmer pro Event",
+    "MAX_PER_RECEIVED_GIVEAWAY": "Max. Teilnehmer pro Event",
     "COMMENT": "Kommentar",
-    "CREATE_EVENT": "Event anlegen",
-    "EDIT_EVENT": "Event bearbeiten",
-    "THIS_EVENT": "bei diesem Event"
+    "CREATE_RECEIVED_GIVEAWAY": "Event anlegen",
+    "EDIT_RECEIVED_GIVEAWAY": "Event bearbeiten",
+    "THIS_RECEIVED_GIVEAWAY": "bei diesem Event"
   },
   "TEAM": {
     "TEAM": "Team",
@@ -299,7 +299,7 @@
     "EXPIRED_LINK_OR_INVALID": "Dieser Link ist ungültig oder abgelaufen"
   },
   "FOOTER": {
-    "TITLE_TEAM_CENTER": "team.center",
+    "TITLE_MERCHANT_AFFILIATE": "team.center",
     "DATA_PRIVACY": "Datenschutz",
     "FEATURES": "features",
     "TERMS_CONDITIONS": "AGBs",
@@ -333,7 +333,7 @@
     "SECTION1": {
       "TITLE": "Scope",
       "TEXT1": "team.center ist durch ein privates Projekt entstanden und befindet sich zur Zeit vollumfänglich im Besitz der team.center GmbH Spranglenstrasse 48, 8303 Bassersdorf. Die Rechtsform der team.center GmbH kann sich zu jeder Zeit ändern. In diesem Fall werden die AGBs unverzüglich angepasst. Generell behalten sich die team.center GmbH und deren Anteilseigner (nachfolgend einfach team.center genannt) das Recht vor, die AGBs jeder Zeit und ohne Vorankündigung zu ändern. Eine aktuelle Version der deutschen AGBs ist stets unter",
-      "LINK": "http://www.team.center/team-center/terms-and-conditions",
+      "LINK": "http://www.team.center/merchant-affiliate/terms-and-conditions",
       "TEXT2": "einsehbar. Sollten einzelne Punkte oder Bestimmungen dieser AGB ungültig werden, bleibt die Gültigkeit der übrigen Bestimmungen hingegen weiterhin geltend.  Sämtliche Urheberrechte bleiben vollumfänglich bei team.center. Verstösse gegen diese Urheberrechte oder gegen die AGBs können für die betroffene Person zu einer kompletten Sperrung der team.center Dienste führen."
     },
     "SECTION2": {

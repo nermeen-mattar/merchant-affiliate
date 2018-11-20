@@ -52,7 +52,7 @@
       <ng-container matColumnDef="participations">
         <mat-header-cell class="app-members-statistics__container__table__header-cell app-members-statistics__container__table__participation"
           *matHeaderCellDef mat-sort-header>
-          <div class="app-text-truncate"> {{'EVENT.PARTICIPATIONS' | translate}} </div>
+          <div class="app-text-truncate"> {{'RECEIVED_GIVEAWAY.PARTICIPATIONS' | translate}} </div>
         </mat-header-cell>
         <mat-cell class="app-members-statistics__container__table__content-cell app-members-statistics__container__table__participation"
           *matCellDef="let row" [ngClass]="!row.activeFlag ? 'app-members-statistics__container__table__inactive-cell' : ''">
@@ -66,7 +66,7 @@
       <ng-container matColumnDef="cancelations">
         <mat-header-cell class="app-members-statistics__container__table__header-cell app-members-statistics__container__table__cancelation"
           *matHeaderCellDef mat-sort-header>
-          <div class="app-text-truncate"> {{'EVENT.CANCELATIONS' | translate}}
+          <div class="app-text-truncate"> {{'RECEIVED_GIVEAWAY.CANCELATIONS' | translate}}
           </div>
         </mat-header-cell>
         <mat-cell class="app-members-statistics__container__table__content-cell app-members-statistics__container__table__cancelation"

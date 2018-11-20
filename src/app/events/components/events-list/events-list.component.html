@@ -7,7 +7,7 @@
     </div>
     <div class="app-events__header">
       <h3 class="app-events__header__title">
-        <span class="app-events__header__title__text">{{ (isPastEvents ? 'EVENT.PAST_EVENTS' : 'EVENT.EVENTS') | translate}}
+        <span class="app-events__header__title__text">{{ (isPastEvents ? 'RECEIVED_GIVEAWAY.PAST_RECEIVED_GIVEAWAYS' : 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAYS') | translate}}
           <span *ngIf="eventsDataSource"> ({{eventsDataSource.data.length}})</span>
         </span>
         <ng-container *ngIf="!isPastEvents">
@@ -30,8 +30,8 @@
     <div class="app-events__container">
       <mat-table class="app-events__container__table" [dataSource]="eventsDataSource" matSort>
         <ng-container matColumnDef="toggeler">
-          <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.OUT' | translate}}
-            <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'EVENT.IN' | translate}}
+          <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'RECEIVED_GIVEAWAY.OUT' | translate}}
+            <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'RECEIVED_GIVEAWAY.IN' | translate}}
           </mat-header-cell>
           <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row">
             <mat-slide-toggle color="primary" #participationToggeler (change)="toggleParticipationInEvent($event.checked, row.id, participationToggeler)"
@@ -42,15 +42,15 @@
         </ng-container>
         <ng-container matColumnDef="date">
           <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-            {{'EVENT.DATE' | translate}} </mat-header-cell>
+            {{'RECEIVED_GIVEAWAY.DATE' | translate}} </mat-header-cell>
           <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.date |  date:"yyyy.MM.dd"}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="time">
-          <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.TIME' | translate}} </mat-header-cell>
+          <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'RECEIVED_GIVEAWAY.TIME' | translate}} </mat-header-cell>
           <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.startTime | stringNormalizer:timeFormat}} - {{row.endTime | stringNormalizer:timeFormat }} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="event">
-          <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'EVENT.EVENT' | translate}}
+          <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY' | translate}}
           </mat-header-cell>
           <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row">
             <span class="app-events__container__table__content-cell"> {{row.eventName}} </span>
@@ -58,7 +58,7 @@
         </ng-container>
         <ng-container matColumnDef="status">
           <mat-header-cell class="app-events__container__table__header-cell app-events__event__members" *matHeaderCellDef mat-sort-header>
-            {{'EVENT.PARTICIPATION_STATUS' | translate}} </mat-header-cell>
+            {{'RECEIVED_GIVEAWAY.PARTICIPATION_STATUS' | translate}} </mat-header-cell>
           <mat-cell class="app-events__container__table__content-cell app-events__event__members" *matCellDef="let row">
             <ng-template #success>
               <mat-icon class="app-events__event__success">check_circle</mat-icon>
@@ -66,11 +66,11 @@
             <span class="app-events__event__members__actual"> {{row.numOfParticipations}} </span>
            <ng-container *ngIf="row.hasMinCriticalValue || row.hasMaxCriticalValu"> (</ng-container>
             <span *ngIf="row.hasMinCriticalValue">
-              {{'EVENT.MIN' | translate}}: {{row.minCriticalValue}}
+              {{'RECEIVED_GIVEAWAY.MIN' | translate}}: {{row.minCriticalValue}}
             </span>
             <span *ngIf="row.hasMinCriticalValue && row.hasMaxCriticalValue"
               class="app-events__event__members__seperator"> , </span>
-            <span *ngIf="row.hasMaxCriticalValue"> {{'EVENT.MAX' | translate}} : {{row.maxCriticalValue}}
+            <span *ngIf="row.hasMaxCriticalValue"> {{'RECEIVED_GIVEAWAY.MAX' | translate}} : {{row.maxCriticalValue}}
             </span> 
             <ng-container *ngIf="row.hasMinCriticalValue || row.hasMaxCriticalValu"> )</ng-container>
             <mat-icon class="app-events__event__error" *ngIf="(row.hasMinCriticalValue  && row.minCriticalValue > row.numOfParticipations) ||
@@ -113,7 +113,7 @@
               <ng-template #success>
                 <mat-icon class="app-events__event__success">check_circle</mat-icon>
               </ng-template>
-              <!-- {{'EVENT.STATUS' | translate}}:
+              <!-- {{'RECEIVED_GIVEAWAY.STATUS' | translate}}:
               <mat-icon>insert_chart</mat-icon>
             {{event.numOfParticipations}} / {{event.detailedParticipations.length}} -->
             </mat-panel-description>
@@ -130,11 +130,11 @@
                 <span class="app-events__event__members__actual"> {{event.numOfParticipations}} </span>
                 <span *ngIf="event.hasMinCriticalValue || event.hasMaxCriticalValue">(</span>
                 <span *ngIf="event.hasMinCriticalValue">
-                  {{'EVENT.MIN' | translate}}: {{event.minCriticalValue}}
+                  {{'RECEIVED_GIVEAWAY.MIN' | translate}}: {{event.minCriticalValue}}
                 </span>
                 <span *ngIf="event.hasMinCriticalValue && event.hasMaxCriticalValue"
                   class="app-events__event__members__seperator"> , </span>
-                <span *ngIf="(event.hasMaxCriticalValue) "> {{'EVENT.MAX' | translate}} : {{event.maxCriticalValue}}
+                <span *ngIf="(event.hasMaxCriticalValue) "> {{'RECEIVED_GIVEAWAY.MAX' | translate}} : {{event.maxCriticalValue}}
                 </span> 
                 <span *ngIf="event.hasMinCriticalValue || event.hasMaxCriticalValue">)</span>
 

@@ -87,7 +87,7 @@ export class EventsService {
         teamMemberId: teamMemberId
       }, {
         success: toggleSuccessMessage,
-        failDefault: 'EVENT.EVENT_CHANGING_PARTICIPATION_FAIL'
+        failDefault: 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_CHANGING_PARTICIPATION_FAIL'
       });
   }
 
@@ -100,8 +100,8 @@ export class EventsService {
   deleteEvent(eventId: number): Observable < any > {
     return this.httpRequestService.httpDelete(
       `events/${eventId}`, {
-        success: 'EVENT.EVENT_DELETING_SUCCESS',
-        failDefault: 'EVENT.EVENT_DELETING_FAIL'
+        success: 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_DELETING_SUCCESS',
+        failDefault: 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_DELETING_FAIL'
       });
   }
 
@@ -116,7 +116,7 @@ export class EventsService {
   getEvent(eventId: number): Observable < any > {
     return this.httpRequestService.httpGet(
       `events/${eventId}`, {
-        failDefault: 'EVENT.EVENT_GETTING_FAIL'
+        failDefault: 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_GETTING_FAIL'
       });
   }
 
@@ -130,8 +130,8 @@ export class EventsService {
   createEvent(teamId: number, event: TcEvent ): Observable < any > { // Event [] there are other info!
     return this.httpRequestService.httpPost(
       'events', {teamId: teamId, ...event}, {
-        success: 'EVENT.EVENT_CREATING_SUCCESS',
-        failDefault: 'EVENT.EVENT_CREATING_FAIL'
+        success: 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_CREATING_SUCCESS',
+        failDefault: 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_CREATING_FAIL'
       });
   }
 
@@ -146,8 +146,8 @@ export class EventsService {
   updateEvent(eventId: number, teamId: number, event: TcEvent ): Observable < any > {
     return this.httpRequestService.httpPut(
       `events/${eventId}`, event, {
-        success: 'EVENT.EVENT_UPDATING_SUCCESS',
-        failDefault: 'EVENT.EVENT_UPDATING_FAIL'
+        success: 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_UPDATING_SUCCESS',
+        failDefault: 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_UPDATING_FAIL'
       });
   }
 

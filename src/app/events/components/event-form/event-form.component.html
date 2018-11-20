@@ -4,16 +4,16 @@
       <mat-icon color="primary">chevron_left</mat-icon>
       {{'BACK'| translate}}
     </div>
-    <mat-card-title class="app-event-form__title">{{ (eventId ? 'EVENT.EDIT_EVENT' : 'EVENT.CREATE_EVENT') | translate }} </mat-card-title>
+    <mat-card-title class="app-event-form__title">{{ (eventId ? 'RECEIVED_GIVEAWAY.EDIT_RECEIVED_GIVEAWAY' : 'RECEIVED_GIVEAWAY.CREATE_RECEIVED_GIVEAWAY') | translate }} </mat-card-title>
     <mat-card-content *ngIf="eventGroup" [ngClass]="{'app-event-form__element-hide': displaySpinner}">
       <form novalidate [formGroup]="eventGroup" (ngSubmit)="save(eventGroup.value)" novalidate>
         <div class="app-event-form__fields-wrapper ">
           <mat-form-field class="app-event-form__field">
-            <input matInput placeholder="{{ 'EVENT.EVENT_NAME' | translate }}" formControlName="eventName" required type="text">
-            <mat-error *ngIf="eventGroup.controls['eventName'].invalid"> {{ 'EVENT.EVENT_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
+            <input matInput placeholder="{{ 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_NAME' | translate }}" formControlName="eventName" required type="text">
+            <mat-error *ngIf="eventGroup.controls['eventName'].invalid"> {{ 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_NAME' | translate }} {{'FORM.IS_REQUIRED' | translate}} </mat-error>
           </mat-form-field>
           <mat-form-field formGroupName="eventTiming" class="app-event-form__field">
-            <input matInput  [min]="today" [matDatepicker]="picker" placeholder="{{ 'EVENT.EVENT_DATE' | translate }}" formControlName="date" required>
+            <input matInput  [min]="today" [matDatepicker]="picker" placeholder="{{ 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_DATE' | translate }}" formControlName="date" required>
             <mat-icon color="primary" class="app-event-form__field__icon" matPrefix>date</mat-icon>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -22,14 +22,14 @@
         <div formGroupName="eventTiming" class="app-event-form__nested-form-group">
           <div class="app-event-form__fields-wrapper">
             <mat-form-field class="app-event-form__field">
-              <input matInput placeholder="{{ 'EVENT.START_TIME' | translate }}" formControlName="startTime" required type="time">
+              <input matInput placeholder="{{ 'RECEIVED_GIVEAWAY.START_TIME' | translate }}" formControlName="startTime" required type="time">
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix>query_builder</mat-icon>
-              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['startTime'].invalid"> {{'EVENT.START_TIME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['startTime'].invalid"> {{'RECEIVED_GIVEAWAY.START_TIME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field class="app-event-form__field">
-              <input matInput placeholder="{{ 'EVENT.END_TIME'| translate }}" formControlName="endTime" required type="time">
+              <input matInput placeholder="{{ 'RECEIVED_GIVEAWAY.END_TIME'| translate }}" formControlName="endTime" required type="time">
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> query_builder</mat-icon>
-              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['endTime'].invalid"> {{'EVENT.END_TIME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+              <mat-error *ngIf="eventGroup.controls['eventTiming'].controls['endTime'].invalid"> {{'RECEIVED_GIVEAWAY.END_TIME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
             </mat-form-field>
           </div>
           <!-- <mat-error *ngIf="eventTimingGroup.invalid && eventId || (eventTimingGroup.controls['endTime'].dirty &&  eventTimingGroup.controls['startTime'].dirty)"> -->
@@ -39,37 +39,37 @@
               </mat-error>   
               <ng-template #validateInFuture> 
                 <mat-error  class="app-event-form__field__error app-event-form__field__error__in-past" *ngIf="eventGroup.controls['eventTiming'].errors.validateTimeInFuture">
-                    {{'USER_MESSAGES.EVENT.EVENT_SHOULD_BE_IN_FUTURE' | translate}}
+                    {{'USER_MESSAGES.RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_SHOULD_BE_IN_FUTURE' | translate}}
                   </mat-error>    
               </ng-template>   
           </ng-container>
         </div>
         <mat-form-field class="app-event-form__field">
-          <input matInput placeholder="{{'EVENT.LOCATION'| translate}}" formControlName="location" required type="text">
+          <input matInput placeholder="{{'RECEIVED_GIVEAWAY.LOCATION'| translate}}" formControlName="location" required type="text">
           <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> room</mat-icon>
-          <mat-error *ngIf="eventGroup.controls['location'].invalid"> {{'EVENT.LOCATION'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+          <mat-error *ngIf="eventGroup.controls['location'].invalid"> {{'RECEIVED_GIVEAWAY.LOCATION'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
         <div class="app-event-form__fields-wrapper">
           <label class="app-event-form__field__label"> {{'MEMBER.BY_DEFAULT_MEMBERS_ARE' | translate}} </label>
           <mat-form-field class="app-event-form__field app-event-form__field__small">
             <mat-select formControlName="type" required (selectionChange)="onEventTypeChange()">
-              <mat-option value="0">{{'EVENT.JOINING'| translate}}</mat-option>
-              <mat-option value="1">{{'EVENT.NOT_JOINING'| translate}} </mat-option>
+              <mat-option value="0">{{'RECEIVED_GIVEAWAY.JOINING'| translate}}</mat-option>
+              <mat-option value="1">{{'RECEIVED_GIVEAWAY.NOT_JOINING'| translate}} </mat-option>
             </mat-select>
           </mat-form-field>
-          <label class="app-event-form__field__label"> {{'EVENT.THIS_EVENT' | translate}} </label>
+          <label class="app-event-form__field__label"> {{'RECEIVED_GIVEAWAY.THIS_RECEIVED_GIVEAWAY' | translate}} </label>
         </div>
         <div formGroupName="eventCriticalValues" class="app-event-form__nested-form-group">
           <div class="app-event-form__fields-wrapper">
             <mat-form-field class="app-event-form__field">
-              <input matInput placeholder="{{'EVENT.MIN_PER_EVENT'| translate}}" formControlName="min" type="number">
+              <input matInput placeholder="{{'RECEIVED_GIVEAWAY.MIN_PER_RECEIVED_GIVEAWAY'| translate}}" formControlName="min" type="number">
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> shut_down</mat-icon>
-              <mat-error *ngIf="eventGroup.controls['eventCriticalValues'].controls['min'].invalid"> {{'EVENT.MIN_PER_EVENT'| translate}} {{ 'FORM.SHOULD_BE_POSITIVE' | translate }}</mat-error>
+              <mat-error *ngIf="eventGroup.controls['eventCriticalValues'].controls['min'].invalid"> {{'RECEIVED_GIVEAWAY.MIN_PER_RECEIVED_GIVEAWAY'| translate}} {{ 'FORM.SHOULD_BE_POSITIVE' | translate }}</mat-error>
             </mat-form-field>
             <mat-form-field class="app-event-form__field" [ngClass]="{'app-event-form__hide-element': eventGroup.controls['eventCriticalValues'].controls['max'].disabled }">
-              <input matInput placeholder="{{'EVENT.MAX_PER_EVENT'| translate}}" formControlName="max" type="number">
+              <input matInput placeholder="{{'RECEIVED_GIVEAWAY.MAX_PER_RECEIVED_GIVEAWAY'| translate}}" formControlName="max" type="number">
               <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> shut_down</mat-icon>
-              <mat-error *ngIf="eventGroup.controls['eventCriticalValues'].controls['max'].invalid"> {{'EVENT.MAX_PER_EVENT'| translate}} {{ 'FORM.SHOULD_BE_POSITIVE' | translate }}</mat-error>
+              <mat-error *ngIf="eventGroup.controls['eventCriticalValues'].controls['max'].invalid"> {{'RECEIVED_GIVEAWAY.MAX_PER_RECEIVED_GIVEAWAY'| translate}} {{ 'FORM.SHOULD_BE_POSITIVE' | translate }}</mat-error>
             </mat-form-field>
           </div>
           <mat-error class="app-event-form__field__error" *ngIf="eventGroup.controls['eventCriticalValues'].invalid && (!eventGroup.controls['eventCriticalValues'].controls['min'].invalid &&  !eventGroup.controls['eventCriticalValues'].controls['max'].invalid)">
@@ -77,9 +77,9 @@
           </mat-error>
         </div>
         <mat-form-field class="app-event-form__field">
-          <input matInput placeholder="{{'EVENT.COMMENT'| translate}}" formControlName="comment" type="text">
+          <input matInput placeholder="{{'RECEIVED_GIVEAWAY.COMMENT'| translate}}" formControlName="comment" type="text">
           <mat-icon color="primary" class="app-event-form__field__icon" matPrefix> comment</mat-icon>
-          <mat-error *ngIf="eventGroup.controls['comment'].invalid"> {{'EVENT.COMMENT'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
+          <mat-error *ngIf="eventGroup.controls['comment'].invalid"> {{'RECEIVED_GIVEAWAY.COMMENT'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" class="app-event-form__button" type="submit" [disabled]="!eventGroup.valid">{{ 'FORM.SAVE' | translate }}</button>
       </form>

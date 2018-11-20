@@ -21,19 +21,19 @@
       <mat-table [dataSource]="memberStatisticsDetailsDatasource">
         <ng-container matColumnDef="date">
           <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label"
-            *matHeaderCellDef> {{'EVENT.DATE' | translate}} </mat-header-cell>
+            *matHeaderCellDef> {{'RECEIVED_GIVEAWAY.DATE' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <span class="app-member-statistics-details__date"> {{row.date}}</span>
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="eventName">
           <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label"
-            *matHeaderCellDef> {{'EVENT.EVENT' | translate}} </mat-header-cell>
+            *matHeaderCellDef> {{'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.eventName}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="time">
           <mat-header-cell class="app-member-statistics-details__container__table__header-cell app-member-statistics-details__label"
-            *matHeaderCellDef> {{'EVENT.TIME' | translate}} </mat-header-cell>
+            *matHeaderCellDef> {{'RECEIVED_GIVEAWAY.TIME' | translate}} </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <span class="app-member-statistics-details__date"> {{row.startTime | stringNormalizer:timeFormat}} {{row.endTime | stringNormalizer:timeFormat}} </span>
           </mat-cell>
@@ -41,7 +41,7 @@
         <ng-container matColumnDef="status">
           <mat-header-cell class="app-member-statistics-details__container__table__header-cell  app-member-statistics-details__label app-member-statistics-details__item__members"
             *matHeaderCellDef mat-sort-header>
-            {{'EVENT.PARTICIPATION_STATUS' | translate}} </mat-header-cell>
+            {{'RECEIVED_GIVEAWAY.PARTICIPATION_STATUS' | translate}} </mat-header-cell>
           <mat-cell class="app-member-statistics-details__container__table__content-cell app-member-statistics-details__item__members"
             *matCellDef="let row">
             <ng-template #success>
@@ -50,11 +50,11 @@
             <span class="app-member-statistics-details__item__members__actual"> {{row.numberOfParticipations}} </span>
             (
             <span *ngIf="row.minCriticalValue || row.minCriticalValue === 0">
-              {{'EVENT.MIN' | translate}}: {{row.minCriticalValue}}
+              {{'RECEIVED_GIVEAWAY.MIN' | translate}}: {{row.minCriticalValue}}
             </span>
             <span *ngIf="(row.minCriticalValue || row.minCriticalValue === 0 ) && (row.maxCriticalValue || row.maxCriticalValue === 0 )"
               class="app-member-statistics-details__item__members__seperator"> , </span>
-            <span *ngIf="row.maxCriticalValue || row.maxCriticalValue === 0"> {{'EVENT.MAX' | translate}} : {{row.maxCriticalValue}}
+            <span *ngIf="row.maxCriticalValue || row.maxCriticalValue === 0"> {{'RECEIVED_GIVEAWAY.MAX' | translate}} : {{row.maxCriticalValue}}
             </span> )
             <mat-icon class="app-member-statistics-details__item__error" *ngIf="((row.minCriticalValue || row.minCriticalValue === 0 ) && row.minCriticalValue > row.numberOfParticipations) ||
                 ((row.maxCriticalValue || row.maxCriticalValue === 0 ) && row.maxCriticalValue < row.numberOfParticipations); else success">error</mat-icon>

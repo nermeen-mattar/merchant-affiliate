@@ -5,7 +5,7 @@ import { ParallaxModule } from 'ngx-parallax';
 
 import { SharedModule } from '../shared/shared.module';
 import { AboutComponent } from './components/about/about.component';
-import { TeamCenterInfoRoutingModule } from './team-center-info-routing.module';
+// import { TeamCenterInfoRoutingModule } from './merchant-affiliate-info-routing.module';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { DataPrivacyComponent } from './components/data-privacy/data-privacy.component';
 import { LegalNoticeComponent } from './components/legal-notice/legal-notice.component';
@@ -13,7 +13,7 @@ import { LegalNoticeComponent } from './components/legal-notice/legal-notice.com
 @NgModule({
   imports: [
     CommonModule,
-    TeamCenterInfoRoutingModule,
+    // TeamCenterInfoRoutingModule,
     SharedModule,
     TranslateModule.forChild(),
     ParallaxModule

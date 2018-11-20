@@ -87,7 +87,7 @@ export class MembersService {
         participationText: participationText,
       }, {
         success: toggleSuccessMessage,
-        fail: 'EVENT.EVENT_CHANGING_PARTICIPATION_FAIL'
+        fail: 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_CHANGING_PARTICIPATION_FAIL'
       }
     );
   }

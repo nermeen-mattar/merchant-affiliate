@@ -4,7 +4,7 @@
       <div class="app-container__sidenav__menu__item" (click)="sidenav.close()" routerLink="/events" *ngIf="($isUserLoggedIn| async)"
         routerLinkActive="active">
         <mat-icon class="app-container__sidenav__menu__item__icon">event</mat-icon>
-        <span> {{'EVENT.EVENTS' | translate}} </span>
+        <span> {{'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAYS' | translate}} </span>
       </div>
       <ng-container *ngIf="($isUserLoggedIn | async)">
         <div *ngIf="hasAdminRole; else onlyMembersList" class="app-container__sidenav__menu__item app-container__sidenav__menu__item__sub-menu"
@@ -67,6 +67,6 @@
     <div class="app-container__content__main">
       <router-outlet></router-outlet>
     </div>
-    <tc-footer></tc-footer>
+    <!-- <tc-footer></tc-footer> -->  
   </mat-sidenav-content>
 </mat-sidenav-container>

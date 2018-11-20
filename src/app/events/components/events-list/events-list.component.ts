@@ -148,7 +148,7 @@ export class EventsListComponent implements OnInit {
    * @param {number} eventId
    */
   toggleParticipationInEvent(toggleValue: boolean, eventId: number, currToggle: MatSlideToggle) {
-    const toggleSuccessMessage = toggleValue ? 'EVENT.EVENT_PARTICIPATION_CONFIRMED' : 'EVENT.EVENT_CANCELATION_CONFIRMED';
+    const toggleSuccessMessage = toggleValue ? 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_PARTICIPATION_CONFIRMED' : 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_CANCELATION_CONFIRMED';
     this.eventsService.toggleEventParticipation(toggleValue, eventId, this.teamMemberId, toggleSuccessMessage).subscribe(res => {
       const event = this.eventsDataSource.data[this.getIndexOfTargetEvent(eventId)];
       event.numOfParticipations += toggleValue ? 1 : -1;
@@ -195,8 +195,8 @@ export class EventsListComponent implements OnInit {
     this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
       autoFocus: true,
       data: {
-        dialogTitle: 'USER_MESSAGES.EVENT.EVENT_CONFIRM_DELETING_HEADER',
-        dialogMessage: 'USER_MESSAGES.EVENT.EVENT_CONFIRM_DELETING_BODY'
+        dialogTitle: 'USER_MESSAGES.RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_CONFIRM_DELETING_HEADER',
+        dialogMessage: 'USER_MESSAGES.RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY_CONFIRM_DELETING_BODY'
       }
     });
   }
