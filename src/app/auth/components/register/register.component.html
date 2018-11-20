@@ -5,6 +5,14 @@
       <mat-vertical-stepper #regStepper linear="true" (selectionChange)="selectedStepChanged($event)">
         <mat-step label="{{ 'TEAM.TEAM_DETAILS' | translate }}" *ngIf="registerFirstStepForm" [stepControl]="registerFirstStepForm">
           <form novalidate (ngSubmit)="regStepper.next()" [formGroup]="registerFirstStepForm" class="app-register__content__form">
+            
+            <mat-form-field>
+                  <mat-select placeholder="Businesses" [formControl]="businesses" multiple>
+                    <mat-option *ngFor="let business of businessList" [value]="business">{{business.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                
+                
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" formControlName="teamName" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>supervisor_account</mat-icon>

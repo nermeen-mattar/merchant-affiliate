@@ -26,6 +26,7 @@ export class RegisterComponent implements OnInit {
   registerSecondStepForm: FormGroup;
   currentStep = 1;
   roles = roles; /* needed to declare a class property to make it available on the component html */
+  businessList = [{id: 1, name: 'hadeel'}, { id: 2, name: 'nermeen'}];
   constructor(
     private authService: AuthService,
     private registerService: RegisterService,
