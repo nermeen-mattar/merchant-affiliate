@@ -31,8 +31,8 @@
     <span class="app-header__menu__item" routerLink="/auth/register" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
       <span> {{'REGISTER.REGISTER' | translate}}</span>
     </span>
-    <span class="app-header__menu__item" routerLink="/auth/login" *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
-      <span> {{'LOGIN.LOGIN' | translate}}</span>
+    <span class="app-header__menu__item" href="http://launchpad.rocketinfra.com/oauth/authorize/?response_type=code&client_id=LDMoVlUYyi8OXZBX2964hO4CwWscswl1pvvxHlW0&redirect_uri=http://localhost:5000/activation"  *ngIf="!($isUserLoggedIn | async)" routerLinkActive="active">
+      <a   style="text-decoration: none; color: white;" href="http://launchpad.rocketinfra.com/oauth/authorize/?response_type=code&client_id=LDMoVlUYyi8OXZBX2964hO4CwWscswl1pvvxHlW0&redirect_uri=http://localhost:5000/activation" >{{ 'LOGIN.LOGIN' | translate }}</a>
     </span>
     <!-- <span class="app-header__menu__item" routerLink="/merchant-affiliate/about" routerLinkActive="active">
       <span> {{'ABOUT.ABOUT' | translate}} </span>
