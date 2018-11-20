@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { TcMember } from '../../members/models/tc-member.model';
@@ -11,30 +11,29 @@ import { State } from '../../models/state';
   styleUrls: ['./email-activation.component.scss']
 })
 export class EmailActivationComponent implements OnInit {
-  displaySpinner = true;
+  // displaySpinner = true;
   displayPageNotFound: boolean;
   mailState: number = State.SUCCESS;
   userInfo: TcMember;
   State = State;
-  constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService) {
+  constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService, router: Router) {
     const queryParams = activatedRoute.snapshot.queryParams;
-    if (queryParams && queryParams['h']) {
-      httpRequestsService.httpPost('activation', {
-        hash: queryParams['h']
-      }, {
+     if (queryParams && queryParams['code']) {
+      const urlParams =
+      'grant_type=authorization_code&code='.concat(queryParams['code']).
+      concat('&client_id=LDMoVlUYyi8OXZBX2964hO4CwWscswl1pvvxHlW0&redirect_uri=http://localhost:5000/activation&client_secret=OJn9Hr41S7C7Z70IOoFxnqa3tNLPYvae6QKjGUZCjaKjhWuqt0PcGm6KlTkPWhTsWyVDMrwEjWDH3YCEjUbBCvBPFQ5WJZBn6BI3K9nxXJ2u9Hkx99U1D5cjCzG7nImX')
+  
+      httpRequestsService.httpPost('oauth/token/?'.concat(urlParams), {
         fail: 'NO_ERROR_MESSAGE'
       }).subscribe(
         res => {
-          this.displaySpinner = false;
-          this.userInfo = res;
-          this.mailState = State.SUCCESS;
+          router.navigateByUrl('my-giveaways');
+
         }, err => {
-          this.displaySpinner = false;
-          if (err.error.message === 'error.mail.confirmed') {
-            this.mailState = State.OTHER;
-          } else {
+          console.log(err);
             this.mailState = State.ERROR;
-          }
+            router.navigateByUrl('teams');
+
         });
     } else {
       this.displayPageNotFound = true;

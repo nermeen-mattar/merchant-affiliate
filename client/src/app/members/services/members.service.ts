@@ -10,6 +10,38 @@ export class MembersService {
 
   constructor(private httpRequestService: HttpRequestsService) {}
 
+  businessInfo(): Observable < any > {
+    return this.httpRequestService.httpGet('api/business  ', {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
+
+  locationsList(): Observable < any > {
+    return this.httpRequestService.httpGet('api/locations', {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
+
+
+  locationSales(locationId): Observable < any > {
+    return this.httpRequestService.httpGet('api/locations/'.concat(locationId).concat('/sales'), {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
+  customersList(): Observable < any > {
+    return this.httpRequestService.httpGet('api/directory/customers', {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
+  itemsList(): Observable < any > {
+    return this.httpRequestService.httpGet('api/catalog/items  ', {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
 
 
   /**

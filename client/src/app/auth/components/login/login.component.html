@@ -23,7 +23,10 @@
         <mat-icon class="app-login__content__field__icon" matPrefix> lock</mat-icon>
         <mat-error *ngIf="userPassword.invalid"> {{'LOGIN.PASSWORD'| translate}} {{ 'FORM.IS_REQUIRED' | translate }}</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" class="app-login__content__button" [disabled]="loginForm.invalid" type="submit">{{ 'LOGIN.LOGIN' | translate }}</button>
+
+      <!-- http://launchpad.rocketinfra.com/oauth/authorize/?response_type=code&client_id=LDMoVlUYyi8OXZBX2964hO4CwWscswl1pvvxHlW0&redirect_uri=http%3A%2F%2Flaunchpad.rocketinfra.com%2Fstatic%2Fdrf-yasg%2Fswagger-ui-dist%2Foauth2-redirect.html&state=VHVlIE5vdiAyMCAyMDE4IDIyOjE3OjMxIEdNVCswMjAwIChFYXN0ZXJuIEV1cm9wZWFuIFN0YW5kYXJkIFRpbWUp -->
+      <!-- http://launchpad.rocketinfra.com/oauth/authorize/?response_type=code&client_id=LDMoVlUYyi8OXZBX2964hO4CwWscswl1pvvxHlW0&redirect_uri=http://localhost:5000/call_back -->
+      <a mat-raised-button color="primary" class="app-login__content__button"  href="http://launchpad.rocketinfra.com/oauth/authorize/?response_type=code&client_id=LDMoVlUYyi8OXZBX2964hO4CwWscswl1pvvxHlW0&redirect_uri=http://localhost:5000/activation" >{{ 'LOGIN.LOGIN' | translate }}</a>
       <p routerLink="../request-reset-password" class="app-login__content__link app-login__content__forgot-password">{{'LOGIN.FORGOT_PASSWORD'| translate}}</p>
     </form>
     <div *ngIf="displayMessage && !displaySpinner" class="app-login__content__user-message">

@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:  'https://dev.team.center/service/', // '/api/' not authorized
+  baseUrl: 'http://launchpad.rocketinfra.com/', // '/api/' not authorized
   authConfig: {
     tokenExpiration: 0 // in days
   }

@@ -26,15 +26,42 @@ export class TeamsListComponent implements OnInit {
   roles = roles; /* needed to declare a class property to make it available on the component html */
   teamRoles: TcClientSideTeamRoles;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
+  itemsList;
   constructor(private userService: UserService, private teamsService: TeamsService, private membersService: MembersService,
-    public dialog: MatDialog, private dealApi: DealApi,
-    private router: Router) {
-    this.teamRoles = this.teamsService.teamRoles;
-    this.hasAdminRole = this.teamsService.hasAdminRole();
-    if (this.hasAdminRole) {
-      this.displayedColumns.push('action');
-    }
+    public dialog: MatDialog) {
+    // this.teamRoles = this.teamsService.teamRoles;
+    // this.hasAdminRole = this.teamsService.hasAdminRole();
+    // if (this.hasAdminRole) {
+    //   this.displayedColumns.push('action');
+    // }
     // this.updateTeamsDataSource();
+    membersService.customersList().subscribe( res   => {
+      console.log(res);
+      // this.teamsDataSource = new MatTableDataSource(res);
+
+    });
+    membersService.businessInfo().subscribe( res   => {
+      console.log(res);
+      // this.teamsDataSource = new MatTableDataSource(res);
+
+    });
+    membersService.itemsList().subscribe( res   => {
+      this.itemsList = res;
+      // this.teamsDataSource = new MatTableDataSource(res);
+
+    });
+
+    membersService.locationsList().subscribe( locationsList   => {
+      locationsList.forEach(location => {
+
+        console.log(location);
+        membersService.locationSales(location.id).subscribe( sales   => {
+          console.log(sales);
+
+        });
+      });
+
+    });
   }
 
   ngOnInit() {
