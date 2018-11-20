@@ -1,38 +1,27 @@
 <div class="app-teams">
   <h3 class="app-teams__title">
    Your Giveaways
-     ({{teamsDataSource && teamsDataSource.data.length}})
     <button mat-mini-fab color="primary" class="app-teams__action-btn app-teams__add" routerLink="/teams/create">
       +
     </button>
   </h3>
   <div class="app-teams__container">
-    <mat-table class="app-teams__container__table" [dataSource]="teamsDataSource" matSort>
+    <mat-table class="app-teams__container__table" [dataSource]="dealsDataSource" matSort>
       <ng-container matColumnDef="teamName">
         <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-          {{'TEAM.TEAM_NAME' | translate}} </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.teamName}} </mat-cell>
+          Deal Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="roles">
-        <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'TEAM.ROLES' | translate}}
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <mat-chip-list selectable="false">
-            <mat-chip *ngIf="teamRoles.teamAdmins.includes(row.teamId)" class="app-teams__container__table__team-admin">
-              {{'ADMIN.ADMIN' | translate}}
-            </mat-chip>
-            <mat-chip *ngIf="teamRoles.teamMembers.includes(row.teamId); else addMeAsMember">
-              {{'MEMBER.MEMBER' | translate}}
-            </mat-chip>
-            <ng-template #addMeAsMember>
-              <mat-chip (click)="addTeamAdminAsMember(row)" class="app-teams__action">
-                {{ 'MEMBER.ADD_ME_AS_MEMBER' | translate }}
-              </mat-chip>
-            </ng-template>
-            <!--  add displayAdminActions to the ngIf if the user must be logged in as an admin -->
-          </mat-chip-list>
-        </mat-cell>
-      </ng-container>
+      <ng-container matColumnDef="teamDescription">
+          <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header>
+            Deal Description </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="teamLimit">
+            <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header>
+              Deal Limit </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.limit}} </mat-cell>
+          </ng-container>
       <ng-container matColumnDef="action" *ngIf="hasAdminRole">
         <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
         <mat-cell *matCellDef="let row">
@@ -43,6 +32,6 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;">
       </mat-row>
     </mat-table>
-    <mat-spinner class="app-teams__container__spinner" *ngIf="!teamsDataSource"></mat-spinner>
+    <mat-spinner class="app-teams__container__spinner" *ngIf="!dealsDataSource"></mat-spinner>
   </div>
 </div>

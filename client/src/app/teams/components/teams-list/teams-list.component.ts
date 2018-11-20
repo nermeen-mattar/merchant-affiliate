@@ -9,6 +9,8 @@ import { TcTeamInfo } from '../../models/tc-team-info.model';
 import { TeamsService } from '../../../core/services/teams.service';
 import { roles } from '../../../core/constants/roles.constants';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { DealApi } from '../../../sdk';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tc-teams-list',
@@ -17,24 +19,29 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
   providers: [MembersService]
 })
 export class TeamsListComponent implements OnInit {
-  displayedColumns = ['teamName', 'roles'];
-  teamsDataSource: MatTableDataSource < TcTeamInfo > ;
+  displayedColumns = ['teamName', 'teamDescription', 'teamLimit'];
+  dealsDataSource: MatTableDataSource < any > ;
   hasAdminRole: boolean;
   filterString = '';
   roles = roles; /* needed to declare a class property to make it available on the component html */
   teamRoles: TcClientSideTeamRoles;
   confirmDialogRef: MatDialogRef < ConfirmDialogComponent > ;
   constructor(private userService: UserService, private teamsService: TeamsService, private membersService: MembersService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog, private dealApi: DealApi,
+    private router: Router) {
     this.teamRoles = this.teamsService.teamRoles;
     this.hasAdminRole = this.teamsService.hasAdminRole();
     if (this.hasAdminRole) {
       this.displayedColumns.push('action');
     }
-    this.updateTeamsDataSource();
+    // this.updateTeamsDataSource();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dealApi.find().subscribe(data => {
+      this.dealsDataSource = new MatTableDataSource(data);
+    });
+  }
 
   /**
    * @author Nermeen Mattar
@@ -42,7 +49,7 @@ export class TeamsListComponent implements OnInit {
    */
   updateTeamsDataSource() {
     this.filterString = '';
-    this.teamsDataSource = new MatTableDataSource(this.teamsService.userTeams);
+    // this.dealsDataSource = new MatTableDataSource(this.teamsService.userTeams);
   }
 
   /**

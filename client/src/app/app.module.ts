@@ -15,6 +15,7 @@ import { createTranslateLoader } from './core/loaders/translate-loader';
 import { EmailActivationComponent } from './components/email-activation/email-activation.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { MemberActivationFormComponent } from './components/member-activation-form/member-activation-form.component';
+import { SDKBrowserModule } from './sdk';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MemberActivationFormComponent } from './components/member-activation-fo
     SharedModule,
     HttpClientModule,
     MatIconModule,
+    SDKBrowserModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
