@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/internal/Observable';
 import { Injectable } from '@angular/core';
 
 import { HttpRequestsService } from './http-requests.service';
@@ -14,7 +15,7 @@ export class UserService {
   private _lastName: string;
   private _mobile: number;
 
-  constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, httpRequestsService: HttpRequestsService,
+  constructor(private teamsService: TeamsService, loginStatusService: LoginStatusService, private httpRequestsService: HttpRequestsService,
     tokenHandlerService: TokenHandlerService) {
     loginStatusService.$userLoginState.subscribe(isLoggedIn => {
       if (!isLoggedIn) {
@@ -27,6 +28,42 @@ export class UserService {
       this.updateLoggedInUserInfo(tokenHandlerService.decodeToken(token));
     });
   }
+
+
+  businessInfo(): Observable < any > {
+    return this.httpRequestsService.httpGet('api/business  ', {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
+
+  locationsList(): Observable < any > {
+    return this.httpRequestsService.httpGet('api/locations', {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
+
+
+  locationSales(locationId): Observable < any > {
+    return this.httpRequestsService.httpGet('api/locations/'.concat(locationId).concat('/sales'), {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
+  customersList(): Observable < any > {
+    return this.httpRequestsService.httpGet('api/directory/customers', {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
+  itemsList(): Observable < any > {
+    return this.httpRequestsService.httpGet('api/catalog/items  ', {
+      fail: 'NO_ERROR_MESSAGE'
+    });
+  }
+
+
 
   /**
    * @author Nermeen Mattar

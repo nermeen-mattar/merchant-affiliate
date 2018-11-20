@@ -9,7 +9,7 @@ import { TcTeamInfo } from '../../models/tc-team-info.model';
 import { TeamsService } from '../../../core/services/teams.service';
 import { roles } from '../../../core/constants/roles.constants';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { DealApi } from '../../../sdk';
+// import { DealApi } from '../../../sdk';
 import { Router } from '@angular/router';
 
 @Component({
@@ -35,27 +35,27 @@ export class TeamsListComponent implements OnInit {
     //   this.displayedColumns.push('action');
     // }
     // this.updateTeamsDataSource();
-    membersService.customersList().subscribe( res   => {
+    userService.customersList().subscribe( res   => {
       console.log(res);
       // this.teamsDataSource = new MatTableDataSource(res);
 
     });
-    membersService.businessInfo().subscribe( res   => {
+    userService.businessInfo().subscribe( res   => {
       console.log(res);
       // this.teamsDataSource = new MatTableDataSource(res);
 
     });
-    membersService.itemsList().subscribe( res   => {
+    userService.itemsList().subscribe( res   => {
       this.itemsList = res;
       // this.teamsDataSource = new MatTableDataSource(res);
 
     });
 
-    membersService.locationsList().subscribe( locationsList   => {
+    userService.locationsList().subscribe( locationsList   => {
       locationsList.forEach(location => {
 
         console.log(location);
-        membersService.locationSales(location.id).subscribe( sales   => {
+        userService.locationSales(location.id).subscribe( sales   => {
           console.log(sales);
 
         });
@@ -65,9 +65,9 @@ export class TeamsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dealApi.find().subscribe(data => {
-      this.dealsDataSource = new MatTableDataSource(data);
-    });
+    // this.dealApi.find().subscribe(data => {
+    //   this.dealsDataSource = new MatTableDataSource(data);
+    // });
   }
 
   /**
