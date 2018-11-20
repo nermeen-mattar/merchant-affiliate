@@ -48,7 +48,7 @@ export class LoginStatusService {
    * (default page for unauthorized users) then emitting the new login status for other components/services
    */
   logout() {
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('auth');
     this.isLoggedIn.next(false);
   }
 

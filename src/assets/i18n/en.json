@@ -234,7 +234,7 @@
     "SELECT_TEAM_TO_CHANGE_NAME": "Select a team to change its name",
     "NEW_TEAM_NAME": "New Team Name",
     "CHANGE_TEAM_NAME": "Change Team Name",
-    "CREATE_TEAM": "Create Team",
+    "CREATE_TEAM": "Register",
     "GO_TO_TEAMS": "Go to Teams"
   },
   "ADMIN": {
@@ -278,7 +278,7 @@
     "CONFIRM_DELETING_ACCOUNT_BODY": "Do you really want to delete your account?"
   },
   "REGISTER": {
-    "REGISTER": "Create team",
+    "REGISTER": "Register",
     "MEMBER_ALREADY_EXIST": "You have already registered. Please enter your password to create this new team",
     "EMAIL_NOT_RECEIVED": "Haven't receive an email?",
     "SEND_MAIL_AGAIN": "Resend activation mail",
