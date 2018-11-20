@@ -34,7 +34,7 @@ const routes: Routes = [{
     loadChildren: './members/members.module#MembersModule'
   },
   {
-    path: 'teams',
+    path: 'my-giveaways',
     canActivate: [AuthGuard],
     loadChildren: './teams/teams.module#TeamsModule'
   },
