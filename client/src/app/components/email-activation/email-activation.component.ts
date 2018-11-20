@@ -32,7 +32,7 @@ export class EmailActivationComponent implements OnInit {
         }, err => {
           console.log(err);
             this.mailState = State.ERROR;
-            router.navigateByUrl('teams');
+            router.navigateByUrl('my-giveaways');
 
         });
     } else {
