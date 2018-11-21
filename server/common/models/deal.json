@@ -22,8 +22,7 @@
       "type": "object"
     },
     "target_business_types": {
-      "type": ["string"],
-      "default": ""
+      "type": ["string"]
     },
     "target_businesses": {
       "type": ["object"]
