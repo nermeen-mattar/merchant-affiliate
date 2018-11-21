@@ -1,7 +1,7 @@
 <div class="app-teams">
   <h3 class="app-teams__title">
    Your Giveaways
-    <button mat-mini-fab color="primary" class="app-teams__action-btn app-teams__add" routerLink="/teams/create">
+    <button mat-mini-fab color="primary" class="app-teams__action-btn app-teams__add" routerLink="/deals/create">
       +
     </button>
   </h3>
@@ -14,12 +14,14 @@
       </ng-container>
       <ng-container matColumnDef="teamDescription">
           <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-            Deal Description </mat-header-cell>
+            Deal Description
+          </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="teamLimit">
             <mat-header-cell class="app-teams__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-              Deal Limit </mat-header-cell>
+              Deal Limit
+            </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.limit}} </mat-cell>
           </ng-container>
       <ng-container matColumnDef="action" *ngIf="hasAdminRole">

@@ -18,14 +18,14 @@ export class EmailActivationComponent implements OnInit {
   mailState: number = State.SUCCESS;
   userInfo: TcMember;
   State = State;
-  constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService, router: Router, 
+  constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService, router: Router,
     userService: UserService, loginStatusService: LoginStatusService) {
     const queryParams = activatedRoute.snapshot.queryParams;
      if (queryParams && queryParams['code']) {
       const urlParams =
       'grant_type=authorization_code&code='.concat(queryParams['code']).
-      concat('&client_id=LDMoVlUYyi8OXZBX2964hO4CwWscswl1pvvxHlW0&redirect_uri=http://localhost:5000/activation&client_secret=OJn9Hr41S7C7Z70IOoFxnqa3tNLPYvae6QKjGUZCjaKjhWuqt0PcGm6KlTkPWhTsWyVDMrwEjWDH3YCEjUbBCvBPFQ5WJZBn6BI3K9nxXJ2u9Hkx99U1D5cjCzG7nImX')
-  
+      concat('&client_id=LDMoVlUYyi8OXZBX2964hO4CwWscswl1pvvxHlW0&redirect_uri=http://localhost:5000/activation&client_secret=OJn9Hr41S7C7Z70IOoFxnqa3tNLPYvae6QKjGUZCjaKjhWuqt0PcGm6KlTkPWhTsWyVDMrwEjWDH3YCEjUbBCvBPFQ5WJZBn6BI3K9nxXJ2u9Hkx99U1D5cjCzG7nImX');
+
       httpRequestsService.httpPost('oauth/token/?'.concat(urlParams), {
         fail: 'NO_ERROR_MESSAGE'
       }).subscribe(
@@ -50,7 +50,7 @@ export class EmailActivationComponent implements OnInit {
     }
   }
 
-  
+
 
   ngOnInit() {}
 

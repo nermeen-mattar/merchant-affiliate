@@ -27,7 +27,7 @@
     </div>
     <div class="app-events__container">
       <mat-table class="app-events__container__table" [dataSource]="eventsDataSource" matSort>
-        <ng-container matColumnDef="toggeler">
+        <!-- <ng-container matColumnDef="toggeler">
           <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'RECEIVED_GIVEAWAY.OUT' | translate}}
             <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'RECEIVED_GIVEAWAY.IN' | translate}}
           </mat-header-cell>
@@ -37,7 +37,7 @@
               [checked]="row.myParticipation && row.myParticipation.action !== 'cancel'">
             </mat-slide-toggle>
           </mat-cell>
-        </ng-container>
+        </ng-container> -->
         <ng-container matColumnDef="date">
           <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header>
             {{'RECEIVED_GIVEAWAY.DATE' | translate}} </mat-header-cell>
@@ -69,7 +69,7 @@
             <span *ngIf="row.hasMinCriticalValue && row.hasMaxCriticalValue"
               class="app-events__event__members__seperator"> , </span>
             <span *ngIf="row.hasMaxCriticalValue"> {{'RECEIVED_GIVEAWAY.MAX' | translate}} : {{row.maxCriticalValue}}
-            </span> 
+            </span>
             <ng-container *ngIf="row.hasMinCriticalValue || row.hasMaxCriticalValu"> )</ng-container>
             <mat-icon class="app-events__event__error" *ngIf="(row.hasMinCriticalValue  && row.minCriticalValue > row.numOfParticipations) ||
               (row.hasMaxCriticalValue && row.maxCriticalValue < row.numOfParticipations); else success">error</mat-icon>
@@ -133,7 +133,7 @@
                 <span *ngIf="event.hasMinCriticalValue && event.hasMaxCriticalValue"
                   class="app-events__event__members__seperator"> , </span>
                 <span *ngIf="(event.hasMaxCriticalValue) "> {{'RECEIVED_GIVEAWAY.MAX' | translate}} : {{event.maxCriticalValue}}
-                </span> 
+                </span>
                 <span *ngIf="event.hasMinCriticalValue || event.hasMaxCriticalValue">)</span>
 
               </div>

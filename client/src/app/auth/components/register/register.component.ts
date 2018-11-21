@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
   dealSecondStepForm: FormGroup;
   dealThirdStepForm: FormGroup;
   itemsList;
+  businessList;
   constructor(
     private dealApi: DealApi,
     private fieldValidatorsService: FieldValidatorsService,
@@ -33,6 +34,9 @@ export class RegisterComponent implements OnInit {
         this.itemsList = itemsList;
       });
       // businessApi get all businesses
+      this.businessApi.find({ fields: {id: true, name: true, image: true} }).subscribe(data => {
+        this.businessList = data;
+      });
   }
 
   /*

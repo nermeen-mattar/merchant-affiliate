@@ -5,26 +5,26 @@
       <mat-vertical-stepper #regStepper linear="true" (selectionChange)="selectedStepChanged($event)">
         <mat-step label="Deal Details" *ngIf="dealFirstStepForm" [stepControl]="dealFirstStepForm">
           <form novalidate (ngSubmit)="regStepper.next()" [formGroup]="dealFirstStepForm" class="app-register__content__form">
-            
-    
-                
+
+
+
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="Deal Name" formControlName="name" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>supervisor_account</mat-icon>
               <mat-error *ngIf="dealFirstStepForm.controls['name'].invalid">
-                Name {{ 'FORM.IS_REQUIRED' | translate }}          
+                Name {{ 'FORM.IS_REQUIRED' | translate }}
               </mat-error>
             </mat-form-field>
             <mat-form-field class="app-register__content__form__field">
               <input matInput placeholder="Description" formControlName="description" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>description</mat-icon>
             </mat-form-field>
-            
+
             <mat-form-field class="app-register__content__form__field">
                 <input matInput placeholder="Number of target businesses" formControlName="limit" type="number">
                 <mat-icon class="app-register__content__form__field__icon" matPrefix>poeple</mat-icon>
                   <mat-error *ngIf="dealFirstStepForm.controls['limit'].invalid">
-                      Number of target businesses {{ 'FORM.IS_REQUIRED' | translate }}            
+                      Number of target businesses {{ 'FORM.IS_REQUIRED' | translate }}
                     </mat-error>
               </mat-form-field>
 
@@ -38,7 +38,7 @@
           <form novalidate (ngSubmit)="regStepper.next()"
             [formGroup]="dealSecondStepForm" class="app-register__content__form">
 
-  
+
                   <mat-form-field class="app-register__content__form__field">
 
                   <mat-select placeholder="Open for" formControlName="openFor"  >
@@ -61,7 +61,7 @@
                 </mat-select>
                <mat-icon class="app-register__content__form__field__icon" matPrefix>people</mat-icon>
              </mat-form-field>
- 
+
             <div class="stepper-action-btns">
               <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{
                 'BACK' | translate }}</button>
@@ -83,14 +83,14 @@
                   </mat-select>
                  <mat-icon class="app-register__content__form__field__icon" matPrefix>item</mat-icon>
                </mat-form-field>
-   
 
-                   
+
+
             <mat-form-field class="app-register__content__form__field">
                 <input matInput placeholder="Number of items for each business" formControlName="number_of_items" type="number">
                 <mat-icon class="app-register__content__form__field__icon" matPrefix>poeple</mat-icon>
                   <mat-error *ngIf="dealThirdStepForm.controls['number_of_items'].invalid">
-                      Number of items  {{ 'FORM.IS_REQUIRED' | translate }}            
+                      Number of items  {{ 'FORM.IS_REQUIRED' | translate }}
                     </mat-error>
               </mat-form-field>
 
@@ -103,7 +103,7 @@
               </div>
             </form>
           </mat-step>
-      
+
       </mat-vertical-stepper>
     </div>
     <mat-spinner class="app-register__spinner" [ngClass]="{'app-register__element-hide': !displaySpinner }"></mat-spinner>
