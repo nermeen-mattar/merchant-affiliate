@@ -7,6 +7,7 @@ import { MembersListComponent } from './components/members-list/members-list.com
 import { MembersComponent } from './members.component';
 import { PageNotFoundComponent } from '../shared/components/page-not-found/page-not-found.component';
 import { MemberStatisticsDetailsComponent } from './components/member-statistics-details/member-statistics-details.component';
+import { DealFormComponent } from '../events/components/deal-form/deal-form.component';
 
 const routes: Routes = [{
   path: '',
@@ -27,6 +28,10 @@ const routes: Routes = [{
     {
       path: 'statistics/details/:memberId/:action-type',
       component: MemberStatisticsDetailsComponent
+    },
+    {
+      path: ':dealId',
+      component: DealFormComponent
     },
     /* The member form component will be used for creating and form editing, creation if the path was /new, edit otherwise */
     {

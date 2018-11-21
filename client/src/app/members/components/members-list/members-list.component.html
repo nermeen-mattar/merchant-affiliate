@@ -4,7 +4,7 @@
     <div class="app-members__header">
       <h3 class="app-members__header__title">
         Open Deals
-        <button mat-mini-fab *ngIf="hasAdminRole" color="primary" class="app-members__action app-members__add" routerLink="add-member">
+        <button mat-mini-fab *ngIf="hasAdminRole" color="primary" class="app-members__action app-members__add"  routerLink="../create">
       + </button>
       </h3>
       <!-- <div>
@@ -56,6 +56,10 @@
             matSuffix matTooltip="{{'MEMBER.SEND_MAIL_AGAIN' | translate}}"
             matTooltipPosition="below"
             >mail</mat-icon>
+            <mat-icon  class="app-members__action" [routerLink]="'../' + row.id" color="primary"
+            matSuffix matTooltip="{{'MEMBER.SEND_MAIL_AGAIN' | translate}}"
+            matTooltipPosition="below"
+            >info_circle</mat-icon>
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

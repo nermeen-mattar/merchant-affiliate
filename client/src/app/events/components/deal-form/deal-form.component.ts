@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { BusinessApi } from './../../../sdk/services/custom/Business';
 import { DealApi } from './../../../sdk/services/custom/Deal';
 import { Component, OnInit } from '@angular/core';
@@ -24,11 +25,13 @@ export class DealFormComponent implements OnInit {
   dealThirdStepForm: FormGroup;
   businessList;
   itemsList;
+  dealId;
   constructor(
     private dealApi: DealApi,
     private fieldValidatorsService: FieldValidatorsService,
     private businessApi: BusinessApi,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute
     ) {
       userService.itemsList().subscribe(itemsList => {
         this.itemsList = itemsList;
@@ -50,10 +53,41 @@ export class DealFormComponent implements OnInit {
   "id"?: any;*/
 
   ngOnInit() {
-    this.createDealFirstStepForm();
-    this.createDealSecondStepForm();
-    this.createDealThirdStepForm();
+    this.initFormEditingOrCreating();
 
+  }
+
+
+
+
+  /**
+   * @author Nermeen Mattar
+   * @description checks the dealId param passed in the route to know if the user is trying to create a new event or edit an existing event
+   * if the dealId param not equal to 'create', a request is sent to get the event with that Id.
+   */
+  initFormEditingOrCreating() {
+
+    this.displaySpinner = true;
+    const dealIdVariable = this.route.snapshot.params['dealId'];
+    if (dealIdVariable !== 'create') {
+      this.dealId = dealIdVariable;
+      this.dealApi.findById(this.dealId).subscribe(res => {
+        this.createDealForms(res);
+        this.dealFirstStepForm.disable();
+        this.dealSecondStepForm.disable();
+        this.dealThirdStepForm.disable();
+
+      });
+    } else {
+      this.createDealForms();
+    }
+  }
+
+  createDealForms(dealData?) {
+    this.displaySpinner = false;
+    this.createDealFirstStepForm(dealData);
+    this.createDealSecondStepForm(dealData);
+    this.createDealThirdStepForm(dealData);
   }
 
   // selectedStepChanged(changeInfo: StepperSelectionEvent) {
@@ -63,29 +97,34 @@ export class DealFormComponent implements OnInit {
   //   this.currentStep = changeInfo.selectedIndex + 1;
   // }
 
-  createDealFirstStepForm() {
+  createDealFirstStepForm(dealData) {
     this.dealFirstStepForm = new FormGroup({
       name: new FormControl(this.name || '', [Validators.required]),
       description: new FormControl(''),
       limit: new FormControl('',  [Validators.required])
 
     });
+    this.dealFirstStepForm.patchValue(dealData);
+
   }
 
-  createDealSecondStepForm() {
+  createDealSecondStepForm(dealData) {
     this.dealSecondStepForm = new FormGroup({
       target_business_types: new FormControl(''),
       target_businesses: new FormControl(''),
       openFor: new FormControl('')
     });
+    this.dealSecondStepForm.patchValue(dealData);
+
   }
 
 
-createDealThirdStepForm() {
+createDealThirdStepForm(dealData) {
   this.dealThirdStepForm = new FormGroup({
     item: new FormControl('', ),
     number_of_items: new FormControl('', [Validators.required]),
   });
+  this.dealThirdStepForm.patchValue(dealData);
 }
 
 

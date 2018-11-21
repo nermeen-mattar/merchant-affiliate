@@ -10,6 +10,7 @@ import { AddMemberFormComponent } from './components/add-member-form/add-member-
 import { SharedModule } from '../shared/shared.module';
 import { MembersStatisticsComponent } from './components/members-statistics/members-statistics.component';
 import { MemberStatisticsDetailsComponent } from './components/member-statistics-details/member-statistics-details.component';
+import { DealFormComponent } from '../events/components/deal-form/deal-form.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { MemberStatisticsDetailsComponent } from './components/member-statistics
     MembersComponent,
     AddMemberFormComponent,
     MembersStatisticsComponent,
-    MemberStatisticsDetailsComponent
+    MemberStatisticsDetailsComponent,
+    DealFormComponent
   ]
 })
 export class MembersModule { }

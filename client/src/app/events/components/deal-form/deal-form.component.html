@@ -1,5 +1,7 @@
 <mat-card class="app-deal">
-    <mat-card-title class="app-deal__title"> Create Deal</mat-card-title>
+    <mat-card-title class="app-deal__title"> 
+     {{dealId ? 'Deal Details': 'Create Deal'}}
+    </mat-card-title>
     <mat-card-content>
       <div class="app-deal__content" [ngClass]="{'app-deal__element-hide': displaySpinner || displayMessageCard}">
         <mat-vertical-stepper #regStepper linear="true" >
@@ -98,7 +100,7 @@
                 <div class="stepper-action-btns">
                   <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-deal__content__button">{{
                     'BACK' | translate }}</button>
-                  <button type="submit" *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-deal__content__button"
+                  <button  type="submit" *ngIf="!displayMessageCard && !dealId" mat-raised-button color="primary" class="app-deal__content__button"
                     [disabled]="dealThirdStepForm.invalid || dealThirdStepForm.invalid"> Create </button>
                 </div>
               </form>
