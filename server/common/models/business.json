@@ -1,10 +1,14 @@
 {
   "name": "business",
   "base": "PersistedModel",
+  "forceId": false,
   "options": {
     "validateUpsert": true
   },
   "properties": {
+    "id": {
+      "type": "string"
+    },
     "name": {
       "type": "string"
     },
@@ -18,12 +22,21 @@
       "type": "string"
     },
     "phone": {
+      "type": "string",
+      "default": null
+    },
+    "end_of_fiscal_day": {
       "type": "string"
     },
     "address": {
-      "type": "string"
+      "type": "string",
+      "default": null
     },
     "image": {
+      "type": "object",
+      "default": null
+    },
+    "timezone": {
       "type": "object"
     },
     "social": {

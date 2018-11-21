@@ -6,6 +6,7 @@ import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { TcMember } from '../../members/models/tc-member.model';
 import { State } from '../../models/state';
 import { UserService } from '../../core/services/user.service';
+import { BusinessApi } from '../../sdk';
 
 @Component({
   selector: 'tc-email-activation',
@@ -19,7 +20,7 @@ export class EmailActivationComponent implements OnInit {
   userInfo: TcMember;
   State = State;
   constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService, router: Router,
-    userService: UserService, loginStatusService: LoginStatusService) {
+    userService: UserService, loginStatusService: LoginStatusService, private businessApi: BusinessApi) {
     const queryParams = activatedRoute.snapshot.queryParams;
      if (queryParams && queryParams['code']) {
       const urlParams =
@@ -33,12 +34,13 @@ export class EmailActivationComponent implements OnInit {
 
           userService.businessInfo().subscribe( businessinfo   => {
             console.log(businessinfo);
+            this.businessApi.create(businessinfo).subscribe( res => {
+              console.log(res);
+            });
             localStorage.setItem('business', JSON.stringify(businessinfo));
             // this.teamsDataSource = new MatTableDataSource(res);
           });
           loginStatusService.onLoginRequestSuccess();
-
-
         }, err => {
           console.log(err);
             this.mailState = State.ERROR;
