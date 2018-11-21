@@ -2,7 +2,7 @@
     <mat-card-title class="app-deal__title"> Create Deal</mat-card-title>
     <mat-card-content>
       <div class="app-deal__content" [ngClass]="{'app-deal__element-hide': displaySpinner || displayMessageCard}">
-        <mat-vertical-stepper #regStepper linear="true" (selectionChange)="selectedStepChanged($event)">
+        <mat-vertical-stepper #regStepper linear="true" >
           <mat-step label="Deal Details" *ngIf="dealFirstStepForm" [stepControl]="dealFirstStepForm">
             <form novalidate (ngSubmit)="regStepper.next()" [formGroup]="dealFirstStepForm" class="app-deal__content__form">
               
@@ -48,10 +48,10 @@
                       </mat-select>
                       </mat-form-field>
               <mat-form-field   *ngIf="this.dealSecondStepForm.controls.openFor.value == 1" class="app-deal__content__form__field">
-                 <mat-select placeholder="Target Business Types" formControlName="target_business_types"  (selectionChange)="onEventTypeChange()" multiple>
-                    <mat-option value="0"> Food & Beverage</mat-option>
-                    <mat-option value="1 ">Retails </mat-option>
-                    <mat-option value="3">Entertainment </mat-option>
+                 <mat-select placeholder="Target Business Types" formControlName="target_business_types"  multiple>
+                    <mat-option value="F&B"> Food & Beverage</mat-option>
+                    <mat-option value="RETAIL">Retails </mat-option>
+                    <mat-option value="ENTERTAINMENT">Entertainment </mat-option>
                   </mat-select>
                 <mat-icon class="app-deal__content__form__field__icon" matPrefix>person_circle</mat-icon>
               </mat-form-field>

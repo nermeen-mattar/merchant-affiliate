@@ -22,6 +22,7 @@ export class DealFormComponent implements OnInit {
   dealFirstStepForm: FormGroup;
   dealSecondStepForm: FormGroup;
   dealThirdStepForm: FormGroup;
+  businessList;
   itemsList;
   constructor(
     private dealApi: DealApi,
@@ -32,7 +33,10 @@ export class DealFormComponent implements OnInit {
       userService.itemsList().subscribe(itemsList => {
         this.itemsList = itemsList;
       });
-      // businessApi get all businesses
+            // businessApi get all businesses
+      this.businessApi.find({ fields: {id: true, name: true, image: true} }).subscribe(data => {
+         this.businessList = data;
+      });
   }
 
   /*
@@ -136,11 +140,12 @@ createDealThirdStepForm() {
 
   createDeal(firstStepValues, secondStepValues, thirdStepValues) {
     this.displaySpinner = true;
+    this.prepareTargetBusinesses(secondStepValues);
     this.dealApi.create({
       ...firstStepValues,
       ...secondStepValues,
-      ...thirdStepValues
-      // src_business: get it from local storage
+      ...thirdStepValues,
+      src_business: this.userService.business
     }).subscribe(dealRes => {
         this.displayMessageCard = true;
         this.displaySpinner = false;
@@ -148,4 +153,17 @@ createDealThirdStepForm() {
       this.displaySpinner = false;
     });
   }
+
+  prepareTargetBusinesses(secondStepValues) {
+    if (!secondStepValues.target_businesses) {
+        if (secondStepValues.target_business_types && secondStepValues.target_business_types.length) {
+          secondStepValues.target_businesses = this.businessList.filter(business =>
+            secondStepValues.target_business_types.includes(business.type));
+        } else {
+          secondStepValues.target_businesses = this.businessList;
+     
+        }
+    }
+    delete secondStepValues.openFor;
+  } 
 }
