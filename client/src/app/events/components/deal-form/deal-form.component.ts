@@ -76,7 +76,6 @@ export class DealFormComponent implements OnInit {
     this.dealSecondStepForm = new FormGroup({
       target_business_types: new FormControl(''),
       target_businesses: new FormControl(''),
-      businesses: new FormControl(''),
       openFor: new FormControl('')
     });
   }
