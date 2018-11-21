@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpRequestsService } from '../../core/services/http-requests.service';
 import { TcMember } from '../../members/models/tc-member.model';
 import { State } from '../../models/state';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'tc-email-activation',
@@ -18,7 +19,7 @@ export class EmailActivationComponent implements OnInit {
   userInfo: TcMember;
   State = State;
   constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService, router: Router, 
-    loginStatusService: LoginStatusService) {
+    userService: UserService, loginStatusService: LoginStatusService) {
     const queryParams = activatedRoute.snapshot.queryParams;
      if (queryParams && queryParams['code']) {
       const urlParams =
@@ -29,9 +30,14 @@ export class EmailActivationComponent implements OnInit {
         fail: 'NO_ERROR_MESSAGE'
       }).subscribe(
         res => {
+
+          userService.businessInfo().subscribe( businessinfo   => {
+            console.log(businessinfo);
+            localStorage.setItem('business', JSON.stringify(businessinfo));
+            // this.teamsDataSource = new MatTableDataSource(res);
+          });
           loginStatusService.onLoginRequestSuccess();
 
-          // router.navigateByUrl('my-giveaways');
 
         }, err => {
           console.log(err);
@@ -43,6 +49,8 @@ export class EmailActivationComponent implements OnInit {
       this.displayPageNotFound = true;
     }
   }
+
+  
 
   ngOnInit() {}
 

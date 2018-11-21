@@ -10,7 +10,7 @@ import { TokenHandlerService } from '../../auth/services/token-handler.service';
 export class UserService {
   /* User static properties (received from the backend) */
   private _username: string;
-  private _memberId: number;
+  private _business: number;
   private _firstName: string;
   private _lastName: string;
   private _mobile: number;
@@ -25,7 +25,7 @@ export class UserService {
     });
     httpRequestsService.$token.subscribe( token => {
       // executed 1) upon login 2) upon token change 3) when refreshing and the user is logged in
-      this.updateLoggedInUserInfo(tokenHandlerService.decodeToken(token));
+      this.updateLoggedInUserInfo();
     });
   }
 
@@ -171,22 +171,22 @@ export class UserService {
    * @readonly
    * @type {number}
    */
-  get memberId(): number {
-    return this._memberId;
+  get business(): number {
+    return this._business;
   }
 
   /**
    * @author Nermeen Mattar
    * @description sets the user id in a private variable then it either sets it in the localstorage or
    * remove it from the localstorage
-   * @param {memberId} number
+   * @param {business} number
    */
-  set memberId(memberId: number) {
-    this._memberId = memberId;
-    if (memberId) {
-      localStorage.setItem('memberId', memberId.toString());
+  set business(business: number) {
+    this._business = business;
+    if (business) {
+      localStorage.setItem('business', business.toString());
     } else {
-      localStorage.removeItem('memberId');
+      localStorage.removeItem('business');
     }
   }
 
@@ -195,23 +195,13 @@ export class UserService {
    * @description sets the class properties either from the decoded token
    * (in case of logging in or updating the token) or from the localStorage
    * (in case a logged in user has reloaded the page)
-   * @param {DecodedToken} decodedToken
    */
-  updateLoggedInUserInfo(decodedToken?: DecodedToken) {
-    if (decodedToken) {
-      this.memberId = decodedToken.memberId;
-      this.username = decodedToken.sub;
-      this.firstName = decodedToken.firstName;
-      this.lastName = decodedToken.lastName;
-      this.mobile = decodedToken.mobile;
-      this.teamsService.initTeamRolesAndTeamsList(decodedToken.teamRoles);
-    } else {
-      this.memberId = Number(localStorage.getItem('memberId'));
-      this.username = localStorage.getItem('username');
-      this.firstName = localStorage.getItem('firstName');
-      this.lastName = localStorage.getItem('lastName');
-      this.mobile = Number(localStorage.getItem('mobile'));
-    }
+  updateLoggedInUserInfo() {
+    this.businessInfo().subscribe( businessinfo   => {
+      this.business = businessinfo;
+      localStorage.setItem('business', JSON.stringify(businessinfo));
+      // this.teamsDataSource = new MatTableDataSource(res);
+    });
   }
 
   /**
@@ -219,7 +209,7 @@ export class UserService {
    * @description resets the class variables
    */
   resetData() {
-    this.memberId = null;
+    this.business = null;
     this.username = null;
     this.firstName = null;
     this.lastName = null;

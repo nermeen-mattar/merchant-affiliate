@@ -51,11 +51,11 @@ export class MemberSettingsComponent implements OnInit {
     //   lastName: this.userService.lastName,
     //   mobile: this.userService.mobile
     // }
-    this.membersService.getMember(this.userService.memberId).subscribe(currentMemberInfo => {
-      this.currentMember = currentMemberInfo;
-      this.memberBasicSettingsGroup.patchValue(this.currentMember);
-      this.memberBasicSettingsGroup.markAsUntouched();
-    });
+    // this.membersService.getMember(this.userService.memberId).subscribe(currentMemberInfo => {
+    //   this.currentMember = currentMemberInfo;
+    //   this.memberBasicSettingsGroup.patchValue(this.currentMember);
+    //   this.memberBasicSettingsGroup.markAsUntouched();
+    // });
 
     this.membersService.getReminders().subscribe(remindersInfo => {
       this.remindersForm.patchValue(remindersInfo);
@@ -162,16 +162,16 @@ export class MemberSettingsComponent implements OnInit {
     Object.keys(updatedMemberValue).forEach(propertyName => {
       this.deletePropertyValueIfNotTouched(propertyName, updatedMemberValue);
     });
-    this.membersService.updateMember(this.userService.memberId, updatedMemberValue).subscribe(res => {
-      this.memberBasicSettingsGroup.markAsUntouched();
-      this.currentMember = {
-        ...this.currentMember,
-        ...updatedMemberValue
-      };
-      Object.keys(updatedMemberValue).forEach(propertyName => {
-        this.userService[propertyName] = updatedMemberValue[propertyName];
-      });
-    });
+    // this.membersService.updateMember(this.userService.memberId, updatedMemberValue).subscribe(res => {
+    //   this.memberBasicSettingsGroup.markAsUntouched();
+    //   this.currentMember = {
+    //     ...this.currentMember,
+    //     ...updatedMemberValue
+    //   };
+    //   Object.keys(updatedMemberValue).forEach(propertyName => {
+    //     this.userService[propertyName] = updatedMemberValue[propertyName];
+    //   });
+    // });
   }
 
   saveRemindersInfo() {
