@@ -40,7 +40,7 @@ export class MemberSettingsComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.allTeams = this.teamsService.userTeams;
-    this.teamsTheUserIsAdminOf = this.teamsService.getTeamsTheUserIsAdminOf();
+    this.teamsTheUserIsAdminOf = [{ teamId : 1, teamName: 'dummyname'}];
     this.initSettingsForm();
   }
 
