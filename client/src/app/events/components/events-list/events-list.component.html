@@ -1,6 +1,4 @@
 <div class="app-events">
-  <div *ngIf="!isTeamMember && !isTeamAdmin; else hasTeams">{{'ERRORS.NO_TEAMS_FOR_USER' | translate}}</div>
-  <ng-template #hasTeams>
     <div *ngIf="isPastEvents" class="app-events__back" (click)="displayFutureEvents()">
       <mat-icon color="primary">chevron_left</mat-icon>
       {{'BACK'| translate}}
@@ -153,5 +151,4 @@
       </mat-accordion>
       <mat-spinner class="app-events__container__spinner" *ngIf="spinner"></mat-spinner>
     </div>
-  </ng-template>
 </div>

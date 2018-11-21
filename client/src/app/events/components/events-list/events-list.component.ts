@@ -22,7 +22,7 @@ export class EventsListComponent implements OnInit {
   userTeams: TcTeamInfo[];
   selectedTeamId: number;
   teamMemberId: number;
-  isPastEvents: boolean;
+  isPastEvents = false;
   filterString = '';
   isTeamAdmin: boolean;
   isTeamMember: boolean;
@@ -35,14 +35,9 @@ export class EventsListComponent implements OnInit {
   activeEvent: TcEvent = null;
   constructor(
     private eventsService: EventsService,
-    private teamsService: TeamsService,
     public dialog: MatDialog
   ) {
     this.spinner = true;
-    this.userTeams = this.teamsService.userTeams;
-    this.selectedTeamId = this.teamsService.selectedTeamId;
-    this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
-    this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     if (this.isTeamMember || this.isTeamAdmin) {
       this.changeColumnsToDisplay();
       this.updateEvents();
@@ -98,7 +93,7 @@ export class EventsListComponent implements OnInit {
    * selected team, and updates the displayed events to displays the events that belongs to the selected team.
    */
   changeSelectedTeam() {
-    this.teamsService.selectedTeamId = this.selectedTeamId;
+    // this.teamsService.selectedTeamId = this.selectedTeamId;
     this.changeColumnsToDisplay();
     this.updateEvents();
   }
@@ -120,7 +115,7 @@ export class EventsListComponent implements OnInit {
    * admin-actions columns is not already displayed
    */
   pushAdminActionIfTeamAdmin() {
-    this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
+    // this.isTeamAdmin = this.teamsService.hasAdminRole(this.selectedTeamId);
     if (this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') === -1) {
       this.columnsToDisplay.push('admin-actions');
     } else if (!this.isTeamAdmin && this.columnsToDisplay.indexOf('admin-actions') !== -1) {
@@ -133,7 +128,7 @@ export class EventsListComponent implements OnInit {
    * @description pushes the event toggeler action column if the user is a member of the selected team and toggeler is not already displayed
    */
   pushToggelerIfTeamMember() {
-    this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
+    // this.isTeamMember = this.teamsService.hasMemberRole(this.selectedTeamId);
     if (this.isTeamMember && this.columnsToDisplay.indexOf('toggeler') === -1) {
       this.columnsToDisplay.unshift('toggeler');
     } else if (!this.isTeamMember && this.columnsToDisplay.indexOf('toggeler') !== -1) {
