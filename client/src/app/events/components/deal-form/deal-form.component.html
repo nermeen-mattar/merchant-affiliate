@@ -79,7 +79,7 @@
   
                 <mat-form-field   class="app-deal__content__form__field">
                        <mat-select placeholder="Items" formControlName="item"  >
-                      <mat-option *ngFor="let item of itemsList" [value]="business">{{item.name}}</mat-option>
+                      <mat-option *ngFor="let item of itemsList" [value]="item">{{item.name}}</mat-option>
                     </mat-select>
                    <mat-icon class="app-deal__content__form__field__icon" matPrefix>item</mat-icon>
                  </mat-form-field>
