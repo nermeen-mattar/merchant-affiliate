@@ -28,7 +28,7 @@ const routes: Routes = [{
     loadChildren: './auth/auth.module#AuthModule',
   },
   {
-    path: 'events',
+    path: 'deals',
     canActivate: [AuthGuard],
     loadChildren: './events/events.module#EventsModule'
   },

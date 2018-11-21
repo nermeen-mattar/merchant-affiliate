@@ -6,7 +6,7 @@
     <span class="app-header__logo__icon"></span>
   </div>
   <div class="app-header__menu">
-    <span class="app-header__menu__item" routerLink="/events" *ngIf="$isUserLoggedIn | async" routerLinkActive="active">
+    <span class="app-header__menu__item" routerLink="/deals" *ngIf="$isUserLoggedIn | async" routerLinkActive="active">
       <span> {{'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAYS' | translate}} </span>
     </span>
     <span *ngIf="$isUserLoggedIn | async">
