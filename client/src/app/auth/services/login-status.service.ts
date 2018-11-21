@@ -38,7 +38,7 @@ export class LoginStatusService {
    * @memberof AuthService
    */
   onLoginRequestSuccess() {
-    this.router.navigateByUrl('events');
+    this.router.navigateByUrl('my-giveaways');
     this.isLoggedIn.next(true);
   }
 

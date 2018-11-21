@@ -1,3 +1,4 @@
+import { LoginStatusService } from './../../../../src/app/auth/services/login-status.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -16,7 +17,8 @@ export class EmailActivationComponent implements OnInit {
   mailState: number = State.SUCCESS;
   userInfo: TcMember;
   State = State;
-  constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService, router: Router) {
+  constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService, router: Router, 
+    loginStatusService: LoginStatusService) {
     const queryParams = activatedRoute.snapshot.queryParams;
      if (queryParams && queryParams['code']) {
       const urlParams =
@@ -27,7 +29,9 @@ export class EmailActivationComponent implements OnInit {
         fail: 'NO_ERROR_MESSAGE'
       }).subscribe(
         res => {
-          router.navigateByUrl('my-giveaways');
+          loginStatusService.onLoginRequestSuccess();
+
+          // router.navigateByUrl('my-giveaways');
 
         }, err => {
           console.log(err);
