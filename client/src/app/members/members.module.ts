@@ -27,7 +27,7 @@ import { DealFormComponent } from '../events/components/deal-form/deal-form.comp
     AddMemberFormComponent,
     MembersStatisticsComponent,
     MemberStatisticsDetailsComponent,
-    DealFormComponent
+    DealFormComponent,
   ]
 })
 export class MembersModule { }

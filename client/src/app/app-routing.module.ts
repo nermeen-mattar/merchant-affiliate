@@ -1,3 +1,4 @@
+import { CustomersGiftComponent } from './members/components/customers-gift/customers-gift.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -31,6 +32,11 @@ const routes: Routes = [{
     path: 'deals',
     canActivate: [AuthGuard],
     loadChildren: './members/members.module#MembersModule'
+  },
+  {
+    path: 'customers-gift',
+    canActivate: [AuthGuard],
+    component: CustomersGiftComponent
   },
   {
     path: 'my-giveaways',

@@ -11,11 +11,11 @@ import { ConfirmDialogComponent } from './../../../shared/components/confirm-dia
 import { DealApi, BusinessApi } from '../../../sdk';
 
 @Component({
-  selector: 'tc-members-list',
-  templateUrl: './members-list.component.html',
-  styleUrls: ['./members-list.component.scss']
+  selector: 'tc-customers-gift',
+  templateUrl: './customers-gift.component.html',
+  styleUrls: ['./customers-gift.component.scss']
 })
-export class MembersListComponent implements OnInit {
+export class CustomersGiftComponent implements OnInit {
   memberColumns = ['member', 'mail'];
   adminColumns = ['member', 'mail', 'action'];
   displayedColumns = ['name', 'description', 'limit', 'src_business', 'action'];
@@ -74,12 +74,10 @@ export class MembersListComponent implements OnInit {
     let copyDealsList = Object.assign([], this.deals);
     if (status === 'Opened') {
       this.disableBusinessFilter = false;
-      copyDealsList = copyDealsList.filter(deal => !deal.destination_businesses || (Number(deal.limit) >
-      deal.destination_businesses.length));
+      copyDealsList = copyDealsList.filter(deal => !deal.target_businesses || (Number(deal.limit) > deal.target_businesses.length));
     } else if (status === 'Closed') {
       this.disableBusinessFilter = true;
-      copyDealsList = copyDealsList.filter(deal => deal.destination_businesses && (Number(deal.limit) ===
-      deal.destination_businesses.length));
+      copyDealsList = copyDealsList.filter(deal => deal.target_businesses && (Number(deal.limit) === deal.target_businesses.length));
     }
     this.updateMembersDataSource(copyDealsList);
   }
@@ -243,10 +241,10 @@ export class MembersListComponent implements OnInit {
 
   takeDeal(dealId) {
     const targetDeal = this.deals.filter(deal => deal.id === dealId)[0];
-    if (!targetDeal.destination_businesses) {
-      targetDeal.destination_businesses = [this.userService.business];
+    if (!targetDeal.target_businesses) {
+      targetDeal.target_businesses = [this.userService.business];
     } else {
-      targetDeal.destination_businesses.push(this.userService.business);
+      targetDeal.target_businesses.push(this.userService.business);
     }
     // update deal with targetDeal on success -> this.updateDealsList()
     this.dealApi.patchAttributes(dealId, targetDeal).subscribe( res => {

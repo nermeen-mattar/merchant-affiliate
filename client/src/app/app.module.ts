@@ -1,3 +1,4 @@
+import { CustomersGiftComponent } from './members/components/customers-gift/customers-gift.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +23,8 @@ import { SDKBrowserModule } from './sdk';
     AppComponent,
     EmailActivationComponent,
     MemberActivationFormComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    CustomersGiftComponent
     ],
   imports: [
     BrowserModule,

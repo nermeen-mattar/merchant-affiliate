@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 
-import { EventsListComponent } from './components/events-list/events-list.component';
 import { EventsComponent } from './events.component';
 import { EventsRoutingModule } from './events-routing.module';
 import { EventsService } from './services/events.service';
@@ -21,7 +20,6 @@ import { DealFormComponent } from './components/deal-form/deal-form.component';
     SharedModule,
   ],
   declarations: [
-    EventsListComponent,
     EventsComponent,
     EventDetailsComponent,
     EventFormComponent,
