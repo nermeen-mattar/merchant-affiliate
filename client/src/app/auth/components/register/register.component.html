@@ -3,116 +3,109 @@
   <mat-card-content>
     <div class="app-register__content" [ngClass]="{'app-register__element-hide': displaySpinner || displayMessageCard}">
       <mat-vertical-stepper #regStepper linear="true" (selectionChange)="selectedStepChanged($event)">
-        <mat-step label="{{ 'TEAM.TEAM_DETAILS' | translate }}" *ngIf="registerFirstStepForm" [stepControl]="registerFirstStepForm">
-          <form novalidate (ngSubmit)="regStepper.next()" [formGroup]="registerFirstStepForm" class="app-register__content__form">
+        <mat-step label="Deal Details" *ngIf="dealFirstStepForm" [stepControl]="dealFirstStepForm">
+          <form novalidate (ngSubmit)="regStepper.next()" [formGroup]="dealFirstStepForm" class="app-register__content__form">
             
-            <mat-form-field>
-                  <mat-select placeholder="Businesses" [formControl]="businesses" multiple>
-                    <mat-option *ngFor="let business of businessList" [value]="business">{{business.name}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                
+    
                 
             <mat-form-field class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'TEAM.TEAM_NAME' | translate }}" formControlName="teamName" type="text">
+              <input matInput placeholder="Deal Name" formControlName="name" type="text">
               <mat-icon class="app-register__content__form__field__icon" matPrefix>supervisor_account</mat-icon>
-              <mat-error *ngIf="registerFirstStepForm.controls['teamName'].invalid">
-                <span *ngIf="registerFirstStepForm.controls['teamName'].errors.required; else invalidTeamName">
-                  {{'TEAM.TEAM_NAME' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
-                </span>
-                <ng-template #invalidTeamName>
-                  <span *ngIf="registerFirstStepForm.controls['teamName'].errors.minlength">
-                    {{'TEAM.TEAM_NAME' | translate}} {{ ('FORM.MIN_LENGTH' | translate) |
-                    localizedTextModifier:'inject':registerFirstStepForm.controls['teamName'].errors.minlength.requiredLength}}
-                  </span>
-                </ng-template>
+              <mat-error *ngIf="dealFirstStepForm.controls['name'].invalid">
+                Name {{ 'FORM.IS_REQUIRED' | translate }}          
               </mat-error>
             </mat-form-field>
             <mat-form-field class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'USER.EMAIL' | translate }}" formControlName="email" type="text">
-              <mat-icon class="app-register__content__form__field__icon" matPrefix>email</mat-icon>
-              <mat-icon *ngIf="registerFirstStepForm.controls['email'].dirty && registerFirstStepForm.controls['email'].invalid&&registerFirstStepForm.controls['email'].errors.email"
-                class="app-register__content__form__field__icon" matSuffix matTooltip="{{'FORM.EMAIL_VALID_FORMAT' | translate}}"
-                matTooltipPosition="below">
-                info </mat-icon>
-              <mat-error *ngIf="registerFirstStepForm.controls['email'].invalid">
-                <span *ngIf="registerFirstStepForm.controls['email'].errors.required; else invalidEmail">
-                  {{'USER.EMAIL' | translate}} {{ 'FORM.IS_REQUIRED' | translate }}
-                </span>
-                <ng-template #invalidEmail>
-                  <span *ngIf="registerFirstStepForm.controls['email'].errors.email">
-                    {{'FORM.ENTER_VALID_EMAIL' | translate}}
-                  </span>
-                </ng-template>
-              </mat-error>
+              <input matInput placeholder="Description" formControlName="description" type="text">
+              <mat-icon class="app-register__content__form__field__icon" matPrefix>description</mat-icon>
             </mat-form-field>
+            
+            <mat-form-field class="app-register__content__form__field">
+                <input matInput placeholder="Number of target businesses" formControlName="limit" type="number">
+                <mat-icon class="app-register__content__form__field__icon" matPrefix>poeple</mat-icon>
+                  <mat-error *ngIf="dealFirstStepForm.controls['limit'].invalid">
+                      Number of target businesses {{ 'FORM.IS_REQUIRED' | translate }}            
+                    </mat-error>
+              </mat-form-field>
+
             <div class="stepper-action-btns stepper-action-btns--step-1">
-              <button type="submit" mat-button matStepperNext mat-raised-button [disabled]="registerFirstStepForm.invalid"
+              <button type="submit" mat-buztton matStepperNext mat-raised-button [disabled]="dealFirstStepForm.invalid"
                 color="primary" class="app-register__content__button">{{ 'NEXT' | translate }}</button>
             </div>
           </form>
         </mat-step>
-        <mat-step label="{{ 'USER.USER_DETAILS' | translate }}" *ngIf="registerSecondStepForm" [stepControl]="registerSecondStepForm">
-          <form novalidate *ngIf="currentStep === 2" (ngSubmit)="(!registerFirstStepForm.invalid && !registerSecondStepForm.invalid) && register(registerFirstStepForm.value, registerSecondStepForm.value);"
-            [formGroup]="registerSecondStepForm" class="app-register__content__form">
-            <mat-form-field *ngIf="isNewUser" class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'USER.FIRST_NAME' | translate }}" formControlName="firstName" type="text">
+        <mat-step label="Target Buesiness(s) Details" *ngIf="dealSecondStepForm" [stepControl]="dealSecondStepForm">
+          <form novalidate (ngSubmit)="(!dealFirstStepForm.invalid && !dealSecondStepForm.invalid) && register(dealFirstStepForm.value, dealSecondStepForm.value);"
+            [formGroup]="dealSecondStepForm" class="app-register__content__form">
+
+  
+                  <mat-form-field class="app-register__content__form__field">
+
+                  <mat-select placeholder="Open for" formControlName="openFor"  >
+                      <mat-option value="0"> All Merchants  </mat-option>
+                      <mat-option value="1 ">Merchants with certain category  </mat-option>
+                      <mat-option value="2">Specific Merchant(s) </mat-option>
+                    </mat-select>
+                    </mat-form-field>
+            <mat-form-field   *ngIf="this.dealSecondStepForm.controls.openFor.value == 1" class="app-register__content__form__field">
+               <mat-select placeholder="Target Business Types" formControlName="target_business_types"  (selectionChange)="onEventTypeChange()" multiple>
+                  <mat-option value="0"> Food & Beverage</mat-option>
+                  <mat-option value="1 ">Retails </mat-option>
+                  <mat-option value="3">Entertainment </mat-option>
+                </mat-select>
               <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
-              <mat-error *ngIf="registerSecondStepForm.controls['firstName'].invalid"> {{ 'USER.FIRST_NAME' | translate
-                }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
             </mat-form-field>
-            <mat-form-field *ngIf="isNewUser" class="app-register__content__form__field">
-              <input matInput placeholder="{{ 'USER.LAST_NAME' | translate }}" formControlName="lastName" type="text">
-              <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
-              <mat-error *ngIf="registerSecondStepForm.controls['lastName'].invalid"> {{ 'USER.LAST_NAME' | translate
-                }} {{'FORM.IS_REQUIRED' | translate}}</mat-error>
-            </mat-form-field>
-            <p *ngIf="!isNewUser">
-              {{'REGISTER.MEMBER_ALREADY_EXIST' | translate}}
-            </p>
-            <tc-new-password [passwordControl]="registerSecondStepForm.controls['password']"></tc-new-password>
-            <!-- TODO: after go live -->
-            <!-- <div class="app-register__content__form__field">
-              <mat-checkbox color="primary" formControlName="isTeamMember">
-                {{ 'TEAM_MEMBER.ALSO_A_TEAM_MEMBER' | translate }} </mat-checkbox>
-            </div> -->
-            <div *ngIf="isNewUser" class="app-register__content__form__field">
-              <mat-checkbox color="primary" formControlName="confirmTerms"> </mat-checkbox>
-              <span class="app-register__content__form__field__terms-conditions" routerLink="/merchant-affiliate/terms-and-conditions">{{
-                'CONFIRM_TERM_CONDITIONS' | translate }}</span>
-            </div>
-            <mat-error *ngIf="isNewUser && registerSecondStepForm.controls['confirmTerms'].dirty && !registerSecondStepForm.controls['confirmTerms'].value">
-              {{ 'HAVE_TO_CONFIRM_TERM_CONDITIONS' | translate }}
-            </mat-error>
+            <mat-form-field *ngIf="this.dealSecondStepForm.controls.openFor.value == 2"  class="app-register__content__form__field">
+                   <mat-select placeholder="Businesses" formControlName="target_businesses"   multiple>
+                  <mat-option *ngFor="let business of businessList" [value]="business">{{business.name}}</mat-option>
+                </mat-select>
+               <mat-icon class="app-register__content__form__field__icon" matPrefix>people</mat-icon>
+             </mat-form-field>
+ 
             <div class="stepper-action-btns">
               <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{
                 'BACK' | translate }}</button>
-              <button type="submit" *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button"
-                [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid">{{ 'REGISTER.REGISTER' |
-                translate }}</button>
+                <button type="submit" mat-buztton matStepperNext mat-raised-button
+                color="primary" class="app-register__content__button">{{ 'NEXT' | translate }}</button>
+                <!-- [disabled]="dealThirdStepForm.invalid" -->
             </div>
           </form>
         </mat-step>
+
+
+        <mat-step label="Offer Details" *ngIf="dealThirdStepForm" [stepControl]="dealThirdStepForm">
+            <form novalidate (ngSubmit)="(!dealThirdStepForm.invalid && !dealThirdStepForm.invalid) && register(dealThirdStepForm.value, dealThirdStepForm.value);"
+              [formGroup]="dealThirdStepForm" class="app-register__content__form">
+
+              <mat-form-field   class="app-register__content__form__field">
+                     <mat-select placeholder="Items" formControlName="item"  >
+                    <mat-option *ngFor="let item of itemsList" [value]="business">{{item.name}}</mat-option>
+                  </mat-select>
+                 <mat-icon class="app-register__content__form__field__icon" matPrefix>item</mat-icon>
+               </mat-form-field>
+   
+
+                   
+            <mat-form-field class="app-register__content__form__field">
+                <input matInput placeholder="Number of items for each business" formControlName="number_of_items" type="number">
+                <mat-icon class="app-register__content__form__field__icon" matPrefix>poeple</mat-icon>
+                  <mat-error *ngIf="dealThirdStepForm.controls['number_of_items'].invalid">
+                      Number of items  {{ 'FORM.IS_REQUIRED' | translate }}            
+                    </mat-error>
+              </mat-form-field>
+
+
+              <div class="stepper-action-btns">
+                <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-register__content__button">{{
+                  'BACK' | translate }}</button>
+                <button type="submit" *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-register__content__button"
+                  [disabled]="dealThirdStepForm.invalid || dealThirdStepForm.invalid"> Create </button>
+              </div>
+            </form>
+          </mat-step>
+      
       </mat-vertical-stepper>
     </div>
     <mat-spinner class="app-register__spinner" [ngClass]="{'app-register__element-hide': !displaySpinner }"></mat-spinner>
-    <div *ngIf="displayMessageCard && !displaySpinner">
-      <div *ngIf="!emailActivationRequired" class="app-register__content__form__register-success"> {{
-        'USER_MESSAGES.REGISTER.TEAM_CREATING_SUCCESS' | translate }}. {{ 'USER_MESSAGES.REGISTER.PLEASE_ACTIVATE' |
-        translate }} </div>
-      <div class="app-register__content__resend-mail">
-        <span *ngIf="emailActivationRequired">
-          {{ 'REGISTER.NEED_TO_CONFIRM_EMAIL' | translate | localizedTextModifier:'inject':
-          registerFirstStepForm.controls.email.value}}
-        </span>
-        <div class="app-register__content__resend-mail ">
-          <span> {{'REGISTER.EMAIL_NOT_RECEIVED' | translate}} </span>
-          <span (click)="resendConfirmationEmail()" class="app-register__content__link"> {{'REGISTER.SEND_MAIL_AGAIN' |
-            translate}} </span>
-        </div>
-      </div>
-      <button mat-raised-button color="primary" class="app-register__content__button" [disabled]="registerFirstStepForm.invalid || registerSecondStepForm.invalid"
-        routerLink="/auth/login">{{ 'OK' | translate }}</button>
-    </div>
   </mat-card-content>
 </mat-card>

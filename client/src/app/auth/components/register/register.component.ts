@@ -1,16 +1,13 @@
-import { ActivatedRoute } from '@angular/router';
+import { BusinessApi } from './../../../sdk/services/custom/Business';
+import { DealApi } from './../../../sdk/services/custom/Deal';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
-import { MembersService } from './../../../members/services/members.service';
-import { RegisterService } from './../../services/register.service';
+
 import { FieldValidatorsService } from './../../../core/services/field-validators.service';
-import { AuthService } from '../../services/auth.service';
-import { MemberRegisterInfo } from './../../models/member-register-info.model';
-import { TeamRegisterInfo } from './../../models/team-register-info.model';
-import { roles } from '../../../core/constants/roles.constants';
 import { userCheckBackendResponse } from '../../../core/constants/user-check-backend-response.constats';
+import { UserService } from '../../../core/services/user.service';
 @Component({
   selector: 'tc-register',
   templateUrl: './register.component.html',
@@ -21,69 +18,75 @@ export class RegisterComponent implements OnInit {
   displaySpinner = false;
   emailActivationRequired = false;
   displayMessageCard = false;
-  teamName: string;
-  registerFirstStepForm: FormGroup;
-  registerSecondStepForm: FormGroup;
-  currentStep = 1;
-  roles = roles; /* needed to declare a class property to make it available on the component html */
-  businessList = [{id: 1, name: 'hadeel'}, { id: 2, name: 'nermeen'}];
+  name: string;
+  dealFirstStepForm: FormGroup;
+  dealSecondStepForm: FormGroup;
+  dealThirdStepForm: FormGroup;
+  itemsList;
   constructor(
-    private authService: AuthService,
-    private registerService: RegisterService,
-    activatedRoute: ActivatedRoute,
-    private membersService: MembersService,
-    private fieldValidatorsService: FieldValidatorsService
+    private dealApi: DealApi,
+    private fieldValidatorsService: FieldValidatorsService,
+    private businessApi: BusinessApi,
+    private userService: UserService
     ) {
-    const queryParams = activatedRoute.snapshot.queryParams;
-    this.teamName = queryParams && queryParams['team-name'];
+      userService.itemsList().subscribe(itemsList => {
+        this.itemsList = itemsList;
+      });
+      // businessApi get all businesses
   }
+
+  /*
+    "name"?: string;
+  "description"?: string;
+  "limit"?: string;
+  "src_business"?: any;
+  "target_business_types"?: Array<any>;
+  "target_businesses"?: Array<any>;
+  "status"?: string;
+  "id"?: any;*/
 
   ngOnInit() {
-    this.createRegisterFirstStepForm();
-    this.createRegisterSecondStepForm();
+    this.createDealFirstStepForm();
+    this.createDealSecondStepForm();
+    this.createDealThirdStepForm();
+
   }
 
-  selectedStepChanged(changeInfo: StepperSelectionEvent) {
-    if (changeInfo.previouslySelectedIndex === 0) {
-      this.checkIfNewUser(changeInfo.previouslySelectedStep.stepControl.value);
-    }
-    this.currentStep = changeInfo.selectedIndex + 1;
-  }
-  createRegisterFirstStepForm() {
-    this.registerFirstStepForm = new FormGroup({
-      teamName: new FormControl(this.teamName || '', [Validators.required, Validators.minLength(4) ]),
-      email: new FormControl('', [Validators.required, Validators.email])
+  // selectedStepChanged(changeInfo: StepperSelectionEvent) {
+  //   if (changeInfo.previouslySelectedIndex === 0) {
+  //     this.checkIfNewUser(changeInfo.previouslySelectedStep.stepControl.value);
+  //   }
+  //   this.currentStep = changeInfo.selectedIndex + 1;
+  // }
+
+  createDealFirstStepForm() {
+    this.dealFirstStepForm = new FormGroup({
+      name: new FormControl(this.name || '', [Validators.required]),
+      description: new FormControl(''),
+      limit: new FormControl('',  [Validators.required])
+
     });
   }
 
-  createRegisterSecondStepForm() {
-    this.registerSecondStepForm = new FormGroup({
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required, this.fieldValidatorsService.getValidator('validatePassword')]),
-      isTeamMember: new FormControl(false),
-      confirmTerms: new FormControl(false)
+  createDealSecondStepForm() {
+    this.dealSecondStepForm = new FormGroup({
+      target_business_types: new FormControl(''),
+      target_businesses: new FormControl(''),
+      businesses: new FormControl(''),
+      openFor: new FormControl('')
     });
   }
 
-  /**
-   * @author Nermeen Mattar
-   * @description uses the admin service to check if the admin is already exist. The response has three cases; first, the email might
-   * not belong to any user. Second, the email might belong to a user who is not an admin. Third, the email might belong to an admin user.
-   * For the first and the third cases the backend returns the result inside an error whereas for the second case the result is inside the
-   * response.
-   * @param {TeamRegisterInfo} firstStepValue
-   */
-  checkIfNewUser(firstStepValue: TeamRegisterInfo) {
-    this.displaySpinner = true;
-    this.membersService.isMemberExist(firstStepValue.email).subscribe((checkResult) => {
-      this.displaySpinner = false;
-      this.changeNextStepBasedOnUserCheckResult(checkResult);
-      }, err => {
-        this.changeNextStepBasedOnUserCheckResult(firstStepValue.teamName); /* temp will be removed once  backend supports this */
-        this.displaySpinner = false;
-      });
-  }
+
+createDealThirdStepForm() {
+  this.dealThirdStepForm = new FormGroup({
+    item: new FormControl('', [Validators.required]),
+    number_of_items: new FormControl('', [Validators.required]),
+  });
+}
+
+
+
 
   /**
    * @author Nermeen Mattar
@@ -103,8 +106,7 @@ export class RegisterComponent implements OnInit {
         this.disableFormControls(['firstName', 'lastName', 'confirmTerms']);
         break;
       case userCheckBackendResponse.nonConfirmedMember:
-        this.registerSecondStepForm.disable();
-        this.informUserToActivateEmail();
+        this.dealSecondStepForm.disable();
         break;
     }
   }
@@ -116,7 +118,7 @@ export class RegisterComponent implements OnInit {
   disableFormControls(formControlsNames: string[]) {
     const formControlsLen = formControlsNames.length;
     for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++) {
-      this.registerSecondStepForm.controls[formControlsNames[formControlIndex]].disable();
+      this.dealSecondStepForm.controls[formControlsNames[formControlIndex]].disable();
     }
   }
 
@@ -128,7 +130,7 @@ export class RegisterComponent implements OnInit {
   enableFormControls(formControlsNames: string[]) {
     const formControlsLen = formControlsNames.length;
     for (let formControlIndex = 0; formControlIndex < formControlsLen; formControlIndex++) {
-      this.registerSecondStepForm.controls[formControlsNames[formControlIndex]].enable();
+      this.dealSecondStepForm.controls[formControlsNames[formControlIndex]].enable();
     }
   }
 
@@ -140,62 +142,17 @@ export class RegisterComponent implements OnInit {
    * @param {TeamRegisterInfo} teamInfo
    * @param {MemberRegisterInfo} adminInfo
    */
-  register(teamInfo: TeamRegisterInfo, adminInfo: MemberRegisterInfo) {
-    if (this.isNewUser && !this.registerSecondStepForm.controls.confirmTerms.value) {
-      this.registerSecondStepForm.controls.confirmTerms.markAsDirty();
-      return false;
-    }
+  register(firstStepValues, secondStepValues) {
     this.displaySpinner = true;
-    const newUserInfo = this.isNewUser ? {
-      firstName: adminInfo.firstName,
-      lastName: adminInfo.lastName
-    } : {};
-    const password = adminInfo.password;
-    this.authService.register({
-      ...newUserInfo,
-      teamName: teamInfo.teamName,
-      email: teamInfo.email,
-      password: password,
-      isTeamMember: adminInfo.isTeamMember,
-      confirmTerms: adminInfo.confirmTerms
+    this.dealApi.create({
+      ...firstStepValues,
+      ...secondStepValues
+      // src_business: get it from local storage
     }).subscribe(registerRes => {
         this.displayMessageCard = true;
         this.displaySpinner = false;
     }, err => {
       this.displaySpinner = false;
     });
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description requests the backend to resend the activation mail to the email the user entered
-   */
-  resendConfirmationEmail() {
-    this.displaySpinner = true;
-    this.registerService.resendActivationMail(this.registerFirstStepForm.controls.email.value).subscribe(res => {
-      this.displaySpinner = false;
-    }, err => {
-      this.displaySpinner = false;
-    });
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description handles the login fail
-   */
-  handleLoginError(err) {
-    this.displaySpinner = false;
-    if (err.error.message === 'error.mail.not.confirmed') {
-      this.informUserToActivateEmail(); /* better to move this to happen in the first step (checking).. need support from backend */
-    }
-  }
-
-  /**
-   * @author Nermeen Mattar
-   * @description displays a message to inform the user of the need to activate email. A resend activation mail link will be displayed too.
-   */
-  informUserToActivateEmail() {
-    this.emailActivationRequired = true;
-    this.displayMessageCard = true;
   }
 }
