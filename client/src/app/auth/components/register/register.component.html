@@ -35,7 +35,7 @@
           </form>
         </mat-step>
         <mat-step label="Target Buesiness(s) Details" *ngIf="dealSecondStepForm" [stepControl]="dealSecondStepForm">
-          <form novalidate (ngSubmit)="(!dealFirstStepForm.invalid && !dealSecondStepForm.invalid) && register(dealFirstStepForm.value, dealSecondStepForm.value);"
+          <form novalidate (ngSubmit)="regStepper.next()"
             [formGroup]="dealSecondStepForm" class="app-register__content__form">
 
   
@@ -74,7 +74,7 @@
 
 
         <mat-step label="Offer Details" *ngIf="dealThirdStepForm" [stepControl]="dealThirdStepForm">
-            <form novalidate (ngSubmit)="(!dealThirdStepForm.invalid && !dealThirdStepForm.invalid) && register(dealThirdStepForm.value, dealThirdStepForm.value);"
+            <form novalidate (ngSubmit)="(!dealFirstStepForm.invalid && !dealSecondStepForm.invalid && !dealThirdStepForm.invalid)  && register(dealFirstStepForm.value , dealSecondStepForm.value , dealThirdStepForm.value);"
               [formGroup]="dealThirdStepForm" class="app-register__content__form">
 
               <mat-form-field   class="app-register__content__form__field">

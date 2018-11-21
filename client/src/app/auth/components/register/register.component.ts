@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
 
 createDealThirdStepForm() {
   this.dealThirdStepForm = new FormGroup({
-    item: new FormControl('', [Validators.required]),
+    item: new FormControl('', ),
     number_of_items: new FormControl('', [Validators.required]),
   });
 }
@@ -142,11 +142,12 @@ createDealThirdStepForm() {
    * @param {TeamRegisterInfo} teamInfo
    * @param {MemberRegisterInfo} adminInfo
    */
-  register(firstStepValues, secondStepValues) {
+  register(firstStepValues, secondStepValues, thirdStepValues) {
     this.displaySpinner = true;
     this.dealApi.create({
       ...firstStepValues,
-      ...secondStepValues
+      ...secondStepValues,
+      ...thirdStepValues
       // src_business: get it from local storage
     }).subscribe(registerRes => {
         this.displayMessageCard = true;
