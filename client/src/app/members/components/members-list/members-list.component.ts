@@ -53,7 +53,6 @@ export class MembersListComponent implements OnInit {
 
 
   updateDealsList() {
-
     this.dealApi.find().subscribe( (data: any) => {
       console.log(data);
       this.dealsDataSource = data.filter(deal => (!deal.target_businesses || (Number(deal.limit) > deal.target_businesses.length))  );
@@ -203,16 +202,15 @@ export class MembersListComponent implements OnInit {
 
 
   takeDeal(dealId) {
-    console.log('ddd', dealId);
-    const targetDeal = this.dealsDataSource.filter(deal => deal.id === dealId);
+    const targetDeal = this.dealsDataSource.filter(deal => deal.id === dealId)[0];
     if (!targetDeal.target_businesses) {
-      targetDeal.target_businesses = this.userService.business;
+      targetDeal.target_businesses = [this.userService.business];
     } else {
       targetDeal.target_businesses.push(this.userService.business);
     }
     // update deal with targetDeal on success -> this.updateDealsList()
     this.dealApi.patchAttributes(dealId, targetDeal).subscribe( res => {
-      console.log(res);
+      this.updateDealsList();
     });
   }
 }
