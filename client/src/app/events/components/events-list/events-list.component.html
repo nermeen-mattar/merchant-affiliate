@@ -5,7 +5,7 @@
     </div>
     <div class="app-events__header">
       <h3 class="app-events__header__title">
-        <span class="app-events__header__title__text">{{ (isPastEvents ? 'RECEIVED_GIVEAWAY.PAST_RECEIVED_GIVEAWAYS' : 'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAYS') | translate}}
+        <span class="app-events__header__title__text"> Received Giveaways
           <span *ngIf="eventsDataSource"> ({{eventsDataSource.data.length}})</span>
         </span>
         <ng-container *ngIf="!isPastEvents">
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="app-events__container">
-      <mat-table class="app-events__container__table" [dataSource]="eventsDataSource" matSort>
+      <mat-table class="app-events__container__table" [dataSource]="receivedDealsDataSource" matSort>
         <!-- <ng-container matColumnDef="toggeler">
           <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'RECEIVED_GIVEAWAY.OUT' | translate}}
             <mat-slide-toggle color="primary" disabled> </mat-slide-toggle> {{'RECEIVED_GIVEAWAY.IN' | translate}}
@@ -38,14 +38,14 @@
             </mat-slide-toggle>
           </mat-cell>
         </ng-container> -->
-        <ng-container matColumnDef="date">
+        <ng-container matColumnDef="name">
           <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-            {{'RECEIVED_GIVEAWAY.DATE' | translate}} </mat-header-cell>
-          <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.date |  date:"yyyy.MM.dd"}} </mat-cell>
+            Deal Name </mat-header-cell>
+          <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.name}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="time">
-          <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'RECEIVED_GIVEAWAY.TIME' | translate}} </mat-header-cell>
-          <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.startTime | stringNormalizer:timeFormat}} - {{row.endTime | stringNormalizer:timeFormat }} </mat-cell>
+        <ng-container matColumnDef="description">
+          <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> Deal Description </mat-header-cell>
+          <mat-cell class="app-events__container__table__content-cell" *matCellDef="let row"> {{row.description }} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="event">
           <mat-header-cell class="app-events__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAY' | translate}}

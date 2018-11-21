@@ -8,6 +8,7 @@ import { TcEvent } from '../../models/tc-event.model';
 import { EventsService } from '../../services/events.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { DealApi } from '../../../sdk';
 
 @Component({
   selector: 'tc-events-list',
@@ -16,7 +17,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 })
 
 export class EventsListComponent implements OnInit {
-  columnsToDisplay = [ 'date', 'time', 'event', 'status', 'user-action']; // need to change those based on the model
+  columnsToDisplay = [ 'name', 'description', 'src_business', 'status']; // need to change those based on the model
   eventsDataSource: MatTableDataSource < TcEvent > ;
   spinner: boolean;
   userTeams: TcTeamInfo[];
@@ -33,17 +34,23 @@ export class EventsListComponent implements OnInit {
     }
   };
   activeEvent: TcEvent = null;
+  receivedDealsDataSource;
   constructor(
     private eventsService: EventsService,
+    private dealApi: DealApi,
     public dialog: MatDialog
   ) {
     this.spinner = true;
       this.updateEvents();
-    
+
     this.spinner = false;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dealApi.find({ where: {status: 'taken'} }).subscribe( data => {
+      this.receivedDealsDataSource = data;
+    });
+  }
 
   /**
    * @author Nermeen Mattar

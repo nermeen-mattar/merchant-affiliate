@@ -1,3 +1,4 @@
+import { UserService } from './../../../core/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatDialogRef} from '@angular/material';
 import { first } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { MembersService } from '../../services/members.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { TcMember } from '../../models/tc-member.model';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { DealApi } from '../../../sdk';
 
 @Component({
   selector: 'tc-members-list',
@@ -16,7 +18,7 @@ import { ConfirmDialogComponent } from './../../../shared/components/confirm-dia
 export class MembersListComponent implements OnInit {
   memberColumns = ['member', 'mail'];
   adminColumns = ['member', 'mail', 'action'];
-  displayedColumns: string[];
+  displayedColumns = ['name', 'description', 'limit', 'src_business', 'action'];
   membersDataSource: MatTableDataSource < TcMember > ;
   userTeams: TcTeamInfo[];
   selectedTeamId: number;
@@ -27,8 +29,11 @@ export class MembersListComponent implements OnInit {
   spinner: boolean;
   isTeamAdmin: boolean;
   isTeamMember: boolean;
+  businessInfo;
+  dealsDataSource;
   constructor(private membersService: MembersService, private teamsService: TeamsService,
-    public dialog: MatDialog) {
+    private userService: UserService,
+    public dialog: MatDialog, private dealApi: DealApi) {
     this.spinner = true;
     this.userTeams = this.teamsService.userTeams;
     this.selectedTeamId = this.teamsService.selectedTeamId;
@@ -40,7 +45,20 @@ export class MembersListComponent implements OnInit {
     this.spinner = false;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.businessInfo = localStorage.getItem('business');
+    // this.dealApi.find({ where: {src_business: {id: { neq: this.businessInfo['id']} }}}).subscribe( data => {
+    this.updateDealsList();
+  }
+
+
+  updateDealsList() {
+
+    this.dealApi.find().subscribe( (data: any) => {
+      console.log(data);
+      this.dealsDataSource = data.filter(deal => (!deal.target_businesses || (Number(deal.limit) > deal.target_businesses.length))  );
+    });
+  }
 
   /**
    * @author Nermeen Mattar
@@ -63,11 +81,11 @@ export class MembersListComponent implements OnInit {
    */
   hideOrDisplayAdminActions() {
     this.hasAdminRole = this.teamsService.hasAdminRole(this.selectedTeamId);
-    if (this.hasAdminRole) {
-      this.displayedColumns = this.adminColumns;
-    } else {
-      this.displayedColumns = this.memberColumns;
-    }
+    // if (this.hasAdminRole) {
+    //   this.displayedColumns = this.adminColumns;
+    // } else {
+    //   this.displayedColumns = this.memberColumns;
+    // }
   }
 
   /**
@@ -181,5 +199,20 @@ export class MembersListComponent implements OnInit {
     filterValue = filterValue.trim(); // Removes whitespace
     filterValue = filterValue.toLowerCase(); // membersDataSource defaults to lowercase matches
     this.membersDataSource.filter = filterValue;
+  }
+
+
+  takeDeal(dealId) {
+    console.log('ddd', dealId);
+    const targetDeal = this.dealsDataSource.filter(deal => deal.id === dealId);
+    if (!targetDeal.target_businesses) {
+      targetDeal.target_businesses = this.userService.business;
+    } else {
+      targetDeal.target_businesses.push(this.userService.business);
+    }
+    // update deal with targetDeal on success -> this.updateDealsList()
+    this.dealApi.patchAttributes(dealId, targetDeal).subscribe( res => {
+      console.log(res);
+    });
   }
 }

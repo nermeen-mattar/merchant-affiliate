@@ -18,8 +18,12 @@
     "src_business": {
       "type": "object"
     },
+    "item": {
+      "type": "object"
+    },
     "target_business_types": {
-      "type": ["string"]
+      "type": ["string"],
+      "default": ""
     },
     "target_businesses": {
       "type": ["object"]

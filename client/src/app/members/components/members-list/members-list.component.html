@@ -3,11 +3,11 @@
   <ng-template #hasTeams>
     <div class="app-members__header">
       <h3 class="app-members__header__title">
-        Open Deals <span *ngIf="membersDataSource"> ({{membersDataSource.data.length}})</span>
+        Open Deals
         <button mat-mini-fab *ngIf="hasAdminRole" color="primary" class="app-members__action app-members__add" routerLink="add-member">
       + </button>
       </h3>
-      <div>
+      <!-- <div>
         <mat-form-field>
           <mat-select [(value)]="selectedTeamId" (selectionChange)="updateMembers()">
             <mat-option *ngFor="let team of userTeams" [value]="team.teamId">
@@ -15,50 +15,54 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
+      </div> -->
     </div>
     <mat-form-field class="app-members__filter">
       <input matInput (keyup)="applyFilter($event.target.value)" [(ngModel)]="filterString" placeholder="{{'SEARCH_PLACEHOLDER' | translate}}">
     </mat-form-field>
     <div class="app-members__container">
-      <mat-table class="app-members__container__table" [dataSource]="membersDataSource" matSort>
-        <ng-container acceptInvitation matColumnDef="member">
+      <mat-table class="app-members__container__table" [dataSource]="dealsDataSource" matSort>
+        <ng-container acceptInvitation matColumnDef="name">
           <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header>
-            {{'MEMBER.MEMBER' | translate}} </mat-header-cell>
-          <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row"
-          [ngClass]="{'app-members__container__table__inactive-cell': !row.active, 'app-members__container__table__unaccepted-invitation-cell': !row.acceptInvitation}">
-          {{row.member.firstName}} {{row.member.lastName}} </mat-cell>
+            Deal Name </mat-header-cell>
+          <mat-cell class="app-members__container__table__content-cell" *matCellDef="let row">
+          {{row.name}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="mail">
-          <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> {{'USER.EMAIL' | translate}}
+        <ng-container matColumnDef="description">
+          <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> Deal Description
           </mat-header-cell>
-          <mat-cell  *matCellDef="let row"
-          [ngClass]="{'app-members__container__table__inactive-cell': !row.active, 'app-members__container__table__unaccepted-invitation-cell': !row.acceptInvitation}">
-            <span class="app-members__container__table__content-cell">{{row.member.mail}} </span>
+          <mat-cell  *matCellDef="let row">
+            <span class="app-members__container__table__content-cell">{{row.description}} </span>
           </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="action" *ngIf="hasAdminRole">
+        <ng-container matColumnDef="limit">
+          <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> Deal Limit
+          </mat-header-cell>
+          <mat-cell  *matCellDef="let row">
+            <span class="app-members__container__table__content-cell">{{row.limit}} </span>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="src_business">
+          <mat-header-cell class="app-members__container__table__header-cell" *matHeaderCellDef mat-sort-header> Deal Source Business
+          </mat-header-cell>
+          <mat-cell  *matCellDef="let row">
+            <span class="app-members__container__table__content-cell">{{row.src_business?.name}} </span>
+          </mat-cell>
+        </ng-container>
+         <ng-container matColumnDef="action">
           <mat-header-cell class="app-members__container__table__header-cell app-members__container__table__actions-wrapper" *matHeaderCellDef mat-sort-header> </mat-header-cell>
           <mat-cell class="app-members__container__table__content-cell  app-members__container__table__actions-wrapper" *matCellDef="let row">
-            <mat-icon *ngIf="!row.acceptInvitation" class="app-members__action" (click)="resedInvitationLink(row.id)" color="primary"
+            <mat-icon  class="app-members__action" (click)="takeDeal(row.id)" color="primary"
             matSuffix matTooltip="{{'MEMBER.SEND_MAIL_AGAIN' | translate}}"
             matTooltipPosition="below"
             >mail</mat-icon>
-            <mat-icon class="app-members__action" (click)="changeMemberActivationStatus(row)" color="primary" *ngIf="row.acceptInvitation" >
-              {{row.active ? "pause_circle_outline" : "play_circle_outline"}}
-            </mat-icon>
-            <mat-icon matTooltip="{{'MEMBER.DELETE_MEMBER' | translate}}" class="app-members__action" (click)="deleteMember(row.id)" color="primary">
-              delete
-            </mat-icon>
-            <div matTooltip="{{'MEMBER.MAKE_ADMIN' | translate}}" class="app-members__action--admin-icon" (click)="makeAdmin(row)" color="primary" *ngIf="!row.isAdmin">
-            </div>
           </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;">
         </mat-row>
       </mat-table>
-      <mat-spinner class="app-members__container__spinner" *ngIf="!membersDataSource"></mat-spinner>
+      <mat-spinner class="app-members__container__spinner" *ngIf="!dealsDataSource"></mat-spinner>
     </div>
   </ng-template>
 </div>
