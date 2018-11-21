@@ -8,7 +8,7 @@ import { MembersService } from '../../services/members.service';
 import { TcTeamInfo } from '../../../teams/models/tc-team-info.model';
 import { TcMember } from '../../models/tc-member.model';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { DealApi } from '../../../sdk';
+import { DealApi, BusinessApi } from '../../../sdk';
 
 @Component({
   selector: 'tc-members-list',
@@ -32,9 +32,12 @@ export class MembersListComponent implements OnInit {
   businessInfo;
   deals = [];
   dealsDataSource;
+  businessList = [];
+  defaultBusinessName: string;
+  disableBusinessFilter = false;
   constructor(private membersService: MembersService, private teamsService: TeamsService,
     private userService: UserService,
-    public dialog: MatDialog, private dealApi: DealApi) {
+    public dialog: MatDialog, private dealApi: DealApi, private businessApi: BusinessApi) {
     this.spinner = true;
     this.userTeams = this.teamsService.userTeams;
     this.selectedTeamId = this.teamsService.selectedTeamId;
@@ -50,24 +53,39 @@ export class MembersListComponent implements OnInit {
     this.businessInfo = localStorage.getItem('business');
     // this.dealApi.find({ where: {src_business: {id: { neq: this.businessInfo['id']} }}}).subscribe( data => {
     this.getDealsList();
+
+    this.businessApi.find({ fields: {id: true, name: true, image: true} }).subscribe(data => {
+      this.businessList = data;
+    });
+    const myBusinessObj = JSON.parse(localStorage.getItem('business'));
+    this.defaultBusinessName = myBusinessObj.name;
   }
 
 
   getDealsList() {
     this.dealApi.find().subscribe( (data: any) => {
       this.deals = data;
-      this.updateDealist('Opend');
+      this.updateDealist('Opened');
     });
   }
 
   updateDealist(status) {
     let copyDealsList = Object.assign([], this.deals);
-    console.log('const   ', copyDealsList);
-    if (status === 'Opend') {
+    if (status === 'Opened') {
       copyDealsList = copyDealsList.filter(deal => !deal.target_businesses || (Number(deal.limit) > deal.target_businesses.length));
     } else if (status === 'Closed') {
+      this.disableBusinessFilter = true;
       copyDealsList = copyDealsList.filter(deal => deal.target_businesses && (Number(deal.limit) === deal.target_businesses.length));
     }
+    this.updateMembersDataSource(copyDealsList);
+  }
+
+  onFilterBusinessChange(event) {
+    console.log(event);
+    const businessName = event.value;
+    let copyDealsList = Object.assign([], this.deals);
+    copyDealsList = copyDealsList.filter(deal => deal.src_business && deal.src_business.name === businessName);
+
     this.updateMembersDataSource(copyDealsList);
   }
 

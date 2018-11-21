@@ -9,13 +9,20 @@
       </h3>
       <div>
         <mat-form-field  class="app-register__content__form__field">
-          <mat-select placeholder="" value="Opend" (selectionChange)="onFilterTypeChange($event)">
-             <mat-option value="Opend">Opend</mat-option>
+          <mat-select placeholder="" value="Opened" (selectionChange)="onFilterTypeChange($event)">
+             <mat-option value="Opened">Opened</mat-option>
              <mat-option value="Closed">Closed</mat-option>
              <!-- <mat-option value="3">My</mat-option> -->
            </mat-select>
          <mat-icon class="app-register__content__form__field__icon" matPrefix>person_circle</mat-icon>
        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="app-register__content__form__field">
+          <mat-select [disabled]="disableBusinessFilter" value={{defaultBusinessName}} placeholder="" (selectionChange)="onFilterBusinessChange($event)">
+            <mat-option *ngFor="let business of businessList" [value]="business.name">{{business.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <!-- <div>
         <mat-form-field>
