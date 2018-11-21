@@ -1,7 +1,6 @@
 {
   "name": "business",
   "base": "PersistedModel",
-  "idInjection": true,
   "options": {
     "validateUpsert": true
   },

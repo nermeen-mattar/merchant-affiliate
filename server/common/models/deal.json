@@ -24,6 +24,12 @@
     "target_businesses": {
       "type": ["object"]
     },
+    "number_of_items": {
+      "type": "string"
+    },
+    "destination_businesses": {
+      "type": ["object"]
+    },
     "status": {
       "type": "string"
     }
