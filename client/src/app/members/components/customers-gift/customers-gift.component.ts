@@ -18,7 +18,7 @@ import { DealApi, BusinessApi } from '../../../sdk';
 export class CustomersGiftComponent implements OnInit {
   memberColumns = ['member', 'mail'];
   adminColumns = ['member', 'mail', 'action'];
-  displayedColumns = ['name', 'description', 'limit', 'src_business', 'action'];
+  displayedColumns = ['name', 'description', 'limit', 'action'];
   membersDataSource: MatTableDataSource < TcMember > ;
   userTeams: TcTeamInfo[];
   selectedTeamId: number;

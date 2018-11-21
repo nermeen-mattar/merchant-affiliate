@@ -19,7 +19,7 @@
       </div>
       <div>
         <mat-form-field class="app-register__content__form__field">
-          <mat-select [disabled]="disableBusinessFilter" value={{defaultBusinessName}} placeholder="" (selectionChange)="onFilterBusinessChange($event)">
+          <mat-select [disabled]="disableBusinessFilter" value={{defaultBusinessName}} placeholder="" (selectionChange)="onFilterBusinessChange($event.value)">
             <mat-option *ngFor="let business of businessList" [value]="business.name">{{business.name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -72,7 +72,8 @@
             <mat-icon  class="app-members__action" (click)="takeDeal(row.id)" color="primary"
             matSuffix matTooltip="{{'MEMBER.SEND_MAIL_AGAIN' | translate}}"
             matTooltipPosition="below"
-            >mail</mat-icon>
+            > <button mat-mini-fab  color="primary" class="app-members__action app-members__add test"   style="width:30px!important; height: 30px!important; display: flex; flex-direction: column; justify-content: center; align-items: center; position:relative; right: 30px;top:-4px;" >
+                + </button></mat-icon>
             <mat-icon  class="app-members__action" [routerLink]="'../' + row.id" color="primary"
             matSuffix matTooltip="{{'MEMBER.SEND_MAIL_AGAIN' | translate}}"
             matTooltipPosition="below"

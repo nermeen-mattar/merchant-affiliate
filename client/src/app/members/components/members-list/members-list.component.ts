@@ -52,14 +52,17 @@ export class MembersListComponent implements OnInit {
   ngOnInit() {
     this.businessInfo = localStorage.getItem('business');
     // this.dealApi.find({ where: {src_business: {id: { neq: this.businessInfo['id']} }}}).subscribe( data => {
-    this.getDealsList();
-
-    this.businessApi.find({ fields: {id: true, name: true, image: true} }).subscribe(data => {
-      this.businessList = data;
-    });
-    const myBusinessObj = JSON.parse(localStorage.getItem('business'));
-    console.log('busObj    ', myBusinessObj);
-    this.defaultBusinessName = myBusinessObj.name;
+      this.getDealsList();
+      
+      this.businessApi.find({ fields: {id: true, name: true, image: true} }).subscribe(data => {
+        this.businessList = data;
+      });
+      const myBusinessObj = JSON.parse(localStorage.getItem('business'));
+      console.log('busObj    ', myBusinessObj);
+      this.defaultBusinessName = myBusinessObj.name;
+      this.defaultBusinessName = myBusinessObj.name;
+      this.onFilterBusinessChange(this.defaultBusinessName);
+    // this.defaultBusinessName = myBusinessObj.name;
   }
 
 
@@ -84,9 +87,7 @@ export class MembersListComponent implements OnInit {
     this.updateMembersDataSource(copyDealsList);
   }
 
-  onFilterBusinessChange(event) {
-    console.log(event);
-    const businessName = event.value;
+  onFilterBusinessChange(businessName) {
     let copyDealsList = Object.assign([], this.deals);
     copyDealsList = copyDealsList.filter(deal => deal.src_business && deal.src_business.name === businessName);
 

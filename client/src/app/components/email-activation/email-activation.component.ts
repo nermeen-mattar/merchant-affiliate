@@ -19,7 +19,7 @@ export class EmailActivationComponent implements OnInit {
   mailState: number = State.SUCCESS;
   userInfo: TcMember;
   State = State;
-  constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService, router: Router,
+  constructor(activatedRoute: ActivatedRoute, httpRequestsService: HttpRequestsService, private router: Router,
     userService: UserService, loginStatusService: LoginStatusService, private businessApi: BusinessApi) {
     const queryParams = activatedRoute.snapshot.queryParams;
      if (queryParams && queryParams['code']) {
@@ -34,18 +34,17 @@ export class EmailActivationComponent implements OnInit {
 
           userService.businessInfo().subscribe( businessinfo   => {
             console.log(businessinfo);
-            this.businessApi.create(businessinfo).subscribe( res => {
-              console.log(res);
+            this.businessApi.create(businessinfo).subscribe( businessInfo => {
+              console.log(businessInfo);
             });
             localStorage.setItem('business', JSON.stringify(businessinfo));
             // this.teamsDataSource = new MatTableDataSource(res);
           });
           loginStatusService.onLoginRequestSuccess();
+          // this.router.navigateByUrl('deals');
         }, err => {
           console.log(err);
             this.mailState = State.ERROR;
-            router.navigateByUrl('my-giveaways');
-
         });
     } else {
       this.displayPageNotFound = true;
