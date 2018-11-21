@@ -38,7 +38,7 @@ export class LoginStatusService {
    * @memberof AuthService
    */
   onLoginRequestSuccess() {
-    this.router.navigateByUrl('my-giveaways');
+    this.router.navigateByUrl('deals');
     this.isLoggedIn.next(true);
   }
 
@@ -48,7 +48,7 @@ export class LoginStatusService {
    * (default page for unauthorized users) then emitting the new login status for other components/services
    */
   logout() {
-    this.router.navigateByUrl('auth');
+    this.router.navigateByUrl('home');
     this.isLoggedIn.next(false);
   }
 

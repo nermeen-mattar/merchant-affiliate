@@ -22,18 +22,13 @@ const routes: Routes = [{
     path: 'contact',
     loadChildren: './contact/contact.module#ContactModule'
   },
-  {
-    path: 'auth',
-    canActivate: [AuthGuard],
-    loadChildren: './auth/auth.module#AuthModule',
-  },
+  // {
+  //   path: 'auth',
+  //   canActivate: [AuthGuard],
+  //   loadChildren: './auth/auth.module#AuthModule',
+  // },
   {
     path: 'deals',
-    canActivate: [AuthGuard],
-    loadChildren: './events/events.module#EventsModule'
-  },
-  {
-    path: 'open-deals',
     canActivate: [AuthGuard],
     loadChildren: './members/members.module#MembersModule'
   },

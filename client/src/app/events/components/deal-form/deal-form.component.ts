@@ -72,22 +72,24 @@ export class DealFormComponent implements OnInit {
     if (dealIdVariable !== 'create') {
       this.dealId = dealIdVariable;
       this.dealApi.findById(this.dealId).subscribe(res => {
-        this.createDealForms(res);
+        this.createDealForms();
+        this.dealFirstStepForm.patchValue(res);
+        this.dealSecondStepForm.patchValue(res);
+        this.dealThirdStepForm.patchValue(res);
         this.dealFirstStepForm.disable();
         this.dealSecondStepForm.disable();
         this.dealThirdStepForm.disable();
-
       });
     } else {
       this.createDealForms();
     }
   }
 
-  createDealForms(dealData?) {
+  createDealForms() {
     this.displaySpinner = false;
-    this.createDealFirstStepForm(dealData);
-    this.createDealSecondStepForm(dealData);
-    this.createDealThirdStepForm(dealData);
+    this.createDealFirstStepForm();
+    this.createDealSecondStepForm();
+    this.createDealThirdStepForm();
   }
 
   // selectedStepChanged(changeInfo: StepperSelectionEvent) {
@@ -97,34 +99,31 @@ export class DealFormComponent implements OnInit {
   //   this.currentStep = changeInfo.selectedIndex + 1;
   // }
 
-  createDealFirstStepForm(dealData) {
+  createDealFirstStepForm() {
     this.dealFirstStepForm = new FormGroup({
       name: new FormControl(this.name || '', [Validators.required]),
       description: new FormControl(''),
       limit: new FormControl('',  [Validators.required])
 
     });
-    this.dealFirstStepForm.patchValue(dealData);
 
   }
 
-  createDealSecondStepForm(dealData) {
+  createDealSecondStepForm() {
     this.dealSecondStepForm = new FormGroup({
       target_business_types: new FormControl(''),
       target_businesses: new FormControl(''),
       openFor: new FormControl('')
     });
-    this.dealSecondStepForm.patchValue(dealData);
 
   }
 
 
-createDealThirdStepForm(dealData) {
+createDealThirdStepForm() {
   this.dealThirdStepForm = new FormGroup({
     item: new FormControl('', ),
     number_of_items: new FormControl('', [Validators.required]),
   });
-  this.dealThirdStepForm.patchValue(dealData);
 }
 
 

@@ -4,7 +4,7 @@
       {{'WELCOME' | translate}}
       <span *ngIf="userInfo" class="app-mail-activation__title__user-name"> {{userInfo.firstName}} {{userInfo.lastName}}</span>
     </mat-card-title>
-    <mat-card-content *ngIf="!displaySpinner; else spinner">
+    <mat-card-content *ngIf="false; else spinner">
       <div *ngIf="mailState !== State.ERROR; else expiredLink">
         <img class="app-mail-activation__wrapper__img" width="350" alt="dropped coffee" src="../../assets/img/mail-activated.png">
         <div *ngIf="mailState === State.SUCCESS; else alreadyActivated" class="app-mail-activation__message app-mail-activation__success">
