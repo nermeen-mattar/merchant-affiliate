@@ -1,4 +1,8 @@
 <mat-card class="app-deal">
+    <div class="app-deal__back" routerLink="../">
+      <mat-icon color="primary">chevron_left</mat-icon>
+      {{'BACK'| translate}}
+    </div>
     <mat-card-title class="app-deal__title"> 
      {{dealId ? 'Deal Details': 'Create Deal'}}
     </mat-card-title>

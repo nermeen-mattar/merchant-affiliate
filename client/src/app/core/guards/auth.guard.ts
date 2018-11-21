@@ -21,25 +21,24 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable < boolean > | Promise < boolean > | boolean {
-    // if (this.loginStatusService.isAuthenticated()) { // when the user is logged in
-    //   if (state.url.indexOf('auth') > -1 ) {
-    //     if (this.router.routerState.snapshot.url === '') {
-    //       this.router.navigateByUrl('events'); // when manually changing the route to a wrong route or to a non account based page.
-    //     }
-    //     return false;
-    //   } else {
-    //     return true;
-    //   }
-    // } else {  // when the user is not logged in
-    //   if (state.url.indexOf('auth') > -1 ) {
-    //     return true;
-    //   } else {
-    //     if (this.router.routerState.snapshot.url === '') {
-    //       this.router.navigateByUrl('home'); // when manually changing the route to a wrong route or to an account based page.
-    //     }
-    //     return false;
-    //   }
-    // }
-    return true;
+    if (this.loginStatusService.isAuthenticated()) { // when the user is logged in
+      if (state.url.indexOf('auth') > -1 ) {
+        if (this.router.routerState.snapshot.url === '') {
+          this.router.navigateByUrl('events'); // when manually changing the route to a wrong route or to a non account based page.
+        }
+        return false;
+      } else {
+        return true;
+      }
+    } else {  // when the user is not logged in
+      if (state.url.indexOf('auth') > -1 ) {
+        return true;
+      } else {
+        if (this.router.routerState.snapshot.url === '') {
+          this.router.navigateByUrl('home'); // when manually changing the route to a wrong route or to an account based page.
+        }
+        return false;
+      }
+    }
   }
 }

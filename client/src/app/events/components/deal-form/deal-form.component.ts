@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessApi } from './../../../sdk/services/custom/Business';
 import { DealApi } from './../../../sdk/services/custom/Deal';
 import { Component, OnInit } from '@angular/core';
@@ -31,7 +31,8 @@ export class DealFormComponent implements OnInit {
     private fieldValidatorsService: FieldValidatorsService,
     private businessApi: BusinessApi,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
     ) {
       userService.itemsList().subscribe(itemsList => {
         this.itemsList = itemsList;
@@ -119,6 +120,7 @@ export class DealFormComponent implements OnInit {
   }
 
 
+  
 createDealThirdStepForm() {
   this.dealThirdStepForm = new FormGroup({
     item: new FormControl('', ),
@@ -186,6 +188,8 @@ createDealThirdStepForm() {
     }).subscribe(dealRes => {
         this.displayMessageCard = true;
         this.displaySpinner = false;
+        this.navigateBack();
+
     }, err => {
       this.displaySpinner = false;
     });
@@ -203,4 +207,14 @@ createDealThirdStepForm() {
     }
     delete secondStepValues.openFor;
   } 
+
+    /**
+   * @author Nermeen Mattar
+   * @description navigates to the page the user was previously in.
+   */
+  navigateBack() {
+    this.router.navigate(['../'], {
+      relativeTo: this.route
+    });
+  }
 }

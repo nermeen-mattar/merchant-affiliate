@@ -6,6 +6,13 @@
   min-height:  152px; // 200; // 242px;
   max-width: 500px;
   margin: 120px auto;
+  &__back {
+    color: $primary-color;
+    font-weight: $tc-font-weight-4;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
   &__title {
     text-align: center;
   }
