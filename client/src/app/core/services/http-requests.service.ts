@@ -83,7 +83,7 @@ export class HttpRequestsService {
           if (err.error.statusCode === 401) {
             this.loginStatusService.logout();
           }
-          this.userMessagesService.showUserMessage(userMessages, 'fail', err);
+          //this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
     });
@@ -102,7 +102,7 @@ export class HttpRequestsService {
           if (err.error.statusCode === 401) {
             this.loginStatusService.logout();
           }
-          this.userMessagesService.showUserMessage(userMessages, 'fail', err);
+          //this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
     });
@@ -121,7 +121,7 @@ export class HttpRequestsService {
           if (err.error.statusCode === 401) {
             this.loginStatusService.logout();
           }
-          this.userMessagesService.showUserMessage(userMessages, 'fail', err);
+          //this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
         });
     });
@@ -137,7 +137,7 @@ export class HttpRequestsService {
           obs.complete();
         },
         err => {
-          this.userMessagesService.showUserMessage(userMessages, 'fail', err);
+          //this.userMessagesService.showUserMessage(userMessages, 'fail', err);
           obs.error(err);
           if (err.error.statusCode === 401) {
             this.loginStatusService.logout();

@@ -16,7 +16,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 })
 
 export class EventsListComponent implements OnInit {
-  columnsToDisplay = ['toggeler', 'date', 'time', 'event', 'status', 'user-action'];
+  columnsToDisplay = [ 'date', 'time', 'event', 'status', 'user-action']; // need to change those based on the model
   eventsDataSource: MatTableDataSource < TcEvent > ;
   spinner: boolean;
   userTeams: TcTeamInfo[];
@@ -38,10 +38,8 @@ export class EventsListComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.spinner = true;
-    if (this.isTeamMember || this.isTeamAdmin) {
-      this.changeColumnsToDisplay();
       this.updateEvents();
-    }
+    
     this.spinner = false;
   }
 
@@ -55,13 +53,12 @@ export class EventsListComponent implements OnInit {
    */
   updateEvents() {
     this.eventsDataSource = undefined; // reset data source to display the loader as new data will be received
-    this.eventsService.getEvents(this.selectedTeamId, this.isPastEvents).subscribe(({
-      events = [],
-      myTeamMemberId
-    }) => {
-      this.teamMemberId = myTeamMemberId;
+    this.eventsService.getEvents(this.selectedTeamId, this.isPastEvents).subscribe( events => {
       this.eventsService.addNumOfParticipationsToEvents(events);
       this.updateEventsDataSource(events);
+    }, err => {
+      this.updateEventsDataSource([{ 'date': '', 'time': '', 'event': '', 'status': '',  'user-action': ''}]);
+
     });
   }
 
@@ -201,7 +198,7 @@ export class EventsListComponent implements OnInit {
    * @description creates a new object of type material table data source and passes to it the events data to be displayed on the table
    * @param {Event []} events
    */
-  updateEventsDataSource(events: TcEvent[]) {
+  updateEventsDataSource(events) {
     this.filterString = ''; // reset any string the user entered in the search input
     this.eventsDataSource = new MatTableDataSource(events); // Assign the data to the data source for the table to render
   }
