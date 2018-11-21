@@ -30,6 +30,7 @@ export class MembersListComponent implements OnInit {
   isTeamAdmin: boolean;
   isTeamMember: boolean;
   businessInfo;
+  deals = [];
   dealsDataSource;
   constructor(private membersService: MembersService, private teamsService: TeamsService,
     private userService: UserService,
@@ -48,15 +49,32 @@ export class MembersListComponent implements OnInit {
   ngOnInit() {
     this.businessInfo = localStorage.getItem('business');
     // this.dealApi.find({ where: {src_business: {id: { neq: this.businessInfo['id']} }}}).subscribe( data => {
-    this.updateDealsList();
+    this.getDealsList();
   }
 
 
-  updateDealsList() {
+  getDealsList() {
     this.dealApi.find().subscribe( (data: any) => {
-      console.log(data);
-      this.dealsDataSource = data.filter(deal => (!deal.target_businesses || (Number(deal.limit) > deal.target_businesses.length))  );
+      this.deals = data;
+      this.updateDealist('Opend');
     });
+  }
+
+  updateDealist(status) {
+    let copyDealsList = Object.assign([], this.deals);
+    console.log('const   ', copyDealsList);
+    if (status === 'Opend') {
+      copyDealsList = copyDealsList.filter(deal => !deal.target_businesses || (Number(deal.limit) > deal.target_businesses.length));
+    } else if (status === 'Closed') {
+      copyDealsList = copyDealsList.filter(deal => deal.target_businesses && (Number(deal.limit) === deal.target_businesses.length));
+    }
+    this.updateMembersDataSource(copyDealsList);
+  }
+
+
+  onFilterTypeChange(event) {
+    console.log(event.value);
+    this.updateDealist(event.value);
   }
 
   /**
@@ -184,9 +202,9 @@ export class MembersListComponent implements OnInit {
    * @description creates a new object of type material table data source and passes to it the members data to be displayed on the table
    * @param {TcMember[]} members
    */
-  updateMembersDataSource(members: TcMember[]) {
+  updateMembersDataSource(members) {
     this.filterString = ''; // reset any string the user entered in the search input
-    this.membersDataSource = new MatTableDataSource(members); // Assign the data to the data source for the table to render
+    this.dealsDataSource = new MatTableDataSource(members); // Assign the data to the data source for the table to render
   }
 
   /**
@@ -202,7 +220,7 @@ export class MembersListComponent implements OnInit {
 
 
   takeDeal(dealId) {
-    const targetDeal = this.dealsDataSource.filter(deal => deal.id === dealId)[0];
+    const targetDeal = this.deals.filter(deal => deal.id === dealId)[0];
     if (!targetDeal.target_businesses) {
       targetDeal.target_businesses = [this.userService.business];
     } else {
@@ -210,7 +228,7 @@ export class MembersListComponent implements OnInit {
     }
     // update deal with targetDeal on success -> this.updateDealsList()
     this.dealApi.patchAttributes(dealId, targetDeal).subscribe( res => {
-      this.updateDealsList();
+      this.getDealsList();
     });
   }
 }
