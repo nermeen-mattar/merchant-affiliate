@@ -33,7 +33,7 @@ const routes: Routes = [{
     loadChildren: './events/events.module#EventsModule'
   },
   {
-    path: 'members',
+    path: 'open-deals',
     canActivate: [AuthGuard],
     loadChildren: './members/members.module#MembersModule'
   },

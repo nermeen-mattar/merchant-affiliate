@@ -9,7 +9,7 @@
     <span class="app-header__menu__item" routerLink="/deals" *ngIf="$isUserLoggedIn | async" routerLinkActive="active">
       <span> {{'RECEIVED_GIVEAWAY.RECEIVED_GIVEAWAYS' | translate}} </span>
     </span>
-    <span *ngIf="$isUserLoggedIn | async">
+    <!-- <span *ngIf="$isUserLoggedIn | async">
       <div *ngIf="hasAdminRole; else onlyMembersList" class="app-header__menu__item app-header__menu__item__sub-menu" mat-button
         [matMenuTriggerFor]="membersMenu">
         {{'MEMBER.MEMBERS' | translate}}
@@ -24,6 +24,9 @@
           <span> {{ 'MEMBER.MEMBERS_LIST' | translate}} </span>
         </span>
       </ng-template>
+    </span> -->
+    <span  class="app-header__menu__item" routerLink="/open-deals" *ngIf="$isUserLoggedIn | async" routerLinkActive="active">
+      <span> Open Deals </span>
     </span>
     <span class="app-header__menu__item" routerLink="/my-giveaways" *ngIf="$isUserLoggedIn | async" routerLinkActive="active">
       <span> My Giveaways </span>

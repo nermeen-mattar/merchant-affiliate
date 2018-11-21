@@ -27,7 +27,7 @@ export class MemberSettingsComponent implements OnInit {
   teamsTheUserIsAdminOf: TcTeamInfo[];
   isEditingTeamName: boolean;
   userEmail: string;
-  currentMember: TcMember;
+  currentMember = {};
   isSelectAllReminders = false;
   @ViewChild('adminTeamsSelect') adminTeamsSelect;
 
