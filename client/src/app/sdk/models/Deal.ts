@@ -8,6 +8,8 @@ export interface DealInterface {
   "src_business"?: any;
   "target_business_types"?: Array<any>;
   "target_businesses"?: Array<any>;
+  "number_of_items"?: string;
+  "destination_businesses"?: Array<any>;
   "status"?: string;
   "id"?: any;
 }
@@ -19,6 +21,8 @@ export class Deal implements DealInterface {
   "src_business": any;
   "target_business_types": Array<any>;
   "target_businesses": Array<any>;
+  "number_of_items": string;
+  "destination_businesses": Array<any>;
   "status": string;
   "id": any;
   constructor(data?: DealInterface) {
@@ -76,6 +80,14 @@ export class Deal implements DealInterface {
         },
         "target_businesses": {
           name: 'target_businesses',
+          type: 'Array&lt;any&gt;'
+        },
+        "number_of_items": {
+          name: 'number_of_items',
+          type: 'string'
+        },
+        "destination_businesses": {
+          name: 'destination_businesses',
           type: 'Array&lt;any&gt;'
         },
         "status": {
