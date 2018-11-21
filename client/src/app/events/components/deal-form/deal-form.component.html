@@ -1,0 +1,111 @@
+<mat-card class="app-deal">
+    <mat-card-title class="app-deal__title"> Create Deal</mat-card-title>
+    <mat-card-content>
+      <div class="app-deal__content" [ngClass]="{'app-deal__element-hide': displaySpinner || displayMessageCard}">
+        <mat-vertical-stepper #regStepper linear="true" (selectionChange)="selectedStepChanged($event)">
+          <mat-step label="Deal Details" *ngIf="dealFirstStepForm" [stepControl]="dealFirstStepForm">
+            <form novalidate (ngSubmit)="regStepper.next()" [formGroup]="dealFirstStepForm" class="app-deal__content__form">
+              
+      
+                  
+              <mat-form-field class="app-deal__content__form__field">
+                <input matInput placeholder="Deal Name" formControlName="name" type="text">
+                <mat-icon class="app-deal__content__form__field__icon" matPrefix>supervisor_account</mat-icon>
+                <mat-error *ngIf="dealFirstStepForm.controls['name'].invalid">
+                  Name {{ 'FORM.IS_REQUIRED' | translate }}          
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="app-deal__content__form__field">
+                <input matInput placeholder="Description" formControlName="description" type="text">
+                <mat-icon class="app-deal__content__form__field__icon" matPrefix>description</mat-icon>
+              </mat-form-field>
+              
+              <mat-form-field class="app-deal__content__form__field">
+                  <input matInput placeholder="Number of target businesses" formControlName="limit" type="number">
+                  <mat-icon class="app-deal__content__form__field__icon" matPrefix>poeple</mat-icon>
+                    <mat-error *ngIf="dealFirstStepForm.controls['limit'].invalid">
+                        Number of target businesses {{ 'FORM.IS_REQUIRED' | translate }}            
+                      </mat-error>
+                </mat-form-field>
+  
+              <div class="stepper-action-btns stepper-action-btns--step-1">
+                <button type="submit" mat-buztton matStepperNext mat-raised-button [disabled]="dealFirstStepForm.invalid"
+                  color="primary" class="app-deal__content__button">{{ 'NEXT' | translate }}</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step label="Target Buesiness(s) Details" *ngIf="dealSecondStepForm" [stepControl]="dealSecondStepForm">
+            <form novalidate (ngSubmit)="regStepper.next()"
+              [formGroup]="dealSecondStepForm" class="app-deal__content__form">
+  
+    
+                    <mat-form-field class="app-deal__content__form__field">
+  
+                    <mat-select placeholder="Open for" formControlName="openFor"  >
+                        <mat-option value="0"> All Merchants  </mat-option>
+                        <mat-option value="1 ">Merchants with certain category  </mat-option>
+                        <mat-option value="2">Specific Merchant(s) </mat-option>
+                      </mat-select>
+                      </mat-form-field>
+              <mat-form-field   *ngIf="this.dealSecondStepForm.controls.openFor.value == 1" class="app-deal__content__form__field">
+                 <mat-select placeholder="Target Business Types" formControlName="target_business_types"  (selectionChange)="onEventTypeChange()" multiple>
+                    <mat-option value="0"> Food & Beverage</mat-option>
+                    <mat-option value="1 ">Retails </mat-option>
+                    <mat-option value="3">Entertainment </mat-option>
+                  </mat-select>
+                <mat-icon class="app-deal__content__form__field__icon" matPrefix>person_circle</mat-icon>
+              </mat-form-field>
+              <mat-form-field *ngIf="this.dealSecondStepForm.controls.openFor.value == 2"  class="app-deal__content__form__field">
+                     <mat-select placeholder="Businesses" formControlName="target_businesses"   multiple>
+                    <mat-option *ngFor="let business of businessList" [value]="business">{{business.name}}</mat-option>
+                  </mat-select>
+                 <mat-icon class="app-deal__content__form__field__icon" matPrefix>people</mat-icon>
+               </mat-form-field>
+   
+              <div class="stepper-action-btns">
+                <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-deal__content__button">{{
+                  'BACK' | translate }}</button>
+                  <button type="submit" mat-buztton matStepperNext mat-raised-button
+                  color="primary" class="app-deal__content__button">{{ 'NEXT' | translate }}</button>
+                  <!-- [disabled]="dealThirdStepForm.invalid" -->
+              </div>
+            </form>
+          </mat-step>
+  
+  
+          <mat-step label="Offer Details" *ngIf="dealThirdStepForm" [stepControl]="dealThirdStepForm">
+              <form novalidate (ngSubmit)="(!dealFirstStepForm.invalid && !dealSecondStepForm.invalid && !dealThirdStepForm.invalid)  && createDeal(dealFirstStepForm.value , dealSecondStepForm.value , dealThirdStepForm.value);"
+                [formGroup]="dealThirdStepForm" class="app-deal__content__form">
+  
+                <mat-form-field   class="app-deal__content__form__field">
+                       <mat-select placeholder="Items" formControlName="item"  >
+                      <mat-option *ngFor="let item of itemsList" [value]="business">{{item.name}}</mat-option>
+                    </mat-select>
+                   <mat-icon class="app-deal__content__form__field__icon" matPrefix>item</mat-icon>
+                 </mat-form-field>
+     
+  
+                     
+              <mat-form-field class="app-deal__content__form__field">
+                  <input matInput placeholder="Number of items for each business" formControlName="number_of_items" type="number">
+                  <mat-icon class="app-deal__content__form__field__icon" matPrefix>poeple</mat-icon>
+                    <mat-error *ngIf="dealThirdStepForm.controls['number_of_items'].invalid">
+                        Number of items  {{ 'FORM.IS_REQUIRED' | translate }}            
+                      </mat-error>
+                </mat-form-field>
+  
+  
+                <div class="stepper-action-btns">
+                  <button type="button" mat-button matStepperPrevious mat-raised-button color="primary" class="app-deal__content__button">{{
+                    'BACK' | translate }}</button>
+                  <button type="submit" *ngIf="!displayMessageCard" mat-raised-button color="primary" class="app-deal__content__button"
+                    [disabled]="dealThirdStepForm.invalid || dealThirdStepForm.invalid"> Create </button>
+                </div>
+              </form>
+            </mat-step>
+        
+        </mat-vertical-stepper>
+      </div>
+      <mat-spinner class="app-deal__spinner" [ngClass]="{'app-deal__element-hide': !displaySpinner }"></mat-spinner>
+    </mat-card-content>
+  </mat-card>

@@ -10,6 +10,7 @@ import { EventsService } from './services/events.service';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { EventFormComponent } from './components/event-form/event-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { DealFormComponent } from './components/deal-form/deal-form.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +24,8 @@ import { SharedModule } from '../shared/shared.module';
     EventsListComponent,
     EventsComponent,
     EventDetailsComponent,
-    EventFormComponent
+    EventFormComponent,
+    DealFormComponent
   ],
   providers: [EventsService]
 })
