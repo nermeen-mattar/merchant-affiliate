@@ -120,7 +120,7 @@ export class DealFormComponent implements OnInit {
   }
 
 
-  
+
 createDealThirdStepForm() {
   this.dealThirdStepForm = new FormGroup({
     item: new FormControl('', ),
@@ -180,6 +180,7 @@ createDealThirdStepForm() {
   createDeal(firstStepValues, secondStepValues, thirdStepValues) {
     this.displaySpinner = true;
     this.prepareTargetBusinesses(secondStepValues);
+    secondStepValues.target_business_types = secondStepValues.target_business_types ? secondStepValues.target_business_types : [];
     this.dealApi.create({
       ...firstStepValues,
       ...secondStepValues,
@@ -202,11 +203,11 @@ createDealThirdStepForm() {
             secondStepValues.target_business_types.includes(business.type));
         } else {
           secondStepValues.target_businesses = this.businessList;
-     
+
         }
     }
     delete secondStepValues.openFor;
-  } 
+  }
 
     /**
    * @author Nermeen Mattar
